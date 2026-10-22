@@ -113,6 +113,7 @@ GameSounds:
   volume: 0.5
   pitch: 1.0
   #ZOSTAW KTÓRYŚ Z NICH PUSTY, ABY GO WYŁĄCZYĆ
+  #Dźwięki z paczki zasobów też działają: wpisz je z ich przestrzenią nazw, np. 'myserver:custom.ding'
   win: 'minecraft:entity.experience_orb.pickup'
   game-start: 'minecraft:entity.player.levelup'
   time-expired: 'minecraft:entity.villager.no'

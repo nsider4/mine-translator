@@ -113,6 +113,7 @@ GameSounds:
   volume: 0.5
   pitch: 1.0
   #LAISSEZ L'UN DE CEUX-CI VIDE POUR LE DÉSACTIVER
+  #Les sons d'un pack de ressources fonctionnent aussi : écrivez-les avec leur espace de noms, par ex. 'myserver:custom.ding'
   win: 'minecraft:entity.experience_orb.pickup'
   game-start: 'minecraft:entity.player.levelup'
   time-expired: 'minecraft:entity.villager.no'

@@ -29,9 +29,12 @@ hunt:
 
   #Canavar oluşturucu bloklardan veya doğurma yumurtalarından çıkan yaratıkların sayılıp sayılmayacağı.
   count-spawner-mobs: true
+  #MythicMobs moblarının dayandıkları mob için de sayılıp sayılmayacağı (bir MythicMobs zombisi ZOMBIE olarak).
+  count-mythic-mobs: true
 
   data:
     #Bu değerler geçerli Minecraft yaratık kimlikleri olmalıdır (dosyanın başındaki Faydalı bağlantılara bak)
+    #MythicMobs kuruluysa mythic:<mob türü> onun moblarından biridir (bu listenin sonunda bir örnek var)
     ZOMBIE:
       3:
         #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
@@ -97,6 +100,10 @@ hunt:
       5:
         rewards:
           - reward_1
+    #mythic:SkeletonKing:
+    #  1:
+    #    rewards:
+    #      - reward_1
 
 mine:
   enable: true

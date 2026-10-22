@@ -113,6 +113,7 @@ GameSounds:
   volume: 0.5
   pitch: 1.0
   #LAAT EEN VAN DEZE LEEG OM HEM UIT TE SCHAKELEN
+  #Geluiden uit een resourcepack werken ook: schrijf ze met hun namespace, bijv. 'myserver:custom.ding'
   win: 'minecraft:entity.experience_orb.pickup'
   game-start: 'minecraft:entity.player.levelup'
   time-expired: 'minecraft:entity.villager.no'

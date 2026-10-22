@@ -29,9 +29,12 @@ hunt:
 
   #Считать ли существ, появившихся из спавнеров или яиц призыва.
   count-spawner-mobs: true
+  #Засчитываются ли мобы MythicMobs также как моб, на котором они основаны (зомби MythicMobs как ZOMBIE).
+  count-mythic-mobs: true
 
   data:
     #Эти значения должны быть корректными ID существ Minecraft (см. Полезные ссылки в начале файла)
+    #Если установлен MythicMobs, mythic:<тип моба> — один из его мобов (пример в конце этого списка)
     ZOMBIE:
       3:
         #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
@@ -97,6 +100,10 @@ hunt:
       5:
         rewards:
           - reward_1
+    #mythic:SkeletonKing:
+    #  1:
+    #    rewards:
+    #      - reward_1
 
 mine:
   enable: true

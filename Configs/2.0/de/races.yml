@@ -29,9 +29,12 @@ hunt:
 
   #Ob Kreaturen aus Spawnern oder Spawn-Eiern mitzählen.
   count-spawner-mobs: true
+  #Ob MythicMobs-Mobs auch für den Mob zählen, auf dem sie basieren (ein MythicMobs-Zombie als ZOMBIE).
+  count-mythic-mobs: true
 
   data:
     #Diese Werte müssen gültige Minecraft-Kreatur-IDs sein (siehe Nützliche Links oben in der Datei)
+    #Mit installiertem MythicMobs ist mythic:<Mob-Typ> einer seiner Mobs (ein Beispiel steht am Ende dieser Liste)
     ZOMBIE:
       3:
         #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
@@ -97,6 +100,10 @@ hunt:
       5:
         rewards:
           - reward_1
+    #mythic:SkeletonKing:
+    #  1:
+    #    rewards:
+    #      - reward_1
 
 mine:
   enable: true

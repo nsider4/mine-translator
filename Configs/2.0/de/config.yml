@@ -113,6 +113,7 @@ GameSounds:
   volume: 0.5
   pitch: 1.0
   #LASS EINEN DIESER WERTE LEER, UM IHN ZU DEAKTIVIEREN
+  #Sounds aus einem Ressourcenpaket funktionieren auch: schreibe sie mit ihrem Namespace, z. B. 'myserver:custom.ding'
   win: 'minecraft:entity.experience_orb.pickup'
   game-start: 'minecraft:entity.player.levelup'
   time-expired: 'minecraft:entity.villager.no'

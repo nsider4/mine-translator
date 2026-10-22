@@ -113,6 +113,7 @@ GameSounds:
   volume: 0.5
   pitch: 1.0
   #ОСТАВЬТЕ ЛЮБОЙ ИЗ НИХ ПУСТЫМ, ЧТОБЫ ОТКЛЮЧИТЬ ЕГО
+  #Звуки из пакета ресурсов тоже работают: пишите их с пространством имён, например 'myserver:custom.ding'
   win: 'minecraft:entity.experience_orb.pickup'
   game-start: 'minecraft:entity.player.levelup'
   time-expired: 'minecraft:entity.villager.no'

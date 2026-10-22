@@ -113,6 +113,7 @@ GameSounds:
   volume: 0.5
   pitch: 1.0
   #KAPATMAK İÇİN BUNLARDAN BİRİNİ BOŞ BIRAK
+  #Kaynak paketindeki sesler de çalışır: onları ad alanlarıyla yazın, örn. 'myserver:custom.ding'
   win: 'minecraft:entity.experience_orb.pickup'
   game-start: 'minecraft:entity.player.levelup'
   time-expired: 'minecraft:entity.villager.no'

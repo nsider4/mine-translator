@@ -29,9 +29,12 @@ hunt:
 
   #Czy liczyć stworzenia przywołane przez spawnery lub jaja spawnujące.
   count-spawner-mobs: true
+  #Czy moby z MythicMobs liczą się też jako mob, na którym są oparte (zombie z MythicMobs jako ZOMBIE).
+  count-mythic-mobs: true
 
   data:
     #Te wartości muszą być poprawnymi identyfikatorami stworzeń Minecrafta (zobacz Przydatne linki na górze pliku)
+    #Z zainstalowanym MythicMobs mythic:<typ moba> to jeden z jego mobów (przykład jest na końcu tej listy)
     ZOMBIE:
       3:
         #SUMA WSZYSTKICH SZANS DODANYCH NAGRÓD NIE MOŻE PRZEKROCZYĆ 100%
@@ -97,6 +100,10 @@ hunt:
       5:
         rewards:
           - reward_1
+    #mythic:SkeletonKing:
+    #  1:
+    #    rewards:
+    #      - reward_1
 
 mine:
   enable: true

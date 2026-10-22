@@ -29,9 +29,12 @@ hunt:
 
   #S'il faut compter les créatures apparues par des générateurs ou des œufs d'apparition.
   count-spawner-mobs: true
+  #Si les mobs de MythicMobs comptent aussi pour le mob sur lequel ils sont basés (un zombie MythicMobs comme ZOMBIE).
+  count-mythic-mobs: true
 
   data:
     #Ces valeurs doivent être des IDs de créatures Minecraft valides (voir les liens utiles en haut du fichier)
+    #Avec MythicMobs installé, mythic:<type de mob> est l'un de ses mobs (un exemple se trouve à la fin de cette liste)
     ZOMBIE:
       3:
         #LA SOMME DE TOUTES LES CHANCES DE RÉCOMPENSES QUE VOUS AJOUTEZ NE PEUT PAS DÉPASSER 100%
@@ -97,6 +100,10 @@ hunt:
       5:
         rewards:
           - reward_1
+    #mythic:SkeletonKing:
+    #  1:
+    #    rewards:
+    #      - reward_1
 
 mine:
   enable: true

@@ -29,9 +29,12 @@ hunt:
 
   #Of wezens meetellen die door spawnerblokken of spawn-eieren zijn opgeroepen.
   count-spawner-mobs: true
+  #Of MythicMobs-mobs ook meetellen voor de mob waarop ze gebaseerd zijn (een MythicMobs-zombie als ZOMBIE).
+  count-mythic-mobs: true
 
   data:
     #Deze waarden moeten geldige Minecraft-wezen-ID's zijn (zie Nuttige links bovenaan het bestand)
+    #Met MythicMobs geïnstalleerd is mythic:<mobtype> een van zijn mobs (een voorbeeld staat aan het einde van deze lijst)
     ZOMBIE:
       3:
         #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
@@ -97,6 +100,10 @@ hunt:
       5:
         rewards:
           - reward_1
+    #mythic:SkeletonKing:
+    #  1:
+    #    rewards:
+    #      - reward_1
 
 mine:
   enable: true
