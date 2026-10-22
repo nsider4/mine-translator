@@ -1,0 +1,684 @@
+unknown_command: '&8[%prefix%&8] &cOnbekend commando. Probeer iets anders!'
+config_reloaded: '&8[%prefix%&8] &fDe configuratiebestanden zijn herladen!'
+config_reload_failed: '&8[%prefix%&8] &cSommige bestanden konden niet laden; kijk in de console. Die bestanden houden hun vorige waarden.'
+not_enough_permissions: '&8[%prefix%&8] &cJe hebt niet genoeg rechten om dit commando uit te voeren!'
+player_only_command: '&8[%prefix%&8] &cDit commando kan alleen door spelers worden uitgevoerd!'
+player_deleted: '&8[%prefix%&8] &cDe speler &f%player% &cis uit de database verwijderd!'
+player_not_found: '&8[%prefix%&8] &fSpeler niet gevonden: &c%player%'
+number_not_found_commands: '&8[%prefix%&8] &cGeen getal gevonden om op het commando toe te passen'
+points_added: '&8[%prefix%&8] &f&a%amount% &fpunten gegeven aan &c%player%'
+points_removed: '&8[%prefix%&8] &f&a%amount% &fpunten afgenomen van &c%player%'
+points_set: '&8[%prefix%&8] &fDe punten van &c%player% &fzijn nu &a%amount%'
+player_points: '&8[%prefix%&8] &fJe hebt &a%amount% &fpunten!'
+in_cooldown: '&8[%prefix%&8] &cJe kunt dit nog niet gebruiken, wacht &e%time_left%s &cvoordat je het commando opnieuw gebruikt'
+type_not_found: '&8[%prefix%&8] &fGeen materiaal-/entiteittype gevonden voor &c%type%'
+inventory_full: '&8[%prefix%&8] &cJe inventaris is vol! &fDe beloning is op je plek gevallen'
+
+no_winner_placeholder: '---'
+cannot_start_from_disabled: '&8[%prefix%&8] &cJe kunt geen chatspel starten vanuit een uitgeschakelde wereld!'
+toggle_game: '&8[%prefix%&8] &fChat-events: &a%state%&f.'
+toggle_sound: '&8[%prefix%&8] &fChatspelgeluiden: &a%state%&f.'
+toggleAllGames: '&8[%prefix%&8] &fAutomatische chatspellen voor &cIEDEREEN&f: &a%state%'
+state-ON: 'AAN'
+state-OFF: 'UIT'
+game_started: '&8[%prefix%&8] &aJe hebt een %game%-chat-event gestart in je chat!'
+invalid_arguments: '&8[%prefix%&8] &fEr ging iets mis bij het controleren van de argumenten van het commando!'
+cant_log_local: '&8[%prefix%&8] &cJe kunt geen logs zien, want deze optie staat uit in de configuratie!'
+toggle_game_other: '&8[%prefix%&8] &fChat-events voor &c%player%&f: &a%state%&f.'
+toggle_sound_other: '&8[%prefix%&8] &fChatspelgeluiden voor &c%player%&f: &a%state%&f.'
+player_points_other: '&8[%prefix%&8] &c%player% &fheeft &a%amount% &fpunten!'
+data_loading: '&8[%prefix%&8] &cDe gegevens van die speler worden nog geladen, probeer het zo opnieuw.'
+usage: '&8[%prefix%&8] &cGebruik: &f%usage%'
+game_already_running: '&8[%prefix%&8] &cEr loopt al een chatspel! Gebruik &f/chatgames stop &com het eerst te beëindigen.'
+game_not_started: '&8[%prefix%&8] &cHet spel %game% kon niet starten met die waarden. Kijk in de console voor details.'
+no_games_enabled: '&8[%prefix%&8] &cEr is op dit moment geen spel ingeschakeld.'
+game_stopped: '&8[%prefix%&8] &fHet huidige spel is zonder winnaar gestopt.'
+no_game_running: '&8[%prefix%&8] &cEr loopt nu geen chatspel.'
+global_not_enabled: '&8[%prefix%&8] &f%game% &cis in global_games.yml niet ingeschakeld als globaal spel.'
+unknown_game: '&8[%prefix%&8] &cEr bestaat geen spel met de naam &f%game%&c.'
+unknown_menu: '&8[%prefix%&8] &cEr bestaat geen menu met de naam &f%menu%&c.'
+
+presets:
+  loaded: '&8[%prefix%&8] &fPreset &a%preset% &fgeladen (%games%).'
+  cleared: '&8[%prefix%&8] &fEr is geen preset meer actief; de spellen die in games.yml aanstaan worden gebruikt.'
+  saved: '&8[%prefix%&8] &fIngeschakelde spellen opgeslagen als preset &a%preset% &f(%games%).'
+  not_found: '&8[%prefix%&8] &cEr bestaat geen preset met de naam &f%preset%&c.'
+  invalid_name: '&8[%prefix%&8] &cPresetnamen mogen alleen letters, cijfers, - en _ bevatten (max. 32).'
+  list_header: '&8[%prefix%&8] &ePresets:'
+  list_entry: '&7- &f%preset%%active% &8(%games%)'
+  active_marker: ' &a(actief)'
+  list_empty: '&8[%prefix%&8] &cEr zijn geen presets ingesteld in presets.yml.'
+
+challenges:
+  completed: '&8[%prefix%&8] &a%period% uitdaging voltooid: &f%challenge%&a! Haal hem op met &f/chatgames claim&a.'
+  claimed: '&8[%prefix%&8] &aJe hebt &f%challenge% &aopgehaald!'
+  nothing_to_claim: '&8[%prefix%&8] &cJe hebt nu niets om op te halen.'
+  #/chatgames challenges. %period% is hieronder 'Dagelijkse' of 'Wekelijkse'; %resets% is de resterende tijd, bv. 5h 12m
+  header: '&8[%prefix%&8] &e%period% uitdagingen &7(%completed%/%total% klaar, vernieuwd over %resets%)'
+  entry: '&7- %challenge% &8- &7%description% &f%progress%/%amount% %status%'
+  status_in_progress: ''
+  status_ready: '&a[Klaar om op te halen]'
+  status_claimed: '&7[Opgehaald]'
+  none: '&8[%prefix%&8] &cEr zijn nu geen uitdagingen.'
+  daily: 'Dagelijkse'
+  weekly: 'Wekelijkse'
+  reset: '&8[%prefix%&8] &fDe voortgang van de dagelijkse en wekelijkse uitdagingen van &c%player% &fis gereset.'
+
+streaks:
+  grew: '&8[%prefix%&8] &aJe %streak% &ais nu &f%days% &adag(en)! Haal de beloning op met &f/chatgames claim&a.'
+  #%days% is één dag, of een bereik zoals 3-5 als meerdere dagen tegelijk worden opgehaald
+  claimed: '&8[%prefix%&8] &aJe hebt de beloning van je %streak% &aopgehaald (dag %days%)!'
+  header: '&8[%prefix%&8] &eReeksen:'
+  entry: '&7- %streak% &8- &f%days% &7dag(en), record &f%longest% %status%'
+  status_ready: '&a[%unclaimed% op te halen]'
+  status_today: '&7[vandaag gedaan]'
+  status_waiting: '&e[vandaag nog niet]'
+  none: '&8[%prefix%&8] &cReeksen staan uit.'
+  set: '&8[%prefix%&8] &f%streak% &fvan &c%player% &fstaat nu op &a%days% &fdag(en).'
+  unknown: '&8[%prefix%&8] &cEr bestaat geen reeks met de naam &f%type%&c. Gebruik challenge, daily of global.'
+
+events:
+  unknown: '&8[%prefix%&8] &cEr bestaat geen event met de naam &f%event%&c.'
+  started: '&8[%prefix%&8] &fEvent %event% &fgestart.'
+  already_running: '&8[%prefix%&8] &cEr loopt al een event: %event%&c.'
+  cancelled: '&8[%prefix%&8] &cEen andere plugin heeft het event %event% &cgeannuleerd.'
+  not_running: '&8[%prefix%&8] &cEr loopt geen event.'
+  stopped: '&8[%prefix%&8] &fEvent %event% &fgestopt.'
+  list_header: '&8[%prefix%&8] &eEvents:'
+  list_entry: '&7- &f%id% &8(%event%&8) &7%steps% spellen, volgende: &f%next%%running%'
+  list_running: ' &a(loopt, spel %step%/%steps%)'
+  list_empty: '&8[%prefix%&8] &cEr zijn geen events ingesteld in events.yml.'
+  not_scheduled: 'niet gepland'
+  top_header: '&8[%prefix%&8] &eMeeste eventpunten in %event%&e:'
+  top_entry: '&c%spot%. &f%player% &8| &e%points% &7punten'
+  top_empty: '&8[%prefix%&8] &cNog niemand heeft gescoord in %event%&c.'
+
+logs:
+  no_logs: "&cGeen logs beschikbaar of er is een fout opgetreden."
+  header: "&8[%prefix%&8] &eLaatste &6%amount% &elogs:"
+  entries:
+    # Logregels van spellen
+    game:
+      start: "&aSpel start: &f%game% | &aHeeft antwoord: &f%hasAnswer% | &aAntwoord: &f%answer%"
+      end: "&aSpel eindigt: &f%game% | &aHeeft winnaar: &f%hasWinner% | &aWinnaars: &f%winners% | &aAntwoord: &f%answer%"
+
+    # Logregels van races met materialen
+    race:
+      start: "&aRace start: &f%race% | &aMateriaal: &f%material% | &aAantal: &f%amount%"
+      end: "&aRace eindigt: &f%race% | &aHeeft winnaar: &f%hasWinner% | &aWinnaar: &f%winner% | &aMateriaal: &f%material% | &aAantal: &f%amount%"
+
+    # Speciale regel voor de HUNT-race (race met entiteiten)
+    hunt:
+      start: "&aRace start: &f%race% | &aEntiteit: &f%entity% | &aAantal: &f%amount%"
+      end: "&aRace eindigt: &f%race% | &aHeeft winnaar: &f%hasWinner% | &aWinnaar: &f%winner% | &aEntiteit: &f%entity% | &aAantal: &f%amount%"
+
+#Je kunt <center> gebruiken in de ranglijstberichten als je wilt.
+top:
+  #Je kunt elk bericht leeg laten om het uit te schakelen. (Behalve 'format' en 'player-stat-format')
+  header: '&b&m---------&e&lTOP CHAT&b&m---------'
+  #De scheidingswaarde is het bericht dat de top 10 scheidt van kop- en voettekst!
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%points% &7punten'
+  player-stat-format: '&7Je hebt &e&l%player_points% &7overwinningen'
+  total-stat-format: '&7Totaal gewonnen spellen: &6&l%total_wins%'
+  footer: '&b&m---------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cNog geen gegevens! Win een chatspel en verdien punten!'
+
+TypersTop:
+  #Je kunt elk bericht leeg laten om het uit te schakelen. (Behalve 'format' en 'player-stat-format')
+  header: '&b&m---------&e&lTOP SNELST&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6s'
+  player-stat-format: '&7Je snelste tijd is &e&l%fastest_time%&6s'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cNog geen gegevens! Win een chatspel en wees de snelste!'
+  top_disabled_message: '&8[%prefix%&8] &cDeze functie staat momenteel uit!'
+
+GameTypersTop:
+  #Je kunt elk bericht leeg laten om het uit te schakelen. (Behalve 'format' en 'player-stat-format')
+  header: '&b&m---------&e&lTOP SNELST - %game%&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6s'
+  player-stat-format: '&7Je snelste tijd is &e&l%fastest_time%&6s'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cNog geen gegevens! Win een chatspel en wees de snelste!'
+  top_disabled_message: '&8[%prefix%&8] &cDeze functie staat momenteel uit!'
+
+help_command:
+  - '&7&m-------------------------------------------------'
+  - '&e&l-ChatGames-'
+  - '&6'
+  - '&6&lCOMMANDO''S:'
+  - '&6'
+  - '&a/chatgames menu [menu] &f- &3Opent het menu: profiel, uitdagingen, reeksen, ranglijsten (of elk menu uit menus.yml).'
+  - '&a/chatgames profile [player] &f- &3Toont je statistieken (of die van een andere speler).'
+  - '&a/chatgames top &f- &3Toont de 10 spelers met de meeste punten.'
+  - '&a/chatgames fastest [game] &f- &3Toont de snelste winnaars, in totaal of voor één spel.'
+  - '&a/chatgames points [player] &f- &3Toont je punten (of die van een andere speler).'
+  - '&a/chatgames challenges &f- &3Toont je dagelijkse en wekelijkse uitdagingen.'
+  - '&a/chatgames streaks &f- &3Toont je reeksen.'
+  - '&a/chatgames claim &f- &3Haalt voltooide uitdagingen en reeksbeloningen op.'
+  - '&a/chatgames event [list|top <event>] &f- &3Toont de spel-events, of wie in een event het meest scoorde.'
+  - '&a/chatgames toggle [player] &f- &3Zet chatspellen voor jou aan of uit.'
+  - '&a/chatgames togglesound [player] &f- &3Zet chatspelgeluiden aan of uit.'
+  - '&6'
+  - '&c&lADMIN:'
+  - '&a/chatgames admin &f- &3Opent het adminmenu.'
+  - '&a/chatgames debug &f- &3Opent het debugmenu: test elk spel privé, zonder beloningen.'
+  - '&a/chatgames (game) [values] &f- &3Start dat spel nu, eventueel met je eigen woord/waarden.'
+  - '&a/chatgames any &f- &3Start het spel dat de rotatie als volgende zou kiezen.'
+  - '&a/chatgames global <game> [values] &f- &3Start een globaal spel: iedereen die op tijd antwoordt, wint.'
+  - '&a/chatgames event start <event> | stop &f- &3Start of stopt een spel-event.'
+  - '&a/chatgames stop &f- &3Beëindigt het lopende spel zonder winnaar.'
+  - '&a/chatgames toggleAll &f- &3Zet de automatische spelrotatie aan of uit.'
+  - '&a/chatgames preset <list|load|save> [name] &f- &3Beheert spelpresets.'
+  - '&a/chatgames +points|-points|setpoints <player> <amount> &f- &3Wijzigt de punten van een speler.'
+  - '&a/chatgames remove <player> &f- &3Verwijdert de gegevens van een speler.'
+  - '&a/chatgames challenges reset <player> &f- &3Wist de uitdagingsvoortgang van een speler.'
+  - '&a/chatgames streak set <player> <challenge|daily|global> <days> &f- &3Stelt de reeks van een speler in.'
+  - '&a/chatgames logs [amount] &f- &3Toont de laatste spellogs.'
+  - '&a/chatgames reload &f- &3Herlaadt de configuratiebestanden.'
+  - '&6'
+  - '&2&lSPELTYPES:'
+  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace'
+  - '&7&m-------------------------------------------------'
+
+#Gebruik <center> in LIJST-berichten om ze te centreren; regels met dit worden gecentreerd!
+
+#############################
+##    CHATSPELBERICHTEN    ##
+#############################
+#Gedeeld door alle spellen. Een spel kan ze vervangen met een eigen 'hint_message' / 'countdown_actionbar' in zijn sectie hieronder.
+hint_message: '&8[%prefix%&8] &eHint: &f%hint%'
+countdown_actionbar: '&e%seconds%s &7over'
+
+waiting_for_other_winners: '&8[%prefix%&8] &aGoed geraden! &fWachten op andere winnaars...'
+wrong_case: '&8[%prefix%&8] &cBijna... Let op de hoofdletters!'
+  #JE KUNT "%display_name%" GEBRUIKEN IN PLAATS VAN %player% IN correct_message VOOR ALLE SPELLEN.
+  #
+  #JE KUNT OOK %points_<position>% GEBRUIKEN OM DE PUNTEN VAN DE WINNENDE SPELER TE TONEN.
+  #
+  #Om de 1e, 2e, 3e winnaar enzovoort te tonen gebruik je %winner_<position>% en voor ieders tijd %time_<position>%
+
+  ##VOORBEELD MET 2 WINNAARS:
+  #
+  #correct_message:
+  #- ''
+  #- '<center>&r✓ ✯ %prefix% &r✯ ✓'
+  #- ''
+  #- '&7Het goede antwoord was `&e%correct_answer%&7`! De winnaars zijn:'
+  #- '<center>&f1. &a%winner_1% - (&c%time_1%s&7)'
+  #- '<center>&f2. &a%winner_2% - (&c%time_2%s&7)'
+#- ''
+unscramble:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToGuess% seconden &fom te &dontwarren&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7heeft `&e%correct_answer%&7` goed ontward (&c%time_1%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &czijn voorbij! &fHet ontwarspel is afgelopen!'
+    - '<center>Het goede antwoord was &e%correct_answer%&f!'
+    - ''
+
+unreverse:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToGuess% seconden &fom het woord &domt te draaien&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7draaide `&e%correct_answer%&7` het snelst om (&c%time_1%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &czijn voorbij! &fHet omdraaispel is afgelopen!'
+    - '<center>Het goede antwoord was &e%correct_answer%&f!'
+    - ''
+
+reaction:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToGuess% seconden &fom het woord te &dschrijven&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7schreef `&e%correct_answer%&7` het snelst (&c%time_1%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &czijn voorbij! &fHet reactiespel is afgelopen!'
+    - '<center>Het goede antwoord was &e%correct_answer%&f!'
+    - ''
+
+guess_the_number:
+  hint_message: '&8[%prefix%&8] &eHint: het ligt tussen &f%hint%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToGuess% seconden &fom &dhet getal te raden &fin het bereik:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7antwoordde als eerste `&e%correct_answer%&7` (&c%time_1%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &czijn voorbij! &fHet raadspel is afgelopen!'
+    - '<center>Het goede antwoord was &e%correct_answer%&f!'
+    - ''
+
+memorize:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToMemorize% seconden &fom deze lijst te &donthouden&f:'
+    - ''
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  messageAfterMemorized:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToGuess% seconden &fom de lijst &din volgorde&f terug te schrijven!'
+    - ''
+    - '<center>&fScheid elk item met een komma! (bv. `&bappel, banaan, chocolade&f`)'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7schreef de lijst als eerste en wint een prijs! (&c%time_1%s&7)'
+    - ''
+    - '<center>&fDe lijst was: &f`&b%correct_answer%&f`'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &czijn voorbij! &fHet geheugenspel is afgelopen!'
+    - ''
+    - '<center>&fDe lijst was: &f`&b%correct_answer%&f`'
+    - ''
+
+sequence:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToGuess% seconden &fom &dde reeks af te maken&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  hint_message: '&8[%prefix%&8] &eHint: het volgende getal is &f%hint%'
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7vond als eerste `&e%correct_answer%&7` (&c%time_1%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &czijn voorbij! &fHet reeksspel is afgelopen!'
+    - '<center>Het volgende getal was &e%correct_answer%&f!'
+    - ''
+
+clickable:
+  clickableText: '&aKlik hier!'
+  hoverText: '&eKlik hier!'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToGuess% seconden &fom op de tekst te &dklikken&f:'
+    - ''
+    - '<center>&b%clickableText%'
+    - ''
+  #USE %winner_
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7klikte het snelst op de tekst (&c%time_1%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &czijn voorbij! &fHet klikspel is afgelopen!'
+    - ''
+
+fillout:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToGuess% seconden &fom het woord &din te vullen&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7vulde `&e%correct_answer%&7` het snelst in (&c%time_1%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &czijn voorbij! &fHet invulspel is afgelopen!'
+    - '<center>Het goede antwoord was &e%correct_answer%&f!'
+    - ''
+
+hoverable:
+  hoverableText: '&eBeweeg hierover!'
+  hoverText: '&b%selection%'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToGuess% seconden &fom het woord uit de zweeftekst te &dschrijven&f:'
+    - ''
+    - '<center>&b%hoverableText%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7schreef `&e%correct_answer%&7` het snelst (&c%time_1%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &czijn voorbij! &fHet zweefspel is afgelopen!'
+    - '<center>Het goede antwoord was &e%correct_answer%&f!'
+    - ''
+
+#In dit spel wordt een reeks van de opgegeven lengte gemaakt met willekeurige tekens
+random:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToGuess% seconden &fom te &dschrijven&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7schreef `&e%correct_answer%&7` het snelst (&c%time_1%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &czijn voorbij! &fHet willekeurige spel is afgelopen!'
+    - '<center>Het goede antwoord was &e%correct_answer%&f!'
+    - ''
+
+math:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToGuess% seconden &fom &dop te lossen&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7kwam het snelst op `&e%correct_answer%&7` (&c%time_1%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &czijn voorbij! &fHet rekenspel is afgelopen!'
+    - '<center>Het goede antwoord was &e%correct_answer%&f!'
+    - ''
+
+variable:
+  #Dit is het formaat waarin ze verschijnen; je kunt aanpassen hoe vaak %symbol% herhaald wordt in 'line1and2-format', maar alle variabelen in regel 3 blijven zoals getoond.
+  line1and2-format: '&c%symbol%&f + &c%symbol%&f + &c%symbol%&f = &e'
+  line3-format: '&c%symbol_1%&f + &c%symbol_2%&f + &b%toGet% &f= &e%result%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToGuess% seconden &fom op te lossen &dvoor&f: `&b%symbol%&f`'
+    - ''
+    - '<center>%line_1%'
+    - '<center>%line_2%'
+    - '<center>%line_3%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7kwam het snelst op `&e%correct_answer%&7` (&c%time_1%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &czijn voorbij! &fHet variabelespel is afgelopen!'
+    - '<center>Het goede antwoord was &e%correct_answer%&f!'
+    - ''
+
+#%selection% zijn de aanwijzingen, %difficulty% easy/medium/hard.
+word_association:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToGuess% seconden &fom het &dverband&f te vinden:'
+    - '<center>&b%selection%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7vond het verband `&e%correct_answer%&7` (&c%time_1%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &czijn voorbij! &fNiemand vond het verband.'
+    - '<center>Het antwoord was &e%correct_answer%&f!'
+    - ''
+
+trivia:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToGuess% seconden &fom te &dantwoorden&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7antwoordde als eerste `&e%correct_answer%&7` (&c%time_1%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &czijn voorbij! &fDe quiz is afgelopen!'
+    - '<center>Het goede antwoord was &e%correct_answer%&f!'
+    - ''
+
+#RACES
+#Races ondersteunen voorlopig geen meerdere winnaars, want ik zie de reden niet: het zijn 'races' of 'spelersuitdagingen' die de eerste moet winnen.
+
+#%value% is het materiaal of het wezen, %amount% hoeveel, %timeToComplete% de tijdslimiet in seconden.
+#In correct_message: %winner%, %winner_displayname%, %time% (seconden) en %points% (de punten van de winnaar).
+
+hunt:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToComplete% seconden &fom te &djagen&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7is klaar met jagen op `&e%amount%&fx &3%value%&7` (&c%time%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &czijn voorbij! &fDe jachtuitdaging is afgelopen!'
+
+mine:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToComplete% seconden &fom te &dhakken&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7is klaar met hakken van `&e%amount%&fx &3%value%&7` (&c%time%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &czijn voorbij! &fDe hakuitdaging is afgelopen!'
+
+place:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToComplete% seconden &fom te &dplaatsen&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7is klaar met plaatsen van `&e%amount%&fx &3%value%&7` (&c%time%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &czijn voorbij! &fDe plaatsuitdaging is afgelopen!'
+
+fish:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToComplete% seconden &fom te &dvissen&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7is klaar met vissen van `&e%amount%&fx &3%value%&7` (&c%time%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &czijn voorbij! &fDe visuitdaging is afgelopen!'
+
+eat:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToComplete% seconden &fom te &deten&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7is klaar met eten van `&e%amount%&fx &3%value%&7` (&c%time%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &czijn voorbij! &fDe etenuitdaging is afgelopen!'
+
+craft:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToComplete% seconden &fom te &dmaken&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7is klaar met maken van `&e%amount%&fx &3%value%&7` (&c%time%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &czijn voorbij! &fDe maakuitdaging is afgelopen!'
+furnace:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToComplete% seconden &fom te &dkoken&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7is klaar met koken van `&e%amount%&fx &3%value%&7` (&c%time%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &czijn voorbij! &fDe kookuitdaging is afgelopen!'

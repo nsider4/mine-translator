@@ -1,0 +1,684 @@
+unknown_command: '&8[%prefix%&8] &cBilinmeyen komut. Başka bir şey dene!'
+config_reloaded: '&8[%prefix%&8] &fYapılandırma dosyaları yeniden yüklendi!'
+config_reload_failed: '&8[%prefix%&8] &cBazı dosyalar yüklenemedi; konsola bak. O dosyalar önceki değerlerini korur.'
+not_enough_permissions: '&8[%prefix%&8] &cBu komutu kullanmak için yeterli iznin yok!'
+player_only_command: '&8[%prefix%&8] &cBu komutu yalnızca oyuncular kullanabilir!'
+player_deleted: '&8[%prefix%&8] &cOyuncu &f%player% &cveritabanÄ±ndan silindi!'
+player_not_found: '&8[%prefix%&8] &fOyuncu bulunamadı: &c%player%'
+number_not_found_commands: '&8[%prefix%&8] &cKomutta kullanılacak bir sayı bulunamadı'
+points_added: '&8[%prefix%&8] &fOyuncu: &c%player%&f, eklenen puan: &a%amount%'
+points_removed: '&8[%prefix%&8] &fOyuncu: &c%player%&f, alÄ±nan puan: &a%amount%'
+points_set: '&8[%prefix%&8] &fOyuncu: &c%player%&f, yeni puan: &a%amount%'
+player_points: '&8[%prefix%&8] &fPuanÄ±n: &a%amount%&f!'
+in_cooldown: '&8[%prefix%&8] &cBunu henüz kullanamazsın, komutu tekrar kullanmadan önce &e%time_left%s &cbekle'
+type_not_found: '&8[%prefix%&8] &c%type% &fiçin malzeme/varlık türü bulunamadı'
+inventory_full: '&8[%prefix%&8] &cEnvanterin dolu! &fÖdül bulunduğun yere düştü'
+
+no_winner_placeholder: '---'
+cannot_start_from_disabled: '&8[%prefix%&8] &cKapalı bir dünyadan sohbet oyunu başlatamazsın!'
+toggle_game: '&8[%prefix%&8] &fSohbet etkinlikleri: &a%state%&f.'
+toggle_sound: '&8[%prefix%&8] &fSohbet oyunu sesleri: &a%state%&f.'
+toggleAllGames: '&8[%prefix%&8] &fOtomatik sohbet oyunlarÄ± (&cHERKES&f): &a%state%'
+state-ON: 'AÇIK'
+state-OFF: 'KAPALI'
+game_started: '&8[%prefix%&8] &aSohbetinde bir %game% etkinliği başlattın!'
+invalid_arguments: '&8[%prefix%&8] &fKomutun argümanları kontrol edilirken bir sorun oluştu!'
+cant_log_local: '&8[%prefix%&8] &cBu seçenek yapılandırmada kapalı olduğu için kayıtları göremezsin!'
+toggle_game_other: '&8[%prefix%&8] &fSohbet etkinlikleri (&c%player%&f): &a%state%&f.'
+toggle_sound_other: '&8[%prefix%&8] &fSohbet oyunu sesleri (&c%player%&f): &a%state%&f.'
+player_points_other: '&8[%prefix%&8] &c%player% &fadlı oyuncunun &a%amount% &fpuanı var!'
+data_loading: '&8[%prefix%&8] &cBu oyuncunun verileri hâlâ yükleniyor, birazdan tekrar dene.'
+usage: '&8[%prefix%&8] &cKullanım: &f%usage%'
+game_already_running: '&8[%prefix%&8] &cZaten bir sohbet oyunu sürüyor! Önce bitirmek için &f/chatgames stop &ckullan.'
+game_not_started: '&8[%prefix%&8] &c%game% oyunu bu değerlerle başlayamadı. Ayrıntılar konsolda.'
+no_games_enabled: '&8[%prefix%&8] &cŞu anda hiçbir oyun açık değil.'
+game_stopped: '&8[%prefix%&8] &fMevcut oyun kazanan olmadan durduruldu.'
+no_game_running: '&8[%prefix%&8] &cŞu anda süren bir sohbet oyunu yok.'
+global_not_enabled: '&8[%prefix%&8] &f%game% &cglobal_games.yml içinde küresel oyun olarak açık değil.'
+unknown_game: '&8[%prefix%&8] &cÅžu adda bir oyun yok: &f%game%&c.'
+unknown_menu: '&8[%prefix%&8] &cÅžu adda bir menÃ¼ yok: &f%menu%&c.'
+
+presets:
+  loaded: '&8[%prefix%&8] &fÃ–n ayar yÃ¼klendi: &a%preset% &f(%games%).'
+  cleared: '&8[%prefix%&8] &fArtık hiçbir ön ayar etkin değil; games.yml''de açık olan oyunlar kullanılıyor.'
+  saved: '&8[%prefix%&8] &fAçık oyunlar &a%preset% &fön ayarı olarak kaydedildi (%games%).'
+  not_found: '&8[%prefix%&8] &cÅžu adda bir Ã¶n ayar yok: &f%preset%&c.'
+  invalid_name: '&8[%prefix%&8] &cÖn ayar adları yalnızca harf, rakam, - ve _ içerebilir (en fazla 32).'
+  list_header: '&8[%prefix%&8] &eÖn ayarlar:'
+  list_entry: '&7- &f%preset%%active% &8(%games%)'
+  active_marker: ' &a(etkin)'
+  list_empty: '&8[%prefix%&8] &cpresets.yml içinde hiç ön ayar tanımlı değil.'
+
+challenges:
+  completed: '&8[%prefix%&8] &a%period% görev tamamlandı: &f%challenge%&a! &f/chatgames claim &aile al.'
+  claimed: '&8[%prefix%&8] &aAlÄ±ndÄ±: &f%challenge%&a!'
+  nothing_to_claim: '&8[%prefix%&8] &cŞu anda alınacak bir şeyin yok.'
+  #/chatgames challenges. %period% aşağıda 'Günlük' veya 'Haftalık'; %resets% kalan süre, ör. 5h 12m
+  header: '&8[%prefix%&8] &e%period% görevler &7(%completed%/%total% tamam, %resets% sonra yenilenir)'
+  entry: '&7- %challenge% &8- &7%description% &f%progress%/%amount% %status%'
+  status_in_progress: ''
+  status_ready: '&a[Alınmaya hazır]'
+  status_claimed: '&7[Alındı]'
+  none: '&8[%prefix%&8] &cŞu anda hiç görev yok.'
+  daily: 'Günlük'
+  weekly: 'Haftalık'
+  reset: '&8[%prefix%&8] &fGÃ¼nlÃ¼k ve haftalÄ±k gÃ¶rev ilerlemesi sÄ±fÄ±rlandÄ±: &c%player%&f.'
+
+streaks:
+  grew: '&8[%prefix%&8] &a%streak% &aartık &f%days% &agün! Ödülü &f/chatgames claim &aile al.'
+  #%days% bir gün ya da birkaç gün birden alındığında 3-5 gibi bir aralıktır
+  claimed: '&8[%prefix%&8] &a%streak% &aödülünü aldın (gün %days%)!'
+  header: '&8[%prefix%&8] &eSeriler:'
+  entry: '&7- %streak% &8- &f%days% &7gün, rekor &f%longest% %status%'
+  status_ready: '&a[%unclaimed% alınacak]'
+  status_today: '&7[bugün yapıldı]'
+  status_waiting: '&e[bugün henüz değil]'
+  none: '&8[%prefix%&8] &cSeriler kapalı.'
+  set: '&8[%prefix%&8] &fOyuncu: &c%player%&f, %streak% &fartÄ±k &a%days% &fgÃ¼n.'
+  unknown: '&8[%prefix%&8] &cÅžu adda bir seri yok: &f%type%&c. challenge, daily veya global kullan.'
+
+events:
+  unknown: '&8[%prefix%&8] &cÅžu adda bir etkinlik yok: &f%event%&c.'
+  started: '&8[%prefix%&8] &f%event% &fetkinliği başladı.'
+  already_running: '&8[%prefix%&8] &cZaten bir etkinlik sürüyor: %event%&c.'
+  cancelled: '&8[%prefix%&8] &cBaşka bir eklenti %event% &cetkinliğini iptal etti.'
+  not_running: '&8[%prefix%&8] &cSüren bir etkinlik yok.'
+  stopped: '&8[%prefix%&8] &f%event% &fetkinliği durduruldu.'
+  list_header: '&8[%prefix%&8] &eEtkinlikler:'
+  list_entry: '&7- &f%id% &8(%event%&8) &7%steps% oyun, sonraki: &f%next%%running%'
+  list_running: ' &a(sürüyor, oyun %step%/%steps%)'
+  list_empty: '&8[%prefix%&8] &cevents.yml içinde hiç etkinlik tanımlı değil.'
+  not_scheduled: 'planlanmadı'
+  top_header: '&8[%prefix%&8] &e%event% &eiçinde en çok etkinlik puanı:'
+  top_entry: '&c%spot%. &f%player% &8| &e%points% &7puan'
+  top_empty: '&8[%prefix%&8] &c%event% &ciçinde henüz kimse puan almadı.'
+
+logs:
+  no_logs: "&cKullanılabilir kayıt yok veya bir hata oluştu."
+  header: "&8[%prefix%&8] &eSon &6%amount% &ekayıt:"
+  entries:
+    # Oyun kayıt satırları
+    game:
+      start: "&aOyun başladı: &f%game% | &aCevabı var: &f%hasAnswer% | &aCevap: &f%answer%"
+      end: "&aOyun bitti: &f%game% | &aKazananı var: &f%hasWinner% | &aKazananlar: &f%winners% | &aCevap: &f%answer%"
+
+    # Malzemeli yarış kayıt satırları
+    race:
+      start: "&aYarış başladı: &f%race% | &aMalzeme: &f%material% | &aMiktar: &f%amount%"
+      end: "&aYarış bitti: &f%race% | &aKazananı var: &f%hasWinner% | &aKazanan: &f%winner% | &aMalzeme: &f%material% | &aMiktar: &f%amount%"
+
+    # HUNT yarışı (varlıklı yarış) için özel satır
+    hunt:
+      start: "&aYarış başladı: &f%race% | &aVarlık: &f%entity% | &aMiktar: &f%amount%"
+      end: "&aYarış bitti: &f%race% | &aKazananı var: &f%hasWinner% | &aKazanan: &f%winner% | &aVarlık: &f%entity% | &aMiktar: &f%amount%"
+
+#İstersen sıralama mesajlarında <center> kullanabilirsin.
+top:
+  #Herhangi bir mesajı kapatmak için boş bırakabilirsin. ('format' ve 'player-stat-format' hariç)
+  header: '&b&m---------&e&lSOHBET ZİRVESİ&b&m---------'
+  #Ayraç değeri, ilk 10'u üst ve alt bilgiden ayıran mesajdır!
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%points% &7puan'
+  player-stat-format: '&7Galibiyet sayÄ±n: &e&l%player_points% &7galibiyet'
+  total-stat-format: '&7Toplam kazanılan oyun: &6&l%total_wins%'
+  footer: '&b&m---------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cHenüz veri yok! Bir sohbet oyunu kazan ve puan topla!'
+
+TypersTop:
+  #Herhangi bir mesajı kapatmak için boş bırakabilirsin. ('format' ve 'player-stat-format' hariç)
+  header: '&b&m---------&e&lEN HIZLILAR&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6s'
+  player-stat-format: '&7En hızlı süren &e&l%fastest_time%&6s'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cHenüz veri yok! Bir sohbet oyunu kazan ve en hızlı ol!'
+  top_disabled_message: '&8[%prefix%&8] &cBu özellik şu anda kapalı!'
+
+GameTypersTop:
+  #Herhangi bir mesajı kapatmak için boş bırakabilirsin. ('format' ve 'player-stat-format' hariç)
+  header: '&b&m---------&e&lEN HIZLILAR - %game%&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6s'
+  player-stat-format: '&7En hızlı süren &e&l%fastest_time%&6s'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cHenüz veri yok! Bir sohbet oyunu kazan ve en hızlı ol!'
+  top_disabled_message: '&8[%prefix%&8] &cBu özellik şu anda kapalı!'
+
+help_command:
+  - '&7&m-------------------------------------------------'
+  - '&e&l-ChatGames-'
+  - '&6'
+  - '&6&lKOMUTLAR:'
+  - '&6'
+  - '&a/chatgames menu [menu] &f- &3Menüyü açar: profil, görevler, seriler, sıralamalar (veya menus.yml''deki herhangi bir menü).'
+  - '&a/chatgames profile [player] &f- &3İstatistiklerini (veya başka bir oyuncunun) gösterir.'
+  - '&a/chatgames top &f- &3En çok puanı olan 10 oyuncuyu gösterir.'
+  - '&a/chatgames fastest [game] &f- &3En hızlı kazananları gösterir, genel veya tek bir oyun için.'
+  - '&a/chatgames points [player] &f- &3Puanlarını (veya başka bir oyuncunun) gösterir.'
+  - '&a/chatgames challenges &f- &3Günlük ve haftalık görevlerini gösterir.'
+  - '&a/chatgames streaks &f- &3Serilerini gösterir.'
+  - '&a/chatgames claim &f- &3Tamamlanan görevleri ve seri ödüllerini alır.'
+  - '&a/chatgames event [list|top <event>] &f- &3Oyun etkinliklerini veya bir etkinlikte en çok puan alanı gösterir.'
+  - '&a/chatgames toggle [player] &f- &3Sohbet oyunlarını senin için açar veya kapatır.'
+  - '&a/chatgames togglesound [player] &f- &3Sohbet oyunu seslerini açar veya kapatır.'
+  - '&6'
+  - '&c&lYÖNETİCİ:'
+  - '&a/chatgames admin &f- &3Yönetici menüsünü açar.'
+  - '&a/chatgames debug &f- &3Hata ayıklama menüsünü açar: her oyunu gizlice, ödülsüz test et.'
+  - '&a/chatgames (game) [values] &f- &3O oyunu şimdi başlatır, istersen kendi kelime/değerlerinle.'
+  - '&a/chatgames any &f- &3Döngünün sıradaki seçeceği oyunu başlatır.'
+  - '&a/chatgames global <game> [values] &f- &3Küresel bir oyun başlatır: zamanında cevaplayan herkes kazanır.'
+  - '&a/chatgames event start <event> | stop &f- &3Bir oyun etkinliğini başlatır veya durdurur.'
+  - '&a/chatgames stop &f- &3Süren oyunu kazanan olmadan bitirir.'
+  - '&a/chatgames toggleAll &f- &3Otomatik oyun döngüsünü açar veya kapatır.'
+  - '&a/chatgames preset <list|load|save> [name] &f- &3Oyun ön ayarlarını yönetir.'
+  - '&a/chatgames +points|-points|setpoints <player> <amount> &f- &3Bir oyuncunun puanlarını değiştirir.'
+  - '&a/chatgames remove <player> &f- &3Bir oyuncunun verilerini siler.'
+  - '&a/chatgames challenges reset <player> &f- &3Bir oyuncunun görev ilerlemesini temizler.'
+  - '&a/chatgames streak set <player> <challenge|daily|global> <days> &f- &3Bir oyuncunun serisini ayarlar.'
+  - '&a/chatgames logs [amount] &f- &3Son oyun kayıtlarını gösterir.'
+  - '&a/chatgames reload &f- &3Yapılandırma dosyalarını yeniden yükler.'
+  - '&6'
+  - '&2&lOYUN TÜRLERİ:'
+  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace'
+  - '&7&m-------------------------------------------------'
+
+#LİSTE mesajlarını ortalamak için <center> kullan; bunu içeren satırlar ortalanır!
+
+#############################
+##    SOHBET OYUNU MESAJLARI    ##
+#############################
+#Tüm oyunlarca paylaşılır. Bir oyun bunları aşağıdaki bölümünde kendi 'hint_message' / 'countdown_actionbar' değeriyle değiştirebilir.
+hint_message: '&8[%prefix%&8] &eİpucu: &f%hint%'
+countdown_actionbar: '&e%seconds%s &7kaldı'
+
+waiting_for_other_winners: '&8[%prefix%&8] &aDoğru! &fDiğer kazananlar bekleniyor...'
+wrong_case: '&8[%prefix%&8] &cÇok yakın... Büyük harflere dikkat et!'
+  #TÜM OYUNLARDA correct_message İÇİNDE %player% YERİNE "%display_name%" KULLANABİLİRSİN.
+  #
+  #KAZANAN OYUNCUNUN PUANLARINI GÖSTERMEK İÇİN %points_<position>% DA KULLANABİLİRSİN.
+  #
+  #1., 2., 3. kazananı vb. göstermek için %winner_<position>%, her birinin süresi için %time_<position>% kullan
+
+  ##2 KAZANANLI ÖRNEK:
+  #
+  #correct_message:
+  #- ''
+  #- '<center>&r✓ ✯ %prefix% &r✯ ✓'
+  #- ''
+  #- '&7Doğru cevap `&e%correct_answer%&7` idi! Kazananlar:'
+  #- '<center>&f1. &a%winner_1% - (&c%time_1%s&7)'
+  #- '<center>&f2. &a%winner_2% - (&c%time_2%s&7)'
+#- ''
+unscramble:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, &dÃ§Ã¶z&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7`&e%correct_answer%&7` kelimesini çözdü (&c%time_1%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cdoldu! &fKarışık harf oyunu bitti!'
+    - '<center>Doğru cevap &e%correct_answer% &fidi!'
+    - ''
+
+unreverse:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, kelimeyi &dters Ã§evir&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7`&e%correct_answer%&7` kelimesini en hızlı çevirdi (&c%time_1%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cdoldu! &fTers çevirme oyunu bitti!'
+    - '<center>Doğru cevap &e%correct_answer% &fidi!'
+    - ''
+
+reaction:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, kelimeyi &dyaz&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7`&e%correct_answer%&7` kelimesini en hızlı yazdı (&c%time_1%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cdoldu! &fRefleks oyunu bitti!'
+    - '<center>Doğru cevap &e%correct_answer% &fidi!'
+    - ''
+
+guess_the_number:
+  hint_message: '&8[%prefix%&8] &eİpucu: şu aralıkta &f%hint%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, &dsayÄ±yÄ± tahmin et &faralÄ±k:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7ilk olarak `&e%correct_answer%&7` dedi (&c%time_1%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cdoldu! &fSayı tahmin oyunu bitti!'
+    - '<center>Doğru cevap &e%correct_answer% &fidi!'
+    - ''
+
+memorize:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToMemorize% saniye&f, &dezberle &fbu listeyi:'
+    - ''
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  messageAfterMemorized:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, listeyi &dsÄ±rasÄ±yla&f yaz!'
+    - ''
+    - '<center>&fHer öğeyi virgülle ayır! (ör. `&belma, muz, çikolata&f`)'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7listeyi ilk yazan oldu ve ödül kazandı! (&c%time_1%s&7)'
+    - ''
+    - '<center>&fListe şuydu: &f`&b%correct_answer%&f`'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cdoldu! &fHafıza oyunu bitti!'
+    - ''
+    - '<center>&fListe şuydu: &f`&b%correct_answer%&f`'
+    - ''
+
+sequence:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, &ddiziyi tamamla&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  hint_message: '&8[%prefix%&8] &eİpucu: sonraki sayı &f%hint%'
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7`&e%correct_answer%&7` sayısını ilk buldu (&c%time_1%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cdoldu! &fDizi oyunu bitti!'
+    - '<center>Sonraki sayı &e%correct_answer% &fidi!'
+    - ''
+
+clickable:
+  clickableText: '&aBuraya tıkla!'
+  hoverText: '&eBuraya tıkla!'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, metne &dtÄ±kla&f:'
+    - ''
+    - '<center>&b%clickableText%'
+    - ''
+  #USE %winner_
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7metne en hızlı tıkladı (&c%time_1%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cdoldu! &fTıklama oyunu bitti!'
+    - ''
+
+fillout:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, kelimedeki &dboÅŸluklarÄ± doldur&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7`&e%correct_answer%&7` kelimesini en hızlı doldurdu (&c%time_1%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cdoldu! &fBoşluk doldurma oyunu bitti!'
+    - '<center>Doğru cevap &e%correct_answer% &fidi!'
+    - ''
+
+hoverable:
+  hoverableText: '&eÜstüne gel!'
+  hoverText: '&b%selection%'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, Ã¼stÃ¼ne gelince Ã§Ä±kan kelimeyi &dyaz&f:'
+    - ''
+    - '<center>&b%hoverableText%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7`&e%correct_answer%&7` kelimesini en hızlı yazdı (&c%time_1%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cdoldu! &fÜstüne gelme oyunu bitti!'
+    - '<center>Doğru cevap &e%correct_answer% &fidi!'
+    - ''
+
+#Bu oyunda verilen uzunlukta rastgele karakterlerden bir dizi oluşturulur
+random:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, &dyaz&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7`&e%correct_answer%&7` kelimesini en hızlı yazdı (&c%time_1%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cdoldu! &fRastgele oyun bitti!'
+    - '<center>Doğru cevap &e%correct_answer% &fidi!'
+    - ''
+
+math:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, &dÃ§Ã¶z&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7`&e%correct_answer%&7` sonucuna en hızlı ulaştı (&c%time_1%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cdoldu! &fMatematik oyunu bitti!'
+    - '<center>Doğru cevap &e%correct_answer% &fidi!'
+    - ''
+
+variable:
+  #Görünecekleri biçim budur; 'line1and2-format' içinde %symbol% simgesinin kaç kez tekrarlanacağını değiştirebilirsin, ama 3. satırdaki tüm değişkenler gösterildiği gibi kalır.
+  line1and2-format: '&c%symbol%&f + &c%symbol%&f + &c%symbol%&f = &e'
+  line3-format: '&c%symbol_1%&f + &c%symbol_2%&f + &b%toGet% &f= &e%result%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, &dbul&f: `&b%symbol%&f`'
+    - ''
+    - '<center>%line_1%'
+    - '<center>%line_2%'
+    - '<center>%line_3%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7`&e%correct_answer%&7` sonucuna en hızlı ulaştı (&c%time_1%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cdoldu! &fDeğişken oyunu bitti!'
+    - '<center>Doğru cevap &e%correct_answer% &fidi!'
+    - ''
+
+#%selection% ipuçlarıdır, %difficulty% easy/medium/hard.
+word_association:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, &dbaÄŸlantÄ±yÄ±&f bul:'
+    - '<center>&b%selection%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7`&e%correct_answer%&7` bağlantısını buldu (&c%time_1%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cdoldu! &fKimse bağlantıyı bulamadı.'
+    - '<center>Cevap &e%correct_answer% &fidi!'
+    - ''
+
+trivia:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, &dcevapla&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7ilk olarak `&e%correct_answer%&7` dedi (&c%time_1%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cdoldu! &fBilgi yarışması bitti!'
+    - '<center>Doğru cevap &e%correct_answer% &fidi!'
+    - ''
+
+#YARIŞLAR
+#Yarışlar şimdilik birden çok kazananı desteklemiyor, çünkü bir neden göremiyorum: bunlar ilk olanın kazanması gereken 'yarışlar' veya 'oyuncu görevleri'.
+
+#%value% malzeme veya yaratık, %amount% miktar, %timeToComplete% saniye cinsinden süre sınırı.
+#correct_message içinde: %winner%, %winner_displayname%, %time% (saniye) ve %points% (kazananın puanları).
+
+hunt:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToComplete% saniye&f, &davla&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7`&e%amount%&fx &3%value%&7` avını bitirdi (&c%time%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cdoldu! &fAv görevi bitti!'
+
+mine:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToComplete% saniye&f, &dkaz&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7`&e%amount%&fx &3%value%&7` kazmayı bitirdi (&c%time%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cdoldu! &fKazı görevi bitti!'
+
+place:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToComplete% saniye&f, &dyerleÅŸtir&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7`&e%amount%&fx &3%value%&7` yerleştirmeyi bitirdi (&c%time%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cdoldu! &fYerleştirme görevi bitti!'
+
+fish:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToComplete% saniye&f, &dbalÄ±k tut&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7`&e%amount%&fx &3%value%&7` tutmayı bitirdi (&c%time%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cdoldu! &fBalık tutma görevi bitti!'
+
+eat:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToComplete% saniye&f, &dye&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7`&e%amount%&fx &3%value%&7` yemeyi bitirdi (&c%time%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cdoldu! &fYeme görevi bitti!'
+
+craft:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToComplete% saniye&f, &dÃ¼ret&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7`&e%amount%&fx &3%value%&7` üretmeyi bitirdi (&c%time%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cdoldu! &fÜretim görevi bitti!'
+furnace:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSÃ¼ren &e%timeToComplete% saniye&f, &dpiÅŸir&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7`&e%amount%&fx &3%value%&7` pişirmeyi bitirdi (&c%time%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cdoldu! &fPişirme görevi bitti!'

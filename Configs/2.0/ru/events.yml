@@ -1,0 +1,112 @@
+#ИГРОВЫЕ СОБЫТИЯ
+#
+#Событие — это серия игр, сыгранных одна за другой. Каждая игра выдаёт очки события по
+#месту; когда заканчивается последняя, игроки с наибольшим числом очков события получают
+#его награды. Пока идёт событие, обычная ротация игр и глобальные игры ждут.
+#
+#Запустите его через /chatgames event start <event> или позвольте запустить его расписанию.
+#/chatgames event top <event> показывает, кто набрал в нём больше всех за всё время.
+#
+#Каждое событие:
+#  name: показывается игрокам (цветовые коды работают)
+#  schedule: когда оно начинается само, напр. 'SATURDAY 20:00' или 'DAILY 18:30' (или не указывайте).
+#            Часовой пояс — тот, что в challenges.yml.
+#  minimum-players: игроков онлайн, нужных, чтобы расписание его запустило (команда это игнорирует)
+#  pause-seconds: секунды между концом одной игры и началом следующей
+#  points: очки события за 1-е, 2-е, 3-е... место в каждой игре
+#  participation-points: очки события для всех остальных, кто справился. В глобальной игре, если
+#                        сервер достиг цели, очки получают все, кто внёс достаточно:
+#                        'points' для самых больших вкладчиков, эти для остальных.
+#                        Если цель не достигнута, в этой игре никто не получает очков.
+#  steps: игры, по порядку. Каждая:
+#    game: игра или гонка, как в games.yml / races.yml
+#    global: true, чтобы играть её как глобальную игру (сервер играет вместе; см. global_games.yml).
+#            Счёт всегда глобальный.
+#    time: секунды на ответ (или на гонку), вместо значения игры
+#    winners: сколько могут выиграть обычную игру в чате, вместо значения игры
+#    args: значения, как после /chatgames <game>, напр. 'stone 16' для гонки добычи
+#    settings: любые другие значения из games.yml для этой игры, напр. {difficulty: hard}
+#  rewards: строки наград по итоговому месту (1, 2, 3...) и 'participation' для всех остальных,
+#           кто набрал очки. Те же строки, что в rewards.yml ('<chance>%~ ' и 'has:<permission>' работают).
+
+events:
+  weekend_cup:
+    name: '&6&lКубок выходных'
+    schedule:
+      - 'SATURDAY 20:00'
+    minimum-players: 3
+    pause-seconds: 15
+    points: [5, 3, 1]
+    participation-points: 1
+    steps:
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+        time: 25
+      - game: word_association
+        global: true
+        settings:
+          difficulty: hard
+      - game: trivia
+        winners: 3
+      - game: mine
+        global: true
+        time: 120
+        args: 'stone 100'
+    rewards:
+      1:
+        - '[consolecmd] give %player% diamond 5'
+      2:
+        - '[consolecmd] give %player% diamond 3'
+      3:
+        - '[consolecmd] give %player% diamond 1'
+      participation:
+        - '[consolecmd] give %player% iron_ingot 3'
+
+  quick_quiz:
+    name: '&b&lБыстрая викторина'
+    minimum-players: 2
+    pause-seconds: 8
+    points: [3, 2, 1]
+    participation-points: 0
+    steps:
+      - game: reaction
+        winners: 3
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+    rewards:
+      1:
+        - '[consolecmd] give %player% gold_ingot 5'
+
+messages:
+  #Всем. %event% — название, %steps% — сколько игр, %pause% — секунды между ними.
+  start:
+    - ''
+    - '&6&l» СОБЫТИЕ: %event% &fначинается! &e%steps% &fигр, побеждает больше всего очков события.'
+    - ''
+  #Перед каждой игрой. %step% — её номер, %game% — игра.
+  step:
+    - '&6&l» %event% &f- игра &e%step%/%steps%&f: &e%game%'
+  #Каждому игроку, набравшему очки в игре. %points% — что он заработал, %total% — его сумма в событии.
+  step_points: '&8[%prefix%&8] &a+%points% очков события &7(всего %total%)'
+  #Всем в конце. %count% игроков набрали очки; %winner_<n>% и %points_<n>% — первая тройка.
+  end:
+    - ''
+    - '&6&l» %event% &fзавершено! &e%count% &fигрок(ов) набрали очки.'
+    - '&f  1. &e%winner_1% &7%points_1%  &f2. &e%winner_2% &7%points_2%  &f3. &e%winner_3% &7%points_3%'
+    - ''
+  nobody:
+    - '&6&l» %event% &fзавершено! &cНикто не набрал очков.'
+  #Каждому игроку, набравшему очки, после конца. %place% из %count%.
+  result: '&8[%prefix%&8] &fТы занял &e#%place% &fместо из %count% с &e%points% &fочками события.'
+  stopped:
+    - '&6&l» %event% &cостановлено.'
+
+#Итоговая таблица отправляется в Discord-вебхук из config.yml, если он задан.
+discord:
+  enabled: true
+  title: '%event% results'
+  line: '#%place% %player% - %points% points'

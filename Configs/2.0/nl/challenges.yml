@@ -1,0 +1,136 @@
+#DAGELIJKSE EN WEKELIJKSE UITDAGINGEN
+#
+#Iedereen krijgt dezelfde uitdagingen. De voortgang telt mee terwijl spelers spelen; een voltooide
+#uitdaging toont "Klaar om op te halen" in /chatgames challenges, en /chatgames claim betaalt hem uit.
+#Niet opgehaalde beloningen gaan verloren als de uitdagingen worden vernieuwd.
+#
+#SOORTEN UITDAGINGEN (amount is hoeveel er nodig zijn):
+#  WIN_GAMES    win chatspellen of races, op elke plek
+#  WIN_GAME     win één spel of race, ingesteld met 'game' (bv. game: unscramble)
+#  WIN_RACES    win races
+#  PLAY_GLOBAL  los globale spellen op tijd op
+#  WIN_GLOBAL   eindig globale spellen op een beloonde plek
+#  FAST_WIN     win chatspellen in 'seconds' of minder (races tellen niet)
+#  EARN_POINTS  verdien punten met spellen
+#  PLAY_EVENT   doe mee aan spel-events
+#
+#Elke uitdaging heeft:
+#  name / description: getoond in de chat en het menu. %amount%, %game% en %seconds% worden ingevuld.
+#  icon: het item in het menu (een materiaalnaam)
+#  rewards: regels zoals in rewards.yml (kansen met '<chance>%~ ', permissies met 'has:<permission>').
+#           %player% en %challenge% (de naam) worden ingevuld.
+#
+#De ID's (win_3, fast_1...) worden opgeslagen met de voortgang van spelers: houd ze bij a-z, 0-9, - en _,
+#en er een wijzigen laat de voortgang van die uitdaging opnieuw beginnen.
+
+#De tijdzone waarin de dagen beginnen, voor uitdagingen en reeksen, bv. Europe/Amsterdam of America/New_York.
+#Leeg gebruikt die van de server.
+timezone: ''
+
+daily:
+  enabled: true
+  #fixed: elke uitdaging hieronder is elke dag actief.
+  #random: elke dag worden er 'amount' getrokken (dezelfde voor iedereen).
+  mode: random
+  amount: 3
+  challenges:
+    win_3:
+      type: WIN_GAMES
+      amount: 3
+      name: '&eOpwarmen'
+      description: '&7Win %amount% chatspellen'
+      icon: GOLD_NUGGET
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    win_8:
+      type: WIN_GAMES
+      amount: 8
+      name: '&6Op dreef'
+      description: '&7Win %amount% chatspellen'
+      icon: GOLD_INGOT
+      rewards:
+        - '[consolecmd] give %player% gold_ingot 8'
+    unscramble_2:
+      type: WIN_GAME
+      game: unscramble
+      amount: 2
+      name: '&bWoordtovenaar'
+      description: '&7Win %amount% keer %game%'
+      icon: BOOK
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    math_2:
+      type: WIN_GAME
+      game: math
+      amount: 2
+      name: '&bMenselijke rekenmachine'
+      description: '&7Win %amount% keer %game%'
+      icon: PAPER
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    fast_1:
+      type: FAST_WIN
+      seconds: 5
+      amount: 1
+      name: '&cSnelle vingers'
+      description: '&7Win een chatspel in %seconds% seconden of minder'
+      icon: FEATHER
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    race_1:
+      type: WIN_RACES
+      amount: 1
+      name: '&aRacer'
+      description: '&7Win een race'
+      icon: IRON_PICKAXE
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    points_5:
+      type: EARN_POINTS
+      amount: 5
+      name: '&dPuntenverzamelaar'
+      description: '&7Verdien %amount% punten'
+      icon: EXPERIENCE_BOTTLE
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    global_1:
+      type: PLAY_GLOBAL
+      amount: 1
+      name: '&3Teamspeler'
+      description: '&7Los een globaal spel op tijd op'
+      icon: COMPASS
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+
+weekly:
+  enabled: true
+  #De dag waarop elke week begint.
+  reset-day: MONDAY
+  mode: fixed
+  amount: 3
+  challenges:
+    win_25:
+      type: WIN_GAMES
+      amount: 25
+      name: '&6Weekkampioen'
+      description: '&7Win deze week %amount% chatspellen'
+      icon: DIAMOND
+      rewards:
+        - '[consolecmd] give %player% diamond 3'
+    fast_5:
+      type: FAST_WIN
+      seconds: 4
+      amount: 5
+      name: '&cBliksem'
+      description: '&7Win %amount% chatspellen in %seconds% seconden of minder'
+      icon: BLAZE_POWDER
+      rewards:
+        - '[consolecmd] give %player% diamond 2'
+    global_5:
+      type: WIN_GLOBAL
+      amount: 5
+      name: '&3Publiekslieveling'
+      description: '&7Eindig %amount% globale spellen op een beloonde plek'
+      icon: BEACON
+      rewards:
+        - '[consolecmd] give %player% diamond 2'

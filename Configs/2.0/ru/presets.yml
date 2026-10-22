@@ -1,0 +1,41 @@
+# Пресеты ChatGames: именованные наборы игр для автоматической ротации.
+#
+# Пока пресет активен, ротация выбирает только его игры, а флаги 'enable'
+# в games.yml / races.yml игнорируются. Установите 'active' в none, чтобы снова использовать эти флаги.
+# Гонки в пресете идут, только если гонки включены в races.yml (enable-races).
+#
+# Команды (право chatgames.preset):
+#   /chatgames preset list
+#   /chatgames preset load <name>   (или 'none')
+#   /chatgames preset save <name>   сохраняет включённые сейчас игры как пресет
+#
+# Плагин перезаписывает этот файл, когда вы используете эти команды.
+
+active: none
+
+presets:
+  weekend_set:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+
+  minimal_set:
+    games:
+      - reaction
+
+  full_rotation:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+      - guess_the_number
+      - memorize
+      - sequence
+      - clickable
+      - fillout
+      - hoverable
+      - random
+      - math
+      - variable
+      - trivia

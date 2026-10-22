@@ -1,0 +1,1154 @@
+#MENUS
+#
+#Todo menu sob 'menus:' tem um 'title', um tamanho em 'rows' (1-6) e seus 'items'. Você pode mudar
+#o que qualquer botão faz, adicionar botões ou adicionar menus inteiros (abra-os com /chatgames menu <id>,
+#ou coloque cada um no seu próprio arquivo na pasta menus/, chamado <id>.yml).
+#
+#Cada item:
+#  slot: onde fica, de 0 (canto superior esquerdo) a rows*9-1. 'slots: [0, 1, '9-17']' o repete.
+#  material: qualquer nome de item da 1.8 à 26.x: nomes modernos ou antigos (lime_dye / INK_SACK:10 / 351:10),
+#            ou 'head:<nome de jogador, textura ou URL de textures.minecraft.net>'
+#  name / lore: códigos de cor (&a, e &#RRGGBB na 1.16+) e placeholders do PlaceholderAPI funcionam.
+#  amount, glow: true, enchantments: ['SHARPNESS:1'], flags: [HIDE_ATTRIBUTES], head: '%player%',
+#  custom-model-data: 1001 (1.14+), item-model: 'namespace:key' (1.21.2+), color: '#FF0000' (couro)
+#  actions: o que um clique faz, em ordem. Também left-actions, right-actions, shift-left-actions,
+#           shift-right-actions, middle-actions e drop-actions (cada uma usa actions se faltar).
+#  view-requirements: o item só aparece quando todas as linhas passam
+#  click-requirements: quando uma linha falha, as 'deny-actions' rodam no lugar das actions
+#  state + when-off: quando o estado é false, as chaves de when-off substituem as do item
+#                    (não 'off': o YAML lê um off solto como false)
+#Remova um item para escondê-lo. 'filler' preenche todos os espaços vazios; remova-o para não preencher.
+#
+#Ações:
+#  [command] <command>        você executa o comando      [console] <command>   o console executa
+#  [message] <text>           uma mensagem para você      [broadcast] <text>    para todos
+#  [sound] <sound> [volume] [pitch]   qualquer nome de som da 1.8 à 26.x
+#  [open] <menu> [values]     abre outro menu             [switch] <menu> [values]  igual, mas [back] o pula
+#  [back] [menu]              o menu anterior (ou o menu indicado, ou fecha)
+#  [refresh]  [close]  [next-page]  [previous-page]  [wait] <ticks>
+#  [chatgames:no-permission]  envia a mensagem de falta de permissão
+#  As específicas de cada menu estão descritas acima dos menus que as têm.
+#
+#Requisitos, um por linha (todas as linhas devem passar; comece uma linha com ! para invertê-la):
+#  permission <node>     uma comparação como '%chatgames_points% >= 100' (==, !=, >=, <=, >, <)
+#  ou um valor que seja true / on / yes / um número diferente de 0
+#
+#Menus que listam coisas (desafios, jogos, eventos...) as colocam em ordem em 'list-slots',
+#desenhadas com as 'templates' do menu. Com mais entradas que espaços, os itens cujas ações são
+#[next-page] / [previous-page] mudam de página; somem quando não há página para onde ir.
+#Uma linha de lore que é só um placeholder de lista, como '%game_wins%', vira várias linhas.
+#Todo menu também tem %player%, %page%, %pages% e %entries% (quantas entradas a lista tem).
+
+#Nomes e ícones dos jogos, em todos os menus e nas mensagens que citam um jogo (%game%).
+#Um jogo que não está aqui é nomeado pela sua chave.
+game-names:
+  unscramble: 'Desembaralhar'
+  unreverse: 'Desinverter'
+  reaction: 'Reação'
+  guess_the_number: 'Adivinhe o número'
+  clickable: 'Clique'
+  fillout: 'Completar'
+  hoverable: 'Texto flutuante'
+  random: 'Aleatório'
+  math: 'Matemática'
+  variable: 'Variável'
+  sequence: 'Sequência'
+  memorize: 'Memorizar'
+  word_association: 'Associação de palavras'
+  trivia: 'Quiz'
+  count: 'Contar'
+  hunt: 'Caça'
+  mine: 'Mineração'
+  place: 'Colocar'
+  fish: 'Pesca'
+  eat: 'Comer'
+  craft: 'Fabricar'
+  furnace: 'Culinária'
+game-icons:
+  unscramble: book
+  math: redstone
+  trivia: enchanted_book
+  reaction: feather
+  clickable: stone_button
+  random: ender_pearl
+  unreverse: compass
+  variable: name_tag
+  guess_the_number: clock
+  memorize: map
+  sequence: ladder
+  fillout: paper
+  hoverable: ender_eye
+  word_association: lead
+  count: clock
+  hunt: iron_sword
+  place: grass_block
+  mine: iron_pickaxe
+  fish: fishing_rod
+  eat: cooked_beef
+  craft: crafting_table
+  furnace: furnace
+
+formats:
+  #Mostrado no lugar de uma posição para jogadores que ainda não estão no ranking
+  no-rank: '-'
+
+#Para o jogador, a partir do menu de depuração. Deixe uma linha vazia ('') para não enviar nada.
+messages:
+  debug-round: '&8[&cDEBUG&8] &fNova rodada privada de &e%game% &f(resposta: &a%answer%&f), gerada em &e%generated% ms&f. Só você pode ver isto.'
+  debug-failed: '&8[&cDEBUG&8] &cNão foi possível gerar uma rodada de %game%; o console diz por quê.'
+  debug-race: '&8[&cDEBUG&8] &cAs corridas são jogadas no mundo, então não dá para testá-las aqui. Inicie uma com /chatgames <race>.'
+  debug-no-letters: '&8[&cDEBUG&8] &7Esta resposta não tem letras, então as maiúsculas não podem estar erradas.'
+  debug-timeout-started: '&8[&cDEBUG&8] &7Aguardando o limite de tempo de &e%time%s&7...'
+  debug-timeout: '&8[&cDEBUG&8] &e%game%&7: o tempo acabou. Os jogadores saberiam que a resposta era &f%answer%&7.'
+  #%verdict% é uma das linhas abaixo
+  debug-result: '&8[&cDEBUG&8] &e%game% &7| digitou &f%input% &7após &e%ms% ms&7: %verdict%'
+  debug-verdicts:
+    accepted: '&aaceita &7(ficaria em uma posição e ganharia &e%points% &7pontos)'
+    wrong: '&cerrada &7(ignorada)'
+    wrong-case: '&6maiúsculas erradas &7(o jogador é avisado para conferir)'
+    macro: '&cignorada como macro &7(mais rápida que min-answer-ms, &e%min_ms% ms&7)'
+    late: '&ctarde demais &7(depois do limite de tempo)'
+
+menus:
+
+  #/chatgames menu. %points% %rank% %wins% %claimable% (recompensas para resgatar),
+  #%daily_completed% %daily_total% %weekly_completed% %weekly_total%,
+  #%games_on% / %sound_on% (true ou false) e %games_state% / %sound_state% (texto ON/OFF)
+  main:
+    title: '&8&lChatGames'
+    rows: 3
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      profile:
+        slot: 10
+        material: player_head
+        head: '%player%'
+        name: '&e&lSeu perfil'
+        lore:
+          - '&7Pontos: &e%points% &8(%rank%)'
+          - '&7Vitórias: &e%wins%'
+          - ''
+          - '&eClique para ver suas estatísticas'
+        actions: ['[open] profile']
+      challenges:
+        slot: 11
+        material: writable_book
+        name: '&a&lDesafios'
+        lore:
+          - '&7Diários: &e%daily_completed%&7/&e%daily_total%'
+          - '&7Semanais: &e%weekly_completed%&7/&e%weekly_total%'
+          - '&7Recompensas para resgatar: &e%claimable%'
+          - ''
+          - '&eClique para abrir'
+        actions: ['[open] challenges daily']
+      streaks:
+        slot: 12
+        material: blaze_powder
+        name: '&6&lSequências'
+        lore:
+          - '&7Jogue todo dia para mantê-las.'
+          - ''
+          - '&eClique para abrir'
+        actions: ['[open] streaks']
+      leaderboards:
+        slot: 13
+        material: gold_ingot
+        name: '&e&lRankings'
+        lore:
+          - '&7Mais pontos e jogadores mais rápidos.'
+          - ''
+          - '&eClique para abrir'
+        actions: ['[open] leaderboards']
+      games-toggle:
+        slot: 15
+        material: lime_dye
+        name: '&fJogos de chat: %games_state%'
+        lore:
+          - '&7Clique para desativar os jogos de chat para você.'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7Clique para ativar os jogos de chat para você.'
+      sound-toggle:
+        slot: 16
+        material: note_block
+        name: '&fSons dos jogos: %sound_state%'
+        lore:
+          - '&7Clique para desativar os sons dos jogos.'
+        state: '%sound_on%'
+        actions: ['[command] chatgames togglesound', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7Clique para ativar os sons dos jogos.'
+      admin:
+        slot: 22
+        material: command_block
+        name: '&c&lAdmin'
+        lore:
+          - '&7Iniciar jogos, eventos, presets...'
+        view-requirements: ['permission chatgames.admin']
+        actions: ['[open] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cFechar'
+        actions: ['[close]']
+
+  #/chatgames profile [player]. %target% %points% %rank% %wins% %race_wins% %global_played%
+  #%global_won% (concluídos) %contributions% %events_played% %event_wins% %event_best_place% %fastest% %challenges_completed%
+  #%milestones% %milestones_total% %streak_<challenge|daily|global>% e %streak_<...>_longest%.
+  #Listas: %game_wins% e %game_fastest%. [open] profile <name> abre o de outra pessoa.
+  profile:
+    title: '&8Perfil: %target%'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7nenhum ainda'
+      game-wins: '&7%game%: &f%wins%'
+      game-fastest: '&7%game%: &f%time%s'
+    items:
+      head:
+        slot: 4
+        material: player_head
+        head: '%target%'
+        name: '&e&l%target%'
+        lore:
+          - '&7Pontos: &e%points% &8(%rank%)'
+      wins:
+        slot: 19
+        material: diamond
+        name: '&b&lVitórias'
+        lore:
+          - '&7Jogos de chat vencidos: &f%wins%'
+          - '&7Corridas vencidas: &f%race_wins%'
+          - ''
+          - '%game_wins%'
+      fastest:
+        slot: 20
+        material: clock
+        name: '&e&lTempos mais rápidos'
+        lore:
+          - '&7Melhor no geral: &f%fastest%'
+          - ''
+          - '%game_fastest%'
+      global:
+        slot: 21
+        material: beacon
+        name: '&3&lJogos globais'
+        lore:
+          - '&7Jogados: &f%global_played%'
+          - '&7Concluídos: &f%global_won%'
+          - '&7Contribuições: &f%contributions%'
+      events:
+        slot: 23
+        material: nether_star
+        name: '&6&lEventos'
+        lore:
+          - '&7Jogados: &f%events_played%'
+          - '&7Vencidos: &f%event_wins%'
+          - '&7Melhor posição: &f%event_best_place%'
+      streaks:
+        slot: 24
+        material: blaze_powder
+        name: '&6&lSequências'
+        lore:
+          - '&7Desafios: &f%streak_challenge% &8(recorde %streak_challenge_longest%)'
+          - '&7Vitória diária: &f%streak_daily% &8(recorde %streak_daily_longest%)'
+          - '&7Global: &f%streak_global% &8(recorde %streak_global_longest%)'
+      progress:
+        slot: 25
+        material: experience_bottle
+        name: '&a&lProgresso'
+        lore:
+          - '&7Pontos: &f%points%'
+          - '&7Marcos alcançados: &f%milestones%&7/&f%milestones_total%'
+          - '&7Desafios concluídos: &f%challenges_completed%'
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Voltar'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cFechar'
+        actions: ['[close]']
+
+  #[open] challenges <daily|weekly>. %period% %period_key% %completed% %total% %resets%.
+  #Entradas: %challenge% %id% %description% %progress% %amount% %percent% %bar% %icon%.
+  #[chatgames:claim-challenge] <period> <id> resgata um.
+  challenges:
+    title: '&8Desafios (%period%)'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    progress-bar:
+      length: 10
+      done: '&a|'
+      left: '&7|'
+    items:
+      tab-daily:
+        slot: 2
+        material: sunflower
+        name: '&e&lDiários'
+        glow: true
+        lore:
+          - '&7Mostrando os desafios de hoje.'
+        state: '%period_key% == daily'
+        actions: ['[switch] challenges daily']
+        when-off:
+          glow: false
+          lore:
+            - '&eClique para ver os desafios de hoje'
+      tab-weekly:
+        slot: 6
+        material: clock
+        name: '&b&lSemanais'
+        glow: true
+        lore:
+          - '&7Mostrando os desafios desta semana.'
+        state: '%period_key% == weekly'
+        actions: ['[switch] challenges weekly']
+        when-off:
+          glow: false
+          lore:
+            - '&eClique para ver os desafios desta semana'
+      info:
+        slot: 4
+        material: book
+        name: '&f%period%: &e%completed%&7/&e%total% &ffeitos'
+        lore:
+          - '&7Novos desafios em &f%resets%'
+      none:
+        slot: 22
+        material: barrier
+        name: '&7Nenhum desafio (%period%) agora'
+        view-requirements: ['%entries% == 0']
+      claim-all:
+        slot: 40
+        material: chest
+        name: '&a&lResgatar tudo'
+        lore:
+          - '&7Resgata todos os desafios concluídos'
+          - '&7e recompensas de sequência.'
+        actions: ['[command] chatgames claim', '[wait] 2', '[refresh]']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7Página anterior'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7Próxima página &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Voltar'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cFechar'
+        actions: ['[close]']
+    templates:
+      in-progress:
+        material: '%icon%'
+        name: '%challenge%'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&7Em andamento'
+      ready:
+        material: '%icon%'
+        glow: true
+        name: '%challenge% &a&l(FEITO)'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&a&lClique para resgatar sua recompensa!'
+        actions: ['[chatgames:claim-challenge] %period_key% %id%', '[refresh]']
+      claimed:
+        material: lime_stained_glass_pane
+        name: '%challenge% &7(resgatado)'
+        lore:
+          - '%description%'
+          - ''
+          - '&aRecompensa resgatada'
+
+  #Cada sequência tem %streak_<type>% (dias), %streak_<type>_name%, %streak_<type>_longest%,
+  #%streak_<type>_unclaimed% e %streak_<type>_enabled%, onde <type> é challenge, daily ou global.
+  #A escada de 7 dias de cada uma vai na lista com o nome dela, do dia 1 ao 7 (8-14 na segunda semana...).
+  #Dias da escada: %day% %ladder_day% (o dia de recompensa, 1-7) %type% %streak%, e %today% (true no dia de hoje).
+  #[chatgames:claim-streak] <type> resgata todos os dias não resgatados de uma sequência.
+  streaks:
+    title: '&8Sequências'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    lists:
+      challenge: ['11-17']
+      daily: ['20-26']
+      global: ['29-35']
+    items:
+      challenge:
+        slot: 10
+        material: writable_book
+        name: '%streak_challenge_name%'
+        lore:
+          - '&7Conclua todos os desafios diários todo dia.'
+          - ''
+          - '&7Atual: &f%streak_challenge% &7dias &8(recorde %streak_challenge_longest%)'
+          - '&7Dias para resgatar: &e%streak_challenge_unclaimed%'
+        view-requirements: ['%streak_challenge_enabled%']
+        click-requirements: ['%streak_challenge_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] challenge', '[refresh]']
+      daily:
+        slot: 19
+        material: gold_ingot
+        name: '%streak_daily_name%'
+        lore:
+          - '&7Vença pelo menos um jogo todo dia.'
+          - ''
+          - '&7Atual: &f%streak_daily% &7dias &8(recorde %streak_daily_longest%)'
+          - '&7Dias para resgatar: &e%streak_daily_unclaimed%'
+        view-requirements: ['%streak_daily_enabled%']
+        click-requirements: ['%streak_daily_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] daily', '[refresh]']
+      global:
+        slot: 28
+        material: beacon
+        name: '%streak_global_name%'
+        lore:
+          - '&7Resolva um jogo global todo dia.'
+          - ''
+          - '&7Atual: &f%streak_global% &7dias &8(recorde %streak_global_longest%)'
+          - '&7Dias para resgatar: &e%streak_global_unclaimed%'
+        view-requirements: ['%streak_global_enabled%']
+        click-requirements: ['%streak_global_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] global', '[refresh]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Voltar'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cFechar'
+        actions: ['[close]']
+    templates:
+      day-claimed:
+        material: lime_stained_glass_pane
+        glow: '%today%'
+        name: '&aDia %day% &7(resgatado)'
+      day-ready:
+        material: chest
+        glow: '%today%'
+        name: '&e&lDia %day%'
+        lore:
+          - '&a&lClique para resgatar!'
+        actions: ['[chatgames:claim-streak] %type%', '[refresh]']
+      day-today:
+        material: yellow_stained_glass_pane
+        glow: true
+        name: '&eDia %day% &7(hoje)'
+        lore:
+          - '&7Mantenha a sequência hoje'
+          - '&7para desbloquear esta recompensa.'
+      day-locked:
+        material: red_stained_glass_pane
+        name: '&cDia %day%'
+        lore:
+          - '&7Ainda não alcançado.'
+
+  #%points_rank% %fastest_rank% %total_points%; listas %top_points% e %top_fastest% (linhas conforme top-size)
+  leaderboards:
+    title: '&8Rankings'
+    rows: 3
+    top-size: 10
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7Ninguém ainda'
+    items:
+      points:
+        slot: 10
+        material: gold_block
+        name: '&e&lMais pontos'
+        lore:
+          - '%top_points%'
+      fastest:
+        slot: 11
+        material: clock
+        name: '&b&lMais rápidos'
+        lore:
+          - '%top_fastest%'
+      you:
+        slot: 13
+        material: player_head
+        head: '%player%'
+        name: '&a&lVocê'
+        lore:
+          - '&7Posição em pontos: &f%points_rank%'
+          - '&7Posição em rapidez: &f%fastest_rank%'
+          - ''
+          - '&7Pontos ganhos por todos: &f%total_points%'
+      games:
+        slot: 15
+        material: book
+        name: '&d&lMais rápidos por jogo'
+        lore:
+          - '&eClique para ver todos os jogos'
+        actions: ['[open] leaderboard-games']
+      events:
+        slot: 16
+        material: nether_star
+        name: '&6&lEventos'
+        lore:
+          - '&eClique para ver os eventos'
+        view-requirements: ['permission chatgames.event']
+        actions: ['[open] leaderboard-events']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7Voltar'
+        actions: ['[back] main']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cFechar'
+        actions: ['[close]']
+
+  #Uma entrada por jogo e corrida: %game% %key% %icon%, e %top% (os mais rápidos desse jogo)
+  leaderboard-games:
+    title: '&8Mais rápidos por jogo'
+    rows: 6
+    top-size: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7Ninguém ainda'
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7Página anterior'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7Próxima página &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7Voltar'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 53
+        material: barrier
+        name: '&cFechar'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&e&l%game%'
+        lore:
+          - '%top%'
+
+  #Uma entrada por evento: %event% %id% %steps%
+  leaderboard-events:
+    title: '&8Rankings de eventos'
+    rows: 4
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7Nenhum evento está configurado'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Página anterior'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Próxima página &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Voltar'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cFechar'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7%steps% jogos'
+          - ''
+          - '&eClique para ver quem pontuou mais'
+        actions: ['[close]', '[command] chatgames event top %id%']
+
+  #/chatgames admin. %current_game% %next_game% %rotation_state% %event% %preset%,
+  #%rotation_on% e %games_on% (true ou false). Cada botão executa o comando correspondente,
+  #que confere a própria permissão como se fosse digitado.
+  admin:
+    title: '&4&lAdmin do ChatGames'
+    rows: 5
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7nenhum'
+    items:
+      status:
+        slot: 4
+        material: repeater
+        name: '&f&lStatus'
+        lore:
+          - '&7Em andamento: &f%current_game%'
+          - '&7Próximo jogo em: &f%next_game%'
+          - '&7Rotação: %rotation_state%'
+          - '&7Evento: &f%event%'
+          - '&7Preset: &f%preset%'
+      start-game:
+        slot: 19
+        material: diamond_sword
+        name: '&a&lIniciar um jogo'
+        lore:
+          - '&7Qualquer jogo ou corrida, agora.'
+        actions: ['[open] admin-start']
+      global:
+        slot: 20
+        material: beacon
+        name: '&3&lIniciar um jogo global'
+        lore:
+          - '&7Todo mundo que conseguir a tempo vence.'
+        actions: ['[open] admin-global']
+      events:
+        slot: 21
+        material: nether_star
+        name: '&6&lEventos'
+        lore:
+          - '&7Iniciar ou parar um evento de jogos.'
+        actions: ['[open] admin-events']
+      presets:
+        slot: 23
+        material: chest
+        name: '&d&lPresets'
+        lore:
+          - '&7Carregar um conjunto de jogos ativados.'
+        actions: ['[open] admin-presets']
+      logs:
+        slot: 24
+        material: oak_sign
+        name: '&f&lRegistros'
+        lore:
+          - '&7Mostrar os últimos jogos no chat.'
+        actions: ['[open] admin-logs']
+      stop:
+        slot: 25
+        material: red_wool
+        name: '&c&lParar o jogo'
+        lore:
+          - '&7Encerra o jogo em andamento sem vencedor.'
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      toggle:
+        slot: 29
+        material: lime_dye
+        name: '&fSeus jogos de chat: &aON'
+        lore:
+          - '&7Clique para desativá-los para você.'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&fSeus jogos de chat: &cOFF'
+          lore:
+            - '&7Clique para ativá-los para você.'
+      toggle-all:
+        slot: 30
+        material: lime_dye
+        name: '&fRotação de jogos: &aON'
+        lore:
+          - '&7Clique para parar os jogos automáticos para todos.'
+        state: '%rotation_on%'
+        #toggleAll termina na thread global, um tick depois no Folia
+        actions: ['[command] chatgames toggleAll', '[wait] 2', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&fRotação de jogos: &cOFF'
+          lore:
+            - '&7Clique para retomar os jogos automáticos.'
+      reload:
+        slot: 32
+        material: hopper
+        name: '&e&lRecarregar'
+        lore:
+          - '&7Recarrega todos os arquivos de configuração.'
+        actions: ['[close]', '[command] chatgames reload']
+      debug:
+        slot: 33
+        material: command_block
+        name: '&c&lDepuração'
+        lore:
+          - '&7Teste qualquer jogo em privado.'
+        view-requirements: ['permission chatgames.debug']
+        actions: ['[open] debug']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Voltar'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cFechar'
+        actions: ['[close]']
+
+  #Todos os jogos e corridas: %game% %key% (como nos comandos) %icon%
+  admin-start:
+    title: '&8Iniciar um jogo'
+    rows: 6
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7Página anterior'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7Próxima página &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7Voltar'
+        actions: ['[back] admin']
+      close:
+        slot: 53
+        material: barrier
+        name: '&cFechar'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&a%game%'
+        lore:
+          - '&7Jogo de chat'
+          - '&eClique para iniciar'
+        actions: ['[close]', '[command] chatgames %key%']
+      race:
+        material: '%icon%'
+        name: '&6%game%'
+        lore:
+          - '&7Corrida'
+          - '&eClique para iniciar'
+        actions: ['[close]', '[command] chatgames %key%']
+
+  #Os jogos que o global_games.yml ativa: %game% %key% %icon% %goal% %duration% %points%.
+  #O que está em jogo: %global_running% %global_game% %global_goal% (ex.: "500 Pedra")
+  #%global_progress% %global_goal_amount% %global_percent% %global_contributors% %global_time_left%
+  admin-global:
+    title: '&8Jogos globais'
+    rows: 5
+    update-interval: 20
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    items:
+      status:
+        slot: 4
+        material: beacon
+        name: '&3&lJogando: &f%global_game%'
+        lore:
+          - '&7Meta: &f%global_goal%'
+          - '&7Progresso: &e%global_progress%&7/&e%global_goal_amount% &8(%global_percent%%)'
+          - '&7Jogadores ajudando: &f%global_contributors%'
+          - '&7Tempo restante: &f%global_time_left%s'
+          - ''
+          - '&cClique para pará-lo (sem recompensas)'
+        view-requirements: ['%global_running%']
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      idle:
+        slot: 4
+        material: gray_dye
+        name: '&7Nenhum jogo global em andamento'
+        lore:
+          - '&7Escolha um abaixo para iniciá-lo.'
+        view-requirements: ['!%global_running%']
+      none:
+        slot: 22
+        material: barrier
+        name: '&7Nenhum jogo global está ativado'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7Página anterior'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7Próxima página &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Voltar'
+        actions: ['[back] admin']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cFechar'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&3%game% global'
+        lore:
+          - '&7Meta: &f%goal% respostas certas'
+          - '&7Tempo: &f%duration%s'
+          - '&7Pontos: &f%points%'
+          - ''
+          - '&eClique para iniciar'
+        actions: ['[close]', '[command] chatgames global %key%']
+      race:
+        material: '%icon%'
+        name: '&3Corrida global de %game%'
+        lore:
+          - '&7Meta: &f%goal% juntos'
+          - '&7Tempo: &f%duration%s'
+          - '&7Pontos: &f%points%'
+          - ''
+          - '&eClique para iniciar'
+        actions: ['[close]', '[command] chatgames global %key%']
+      count:
+        material: '%icon%'
+        name: '&3%game% global'
+        lore:
+          - '&7Contem juntos no chat'
+          - '&7Tempo: &f%duration%s'
+          - '&7Pontos: &f%points%'
+          - ''
+          - '&eClique para iniciar'
+        actions: ['[close]', '[command] chatgames global %key%']
+
+  #Eventos do events.yml: %event% %id% %steps%, e %step% (o jogo de agora) para o que está em andamento
+  admin-events:
+    title: '&8Eventos'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7Nenhum evento está configurado no events.yml'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Página anterior'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Próxima página &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Voltar'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cFechar'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7%steps% jogos'
+          - ''
+          - '&eClique para iniciar'
+        actions: ['[command] chatgames event start %id%', '[wait] 2', '[refresh]']
+      running:
+        material: nether_star
+        glow: true
+        name: '%event% &a(em andamento)'
+        lore:
+          - '&7Jogo %step% de %steps%'
+          - ''
+          - '&cClique para pará-lo'
+        actions: ['[command] chatgames event stop', '[wait] 2', '[refresh]']
+
+  #Os presets mais 'none' (as flags enable do games.yml): %preset% %games%
+  admin-presets:
+    title: '&8Presets'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Página anterior'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Próxima página &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Voltar'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cFechar'
+        actions: ['[close]']
+    templates:
+      preset:
+        material: chest
+        name: '&d%preset%'
+        lore:
+          - '&7Jogos: &f%games%'
+          - ''
+          - '&eClique para carregar'
+        actions: ['[command] chatgames preset load %preset%', '[wait] 2', '[refresh]']
+      active:
+        material: ender_chest
+        glow: true
+        name: '&d%preset% &a(ativo)'
+        lore:
+          - '&7Jogos: &f%games%'
+
+  #Montado inteiramente aqui: adicione ou mude as quantidades à vontade
+  admin-logs:
+    title: '&8Registros'
+    rows: 3
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      last-10:
+        slot: 11
+        material: paper
+        name: '&fÚltimos &e10 &fjogos'
+        lore: ['&eClique para mostrá-los no chat']
+        actions: ['[close]', '[command] chatgames logs 10']
+      last-25:
+        slot: 12
+        material: paper
+        name: '&fÚltimos &e25 &fjogos'
+        lore: ['&eClique para mostrá-los no chat']
+        actions: ['[close]', '[command] chatgames logs 25']
+      last-50:
+        slot: 14
+        material: paper
+        name: '&fÚltimos &e50 &fjogos'
+        lore: ['&eClique para mostrá-los no chat']
+        actions: ['[close]', '[command] chatgames logs 50']
+      last-100:
+        slot: 15
+        material: paper
+        name: '&fÚltimos &e100 &fjogos'
+        lore: ['&eClique para mostrá-los no chat']
+        actions: ['[close]', '[command] chatgames logs 100']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7Voltar'
+        actions: ['[back] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cFechar'
+        actions: ['[close]']
+
+  #/chatgames debug: todos os jogos de chat (%game% %key% %icon%). [chatgames:debug] <game> inicia uma
+  #rodada privada e abre debug-session.
+  debug:
+    title: '&4Depuração: escolha um jogo'
+    rows: 4
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Página anterior'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Próxima página &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Voltar'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cFechar'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&c%game%'
+        lore:
+          - '&7Gera uma rodada privada.'
+          - '&7Sem recompensas, nada é salvo.'
+        actions: ['[chatgames:debug] %key%']
+
+  #A rodada privada: %game% %key% %icon% %question% %answer% %time% %min_ms% %case_sensitive%
+  #%winners% %points% %hints% %generated%; listas %placeholders% e %answers%.
+  #[chatgames:debug-answer] <correct|wrong|wrong-case> [ms] envia uma resposta simulada (após ms);
+  #[chatgames:debug-timeout] espera o limite de tempo; [chatgames:debug-reroll] cria uma nova rodada;
+  #[chatgames:debug-end] encerra a sessão.
+  debug-session:
+    title: '&4Depuração: %game%'
+    rows: 5
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    #Um botão "responder certo após X ms" por espera, nos espaços da lista 'delays'
+    delays: [100, 500, 1000, 5000]
+    lists:
+      delays: ['29-32']
+    items:
+      question:
+        slot: 11
+        material: '%icon%'
+        name: '&e&lPergunta'
+        lore:
+          - '&f%question%'
+          - ''
+          - '%placeholders%'
+      answer:
+        slot: 13
+        material: emerald
+        name: '&a&lRespostas aceitas'
+        lore:
+          - '%answers%'
+      settings:
+        slot: 15
+        material: repeater
+        name: '&f&lConfigurações'
+        lore:
+          - '&7Limite de tempo: &f%time%s'
+          - '&7Tempo mínimo de resposta: &f%min_ms% ms'
+          - '&7Diferencia maiúsculas: %case_sensitive%'
+          - '&7Vencedores: &f%winners%  &7Pontos: &f%points%'
+          - '&7Dicas preparadas: &f%hints%'
+          - '&7Gerada em: &f%generated% ms'
+      correct-now:
+        slot: 28
+        material: lime_wool
+        name: '&aResponder certo agora'
+        lore:
+          - '&7Mais rápido que qualquer pessoa: mostra'
+          - '&7a verificação anti-macro em ação.'
+        actions: ['[chatgames:debug-answer] correct']
+      wrong:
+        slot: 33
+        material: red_wool
+        name: '&cResponder errado'
+        actions: ['[chatgames:debug-answer] wrong']
+      wrong-case:
+        slot: 34
+        material: orange_wool
+        name: '&6Responder com maiúsculas erradas'
+        actions: ['[chatgames:debug-answer] wrong-case']
+      timeout:
+        slot: 39
+        material: clock
+        name: '&eDeixar o tempo acabar'
+        lore:
+          - '&7Espera o limite de tempo e depois informa.'
+        actions: ['[chatgames:debug-timeout]']
+      reroll:
+        slot: 41
+        material: ender_pearl
+        name: '&dNova rodada'
+        actions: ['[chatgames:debug-reroll]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Voltar'
+        actions: ['[chatgames:debug-end]', '[back] debug']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cFechar'
+        actions: ['[close]']
+    templates:
+      correct-after:
+        material: yellow_wool
+        name: '&eResponder certo após %ms% ms'
+        actions: ['[chatgames:debug-answer] correct %ms%']

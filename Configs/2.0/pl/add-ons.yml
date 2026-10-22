@@ -1,0 +1,20 @@
+discord:
+  #Jeśli url jest pusty, to jest ignorowane, bo nie ma webhooka
+  webhook-url: ''
+  message-content: 'Latest game results:'
+  img-url: 'https://www.spigotmc.org/data/resource_icons/107/107781.jpg?1676494289'
+  username: 'Chat Games'
+  title: 'Chat Games Result'
+  description: 'The winner is:'
+  winner-field: '%winner% (%time%)'
+  game-field: 'Game: %game%'
+
+
+#Plik, w którym będą zapisywane logi
+log-file: 'game_log.txt'
+
+#Jeśli true, wszystkie wydarzenia czatu będą logowane w konsoli; oba mogą działać jednocześnie
+log-console: true
+
+#Jeśli true, wszystkie wydarzenia czatu będą logowane w pliku; oba mogą działać jednocześnie
+log-local: true

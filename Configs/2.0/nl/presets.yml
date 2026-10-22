@@ -1,0 +1,41 @@
+# ChatGames-presets: benoemde sets van spellen voor de automatische rotatie.
+#
+# Zolang een preset actief is, kiest de rotatie alleen zijn spellen, en de 'enable'-vlaggen
+# in games.yml / races.yml worden genegeerd. Zet 'active' op none om die vlaggen weer te gebruiken.
+# Races in een preset lopen alleen als races aanstaan in races.yml (enable-races).
+#
+# Commando's (permissie chatgames.preset):
+#   /chatgames preset list
+#   /chatgames preset load <name>   (of 'none')
+#   /chatgames preset save <name>   slaat de spellen die nu aanstaan op als preset
+#
+# De plugin herschrijft dit bestand als je die commando's gebruikt.
+
+active: none
+
+presets:
+  weekend_set:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+
+  minimal_set:
+    games:
+      - reaction
+
+  full_rotation:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+      - guess_the_number
+      - memorize
+      - sequence
+      - clickable
+      - fillout
+      - hoverable
+      - random
+      - math
+      - variable
+      - trivia

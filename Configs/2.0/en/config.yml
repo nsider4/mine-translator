@@ -1,0 +1,121 @@
+#############################
+######    SETTINGS    #######
+#############################
+check-update: true
+
+#The server's language. Block, item and mob names (in races and Memorize) are translated
+#into it, in over 140 languages. See the ID for your language here:
+#https://github.com/nsider4/mine-translator/blob/main/language_names.txt
+#The names are downloaded into translations/ and updated automatically when a newer Minecraft
+#version is out. A change here applies on /chatgames reload.
+lang: 'en_us'
+
+#The language of these config files: messages, menus, word lists, trivia, comments...
+#  auto: switch them when 'lang' above changes, if that language has translated files
+#  none: never change them
+#  or a language code: en, es, fr, pt, de, it, nl, pl, ru, tr
+#Switching keeps your settings and the changes you made to them; your own messages are
+#replaced by the translation (the old files are copied to backups/ first). Translations are
+#downloaded from https://github.com/nsider4/mine-translator (folder Configs) and updated
+#automatically. More languages can be added there.
+config-language: 'auto'
+
+#Storage type, available: SQLite or MySQL
+Storage: 'SQLite'
+
+#The name of the table that will contain all ChatGames data
+table_name: 'chatgames'
+
+#The name of the table that will contain all ChatGames fastest times
+fastest_times_table: 'chatgames_fastest_times'
+
+SQLite:
+  Filename: 'chatgames-data'
+
+MySQL:
+  host: 'localhost'
+  port: '3306'
+  user: 'root'
+  password: 'password'
+  database: 'chatgame'
+  connection-parameters: '?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8'
+  Pool-Settings:
+    max-pool-size: 10
+    min-idle: 10
+    max-lifetime: 180000
+    keep-alive-time: 60000
+    time-out: 20000
+
+disabled-worlds:
+  - 'example_world'
+
+prefix: '&c&lC&d&lH&b&lA&a&lT &6&lG&e&lA&a&lM&c&lE&b&lS'
+
+#Only players with 'chatgames.start.*' will be able to start even when this is false
+allow_starting_from_disabled: true
+
+#If false, it won't cancel the message that is normally not sent when a user guesses the correct option
+cancel-message-when-winning: true
+
+#The minimum amount of players that have to be online in order for the chat event to start
+min_players_online: 1
+
+#The time it will take for a random game to be picked again.
+#The value -1 will disable the task, this will disable the task COMPLETELY, with this in -1 you can't use randomDelay either
+time_minutes: 25
+
+#If this is enabled, everytime a game ends, it will create a random number from 'randomDelay.minimum' to the number in 'randomDelay.limit' as a delay for the next game
+#Enabling this will ignore 'time_minutes' value unless it's -1 since there will be no task.
+randomDelay:
+  enable: false
+  #Time unit, the other possible value is 'seconds', if you do change it, it's recommended to make the minimum higher than the 'timeToGuess_seconds' for a game
+  timeUnit: 'minutes'
+  minimum: 1
+  limit: 25
+
+
+#Turning this off will mean that chatgames.play permission will not be necessary to show the games
+use-permission-toplay: false
+
+#In false, it will only count players who have the 'chatgames.play' command meaning they are able to play.
+#In true, it will count all online players except vanished players.
+count-all-players: false
+
+#In true, it will create a top for the fastest typers(/chatgames fastest). Otherwise, in false, this top type will be off.
+fastest-typers-top: true
+
+#PlaceholderAPI placeholders (needs PlaceholderAPI installed):
+#  You:          %chatgames_points%, %chatgames_wins%, %chatgames_wins_<game>%, %chatgames_race_wins%,
+#                %chatgames_global_played%, %chatgames_global_won%, %chatgames_toggle%, %chatgames_sound_toggle%
+#                %chatgames_events_played%, %chatgames_event_wins%, %chatgames_event_best_place% (0 = none yet)
+#  Your times:   %chatgames_personal_best% (any chat game), %chatgames_fastest_<game>% (races too)
+#  Your place:   %chatgames_show_current_pos_top% (points), %chatgames_show_current_pos_fastest% (best time)
+#  Points top:   %chatgames_top_<n>% (name), %chatgames_points_top_<n>%, %chatgames_total_points%
+#  Fastest top:  %chatgames_fastest_<n>% (name, chat games), %chatgames_fastest_time_<n>%,
+#                %chatgames_fastest_<game>_<n>%, %chatgames_fastest_<game>_time_<n>%
+#  Right now:    %chatgames_game_running%, %chatgames_current_game%, %chatgames_next_game_in% (seconds)
+#  Race:         %chatgames_race_target%, %chatgames_race_amount%, %chatgames_race_progress% (yours)
+#  Challenges:   %chatgames_daily_completed%, %chatgames_daily_total%, %chatgames_weekly_completed%,
+#                %chatgames_weekly_total%, %chatgames_challenges_completed% (all time)
+#  Streaks:      %chatgames_streak_<type>%, %chatgames_streak_<type>_longest% (<type> is challenge, daily or global)
+#  Game event:   %chatgames_event_running%, %chatgames_event_name%, %chatgames_event_step%, %chatgames_event_steps%,
+#                %chatgames_event_points% and %chatgames_event_place% (yours in the running event)
+#  <game> is a game's name as in games.yml (e.g. unscramble, guess_the_number); <n> is a place (1, 2, 3...).
+placeholders:
+  #How often the leaderboard placeholders (top_<n>, fastest_<n>, positions...) are rebuilt, in seconds.
+  #They are also rebuilt after every game with a winner. Your own points, wins and times are always live.
+  refresh-seconds: 60
+  #Shown when there is nothing to show: an empty leaderboard place, no best time yet, no game running...
+  empty-value: ''
+
+#Sound to send to players when a chat event starts!
+GameSounds:
+  volume: 0.5
+  pitch: 1.0
+  #LEAVE ANY OF THESE EMPTY TO DISABLE THEM
+  win: 'minecraft:entity.experience_orb.pickup'
+  game-start: 'minecraft:entity.player.levelup'
+  time-expired: 'minecraft:entity.villager.no'
+  wrong-case: 'minecraft:block.note_block.bass'
+
+#Game presets (named sets of enabled games) live in presets.yml.

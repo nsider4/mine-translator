@@ -1,0 +1,475 @@
+enable-races: true
+
+creative-enabled: true
+#VERİ eklemek için faydalı bağlantılar:
+#
+#https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+#https://helpch.at/docs/1.8/index.html?org/bukkit/entity/EntityType.html
+#https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+#https://helpch.at/docs/1.8/org/bukkit/Material.html
+
+#Adlar yeni veya eski olabilir (MOOSHROOM veya MUSHROOM_COW, COD veya RAW_FISH): sunucunun sürümüne
+#eşlenirler. Sürümünde olmayan adlar (ör. 1.8'de 1.21'den bir blok) konsola bir not düşülerek atlanır.
+#
+#Her yarış ayrıca şunları kabul eder (isteğe bağlı):
+#  points: 1     #kazananın aldığı puan (varsayılan 1)
+#  weight: 1     #döngünün onu diğer oyunlara göre ne sıklıkla seçtiği (varsayılan 1, 0 = asla)
+#
+#Yöneticiler kendi değerleriyle bir yarış başlatabilir: /chatgames <race> <material/mob> [amount]
+#Miktar verilmezse o malzeme/yaratık için aşağıda listelenenlerden biri kullanılır. Kazanan, tam olarak o
+#malzeme ve miktar için listelenen ödülleri alır, burada yoksa hiçbirini almaz (puanlar yine verilir).
+
+hunt:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__Kapatmak için sonraki 2 değeri boş bırak__
+  titleMessage: '&bAV'
+  subtitleMessage: '&a%amount% %value% öldür!'
+
+  #Canavar oluşturucu bloklardan veya doğurma yumurtalarından çıkan yaratıkların sayılıp sayılmayacağı.
+  count-spawner-mobs: true
+
+  data:
+    #Bu değerler geçerli Minecraft yaratık kimlikleri olmalıdır (dosyanın başındaki Faydalı bağlantılara bak)
+    ZOMBIE:
+      3:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+
+    CREEPER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SKELETON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SPIDER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    PIG:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SHEEP:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    COW:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    CHICKEN:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SALMON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+
+mine:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Kapatmak için sonraki 2 değeri boş bırak__
+  titleMessage: '&bKAZI'
+  subtitleMessage: '&a%amount% %value% kaz!'
+
+  data:
+    #Bu değerler geçerli Minecraft malzeme kimlikleri olmalıdır (dosyanın başındaki Faydalı bağlantılara bak)
+    STONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRASS_BLOCK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRAVEL:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIORITE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+place:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Kapatmak için sonraki 2 değeri boş bırak__
+  titleMessage: '&bYERLEŞTİR'
+  subtitleMessage: '&a%amount% %value% yerleştir!'
+
+  data:
+    #Bu değerler geçerli Minecraft malzeme kimlikleri olmalıdır (dosyanın başındaki Faydalı bağlantılara bak)
+    COBBLESTONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+fish:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Kapatmak için sonraki 2 değeri boş bırak__
+  titleMessage: '&bBALIK TUT'
+  subtitleMessage: '&a%amount% %value% tut!'
+
+  data:
+    #Bu değerler geçerli Minecraft malzeme kimlikleri olmalıdır (dosyanın başındaki Faydalı bağlantılara bak)
+    COD:
+      1:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+          - reward_3
+    SALMON:
+      1:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+          - reward_3
+    PUFFERFISH:
+      1:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+          - reward_3
+    BOWL:
+      1:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+          - reward_3
+
+eat:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Kapatmak için sonraki 2 değeri boş bırak__
+  titleMessage: '&bYE'
+  subtitleMessage: '&a%amount% %value% ye!'
+
+  data:
+    #Bu değerler geçerli Minecraft malzeme kimlikleri olmalıdır (dosyanın başındaki Faydalı bağlantılara bak)
+    COOKED_BEEF:
+      1:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_CHICKEN:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BAKED_POTATO:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BREAD:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    GOLDEN_APPLE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+
+craft:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Kapatmak için sonraki 2 değeri boş bırak__
+  titleMessage: '&bÜRET'
+  subtitleMessage: '&a%amount% %value% üret!'
+
+  data:
+    #Bu değerler geçerli Minecraft malzeme kimlikleri olmalıdır (dosyanın başındaki Faydalı bağlantılara bak)
+    FURNACE:
+      2:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+      4:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+          - reward_3
+    CHEST:
+      2:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+      4:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+          - reward_3
+    CRAFTING_TABLE:
+      4:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+      8:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_1
+          - reward_2
+      12:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      32:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+      48:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_1
+          - reward_2
+      64:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+          - reward_3
+
+furnace:
+  enable: true
+
+  timeToComplete_seconds: 150
+  #__Kapatmak için sonraki 2 değeri boş bırak__
+  titleMessage: '&bPİŞİR'
+  subtitleMessage: '&a%amount% %value% pişir!'
+
+  data:
+    #Bu değerler geçerli Minecraft malzeme kimlikleri olmalıdır (dosyanın başındaki Faydalı bağlantılara bak)
+    GOLD_INGOT:
+      3:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+      6:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+          - reward_3
+    IRON_INGOT:
+      3:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+      6:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_BEEF:
+      3:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+      6:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_COD:
+      3:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+      6:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #EKLEDİĞİN TÜM ÖDÜLLERİN ŞANSLARININ TOPLAMI %100'Ü GEÇEMEZ
+        rewards:
+          - reward_2
+          - reward_3

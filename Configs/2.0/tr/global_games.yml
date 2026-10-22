@@ -1,0 +1,247 @@
+#KÜRESEL OYUNLAR
+#
+#Küresel bir oyunda tüm sunucu tek takım olarak oynar. Her doğru cevap (ya da küresel bir
+#yarışta kazılan her blok, öldürülen her yaratık...; Sayma'da sayılan her sayı) tek bir ortak
+#skora eklenir. Kimsenin en hızlı olması gerekmez: skor zamanında hedefe ulaşınca katkı veren
+#herkes ödülü alır. Süre önce biterse oyun başarısız olur.
+#
+#  Sohbet oyunları bir soru akışı olarak oynanır. Her oyuncu her soruyu bir kez cevaplayabilir ve
+#  sonraki soru 'answers-per-question' doğru cevaptan veya 'question-seconds' süresinden sonra gelir.
+#  Cevaplar her zaman gizlidir, böylece kopyalanamazlar.
+#  Yarışlar herkesin ilerlemesini birlikte sayar, ör. tüm sunucunun kazdığı 500 Taş.
+#  Sayma (yalnızca küresel oynanır): sohbette birlikte say, mesaj başına bir sayı.
+#
+#Küresel oyunlar normal bir oyundan sonra şansa bağlı, bir zamanlayıcıyla,
+#/chatgames global <game> [values] ile ya da bir etkinliğin adımı olarak (events.yml) başlar.
+#İlerleme bir boss çubuğunda (1.9+) veya aksiyon çubuğunda (1.8) görünür.
+
+triggers:
+  #Normal bir oyun veya yarış bittikten sonra küresel bir oyunun başlama yüzdesi (0 = asla).
+  chance-after-game: 10
+  #Normal oyunun bitişi ile küresel oyunun başlangıcı arasındaki saniye.
+  delay-seconds: 5
+  #Zamanlayıcıyla başlatılan küresel oyunlar arasındaki dakika (0 = kapalı).
+  interval-minutes: 0
+  #Küresel bir oyunun kendiliğinden başlaması için gereken çevrimiçi oyuncu (komut bunu yok sayar).
+  minimum-players: 2
+
+progress-bar:
+  enabled: true
+  #Bir boss çubuğu rengi: BLUE, GREEN, PINK, PURPLE, RED, WHITE veya YELLOW.
+  color: YELLOW
+  #SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12 veya SEGMENTED_20.
+  style: SEGMENTED_10
+  #Sunucu ulaştıkça sohbette duyurulan hedef yüzdeleri.
+  announce-at: [25, 50, 75]
+
+#Aşağıdaki her oyun tarafından, kendisinin ayarlamadığı her değer için kullanılır.
+#  goal: sunucunun ihtiyaç duyduğu doğru cevaplar (ya da yarışlarda eşyalar/yaratıklar)
+#  duration-seconds: sunucunun ne kadar süresi olduğu
+#  min-contribution: bir oyuncunun ödül için en az ne kadar katkı vermesi gerektiği
+#  points: hedefe ulaşıldığında ödüllendirilen her oyuncunun aldığı
+#  points-per-contribution: bir oyuncunun her katkısı için ek puan
+#  answers-per-question: yalnızca sohbet oyunları, bir soruyu kaç oyuncunun cevaplayabileceği
+#  question-seconds: yalnızca sohbet oyunları, bir sorunun en uzun kalma süresi
+defaults:
+  goal: 10
+  duration-seconds: 120
+  min-contribution: 1
+  points: 1
+  points-per-contribution: 0
+  answers-per-question: 3
+  question-seconds: 15
+
+#rewards.yml biçiminde ödüller (chance, minimum-players, '<chance>%~ ' ve 'has:<permission>'
+#hepsi çalışır). %player% oyuncu, %contribution% onun katkısıdır.
+#Bir oyunun kendi 'rewards' bölümü o oyun için bunların yerini alır.
+rewards:
+  #Hedefe ulaşıldığında en az min-contribution kadar katkı veren herkes.
+  completed:
+    reward_1:
+      data:
+        - '[consolecmd] give %player% iron_ingot 3'
+  #Süre dolduğunda aynı oyuncular. Boş: teselli ödülü yok.
+  failed: {}
+  #Hedefe ulaşıldığında en büyük katkı verenlere sıraya göre ek ödül.
+  top-contributors:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% diamond 1'
+    2:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 3'
+    3:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 1'
+
+#Her mesajdaki yer tutucular: %game% %goal% (bir sayı) %goal_text% (ör. "500 Taş")
+#%progress% %percent% %time% (kalan saniye) %duration%
+messages:
+  start:
+    - ''
+    - '&6&l» KÜRESEL %game%! &fTüm sunucu birlikte oynuyor.'
+    - '&f  &e%time%s &fiçinde &e%goal% doğru cevaba &fulaşın. Yardım eden herkes ödüllendirilir!'
+    - '&7  Her soru %answers% cevap alır, o yüzden başkalarını bekleme.'
+    - ''
+  race_start:
+    - ''
+    - '&6&l» KÜRESEL YARIŞ! &fTüm sunucu birlikte oynuyor.'
+    - '&f  &e%time%s &fiçinde birlikte &e%goal% %value% &ftoplayın. Yardım eden herkes ödüllendirilir!'
+    - ''
+  count_start:
+    - ''
+    - '&6&l» KÜRESEL SAYMA! &fBirlikte &e%start% &fsayısından &e%target% &fsayısına &e%step% &fadımla sayın!'
+    - '&7  Mesaj başına bir sayı, sırayla. Kimse art arda iki kez saymaz. Bitirmek için %time%s.'
+    - ''
+  #Her sorunun üstünde. %question% sorunun numarasıdır.
+  question:
+    - '&6&l» KÜRESEL &7Soru #%question% &8| &e%progress%&7/&e%goal%'
+  #Bir sorunun süresi dolduğunda. %answer% cevabıdır. Sessiz kalmak için boş bırak.
+  question_over: '&8» &7Cevap &f%answer% &7idi.'
+  #Cevabı sayılan bir oyuncuya. %contribution% şimdiye kadarki toplamıdır.
+  answered: '&8[%prefix%&8] &aDoğru! &7Sunucunun &f%progress%/%goal% &7değerine &f%contribution% &7katkı verdin.'
+  #%reached% az önce ulaşılan yüzdedir.
+  milestone: '&6&l» &e%reached%% &ftamam! &7(%progress%/%goal%, %time%s kaldı)'
+  #Sayılan bir sayı, oyuncunun mesajı yerine gösterilir. %player% %number%
+  counted: '&e%player% &8» &f%number%'
+  #Bir hata. %player% %number% %next% (beklenen) %start% %reason% %mistakes% %max_mistakes%
+  count_broken:
+    - '&c%player% %number% dedi: %reason%'
+    - '&fSayma &e%start% &fsayısından yeniden başlıyor.'
+  #Oyunu bitiren hata (on-mistake: fail ya da max-mistakes değerine ulaşıldı).
+  count_broken_final:
+    - '&c%player% %number% dedi: %reason%'
+  count_reasons:
+    ahead: 'çok ileri gitti (sonraki sayı %next% idi)'
+    behind: 'o zaten sayıldı (sonraki sayı %next% idi)'
+    repeated: 'o sayı az önce söylendi'
+    twice: 'kimse art arda iki sayı söyleyemez'
+  #%count% oyuncu ödüllendirildi, %contributors% katıldı, %seconds% sürdü.
+  #%top_<n>% ve %top_<n>_amount%: en büyük üç katkıcı.
+  completed:
+    - ''
+    - '&6&l» HEDEFE ULAŞILDI! &fSunucu &e%seconds%s &fiçinde &e%goal_text% &ftopladı.'
+    - '&f  Top: &e%top_1% &7(%top_1_amount%)  &e%top_2% &7(%top_2_amount%)  &e%top_3% &7(%top_3_amount%)'
+    - '&f  &e%count% &foyuncu ödülü alıyor.'
+    - ''
+  failed:
+    - ''
+    - '&6&l» KÜRESEL OYUN BİTTİ! &fSunucu &e%progress%/%goal% &7(%percent%%) &fdeğerine ulaştı. Bir dahaki sefere!'
+    - ''
+  #Hedefe ulaşıldığında ödüllendirilen her oyuncuya. %points% kazandığıdır.
+  rewarded: '&8[%prefix%&8] &aKatkÄ±n: &f%contribution%&a, kazandÄ±ÄŸÄ±n: &f%points% &apuan!'
+  #min-contribution değerinden az katkı veren bir oyuncuya. %min% o en düşük değerdir.
+  too_little: '&8[%prefix%&8] &7%contribution% katkı verdin; ödül için en az %min% gerekiyordu.'
+  #Boss çubuğu (ya da 1.8'de aksiyon çubuğu).
+  bar: '&6Küresel %game% &8| &f%progress%/%goal% &8| &e%time%s'
+
+#%goal_text% oluşturmak için kullanılan kelimeler.
+words:
+  answers: 'doğru cevap'
+  to: 'ile'
+
+#Küresel oynanabilen oyunlar. Ezberle ve Sayı Tahmini oynanamaz.
+#Her biri enabled değerini ve 'defaults' içindeki her şeyi, ayrıca kendi 'rewards' bölümünü ayarlayabilir.
+games:
+  reaction:
+    enabled: true
+    goal: 10
+    duration-seconds: 90
+    question-seconds: 10
+  unscramble:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  math:
+    enabled: true
+    goal: 15
+    duration-seconds: 150
+  sequence:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  trivia:
+    enabled: true
+    goal: 8
+    duration-seconds: 180
+    question-seconds: 20
+  word_association:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  fillout:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  unreverse:
+    enabled: false
+  random:
+    enabled: false
+  variable:
+    enabled: false
+  hoverable:
+    enabled: false
+  clickable:
+    enabled: false
+  #Birlikte say. Hedefi, seçilen modun kaç sayısı olduğudur.
+  count:
+    enabled: true
+    duration-seconds: 120
+    #Kimse art arda iki sayı söyleyemez.
+    no-double-count: true
+    #reset: bir hata saymayı baştan başlatır; fail: bir hata oyunu bitirir.
+    on-mistake: reset
+    #reset ile: oyunu yine de bitiren hata sayısı (0 = sınırsız).
+    max-mistakes: 5
+    #Biri rastgele seçilir; /chatgames global count <mode> birini seçer.
+    #'step' her sayının ne kadar arttığıdır (yön start ve target değerine göre belirlenir).
+    modes:
+      up:
+        start: 1
+        target: 20
+        step: 1
+      down:
+        start: 15
+        target: 1
+        step: 1
+      evens:
+        start: 2
+        target: 30
+        step: 2
+      fives:
+        start: 5
+        target: 75
+        step: 5
+  #Küresel yarışlar: tüm sunucu hedefe doğru toplar. Hedefler races.yml'den gelir;
+  #/chatgames global mine STONE 500 ikisini de ayarlar.
+  mine:
+    enabled: true
+    goal: 200
+    duration-seconds: 240
+  hunt:
+    enabled: true
+    goal: 40
+    duration-seconds: 240
+  place:
+    enabled: false
+    goal: 200
+    duration-seconds: 240
+  fish:
+    enabled: false
+    goal: 20
+    duration-seconds: 300
+  eat:
+    enabled: false
+    goal: 30
+    duration-seconds: 240
+  craft:
+    enabled: false
+    goal: 100
+    duration-seconds: 240
+  furnace:
+    enabled: false
+    goal: 64
+    duration-seconds: 300

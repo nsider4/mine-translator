@@ -1,0 +1,367 @@
+#############################
+######    CHATGAMES    ######
+#############################
+#Настройки, которые принимает каждая игра (если какой-то нет, действует показанное значение по умолчанию):
+#  enable: true/false
+#  weight: 1             Насколько охотно ротация выбирает эту игру по сравнению с другими (0 = никогда).
+#                        Одна и та же игра никогда не идёт два раза подряд.
+#  winners: 1            Сколько игроков могут выиграть каждый раунд.
+#  points: 1             Очки за победу (/chatgames top).
+#  case-sensitive: false Кто ответил верно, кроме регистра букв, получает сообщение 'wrong_case'.
+#  timeToGuess_seconds: 20
+#  min-answer-ms: 400    Более быстрые правильные ответы игнорируются и записываются в лог: никто не читает и не печатает
+#                        так быстро, а боты — да. 0 отключает проверку.
+#  hints:                Подсказки во время раунда, с 'hint_message' из messages.yml.
+#    enable: false
+#    after-percent: 50   Первая подсказка появляется, когда прошёл этот процент времени; остальные распределяются по оставшемуся времени.
+#    max: 1              До 3.
+#  countdown:            Оставшееся время, на панели действий. Работает на любой версии (от 1.8 до 26.x).
+#    enable: false
+#    last-seconds: 10    Только в последние N секунд; 0 показывает его весь раунд.
+#  titleMessage / subtitleMessage: оставьте оба пустыми, чтобы не отправлять заголовок.
+unscramble:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Время в секундах, которое у игроков есть, чтобы угадать, решить, написать и т. д.
+  timeToGuess_seconds: 20
+  #__Оставьте 2 следующих пустыми, чтобы отключить их__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aРасшифруй'
+
+unreverse:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Время в секундах, которое у игроков есть, чтобы угадать, решить, написать и т. д.
+  timeToGuess_seconds: 20
+  #Оставьте 2 следующих пустыми, чтобы отключить их
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aПереверни'
+
+reaction:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Время в секундах, которое у игроков есть, чтобы угадать, решить, написать и т. д.
+  timeToGuess_seconds: 20
+  #__Оставьте 2 следующих пустыми, чтобы отключить их__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aНапиши'
+
+guess_the_number:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+  #Не меняйте это
+  case-sensitive: false
+
+  lower-limit: 1
+  upper-limit: 20
+
+  #Время в секундах, которое у игроков есть, чтобы угадать, решить, написать и т. д.
+  timeToGuess_seconds: 20
+  #__Оставьте 2 следующих пустыми, чтобы отключить их__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aНапиши'
+
+clickable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Время в секундах, которое у игроков есть, чтобы угадать, решить, написать и т. д.
+  timeToGuess_seconds: 20
+  #__Оставьте 2 следующих пустыми, чтобы отключить их__
+  titleMessage: '&eНажми на текст'
+  subtitleMessage: '&fУ тебя &e%timeToGuess%с'
+
+fillout:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Процент скрытых букв в игре «Заполни пропуски». От 1 до 100. Малые числа скрывают меньше букв.
+  difficulty: 30
+  case-sensitive: true
+  #Время в секундах, которое у игроков есть, чтобы угадать, решить, написать и т. д.
+  timeToGuess_seconds: 20
+  #__Оставьте 2 следующих пустыми, чтобы отключить их__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aЗаполни'
+
+hoverable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Время в секундах, которое у игроков есть, чтобы угадать, решить, написать и т. д.
+  timeToGuess_seconds: 20
+  #__Оставьте 2 следующих пустыми, чтобы отключить их__
+  titleMessage: '&eНаведи на текст'
+  subtitleMessage: '&fУ тебя &e%timeToGuess%с'
+
+#В этой игре создаётся строка заданной длины из случайных символов
+random:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Время в секундах, которое у игроков есть, чтобы угадать, решить, написать и т. д.
+  timeToGuess_seconds: 20
+  #Длина случайной строки этой игры. Формат диапазона <min>-<max>. Для одной длины укажите одно число с обеих сторон
+  lengthRange: 6-8
+  #Доступные типы: ALPHA (буквы), ALPHANUMERIC (буквы и цифры), NUMERIC (цифры), SYMBOLIC (символы),
+  #LOWERCASE_ALPHA (только строчные), UPPERCASE_ALPHA (только заглавные), HEXADECIMAL (шестнадцатеричные символы: 0123456789ABCDEF)
+  #CUSTOM (использует то, что указано в 'custom_characters')
+  character_type: ALPHANUMERIC
+  #Эта строка используется, только если тип — "CUSTOM"
+  custom_characters: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+  #__Оставьте 2 следующих пустыми, чтобы отключить их__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aНапиши'
+
+math:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Не меняйте это
+  case-sensitive: false
+  #Время в секундах, которое у игроков есть, чтобы угадать, решить, написать и т. д.
+  timeToGuess_seconds: 20
+  #Диапазоны случайных чисел для каждой сложности:
+  #1 - (1-9)
+  #2 - (1-99)
+  #3 - (1-999)
+  #4 - (1-9999)
+  #5 - (1-99999)
+  difficulty: 2
+  #Сколько операторов в каждом вопросе: 1 -> "12 + 7", 2 -> "12 + 7 x 3"
+  operations: 1
+  #solve: вычислить результат ("12 + 7 x 3").  missing-value: найти скрытое число ("12 + ? x 3 = 33").
+  #Каждый раунд выбирает один из перечисленных режимов.
+  modes:
+    - solve
+    - missing-value
+  #Используемые операторы; доступны четыре перечисленных, уберите ненужные. Всегда оставляйте хотя бы 1
+  #Деление всегда даёт целые числа.
+  operators:
+    - '+'
+    - '-'
+    - 'x'
+    - '/'
+
+  #__Оставьте 2 следующих пустыми, чтобы отключить их__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aРеши'
+
+variable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Не меняйте это
+  case-sensitive: false
+  #Время в секундах, которое у игроков есть, чтобы угадать, решить, написать и т. д.
+  timeToGuess_seconds: 20
+
+  #__Оставьте 2 следующих пустыми, чтобы отключить их__
+  titleMessage: '&bРЕШИ'
+  subtitleMessage: '&aДля &7`&b%symbol%&7`'
+
+  #Диапазон случайного числа результата
+  result-min: 20
+  result-max: 100
+
+  toGet: '✗'
+  #Другие символы, которые можно добавить: ✪❃✿✠❂♫♪❦♡♤♢✦☾☽✹
+  data:
+    - '✯;10'
+    - '♛;15'
+    - '❅;20'
+    - '♫;25'
+
+sequence:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Не меняйте это
+  case-sensitive: false
+
+  #Время в секундах, которое у игроков есть, чтобы угадать, решить, написать и т. д.
+  timeToGuess_seconds: 25
+
+  #Игроки видят ряд чисел и пишут следующее, напр. "3, 6, 12, 24, ?" -> 48
+  #Шаблоны: сложение (3, 7, 11), умножение (2, 6, 18), квадраты (4, 9, 16), чередование (5, 9, 7, 11), фибоначчи (2, 3, 5, 8)
+  patterns:
+    - add
+    - multiply
+    - squares
+    - alternating
+    - fibonacci
+  #1-3. Высокая сложность разрешает более трудные шаблоны (квадраты и чередование с 2, фибоначчи на 3) и большие числа.
+  difficulty: 2
+  #Сколько чисел показывается перед '?' (4-8)
+  shown-terms: 5
+
+  #__Оставьте 2 следующих пустыми, чтобы отключить их__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aПродолжи ряд'
+
+memorize:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+
+  listLength: 3
+  #Каждый раунд берёт элементы из одного из этих списков (см. words.yml -> memorize.pools):
+  #shopping_list, words, colors, numbers, blocks, mobs или ваш собственный список
+  pools:
+    - shopping_list
+    - words
+    - colors
+    - numbers
+    - blocks
+    - mobs
+  #Если false, элементы можно писать в любом порядке
+  order-matters: true
+
+  #Время в секундах, которое у игроков есть, чтобы запомнить, решить, написать и т. д.
+  timeToMemorize: 7
+
+  #Время в секундах, которое у игроков есть, чтобы угадать, решить, написать и т. д.
+  timeToGuess_seconds: 20
+  #Оставьте 2 следующих пустыми, чтобы отключить их
+  titleMessage: '&bЗАПОМНИ'
+  subtitleMessage: '&aПопробуй запомнить этот список!'
+
+#Три подсказки, одна скрытая связь (ассоциации находятся в words.yml).
+#difficulty: easy, medium, hard или mixed. Сложные раунды показывают одну подсказку, а остальные открывают
+#как подсказки, поэтому оставьте для них подсказки включёнными (max 2 показывает все три).
+word_association:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  difficulty: mixed
+  hints:
+    enable: true
+    after-percent: 34
+    max: 2
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  timeToGuess_seconds: 30
+  titleMessage: '&bАССОЦИАЦИИ'
+  subtitleMessage: '&aСмотри в чат!'
+
+trivia:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  #Время в секундах, которое у игроков есть, чтобы угадать, решить, написать и т. д.
+  timeToGuess_seconds: 20
+  #__Оставьте 2 следующих пустыми, чтобы отключить их__
+  titleMessage: '&bВИКТОРИНА'
+  subtitleMessage: '&aСмотри в чат!'

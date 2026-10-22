@@ -1,0 +1,121 @@
+#############################
+######    USTAWIENIA    #######
+#############################
+check-update: true
+
+#Język serwera. Nazwy bloków, przedmiotów i stworzeń (w wyścigach i Zapamiętaj) są tłumaczone
+#na niego, w ponad 140 językach. Znajdź tu identyfikator swojego języka:
+#https://github.com/nsider4/mine-translator/blob/main/language_names.txt
+#Nazwy są pobierane do translations/ i aktualizowane same, gdy wychodzi nowa wersja
+#Minecrafta. Zmiana tutaj działa po /chatgames reload.
+lang: 'en_us'
+
+#Język tych plików konfiguracyjnych: wiadomości, menu, listy słów, quiz, komentarze...
+#  auto: zmień, gdy zmieni się 'lang' powyżej, jeśli ten język ma przetłumaczone pliki
+#  none: nigdy nie zmieniaj
+#  lub kod języka: en, es, fr, pt, de, it, nl, pl, ru, tr
+#Przy zmianie twoje ustawienia i ich zmiany zostają; twoje własne wiadomości
+#są zastępowane tłumaczeniem (stare pliki są najpierw kopiowane do backups/). Tłumaczenia
+#są pobierane z https://github.com/nsider4/mine-translator (folder Configs) i aktualizowane
+#same. Można tam dodać więcej języków.
+config-language: 'auto'
+
+#Typ zapisu, dostępne: SQLite lub MySQL
+Storage: 'SQLite'
+
+#Nazwa tabeli ze wszystkimi danymi ChatGames
+table_name: 'chatgames'
+
+#Nazwa tabeli z najszybszymi czasami ChatGames
+fastest_times_table: 'chatgames_fastest_times'
+
+SQLite:
+  Filename: 'chatgames-data'
+
+MySQL:
+  host: 'localhost'
+  port: '3306'
+  user: 'root'
+  password: 'password'
+  database: 'chatgame'
+  connection-parameters: '?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8'
+  Pool-Settings:
+    max-pool-size: 10
+    min-idle: 10
+    max-lifetime: 180000
+    keep-alive-time: 60000
+    time-out: 20000
+
+disabled-worlds:
+  - 'example_world'
+
+prefix: '&c&lC&d&lH&b&lA&a&lT &6&lG&e&lA&a&lM&c&lE&b&lS'
+
+#Jeśli false, tylko gracze z 'chatgames.start.*' mogą uruchamiać gry
+allow_starting_from_disabled: true
+
+#Jeśli false, wiadomość, która normalnie nie jest wysyłana, gdy ktoś zgadnie dobrą odpowiedź, nie zostanie anulowana
+cancel-message-when-winning: true
+
+#Minimalna liczba graczy online, aby wydarzenie czatu mogło się zacząć
+min_players_online: 1
+
+#Czas, zanim znów zostanie wybrana losowa gra.
+#Wartość -1 CAŁKOWICIE wyłącza zadanie; z -1 nie możesz też używać randomDelay
+time_minutes: 25
+
+#Jeśli włączone, po każdej grze jako czas do następnej wybierana jest losowa liczba między 'randomDelay.minimum' a 'randomDelay.limit'
+#Włączenie tego pomija 'time_minutes', chyba że wynosi -1, bo wtedy nie ma zadania.
+randomDelay:
+  enable: false
+  #Jednostka czasu, druga możliwa wartość to 'seconds'; jeśli ją zmienisz, ustaw minimum wyżej niż 'timeToGuess_seconds' gier
+  timeUnit: 'minutes'
+  minimum: 1
+  limit: 25
+
+
+#Jeśli to jest wyłączone, uprawnienie chatgames.play nie jest już potrzebne, aby widzieć gry
+use-permission-toplay: false
+
+#Jeśli false, liczy tylko graczy z uprawnieniem 'chatgames.play', czyli tych, którzy mogą grać.
+#Jeśli true, liczy wszystkich graczy online poza niewidocznymi (vanish).
+count-all-players: false
+
+#Jeśli true, będzie ranking najszybszych piszących (/chatgames fastest). Jeśli false, ten ranking jest wyłączony.
+fastest-typers-top: true
+
+#Placeholdery PlaceholderAPI (PlaceholderAPI musi być zainstalowane):
+#  Ty:           %chatgames_points%, %chatgames_wins%, %chatgames_wins_<game>%, %chatgames_race_wins%,
+#                %chatgames_global_played%, %chatgames_global_won%, %chatgames_toggle%, %chatgames_sound_toggle%
+#                %chatgames_events_played%, %chatgames_event_wins%, %chatgames_event_best_place% (0 = jeszcze brak)
+#  Twoje czasy:  %chatgames_personal_best% (każda gra czatu), %chatgames_fastest_<game>% (też wyścigi)
+#  Twoje miejsce: %chatgames_show_current_pos_top% (punkty), %chatgames_show_current_pos_fastest% (najlepszy czas)
+#  Top punktów:  %chatgames_top_<n>% (nazwa), %chatgames_points_top_<n>%, %chatgames_total_points%
+#  Top szybkich: %chatgames_fastest_<n>% (nazwa, gry czatu), %chatgames_fastest_time_<n>%,
+#                %chatgames_fastest_<game>_<n>%, %chatgames_fastest_<game>_time_<n>%
+#  Teraz:        %chatgames_game_running%, %chatgames_current_game%, %chatgames_next_game_in% (sekundy)
+#  Wyścig:       %chatgames_race_target%, %chatgames_race_amount%, %chatgames_race_progress% (twój)
+#  Wyzwania:     %chatgames_daily_completed%, %chatgames_daily_total%, %chatgames_weekly_completed%,
+#                %chatgames_weekly_total%, %chatgames_challenges_completed% (łącznie)
+#  Serie:        %chatgames_streak_<type>%, %chatgames_streak_<type>_longest% (<type> to challenge, daily lub global)
+#  Wydarzenie:   %chatgames_event_running%, %chatgames_event_name%, %chatgames_event_step%, %chatgames_event_steps%,
+#                %chatgames_event_points% i %chatgames_event_place% (twoje w trwającym wydarzeniu)
+#  <game> to nazwa gry jak w games.yml (np. unscramble, guess_the_number); <n> to miejsce (1, 2, 3...).
+placeholders:
+  #Jak często placeholdery rankingów (top_<n>, fastest_<n>, pozycje...) są przeliczane, w sekundach.
+  #Są też przeliczane po każdej grze ze zwycięzcą. Twoje własne punkty, wygrane i czasy są zawsze aktualne.
+  refresh-seconds: 60
+  #Wyświetlane, gdy nie ma czego pokazać: puste miejsce w rankingu, brak najlepszego czasu, brak trwającej gry...
+  empty-value: ''
+
+#Dźwięk wysyłany graczom, gdy zaczyna się wydarzenie czatu!
+GameSounds:
+  volume: 0.5
+  pitch: 1.0
+  #ZOSTAW KTÓRYŚ Z NICH PUSTY, ABY GO WYŁĄCZYĆ
+  win: 'minecraft:entity.experience_orb.pickup'
+  game-start: 'minecraft:entity.player.levelup'
+  time-expired: 'minecraft:entity.villager.no'
+  wrong-case: 'minecraft:block.note_block.bass'
+
+#Presety gier (nazwane zestawy włączonych gier) są w presets.yml.

@@ -1,0 +1,1063 @@
+unscramble:
+  Words:
+    - 'Potion'
+    - 'Beacon'
+    - 'Arrow'
+    - 'Elytra'
+    - 'Horse'
+    - 'Pig'
+    - 'Sheep'
+    - 'Cow'
+    - 'Chicken'
+    - 'Redstone'
+    - 'Creeper'
+    - 'Enderman'
+    - 'Zombie'
+    - 'Skeleton'
+    - 'Villager'
+    - 'Nether'
+    - 'End'
+    - 'Ender Chest'
+    - 'Sword'
+    - 'Crafting'
+    - 'Biome'
+    - 'End Portal'
+    - 'Ender Pearl'
+    - 'Blaze Rod'
+    - 'Nether Wart'
+    - 'Soul Sand'
+    - 'Ancient Debris'
+    - 'Crying Obsidian'
+    - 'Beehive'
+    - 'Campfire'
+    - 'Lantern'
+    - 'Jukebox'
+    - 'Note Block'
+    - 'Music Disc'
+    - 'Lever'
+    - 'Button'
+    - 'Minecart'
+    - 'Observer'
+    - 'Piston'
+    - 'Diamond'
+    - 'Gold'
+    - 'Iron'
+    - 'Obsidian'
+    - 'Pickaxe'
+    - 'Flower'
+    - 'Sapling'
+    - 'Moss'
+    - 'Torch'
+    - 'Chest'
+    - 'Furnace'
+    - 'Mushroom'
+    - 'Sculk'
+    - 'Prismarine'
+    - 'Dirt'
+    - 'Glass'
+    - 'Shulker'
+    - 'Terracotta'
+    - 'Mangrove'
+    - 'Glowsquid'
+    - 'Composter'
+    - 'Loom'
+    - 'Grindstone'
+    - 'Stonecutter'
+    - 'Shroomlight'
+    - 'Lodestone'
+    - 'Amethyst'
+    - 'Froglight'
+    - 'Dropper'
+    - 'Dispenser'
+    - 'Copper'
+    - 'Netherite'
+    - 'Feather'
+    - 'String'
+    - 'Gunpowder'
+    - 'Leather'
+    - 'Pufferfish'
+    - 'Axolotl'
+    - 'Glowstone'
+    - 'Chorus'
+    - 'Pigstep'
+    - 'Honeycomb'
+    - 'Salmon'
+    - 'Rabbit'
+    - 'Spyglass'
+    - 'Shears'
+    - 'Compass'
+    - 'Mending'
+    - 'Crossbow'
+    - 'Trident'
+    - 'Cauldron'
+    - 'Saddle'
+    - 'Lectern'
+    - 'Hopper'
+    - 'Shovel'
+    - 'Clock'
+    - 'Coal'
+    - 'Lapis'
+    - 'Quartz'
+    - 'Ingot'
+    - 'Tadpole'
+
+unreverse:
+  Words:
+    - 'Potion'
+    - 'Beacon'
+    - 'Arrow'
+    - 'Elytra'
+    - 'Horse'
+    - 'Pig'
+    - 'Sheep'
+    - 'Cow'
+    - 'Chicken'
+    - 'Redstone'
+    - 'Creeper'
+    - 'Enderman'
+    - 'Zombie'
+    - 'Skeleton'
+    - 'Villager'
+    - 'Nether'
+    - 'End'
+    - 'Ender Chest'
+    - 'Sword'
+    - 'Crafting'
+    - 'Biome'
+    - 'End Portal'
+    - 'Ender Pearl'
+    - 'Blaze Rod'
+    - 'Nether Wart'
+    - 'Soul Sand'
+    - 'Ancient Debris'
+    - 'Crying Obsidian'
+    - 'Beehive'
+    - 'Campfire'
+    - 'Lantern'
+    - 'Jukebox'
+    - 'Note Block'
+    - 'Music Disc'
+    - 'Lever'
+    - 'Button'
+    - 'Minecart'
+    - 'Observer'
+    - 'Piston'
+    - 'Diamond'
+    - 'Gold'
+    - 'Iron'
+    - 'Obsidian'
+    - 'Pickaxe'
+    - 'Flower'
+    - 'Sapling'
+    - 'Moss'
+    - 'Torch'
+    - 'Chest'
+    - 'Furnace'
+    - 'Mushroom'
+    - 'Sculk'
+    - 'Prismarine'
+    - 'Dirt'
+    - 'Glass'
+    - 'Shulker'
+    - 'Terracotta'
+    - 'Mangrove'
+    - 'Glowsquid'
+    - 'Composter'
+    - 'Loom'
+    - 'Grindstone'
+    - 'Stonecutter'
+    - 'Shroomlight'
+    - 'Lodestone'
+    - 'Amethyst'
+    - 'Froglight'
+    - 'Dropper'
+    - 'Dispenser'
+    - 'Copper'
+    - 'Netherite'
+    - 'Feather'
+    - 'String'
+    - 'Gunpowder'
+    - 'Leather'
+    - 'Pufferfish'
+    - 'Axolotl'
+    - 'Glowstone'
+    - 'Chorus'
+    - 'Pigstep'
+    - 'Honeycomb'
+    - 'Salmon'
+    - 'Rabbit'
+    - 'Spyglass'
+    - 'Shears'
+    - 'Compass'
+    - 'Mending'
+    - 'Crossbow'
+    - 'Trident'
+    - 'Cauldron'
+    - 'Saddle'
+    - 'Lectern'
+    - 'Hopper'
+    - 'Shovel'
+    - 'Clock'
+    - 'Coal'
+    - 'Lapis'
+    - 'Quartz'
+    - 'Ingot'
+    - 'Tadpole'
+
+reaction:
+  Words:
+    - 'Potion'
+    - 'Beacon'
+    - 'Arrow'
+    - 'Elytra'
+    - 'Horse'
+    - 'Pig'
+    - 'Sheep'
+    - 'Cow'
+    - 'Chicken'
+    - 'Redstone'
+    - 'Creeper'
+    - 'Enderman'
+    - 'Zombie'
+    - 'Skeleton'
+    - 'Villager'
+    - 'Nether'
+    - 'End'
+    - 'Ender Chest'
+    - 'Sword'
+    - 'Crafting'
+    - 'Biome'
+    - 'End Portal'
+    - 'Ender Pearl'
+    - 'Blaze Rod'
+    - 'Nether Wart'
+    - 'Soul Sand'
+    - 'Ancient Debris'
+    - 'Crying Obsidian'
+    - 'Beehive'
+    - 'Campfire'
+    - 'Lantern'
+    - 'Jukebox'
+    - 'Note Block'
+    - 'Music Disc'
+    - 'Lever'
+    - 'Button'
+    - 'Minecart'
+    - 'Observer'
+    - 'Piston'
+    - 'Diamond'
+    - 'Gold'
+    - 'Iron'
+    - 'Obsidian'
+    - 'Pickaxe'
+    - 'Flower'
+    - 'Sapling'
+    - 'Moss'
+    - 'Torch'
+    - 'Chest'
+    - 'Furnace'
+    - 'Mushroom'
+    - 'Sculk'
+    - 'Prismarine'
+    - 'Dirt'
+    - 'Glass'
+    - 'Shulker'
+    - 'Terracotta'
+    - 'Mangrove'
+    - 'Glowsquid'
+    - 'Composter'
+    - 'Loom'
+    - 'Grindstone'
+    - 'Stonecutter'
+    - 'Shroomlight'
+    - 'Lodestone'
+    - 'Amethyst'
+    - 'Froglight'
+    - 'Dropper'
+    - 'Dispenser'
+    - 'Copper'
+    - 'Netherite'
+    - 'Feather'
+    - 'String'
+    - 'Gunpowder'
+    - 'Leather'
+    - 'Pufferfish'
+    - 'Axolotl'
+    - 'Glowstone'
+    - 'Chorus'
+    - 'Pigstep'
+    - 'Honeycomb'
+    - 'Salmon'
+    - 'Rabbit'
+    - 'Spyglass'
+    - 'Shears'
+    - 'Compass'
+    - 'Mending'
+    - 'Crossbow'
+    - 'Trident'
+    - 'Cauldron'
+    - 'Saddle'
+    - 'Lectern'
+    - 'Hopper'
+    - 'Shovel'
+    - 'Clock'
+    - 'Coal'
+    - 'Lapis'
+    - 'Quartz'
+    - 'Ingot'
+    - 'Tadpole'
+
+fillout:
+  Words:
+    - 'Potion'
+    - 'Beacon'
+    - 'Arrow'
+    - 'Elytra'
+    - 'Horse'
+    - 'Pig'
+    - 'Sheep'
+    - 'Cow'
+    - 'Chicken'
+    - 'Redstone'
+    - 'Creeper'
+    - 'Enderman'
+    - 'Zombie'
+    - 'Skeleton'
+    - 'Villager'
+    - 'Nether'
+    - 'End'
+    - 'Ender Chest'
+    - 'Sword'
+    - 'Crafting'
+    - 'Biome'
+    - 'End Portal'
+    - 'Ender Pearl'
+    - 'Blaze Rod'
+    - 'Nether Wart'
+    - 'Soul Sand'
+    - 'Ancient Debris'
+    - 'Crying Obsidian'
+    - 'Beehive'
+    - 'Campfire'
+    - 'Lantern'
+    - 'Jukebox'
+    - 'Note Block'
+    - 'Music Disc'
+    - 'Lever'
+    - 'Button'
+    - 'Minecart'
+    - 'Observer'
+    - 'Piston'
+    - 'Diamond'
+    - 'Gold'
+    - 'Iron'
+    - 'Obsidian'
+    - 'Pickaxe'
+    - 'Flower'
+    - 'Sapling'
+    - 'Moss'
+    - 'Torch'
+    - 'Chest'
+    - 'Furnace'
+    - 'Mushroom'
+    - 'Sculk'
+    - 'Prismarine'
+    - 'Dirt'
+    - 'Glass'
+    - 'Shulker'
+    - 'Terracotta'
+    - 'Mangrove'
+    - 'Glowsquid'
+    - 'Composter'
+    - 'Loom'
+    - 'Grindstone'
+    - 'Stonecutter'
+    - 'Shroomlight'
+    - 'Lodestone'
+    - 'Amethyst'
+    - 'Froglight'
+    - 'Dropper'
+    - 'Dispenser'
+    - 'Copper'
+    - 'Netherite'
+    - 'Feather'
+    - 'String'
+    - 'Gunpowder'
+    - 'Leather'
+    - 'Pufferfish'
+    - 'Axolotl'
+    - 'Glowstone'
+    - 'Chorus'
+    - 'Pigstep'
+    - 'Honeycomb'
+    - 'Salmon'
+    - 'Rabbit'
+    - 'Spyglass'
+    - 'Shears'
+    - 'Compass'
+    - 'Mending'
+    - 'Crossbow'
+    - 'Trident'
+    - 'Cauldron'
+    - 'Saddle'
+    - 'Lectern'
+    - 'Hopper'
+    - 'Shovel'
+    - 'Clock'
+    - 'Coal'
+    - 'Lapis'
+    - 'Quartz'
+    - 'Ingot'
+    - 'Tadpole'
+
+hoverable:
+  Words:
+    - 'Potion'
+    - 'Beacon'
+    - 'Arrow'
+    - 'Elytra'
+    - 'Horse'
+    - 'Pig'
+    - 'Sheep'
+    - 'Cow'
+    - 'Chicken'
+    - 'Redstone'
+    - 'Creeper'
+    - 'Enderman'
+    - 'Zombie'
+    - 'Skeleton'
+    - 'Villager'
+    - 'Nether'
+    - 'End'
+    - 'Ender Chest'
+    - 'Sword'
+    - 'Crafting'
+    - 'Biome'
+    - 'End Portal'
+    - 'Ender Pearl'
+    - 'Blaze Rod'
+    - 'Nether Wart'
+    - 'Soul Sand'
+    - 'Ancient Debris'
+    - 'Crying Obsidian'
+    - 'Beehive'
+    - 'Campfire'
+    - 'Lantern'
+    - 'Jukebox'
+    - 'Note Block'
+    - 'Music Disc'
+    - 'Lever'
+    - 'Button'
+    - 'Minecart'
+    - 'Observer'
+    - 'Piston'
+    - 'Diamond'
+    - 'Gold'
+    - 'Iron'
+    - 'Obsidian'
+    - 'Pickaxe'
+    - 'Flower'
+    - 'Sapling'
+    - 'Moss'
+    - 'Torch'
+    - 'Chest'
+    - 'Furnace'
+    - 'Mushroom'
+    - 'Sculk'
+    - 'Prismarine'
+    - 'Dirt'
+    - 'Glass'
+    - 'Shulker'
+    - 'Terracotta'
+    - 'Mangrove'
+    - 'Glowsquid'
+    - 'Composter'
+    - 'Loom'
+    - 'Grindstone'
+    - 'Stonecutter'
+    - 'Shroomlight'
+    - 'Lodestone'
+    - 'Amethyst'
+    - 'Froglight'
+    - 'Dropper'
+    - 'Dispenser'
+    - 'Copper'
+    - 'Netherite'
+    - 'Feather'
+    - 'String'
+    - 'Gunpowder'
+    - 'Leather'
+    - 'Pufferfish'
+    - 'Axolotl'
+    - 'Glowstone'
+    - 'Chorus'
+    - 'Pigstep'
+    - 'Honeycomb'
+    - 'Salmon'
+    - 'Rabbit'
+    - 'Spyglass'
+    - 'Shears'
+    - 'Compass'
+    - 'Mending'
+    - 'Crossbow'
+    - 'Trident'
+    - 'Cauldron'
+    - 'Saddle'
+    - 'Lectern'
+    - 'Hopper'
+    - 'Shovel'
+    - 'Clock'
+    - 'Coal'
+    - 'Lapis'
+    - 'Quartz'
+    - 'Ingot'
+    - 'Tadpole'
+
+#Item pools for the Memorize game. games.yml -> memorize.pools picks which ones are used.
+#'numbers' needs no list. 'blocks' and 'mobs' are Minecraft ids, shown in the language set in config.yml (lang).
+#Any other name is a plain list: add one here and list its name in games.yml to use it.
+memorize:
+  pools:
+    shopping_list:
+      - Candy Cane
+      - Ribbon
+      - Snow Globe
+      - Gingerbread Man
+      - Sleigh
+      - Jingle Bells
+      - Christmas Tree
+      - Stocking
+      - Mistletoe
+      - Tinsel
+      - Ornaments
+      - Poinsettia
+      - Hot Cocoa
+      - Santa Hat
+      - Reindeer
+      - Wreath
+      - Christmas Lights
+      - Nutcracker
+      - Christmas Cookies
+      - Snowman
+    words:
+      - Creeper
+      - Diamond
+      - Emerald
+      - Redstone
+      - Portal
+      - Beacon
+      - Elytra
+      - Trident
+      - Saddle
+      - Lantern
+      - Compass
+      - Anvil
+    colors:
+      - Red
+      - Orange
+      - Yellow
+      - Lime
+      - Green
+      - Cyan
+      - Light Blue
+      - Blue
+      - Purple
+      - Magenta
+      - Pink
+      - Brown
+      - Black
+      - White
+      - Gray
+    blocks:
+      - diamond_block
+      - oak_log
+      - crafting_table
+      - furnace
+      - tnt
+      - bookshelf
+      - glowstone
+      - obsidian
+      - sponge
+      - pumpkin
+      - melon
+      - cactus
+      - ice
+      - sand
+      - gravel
+      - netherrack
+      - end_stone
+      - hay_block
+    mobs:
+      - creeper
+      - zombie
+      - skeleton
+      - spider
+      - enderman
+      - blaze
+      - ghast
+      - slime
+      - witch
+      - villager
+      - cow
+      - pig
+      - sheep
+      - chicken
+      - wolf
+      - ocelot
+      - horse
+      - squid
+
+blacklistedWords:
+  - 'ass'
+  - 'dumb'
+
+trivia:
+  data:
+    1:
+      question: 'What year did Minecraft release?'
+      answers:
+        - '2011'
+        - '2009'
+    2:
+      question: 'Who is the creator of Minecraft?'
+      answers:
+        - 'Notch'
+    3:
+      question: 'Name the other Minecraft version. Java and _______?'
+      answers:
+        - 'Bedrock'
+    4:
+      question: 'Name the other Minecraft version. Bedrock and ____?'
+      answers:
+        - 'Java'
+    5:
+      question: 'You use the nether portal to enter what dimension?'
+      answers:
+        - 'Nether'
+    6:
+      question: 'Name the game mode that starts with the letter C.'
+      answers:
+        - 'Creative'
+    7:
+      question: 'Name the game mode that starts with the letters Su.'
+      answers:
+        - 'Survival'
+    8:
+      question: 'Name the game mode that starts with the letter Sp.'
+      answers:
+        - 'Spectator'
+    9:
+      question: 'Name the game mode that starts with the letter A.'
+      answers:
+        - 'Adventure'
+    10:
+      question: 'What mob do you spawn with 3 wither heads?'
+      answers:
+        - 'Wither'
+    11:
+      question: 'What block do you get from smelting sand?'
+      answers:
+        - 'Glass'
+    12:
+      question: 'What is the strongest tool material in Minecraft?'
+      answers:
+        - 'Netherite'
+    13:
+      question: 'What item drops when the wither kills another mob?'
+      answers:
+        - 'Wither Rose'
+    14:
+      question: 'What is the build limit in Minecraft?'
+      answers:
+        - '320'
+    15:
+      question: 'What version of Minecraft released caves and cliffs?'
+      answers:
+        - '1.17'
+    16:
+      question: 'Capturing what mob gives you the cutest predator advancement?'
+      answers:
+        - 'Axolotl'
+    17:
+      question: 'What item does the wither drop when slain?'
+      answers:
+        - 'Nether Star'
+    18:
+      question: 'How many music discs are in Minecraft?'
+      answers:
+        - '15'
+    19:
+      question: 'How many goat horn versions are in Minecraft?'
+      answers:
+        - '8'
+    20:
+      question: 'What is this recipe for? Wheat x3 Milk x3 Sugar x2 Egg x1'
+      answers:
+        - 'Cake'
+    21:
+      question: 'How many gold nuggets are needed to craft a golden carrot?'
+      answers:
+        - '8'
+    22:
+      question: 'How many resources does it take to craft a full set of armor?'
+      answers:
+        - '24'
+    23:
+      question: 'When you start a world, what dimension do you start in?'
+      answers:
+        - 'Overworld'
+    24:
+      question: 'What is the most common crafting material in Minecraft?'
+      answers:
+        - 'Wood'
+    25:
+      question: 'What material is used to tame wolves?'
+      answers:
+        - 'Bone'
+    26:
+      question: 'What material is used to tame parrots?'
+      answers:
+        - 'Seed'
+    27:
+      question: 'What material is used to tame cats?'
+      answers:
+        - 'Fish'
+    28:
+      question: 'What biome is home to bamboo?'
+      answers:
+        - 'Jungle'
+    29:
+      question: 'What name do you give a sheep to make it change colors?'
+      answers:
+        - 'Jeb_'
+    30:
+      question: 'How many types of wood are in Minecraft?'
+      answers:
+        - '9'
+    31:
+      question: 'What mob is often found in the deep dark?'
+      answers:
+        - 'Warden'
+    32:
+      question: 'What item is often sought after in the end dimension?'
+      answers:
+        - 'Elytra'
+        - 'Dragon Egg'
+    33:
+      question: 'How many blocks does it take to fully power 1 beacon?'
+      answers:
+        - '169'
+    34:
+      question: 'What block does not power a beacon? Lapis, Emerald, Gold.'
+      answers:
+        - 'Lapis'
+    35:
+      question: 'How many wooden planks does it take to craft 16 crafting tables?'
+      answers:
+        - '64'
+    36:
+      question: 'What is used to create banners in Minecraft?'
+      answers:
+        - 'Loom'
+    37:
+      question: 'What item is dropped when a turtle dies by lightning'
+      answers:
+        - 'Bowl'
+    38:
+      question: 'What Minecraft food drops from leaves?'
+      answers:
+        - 'Apples'
+    39:
+      question: 'How many ghast tears does it take to respawn the ender dragon?'
+      answers:
+        - '4'
+    40:
+      question: 'What item is used to speed up plant growth in Minecraft?'
+      answers:
+        - 'Bone Meal'
+    41:
+      question: 'What food should you never feed a parrot?'
+      answers:
+        - 'Cookie'
+    42:
+      question: 'How many ender pearls are in a full stack?'
+      answers:
+        - '16'
+    43:
+      question: 'How many eyes of ender are needed to open the end portal?'
+      answers:
+        - '12'
+    44:
+      question: 'What valueable item drops from the evoker?'
+      answers:
+        - 'Totem of Undying'
+    45:
+      question: 'How many different colors of wools are in Minecraft?'
+      answers:
+        - '16'
+    46:
+      question: 'What itme do you get for smelting a wood log?'
+      answers:
+        - 'Charcoal'
+    47:
+      question: 'What music disc is exclusive to the nether dimension?'
+      answers:
+        - 'Pigstep'
+    48:
+      question: 'How many iron blocks is needed to spawn an iron golem?'
+      answers:
+        - '4'
+    49:
+      question: 'How many ancient debris does it take to craft a netherite ingot?'
+      answers:
+        - '4'
+    50:
+      question: 'What item is needed to enchant at the enchantment table?'
+      answers:
+        - 'Lapis'
+        - 'xp'
+
+#Word Association: three clues, one hidden link. The first answer is the one shown;
+#the others are also accepted. Hard ones show one clue at a time (as hints).
+word_association:
+  data:
+    nether_portal:
+      difficulty: easy
+      clues: ['Obsidian', 'Flint and Steel', 'Purple']
+      answers: ['Nether Portal', 'portal']
+    creeper:
+      difficulty: easy
+      clues: ['Green', 'Hiss', 'Explosion']
+      answers: ['Creeper']
+    enderman:
+      difficulty: easy
+      clues: ['Tall', 'Teleport', 'Pearl']
+      answers: ['Enderman']
+    diamond:
+      difficulty: easy
+      clues: ['Pickaxe', 'Blue', 'Deep']
+      answers: ['Diamond', 'diamonds']
+    cake:
+      difficulty: easy
+      clues: ['Milk', 'Eggs', 'Sugar']
+      answers: ['Cake']
+    bed:
+      difficulty: easy
+      clues: ['Wool', 'Planks', 'Sleep']
+      answers: ['Bed']
+    bucket:
+      difficulty: easy
+      clues: ['Iron', 'Water', 'Lava']
+      answers: ['Bucket']
+    torch:
+      difficulty: easy
+      clues: ['Stick', 'Coal', 'Light']
+      answers: ['Torch']
+    sheep:
+      difficulty: easy
+      clues: ['Wool', 'Shears', 'Baa']
+      answers: ['Sheep']
+    villager:
+      difficulty: easy
+      clues: ['Emeralds', 'Trade', 'Hmm']
+      answers: ['Villager']
+    zombie:
+      difficulty: easy
+      clues: ['Rotten Flesh', 'Night', 'Groan']
+      answers: ['Zombie']
+    skeleton:
+      difficulty: easy
+      clues: ['Bones', 'Bow', 'Arrows']
+      answers: ['Skeleton']
+    chest:
+      difficulty: easy
+      clues: ['Planks', 'Storage', 'Loot']
+      answers: ['Chest']
+    furnace:
+      difficulty: easy
+      clues: ['Cobblestone', 'Smelt', 'Fuel']
+      answers: ['Furnace']
+    bread:
+      difficulty: easy
+      clues: ['Wheat', 'Three', 'Food']
+      answers: ['Bread']
+    cow:
+      difficulty: easy
+      clues: ['Leather', 'Milk', 'Beef']
+      answers: ['Cow']
+    crafting_table:
+      difficulty: easy
+      clues: ['Planks', 'Grid', 'Recipes']
+      answers: ['Crafting Table', 'workbench']
+    tnt:
+      difficulty: easy
+      clues: ['Gunpowder', 'Sand', 'Boom']
+      answers: ['TNT']
+    chicken:
+      difficulty: easy
+      clues: ['Eggs', 'Feathers', 'Cluck']
+      answers: ['Chicken']
+    wolf:
+      difficulty: easy
+      clues: ['Bones', 'Tame', 'Collar']
+      answers: ['Wolf', 'dog']
+    ender_dragon:
+      difficulty: medium
+      clues: ['The End', 'Crystals', 'Egg']
+      answers: ['Ender Dragon', 'dragon']
+    wither:
+      difficulty: medium
+      clues: ['Soul Sand', 'Skulls', 'Nether Star']
+      answers: ['Wither']
+    blaze:
+      difficulty: medium
+      clues: ['Rods', 'Fire', 'Fortress']
+      answers: ['Blaze']
+    ghast:
+      difficulty: medium
+      clues: ['Tears', 'Fireballs', 'Floating']
+      answers: ['Ghast']
+    enchanting_table:
+      difficulty: medium
+      clues: ['Books', 'Lapis', 'Levels']
+      answers: ['Enchanting Table', 'enchantment table']
+    beacon:
+      difficulty: medium
+      clues: ['Pyramid', 'Nether Star', 'Beam']
+      answers: ['Beacon']
+    elytra:
+      difficulty: medium
+      clues: ['End City', 'Wings', 'Glide']
+      answers: ['Elytra']
+    trident:
+      difficulty: medium
+      clues: ['Drowned', 'Throw', 'Riptide']
+      answers: ['Trident']
+    brewing_stand:
+      difficulty: medium
+      clues: ['Potions', 'Blaze Powder', 'Bottles']
+      answers: ['Brewing Stand']
+    piston:
+      difficulty: medium
+      clues: ['Redstone', 'Push', 'Sticky']
+      answers: ['Piston']
+    anvil:
+      difficulty: medium
+      clues: ['Iron Blocks', 'Repair', 'Rename']
+      answers: ['Anvil']
+    slime:
+      difficulty: medium
+      clues: ['Swamp', 'Bounce', 'Ball']
+      answers: ['Slime']
+    witch:
+      difficulty: medium
+      clues: ['Potions', 'Hut', 'Cackle']
+      answers: ['Witch']
+    iron_golem:
+      difficulty: medium
+      clues: ['Iron Blocks', 'Pumpkin', 'Village']
+      answers: ['Iron Golem', 'golem']
+    snow_golem:
+      difficulty: medium
+      clues: ['Snow', 'Pumpkin', 'Snowballs']
+      answers: ['Snow Golem', 'snowman']
+    compass:
+      difficulty: medium
+      clues: ['Iron', 'Redstone', 'Spawn']
+      answers: ['Compass']
+    clock:
+      difficulty: medium
+      clues: ['Gold', 'Redstone', 'Time']
+      answers: ['Clock']
+    map:
+      difficulty: medium
+      clues: ['Paper', 'Compass', 'Explore']
+      answers: ['Map']
+    shulker:
+      difficulty: medium
+      clues: ['End City', 'Box', 'Levitation']
+      answers: ['Shulker']
+    guardian:
+      difficulty: medium
+      clues: ['Ocean Monument', 'Laser', 'Prismarine']
+      answers: ['Guardian']
+    netherite:
+      difficulty: hard
+      clues: ['Ancient Debris', 'Gold', 'Upgrade']
+      answers: ['Netherite']
+    totem:
+      difficulty: hard
+      clues: ['Evoker', 'Undying', 'Second Chance']
+      answers: ['Totem of Undying', 'totem']
+    conduit:
+      difficulty: hard
+      clues: ['Heart of the Sea', 'Nautilus', 'Ocean']
+      answers: ['Conduit']
+    warden:
+      difficulty: hard
+      clues: ['Deep Dark', 'Blind', 'Sculk']
+      answers: ['Warden']
+    mending:
+      difficulty: hard
+      clues: ['Villager', 'Experience', 'Repair']
+      answers: ['Mending']
+    phantom:
+      difficulty: hard
+      clues: ['Insomnia', 'Membrane', 'Night Sky']
+      answers: ['Phantom']
+    axolotl:
+      difficulty: hard
+      clues: ['Lush Cave', 'Bucket', 'Pink']
+      answers: ['Axolotl']
+    respawn_anchor:
+      difficulty: hard
+      clues: ['Glowstone', 'Crying Obsidian', 'Nether']
+      answers: ['Respawn Anchor']
+    piglin:
+      difficulty: hard
+      clues: ['Gold', 'Barter', 'Nether']
+      answers: ['Piglin']
+    strider:
+      difficulty: hard
+      clues: ['Lava', 'Warped Fungus', 'Saddle']
+      answers: ['Strider']
+    lodestone:
+      difficulty: hard
+      clues: ['Compass', 'Netherite Ingot', 'Waypoint']
+      answers: ['Lodestone']
+    spyglass:
+      difficulty: hard
+      clues: ['Amethyst', 'Copper', 'Zoom']
+      answers: ['Spyglass']
+    bundle:
+      difficulty: hard
+      clues: ['Rabbit Hide', 'String', 'Inventory']
+      answers: ['Bundle']
+    end_portal:
+      difficulty: hard
+      clues: ['Stronghold', 'Eyes', 'Frame']
+      answers: ['End Portal']
+    silk_touch:
+      difficulty: hard
+      clues: ['Enchantment', 'Glass', 'Ores']
+      answers: ['Silk Touch']
+    observer:
+      difficulty: hard
+      clues: ['Redstone', 'Face', 'Detect']
+      answers: ['Observer']
+    hopper:
+      difficulty: hard
+      clues: ['Funnel', 'Iron', 'Items']
+      answers: ['Hopper']
+    bee:
+      difficulty: hard
+      clues: ['Honey', 'Flowers', 'Sting']
+      answers: ['Bee']
+    sniffer:
+      difficulty: hard
+      clues: ['Ancient Seeds', 'Egg', 'Archaeology']
+      answers: ['Sniffer']
+    notch:
+      difficulty: hard
+      clues: ['Creator', 'Apple', 'Mojang']
+      answers: ['Notch']

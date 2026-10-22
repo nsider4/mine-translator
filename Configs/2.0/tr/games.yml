@@ -1,0 +1,367 @@
+#############################
+######    CHATGAMES    ######
+#############################
+#Her oyunun kabul ettiği ayarlar (biri eksikse gösterilen varsayılan geçerlidir):
+#  enable: true/false
+#  weight: 1             Döngünün bu oyunu diğerlerine göre ne kadar seçeceği (0 = asla).
+#                        Aynı oyun asla art arda iki kez oynanmaz.
+#  winners: 1            Her turu kaç oyuncunun kazanabileceği.
+#  points: 1             Galibiyet başına puan (/chatgames top).
+#  case-sensitive: false Büyük/küçük harf dışında her şeyi doğru olan 'wrong_case' mesajını alır.
+#  timeToGuess_seconds: 20
+#  min-answer-ms: 400    Daha hızlı doğru cevaplar yok sayılır ve kaydedilir: kimse bu kadar hızlı okuyup
+#                        yazamaz, botlar yazar. 0 kontrolü kapatır.
+#  hints:                Tur sırasında ipuçları, messages.yml'deki 'hint_message' ile.
+#    enable: false
+#    after-percent: 50   İlk ipucu sürenin bu yüzdesi geçince çıkar; kalanlar kalan süreye yayılır.
+#    max: 1              En fazla 3.
+#  countdown:            Kalan süre, aksiyon çubuğunda. Her sürümde çalışır (1.8'den 26.x'e).
+#    enable: false
+#    last-seconds: 10    Yalnızca son N saniyede; 0 tüm tur boyunca gösterir.
+#  titleMessage / subtitleMessage: başlık göndermemek için ikisini de boş bırak.
+unscramble:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Oyuncuların tahmin etmek, çözmek, yazmak vb. için saniye cinsinden süresi.
+  timeToGuess_seconds: 20
+  #__Kapatmak için sonraki 2 değeri boş bırak__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aÇöz'
+
+unreverse:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Oyuncuların tahmin etmek, çözmek, yazmak vb. için saniye cinsinden süresi.
+  timeToGuess_seconds: 20
+  #Kapatmak için sonraki 2 değeri boş bırak
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aTers çevir'
+
+reaction:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Oyuncuların tahmin etmek, çözmek, yazmak vb. için saniye cinsinden süresi.
+  timeToGuess_seconds: 20
+  #__Kapatmak için sonraki 2 değeri boş bırak__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aYaz'
+
+guess_the_number:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+  #Bunu değiştirme
+  case-sensitive: false
+
+  lower-limit: 1
+  upper-limit: 20
+
+  #Oyuncuların tahmin etmek, çözmek, yazmak vb. için saniye cinsinden süresi.
+  timeToGuess_seconds: 20
+  #__Kapatmak için sonraki 2 değeri boş bırak__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aYaz'
+
+clickable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Oyuncuların tahmin etmek, çözmek, yazmak vb. için saniye cinsinden süresi.
+  timeToGuess_seconds: 20
+  #__Kapatmak için sonraki 2 değeri boş bırak__
+  titleMessage: '&eMetne tıkla'
+  subtitleMessage: '&fSÃ¼re: &e%timeToGuess%s'
+
+fillout:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Boşluk doldurma oyunundaki gizli harflerin yüzdesi. 1'den 100'e. Küçük sayılar daha az harf gizler.
+  difficulty: 30
+  case-sensitive: true
+  #Oyuncuların tahmin etmek, çözmek, yazmak vb. için saniye cinsinden süresi.
+  timeToGuess_seconds: 20
+  #__Kapatmak için sonraki 2 değeri boş bırak__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aBoşluğu doldur'
+
+hoverable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Oyuncuların tahmin etmek, çözmek, yazmak vb. için saniye cinsinden süresi.
+  timeToGuess_seconds: 20
+  #__Kapatmak için sonraki 2 değeri boş bırak__
+  titleMessage: '&eMetnin üstüne gel'
+  subtitleMessage: '&fSÃ¼re: &e%timeToGuess%s'
+
+#Bu oyunda verilen uzunlukta rastgele karakterlerden bir dizi oluşturulur
+random:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Oyuncuların tahmin etmek, çözmek, yazmak vb. için saniye cinsinden süresi.
+  timeToGuess_seconds: 20
+  #Bu oyunun rastgele dizisinin uzunluğu. Aralık biçimi <min>-<max>. Tek uzunluk için iki tarafa aynı sayıyı yaz
+  lengthRange: 6-8
+  #Kullanılabilir türler: ALPHA (harfler), ALPHANUMERIC (harf ve rakamlar), NUMERIC (rakamlar), SYMBOLIC (semboller),
+  #LOWERCASE_ALPHA (yalnızca küçük harfler), UPPERCASE_ALPHA (yalnızca büyük harfler), HEXADECIMAL (onaltılık karakterler: 0123456789ABCDEF)
+  #CUSTOM ('custom_characters' içindekileri kullanır)
+  character_type: ALPHANUMERIC
+  #Bu satır yalnızca tür "CUSTOM" ise kullanılır
+  custom_characters: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+  #__Kapatmak için sonraki 2 değeri boş bırak__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aYaz'
+
+math:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Bunu değiştirme
+  case-sensitive: false
+  #Oyuncuların tahmin etmek, çözmek, yazmak vb. için saniye cinsinden süresi.
+  timeToGuess_seconds: 20
+  #Her zorluk için rastgele sayı aralıkları:
+  #1 - (1-9)
+  #2 - (1-99)
+  #3 - (1-999)
+  #4 - (1-9999)
+  #5 - (1-99999)
+  difficulty: 2
+  #Her sorunun kaç işleci var: 1 -> "12 + 7", 2 -> "12 + 7 x 3"
+  operations: 1
+  #solve: sonucu hesaplamak ("12 + 7 x 3").  missing-value: gizli sayıyı bulmak ("12 + ? x 3 = 33").
+  #Her tur listelenen modlardan birini seçer.
+  modes:
+    - solve
+    - missing-value
+  #Kullanılacak işleçler; listelenen dördü kullanılabilir, istemediklerini kaldır. Her zaman en az 1 tane bırak
+  #Bölmeler her zaman tam sayı verir.
+  operators:
+    - '+'
+    - '-'
+    - 'x'
+    - '/'
+
+  #__Kapatmak için sonraki 2 değeri boş bırak__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aÇöz'
+
+variable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Bunu değiştirme
+  case-sensitive: false
+  #Oyuncuların tahmin etmek, çözmek, yazmak vb. için saniye cinsinden süresi.
+  timeToGuess_seconds: 20
+
+  #__Kapatmak için sonraki 2 değeri boş bırak__
+  titleMessage: '&bÇÖZ'
+  subtitleMessage: '&aŞunun için &7`&b%symbol%&7`'
+
+  #Rastgele sonuç sayısının aralığı
+  result-min: 20
+  result-max: 100
+
+  toGet: '✗'
+  #Ekleyebileceğin diğer semboller: ✪❃✿✠❂♫♪❦♡♤♢✦☾☽✹
+  data:
+    - '✯;10'
+    - '♛;15'
+    - '❅;20'
+    - '♫;25'
+
+sequence:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Bunu değiştirme
+  case-sensitive: false
+
+  #Oyuncuların tahmin etmek, çözmek, yazmak vb. için saniye cinsinden süresi.
+  timeToGuess_seconds: 25
+
+  #Oyuncular bir sayı dizisi görür ve sonraki sayıyı yazar, ör. "3, 6, 12, 24, ?" -> 48
+  #Örüntüler: toplama (3, 7, 11), çarpma (2, 6, 18), kareler (4, 9, 16), dönüşümlü (5, 9, 7, 11), fibonacci (2, 3, 5, 8)
+  patterns:
+    - add
+    - multiply
+    - squares
+    - alternating
+    - fibonacci
+  #1-3. Yüksek zorluk daha zor örüntülere (2'den itibaren kareler ve dönüşümlü, 3'te fibonacci) ve büyük sayılara izin verir.
+  difficulty: 2
+  #'?' işaretinden önce kaç sayı gösterilir (4-8)
+  shown-terms: 5
+
+  #__Kapatmak için sonraki 2 değeri boş bırak__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aDiziyi tamamla'
+
+memorize:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+
+  listLength: 3
+  #Her tur öğelerini bu listelerden birinden alır (bkz. words.yml -> memorize.pools):
+  #shopping_list, words, colors, numbers, blocks, mobs veya kendi listen
+  pools:
+    - shopping_list
+    - words
+    - colors
+    - numbers
+    - blocks
+    - mobs
+  #false ise öğeler herhangi bir sırayla yazılabilir
+  order-matters: true
+
+  #Oyuncuların ezberlemek, çözmek, yazmak vb. için saniye cinsinden süresi.
+  timeToMemorize: 7
+
+  #Oyuncuların tahmin etmek, çözmek, yazmak vb. için saniye cinsinden süresi.
+  timeToGuess_seconds: 20
+  #Kapatmak için sonraki 2 değeri boş bırak
+  titleMessage: '&bEZBERLE'
+  subtitleMessage: '&aBu listeyi ezberlemeye çalış!'
+
+#Üç ipucu, gizli bir bağlantı (çağrışımlar words.yml içinde).
+#difficulty: easy, medium, hard veya mixed. Zor turlar bir ipucu gösterir, diğerlerini
+#ipucu olarak açar, bu yüzden onlar için ipuçlarını açık bırak (max 2 üçünü de gösterir).
+word_association:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  difficulty: mixed
+  hints:
+    enable: true
+    after-percent: 34
+    max: 2
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  timeToGuess_seconds: 30
+  titleMessage: '&bKELİME ÇAĞRIŞIMI'
+  subtitleMessage: '&aSohbete bak!'
+
+trivia:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  #Oyuncuların tahmin etmek, çözmek, yazmak vb. için saniye cinsinden süresi.
+  timeToGuess_seconds: 20
+  #__Kapatmak için sonraki 2 değeri boş bırak__
+  titleMessage: '&bBİLGİ YARIŞMASI'
+  subtitleMessage: '&aSohbete bak!'

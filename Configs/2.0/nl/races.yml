@@ -1,0 +1,475 @@
+enable-races: true
+
+creative-enabled: true
+#Nuttige links om GEGEVENS toe te voegen:
+#
+#https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+#https://helpch.at/docs/1.8/index.html?org/bukkit/entity/EntityType.html
+#https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+#https://helpch.at/docs/1.8/org/bukkit/Material.html
+
+#Namen mogen modern of oud zijn (MOOSHROOM of MUSHROOM_COW, COD of RAW_FISH): ze worden afgestemd op de
+#versie van je server. Namen die op je versie niet bestaan (bv. een blok uit 1.21 op 1.8) worden overgeslagen, met een melding in de console.
+#
+#Elke race accepteert ook (optioneel):
+#  points: 1     #punten voor de winnaar (standaard 1)
+#  weight: 1     #hoe vaak de rotatie hem kiest ten opzichte van andere spellen (standaard 1, 0 = nooit)
+#
+#Admins kunnen een race starten met eigen waarden: /chatgames <race> <material/mob> [amount]
+#Zonder aantal wordt er een gebruikt die hieronder voor dat materiaal/wezen staat. De winnaar krijgt de beloningen
+#voor precies dat materiaal en aantal, of geen als ze hier niet staan (punten worden wel gegeven).
+
+hunt:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__Laat de volgende 2 leeg om ze uit te schakelen__
+  titleMessage: '&bJACHT'
+  subtitleMessage: '&aDood %amount% %value%!'
+
+  #Of wezens meetellen die door spawnerblokken of spawn-eieren zijn opgeroepen.
+  count-spawner-mobs: true
+
+  data:
+    #Deze waarden moeten geldige Minecraft-wezen-ID's zijn (zie Nuttige links bovenaan het bestand)
+    ZOMBIE:
+      3:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+
+    CREEPER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SKELETON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SPIDER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    PIG:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SHEEP:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    COW:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    CHICKEN:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SALMON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+
+mine:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Laat de volgende 2 leeg om ze uit te schakelen__
+  titleMessage: '&bHAKKEN'
+  subtitleMessage: '&aHak %amount% %value%!'
+
+  data:
+    #Deze waarden moeten geldige Minecraft-materiaal-ID's zijn (zie Nuttige links bovenaan het bestand)
+    STONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRASS_BLOCK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRAVEL:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIORITE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+place:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Laat de volgende 2 leeg om ze uit te schakelen__
+  titleMessage: '&bPLAATSEN'
+  subtitleMessage: '&aPlaats %amount% %value%!'
+
+  data:
+    #Deze waarden moeten geldige Minecraft-materiaal-ID's zijn (zie Nuttige links bovenaan het bestand)
+    COBBLESTONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+fish:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Laat de volgende 2 leeg om ze uit te schakelen__
+  titleMessage: '&bVISSEN'
+  subtitleMessage: '&aVang %amount% %value%!'
+
+  data:
+    #Deze waarden moeten geldige Minecraft-materiaal-ID's zijn (zie Nuttige links bovenaan het bestand)
+    COD:
+      1:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+          - reward_3
+    SALMON:
+      1:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+          - reward_3
+    PUFFERFISH:
+      1:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+          - reward_3
+    BOWL:
+      1:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+eat:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Laat de volgende 2 leeg om ze uit te schakelen__
+  titleMessage: '&bETEN'
+  subtitleMessage: '&aEet %amount% %value%!'
+
+  data:
+    #Deze waarden moeten geldige Minecraft-materiaal-ID's zijn (zie Nuttige links bovenaan het bestand)
+    COOKED_BEEF:
+      1:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_CHICKEN:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BAKED_POTATO:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BREAD:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    GOLDEN_APPLE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+
+craft:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Laat de volgende 2 leeg om ze uit te schakelen__
+  titleMessage: '&bMAKEN'
+  subtitleMessage: '&aMaak %amount% %value%!'
+
+  data:
+    #Deze waarden moeten geldige Minecraft-materiaal-ID's zijn (zie Nuttige links bovenaan het bestand)
+    FURNACE:
+      2:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+      4:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+          - reward_3
+    CHEST:
+      2:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+      4:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+          - reward_3
+    CRAFTING_TABLE:
+      4:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+      8:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_1
+          - reward_2
+      12:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      32:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+      48:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_1
+          - reward_2
+      64:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+furnace:
+  enable: true
+
+  timeToComplete_seconds: 150
+  #__Laat de volgende 2 leeg om ze uit te schakelen__
+  titleMessage: '&bKOKEN'
+  subtitleMessage: '&aKook %amount% %value%!'
+
+  data:
+    #Deze waarden moeten geldige Minecraft-materiaal-ID's zijn (zie Nuttige links bovenaan het bestand)
+    GOLD_INGOT:
+      3:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+      6:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+          - reward_3
+    IRON_INGOT:
+      3:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+      6:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_BEEF:
+      3:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+      6:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_COD:
+      3:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+      6:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #DE SOM VAN ALLE KANSEN VAN DE BELONINGEN DIE JE TOEVOEGT MAG NIET HOGER ZIJN DAN 100%
+        rewards:
+          - reward_2
+          - reward_3

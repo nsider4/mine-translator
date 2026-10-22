@@ -1,0 +1,41 @@
+# ChatGames ön ayarları: otomatik döngü için adlandırılmış oyun setleri.
+#
+# Bir ön ayar etkinken döngü yalnızca onun oyunlarını seçer ve games.yml / races.yml
+# içindeki 'enable' bayrakları yok sayılır. Bu bayrakları yeniden kullanmak için 'active' değerini none yap.
+# Bir ön ayardaki yarışlar yalnızca races.yml'de yarışlar açıksa çalışır (enable-races).
+#
+# Komutlar (izin chatgames.preset):
+#   /chatgames preset list
+#   /chatgames preset load <name>   (veya 'none')
+#   /chatgames preset save <name>   şu an açık oyunları ön ayar olarak kaydeder
+#
+# Bu komutları kullandığında eklenti bu dosyayı yeniden yazar.
+
+active: none
+
+presets:
+  weekend_set:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+
+  minimal_set:
+    games:
+      - reaction
+
+  full_rotation:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+      - guess_the_number
+      - memorize
+      - sequence
+      - clickable
+      - fillout
+      - hoverable
+      - random
+      - math
+      - variable
+      - trivia

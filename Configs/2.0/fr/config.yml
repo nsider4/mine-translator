@@ -1,0 +1,121 @@
+#############################
+######    PARAMÈTRES    #######
+#############################
+check-update: true
+
+#La langue du serveur. Les noms de blocs, d'objets et de créatures (dans les courses et Mémoriser) sont traduits
+#dans cette langue, parmi plus de 140. Trouvez l'ID de votre langue ici :
+#https://github.com/nsider4/mine-translator/blob/main/language_names.txt
+#Les noms sont téléchargés dans translations/ et mis à jour automatiquement à chaque nouvelle version
+#de Minecraft. Un changement ici s'applique avec /chatgames reload.
+lang: 'en_us'
+
+#La langue de ces fichiers de configuration : messages, menus, listes de mots, quiz, commentaires...
+#  auto : les changer quand 'lang' ci-dessus change, si cette langue a des fichiers traduits
+#  none : ne jamais les changer
+#  ou un code de langue : en, es, fr, pt, de, it, nl, pl, ru, tr
+#Le changement conserve vos paramètres et les modifications que vous y avez faites ; vos propres messages
+#sont remplacés par la traduction (les anciens fichiers sont d'abord copiés dans backups/). Les traductions
+#sont téléchargées depuis https://github.com/nsider4/mine-translator (dossier Configs) et mises à jour
+#automatiquement. D'autres langues peuvent y être ajoutées.
+config-language: 'auto'
+
+#Type de stockage, disponibles : SQLite ou MySQL
+Storage: 'SQLite'
+
+#Le nom de la table qui contiendra toutes les données de ChatGames
+table_name: 'chatgames'
+
+#Le nom de la table qui contiendra les meilleurs temps de ChatGames
+fastest_times_table: 'chatgames_fastest_times'
+
+SQLite:
+  Filename: 'chatgames-data'
+
+MySQL:
+  host: 'localhost'
+  port: '3306'
+  user: 'root'
+  password: 'password'
+  database: 'chatgame'
+  connection-parameters: '?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8'
+  Pool-Settings:
+    max-pool-size: 10
+    min-idle: 10
+    max-lifetime: 180000
+    keep-alive-time: 60000
+    time-out: 20000
+
+disabled-worlds:
+  - 'example_world'
+
+prefix: '&c&lC&d&lH&b&lA&a&lT &6&lG&e&lA&a&lM&c&lE&b&lS'
+
+#Seuls les joueurs avec 'chatgames.start.*' pourront lancer des jeux quand ceci est false
+allow_starting_from_disabled: true
+
+#Si false, le message qui n'est normalement pas envoyé quand un joueur trouve la bonne réponse ne sera pas annulé
+cancel-message-when-winning: true
+
+#Le nombre minimum de joueurs connectés pour qu'un événement de chat commence
+min_players_online: 1
+
+#Le temps avant qu'un jeu aléatoire soit à nouveau choisi.
+#La valeur -1 désactive la tâche COMPLÈTEMENT ; avec -1 vous ne pouvez pas non plus utiliser randomDelay
+time_minutes: 25
+
+#Si activé, à chaque fin de jeu un nombre aléatoire entre 'randomDelay.minimum' et 'randomDelay.limit' est tiré comme délai avant le jeu suivant
+#L'activer ignore la valeur 'time_minutes' sauf si elle vaut -1, puisqu'il n'y aura pas de tâche.
+randomDelay:
+  enable: false
+  #Unité de temps, l'autre valeur possible est 'seconds' ; si vous la changez, il est conseillé de mettre un minimum supérieur au 'timeToGuess_seconds' des jeux
+  timeUnit: 'minutes'
+  minimum: 1
+  limit: 25
+
+
+#Le désactiver rend la permission chatgames.play inutile pour voir les jeux
+use-permission-toplay: false
+
+#À false, seuls les joueurs ayant la permission 'chatgames.play', donc capables de jouer, sont comptés.
+#À true, tous les joueurs connectés sont comptés sauf ceux en vanish.
+count-all-players: false
+
+#À true, un classement des plus rapides est créé (/chatgames fastest). À false, ce classement est désactivé.
+fastest-typers-top: true
+
+#Placeholders PlaceholderAPI (PlaceholderAPI doit être installé) :
+#  Vous :        %chatgames_points%, %chatgames_wins%, %chatgames_wins_<game>%, %chatgames_race_wins%,
+#                %chatgames_global_played%, %chatgames_global_won%, %chatgames_toggle%, %chatgames_sound_toggle%
+#                %chatgames_events_played%, %chatgames_event_wins%, %chatgames_event_best_place% (0 = aucun pour l'instant)
+#  Vos temps :   %chatgames_personal_best% (tout jeu de chat), %chatgames_fastest_<game>% (courses aussi)
+#  Votre place : %chatgames_show_current_pos_top% (points), %chatgames_show_current_pos_fastest% (meilleur temps)
+#  Top points :  %chatgames_top_<n>% (nom), %chatgames_points_top_<n>%, %chatgames_total_points%
+#  Top rapides : %chatgames_fastest_<n>% (nom, jeux de chat), %chatgames_fastest_time_<n>%,
+#                %chatgames_fastest_<game>_<n>%, %chatgames_fastest_<game>_time_<n>%
+#  En ce moment : %chatgames_game_running%, %chatgames_current_game%, %chatgames_next_game_in% (secondes)
+#  Course :      %chatgames_race_target%, %chatgames_race_amount%, %chatgames_race_progress% (la vôtre)
+#  Défis :       %chatgames_daily_completed%, %chatgames_daily_total%, %chatgames_weekly_completed%,
+#                %chatgames_weekly_total%, %chatgames_challenges_completed% (au total)
+#  Séries :      %chatgames_streak_<type>%, %chatgames_streak_<type>_longest% (<type> vaut challenge, daily ou global)
+#  Événement :   %chatgames_event_running%, %chatgames_event_name%, %chatgames_event_step%, %chatgames_event_steps%,
+#                %chatgames_event_points% et %chatgames_event_place% (les vôtres dans l'événement en cours)
+#  <game> est le nom d'un jeu comme dans games.yml (ex. unscramble, guess_the_number) ; <n> est une place (1, 2, 3...).
+placeholders:
+  #Fréquence de recalcul des placeholders de classement (top_<n>, fastest_<n>, positions...), en secondes.
+  #Ils sont aussi recalculés après chaque jeu avec un gagnant. Vos propres points, victoires et temps sont toujours à jour.
+  refresh-seconds: 60
+  #Affiché quand il n'y a rien à afficher : une place vide au classement, pas encore de meilleur temps, aucun jeu en cours...
+  empty-value: ''
+
+#Son envoyé aux joueurs quand un événement de chat commence !
+GameSounds:
+  volume: 0.5
+  pitch: 1.0
+  #LAISSEZ L'UN DE CEUX-CI VIDE POUR LE DÉSACTIVER
+  win: 'minecraft:entity.experience_orb.pickup'
+  game-start: 'minecraft:entity.player.levelup'
+  time-expired: 'minecraft:entity.villager.no'
+  wrong-case: 'minecraft:block.note_block.bass'
+
+#Les presets de jeux (ensembles nommés de jeux activés) se trouvent dans presets.yml.

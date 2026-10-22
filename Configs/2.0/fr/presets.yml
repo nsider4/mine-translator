@@ -1,0 +1,41 @@
+# Presets de ChatGames : ensembles nommés de jeux pour la rotation automatique.
+#
+# Quand un preset est actif, la rotation ne choisit que ses jeux, et les drapeaux 'enable'
+# de games.yml / races.yml sont ignorés. Mettez 'active' à none pour réutiliser ces drapeaux.
+# Les courses d'un preset ne se lancent que si les courses sont activées dans races.yml (enable-races).
+#
+# Commandes (permission chatgames.preset) :
+#   /chatgames preset list
+#   /chatgames preset load <name>   (ou 'none')
+#   /chatgames preset save <name>   enregistre les jeux activés en ce moment comme preset
+#
+# Le plugin réécrit ce fichier quand vous utilisez ces commandes.
+
+active: none
+
+presets:
+  weekend_set:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+
+  minimal_set:
+    games:
+      - reaction
+
+  full_rotation:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+      - guess_the_number
+      - memorize
+      - sequence
+      - clickable
+      - fillout
+      - hoverable
+      - random
+      - math
+      - variable
+      - trivia

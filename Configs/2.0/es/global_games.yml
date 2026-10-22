@@ -1,0 +1,247 @@
+#JUEGOS GLOBALES
+#
+#En un juego global todo el servidor juega como un equipo. Cada respuesta correcta (o, en una carrera
+#global, cada bloque minado, criatura matada...; en Contar, cada número contado) suma a una puntuación
+#común. Nadie tiene que ser el más rápido: si la puntuación llega al objetivo a tiempo, todos los que
+#aportaron reciben la recompensa. Si se acaba el tiempo antes, el juego falla.
+#
+#  Los juegos de chat son una serie de preguntas. Cada jugador puede responder cada pregunta una vez, y
+#  la siguiente pregunta llega tras 'answers-per-question' respuestas correctas o 'question-seconds'.
+#  Las respuestas siempre se ocultan, así que no se pueden copiar.
+#  Las carreras suman el progreso de todos, p. ej. 500 de Piedra minada por todo el servidor.
+#  Contar (solo se juega en global): contad juntos en el chat, un número por mensaje.
+#
+#Los juegos globales empiezan por probabilidad tras un juego normal, con un temporizador, con
+#/chatgames global <game> [values], o como paso de un evento (events.yml).
+#El progreso se muestra en una barra de jefe (1.9+) o en la barra de acción (1.8).
+
+triggers:
+  #Probabilidad en porcentaje de que empiece un juego global al terminar un juego o carrera normal (0 = nunca).
+  chance-after-game: 10
+  #Segundos entre el final del juego normal y el inicio del juego global.
+  delay-seconds: 5
+  #Minutos entre juegos globales iniciados por temporizador (0 = desactivado).
+  interval-minutes: 0
+  #Jugadores conectados necesarios para que un juego global empiece solo (el comando lo ignora).
+  minimum-players: 2
+
+progress-bar:
+  enabled: true
+  #Un color de barra de jefe: BLUE, GREEN, PINK, PURPLE, RED, WHITE o YELLOW.
+  color: YELLOW
+  #SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12 o SEGMENTED_20.
+  style: SEGMENTED_10
+  #Porcentajes del objetivo que se anuncian en el chat según el servidor los alcanza.
+  announce-at: [25, 50, 75]
+
+#Los usan todos los juegos de abajo para cualquier valor que no fijen ellos mismos.
+#  goal: respuestas correctas (o, en carreras, objetos/criaturas) que necesita el servidor
+#  duration-seconds: cuánto tiempo tiene el servidor
+#  min-contribution: lo mínimo que debe aportar un jugador para recibir recompensa
+#  points: lo que recibe cada jugador recompensado al alcanzar el objetivo
+#  points-per-contribution: puntos extra por cada aportación de un jugador
+#  answers-per-question: solo juegos de chat, cuántos jugadores pueden responder una pregunta
+#  question-seconds: solo juegos de chat, lo máximo que dura una pregunta
+defaults:
+  goal: 10
+  duration-seconds: 120
+  min-contribution: 1
+  points: 1
+  points-per-contribution: 0
+  answers-per-question: 3
+  question-seconds: 15
+
+#Recompensas en el formato de rewards.yml (chance, minimum-players, '<chance>%~ ' y 'has:<permission>'
+#funcionan). %player% es el jugador y %contribution% lo que aportó.
+#La sección 'rewards' propia de un juego sustituye a estas para ese juego.
+rewards:
+  #Todos los que aportaron al menos min-contribution, al alcanzar el objetivo.
+  completed:
+    reward_1:
+      data:
+        - '[consolecmd] give %player% iron_ingot 3'
+  #Los mismos jugadores cuando se acaba el tiempo. Vacío: sin premio de consolación.
+  failed: {}
+  #Extra para los que más aportaron al alcanzar el objetivo, por puesto.
+  top-contributors:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% diamond 1'
+    2:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 3'
+    3:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 1'
+
+#Placeholders en todos los mensajes: %game% %goal% (un número) %goal_text% (p. ej. "500 Piedra")
+#%progress% %percent% %time% (segundos restantes) %duration%
+messages:
+  start:
+    - ''
+    - '&6&l» ¡%game% GLOBAL! &fTodo el servidor juega junto.'
+    - '&f  Objetivo: &e%goal% respuestas correctas &fen &e%time%s&f. ¡Todo el que ayude tendrá premio!'
+    - '&7  Cada pregunta admite %answers% respuestas, así que no esperes a los demás.'
+    - ''
+  race_start:
+    - ''
+    - '&6&l» ¡CARRERA GLOBAL! &fTodo el servidor juega junto.'
+    - '&f  Objetivo: &e%goal% %value% &fentre todos en &e%time%s&f. ¡Todo el que ayude tendrá premio!'
+    - ''
+  count_start:
+    - ''
+    - '&6&l» ¡CUENTA GLOBAL! &f¡A contar juntos desde &e%start% &fhasta &e%target% &fcon saltos de &e%step%&f!'
+    - '&7  Un número por mensaje, en orden. Nadie cuenta dos veces seguidas. %time%s para terminar.'
+    - ''
+  #Encima de cada pregunta. %question% es su número.
+  question:
+    - '&6&l» GLOBAL &7Pregunta n.º %question% &8| &e%progress%&7/&e%goal%'
+  #Cuando se acaba el tiempo de una pregunta. %answer% es su respuesta. Vacío para no decir nada.
+  question_over: '&8» &7La respuesta era &f%answer%&7.'
+  #A un jugador cuya respuesta contó. %contribution% es su total hasta ahora.
+  answered: '&8[%prefix%&8] &a¡Correcto! &7Llevas &f%contribution% &7de las &f%progress%/%goal%&7 del servidor.'
+  #%reached% es el porcentaje que se acaba de alcanzar.
+  milestone: '&6&l» &e%reached%% &f¡completado! &7(%progress%/%goal%, quedan %time%s)'
+  #Un número que contó, mostrado en lugar del mensaje del jugador. %player% %number%
+  counted: '&e%player% &8» &f%number%'
+  #Un error. %player% %number% %next% (lo que se esperaba) %start% %reason% %mistakes% %max_mistakes%
+  count_broken:
+    - '&c%player% dijo %number%: %reason%'
+    - '&fLa cuenta vuelve a empezar desde &e%start%&f.'
+  #El error que termina el juego (on-mistake: fail, o al llegar a max-mistakes).
+  count_broken_final:
+    - '&c%player% dijo %number%: %reason%'
+  count_reasons:
+    ahead: 'demasiado adelantado (el siguiente número era %next%)'
+    behind: 'ese ya se había contado (el siguiente número era %next%)'
+    repeated: 'ese número se acaba de decir'
+    twice: 'nadie puede contar dos números seguidos'
+  #%count% jugadores recibieron recompensa, %contributors% participaron, %seconds% es lo que tardaron.
+  #%top_<n>% y %top_<n>_amount%: los tres que más aportaron.
+  completed:
+    - ''
+    - '&6&l» ¡OBJETIVO CONSEGUIDO! &fEl servidor consiguió &e%goal_text% &fen &e%seconds%s&f.'
+    - '&f  Top: &e%top_1% &7(%top_1_amount%)  &e%top_2% &7(%top_2_amount%)  &e%top_3% &7(%top_3_amount%)'
+    - '&f  &e%count% &fjugador(es) reciben la recompensa.'
+    - ''
+  failed:
+    - ''
+    - '&6&l» ¡FIN DEL JUEGO GLOBAL! &fEl servidor llegó a &e%progress%/%goal% &7(%percent%%)&f. ¡Más suerte la próxima vez!'
+    - ''
+  #A cada jugador recompensado al alcanzar el objetivo. %points% es lo que ganó.
+  rewarded: '&8[%prefix%&8] &a¡Aportaste &f%contribution% &ay ganaste &f%points% &apunto(s)!'
+  #A un jugador que aportó menos de min-contribution. %min% es ese mínimo.
+  too_little: '&8[%prefix%&8] &7Aportaste %contribution%; hacían falta al menos %min% para la recompensa.'
+  #La barra de jefe (o la barra de acción en 1.8).
+  bar: '&6%game% global &8| &f%progress%/%goal% &8| &e%time%s'
+
+#Palabras usadas para formar %goal_text%.
+words:
+  answers: 'respuestas correctas'
+  to: 'a'
+
+#Los juegos que se pueden jugar en global. Memorizar y Adivina el número no pueden.
+#Cada uno puede fijar enabled y cualquier cosa de 'defaults', además de sus propias 'rewards'.
+games:
+  reaction:
+    enabled: true
+    goal: 10
+    duration-seconds: 90
+    question-seconds: 10
+  unscramble:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  math:
+    enabled: true
+    goal: 15
+    duration-seconds: 150
+  sequence:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  trivia:
+    enabled: true
+    goal: 8
+    duration-seconds: 180
+    question-seconds: 20
+  word_association:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  fillout:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  unreverse:
+    enabled: false
+  random:
+    enabled: false
+  variable:
+    enabled: false
+  hoverable:
+    enabled: false
+  clickable:
+    enabled: false
+  #Contar juntos. Su objetivo es cuántos números tiene el modo elegido.
+  count:
+    enabled: true
+    duration-seconds: 120
+    #Nadie puede decir dos números seguidos.
+    no-double-count: true
+    #reset: un error reinicia la cuenta; fail: un error termina el juego.
+    on-mistake: reset
+    #Con reset: los errores que terminan el juego igualmente (0 = sin límite).
+    max-mistakes: 5
+    #Se elige uno al azar; /chatgames global count <mode> elige uno.
+    #'step' es cuánto sube cada número (la dirección sigue a start y target).
+    modes:
+      up:
+        start: 1
+        target: 20
+        step: 1
+      down:
+        start: 15
+        target: 1
+        step: 1
+      evens:
+        start: 2
+        target: 30
+        step: 2
+      fives:
+        start: 5
+        target: 75
+        step: 5
+  #Carreras globales: todo el servidor recolecta hacia el objetivo. Los objetivos vienen de races.yml;
+  #/chatgames global mine STONE 500 fija ambos.
+  mine:
+    enabled: true
+    goal: 200
+    duration-seconds: 240
+  hunt:
+    enabled: true
+    goal: 40
+    duration-seconds: 240
+  place:
+    enabled: false
+    goal: 200
+    duration-seconds: 240
+  fish:
+    enabled: false
+    goal: 20
+    duration-seconds: 300
+  eat:
+    enabled: false
+    goal: 30
+    duration-seconds: 240
+  craft:
+    enabled: false
+    goal: 100
+    duration-seconds: 240
+  furnace:
+    enabled: false
+    goal: 64
+    duration-seconds: 300

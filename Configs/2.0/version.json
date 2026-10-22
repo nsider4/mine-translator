@@ -1,0 +1,115 @@
+{
+  "languages": {
+    "en": {
+      "name": "English",
+      "lang": [
+        "en_us",
+        "en_gb",
+        "en_au",
+        "en_ca",
+        "en_nz"
+      ],
+      "version": 1,
+      "hash": "ebbcadf461ce4bbf68e2d7e7e6c4702269d4f8ba808106117b2aa4dfc5be8544"
+    },
+    "es": {
+      "name": "Español",
+      "lang": [
+        "es_es",
+        "es_mx",
+        "es_ar",
+        "es_cl",
+        "es_ec",
+        "es_uy",
+        "es_ve"
+      ],
+      "version": 1,
+      "hash": "bb81eeefa114ea830b4ca96c8fac6e3548756b23931dc412aeca0749072b4a60"
+    },
+    "fr": {
+      "name": "Français",
+      "lang": [
+        "fr_fr",
+        "fr_ca"
+      ],
+      "version": 1,
+      "hash": "d053c88642b2442b3548e7128908bea145f9330e6bd1909914266cda0cbb8207"
+    },
+    "pt": {
+      "name": "Português",
+      "lang": [
+        "pt_br",
+        "pt_pt"
+      ],
+      "version": 1,
+      "hash": "327469bad5e3a4452fc0c76c1f4fffb7321623a8b6792fdafc5303b3520a53a0"
+    },
+    "de": {
+      "name": "Deutsch",
+      "lang": [
+        "de_de",
+        "de_at",
+        "de_ch"
+      ],
+      "version": 1,
+      "hash": "89e179a4e0defdb365041e2009b8e6d2645ee6f30c303a966091eb302f6882e4"
+    },
+    "it": {
+      "name": "Italiano",
+      "lang": [
+        "it_it"
+      ],
+      "version": 1,
+      "hash": "10a7ff877b279fe9598b5f7852b868b340e94788790988fc174119baccb7494c"
+    },
+    "nl": {
+      "name": "Nederlands",
+      "lang": [
+        "nl_nl",
+        "nl_be"
+      ],
+      "version": 1,
+      "hash": "78334c9acd3371e01982c560ba6bf61919687a6ea100547a498e09e095459220"
+    },
+    "pl": {
+      "name": "Polski",
+      "lang": [
+        "pl_pl"
+      ],
+      "version": 1,
+      "hash": "751f96f7ac257bcdc4f0aefaae33167c5b1c30239311f2e83a1b235ce51bde31"
+    },
+    "ru": {
+      "name": "Русский",
+      "lang": [
+        "ru_ru"
+      ],
+      "version": 1,
+      "hash": "0bbbd9ac277b2526956c90b3727165e60eb71de298925b3fe3b82afe6c6c943a"
+    },
+    "tr": {
+      "name": "Türkçe",
+      "lang": [
+        "tr_tr"
+      ],
+      "version": 1,
+      "hash": "929bd608cba87f79bf398f7ab16367c69b9b1e6f52ca70676acb1bef2be231b5"
+    }
+  },
+  "files": [
+    "config.yml",
+    "games.yml",
+    "messages.yml",
+    "menus.yml",
+    "words.yml",
+    "races.yml",
+    "global_games.yml",
+    "challenges.yml",
+    "streaks.yml",
+    "events.yml",
+    "rewards.yml",
+    "add-ons.yml",
+    "presets.yml",
+    "milestones.yml"
+  ]
+}

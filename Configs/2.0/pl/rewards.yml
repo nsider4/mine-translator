@@ -1,0 +1,153 @@
+#MOŻLIWE AKCJE:
+#
+#[playercmd] - Wykonuje komendę jako zwycięzca
+#[consolecmd] - Wykonuje komendę z konsoli
+#[playermsg] - Wysyła wiadomość do zwycięzcy
+#[broadcast] - Wysyła wiadomość do wszystkich graczy we włączonych światach
+#[player_as_op] - Wykonuje komendę jako op za gracza
+#
+#DODAJ SZANSE DO NAGRÓD W TEN SPOSÓB:
+#
+#PRZYKŁAD:
+#  - '10.0%~ [consolecmd] give %player% iron_block 5'
+#DZIAŁA TYLKO, JEŚLI FORMAT JEST TAKI SAM JAK W PRZYKŁADZIE, Z <chance>% NA POCZĄTKU, PO KTÓRYM JEST ~ I SPACJA. ZAWSZE PIERWSZE W KOMENDZIE
+#
+#KOMENDY BEZ % TO NAGRODY DAWANE W 100%.
+
+#SPRAWDZANIE UPRAWNIEŃ:
+#
+#UMIEŚĆ NA KOŃCU LINII KOMENDY.
+#Przykład:
+#  - '[consolecmd] give %player% iron_block 5 has:test.permission'
+
+#1 jest dla PIERWSZEGO zwycięzcy; JEŚLI DODASZ WIĘCEJ ZWYCIĘZCÓW W config.yml I CHCESZ INNYCH NAGRÓD, DODAJ ICH MIEJSCE (2:, itd.)
+unscramble:
+  rewards:
+    1:
+      reward_1:
+        minimum-players: 2 #Online players-based condition, reward can only be chosen if there are 2 or more players online
+        chance: 50
+        data:
+          - '10.0%~ [consolecmd] give %player% diamond_block 3 has:test.permission'
+          - '[consolecmd] give %player% iron_block 5'
+      reward_2:
+        data:
+          - '[consolecmd] give %player% iron_block 2'
+
+unreverse:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+reaction:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+guess_the_number:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+shoppinglist:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+clickable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+fillout:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+hoverable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+random:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+variable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+math:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+sequence:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+memorize:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+word_association:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+trivia:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+#OD TEGO MIEJSCA SĄ NAGRODY ZA WYŚCIGI, KTÓRE MAJĄ TYLKO 1 ZWYCIĘZCĘ
+#
+#UŻYWANY JEST INNY FORMAT! CZYTAJ UWAŻNIE
+
+races:
+  rewards:
+    #TO SĄ NAGRODY, KTÓRE WPISUJESZ W 'races.yml'
+    reward_1:
+      chance: 50
+      data:
+        - '60.0%~ [consolecmd] give %player% diamond_block 5'
+    #USUNIĘCIE WARTOŚCI 'chance' SPRAWI, ŻE NAGRODA/KOMENDA BĘDZIE ZAWSZE WYKONYWANA
+    reward_2:
+      data:
+        - '[consolecmd] give %player% iron_block 5'
+        - '[playermsg] &aWygrałeś!'
+    reward_3:
+      chance: 50
+      data:
+        - '[consolecmd] give %player% diamond_block 3'

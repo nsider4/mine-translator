@@ -1,0 +1,475 @@
+enable-races: true
+
+creative-enabled: true
+#Links úteis para adicionar DADOS:
+#
+#https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+#https://helpch.at/docs/1.8/index.html?org/bukkit/entity/EntityType.html
+#https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+#https://helpch.at/docs/1.8/org/bukkit/Material.html
+
+#Os nomes podem ser modernos ou antigos (MOOSHROOM ou MUSHROOM_COW, COD ou RAW_FISH): são ajustados à versão do seu
+#servidor. Nomes que não existem na sua versão (ex.: um bloco da 1.21 na 1.8) são ignorados, com um aviso no console.
+#
+#Cada corrida também aceita (opcional):
+#  points: 1     #pontos que o vencedor recebe (padrão 1)
+#  weight: 1     #com que frequência a rotação a escolhe em relação aos outros jogos (padrão 1, 0 = nunca)
+#
+#Admins podem iniciar uma corrida com valores próprios: /chatgames <race> <material/mob> [amount]
+#Sem quantidade, usa-se uma das listadas abaixo para esse material/criatura. O vencedor recebe as recompensas listadas
+#para exatamente esse material e quantidade, ou nenhuma se não estiverem aqui (os pontos são dados mesmo assim).
+
+hunt:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__Deixe os 2 seguintes vazios para desativá-los__
+  titleMessage: '&bCAÇA'
+  subtitleMessage: '&aMate %amount% %value%!'
+
+  #Se as criaturas geradas por geradores ou ovos de geração contam.
+  count-spawner-mobs: true
+
+  data:
+    #Estes valores devem ser IDs de criaturas do Minecraft válidos (veja os links úteis no topo do arquivo)
+    ZOMBIE:
+      3:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+
+    CREEPER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SKELETON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SPIDER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    PIG:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SHEEP:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    COW:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    CHICKEN:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SALMON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+
+mine:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Deixe os 2 seguintes vazios para desativá-los__
+  titleMessage: '&bMINERAÇÃO'
+  subtitleMessage: '&aMinere %amount% %value%!'
+
+  data:
+    #Estes valores devem ser IDs de materiais do Minecraft válidos (veja os links úteis no topo do arquivo)
+    STONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRASS_BLOCK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRAVEL:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIORITE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+place:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Deixe os 2 seguintes vazios para desativá-los__
+  titleMessage: '&bCOLOCAR'
+  subtitleMessage: '&aColoque %amount% %value%!'
+
+  data:
+    #Estes valores devem ser IDs de materiais do Minecraft válidos (veja os links úteis no topo do arquivo)
+    COBBLESTONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+fish:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Deixe os 2 seguintes vazios para desativá-los__
+  titleMessage: '&bPESCA'
+  subtitleMessage: '&aPesque %amount% %value%!'
+
+  data:
+    #Estes valores devem ser IDs de materiais do Minecraft válidos (veja os links úteis no topo do arquivo)
+    COD:
+      1:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+          - reward_3
+    SALMON:
+      1:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+          - reward_3
+    PUFFERFISH:
+      1:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+          - reward_3
+    BOWL:
+      1:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+eat:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Deixe os 2 seguintes vazios para desativá-los__
+  titleMessage: '&bCOMER'
+  subtitleMessage: '&aComa %amount% %value%!'
+
+  data:
+    #Estes valores devem ser IDs de materiais do Minecraft válidos (veja os links úteis no topo do arquivo)
+    COOKED_BEEF:
+      1:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_CHICKEN:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BAKED_POTATO:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BREAD:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    GOLDEN_APPLE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+
+craft:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Deixe os 2 seguintes vazios para desativá-los__
+  titleMessage: '&bFABRICAR'
+  subtitleMessage: '&aFabrique %amount% %value%!'
+
+  data:
+    #Estes valores devem ser IDs de materiais do Minecraft válidos (veja os links úteis no topo do arquivo)
+    FURNACE:
+      2:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+      4:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+          - reward_3
+    CHEST:
+      2:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+      4:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+          - reward_3
+    CRAFTING_TABLE:
+      4:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+      8:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_1
+          - reward_2
+      12:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      32:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+      48:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_1
+          - reward_2
+      64:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+furnace:
+  enable: true
+
+  timeToComplete_seconds: 150
+  #__Deixe os 2 seguintes vazios para desativá-los__
+  titleMessage: '&bCOZINHAR'
+  subtitleMessage: '&aCozinhe %amount% %value%!'
+
+  data:
+    #Estes valores devem ser IDs de materiais do Minecraft válidos (veja os links úteis no topo do arquivo)
+    GOLD_INGOT:
+      3:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+      6:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+          - reward_3
+    IRON_INGOT:
+      3:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+      6:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_BEEF:
+      3:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+      6:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_COD:
+      3:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+      6:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #A SOMA DE TODAS AS CHANCES DAS RECOMPENSAS QUE VOCÊ ADICIONAR NÃO PODE PASSAR DE 100%
+        rewards:
+          - reward_2
+          - reward_3

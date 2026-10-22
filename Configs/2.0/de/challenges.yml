@@ -1,0 +1,136 @@
+#TÄGLICHE UND WÖCHENTLICHE AUFGABEN
+#
+#Alle bekommen dieselben Aufgaben. Der Fortschritt wird beim Spielen gezählt; eine erledigte
+#Aufgabe zeigt "Bereit zum Abholen" in /chatgames challenges, und /chatgames claim zahlt sie aus.
+#Nicht abgeholte Belohnungen verfallen, wenn die Aufgaben zurückgesetzt werden.
+#
+#AUFGABENTYPEN (amount ist, wie viele nötig sind):
+#  WIN_GAMES    Chatspiele oder Rennen gewinnen, auf beliebigem Platz
+#  WIN_GAME     ein bestimmtes Spiel oder Rennen gewinnen, gesetzt mit 'game' (z. B. game: unscramble)
+#  WIN_RACES    Rennen gewinnen
+#  PLAY_GLOBAL  globale Spiele rechtzeitig schaffen
+#  WIN_GLOBAL   globale Spiele auf einem belohnten Platz beenden
+#  FAST_WIN     Chatspiele in 'seconds' oder weniger gewinnen (Rennen zählen nicht)
+#  EARN_POINTS  Punkte in Spielen verdienen
+#  PLAY_EVENT   an Spiel-Events teilnehmen
+#
+#Jede Aufgabe hat:
+#  name / description: im Chat und im Menü gezeigt. %amount%, %game% und %seconds% werden ausgefüllt.
+#  icon: das Menü-Item (ein Materialname)
+#  rewards: Zeilen wie in rewards.yml (Chancen mit '<chance>%~ ', Berechtigungen mit 'has:<permission>').
+#           %player% und %challenge% (der Name) werden ausgefüllt.
+#
+#Die IDs (win_3, fast_1...) werden mit dem Fortschritt der Spieler gespeichert: nutze nur a-z, 0-9, - und _,
+#und eine Änderung startet den Fortschritt dieser Aufgabe neu.
+
+#Die Zeitzone, in der Tage beginnen, für Aufgaben und Serien, z. B. Europe/Berlin oder America/New_York.
+#Leer nutzt die des Servers.
+timezone: ''
+
+daily:
+  enabled: true
+  #fixed: jede Aufgabe unten ist jeden Tag aktiv.
+  #random: 'amount' davon werden jeden Tag gezogen (für alle dieselben).
+  mode: random
+  amount: 3
+  challenges:
+    win_3:
+      type: WIN_GAMES
+      amount: 3
+      name: '&eAufwärmen'
+      description: '&7Gewinne %amount% Chatspiele'
+      icon: GOLD_NUGGET
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    win_8:
+      type: WIN_GAMES
+      amount: 8
+      name: '&6Im Lauf'
+      description: '&7Gewinne %amount% Chatspiele'
+      icon: GOLD_INGOT
+      rewards:
+        - '[consolecmd] give %player% gold_ingot 8'
+    unscramble_2:
+      type: WIN_GAME
+      game: unscramble
+      amount: 2
+      name: '&bWortzauberer'
+      description: '&7Gewinne %amount% Runden %game%'
+      icon: BOOK
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    math_2:
+      type: WIN_GAME
+      game: math
+      amount: 2
+      name: '&bMenschlicher Rechner'
+      description: '&7Gewinne %amount% Runden %game%'
+      icon: PAPER
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    fast_1:
+      type: FAST_WIN
+      seconds: 5
+      amount: 1
+      name: '&cFlinke Finger'
+      description: '&7Gewinne ein Chatspiel in %seconds% Sekunden oder weniger'
+      icon: FEATHER
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    race_1:
+      type: WIN_RACES
+      amount: 1
+      name: '&aRennfahrer'
+      description: '&7Gewinne ein Rennen'
+      icon: IRON_PICKAXE
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    points_5:
+      type: EARN_POINTS
+      amount: 5
+      name: '&dPunktesammler'
+      description: '&7Verdiene %amount% Punkte'
+      icon: EXPERIENCE_BOTTLE
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    global_1:
+      type: PLAY_GLOBAL
+      amount: 1
+      name: '&3Teamplayer'
+      description: '&7Schaffe ein globales Spiel rechtzeitig'
+      icon: COMPASS
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+
+weekly:
+  enabled: true
+  #Der Tag, an dem jede Woche beginnt.
+  reset-day: MONDAY
+  mode: fixed
+  amount: 3
+  challenges:
+    win_25:
+      type: WIN_GAMES
+      amount: 25
+      name: '&6Wochenchampion'
+      description: '&7Gewinne diese Woche %amount% Chatspiele'
+      icon: DIAMOND
+      rewards:
+        - '[consolecmd] give %player% diamond 3'
+    fast_5:
+      type: FAST_WIN
+      seconds: 4
+      amount: 5
+      name: '&cBlitz'
+      description: '&7Gewinne %amount% Chatspiele in %seconds% Sekunden oder weniger'
+      icon: BLAZE_POWDER
+      rewards:
+        - '[consolecmd] give %player% diamond 2'
+    global_5:
+      type: WIN_GLOBAL
+      amount: 5
+      name: '&3Publikumsliebling'
+      description: '&7Beende %amount% globale Spiele auf einem belohnten Platz'
+      icon: BEACON
+      rewards:
+        - '[consolecmd] give %player% diamond 2'

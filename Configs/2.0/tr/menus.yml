@@ -1,0 +1,1154 @@
+#MENÜLER
+#
+#'menus:' altındaki her menünün bir 'title' değeri, 'rows' (1-6) cinsinden boyutu ve 'items' öğeleri vardır. Her düğmenin
+#ne yaptığını değiştirebilir, düğme ekleyebilir veya tamamen yeni menüler yapabilirsin (/chatgames menu <id> ile aç,
+#ya da her birini menus/ klasöründe <id>.yml adlı kendi dosyasına koy).
+#
+#Her öğe:
+#  slot: nerede durduğu, 0'dan (sol üst) rows*9-1'e. 'slots: [0, 1, '9-17']' onu tekrarlar.
+#  material: 1.8'den 26.x'e herhangi bir eşya adı: yeni veya eski adlar (lime_dye / INK_SACK:10 / 351:10),
+#            ya da 'head:<oyuncu adı, doku veya textures.minecraft.net URL'si>'
+#  name / lore: renk kodları (&a ve 1.16+ sürümünde &#RRGGBB) ve PlaceholderAPI yer tutucuları çalışır.
+#  amount, glow: true, enchantments: ['SHARPNESS:1'], flags: [HIDE_ATTRIBUTES], head: '%player%',
+#  custom-model-data: 1001 (1.14+), item-model: 'namespace:key' (1.21.2+), color: '#FF0000' (deri)
+#  actions: tıklamanın sırayla ne yaptığı. Ayrıca left-actions, right-actions, shift-left-actions,
+#           shift-right-actions, middle-actions ve drop-actions (her biri actions'a geri döner).
+#  view-requirements: öğe yalnızca her satır geçerse görünür
+#  click-requirements: bir satır geçmezse actions yerine 'deny-actions' çalışır
+#  state + when-off: durum false olduğunda when-off anahtarları öğenin anahtarlarının yerini alır
+#                    ('off' değil: YAML tek başına off yazısını false okur)
+#Gizlemek için bir öğeyi kaldır. 'filler' her boş yuvayı doldurur; dolgu istemezsen kaldır.
+#
+#Eylemler:
+#  [command] <command>        komutu sen çalıştırırsın     [console] <command>   konsol çalıştırır
+#  [message] <text>           sana bir mesaj               [broadcast] <text>    herkese
+#  [sound] <sound> [volume] [pitch]   1.8'den 26.x'e herhangi bir ses adı
+#  [open] <menu> [values]     başka bir menü açar          [switch] <menu> [values]  aynısı, ama [back] onu atlar
+#  [back] [menu]              önceki menü (ya da belirtilen, ya da kapatır)
+#  [refresh]  [close]  [next-page]  [previous-page]  [wait] <ticks>
+#  [chatgames:no-permission]  izin yok mesajını gönderir
+#  Menüye özgü olanlar, onlara sahip menülerin üstünde açıklanır.
+#
+#Gereksinimler, satır başına bir tane (her satır geçmeli; tersine çevirmek için satırı ! ile başlat):
+#  permission <node>     '%chatgames_points% >= 100' gibi bir karşılaştırma (==, !=, >=, <=, >, <)
+#  ya da true / on / yes / 0 dışında bir sayı olan bir değer
+#
+#Bir şeyleri listeleyen menüler (görevler, oyunlar, etkinlikler...) onları sırayla 'list-slots' içine dizer,
+#menünün 'templates' değerleriyle çizilir. Yuvadan fazla öğe olduğunda [next-page] / [previous-page]
+#eylemli öğeler sayfa çevirir; gidilecek sayfa olmadığında kaybolurlar.
+#Yalnızca '%game_wins%' gibi bir liste yer tutucusu olan bir lore satırı birden çok satıra dönüşür.
+#Her menüde ayrıca %player%, %page%, %pages% ve %entries% (listenin kaç öğesi olduğu) vardır.
+
+#Oyunların adları ve simgeleri, her menüde ve bir oyunu anan mesajlarda (%game%).
+#Burada eksik olan bir oyun anahtarının adını alır.
+game-names:
+  unscramble: 'Karışık Harf'
+  unreverse: 'Ters Çevir'
+  reaction: 'Refleks'
+  guess_the_number: 'Sayı Tahmini'
+  clickable: 'Tıkla'
+  fillout: 'Boşluk Doldur'
+  hoverable: 'Üstüne Gel'
+  random: 'Rastgele'
+  math: 'Matematik'
+  variable: 'Değişken'
+  sequence: 'Dizi'
+  memorize: 'Ezberle'
+  word_association: 'Kelime Çağrışımı'
+  trivia: 'Bilgi Yarışması'
+  count: 'Sayma'
+  hunt: 'Av'
+  mine: 'Kazı'
+  place: 'Yerleştir'
+  fish: 'Balık Tut'
+  eat: 'Ye'
+  craft: 'Üret'
+  furnace: 'Pişir'
+game-icons:
+  unscramble: book
+  math: redstone
+  trivia: enchanted_book
+  reaction: feather
+  clickable: stone_button
+  random: ender_pearl
+  unreverse: compass
+  variable: name_tag
+  guess_the_number: clock
+  memorize: map
+  sequence: ladder
+  fillout: paper
+  hoverable: ender_eye
+  word_association: lead
+  count: clock
+  hunt: iron_sword
+  place: grass_block
+  mine: iron_pickaxe
+  fish: fishing_rod
+  eat: cooked_beef
+  craft: crafting_table
+  furnace: furnace
+
+formats:
+  #Henüz sıralamada olmayan oyuncular için rütbe yerine gösterilir
+  no-rank: '-'
+
+#Oyuncuya, hata ayıklama menüsünden. Hiçbir şey göndermemek için bir satırı boş ('') bırak.
+messages:
+  debug-round: '&8[&cDEBUG&8] &fYeni gizli &e%game% &fturu (cevap: &a%answer%&f), &e%generated% ms&f içinde oluşturuldu. Bunu yalnızca sen görüyorsun.'
+  debug-failed: '&8[&cDEBUG&8] &c%game% turu oluşturulamadı; nedeni konsolda.'
+  debug-race: '&8[&cDEBUG&8] &cYarışlar dünyada oynanır, bu yüzden burada test edilemez. /chatgames <race> ile bir tane başlat.'
+  debug-no-letters: '&8[&cDEBUG&8] &7Bu cevapta harf yok, bu yüzden büyük/küçük harf yanlış olamaz.'
+  debug-timeout-started: '&8[&cDEBUG&8] &7SÃ¼re sÄ±nÄ±rÄ± bekleniyor: &e%time%s &7...'
+  debug-timeout: '&8[&cDEBUG&8] &e%game%&7: süre doldu. Oyuncular cevabın &f%answer% &7olduğunu öğrenirdi.'
+  #%verdict% aşağıdaki satırlardan biridir
+  debug-result: '&8[&cDEBUG&8] &e%game% &7| &f%input% &7yazÄ±ldÄ±, &e%ms% ms&7 sonra: %verdict%'
+  debug-verdicts:
+    accepted: '&akabul edildi &7(bir yer alır ve &e%points% &7puan kazanırdı)'
+    wrong: '&cyanlış &7(yok sayıldı)'
+    wrong-case: '&6yanlış büyük/küçük harf &7(oyuncuya kontrol etmesi söylenir)'
+    macro: '&cmakro olarak yok sayıldı &7(min-answer-ms değerinden hızlı, &e%min_ms% ms&7)'
+    late: '&cçok geç &7(süre sınırından sonra)'
+
+menus:
+
+  #/chatgames menu. %points% %rank% %wins% %claimable% (alınacak ödüller),
+  #%daily_completed% %daily_total% %weekly_completed% %weekly_total%,
+  #%games_on% / %sound_on% (true veya false) ve %games_state% / %sound_state% (AÇIK/KAPALI metni)
+  main:
+    title: '&8&lChatGames'
+    rows: 3
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      profile:
+        slot: 10
+        material: player_head
+        head: '%player%'
+        name: '&e&lProfilin'
+        lore:
+          - '&7Puan: &e%points% &8(%rank%)'
+          - '&7Galibiyet: &e%wins%'
+          - ''
+          - '&eİstatistiklerini görmek için tıkla'
+        actions: ['[open] profile']
+      challenges:
+        slot: 11
+        material: writable_book
+        name: '&a&lGörevler'
+        lore:
+          - '&7Günlük: &e%daily_completed%&7/&e%daily_total%'
+          - '&7Haftalık: &e%weekly_completed%&7/&e%weekly_total%'
+          - '&7Alınacak ödüller: &e%claimable%'
+          - ''
+          - '&eAçmak için tıkla'
+        actions: ['[open] challenges daily']
+      streaks:
+        slot: 12
+        material: blaze_powder
+        name: '&6&lSeriler'
+        lore:
+          - '&7Sürdürmek için her gün oyna.'
+          - ''
+          - '&eAçmak için tıkla'
+        actions: ['[open] streaks']
+      leaderboards:
+        slot: 13
+        material: gold_ingot
+        name: '&e&lSıralamalar'
+        lore:
+          - '&7En çok puan ve en hızlı oyuncular.'
+          - ''
+          - '&eAçmak için tıkla'
+        actions: ['[open] leaderboards']
+      games-toggle:
+        slot: 15
+        material: lime_dye
+        name: '&fSohbet oyunları: %games_state%'
+        lore:
+          - '&7Sohbet oyunlarını kendin için kapatmak için tıkla.'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7Sohbet oyunlarını kendin için açmak için tıkla.'
+      sound-toggle:
+        slot: 16
+        material: note_block
+        name: '&fOyun sesleri: %sound_state%'
+        lore:
+          - '&7Oyun seslerini kapatmak için tıkla.'
+        state: '%sound_on%'
+        actions: ['[command] chatgames togglesound', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7Oyun seslerini açmak için tıkla.'
+      admin:
+        slot: 22
+        material: command_block
+        name: '&c&lYönetici'
+        lore:
+          - '&7Oyun, etkinlik, ön ayar başlat...'
+        view-requirements: ['permission chatgames.admin']
+        actions: ['[open] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cKapat'
+        actions: ['[close]']
+
+  #/chatgames profile [player]. %target% %points% %rank% %wins% %race_wins% %global_played%
+  #%global_won% (başarılan) %contributions% %events_played% %event_wins% %event_best_place% %fastest% %challenges_completed%
+  #%milestones% %milestones_total% %streak_<challenge|daily|global>% ve %streak_<...>_longest%.
+  #Listeler: %game_wins% ve %game_fastest%. [open] profile <name> başka birinin profilini açar.
+  profile:
+    title: '&8Profil: %target%'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7henüz yok'
+      game-wins: '&7%game%: &f%wins%'
+      game-fastest: '&7%game%: &f%time%s'
+    items:
+      head:
+        slot: 4
+        material: player_head
+        head: '%target%'
+        name: '&e&l%target%'
+        lore:
+          - '&7Puan: &e%points% &8(%rank%)'
+      wins:
+        slot: 19
+        material: diamond
+        name: '&b&lGalibiyetler'
+        lore:
+          - '&7Kazanılan sohbet oyunları: &f%wins%'
+          - '&7Kazanılan yarışlar: &f%race_wins%'
+          - ''
+          - '%game_wins%'
+      fastest:
+        slot: 20
+        material: clock
+        name: '&e&lEn hızlı süreler'
+        lore:
+          - '&7Genel en iyi: &f%fastest%'
+          - ''
+          - '%game_fastest%'
+      global:
+        slot: 21
+        material: beacon
+        name: '&3&lKüresel oyunlar'
+        lore:
+          - '&7Oynanan: &f%global_played%'
+          - '&7Başarılan: &f%global_won%'
+          - '&7Katkılar: &f%contributions%'
+      events:
+        slot: 23
+        material: nether_star
+        name: '&6&lEtkinlikler'
+        lore:
+          - '&7Oynanan: &f%events_played%'
+          - '&7Kazanılan: &f%event_wins%'
+          - '&7En iyi sıra: &f%event_best_place%'
+      streaks:
+        slot: 24
+        material: blaze_powder
+        name: '&6&lSeriler'
+        lore:
+          - '&7Görevler: &f%streak_challenge% &8(rekor %streak_challenge_longest%)'
+          - '&7Günlük galibiyet: &f%streak_daily% &8(rekor %streak_daily_longest%)'
+          - '&7Küresel: &f%streak_global% &8(rekor %streak_global_longest%)'
+      progress:
+        slot: 25
+        material: experience_bottle
+        name: '&a&lİlerleme'
+        lore:
+          - '&7Puan: &f%points%'
+          - '&7Ulaşılan kilometre taşları: &f%milestones%&7/&f%milestones_total%'
+          - '&7Tamamlanan görevler: &f%challenges_completed%'
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Geri'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cKapat'
+        actions: ['[close]']
+
+  #[open] challenges <daily|weekly>. %period% %period_key% %completed% %total% %resets%.
+  #Öğeler: %challenge% %id% %description% %progress% %amount% %percent% %bar% %icon%.
+  #[chatgames:claim-challenge] <period> <id> bir tanesini alır.
+  challenges:
+    title: '&8%period% görevler'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    progress-bar:
+      length: 10
+      done: '&a|'
+      left: '&7|'
+    items:
+      tab-daily:
+        slot: 2
+        material: sunflower
+        name: '&e&lGünlük'
+        glow: true
+        lore:
+          - '&7Bugünün görevleri.'
+        state: '%period_key% == daily'
+        actions: ['[switch] challenges daily']
+        when-off:
+          glow: false
+          lore:
+            - '&eBugünün görevleri için tıkla'
+      tab-weekly:
+        slot: 6
+        material: clock
+        name: '&b&lHaftalık'
+        glow: true
+        lore:
+          - '&7Bu haftanın görevleri.'
+        state: '%period_key% == weekly'
+        actions: ['[switch] challenges weekly']
+        when-off:
+          glow: false
+          lore:
+            - '&eBu haftanın görevleri için tıkla'
+      info:
+        slot: 4
+        material: book
+        name: '&f%period%: &e%completed%&7/&e%total% &ftamam'
+        lore:
+          - '&f%resets% &7sonra yeni görevler'
+      none:
+        slot: 22
+        material: barrier
+        name: '&7Şu anda görev yok (%period%)'
+        view-requirements: ['%entries% == 0']
+      claim-all:
+        slot: 40
+        material: chest
+        name: '&a&lHepsini al'
+        lore:
+          - '&7Tamamlanan her görevi'
+          - '&7ve seri ödülünü alır.'
+        actions: ['[command] chatgames claim', '[wait] 2', '[refresh]']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7Önceki sayfa'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7Sonraki sayfa &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Geri'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cKapat'
+        actions: ['[close]']
+    templates:
+      in-progress:
+        material: '%icon%'
+        name: '%challenge%'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&7Devam ediyor'
+      ready:
+        material: '%icon%'
+        glow: true
+        name: '%challenge% &a&l(TAMAM)'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&a&lÖdülünü almak için tıkla!'
+        actions: ['[chatgames:claim-challenge] %period_key% %id%', '[refresh]']
+      claimed:
+        material: lime_stained_glass_pane
+        name: '%challenge% &7(alındı)'
+        lore:
+          - '%description%'
+          - ''
+          - '&aÖdül alındı'
+
+  #Her serinin %streak_<type>% (gün), %streak_<type>_name%, %streak_<type>_longest%,
+  #%streak_<type>_unclaimed% ve %streak_<type>_enabled% değerleri vardır; <type> challenge, daily veya global'dir.
+  #Her serinin 7 günlük merdiveni, kendi adını taşıyan listededir, 1'den 7'ye günler (ikinci haftada 8-14...).
+  #Merdiven günleri: %day% %ladder_day% (ödül günü, 1-7) %type% %streak% ve %today% (bugünün gününde true).
+  #[chatgames:claim-streak] <type> bir serinin alınmamış her gününü alır.
+  streaks:
+    title: '&8Seriler'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    lists:
+      challenge: ['11-17']
+      daily: ['20-26']
+      global: ['29-35']
+    items:
+      challenge:
+        slot: 10
+        material: writable_book
+        name: '%streak_challenge_name%'
+        lore:
+          - '&7Her gün tüm günlük görevleri tamamla.'
+          - ''
+          - '&7Şu an: &f%streak_challenge% &7gün &8(rekor %streak_challenge_longest%)'
+          - '&7Alınacak günler: &e%streak_challenge_unclaimed%'
+        view-requirements: ['%streak_challenge_enabled%']
+        click-requirements: ['%streak_challenge_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] challenge', '[refresh]']
+      daily:
+        slot: 19
+        material: gold_ingot
+        name: '%streak_daily_name%'
+        lore:
+          - '&7Her gün en az bir oyun kazan.'
+          - ''
+          - '&7Şu an: &f%streak_daily% &7gün &8(rekor %streak_daily_longest%)'
+          - '&7Alınacak günler: &e%streak_daily_unclaimed%'
+        view-requirements: ['%streak_daily_enabled%']
+        click-requirements: ['%streak_daily_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] daily', '[refresh]']
+      global:
+        slot: 28
+        material: beacon
+        name: '%streak_global_name%'
+        lore:
+          - '&7Her gün bir küresel oyunu başar.'
+          - ''
+          - '&7Şu an: &f%streak_global% &7gün &8(rekor %streak_global_longest%)'
+          - '&7Alınacak günler: &e%streak_global_unclaimed%'
+        view-requirements: ['%streak_global_enabled%']
+        click-requirements: ['%streak_global_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] global', '[refresh]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Geri'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cKapat'
+        actions: ['[close]']
+    templates:
+      day-claimed:
+        material: lime_stained_glass_pane
+        glow: '%today%'
+        name: '&aGün %day% &7(alındı)'
+      day-ready:
+        material: chest
+        glow: '%today%'
+        name: '&e&lGün %day%'
+        lore:
+          - '&a&lAlmak için tıkla!'
+        actions: ['[chatgames:claim-streak] %type%', '[refresh]']
+      day-today:
+        material: yellow_stained_glass_pane
+        glow: true
+        name: '&eGün %day% &7(bugün)'
+        lore:
+          - '&7Bu ödülün kilidini açmak için'
+          - '&7seriyi bugün sürdür.'
+      day-locked:
+        material: red_stained_glass_pane
+        name: '&cGün %day%'
+        lore:
+          - '&7Henüz ulaşılmadı.'
+
+  #%points_rank% %fastest_rank% %total_points%; listeler %top_points% ve %top_fastest% (top-size satır)
+  leaderboards:
+    title: '&8Sıralamalar'
+    rows: 3
+    top-size: 10
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7Henüz kimse yok'
+    items:
+      points:
+        slot: 10
+        material: gold_block
+        name: '&e&lEn çok puan'
+        lore:
+          - '%top_points%'
+      fastest:
+        slot: 11
+        material: clock
+        name: '&b&lEn hızlı yazanlar'
+        lore:
+          - '%top_fastest%'
+      you:
+        slot: 13
+        material: player_head
+        head: '%player%'
+        name: '&a&lSen'
+        lore:
+          - '&7Puan sıran: &f%points_rank%'
+          - '&7Hız sıran: &f%fastest_rank%'
+          - ''
+          - '&7Herkesin kazandığı puan: &f%total_points%'
+      games:
+        slot: 15
+        material: book
+        name: '&d&lHer oyunun en hızlıları'
+        lore:
+          - '&eHer oyunu görmek için tıkla'
+        actions: ['[open] leaderboard-games']
+      events:
+        slot: 16
+        material: nether_star
+        name: '&6&lEtkinlikler'
+        lore:
+          - '&eEtkinlikleri görmek için tıkla'
+        view-requirements: ['permission chatgames.event']
+        actions: ['[open] leaderboard-events']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7Geri'
+        actions: ['[back] main']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cKapat'
+        actions: ['[close]']
+
+  #Oyun ve yarış başına bir öğe: %game% %key% %icon% ve %top% (o oyunun en hızlı oyuncuları)
+  leaderboard-games:
+    title: '&8Her oyunun en hızlıları'
+    rows: 6
+    top-size: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7Henüz kimse yok'
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7Önceki sayfa'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7Sonraki sayfa &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7Geri'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 53
+        material: barrier
+        name: '&cKapat'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&e&l%game%'
+        lore:
+          - '%top%'
+
+  #Etkinlik başına bir öğe: %event% %id% %steps%
+  leaderboard-events:
+    title: '&8Etkinlik sıralamaları'
+    rows: 4
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7Tanımlı etkinlik yok'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Önceki sayfa'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Sonraki sayfa &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Geri'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cKapat'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7%steps% oyun'
+          - ''
+          - '&eEn çok puan alanı görmek için tıkla'
+        actions: ['[close]', '[command] chatgames event top %id%']
+
+  #/chatgames admin. %current_game% %next_game% %rotation_state% %event% %preset%,
+  #%rotation_on% ve %games_on% (true veya false). Her düğme ilgili komutu çalıştırır,
+  #komut da yazılmış gibi kendi iznini kontrol eder.
+  admin:
+    title: '&4&lChatGames Yönetici'
+    rows: 5
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7yok'
+    items:
+      status:
+        slot: 4
+        material: repeater
+        name: '&f&lDurum'
+        lore:
+          - '&7Sürüyor: &f%current_game%'
+          - '&7Sonraki oyun: &f%next_game%'
+          - '&7Döngü: %rotation_state%'
+          - '&7Etkinlik: &f%event%'
+          - '&7Ön ayar: &f%preset%'
+      start-game:
+        slot: 19
+        material: diamond_sword
+        name: '&a&lBir oyun başlat'
+        lore:
+          - '&7Herhangi bir oyun veya yarış, hemen.'
+        actions: ['[open] admin-start']
+      global:
+        slot: 20
+        material: beacon
+        name: '&3&lKüresel oyun başlat'
+        lore:
+          - '&7Zamanında başaran herkes kazanır.'
+        actions: ['[open] admin-global']
+      events:
+        slot: 21
+        material: nether_star
+        name: '&6&lEtkinlikler'
+        lore:
+          - '&7Bir oyun etkinliğini başlat veya durdur.'
+        actions: ['[open] admin-events']
+      presets:
+        slot: 23
+        material: chest
+        name: '&d&lÖn ayarlar'
+        lore:
+          - '&7Bir açık oyun setini yükle.'
+        actions: ['[open] admin-presets']
+      logs:
+        slot: 24
+        material: oak_sign
+        name: '&f&lKayıtlar'
+        lore:
+          - '&7Son oyunları sohbette göster.'
+        actions: ['[open] admin-logs']
+      stop:
+        slot: 25
+        material: red_wool
+        name: '&c&lOyunu durdur'
+        lore:
+          - '&7Süren oyunu kazanan olmadan bitirir.'
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      toggle:
+        slot: 29
+        material: lime_dye
+        name: '&fSohbet oyunların: &aAÇIK'
+        lore:
+          - '&7Kendin için kapatmak için tıkla.'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&fSohbet oyunların: &cKAPALI'
+          lore:
+            - '&7Kendin için açmak için tıkla.'
+      toggle-all:
+        slot: 30
+        material: lime_dye
+        name: '&fOyun döngüsü: &aAÇIK'
+        lore:
+          - '&7Herkes için otomatik oyunları durdurmak için tıkla.'
+        state: '%rotation_on%'
+        #toggleAll küresel iş parçacığında biter, Folia'da bir tick sonra
+        actions: ['[command] chatgames toggleAll', '[wait] 2', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&fOyun döngüsü: &cKAPALI'
+          lore:
+            - '&7Otomatik oyunları yeniden başlatmak için tıkla.'
+      reload:
+        slot: 32
+        material: hopper
+        name: '&e&lYeniden yükle'
+        lore:
+          - '&7Her yapılandırma dosyasını yeniden yükler.'
+        actions: ['[close]', '[command] chatgames reload']
+      debug:
+        slot: 33
+        material: command_block
+        name: '&c&lHata ayıklama'
+        lore:
+          - '&7Her oyunu gizlice test et.'
+        view-requirements: ['permission chatgames.debug']
+        actions: ['[open] debug']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Geri'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cKapat'
+        actions: ['[close]']
+
+  #Her oyun ve yarış: %game% %key% (komutlardaki gibi) %icon%
+  admin-start:
+    title: '&8Bir oyun başlat'
+    rows: 6
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7Önceki sayfa'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7Sonraki sayfa &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7Geri'
+        actions: ['[back] admin']
+      close:
+        slot: 53
+        material: barrier
+        name: '&cKapat'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&a%game%'
+        lore:
+          - '&7Sohbet oyunu'
+          - '&eBaşlatmak için tıkla'
+        actions: ['[close]', '[command] chatgames %key%']
+      race:
+        material: '%icon%'
+        name: '&6%game%'
+        lore:
+          - '&7Yarış'
+          - '&eBaşlatmak için tıkla'
+        actions: ['[close]', '[command] chatgames %key%']
+
+  #global_games.yml'nin açtığı oyunlar: %game% %key% %icon% %goal% %duration% %points%.
+  #Süren: %global_running% %global_game% %global_goal% (ör. "500 Taş")
+  #%global_progress% %global_goal_amount% %global_percent% %global_contributors% %global_time_left%
+  admin-global:
+    title: '&8Küresel oyunlar'
+    rows: 5
+    update-interval: 20
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    items:
+      status:
+        slot: 4
+        material: beacon
+        name: '&3&lSürüyor: &f%global_game%'
+        lore:
+          - '&7Hedef: &f%global_goal%'
+          - '&7İlerleme: &e%global_progress%&7/&e%global_goal_amount% &8(%global_percent%%)'
+          - '&7Yardım eden oyuncular: &f%global_contributors%'
+          - '&7Kalan süre: &f%global_time_left%s'
+          - ''
+          - '&cDurdurmak için tıkla (ödül yok)'
+        view-requirements: ['%global_running%']
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      idle:
+        slot: 4
+        material: gray_dye
+        name: '&7Oynanan küresel oyun yok'
+        lore:
+          - '&7Başlatmak için aşağıdan birini seç.'
+        view-requirements: ['!%global_running%']
+      none:
+        slot: 22
+        material: barrier
+        name: '&7Açık küresel oyun yok'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7Önceki sayfa'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7Sonraki sayfa &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Geri'
+        actions: ['[back] admin']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cKapat'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&3Küresel %game%'
+        lore:
+          - '&7Hedef: &f%goal% doğru cevap'
+          - '&7Süre: &f%duration%s'
+          - '&7Puan: &f%points%'
+          - ''
+          - '&eBaşlatmak için tıkla'
+        actions: ['[close]', '[command] chatgames global %key%']
+      race:
+        material: '%icon%'
+        name: '&3Küresel %game% yarışı'
+        lore:
+          - '&7Hedef: &f%goal% birlikte'
+          - '&7Süre: &f%duration%s'
+          - '&7Puan: &f%points%'
+          - ''
+          - '&eBaşlatmak için tıkla'
+        actions: ['[close]', '[command] chatgames global %key%']
+      count:
+        material: '%icon%'
+        name: '&3Küresel %game%'
+        lore:
+          - '&7Sohbette birlikte sayın'
+          - '&7Süre: &f%duration%s'
+          - '&7Puan: &f%points%'
+          - ''
+          - '&eBaşlatmak için tıkla'
+        actions: ['[close]', '[command] chatgames global %key%']
+
+  #events.yml'deki etkinlikler: %event% %id% %steps% ve süren için %step% (şu an oynanan oyun)
+  admin-events:
+    title: '&8Etkinlikler'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7events.yml içinde hiç etkinlik tanımlı değil'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Önceki sayfa'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Sonraki sayfa &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Geri'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cKapat'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7%steps% oyun'
+          - ''
+          - '&eBaşlatmak için tıkla'
+        actions: ['[command] chatgames event start %id%', '[wait] 2', '[refresh]']
+      running:
+        material: nether_star
+        glow: true
+        name: '%event% &a(sürüyor)'
+        lore:
+          - '&7Oyun %step% / %steps%'
+          - ''
+          - '&cDurdurmak için tıkla'
+        actions: ['[command] chatgames event stop', '[wait] 2', '[refresh]']
+
+  #Ön ayarlar ve 'none' (games.yml'deki enable bayrakları): %preset% %games%
+  admin-presets:
+    title: '&8Ön ayarlar'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Önceki sayfa'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Sonraki sayfa &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Geri'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cKapat'
+        actions: ['[close]']
+    templates:
+      preset:
+        material: chest
+        name: '&d%preset%'
+        lore:
+          - '&7Oyunlar: &f%games%'
+          - ''
+          - '&eYüklemek için tıkla'
+        actions: ['[command] chatgames preset load %preset%', '[wait] 2', '[refresh]']
+      active:
+        material: ender_chest
+        glow: true
+        name: '&d%preset% &a(etkin)'
+        lore:
+          - '&7Oyunlar: &f%games%'
+
+  #Tamamen burada oluşturulur: miktarları dilediğin gibi ekle veya değiştir
+  admin-logs:
+    title: '&8Kayıtlar'
+    rows: 3
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      last-10:
+        slot: 11
+        material: paper
+        name: '&fSon &e10 &foyun'
+        lore: ['&eSohbette göstermek için tıkla']
+        actions: ['[close]', '[command] chatgames logs 10']
+      last-25:
+        slot: 12
+        material: paper
+        name: '&fSon &e25 &foyun'
+        lore: ['&eSohbette göstermek için tıkla']
+        actions: ['[close]', '[command] chatgames logs 25']
+      last-50:
+        slot: 14
+        material: paper
+        name: '&fSon &e50 &foyun'
+        lore: ['&eSohbette göstermek için tıkla']
+        actions: ['[close]', '[command] chatgames logs 50']
+      last-100:
+        slot: 15
+        material: paper
+        name: '&fSon &e100 &foyun'
+        lore: ['&eSohbette göstermek için tıkla']
+        actions: ['[close]', '[command] chatgames logs 100']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7Geri'
+        actions: ['[back] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cKapat'
+        actions: ['[close]']
+
+  #/chatgames debug: her sohbet oyunu (%game% %key% %icon%). [chatgames:debug] <game> gizli bir
+  #tur başlatır ve debug-session menüsünü açar.
+  debug:
+    title: '&4Hata ayıklama: bir oyun seç'
+    rows: 4
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Önceki sayfa'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Sonraki sayfa &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Geri'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cKapat'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&c%game%'
+        lore:
+          - '&7Gizli bir tur oluşturur.'
+          - '&7Ödül yok, hiçbir şey kaydedilmez.'
+        actions: ['[chatgames:debug] %key%']
+
+  #Gizli tur: %game% %key% %icon% %question% %answer% %time% %min_ms% %case_sensitive%
+  #%winners% %points% %hints% %generated%; listeler %placeholders% ve %answers%.
+  #[chatgames:debug-answer] <correct|wrong|wrong-case> [ms] sahte bir cevap gönderir (ms sonra);
+  #[chatgames:debug-timeout] süre sınırını bekler; [chatgames:debug-reroll] yeni bir tur oluşturur;
+  #[chatgames:debug-end] oturumu bitirir.
+  debug-session:
+    title: '&4Hata ayıklama: %game%'
+    rows: 5
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    #Gecikme başına bir "X ms sonra doğru cevapla" düğmesi, 'delays' listesinin yuvalarında
+    delays: [100, 500, 1000, 5000]
+    lists:
+      delays: ['29-32']
+    items:
+      question:
+        slot: 11
+        material: '%icon%'
+        name: '&e&lSoru'
+        lore:
+          - '&f%question%'
+          - ''
+          - '%placeholders%'
+      answer:
+        slot: 13
+        material: emerald
+        name: '&a&lKabul edilen cevaplar'
+        lore:
+          - '%answers%'
+      settings:
+        slot: 15
+        material: repeater
+        name: '&f&lAyarlar'
+        lore:
+          - '&7Süre sınırı: &f%time%s'
+          - '&7En az cevap süresi: &f%min_ms% ms'
+          - '&7Büyük/küçük harf duyarlı: %case_sensitive%'
+          - '&7Kazananlar: &f%winners%  &7Puan: &f%points%'
+          - '&7Hazır ipuçları: &f%hints%'
+          - '&7Oluşturma süresi: &f%generated% ms'
+      correct-now:
+        slot: 28
+        material: lime_wool
+        name: '&aŞimdi doğru cevapla'
+        lore:
+          - '&7Hiçbir insandan daha hızlı: makro'
+          - '&7korumasını iş başında gösterir.'
+        actions: ['[chatgames:debug-answer] correct']
+      wrong:
+        slot: 33
+        material: red_wool
+        name: '&cYanlış cevapla'
+        actions: ['[chatgames:debug-answer] wrong']
+      wrong-case:
+        slot: 34
+        material: orange_wool
+        name: '&6Yanlış büyük/küçük harfle cevapla'
+        actions: ['[chatgames:debug-answer] wrong-case']
+      timeout:
+        slot: 39
+        material: clock
+        name: '&eSürenin dolmasını bekle'
+        lore:
+          - '&7Süre sınırını bekler, sonra bildirir.'
+        actions: ['[chatgames:debug-timeout]']
+      reroll:
+        slot: 41
+        material: ender_pearl
+        name: '&dYeni tur'
+        actions: ['[chatgames:debug-reroll]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Geri'
+        actions: ['[chatgames:debug-end]', '[back] debug']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cKapat'
+        actions: ['[close]']
+    templates:
+      correct-after:
+        material: yellow_wool
+        name: '&e%ms% ms sonra doğru cevapla'
+        actions: ['[chatgames:debug-answer] correct %ms%']

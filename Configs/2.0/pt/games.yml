@@ -1,0 +1,367 @@
+#############################
+######    CHATGAMES    ######
+#############################
+#Configurações que todo jogo aceita (se faltar uma, usa-se o padrão mostrado):
+#  enable: true/false
+#  weight: 1             A chance de a rotação escolher este jogo em relação aos outros (0 = nunca).
+#                        O mesmo jogo nunca é jogado duas vezes seguidas.
+#  winners: 1            Quantos jogadores podem vencer cada rodada.
+#  points: 1             Pontos por vitória (/chatgames top).
+#  case-sensitive: false Quem acerta tudo menos as maiúsculas recebe a mensagem 'wrong_case'.
+#  timeToGuess_seconds: 20
+#  min-answer-ms: 400    Respostas certas mais rápidas que isto são ignoradas e registradas: ninguém lê e digita
+#                        tão rápido, bots sim. 0 desativa a verificação.
+#  hints:                Dicas que aparecem durante a rodada, com 'hint_message' do messages.yml.
+#    enable: false
+#    after-percent: 50   A primeira dica aparece quando passa esta porcentagem do tempo; as outras se espalham pelo resto.
+#    max: 1              Até 3.
+#  countdown:            Tempo restante, na barra de ação. Funciona em todas as versões (1.8 a 26.x).
+#    enable: false
+#    last-seconds: 10    Só nos últimos N segundos; 0 mostra durante toda a rodada.
+#  titleMessage / subtitleMessage: deixe os dois vazios para não enviar título.
+unscramble:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #O tempo em segundos que os jogadores têm para adivinhar, resolver, escrever, etc.
+  timeToGuess_seconds: 20
+  #__Deixe os 2 seguintes vazios para desativá-los__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aDesembaralhe'
+
+unreverse:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #O tempo em segundos que os jogadores têm para adivinhar, resolver, escrever, etc.
+  timeToGuess_seconds: 20
+  #Deixe os 2 seguintes vazios para desativá-los
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aDesinverta'
+
+reaction:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #O tempo em segundos que os jogadores têm para adivinhar, resolver, escrever, etc.
+  timeToGuess_seconds: 20
+  #__Deixe os 2 seguintes vazios para desativá-los__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aEscreva'
+
+guess_the_number:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+  #Não mude isto
+  case-sensitive: false
+
+  lower-limit: 1
+  upper-limit: 20
+
+  #O tempo em segundos que os jogadores têm para adivinhar, resolver, escrever, etc.
+  timeToGuess_seconds: 20
+  #__Deixe os 2 seguintes vazios para desativá-los__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aEscreva'
+
+clickable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #O tempo em segundos que os jogadores têm para adivinhar, resolver, escrever, etc.
+  timeToGuess_seconds: 20
+  #__Deixe os 2 seguintes vazios para desativá-los__
+  titleMessage: '&eClique no texto'
+  subtitleMessage: '&fVocê tem &e%timeToGuess%s'
+
+fillout:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #A porcentagem de letras escondidas no jogo de completar. Vai de 1 a 100. Números baixos escondem menos letras.
+  difficulty: 30
+  case-sensitive: true
+  #O tempo em segundos que os jogadores têm para adivinhar, resolver, escrever, etc.
+  timeToGuess_seconds: 20
+  #__Deixe os 2 seguintes vazios para desativá-los__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aComplete'
+
+hoverable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #O tempo em segundos que os jogadores têm para adivinhar, resolver, escrever, etc.
+  timeToGuess_seconds: 20
+  #__Deixe os 2 seguintes vazios para desativá-los__
+  titleMessage: '&ePasse o mouse no texto'
+  subtitleMessage: '&fVocê tem &e%timeToGuess%s'
+
+#Neste jogo, é criada uma sequência do tamanho indicado com caracteres aleatórios
+random:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #O tempo em segundos que os jogadores têm para adivinhar, resolver, escrever, etc.
+  timeToGuess_seconds: 20
+  #O tamanho da sequência aleatória deste jogo. Formato de intervalo <menor>-<maior>. Para um tamanho só, use o mesmo número dos dois lados
+  lengthRange: 6-8
+  #Tipos disponíveis: ALPHA (letras), ALPHANUMERIC (letras e números), NUMERIC (números), SYMBOLIC (símbolos),
+  #LOWERCASE_ALPHA (tudo minúsculo), UPPERCASE_ALPHA (tudo maiúsculo), HEXADECIMAL (caracteres hexadecimais: 0123456789ABCDEF)
+  #CUSTOM (usa o que estiver em 'custom_characters')
+  character_type: ALPHANUMERIC
+  #Esta linha só é usada se o tipo for "CUSTOM"
+  custom_characters: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+  #__Deixe os 2 seguintes vazios para desativá-los__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aEscreva'
+
+math:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Não mude isto
+  case-sensitive: false
+  #O tempo em segundos que os jogadores têm para adivinhar, resolver, escrever, etc.
+  timeToGuess_seconds: 20
+  #Intervalos de números aleatórios por dificuldade:
+  #1 - (1-9)
+  #2 - (1-99)
+  #3 - (1-999)
+  #4 - (1-9999)
+  #5 - (1-99999)
+  difficulty: 2
+  #Quantos operadores cada pergunta tem: 1 -> "12 + 7", 2 -> "12 + 7 x 3"
+  operations: 1
+  #solve: calcular o resultado ("12 + 7 x 3").  missing-value: achar o número escondido ("12 + ? x 3 = 33").
+  #Cada rodada escolhe um dos modos da lista.
+  modes:
+    - solve
+    - missing-value
+  #Operadores a usar; os quatro da lista são os disponíveis, remova os que não quiser. Deixe sempre pelo menos 1
+  #As divisões sempre dão números inteiros.
+  operators:
+    - '+'
+    - '-'
+    - 'x'
+    - '/'
+
+  #__Deixe os 2 seguintes vazios para desativá-los__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aResolva'
+
+variable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Não mude isto
+  case-sensitive: false
+  #O tempo em segundos que os jogadores têm para adivinhar, resolver, escrever, etc.
+  timeToGuess_seconds: 20
+
+  #__Deixe os 2 seguintes vazios para desativá-los__
+  titleMessage: '&bRESOLVA'
+  subtitleMessage: '&aPara &7`&b%symbol%&7`'
+
+  #O intervalo do número resultado aleatório
+  result-min: 20
+  result-max: 100
+
+  toGet: '✗'
+  #Outros símbolos que você pode adicionar: ✪❃✿✠❂♫♪❦♡♤♢✦☾☽✹
+  data:
+    - '✯;10'
+    - '♛;15'
+    - '❅;20'
+    - '♫;25'
+
+sequence:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Não mude isto
+  case-sensitive: false
+
+  #O tempo em segundos que os jogadores têm para adivinhar, resolver, escrever, etc.
+  timeToGuess_seconds: 25
+
+  #Os jogadores veem uma sequência de números e digitam o próximo, ex.: "3, 6, 12, 24, ?" -> 48
+  #Padrões: somar (3, 7, 11), multiplicar (2, 6, 18), quadrados (4, 9, 16), alternados (5, 9, 7, 11), fibonacci (2, 3, 5, 8)
+  patterns:
+    - add
+    - multiply
+    - squares
+    - alternating
+    - fibonacci
+  #1-3. Dificuldade maior permite padrões mais difíceis (quadrados e alternados a partir de 2, fibonacci no 3) e números maiores.
+  difficulty: 2
+  #Quantos números são mostrados antes do '?' (4-8)
+  shown-terms: 5
+
+  #__Deixe os 2 seguintes vazios para desativá-los__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aComplete a sequência'
+
+memorize:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+
+  listLength: 3
+  #Cada rodada tira seus itens de uma destas listas (veja words.yml -> memorize.pools):
+  #shopping_list, words, colors, numbers, blocks, mobs, ou uma lista sua
+  pools:
+    - shopping_list
+    - words
+    - colors
+    - numbers
+    - blocks
+    - mobs
+  #Se false, os itens podem ser digitados em qualquer ordem
+  order-matters: true
+
+  #O tempo em segundos que os jogadores têm para memorizar, resolver, escrever, etc.
+  timeToMemorize: 7
+
+  #O tempo em segundos que os jogadores têm para adivinhar, resolver, escrever, etc.
+  timeToGuess_seconds: 20
+  #Deixe os 2 seguintes vazios para desativá-los
+  titleMessage: '&bMemorize'
+  subtitleMessage: '&aTente lembrar desta lista!'
+
+#Três pistas, uma ligação escondida (as associações estão em words.yml).
+#difficulty: easy, medium, hard ou mixed. Rodadas difíceis mostram uma pista e revelam as outras
+#como dicas, então deixe as dicas ativadas para elas (max 2 mostra as três).
+word_association:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  difficulty: mixed
+  hints:
+    enable: true
+    after-percent: 34
+    max: 2
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  timeToGuess_seconds: 30
+  titleMessage: '&bASSOCIAÇÃO DE PALAVRAS'
+  subtitleMessage: '&aOlhe o chat!'
+
+trivia:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  #O tempo em segundos que os jogadores têm para adivinhar, resolver, escrever, etc.
+  timeToGuess_seconds: 20
+  #__Deixe os 2 seguintes vazios para desativá-los__
+  titleMessage: '&bQUIZ'
+  subtitleMessage: '&aOlhe o chat!'

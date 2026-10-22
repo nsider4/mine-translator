@@ -1,0 +1,475 @@
+enable-races: true
+
+creative-enabled: true
+#Link utili per aggiungere DATI:
+#
+#https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+#https://helpch.at/docs/1.8/index.html?org/bukkit/entity/EntityType.html
+#https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+#https://helpch.at/docs/1.8/org/bukkit/Material.html
+
+#I nomi possono essere moderni o vecchi (MOOSHROOM o MUSHROOM_COW, COD o RAW_FISH): vengono adattati alla versione del tuo
+#server. I nomi che non esistono nella tua versione (es. un blocco della 1.21 sulla 1.8) vengono saltati, con una nota in console.
+#
+#Ogni gara accetta anche (facoltativo):
+#  points: 1     #punti che riceve il vincitore (predefinito 1)
+#  weight: 1     #quanto spesso la rotazione la sceglie rispetto agli altri giochi (predefinito 1, 0 = mai)
+#
+#Gli admin possono avviare una gara con valori propri: /chatgames <race> <material/mob> [amount]
+#Senza quantità, si usa una di quelle elencate sotto per quel materiale/quella creatura. Il vincitore riceve le ricompense elencate
+#per esattamente quel materiale e quella quantità, o nessuna se non sono elencati qui (i punti vengono dati comunque).
+
+hunt:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__Lascia vuoti i 2 seguenti per disattivarli__
+  titleMessage: '&bCACCIA'
+  subtitleMessage: '&aUccidi %amount% %value%!'
+
+  #Se contare le creature generate da generatori o uova generatrici.
+  count-spawner-mobs: true
+
+  data:
+    #Questi valori devono essere ID di creature di Minecraft validi (vedi i link utili all'inizio del file)
+    ZOMBIE:
+      3:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+
+    CREEPER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SKELETON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SPIDER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    PIG:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SHEEP:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    COW:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    CHICKEN:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SALMON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+
+mine:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Lascia vuoti i 2 seguenti per disattivarli__
+  titleMessage: '&bSCAVO'
+  subtitleMessage: '&aScava %amount% %value%!'
+
+  data:
+    #Questi valori devono essere ID di materiali di Minecraft validi (vedi i link utili all'inizio del file)
+    STONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRASS_BLOCK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRAVEL:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIORITE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+place:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Lascia vuoti i 2 seguenti per disattivarli__
+  titleMessage: '&bPIAZZA'
+  subtitleMessage: '&aPiazza %amount% %value%!'
+
+  data:
+    #Questi valori devono essere ID di materiali di Minecraft validi (vedi i link utili all'inizio del file)
+    COBBLESTONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+fish:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Lascia vuoti i 2 seguenti per disattivarli__
+  titleMessage: '&bPESCA'
+  subtitleMessage: '&aPesca %amount% %value%!'
+
+  data:
+    #Questi valori devono essere ID di materiali di Minecraft validi (vedi i link utili all'inizio del file)
+    COD:
+      1:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+          - reward_3
+    SALMON:
+      1:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+          - reward_3
+    PUFFERFISH:
+      1:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+          - reward_3
+    BOWL:
+      1:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+eat:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Lascia vuoti i 2 seguenti per disattivarli__
+  titleMessage: '&bMANGIA'
+  subtitleMessage: '&aMangia %amount% %value%!'
+
+  data:
+    #Questi valori devono essere ID di materiali di Minecraft validi (vedi i link utili all'inizio del file)
+    COOKED_BEEF:
+      1:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_CHICKEN:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BAKED_POTATO:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BREAD:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    GOLDEN_APPLE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+
+craft:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Lascia vuoti i 2 seguenti per disattivarli__
+  titleMessage: '&bCRAFTING'
+  subtitleMessage: '&aCrafta %amount% %value%!'
+
+  data:
+    #Questi valori devono essere ID di materiali di Minecraft validi (vedi i link utili all'inizio del file)
+    FURNACE:
+      2:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+      4:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+          - reward_3
+    CHEST:
+      2:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+      4:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+          - reward_3
+    CRAFTING_TABLE:
+      4:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+      8:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_1
+          - reward_2
+      12:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      32:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+      48:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_1
+          - reward_2
+      64:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+furnace:
+  enable: true
+
+  timeToComplete_seconds: 150
+  #__Lascia vuoti i 2 seguenti per disattivarli__
+  titleMessage: '&bCOTTURA'
+  subtitleMessage: '&aCuoci %amount% %value%!'
+
+  data:
+    #Questi valori devono essere ID di materiali di Minecraft validi (vedi i link utili all'inizio del file)
+    GOLD_INGOT:
+      3:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+      6:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+          - reward_3
+    IRON_INGOT:
+      3:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+      6:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_BEEF:
+      3:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+      6:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_COD:
+      3:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+      6:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #LA SOMMA DI TUTTE LE PROBABILITÀ DELLE RICOMPENSE CHE AGGIUNGI NON PUÒ SUPERARE IL 100%
+        rewards:
+          - reward_2
+          - reward_3

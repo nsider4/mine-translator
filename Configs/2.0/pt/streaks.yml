@@ -1,0 +1,72 @@
+#SEQUÊNCIAS
+#
+#Dias seguidos em que um jogador fez algo. Perder um dia recomeça a sequência
+#do 1, e as recompensas não resgatadas até lá se perdem. Os dias começam no fuso horário definido
+#no challenges.yml.
+#  challenge: concluiu todos os desafios diários
+#  daily:     venceu pelo menos um jogo (ou terminou um jogo global numa posição recompensada)
+#  global:    resolveu pelo menos um jogo global a tempo
+#
+#Cada dia em que uma sequência cresce paga a recompensa daquele dia, resgatada com /chatgames claim.
+#As recompensas são linhas como no rewards.yml; %player%, %streak% (o nome) e %day% são preenchidos.
+
+#Depois do dia 7: 'repeat' paga a recompensa do dia 7 todo dia, 'loop' recomeça do dia 1.
+after-day-7: repeat
+
+challenge:
+  enabled: true
+  name: '&dSequência de desafios'
+  rewards:
+    1:
+      - '[consolecmd] give %player% iron_ingot 4'
+    2:
+      - '[consolecmd] give %player% iron_ingot 8'
+    3:
+      - '[consolecmd] give %player% gold_ingot 4'
+    4:
+      - '[consolecmd] give %player% gold_ingot 8'
+    5:
+      - '[consolecmd] give %player% emerald 4'
+    6:
+      - '[consolecmd] give %player% emerald 8'
+    7:
+      - '[consolecmd] give %player% diamond 4'
+      - '[broadcast] &d%player% &fhas completed every daily challenge &d%day% &fdays in a row!'
+
+daily:
+  enabled: true
+  name: '&6Sequência de vitórias diárias'
+  rewards:
+    1:
+      - '[consolecmd] give %player% iron_ingot 2'
+    2:
+      - '[consolecmd] give %player% iron_ingot 4'
+    3:
+      - '[consolecmd] give %player% gold_ingot 2'
+    4:
+      - '[consolecmd] give %player% gold_ingot 4'
+    5:
+      - '[consolecmd] give %player% emerald 2'
+    6:
+      - '[consolecmd] give %player% emerald 4'
+    7:
+      - '[consolecmd] give %player% diamond 2'
+
+global:
+  enabled: true
+  name: '&3Sequência global'
+  rewards:
+    1:
+      - '[consolecmd] give %player% iron_ingot 2'
+    2:
+      - '[consolecmd] give %player% iron_ingot 4'
+    3:
+      - '[consolecmd] give %player% gold_ingot 2'
+    4:
+      - '[consolecmd] give %player% gold_ingot 4'
+    5:
+      - '[consolecmd] give %player% emerald 2'
+    6:
+      - '[consolecmd] give %player% emerald 4'
+    7:
+      - '[consolecmd] give %player% diamond 2'

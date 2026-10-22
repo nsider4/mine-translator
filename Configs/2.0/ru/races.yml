@@ -1,0 +1,475 @@
+enable-races: true
+
+creative-enabled: true
+#Полезные ссылки для добавления ДАННЫХ:
+#
+#https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+#https://helpch.at/docs/1.8/index.html?org/bukkit/entity/EntityType.html
+#https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+#https://helpch.at/docs/1.8/org/bukkit/Material.html
+
+#Имена могут быть новыми или старыми (MOOSHROOM или MUSHROOM_COW, COD или RAW_FISH): они подбираются под версию
+#вашего сервера. Имена, которых нет в вашей версии (напр. блок из 1.21 на 1.8), пропускаются, с заметкой в консоли.
+#
+#Каждая гонка также принимает (необязательно):
+#  points: 1     #очки победителя (по умолчанию 1)
+#  weight: 1     #как часто ротация выбирает её по сравнению с другими играми (по умолчанию 1, 0 = никогда)
+#
+#Админы могут запустить гонку со своими значениями: /chatgames <race> <material/mob> [amount]
+#Без количества используется одно из указанных ниже для этого материала/существа. Победитель получает награды
+#именно для этого материала и количества, или никаких, если их здесь нет (очки всё равно даются).
+
+hunt:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__Оставьте 2 следующих пустыми, чтобы отключить их__
+  titleMessage: '&bОХОТА'
+  subtitleMessage: '&aУбей %amount% %value%!'
+
+  #Считать ли существ, появившихся из спавнеров или яиц призыва.
+  count-spawner-mobs: true
+
+  data:
+    #Эти значения должны быть корректными ID существ Minecraft (см. Полезные ссылки в начале файла)
+    ZOMBIE:
+      3:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+
+    CREEPER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SKELETON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SPIDER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    PIG:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SHEEP:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    COW:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    CHICKEN:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SALMON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+
+mine:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Оставьте 2 следующих пустыми, чтобы отключить их__
+  titleMessage: '&bДОБЫЧА'
+  subtitleMessage: '&aДобудь %amount% %value%!'
+
+  data:
+    #Эти значения должны быть корректными ID материалов Minecraft (см. Полезные ссылки в начале файла)
+    STONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRASS_BLOCK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRAVEL:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIORITE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+place:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Оставьте 2 следующих пустыми, чтобы отключить их__
+  titleMessage: '&bСТРОЙКА'
+  subtitleMessage: '&aПоставь %amount% %value%!'
+
+  data:
+    #Эти значения должны быть корректными ID материалов Minecraft (см. Полезные ссылки в начале файла)
+    COBBLESTONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+fish:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Оставьте 2 следующих пустыми, чтобы отключить их__
+  titleMessage: '&bРЫБАЛКА'
+  subtitleMessage: '&aВылови %amount% %value%!'
+
+  data:
+    #Эти значения должны быть корректными ID материалов Minecraft (см. Полезные ссылки в начале файла)
+    COD:
+      1:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    SALMON:
+      1:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    PUFFERFISH:
+      1:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    BOWL:
+      1:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+eat:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Оставьте 2 следующих пустыми, чтобы отключить их__
+  titleMessage: '&bЕДА'
+  subtitleMessage: '&aСъешь %amount% %value%!'
+
+  data:
+    #Эти значения должны быть корректными ID материалов Minecraft (см. Полезные ссылки в начале файла)
+    COOKED_BEEF:
+      1:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_CHICKEN:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BAKED_POTATO:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BREAD:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    GOLDEN_APPLE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+
+craft:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Оставьте 2 следующих пустыми, чтобы отключить их__
+  titleMessage: '&bКРАФТ'
+  subtitleMessage: '&aСкрафти %amount% %value%!'
+
+  data:
+    #Эти значения должны быть корректными ID материалов Minecraft (см. Полезные ссылки в начале файла)
+    FURNACE:
+      2:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+      4:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    CHEST:
+      2:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+      4:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    CRAFTING_TABLE:
+      4:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+      8:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      12:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      32:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+      48:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      64:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+furnace:
+  enable: true
+
+  timeToComplete_seconds: 150
+  #__Оставьте 2 следующих пустыми, чтобы отключить их__
+  titleMessage: '&bГОТОВКА'
+  subtitleMessage: '&aПриготовь %amount% %value%!'
+
+  data:
+    #Эти значения должны быть корректными ID материалов Minecraft (см. Полезные ссылки в начале файла)
+    GOLD_INGOT:
+      3:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+      6:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    IRON_INGOT:
+      3:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+      6:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_BEEF:
+      3:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+      6:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_COD:
+      3:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+      6:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #СУММА ВСЕХ ШАНСОВ ДОБАВЛЕННЫХ НАГРАД НЕ МОЖЕТ ПРЕВЫШАТЬ 100%
+        rewards:
+          - reward_2
+          - reward_3

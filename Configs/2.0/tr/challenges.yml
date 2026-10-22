@@ -1,0 +1,136 @@
+#GÜNLÜK VE HAFTALIK GÖREVLER
+#
+#Herkes aynı görevleri alır. İlerleme oyuncular oynadıkça sayılır; tamamlanan bir
+#görev /chatgames challenges içinde "Alınmaya hazır" gösterir, /chatgames claim ödülünü verir.
+#Alınmayan ödüller görevler yenilendiğinde kaybolur.
+#
+#GÖREV TÜRLERİ (amount kaç tane gerektiğidir):
+#  WIN_GAMES    herhangi bir sırada sohbet oyunları veya yarışlar kazan
+#  WIN_GAME     'game' ile ayarlanan tek bir oyun veya yarış kazan (ör. game: unscramble)
+#  WIN_RACES    yarışlar kazan
+#  PLAY_GLOBAL  küresel oyunları zamanında başar
+#  WIN_GLOBAL   küresel oyunları ödüllü bir sırada bitir
+#  FAST_WIN     sohbet oyunlarını 'seconds' veya daha kısa sürede kazan (yarışlar sayılmaz)
+#  EARN_POINTS  oyunlardan puan kazan
+#  PLAY_EVENT   oyun etkinliklerine katıl
+#
+#Her görevin şunları vardır:
+#  name / description: sohbette ve menüde gösterilir. %amount%, %game% ve %seconds% doldurulur.
+#  icon: menüdeki öğe (bir malzeme adı)
+#  rewards: rewards.yml'deki gibi satırlar ('<chance>%~ ' ile şanslar, 'has:<permission>' ile izinler).
+#           %player% ve %challenge% (ad) doldurulur.
+#
+#Kimlikler (win_3, fast_1...) oyuncuların ilerlemesiyle kaydedilir: yalnızca a-z, 0-9, - ve _ kullan,
+#birini değiştirmek o görevin ilerlemesini baştan başlatır.
+
+#Görevler ve seriler için günlerin başladığı saat dilimi, ör. Europe/Istanbul veya America/New_York.
+#Boşsa sunucununki kullanılır.
+timezone: ''
+
+daily:
+  enabled: true
+  #fixed: aşağıdaki her görev her gün etkindir.
+  #random: her gün 'amount' kadar görev çekilir (herkes için aynı).
+  mode: random
+  amount: 3
+  challenges:
+    win_3:
+      type: WIN_GAMES
+      amount: 3
+      name: '&eIsınma'
+      description: '&7%amount% sohbet oyunu kazan'
+      icon: GOLD_NUGGET
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    win_8:
+      type: WIN_GAMES
+      amount: 8
+      name: '&6Seri Halinde'
+      description: '&7%amount% sohbet oyunu kazan'
+      icon: GOLD_INGOT
+      rewards:
+        - '[consolecmd] give %player% gold_ingot 8'
+    unscramble_2:
+      type: WIN_GAME
+      game: unscramble
+      amount: 2
+      name: '&bKelime Büyücüsü'
+      description: '&7%amount% kez %game% kazan'
+      icon: BOOK
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    math_2:
+      type: WIN_GAME
+      game: math
+      amount: 2
+      name: '&bİnsan Hesap Makinesi'
+      description: '&7%amount% kez %game% kazan'
+      icon: PAPER
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    fast_1:
+      type: FAST_WIN
+      seconds: 5
+      amount: 1
+      name: '&cHızlı Parmaklar'
+      description: '&7Bir sohbet oyununu %seconds% saniye veya daha kısa sürede kazan'
+      icon: FEATHER
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    race_1:
+      type: WIN_RACES
+      amount: 1
+      name: '&aYarışçı'
+      description: '&7Bir yarış kazan'
+      icon: IRON_PICKAXE
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    points_5:
+      type: EARN_POINTS
+      amount: 5
+      name: '&dPuan Toplayıcı'
+      description: '&7%amount% puan kazan'
+      icon: EXPERIENCE_BOTTLE
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    global_1:
+      type: PLAY_GLOBAL
+      amount: 1
+      name: '&3Takım Oyuncusu'
+      description: '&7Bir küresel oyunu zamanında başar'
+      icon: COMPASS
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+
+weekly:
+  enabled: true
+  #Her haftanın başladığı gün.
+  reset-day: MONDAY
+  mode: fixed
+  amount: 3
+  challenges:
+    win_25:
+      type: WIN_GAMES
+      amount: 25
+      name: '&6Haftanın Şampiyonu'
+      description: '&7Bu hafta %amount% sohbet oyunu kazan'
+      icon: DIAMOND
+      rewards:
+        - '[consolecmd] give %player% diamond 3'
+    fast_5:
+      type: FAST_WIN
+      seconds: 4
+      amount: 5
+      name: '&cYıldırım'
+      description: '&7%amount% sohbet oyununu %seconds% saniye veya daha kısa sürede kazan'
+      icon: BLAZE_POWDER
+      rewards:
+        - '[consolecmd] give %player% diamond 2'
+    global_5:
+      type: WIN_GLOBAL
+      amount: 5
+      name: '&3Kalabalığın Gözdesi'
+      description: '&7%amount% küresel oyunu ödüllü bir sırada bitir'
+      icon: BEACON
+      rewards:
+        - '[consolecmd] give %player% diamond 2'

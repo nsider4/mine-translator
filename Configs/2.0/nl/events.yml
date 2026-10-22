@@ -1,0 +1,112 @@
+#SPEL-EVENTS
+#
+#Een event is een reeks spellen die na elkaar worden gespeeld. Elk spel deelt eventpunten uit per
+#plek; als het laatste eindigt, winnen de spelers met de meeste eventpunten de beloningen
+#van het event. Zolang een event loopt, wachten de normale spelrotatie en de globale spellen.
+#
+#Start er een met /chatgames event start <event>, of laat zijn schema het starten.
+#/chatgames event top <event> toont wie er in de loop van de tijd het meest in scoorde.
+#
+#Elk event:
+#  name: getoond aan spelers (kleurcodes werken)
+#  schedule: wanneer het vanzelf start, bv. 'SATURDAY 20:00' of 'DAILY 18:30' (of laat het weg).
+#            De tijdzone is die uit challenges.yml.
+#  minimum-players: spelers die online moeten zijn zodat het schema het start (het commando negeert dit)
+#  pause-seconds: seconden tussen het einde van een spel en de start van het volgende
+#  points: eventpunten voor de 1e, 2e, 3e... in elk spel
+#  participation-points: eventpunten voor iedereen anders die het haalt. In een globaal spel, als de
+#                        server het doel haalt, scoort iedereen die genoeg heeft bijgedragen:
+#                        'points' voor de grootste bijdragers, deze voor de rest.
+#                        Wordt het doel niet gehaald, dan scoort niemand in dat spel.
+#  steps: de spellen, op volgorde. Elk:
+#    game: het spel of de race, zoals in games.yml / races.yml
+#    global: true om het als globaal spel te spelen (de server speelt samen; zie global_games.yml).
+#            Tellen is altijd globaal.
+#    time: seconden om te antwoorden (of een race af te maken), in plaats van die van het spel
+#    winners: hoeveel er een normaal chatspel kunnen winnen, in plaats van die van het spel
+#    args: de waarden, zoals na /chatgames <game>, bv. 'stone 16' voor een hakrace
+#    settings: andere waarden uit games.yml om voor dit spel te wijzigen, bv. {difficulty: hard}
+#  rewards: beloningsregels per eindplek (1, 2, 3...), en 'participation' voor iedereen anders
+#           die scoorde. Dezelfde regels als in rewards.yml ('<chance>%~ ' en 'has:<permission>' werken).
+
+events:
+  weekend_cup:
+    name: '&6&lWeekendbeker'
+    schedule:
+      - 'SATURDAY 20:00'
+    minimum-players: 3
+    pause-seconds: 15
+    points: [5, 3, 1]
+    participation-points: 1
+    steps:
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+        time: 25
+      - game: word_association
+        global: true
+        settings:
+          difficulty: hard
+      - game: trivia
+        winners: 3
+      - game: mine
+        global: true
+        time: 120
+        args: 'stone 100'
+    rewards:
+      1:
+        - '[consolecmd] give %player% diamond 5'
+      2:
+        - '[consolecmd] give %player% diamond 3'
+      3:
+        - '[consolecmd] give %player% diamond 1'
+      participation:
+        - '[consolecmd] give %player% iron_ingot 3'
+
+  quick_quiz:
+    name: '&b&lSnelle quiz'
+    minimum-players: 2
+    pause-seconds: 8
+    points: [3, 2, 1]
+    participation-points: 0
+    steps:
+      - game: reaction
+        winners: 3
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+    rewards:
+      1:
+        - '[consolecmd] give %player% gold_ingot 5'
+
+messages:
+  #Aan iedereen. %event% is de naam, %steps% hoeveel spellen, %pause% de seconden ertussen.
+  start:
+    - ''
+    - '&6&l» EVENT: %event% &fbegint! &e%steps% &fspellen, de meeste eventpunten wint.'
+    - ''
+  #Voor elk spel. %step% is het nummer, %game% het spel.
+  step:
+    - '&6&l» %event% &f- spel &e%step%/%steps%&f: &e%game%'
+  #Aan elke speler die in een spel scoort. %points% wat die verdiende, %total% zijn eventtotaal.
+  step_points: '&8[%prefix%&8] &a+%points% eventpunten &7(%total% in totaal)'
+  #Aan iedereen aan het einde. %count% spelers scoorden; %winner_<n>% en %points_<n>% de eerste drie.
+  end:
+    - ''
+    - '&6&l» %event% &fis voorbij! &e%count% &fspeler(s) scoorden.'
+    - '&f  1. &e%winner_1% &7%points_1%  &f2. &e%winner_2% &7%points_2%  &f3. &e%winner_3% &7%points_3%'
+    - ''
+  nobody:
+    - '&6&l» %event% &fis voorbij! &cNiemand scoorde.'
+  #Aan elke speler die scoorde, na het einde. %place% van %count%.
+  result: '&8[%prefix%&8] &fJe bent &e#%place% &fvan %count% geworden met &e%points% &feventpunten.'
+  stopped:
+    - '&6&l» %event% &cis gestopt.'
+
+#De eindstand wordt naar de Discord-webhook in config.yml gestuurd, als die is ingesteld.
+discord:
+  enabled: true
+  title: '%event% results'
+  line: '#%place% %player% - %points% points'

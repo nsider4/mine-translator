@@ -1,0 +1,153 @@
+#OLASI EYLEMLER:
+#
+#[playercmd] - Komutu kazanan olarak çalıştırır
+#[consolecmd] - Komutu konsoldan çalıştırır
+#[playermsg] - Kazanana bir mesaj gönderir
+#[broadcast] - Açık dünyalardaki tüm oyunculara bir mesaj yayınlar
+#[player_as_op] - Oyuncu için op olarak bir komut çalıştırır
+#
+#ÖDÜLLERE ŞU ŞEKİLDE ŞANS EKLE:
+#
+#ÖRNEK:
+#  - '10.0%~ [consolecmd] give %player% iron_block 5'
+#YALNIZCA BİÇİM ÖRNEKTEKİYLE AYNIYSA ÇALIŞIR: BAŞTA <chance>%, ARDINDAN ~ VE BİR BOŞLUK. KOMUTTA HER ZAMAN İLK SIRADA
+#
+#% İÇERMEYEN KOMUTLAR %100 VERİLEN ÖDÜLLERDİR.
+
+#İZİN KONTROLÜ:
+#
+#KOMUT SATIRININ SONUNA KOY.
+#Örnek:
+#  - '[consolecmd] give %player% iron_block 5 has:test.permission'
+
+#1 İLK kazanan içindir; config.yml'DE DAHA FAZLA KAZANAN EKLER VE FARKLI ÖDÜLLER İSTERSEN SIRALARINI EKLE (2:, vb.)
+unscramble:
+  rewards:
+    1:
+      reward_1:
+        minimum-players: 2 #Online players-based condition, reward can only be chosen if there are 2 or more players online
+        chance: 50
+        data:
+          - '10.0%~ [consolecmd] give %player% diamond_block 3 has:test.permission'
+          - '[consolecmd] give %player% iron_block 5'
+      reward_2:
+        data:
+          - '[consolecmd] give %player% iron_block 2'
+
+unreverse:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+reaction:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+guess_the_number:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+shoppinglist:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+clickable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+fillout:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+hoverable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+random:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+variable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+math:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+sequence:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+memorize:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+word_association:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+trivia:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+#BURADAN SONRASI YALNIZCA 1 KAZANANI OLAN YARIŞLARIN ÖDÜLLERİDİR
+#
+#FARKLI BİR BİÇİM KULLANILIR! DİKKATLE OKU
+
+races:
+  rewards:
+    #BUNLAR 'races.yml' İÇİNE YAZDIĞIN ÖDÜLLERDİR
+    reward_1:
+      chance: 50
+      data:
+        - '60.0%~ [consolecmd] give %player% diamond_block 5'
+    #'chance' DEĞERİNİ KALDIRMAK ÖDÜLÜN/KOMUTUN HER ZAMAN GERÇEKLEŞMESİNİ SAĞLAR
+    reward_2:
+      data:
+        - '[consolecmd] give %player% iron_block 5'
+        - '[playermsg] &aKazandın!'
+    reward_3:
+      chance: 50
+      data:
+        - '[consolecmd] give %player% diamond_block 3'

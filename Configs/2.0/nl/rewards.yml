@@ -1,0 +1,153 @@
+#MOGELIJKE ACTIES:
+#
+#[playercmd] - Voert het commando uit als de winnaar
+#[consolecmd] - Voert het commando uit vanuit de console
+#[playermsg] - Stuurt een bericht naar de winnaar
+#[broadcast] - Stuurt een bericht naar alle spelers in ingeschakelde werelden
+#[player_as_op] - Voert een commando uit als op voor de speler
+#
+#VOEG ZO KANSEN TOE AAN BELONINGEN:
+#
+#VOORBEELD:
+#  - '10.0%~ [consolecmd] give %player% iron_block 5'
+#WERKT ALLEEN ALS HET FORMAAT GELIJK IS AAN HET VOORBEELD, MET DE <chance>% AAN HET BEGIN GEVOLGD DOOR EEN ~ EN EEN SPATIE. ALTIJD ALS EERSTE IN HET COMMANDO
+#
+#COMMANDO'S ZONDER % ZIJN BELONINGEN DIE 100% WORDEN GEGEVEN.
+
+#PERMISSIECONTROLE:
+#
+#ZET HET AAN HET EINDE VAN DE COMMANDOREGEL.
+#Voorbeeld:
+#  - '[consolecmd] give %player% iron_block 5 has:test.permission'
+
+#De 1 is voor de EERSTE winnaar; ALS JE MEER WINNAARS TOEVOEGT IN config.yml EN ANDERE BELONINGEN WILT, VOEG DAN HUN PLEK TOE (2:, enz.)
+unscramble:
+  rewards:
+    1:
+      reward_1:
+        minimum-players: 2 #Online players-based condition, reward can only be chosen if there are 2 or more players online
+        chance: 50
+        data:
+          - '10.0%~ [consolecmd] give %player% diamond_block 3 has:test.permission'
+          - '[consolecmd] give %player% iron_block 5'
+      reward_2:
+        data:
+          - '[consolecmd] give %player% iron_block 2'
+
+unreverse:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+reaction:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+guess_the_number:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+shoppinglist:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+clickable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+fillout:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+hoverable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+random:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+variable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+math:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+sequence:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+memorize:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+word_association:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+trivia:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+#VANAF HIER ZIJN HET BELONINGEN VOOR RACES, DIE MAAR 1 WINNAAR HEBBEN
+#
+#ER WORDT EEN ANDER FORMAAT GEBRUIKT! LEES GOED
+
+races:
+  rewards:
+    #DIT ZIJN DE BELONINGEN DIE JE IN 'races.yml' ZET
+    reward_1:
+      chance: 50
+      data:
+        - '60.0%~ [consolecmd] give %player% diamond_block 5'
+    #DE WAARDE 'chance' WEGHALEN LAAT DE BELONING/HET COMMANDO ALTIJD GEBEUREN
+    reward_2:
+      data:
+        - '[consolecmd] give %player% iron_block 5'
+        - '[playermsg] &aJe hebt gewonnen!'
+    reward_3:
+      chance: 50
+      data:
+        - '[consolecmd] give %player% diamond_block 3'

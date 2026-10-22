@@ -1,0 +1,136 @@
+#ЕЖЕДНЕВНЫЕ И ЕЖЕНЕДЕЛЬНЫЕ ИСПЫТАНИЯ
+#
+#Все получают одинаковые испытания. Прогресс считается во время игры; выполненное
+#испытание показывает «Можно забрать» в /chatgames challenges, а /chatgames claim выдаёт награду.
+#Незабранные награды пропадают при обновлении испытаний.
+#
+#ТИПЫ ИСПЫТАНИЙ (amount — сколько нужно):
+#  WIN_GAMES    выигрывай игры в чате или гонки, на любом месте
+#  WIN_GAME     выиграй одну игру или гонку, задаётся через 'game' (напр. game: unscramble)
+#  WIN_RACES    выигрывай гонки
+#  PLAY_GLOBAL  проходи глобальные игры вовремя
+#  WIN_GLOBAL   заканчивай глобальные игры на награждаемом месте
+#  FAST_WIN     выигрывай игры в чате за 'seconds' или меньше (гонки не считаются)
+#  EARN_POINTS  зарабатывай очки в играх
+#  PLAY_EVENT   участвуй в игровых событиях
+#
+#У каждого испытания есть:
+#  name / description: показываются в чате и меню. %amount%, %game% и %seconds% подставляются.
+#  icon: элемент в меню (название материала)
+#  rewards: строки как в rewards.yml (шансы с '<chance>%~ ', права с 'has:<permission>').
+#           %player% и %challenge% (название) подставляются.
+#
+#ID (win_3, fast_1...) сохраняются с прогрессом игроков: используйте только a-z, 0-9, - и _,
+#а изменение ID начинает прогресс этого испытания заново.
+
+#Часовой пояс, в котором начинаются дни, для испытаний и серий, напр. Europe/Moscow или America/New_York.
+#Пусто — используется пояс сервера.
+timezone: ''
+
+daily:
+  enabled: true
+  #fixed: каждое испытание ниже активно каждый день.
+  #random: каждый день выбирается 'amount' испытаний (одни и те же для всех).
+  mode: random
+  amount: 3
+  challenges:
+    win_3:
+      type: WIN_GAMES
+      amount: 3
+      name: '&eРазминка'
+      description: '&7Выиграй %amount% игр в чате'
+      icon: GOLD_NUGGET
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    win_8:
+      type: WIN_GAMES
+      amount: 8
+      name: '&6В ударе'
+      description: '&7Выиграй %amount% игр в чате'
+      icon: GOLD_INGOT
+      rewards:
+        - '[consolecmd] give %player% gold_ingot 8'
+    unscramble_2:
+      type: WIN_GAME
+      game: unscramble
+      amount: 2
+      name: '&bМастер слов'
+      description: '&7Выиграй %game% %amount% раз'
+      icon: BOOK
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    math_2:
+      type: WIN_GAME
+      game: math
+      amount: 2
+      name: '&bЖивой калькулятор'
+      description: '&7Выиграй %game% %amount% раз'
+      icon: PAPER
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    fast_1:
+      type: FAST_WIN
+      seconds: 5
+      amount: 1
+      name: '&cБыстрые пальцы'
+      description: '&7Выиграй игру в чате за %seconds% секунд или меньше'
+      icon: FEATHER
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    race_1:
+      type: WIN_RACES
+      amount: 1
+      name: '&aГонщик'
+      description: '&7Выиграй гонку'
+      icon: IRON_PICKAXE
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    points_5:
+      type: EARN_POINTS
+      amount: 5
+      name: '&dСборщик очков'
+      description: '&7Заработай %amount% очков'
+      icon: EXPERIENCE_BOTTLE
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    global_1:
+      type: PLAY_GLOBAL
+      amount: 1
+      name: '&3Командный игрок'
+      description: '&7Пройди глобальную игру вовремя'
+      icon: COMPASS
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+
+weekly:
+  enabled: true
+  #День, с которого начинается каждая неделя.
+  reset-day: MONDAY
+  mode: fixed
+  amount: 3
+  challenges:
+    win_25:
+      type: WIN_GAMES
+      amount: 25
+      name: '&6Чемпион недели'
+      description: '&7Выиграй %amount% игр в чате на этой неделе'
+      icon: DIAMOND
+      rewards:
+        - '[consolecmd] give %player% diamond 3'
+    fast_5:
+      type: FAST_WIN
+      seconds: 4
+      amount: 5
+      name: '&cМолния'
+      description: '&7Выиграй %amount% игр в чате за %seconds% секунд или меньше'
+      icon: BLAZE_POWDER
+      rewards:
+        - '[consolecmd] give %player% diamond 2'
+    global_5:
+      type: WIN_GLOBAL
+      amount: 5
+      name: '&3Любимец публики'
+      description: '&7Закончи %amount% глобальных игр на награждаемом месте'
+      icon: BEACON
+      rewards:
+        - '[consolecmd] give %player% diamond 2'

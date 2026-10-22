@@ -1,0 +1,121 @@
+#############################
+######    AYARLAR    #######
+#############################
+check-update: true
+
+#Sunucunun dili. Blok, eşya ve yaratık adları (yarışlarda ve Ezberle oyununda) bu dile
+#çevrilir, 140'tan fazla dil var. Dilinin kimliğini burada bul:
+#https://github.com/nsider4/mine-translator/blob/main/language_names.txt
+#Adlar translations/ klasörüne indirilir ve yeni bir Minecraft sürümü çıktığında kendiliğinden
+#güncellenir. Buradaki bir değişiklik /chatgames reload sonrası geçerli olur.
+lang: 'en_us'
+
+#Bu yapılandırma dosyalarının dili: mesajlar, menüler, kelime listeleri, bilgi yarışması, yorumlar...
+#  auto: yukarıdaki 'lang' değişince, o dilin çevrilmiş dosyaları varsa geçiş yapar
+#  none: asla geçiş yapma
+#  ya da bir dil kodu: en, es, fr, pt, de, it, nl, pl, ru, tr
+#Geçişte ayarların ve onlarda yaptığın değişiklikler korunur; kendi mesajların
+#çeviriyle değiştirilir (eski dosyalar önce backups/ klasörüne kopyalanır). Çeviriler
+#https://github.com/nsider4/mine-translator adresinden (Configs klasörü) indirilir ve kendiliğinden
+#güncellenir. Oraya daha fazla dil eklenebilir.
+config-language: 'auto'
+
+#Kayıt türü, kullanılabilir: SQLite veya MySQL
+Storage: 'SQLite'
+
+#Tüm ChatGames verilerini tutan tablonun adı
+table_name: 'chatgames'
+
+#En hızlı ChatGames sürelerini tutan tablonun adı
+fastest_times_table: 'chatgames_fastest_times'
+
+SQLite:
+  Filename: 'chatgames-data'
+
+MySQL:
+  host: 'localhost'
+  port: '3306'
+  user: 'root'
+  password: 'password'
+  database: 'chatgame'
+  connection-parameters: '?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8'
+  Pool-Settings:
+    max-pool-size: 10
+    min-idle: 10
+    max-lifetime: 180000
+    keep-alive-time: 60000
+    time-out: 20000
+
+disabled-worlds:
+  - 'example_world'
+
+prefix: '&c&lC&d&lH&b&lA&a&lT &6&lG&e&lA&a&lM&c&lE&b&lS'
+
+#false ise oyunları yalnızca 'chatgames.start.*' iznine sahip oyuncular başlatabilir
+allow_starting_from_disabled: true
+
+#false ise biri doğru cevabı bildiğinde normalde gönderilmeyen mesaj iptal edilmez
+cancel-message-when-winning: true
+
+#Bir sohbet etkinliğinin başlaması için gereken en az çevrimiçi oyuncu sayısı
+min_players_online: 1
+
+#Yeniden rastgele bir oyun seçilmeden önceki süre.
+#-1 değeri görevi TAMAMEN kapatır; -1 ile randomDelay de kullanılamaz
+time_minutes: 25
+
+#Açıksa her oyundan sonra bir sonraki oyuna kadar beklenecek süre olarak 'randomDelay.minimum' ile 'randomDelay.limit' arasında rastgele bir sayı seçilir
+#Bunu açmak 'time_minutes' değerini yok sayar, -1 olması hariç, çünkü o zaman görev yoktur.
+randomDelay:
+  enable: false
+  #Zaman birimi, diğer olası değer 'seconds'; değiştirirsen en düşük değeri oyunların 'timeToGuess_seconds' değerinden yüksek yap
+  timeUnit: 'minutes'
+  minimum: 1
+  limit: 25
+
+
+#Bu kapalıysa oyunları görmek için chatgames.play izni artık gerekmez
+use-permission-toplay: false
+
+#false ise yalnızca 'chatgames.play' iznine sahip, yani oynayabilen oyuncular sayılır.
+#true ise görünmez (vanish) olanlar dışındaki tüm çevrimiçi oyuncular sayılır.
+count-all-players: false
+
+#true ise en hızlı yazanların sıralaması olur (/chatgames fastest). false ise bu sıralama kapalıdır.
+fastest-typers-top: true
+
+#PlaceholderAPI yer tutucuları (PlaceholderAPI kurulu olmalı):
+#  Sen:          %chatgames_points%, %chatgames_wins%, %chatgames_wins_<game>%, %chatgames_race_wins%,
+#                %chatgames_global_played%, %chatgames_global_won%, %chatgames_toggle%, %chatgames_sound_toggle%
+#                %chatgames_events_played%, %chatgames_event_wins%, %chatgames_event_best_place% (0 = henüz yok)
+#  Sürelerin:   %chatgames_personal_best% (her sohbet oyunu), %chatgames_fastest_<game>% (yarışlar da)
+#  Sıran:       %chatgames_show_current_pos_top% (puan), %chatgames_show_current_pos_fastest% (en iyi süre)
+#  Puan zirvesi: %chatgames_top_<n>% (ad), %chatgames_points_top_<n>%, %chatgames_total_points%
+#  Hız zirvesi: %chatgames_fastest_<n>% (ad, sohbet oyunları), %chatgames_fastest_time_<n>%,
+#                %chatgames_fastest_<game>_<n>%, %chatgames_fastest_<game>_time_<n>%
+#  Şimdi:       %chatgames_game_running%, %chatgames_current_game%, %chatgames_next_game_in% (saniye)
+#  Yarış:       %chatgames_race_target%, %chatgames_race_amount%, %chatgames_race_progress% (seninki)
+#  Görevler:    %chatgames_daily_completed%, %chatgames_daily_total%, %chatgames_weekly_completed%,
+#                %chatgames_weekly_total%, %chatgames_challenges_completed% (toplam)
+#  Seriler:     %chatgames_streak_<type>%, %chatgames_streak_<type>_longest% (<type> challenge, daily veya global)
+#  Oyun etkinliği: %chatgames_event_running%, %chatgames_event_name%, %chatgames_event_step%, %chatgames_event_steps%,
+#                %chatgames_event_points% ve %chatgames_event_place% (süren etkinlikteki seninkiler)
+#  <game>, games.yml'deki gibi bir oyun adıdır (ör. unscramble, guess_the_number); <n> bir sıradır (1, 2, 3...).
+placeholders:
+  #Sıralama yer tutucularının (top_<n>, fastest_<n>, sıralar...) ne sıklıkla yeniden hesaplandığı, saniye cinsinden.
+  #Kazananı olan her oyundan sonra da yeniden hesaplanırlar. Kendi puanların, galibiyetlerin ve sürelerin her zaman günceldir.
+  refresh-seconds: 60
+  #Gösterilecek bir şey olmadığında gösterilir: sıralamada boş bir yer, henüz en iyi süre yok, süren oyun yok...
+  empty-value: ''
+
+#Bir sohbet etkinliği başladığında oyunculara gönderilen ses!
+GameSounds:
+  volume: 0.5
+  pitch: 1.0
+  #KAPATMAK İÇİN BUNLARDAN BİRİNİ BOŞ BIRAK
+  win: 'minecraft:entity.experience_orb.pickup'
+  game-start: 'minecraft:entity.player.levelup'
+  time-expired: 'minecraft:entity.villager.no'
+  wrong-case: 'minecraft:block.note_block.bass'
+
+#Oyun ön ayarları (açık oyunların adlandırılmış setleri) presets.yml içindedir.

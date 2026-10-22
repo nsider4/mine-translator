@@ -1,0 +1,112 @@
+#EVENTI DI GIOCHI
+#
+#Un evento è una serie di giochi di fila. Ogni gioco assegna punti evento in base alla
+#posizione; quando finisce l'ultimo, i giocatori con più punti evento vincono le ricompense
+#dell'evento. Mentre un evento è in corso, la rotazione normale e i giochi globali aspettano.
+#
+#Avviane uno con /chatgames event start <event>, o lascia che lo avvii il suo orario.
+#/chatgames event top <event> mostra chi ha segnato di più in esso nel tempo.
+#
+#Ogni evento:
+#  name: mostrato ai giocatori (i codici colore funzionano)
+#  schedule: quando parte da solo, es. 'SATURDAY 20:00' o 'DAILY 18:30' (o toglilo).
+#            Il fuso orario è quello di challenges.yml.
+#  minimum-players: giocatori online necessari perché l'orario lo avvii (il comando lo ignora)
+#  pause-seconds: secondi tra la fine di un gioco e l'inizio del successivo
+#  points: punti evento per il 1°, 2°, 3°... in ogni gioco
+#  participation-points: punti evento per chiunque altro ce la faccia. In un gioco globale, se il
+#                        server raggiunge l'obiettivo, segnano tutti quelli che hanno contribuito abbastanza:
+#                        'points' per chi ha contribuito di più, questi per il resto.
+#                        Se l'obiettivo non viene raggiunto, nessuno segna in quel gioco.
+#  steps: i giochi, in ordine. Ognuno:
+#    game: il gioco o la gara, come in games.yml / races.yml
+#    global: true per giocarlo come gioco globale (il server gioca insieme; vedi global_games.yml).
+#            Conta è sempre globale.
+#    time: secondi per rispondere (o per finire una gara), al posto di quelli del gioco
+#    winners: quanti possono vincere un normale gioco in chat, al posto del valore del gioco
+#    args: i valori, come dopo /chatgames <game>, es. 'stone 16' per una gara di scavo
+#    settings: qualsiasi altro valore di games.yml da cambiare per questo gioco, es. {difficulty: hard}
+#  rewards: righe di ricompensa per posizione finale (1, 2, 3...), e 'participation' per tutti gli altri
+#           che hanno segnato. Le stesse righe di rewards.yml ('<chance>%~ ' e 'has:<permission>' funzionano).
+
+events:
+  weekend_cup:
+    name: '&6&lCoppa del weekend'
+    schedule:
+      - 'SATURDAY 20:00'
+    minimum-players: 3
+    pause-seconds: 15
+    points: [5, 3, 1]
+    participation-points: 1
+    steps:
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+        time: 25
+      - game: word_association
+        global: true
+        settings:
+          difficulty: hard
+      - game: trivia
+        winners: 3
+      - game: mine
+        global: true
+        time: 120
+        args: 'stone 100'
+    rewards:
+      1:
+        - '[consolecmd] give %player% diamond 5'
+      2:
+        - '[consolecmd] give %player% diamond 3'
+      3:
+        - '[consolecmd] give %player% diamond 1'
+      participation:
+        - '[consolecmd] give %player% iron_ingot 3'
+
+  quick_quiz:
+    name: '&b&lQuiz lampo'
+    minimum-players: 2
+    pause-seconds: 8
+    points: [3, 2, 1]
+    participation-points: 0
+    steps:
+      - game: reaction
+        winners: 3
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+    rewards:
+      1:
+        - '[consolecmd] give %player% gold_ingot 5'
+
+messages:
+  #A tutti. %event% è il suo nome, %steps% quanti giochi, %pause% i secondi tra uno e l'altro.
+  start:
+    - ''
+    - '&6&l» EVENTO: %event% &fsta per iniziare! &e%steps% &fgiochi, vince chi ha più punti evento.'
+    - ''
+  #Prima di ogni gioco. %step% è il suo numero, %game% il gioco.
+  step:
+    - '&6&l» %event% &f- gioco &e%step%/%steps%&f: &e%game%'
+  #A ogni giocatore che segna in un gioco. %points% quanto ha guadagnato, %total% il suo totale nell'evento.
+  step_points: '&8[%prefix%&8] &a+%points% punti evento &7(%total% in totale)'
+  #A tutti alla fine. %count% giocatori hanno segnato; %winner_<n>% e %points_<n>% i primi tre.
+  end:
+    - ''
+    - '&6&l» %event% &fè finito! &e%count% &fgiocatore/i hanno segnato.'
+    - '&f  1. &e%winner_1% &7%points_1%  &f2. &e%winner_2% &7%points_2%  &f3. &e%winner_3% &7%points_3%'
+    - ''
+  nobody:
+    - '&6&l» %event% &fè finito! &cNessuno ha segnato.'
+  #A ogni giocatore che ha segnato, dopo la fine. %place% su %count%.
+  result: '&8[%prefix%&8] &fHai chiuso &e#%place% &fsu %count% con &e%points% &fpunti evento.'
+  stopped:
+    - '&6&l» %event% &cè stato fermato.'
+
+#La classifica finale viene pubblicata sul webhook Discord di config.yml, se ce n'è uno.
+discord:
+  enabled: true
+  title: '%event% results'
+  line: '#%place% %player% - %points% points'

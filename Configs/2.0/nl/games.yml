@@ -1,0 +1,367 @@
+#############################
+######    CHATGAMES    ######
+#############################
+#Instellingen die elk spel accepteert (ontbreekt er een, dan geldt de getoonde standaard):
+#  enable: true/false
+#  weight: 1             Hoe waarschijnlijk de rotatie dit spel kiest ten opzichte van de andere (0 = nooit).
+#                        Hetzelfde spel wordt nooit twee keer achter elkaar gespeeld.
+#  winners: 1            Hoeveel spelers elke ronde kunnen winnen.
+#  points: 1             Punten per overwinning (/chatgames top).
+#  case-sensitive: false Wie alles goed heeft behalve de hoofdletters, krijgt het bericht 'wrong_case'.
+#  timeToGuess_seconds: 20
+#  min-answer-ms: 400    Goede antwoorden die sneller zijn, worden genegeerd en gelogd: niemand leest en typt
+#                        zo snel, bots wel. 0 zet de controle uit.
+#  hints:                Hints tijdens de ronde, met 'hint_message' uit messages.yml.
+#    enable: false
+#    after-percent: 50   De eerste hint verschijnt als dit percentage van de tijd voorbij is; de rest wordt over de resterende tijd verdeeld.
+#    max: 1              Tot 3.
+#  countdown:            Resterende tijd, in de actiebalk. Werkt op elke versie (1.8 tot 26.x).
+#    enable: false
+#    last-seconds: 10    Alleen in de laatste N seconden; 0 toont het de hele ronde.
+#  titleMessage / subtitleMessage: laat beide leeg om geen titel te sturen.
+unscramble:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #De tijd in seconden die spelers hebben om te raden, op te lossen, te schrijven, enz.
+  timeToGuess_seconds: 20
+  #__Laat de volgende 2 leeg om ze uit te schakelen__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aOntwar het'
+
+unreverse:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #De tijd in seconden die spelers hebben om te raden, op te lossen, te schrijven, enz.
+  timeToGuess_seconds: 20
+  #Laat de volgende 2 leeg om ze uit te schakelen
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aDraai het om'
+
+reaction:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #De tijd in seconden die spelers hebben om te raden, op te lossen, te schrijven, enz.
+  timeToGuess_seconds: 20
+  #__Laat de volgende 2 leeg om ze uit te schakelen__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aSchrijf het'
+
+guess_the_number:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+  #Verander dit niet
+  case-sensitive: false
+
+  lower-limit: 1
+  upper-limit: 20
+
+  #De tijd in seconden die spelers hebben om te raden, op te lossen, te schrijven, enz.
+  timeToGuess_seconds: 20
+  #__Laat de volgende 2 leeg om ze uit te schakelen__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aSchrijf het'
+
+clickable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #De tijd in seconden die spelers hebben om te raden, op te lossen, te schrijven, enz.
+  timeToGuess_seconds: 20
+  #__Laat de volgende 2 leeg om ze uit te schakelen__
+  titleMessage: '&eKlik op de tekst'
+  subtitleMessage: '&fJe hebt &e%timeToGuess%s'
+
+fillout:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Het percentage verborgen letters in het invulspel. Van 1 tot 100. Lage getallen verbergen minder letters.
+  difficulty: 30
+  case-sensitive: true
+  #De tijd in seconden die spelers hebben om te raden, op te lossen, te schrijven, enz.
+  timeToGuess_seconds: 20
+  #__Laat de volgende 2 leeg om ze uit te schakelen__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aVul het in'
+
+hoverable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #De tijd in seconden die spelers hebben om te raden, op te lossen, te schrijven, enz.
+  timeToGuess_seconds: 20
+  #__Laat de volgende 2 leeg om ze uit te schakelen__
+  titleMessage: '&eBeweeg over de tekst'
+  subtitleMessage: '&fJe hebt &e%timeToGuess%s'
+
+#In dit spel wordt een reeks van de opgegeven lengte gemaakt met willekeurige tekens
+random:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #De tijd in seconden die spelers hebben om te raden, op te lossen, te schrijven, enz.
+  timeToGuess_seconds: 20
+  #De lengte van de willekeurige reeks van dit spel. Bereikformaat <min>-<max>. Voor één lengte gebruik je aan beide kanten hetzelfde getal
+  lengthRange: 6-8
+  #Beschikbare types: ALPHA (letters), ALPHANUMERIC (letters en cijfers), NUMERIC (cijfers), SYMBOLIC (symbolen),
+  #LOWERCASE_ALPHA (alleen kleine letters), UPPERCASE_ALPHA (alleen hoofdletters), HEXADECIMAL (hexadecimale tekens: 0123456789ABCDEF)
+  #CUSTOM (gebruikt wat er in 'custom_characters' staat)
+  character_type: ALPHANUMERIC
+  #Deze regel wordt alleen gebruikt als het type "CUSTOM" is
+  custom_characters: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+  #__Laat de volgende 2 leeg om ze uit te schakelen__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aSchrijf het'
+
+math:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Verander dit niet
+  case-sensitive: false
+  #De tijd in seconden die spelers hebben om te raden, op te lossen, te schrijven, enz.
+  timeToGuess_seconds: 20
+  #Bereiken van willekeurige getallen per moeilijkheid:
+  #1 - (1-9)
+  #2 - (1-99)
+  #3 - (1-999)
+  #4 - (1-9999)
+  #5 - (1-99999)
+  difficulty: 2
+  #Hoeveel operatoren elke vraag heeft: 1 -> "12 + 7", 2 -> "12 + 7 x 3"
+  operations: 1
+  #solve: de uitkomst berekenen ("12 + 7 x 3").  missing-value: het verborgen getal vinden ("12 + ? x 3 = 33").
+  #Elke ronde kiest een van de vermelde modi.
+  modes:
+    - solve
+    - missing-value
+  #Te gebruiken operatoren; de vier vermelde zijn beschikbaar, haal weg wat je niet wilt. Laat er altijd minstens 1 staan
+  #Delingen komen altijd uit op hele getallen.
+  operators:
+    - '+'
+    - '-'
+    - 'x'
+    - '/'
+
+  #__Laat de volgende 2 leeg om ze uit te schakelen__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aLos het op'
+
+variable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Verander dit niet
+  case-sensitive: false
+  #De tijd in seconden die spelers hebben om te raden, op te lossen, te schrijven, enz.
+  timeToGuess_seconds: 20
+
+  #__Laat de volgende 2 leeg om ze uit te schakelen__
+  titleMessage: '&bLOS OP'
+  subtitleMessage: '&aVoor &7`&b%symbol%&7`'
+
+  #Het bereik van het willekeurige uitkomstgetal
+  result-min: 20
+  result-max: 100
+
+  toGet: '✗'
+  #Andere symbolen die je kunt toevoegen: ✪❃✿✠❂♫♪❦♡♤♢✦☾☽✹
+  data:
+    - '✯;10'
+    - '♛;15'
+    - '❅;20'
+    - '♫;25'
+
+sequence:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Verander dit niet
+  case-sensitive: false
+
+  #De tijd in seconden die spelers hebben om te raden, op te lossen, te schrijven, enz.
+  timeToGuess_seconds: 25
+
+  #Spelers zien een getallenreeks en typen het volgende getal, bv. "3, 6, 12, 24, ?" -> 48
+  #Patronen: optellen (3, 7, 11), vermenigvuldigen (2, 6, 18), kwadraten (4, 9, 16), afwisselend (5, 9, 7, 11), fibonacci (2, 3, 5, 8)
+  patterns:
+    - add
+    - multiply
+    - squares
+    - alternating
+    - fibonacci
+  #1-3. Hogere moeilijkheid staat moeilijkere patronen toe (kwadraten en afwisselend vanaf 2, fibonacci bij 3) en grotere getallen.
+  difficulty: 2
+  #Hoeveel getallen er voor het '?' worden getoond (4-8)
+  shown-terms: 5
+
+  #__Laat de volgende 2 leeg om ze uit te schakelen__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aMaak de reeks af'
+
+memorize:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+
+  listLength: 3
+  #Elke ronde haalt zijn items uit een van deze lijsten (zie words.yml -> memorize.pools):
+  #shopping_list, words, colors, numbers, blocks, mobs, of een eigen lijst
+  pools:
+    - shopping_list
+    - words
+    - colors
+    - numbers
+    - blocks
+    - mobs
+  #Bij false mogen de items in elke volgorde worden getypt
+  order-matters: true
+
+  #De tijd in seconden die spelers hebben om te onthouden, op te lossen, te schrijven, enz.
+  timeToMemorize: 7
+
+  #De tijd in seconden die spelers hebben om te raden, op te lossen, te schrijven, enz.
+  timeToGuess_seconds: 20
+  #Laat de volgende 2 leeg om ze uit te schakelen
+  titleMessage: '&bOnthoud'
+  subtitleMessage: '&aProbeer deze lijst te onthouden!'
+
+#Drie aanwijzingen, één verborgen verband (de associaties staan in words.yml).
+#difficulty: easy, medium, hard of mixed. Moeilijke rondes tonen één aanwijzing en onthullen de andere
+#als hints, dus laat hints voor hen aan (max 2 toont alle drie).
+word_association:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  difficulty: mixed
+  hints:
+    enable: true
+    after-percent: 34
+    max: 2
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  timeToGuess_seconds: 30
+  titleMessage: '&bWOORDASSOCIATIE'
+  subtitleMessage: '&aKijk in de chat!'
+
+trivia:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  #De tijd in seconden die spelers hebben om te raden, op te lossen, te schrijven, enz.
+  timeToGuess_seconds: 20
+  #__Laat de volgende 2 leeg om ze uit te schakelen__
+  titleMessage: '&bQUIZ'
+  subtitleMessage: '&aKijk in de chat!'

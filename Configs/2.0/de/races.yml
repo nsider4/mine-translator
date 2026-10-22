@@ -1,0 +1,475 @@
+enable-races: true
+
+creative-enabled: true
+#Nützliche Links zum Hinzufügen von DATEN:
+#
+#https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+#https://helpch.at/docs/1.8/index.html?org/bukkit/entity/EntityType.html
+#https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+#https://helpch.at/docs/1.8/org/bukkit/Material.html
+
+#Namen können modern oder alt sein (MOOSHROOM oder MUSHROOM_COW, COD oder RAW_FISH): Sie werden an die Version deines
+#Servers angepasst. Namen, die es auf deiner Version nicht gibt (z. B. ein 1.21-Block auf 1.8), werden mit einem Konsolenhinweis übersprungen.
+#
+#Jedes Rennen akzeptiert außerdem (optional):
+#  points: 1     #Punkte für den Gewinner (Standard 1)
+#  weight: 1     #wie oft die Rotation es im Vergleich zu anderen Spielen wählt (Standard 1, 0 = nie)
+#
+#Admins können ein Rennen mit eigenen Werten starten: /chatgames <race> <material/mob> [amount]
+#Ohne Anzahl wird eine der unten für dieses Material/diese Kreatur aufgeführten genutzt. Der Gewinner bekommt die Belohnungen,
+#die für genau dieses Material und diese Anzahl aufgeführt sind, oder keine, wenn sie hier fehlen (Punkte gibt es trotzdem).
+
+hunt:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__Lass die folgenden 2 leer, um sie zu deaktivieren__
+  titleMessage: '&bJAGD'
+  subtitleMessage: '&aTöte %amount% %value%!'
+
+  #Ob Kreaturen aus Spawnern oder Spawn-Eiern mitzählen.
+  count-spawner-mobs: true
+
+  data:
+    #Diese Werte müssen gültige Minecraft-Kreatur-IDs sein (siehe Nützliche Links oben in der Datei)
+    ZOMBIE:
+      3:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+
+    CREEPER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SKELETON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SPIDER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    PIG:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SHEEP:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    COW:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    CHICKEN:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SALMON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+
+mine:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Lass die folgenden 2 leer, um sie zu deaktivieren__
+  titleMessage: '&bABBAU'
+  subtitleMessage: '&aBaue %amount% %value% ab!'
+
+  data:
+    #Diese Werte müssen gültige Minecraft-Material-IDs sein (siehe Nützliche Links oben in der Datei)
+    STONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRASS_BLOCK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRAVEL:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIORITE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+place:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Lass die folgenden 2 leer, um sie zu deaktivieren__
+  titleMessage: '&bPLATZIEREN'
+  subtitleMessage: '&aPlatziere %amount% %value%!'
+
+  data:
+    #Diese Werte müssen gültige Minecraft-Material-IDs sein (siehe Nützliche Links oben in der Datei)
+    COBBLESTONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+fish:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Lass die folgenden 2 leer, um sie zu deaktivieren__
+  titleMessage: '&bANGELN'
+  subtitleMessage: '&aAngle %amount% %value%!'
+
+  data:
+    #Diese Werte müssen gültige Minecraft-Material-IDs sein (siehe Nützliche Links oben in der Datei)
+    COD:
+      1:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+          - reward_3
+    SALMON:
+      1:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+          - reward_3
+    PUFFERFISH:
+      1:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+          - reward_3
+    BOWL:
+      1:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+          - reward_3
+
+eat:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Lass die folgenden 2 leer, um sie zu deaktivieren__
+  titleMessage: '&bESSEN'
+  subtitleMessage: '&aIss %amount% %value%!'
+
+  data:
+    #Diese Werte müssen gültige Minecraft-Material-IDs sein (siehe Nützliche Links oben in der Datei)
+    COOKED_BEEF:
+      1:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_CHICKEN:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BAKED_POTATO:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BREAD:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    GOLDEN_APPLE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+
+craft:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Lass die folgenden 2 leer, um sie zu deaktivieren__
+  titleMessage: '&bHERSTELLEN'
+  subtitleMessage: '&aStelle %amount% %value% her!'
+
+  data:
+    #Diese Werte müssen gültige Minecraft-Material-IDs sein (siehe Nützliche Links oben in der Datei)
+    FURNACE:
+      2:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+      4:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+          - reward_3
+    CHEST:
+      2:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+      4:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+          - reward_3
+    CRAFTING_TABLE:
+      4:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+      8:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_1
+          - reward_2
+      12:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      32:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+      48:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_1
+          - reward_2
+      64:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+          - reward_3
+
+furnace:
+  enable: true
+
+  timeToComplete_seconds: 150
+  #__Lass die folgenden 2 leer, um sie zu deaktivieren__
+  titleMessage: '&bKOCHEN'
+  subtitleMessage: '&aKoche %amount% %value%!'
+
+  data:
+    #Diese Werte müssen gültige Minecraft-Material-IDs sein (siehe Nützliche Links oben in der Datei)
+    GOLD_INGOT:
+      3:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+      6:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+          - reward_3
+    IRON_INGOT:
+      3:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+      6:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_BEEF:
+      3:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+      6:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_COD:
+      3:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+      6:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #DIE SUMME ALLER BELOHNUNGSCHANCEN, DIE DU HINZUFÜGST, DARF 100% NICHT ÜBERSCHREITEN
+        rewards:
+          - reward_2
+          - reward_3

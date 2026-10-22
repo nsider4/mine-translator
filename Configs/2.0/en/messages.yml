@@ -1,0 +1,684 @@
+unknown_command: '&8[%prefix%&8] &cUnknown command. Try something else!'
+config_reloaded: '&8[%prefix%&8] &fThe configuration files have been reloaded!'
+config_reload_failed: '&8[%prefix%&8] &cSome files failed to load; check the console. Those files keep their previous values.'
+not_enough_permissions: '&8[%prefix%&8] &cYou don`t have enough permissions to execute this command!'
+player_only_command: '&8[%prefix%&8] &cThis command can only be executed by players!'
+player_deleted: '&8[%prefix%&8] &cThe player &f%player% &chas been removed from the database!'
+player_not_found: '&8[%prefix%&8] &fUnable to find the player &c%player%'
+number_not_found_commands: '&8[%prefix%&8] &cUnable to find number to apply to command'
+points_added: '&8[%prefix%&8] &fAdded &a%amount% &fpoints to &c%player%'
+points_removed: '&8[%prefix%&8] &fRemoved &a%amount% &fpoints from &c%player%'
+points_set: '&8[%prefix%&8] &fSet &c%player%`s &fpoints to &a%amount%'
+player_points: '&8[%prefix%&8] &fYou have &a%amount% &fpoints!'
+in_cooldown: '&8[%prefix%&8] &cYou can`t use this yet, wait &e%time_left%s &cbefore using the command again'
+type_not_found: '&8[%prefix%&8] &fUnable to find the type of material/entity for &c%type%'
+inventory_full: '&8[%prefix%&8] &cYour inventory is full! &fReward dropped at your location'
+
+no_winner_placeholder: '---'
+cannot_start_from_disabled: '&8[%prefix%&8] &cYou can`t start a chat game from a disabled world!'
+toggle_game: '&8[%prefix%&8] &fYou have toggled &a%state% &fchat events!'
+toggle_sound: '&8[%prefix%&8] &fYou have toggled &a%state% &fchat game sounds!'
+toggleAllGames: '&8[%prefix%&8] &fYou have toggled &a%state% &cALL &fchatgames!'
+state-ON: 'ON'
+state-OFF: 'OFF'
+game_started: '&8[%prefix%&8] &aYou have started a %game% chat event in your chat!'
+invalid_arguments: '&8[%prefix%&8] &fThere was a problem while trying to validate the arguments for the command!'
+cant_log_local: '&8[%prefix%&8] &cYou can`t see log messages because this option is disabled in the config!'
+toggle_game_other: '&8[%prefix%&8] &fYou have toggled &a%state% &fchat events for &c%player%&f!'
+toggle_sound_other: '&8[%prefix%&8] &fYou have toggled &a%state% &fchat game sounds for &c%player%&f!'
+player_points_other: '&8[%prefix%&8] &c%player% &fhas &a%amount% &fpoints!'
+data_loading: '&8[%prefix%&8] &cThat player''s data is still loading, try again in a moment.'
+usage: '&8[%prefix%&8] &cUsage: &f%usage%'
+game_already_running: '&8[%prefix%&8] &cA chat game is already running! Use &f/chatgames stop &cto end it first.'
+game_not_started: '&8[%prefix%&8] &cThe %game% game couldn''t start with those values. Check the console for details.'
+no_games_enabled: '&8[%prefix%&8] &cNo games are enabled at the moment.'
+game_stopped: '&8[%prefix%&8] &fThe current game has been stopped with no winner.'
+no_game_running: '&8[%prefix%&8] &cNo chat game is running right now.'
+global_not_enabled: '&8[%prefix%&8] &f%game% &cisn''t enabled as a global game in global_games.yml.'
+unknown_game: '&8[%prefix%&8] &cThere is no game called &f%game%&c.'
+unknown_menu: '&8[%prefix%&8] &cThere is no menu called &f%menu%&c.'
+
+presets:
+  loaded: '&8[%prefix%&8] &fLoaded the preset &a%preset% &f(%games%).'
+  cleared: '&8[%prefix%&8] &fNo preset is active any more; the games enabled in games.yml are used.'
+  saved: '&8[%prefix%&8] &fSaved the enabled games as the preset &a%preset% &f(%games%).'
+  not_found: '&8[%prefix%&8] &cThere is no preset called &f%preset%&c.'
+  invalid_name: '&8[%prefix%&8] &cPreset names can only use letters, numbers, - and _ (up to 32).'
+  list_header: '&8[%prefix%&8] &ePresets:'
+  list_entry: '&7- &f%preset%%active% &8(%games%)'
+  active_marker: ' &a(active)'
+  list_empty: '&8[%prefix%&8] &cNo presets are configured in presets.yml.'
+
+challenges:
+  completed: '&8[%prefix%&8] &a%period% challenge complete: &f%challenge%&a! Claim it with &f/chatgames claim&a.'
+  claimed: '&8[%prefix%&8] &aYou claimed &f%challenge%&a!'
+  nothing_to_claim: '&8[%prefix%&8] &cYou have nothing to claim right now.'
+  #/chatgames challenges. %period% is 'daily' or 'weekly' below; %resets% is the time left, e.g. 5h 12m
+  header: '&8[%prefix%&8] &e%period% challenges &7(%completed%/%total% done, resets in %resets%)'
+  entry: '&7- %challenge% &8- &7%description% &f%progress%/%amount% %status%'
+  status_in_progress: ''
+  status_ready: '&a[Ready to claim]'
+  status_claimed: '&7[Claimed]'
+  none: '&8[%prefix%&8] &cThere are no challenges right now.'
+  daily: 'Daily'
+  weekly: 'Weekly'
+  reset: '&8[%prefix%&8] &fReset &c%player%&f''s daily and weekly challenge progress.'
+
+streaks:
+  grew: '&8[%prefix%&8] &aYour %streak% &ais now &f%days% &aday(s)! Claim the reward with &f/chatgames claim&a.'
+  #%days% is one day, or a range such as 3-5 when several days are claimed at once
+  claimed: '&8[%prefix%&8] &aYou claimed your %streak% &areward (day %days%)!'
+  header: '&8[%prefix%&8] &eStreaks:'
+  entry: '&7- %streak% &8- &f%days% &7day(s), best &f%longest% %status%'
+  status_ready: '&a[%unclaimed% to claim]'
+  status_today: '&7[done today]'
+  status_waiting: '&e[not done today]'
+  none: '&8[%prefix%&8] &cStreaks are turned off.'
+  set: '&8[%prefix%&8] &fSet &c%player%&f''s %streak% &fto &a%days% &fday(s).'
+  unknown: '&8[%prefix%&8] &cThere is no streak called &f%type%&c. Use challenge, daily or global.'
+
+events:
+  unknown: '&8[%prefix%&8] &cThere is no event called &f%event%&c.'
+  started: '&8[%prefix%&8] &fStarted the event %event%&f.'
+  already_running: '&8[%prefix%&8] &cAn event is already running: %event%&c.'
+  cancelled: '&8[%prefix%&8] &cAnother plugin cancelled the event %event%&c.'
+  not_running: '&8[%prefix%&8] &cNo event is running.'
+  stopped: '&8[%prefix%&8] &fStopped the event %event%&f.'
+  list_header: '&8[%prefix%&8] &eEvents:'
+  list_entry: '&7- &f%id% &8(%event%&8) &7%steps% games, next: &f%next%%running%'
+  list_running: ' &a(running, game %step%/%steps%)'
+  list_empty: '&8[%prefix%&8] &cNo events are set up in events.yml.'
+  not_scheduled: 'not scheduled'
+  top_header: '&8[%prefix%&8] &eMost event points in %event%&e:'
+  top_entry: '&c%spot%. &f%player% &8| &e%points% &7points'
+  top_empty: '&8[%prefix%&8] &cNobody has scored in %event% &cyet.'
+
+logs:
+  no_logs: "&cNo logs available or an error occurred."
+  header: "&8[%prefix%&8] &eLast &6%amount% &elogs:"
+  entries:
+    # Game-related log entries
+    game:
+      start: "&aGame Starting: &f%game% | &aHas Answer: &f%hasAnswer% | &aAnswer: &f%answer%"
+      end: "&aGame Ending: &f%game% | &aHas Winner: &f%hasWinner% | &aWinners: &f%winners% | &aAnswer: &f%answer%"
+
+    # Race-related log entries for Material-type races
+    race:
+      start: "&aRace Starting: &f%race% | &aMaterial: &f%material% | &aAmount: &f%amount%"
+      end: "&aRace Ending: &f%race% | &aHas Winner: &f%hasWinner% | &aWinner: &f%winner% | &aMaterial: &f%material% | &aAmount: &f%amount%"
+
+    # Special entry for HUNT race (Entity-type race)
+    hunt:
+      start: "&aRace Starting: &f%race% | &aEntity: &f%entity% | &aAmount: &f%amount%"
+      end: "&aRace Ending: &f%race% | &aHas Winner: &f%hasWinner% | &aWinner: &f%winner% | &aEntity: &f%entity% | &aAmount: &f%amount%"
+
+#You can use <center> if you wish to do so in the top messages.
+top:
+  #You can leave empty if you want to disable a certain message out of all. (Excluding 'format' and 'player-stat-format')
+  header: '&b&m---------&e&lTOP CHAT&b&m---------'
+  #The separators value is that one message that is sent to space out the top 10 players from header and footer!
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%points% &7points'
+  player-stat-format: '&7You`ve got &e&l%player_points% &7wins'
+  total-stat-format: '&7Total games won globally: &6&l%total_wins%'
+  footer: '&b&m---------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cThere is no data yet! Win a chat game and get points!'
+
+TypersTop:
+  #You can leave empty if you want to disable a certain message out of all. (Excluding 'format' and 'player-stat-format')
+  header: '&b&m---------&e&lTOP FASTEST&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6s'
+  player-stat-format: '&7Your fastest time is &e&l%fastest_time%&6s'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cThere is no data yet! Win a chat game and be the fastest!'
+  top_disabled_message: '&8[%prefix%&8] &cThis function is currently disabled!'
+
+GameTypersTop:
+  #You can leave empty if you want to disable a certain message out of all. (Excluding 'format' and 'player-stat-format')
+  header: '&b&m---------&e&lTOP FASTEST - %game%&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6s'
+  player-stat-format: '&7Your fastest time is &e&l%fastest_time%&6s'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cThere is no data yet! Win a chat game and be the fastest!'
+  top_disabled_message: '&8[%prefix%&8] &cThis function is currently disabled!'
+
+help_command:
+  - '&7&m-------------------------------------------------'
+  - '&e&l-ChatGames-'
+  - '&6'
+  - '&6&lCOMMANDS:'
+  - '&6'
+  - '&a/chatgames menu [menu] &f- &3Opens the menu: profile, challenges, streaks, leaderboards (or any menu in menus.yml).'
+  - '&a/chatgames profile [player] &f- &3Shows your stats (or another player''s).'
+  - '&a/chatgames top &f- &3Shows the top 10 players with most points.'
+  - '&a/chatgames fastest [game] &f- &3Shows the fastest winners, overall or for one game.'
+  - '&a/chatgames points [player] &f- &3Shows your points (or another player''s).'
+  - '&a/chatgames challenges &f- &3Shows your daily and weekly challenges.'
+  - '&a/chatgames streaks &f- &3Shows your streaks.'
+  - '&a/chatgames claim &f- &3Claims finished challenges and streak rewards.'
+  - '&a/chatgames event [list|top <event>] &f- &3Shows the game events, or who scored most in one.'
+  - '&a/chatgames toggle [player] &f- &3Turns chat games on or off for you.'
+  - '&a/chatgames togglesound [player] &f- &3Turns chat game sounds on or off.'
+  - '&6'
+  - '&c&lADMIN:'
+  - '&a/chatgames admin &f- &3Opens the admin menu.'
+  - '&a/chatgames debug &f- &3Opens the debug menu: test any game privately, without rewards.'
+  - '&a/chatgames (game) [values] &f- &3Starts that game now, optionally with your own word/values.'
+  - '&a/chatgames any &f- &3Starts the game the rotation would pick next.'
+  - '&a/chatgames global <game> [values] &f- &3Starts a global game: everyone who answers in time wins.'
+  - '&a/chatgames event start <event> | stop &f- &3Starts or stops a game event.'
+  - '&a/chatgames stop &f- &3Ends the running game with no winner.'
+  - '&a/chatgames toggleAll &f- &3Turns the automatic game rotation on or off.'
+  - '&a/chatgames preset <list|load|save> [name] &f- &3Manages game presets.'
+  - '&a/chatgames +points|-points|setpoints <player> <amount> &f- &3Changes a player''s points.'
+  - '&a/chatgames remove <player> &f- &3Deletes a player''s data.'
+  - '&a/chatgames challenges reset <player> &f- &3Clears a player''s challenge progress.'
+  - '&a/chatgames streak set <player> <challenge|daily|global> <days> &f- &3Sets a player''s streak.'
+  - '&a/chatgames logs [amount] &f- &3Shows the last game logs.'
+  - '&a/chatgames reload &f- &3Reloads the configuration files.'
+  - '&6'
+  - '&2&lGAME TYPES:'
+  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace'
+  - '&7&m-------------------------------------------------'
+
+#Use <center> in LIST messages to center the messages, the lines with this will be centered!
+
+#############################
+##    CHATGAME MESSAGES    ##
+#############################
+#Shared by every game. A game can override them with its own 'hint_message' / 'countdown_actionbar' in its section below.
+hint_message: '&8[%prefix%&8] &eHint: &f%hint%'
+countdown_actionbar: '&e%seconds%s &7left'
+
+waiting_for_other_winners: '&8[%prefix%&8] &aYou got it right! &fWaiting for other winners...'
+wrong_case: '&8[%prefix%&8] &cAlmost... Check your capitalization!'
+  #YOU CAN USE "%display_name%" AS A REPLACEMENT FOR %player% IN correct_message FOR ALL GAMES.
+  #
+  #YOU CAN ALSO USE %points_<position>% TO SHOW THE POINTS FOR THE PLAYER THAT WON.
+  #
+  #To display 1st, 2nd, 3rd winners, and so on use: %winner_<position>% and for time taken for each use %time_<position>%
+
+  ##EXAMPLE 2 WINNERS SCENARIO:
+  #
+  #correct_message:
+  #- ''
+  #- '<center>&r✓ ✯ %prefix% &r✯ ✓'
+  #- ''
+  #- '&7The correct answer was `&e%correct_answer%&7`! The winners are:'
+  #- '<center>&f1. &a%winner_1% - (&c%time_1%s&7)'
+  #- '<center>&f2. &a%winner_2% - (&c%time_2%s&7)'
+#- ''
+unscramble:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToGuess% seconds &fto &dunscramble&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7has correctly unscrambled `&e%correct_answer%&7` (&c%time_1%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &chave passed! &fThe unscramble game is now over!'
+    - '<center>The correct answer was &e%correct_answer%&f!'
+    - ''
+
+unreverse:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToGuess% seconds &fto &dunreverse&f the word: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7was the fastest to unreverse `&e%correct_answer%&7` (&c%time_1%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &chave passed! &fThe unreverse game is now over!'
+    - '<center>The correct answer was &e%correct_answer%&f!'
+    - ''
+
+reaction:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToGuess% seconds &fto &dwrite out&f the word: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7was the fastest to write out `&e%correct_answer%&7` (&c%time_1%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &chave passed! &fThe reaction game is now over!'
+    - '<center>The correct answer was &e%correct_answer%&f!'
+    - ''
+
+guess_the_number:
+  hint_message: '&8[%prefix%&8] &eHint: it is between &f%hint%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToGuess% seconds &fto &dguess the number &fin the range of:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7was the first to answer `&e%correct_answer%&7` (&c%time_1%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &chave passed! &fThe guessing game is now over!'
+    - '<center>The correct answer was &e%correct_answer%&f!'
+    - ''
+
+memorize:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToMemorize% seconds &fto &dmemorize &fthis list:'
+    - ''
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  messageAfterMemorized:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToGuess% seconds &fto write the list back &din order&f!'
+    - ''
+    - '<center>&fUse commas to separate each item! (e.g. `&bapple, banana, chocolate&f`)'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7was the first to write the list and got a prize! (&c%time_1%s&7)'
+    - ''
+    - '<center>&fThe list was: &f`&b%correct_answer%&f`'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &chave passed! &fThe memorize game is now over!'
+    - ''
+    - '<center>&fThe list was: &f`&b%correct_answer%&f`'
+    - ''
+
+sequence:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToGuess% seconds &fto &dcomplete the sequence&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  hint_message: '&8[%prefix%&8] &eHint: the next number is &f%hint%'
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7was the first to find `&e%correct_answer%&7` (&c%time_1%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &chave passed! &fThe sequence game is now over!'
+    - '<center>The next number was &e%correct_answer%&f!'
+    - ''
+
+clickable:
+  clickableText: '&aClick Here!'
+  hoverText: '&eClick Here!'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToGuess% seconds &fto &dclick&f the text:'
+    - ''
+    - '<center>&b%clickableText%'
+    - ''
+  #USE %winner_
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7was the fastest to click the text (&c%time_1%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &chave passed! &fThe clickable game is now over!'
+    - ''
+
+fillout:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToGuess% seconds &fto &dfill in&f the word: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7was the fastest to fill `&e%correct_answer%&7` (&c%time_1%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &chave passed! &fThe fillout game is now over!'
+    - '<center>The correct answer was &e%correct_answer%&f!'
+    - ''
+
+hoverable:
+  hoverableText: '&eHover Here!'
+  hoverText: '&b%selection%'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToGuess% seconds &fto &dwrite&f the word on the hover text:'
+    - ''
+    - '<center>&b%hoverableText%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7was the fastest to write `&e%correct_answer%&7` (&c%time_1%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &chave passed! &fThe hoverable game is now over!'
+    - '<center>The correct answer was &e%correct_answer%&f!'
+    - ''
+
+#In this game, a string of the length specified will be created with random characters
+random:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToGuess% seconds &fto &dwrite out&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7was the fastest to write `&e%correct_answer%&7` (&c%time_1%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &chave passed! &fThe random game is now over!'
+    - '<center>The correct answer was &e%correct_answer%&f!'
+    - ''
+
+math:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToGuess% seconds &fto &dsolve&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7was the fastest to get `&e%correct_answer%&7` (&c%time_1%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &chave passed! &fThe math game is now over!'
+    - '<center>The correct answer was &e%correct_answer%&f!'
+    - ''
+
+variable:
+  #This is the format in which they will appear, you may change amount of times %symbol% is repeated in 'line1and2-format' but all variables in line 3 are as they are shown.
+  line1and2-format: '&c%symbol%&f + &c%symbol%&f + &c%symbol%&f = &e'
+  line3-format: '&c%symbol_1%&f + &c%symbol_2%&f + &b%toGet% &f= &e%result%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToGuess% seconds &fto &dsolve for&f: `&b%symbol%&f`'
+    - ''
+    - '<center>%line_1%'
+    - '<center>%line_2%'
+    - '<center>%line_3%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7was the fastest to get `&e%correct_answer%&7` (&c%time_1%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &chave passed! &fThe variable game is now over!'
+    - '<center>The correct answer was &e%correct_answer%&f!'
+    - ''
+
+#%selection% is the clues, %difficulty% easy/medium/hard.
+word_association:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToGuess% seconds &fto find the &dlink&f:'
+    - '<center>&b%selection%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7found the link `&e%correct_answer%&7` (&c%time_1%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &chave passed! &fNobody found the link.'
+    - '<center>The answer was &e%correct_answer%&f!'
+    - ''
+
+trivia:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToGuess% seconds &fto &danswer&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7was the first to answer `&e%correct_answer%&7` (&c%time_1%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &chave passed! &fThe trivia game is now over!'
+    - '<center>The correct answer was &e%correct_answer%&f!'
+    - ''
+
+#RACES
+#As of now, the races don't support multiple winners as I don't see a reason since they are 'races' or 'player challenges' that the first should get.
+
+#%value% is the material or mob, %amount% how many, %timeToComplete% the time limit in seconds.
+#In correct_message: %winner%, %winner_displayname%, %time% (seconds) and %points% (the winner's points).
+
+hunt:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToComplete% seconds &fto &dhunt&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7finished hunting `&e%amount%&fx &3%value%&7` (&c%time%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &chave passed! &fThe hunt challenge is now over!'
+
+mine:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToComplete% seconds &fto &dmine&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7finished mining `&e%amount%&fx &3%value%&7` (&c%time%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &chave passed! &fThe mine challenge is now over!'
+
+place:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToComplete% seconds &fto &dplace&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7finished placing `&e%amount%&fx &3%value%&7` (&c%time%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &chave passed! &fThe place challenge is now over!'
+
+fish:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToComplete% seconds &fto &dfish&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7finished fishing `&e%amount%&fx &3%value%&7` (&c%time%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &chave passed! &fThe fish challenge is now over!'
+
+eat:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToComplete% seconds &fto &deat&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7finished eating `&e%amount%&fx &3%value%&7` (&c%time%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &chave passed! &fThe eat challenge is now over!'
+
+craft:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToComplete% seconds &fto &dcraft&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7finished crafting `&e%amount%&fx &3%value%&7` (&c%time%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &chave passed! &fThe craft challenge is now over!'
+furnace:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fYou have &e%timeToComplete% seconds &fto &dcook&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7finished cooking `&e%amount%&fx &3%value%&7` (&c%time%s&7) and got a prize!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &chave passed! &fThe cooking challenge is now over!'

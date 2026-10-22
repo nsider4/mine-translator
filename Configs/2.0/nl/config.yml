@@ -1,0 +1,121 @@
+#############################
+######    INSTELLINGEN    #######
+#############################
+check-update: true
+
+#De taal van de server. Namen van blokken, voorwerpen en wezens (in races en Onthouden) worden
+#hierin vertaald, in meer dan 140 talen. Zoek hier het ID van je taal:
+#https://github.com/nsider4/mine-translator/blob/main/language_names.txt
+#De namen worden gedownload naar translations/ en automatisch bijgewerkt als er een nieuwe Minecraft-
+#versie uitkomt. Een wijziging hier geldt na /chatgames reload.
+lang: 'en_us'
+
+#De taal van deze configuratiebestanden: berichten, menu's, woordenlijsten, quiz, opmerkingen...
+#  auto: wisselen als 'lang' hierboven verandert, als die taal vertaalde bestanden heeft
+#  none: nooit wisselen
+#  of een taalcode: en, es, fr, pt, de, it, nl, pl, ru, tr
+#Bij het wisselen blijven je instellingen en je wijzigingen daarin behouden; je eigen berichten
+#worden vervangen door de vertaling (de oude bestanden worden eerst naar backups/ gekopieerd). Vertalingen
+#worden gedownload van https://github.com/nsider4/mine-translator (map Configs) en automatisch
+#bijgewerkt. Daar kunnen meer talen worden toegevoegd.
+config-language: 'auto'
+
+#Opslagtype, beschikbaar: SQLite of MySQL
+Storage: 'SQLite'
+
+#De naam van de tabel met alle ChatGames-gegevens
+table_name: 'chatgames'
+
+#De naam van de tabel met de snelste ChatGames-tijden
+fastest_times_table: 'chatgames_fastest_times'
+
+SQLite:
+  Filename: 'chatgames-data'
+
+MySQL:
+  host: 'localhost'
+  port: '3306'
+  user: 'root'
+  password: 'password'
+  database: 'chatgame'
+  connection-parameters: '?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8'
+  Pool-Settings:
+    max-pool-size: 10
+    min-idle: 10
+    max-lifetime: 180000
+    keep-alive-time: 60000
+    time-out: 20000
+
+disabled-worlds:
+  - 'example_world'
+
+prefix: '&c&lC&d&lH&b&lA&a&lT &6&lG&e&lA&a&lM&c&lE&b&lS'
+
+#Alleen spelers met 'chatgames.start.*' kunnen spellen starten als dit false is
+allow_starting_from_disabled: true
+
+#Bij false wordt het bericht dat normaal niet wordt verstuurd als iemand het goede antwoord raadt niet geannuleerd
+cancel-message-when-winning: true
+
+#Het minimum aantal spelers online om een chat-event te laten starten
+min_players_online: 1
+
+#De tijd voordat er weer een willekeurig spel wordt gekozen.
+#De waarde -1 schakelt de taak VOLLEDIG uit; met -1 kun je ook randomDelay niet gebruiken
+time_minutes: 25
+
+#Indien aan, wordt na elk spel een willekeurig getal tussen 'randomDelay.minimum' en 'randomDelay.limit' gekozen als wachttijd tot het volgende spel
+#Dit aanzetten negeert 'time_minutes', behalve als die -1 is, want dan is er geen taak.
+randomDelay:
+  enable: false
+  #Tijdseenheid, de andere mogelijke waarde is 'seconds'; als je die wijzigt, zet het minimum dan hoger dan de 'timeToGuess_seconds' van de spellen
+  timeUnit: 'minutes'
+  minimum: 1
+  limit: 25
+
+
+#Als dit uit staat, is de permissie chatgames.play niet meer nodig om de spellen te zien
+use-permission-toplay: false
+
+#Bij false telt alleen spelers met de permissie 'chatgames.play', dus wie kan meespelen.
+#Bij true telt alle spelers online behalve onzichtbare (vanish).
+count-all-players: false
+
+#Bij true komt er een ranglijst van de snelste typers (/chatgames fastest). Bij false staat deze ranglijst uit.
+fastest-typers-top: true
+
+#PlaceholderAPI-placeholders (PlaceholderAPI moet geïnstalleerd zijn):
+#  Jij:          %chatgames_points%, %chatgames_wins%, %chatgames_wins_<game>%, %chatgames_race_wins%,
+#                %chatgames_global_played%, %chatgames_global_won%, %chatgames_toggle%, %chatgames_sound_toggle%
+#                %chatgames_events_played%, %chatgames_event_wins%, %chatgames_event_best_place% (0 = nog geen)
+#  Jouw tijden:  %chatgames_personal_best% (elk chatspel), %chatgames_fastest_<game>% (ook races)
+#  Jouw plek:    %chatgames_show_current_pos_top% (punten), %chatgames_show_current_pos_fastest% (beste tijd)
+#  Top punten:   %chatgames_top_<n>% (naam), %chatgames_points_top_<n>%, %chatgames_total_points%
+#  Top snelst:   %chatgames_fastest_<n>% (naam, chatspellen), %chatgames_fastest_time_<n>%,
+#                %chatgames_fastest_<game>_<n>%, %chatgames_fastest_<game>_time_<n>%
+#  Nu:           %chatgames_game_running%, %chatgames_current_game%, %chatgames_next_game_in% (seconden)
+#  Race:         %chatgames_race_target%, %chatgames_race_amount%, %chatgames_race_progress% (die van jou)
+#  Uitdagingen:  %chatgames_daily_completed%, %chatgames_daily_total%, %chatgames_weekly_completed%,
+#                %chatgames_weekly_total%, %chatgames_challenges_completed% (in totaal)
+#  Reeksen:      %chatgames_streak_<type>%, %chatgames_streak_<type>_longest% (<type> is challenge, daily of global)
+#  Spel-event:   %chatgames_event_running%, %chatgames_event_name%, %chatgames_event_step%, %chatgames_event_steps%,
+#                %chatgames_event_points% en %chatgames_event_place% (die van jou in het lopende event)
+#  <game> is de naam van een spel zoals in games.yml (bv. unscramble, guess_the_number); <n> is een plek (1, 2, 3...).
+placeholders:
+  #Hoe vaak de ranglijst-placeholders (top_<n>, fastest_<n>, posities...) opnieuw worden berekend, in seconden.
+  #Ze worden ook opnieuw berekend na elk spel met een winnaar. Je eigen punten, overwinningen en tijden zijn altijd actueel.
+  refresh-seconds: 60
+  #Getoond als er niets te tonen is: een lege plek op de ranglijst, nog geen beste tijd, geen lopend spel...
+  empty-value: ''
+
+#Geluid dat naar spelers wordt gestuurd als een chat-event start!
+GameSounds:
+  volume: 0.5
+  pitch: 1.0
+  #LAAT EEN VAN DEZE LEEG OM HEM UIT TE SCHAKELEN
+  win: 'minecraft:entity.experience_orb.pickup'
+  game-start: 'minecraft:entity.player.levelup'
+  time-expired: 'minecraft:entity.villager.no'
+  wrong-case: 'minecraft:block.note_block.bass'
+
+#Spelpresets (benoemde sets van ingeschakelde spellen) staan in presets.yml.

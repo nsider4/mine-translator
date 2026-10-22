@@ -1,0 +1,247 @@
+#GLOBALE SPELLEN
+#
+#In een globaal spel speelt de hele server als één team. Elk goed antwoord (of, in een globale
+#race, elk gehakt blok, elk gedood wezen...; in Tellen, elk getelde getal) telt op bij één gedeelde
+#score. Niemand hoeft de snelste te zijn: haalt de score op tijd het doel, dan krijgt iedereen die
+#heeft bijgedragen de beloning. Is de tijd eerder om, dan mislukt het spel.
+#
+#  Chatspellen lopen als een reeks vragen. Elke speler kan elke vraag één keer beantwoorden, en
+#  de volgende vraag komt na 'answers-per-question' goede antwoorden of 'question-seconds'.
+#  Antwoorden zijn altijd verborgen, zodat ze niet gekopieerd kunnen worden.
+#  Races tellen ieders voortgang samen, bv. 500 Steen gehakt door de hele server.
+#  Tellen (alleen globaal gespeeld): tel samen in de chat, één getal per bericht.
+#
+#Globale spellen starten bij toeval na een gewoon spel, op een timer, met
+#/chatgames global <game> [values], of als stap in een event (events.yml).
+#De voortgang staat in een bossbalk (1.9+) of in de actiebalk (1.8).
+
+triggers:
+  #Procentuele kans dat een globaal spel start nadat een gewoon spel of race eindigt (0 = nooit).
+  chance-after-game: 10
+  #Seconden tussen het einde van het gewone spel en de start van het globale spel.
+  delay-seconds: 5
+  #Minuten tussen globale spellen gestart door een timer (0 = uit).
+  interval-minutes: 0
+  #Spelers die online moeten zijn om een globaal spel vanzelf te laten starten (het commando negeert dit).
+  minimum-players: 2
+
+progress-bar:
+  enabled: true
+  #Een kleur voor de bossbalk: BLUE, GREEN, PINK, PURPLE, RED, WHITE of YELLOW.
+  color: YELLOW
+  #SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12 of SEGMENTED_20.
+  style: SEGMENTED_10
+  #Percentages van het doel die in de chat worden gemeld als de server ze bereikt.
+  announce-at: [25, 50, 75]
+
+#Gebruikt door elk spel hieronder voor elke waarde die het zelf niet instelt.
+#  goal: goede antwoorden (of, bij races, voorwerpen/wezens) die de server nodig heeft
+#  duration-seconds: hoeveel tijd de server heeft
+#  min-contribution: het minste dat een speler moet bijdragen om beloond te worden
+#  points: wat elke beloonde speler krijgt als het doel bereikt is
+#  points-per-contribution: extra punten voor elke bijdrage van een speler
+#  answers-per-question: alleen chatspellen, hoeveel spelers één vraag kunnen beantwoorden
+#  question-seconds: alleen chatspellen, het langst dat één vraag blijft staan
+defaults:
+  goal: 10
+  duration-seconds: 120
+  min-contribution: 1
+  points: 1
+  points-per-contribution: 0
+  answers-per-question: 3
+  question-seconds: 15
+
+#Beloningen in het formaat van rewards.yml (chance, minimum-players, '<chance>%~ ' en 'has:<permission>'
+#werken allemaal). %player% is de speler en %contribution% wat die heeft bijgedragen.
+#Een eigen 'rewards'-sectie van een spel vervangt deze voor dat spel.
+rewards:
+  #Iedereen die minstens min-contribution heeft bijgedragen, als het doel bereikt is.
+  completed:
+    reward_1:
+      data:
+        - '[consolecmd] give %player% iron_ingot 3'
+  #Dezelfde spelers als de tijd om is. Leeg: geen troostprijs.
+  failed: {}
+  #Extra voor de grootste bijdragers als het doel bereikt is, per plek.
+  top-contributors:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% diamond 1'
+    2:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 3'
+    3:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 1'
+
+#Placeholders in elk bericht: %game% %goal% (een getal) %goal_text% (bv. "500 Steen")
+#%progress% %percent% %time% (resterende seconden) %duration%
+messages:
+  start:
+    - ''
+    - '&6&l» GLOBAAL %game%! &fDe hele server speelt samen.'
+    - '&f  Haal &e%goal% goede antwoorden &fbinnen &e%time%s&f. Iedereen die helpt, wordt beloond!'
+    - '&7  Elke vraag neemt %answers% antwoorden aan, dus wacht niet op anderen.'
+    - ''
+  race_start:
+    - ''
+    - '&6&l» GLOBALE RACE! &fDe hele server speelt samen.'
+    - '&f  Haal samen &e%goal% %value% &fbinnen &e%time%s&f. Iedereen die helpt, wordt beloond!'
+    - ''
+  count_start:
+    - ''
+    - '&6&l» GLOBAAL TELLEN! &fTel samen van &e%start% &ftot &e%target% &fin stappen van &e%step%&f!'
+    - '&7  Eén getal per bericht, op volgorde. Niemand telt twee keer achter elkaar. %time%s om af te maken.'
+    - ''
+  #Boven elke vraag. %question% is het nummer ervan.
+  question:
+    - '&6&l» GLOBAAL &7Vraag #%question% &8| &e%progress%&7/&e%goal%'
+  #Als de tijd van een vraag om is. %answer% is het antwoord. Leeg om stil te blijven.
+  question_over: '&8» &7Het antwoord was &f%answer%&7.'
+  #Aan een speler wiens antwoord telde. %contribution% is zijn totaal tot nu toe.
+  answered: '&8[%prefix%&8] &aGoed! &7Je hebt &f%contribution% &7bijgedragen aan de &f%progress%/%goal% &7van de server.'
+  #%reached% is het zojuist bereikte percentage.
+  milestone: '&6&l» &e%reached%% &fklaar! &7(%progress%/%goal%, nog %time%s)'
+  #Een getal dat telde, getoond in plaats van het bericht van de speler. %player% %number%
+  counted: '&e%player% &8» &f%number%'
+  #Een fout. %player% %number% %next% (wat werd verwacht) %start% %reason% %mistakes% %max_mistakes%
+  count_broken:
+    - '&c%player% zei %number%: %reason%'
+    - '&fHet tellen begint opnieuw bij &e%start%&f.'
+  #De fout die het spel beëindigt (on-mistake: fail, of max-mistakes bereikt).
+  count_broken_final:
+    - '&c%player% zei %number%: %reason%'
+  count_reasons:
+    ahead: 'te ver vooruit (het volgende getal was %next%)'
+    behind: 'dat was al geteld (het volgende getal was %next%)'
+    repeated: 'dat getal werd net gezegd'
+    twice: 'niemand mag twee getallen achter elkaar zeggen'
+  #%count% spelers zijn beloond, %contributors% deden mee, %seconds% duurde het.
+  #%top_<n>% en %top_<n>_amount%: de drie grootste bijdragers.
+  completed:
+    - ''
+    - '&6&l» DOEL BEREIKT! &fDe server haalde &e%goal_text% &fin &e%seconds%s&f.'
+    - '&f  Top: &e%top_1% &7(%top_1_amount%)  &e%top_2% &7(%top_2_amount%)  &e%top_3% &7(%top_3_amount%)'
+    - '&f  &e%count% &fspeler(s) krijgen de beloning.'
+    - ''
+  failed:
+    - ''
+    - '&6&l» GLOBAAL SPEL VOORBIJ! &fDe server kwam tot &e%progress%/%goal% &7(%percent%%)&f. Volgende keer beter!'
+    - ''
+  #Aan elke beloonde speler als het doel bereikt is. %points% is wat die verdiende.
+  rewarded: '&8[%prefix%&8] &aJe hebt &f%contribution% &abijgedragen en &f%points% &apunt(en) verdiend!'
+  #Aan een speler die minder dan min-contribution heeft bijgedragen. %min% is dat minimum.
+  too_little: '&8[%prefix%&8] &7Je hebt %contribution% bijgedragen; er waren er minstens %min% nodig voor de beloning.'
+  #De bossbalk (of de actiebalk op 1.8).
+  bar: '&6Globaal %game% &8| &f%progress%/%goal% &8| &e%time%s'
+
+#Woorden gebruikt om %goal_text% te maken.
+words:
+  answers: 'goede antwoorden'
+  to: 'tot'
+
+#De spellen die globaal gespeeld kunnen worden. Onthouden en Raad het getal kunnen dat niet.
+#Elk kan enabled instellen en alles uit 'defaults', plus zijn eigen 'rewards'.
+games:
+  reaction:
+    enabled: true
+    goal: 10
+    duration-seconds: 90
+    question-seconds: 10
+  unscramble:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  math:
+    enabled: true
+    goal: 15
+    duration-seconds: 150
+  sequence:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  trivia:
+    enabled: true
+    goal: 8
+    duration-seconds: 180
+    question-seconds: 20
+  word_association:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  fillout:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  unreverse:
+    enabled: false
+  random:
+    enabled: false
+  variable:
+    enabled: false
+  hoverable:
+    enabled: false
+  clickable:
+    enabled: false
+  #Samen tellen. Het doel is hoeveel getallen de gekozen modus heeft.
+  count:
+    enabled: true
+    duration-seconds: 120
+    #Niemand mag twee getallen achter elkaar zeggen.
+    no-double-count: true
+    #reset: een fout laat het tellen opnieuw beginnen; fail: een fout beëindigt het spel.
+    on-mistake: reset
+    #Met reset: de fouten die het spel toch beëindigen (0 = geen limiet).
+    max-mistakes: 5
+    #Er wordt er willekeurig een gekozen; /chatgames global count <mode> kiest er een.
+    #'step' is hoeveel elk getal omhooggaat (de richting volgt start en target).
+    modes:
+      up:
+        start: 1
+        target: 20
+        step: 1
+      down:
+        start: 15
+        target: 1
+        step: 1
+      evens:
+        start: 2
+        target: 30
+        step: 2
+      fives:
+        start: 5
+        target: 75
+        step: 5
+  #Globale races: de hele server verzamelt richting het doel. De doelen komen uit races.yml;
+  #/chatgames global mine STONE 500 stelt beide in.
+  mine:
+    enabled: true
+    goal: 200
+    duration-seconds: 240
+  hunt:
+    enabled: true
+    goal: 40
+    duration-seconds: 240
+  place:
+    enabled: false
+    goal: 200
+    duration-seconds: 240
+  fish:
+    enabled: false
+    goal: 20
+    duration-seconds: 300
+  eat:
+    enabled: false
+    goal: 30
+    duration-seconds: 240
+  craft:
+    enabled: false
+    goal: 100
+    duration-seconds: 240
+  furnace:
+    enabled: false
+    goal: 64
+    duration-seconds: 300

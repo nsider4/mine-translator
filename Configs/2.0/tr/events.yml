@@ -1,0 +1,112 @@
+#OYUN ETKİNLİKLERİ
+#
+#Bir etkinlik art arda oynanan bir dizi oyundur. Her oyun sıraya göre etkinlik puanı
+#dağıtır; sonuncusu bittiğinde en çok etkinlik puanına sahip oyuncular etkinliğin
+#ödüllerini kazanır. Bir etkinlik sürerken normal oyun döngüsü ve küresel oyunlar bekler.
+#
+#/chatgames event start <event> ile başlat ya da programının başlatmasına izin ver.
+#/chatgames event top <event> zaman içinde onda en çok puan alanı gösterir.
+#
+#Her etkinlik:
+#  name: oyunculara gösterilir (renk kodları çalışır)
+#  schedule: kendiliğinden ne zaman başladığı, ör. 'SATURDAY 20:00' veya 'DAILY 18:30' (ya da yazma).
+#            Saat dilimi challenges.yml'deki dilimdir.
+#  minimum-players: programın başlatması için gereken çevrimiçi oyuncu (komut bunu yok sayar)
+#  pause-seconds: bir oyunun bitişi ile sonrakinin başlangıcı arasındaki saniye
+#  points: her oyunda 1., 2., 3.... için etkinlik puanı
+#  participation-points: başaran diğer herkes için etkinlik puanı. Küresel bir oyunda
+#                        sunucu hedefe ulaşırsa yeterince katkı veren herkes puan alır:
+#                        en büyük katkı verenlere 'points', geri kalanlara bunlar.
+#                        Hedefe ulaşılmazsa o oyunda kimse puan almaz.
+#  steps: oyunlar, sırayla. Her biri:
+#    game: games.yml / races.yml'deki gibi oyun veya yarış
+#    global: küresel oyun olarak oynamak için true (sunucu birlikte oynar; bkz. global_games.yml).
+#            Sayma her zaman küreseldir.
+#    time: cevaplamak (veya yarışı bitirmek) için saniye, oyunun kendi değeri yerine
+#    winners: normal bir sohbet oyununu kaç kişinin kazanabileceği, oyunun kendi değeri yerine
+#    args: /chatgames <game> sonrasındaki gibi değerler, ör. kazı yarışı için 'stone 16'
+#    settings: bu oyun için değiştirilecek diğer games.yml değerleri, ör. {difficulty: hard}
+#  rewards: son sıraya göre ödül satırları (1, 2, 3...) ve puan alan diğer herkes için
+#           'participation'. rewards.yml'deki satırların aynısı ('<chance>%~ ' ve 'has:<permission>' çalışır).
+
+events:
+  weekend_cup:
+    name: '&6&lHafta Sonu Kupası'
+    schedule:
+      - 'SATURDAY 20:00'
+    minimum-players: 3
+    pause-seconds: 15
+    points: [5, 3, 1]
+    participation-points: 1
+    steps:
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+        time: 25
+      - game: word_association
+        global: true
+        settings:
+          difficulty: hard
+      - game: trivia
+        winners: 3
+      - game: mine
+        global: true
+        time: 120
+        args: 'stone 100'
+    rewards:
+      1:
+        - '[consolecmd] give %player% diamond 5'
+      2:
+        - '[consolecmd] give %player% diamond 3'
+      3:
+        - '[consolecmd] give %player% diamond 1'
+      participation:
+        - '[consolecmd] give %player% iron_ingot 3'
+
+  quick_quiz:
+    name: '&b&lHızlı Bilgi Yarışması'
+    minimum-players: 2
+    pause-seconds: 8
+    points: [3, 2, 1]
+    participation-points: 0
+    steps:
+      - game: reaction
+        winners: 3
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+    rewards:
+      1:
+        - '[consolecmd] give %player% gold_ingot 5'
+
+messages:
+  #Herkese. %event% adı, %steps% kaç oyun olduğu, %pause% aralarındaki saniye.
+  start:
+    - ''
+    - '&6&l» ETKİNLİK: %event% &fbaşlıyor! &e%steps% &foyun, en çok etkinlik puanı alan kazanır.'
+    - ''
+  #Her oyundan önce. %step% numarası, %game% oyun.
+  step:
+    - '&6&l» %event% &f- oyun &e%step%/%steps%&f: &e%game%'
+  #Bir oyunda puan alan her oyuncuya. %points% kazandığı, %total% etkinlik toplamı.
+  step_points: '&8[%prefix%&8] &a+%points% etkinlik puanı &7(toplam %total%)'
+  #Sonunda herkese. %count% oyuncu puan aldı; %winner_<n>% ve %points_<n>% ilk üç.
+  end:
+    - ''
+    - '&6&l» %event% &fbitti! &e%count% &foyuncu puan aldı.'
+    - '&f  1. &e%winner_1% &7%points_1%  &f2. &e%winner_2% &7%points_2%  &f3. &e%winner_3% &7%points_3%'
+    - ''
+  nobody:
+    - '&6&l» %event% &fbitti! &cKimse puan almadı.'
+  #Puan alan her oyuncuya, bitişten sonra. %count% içinde %place%.
+  result: '&8[%prefix%&8] &f%count% kişi içinde &e%points% &fetkinlik puanıyla &e#%place% &foldun.'
+  stopped:
+    - '&6&l» %event% &cdurduruldu.'
+
+#Ayarlanmışsa son sıralama config.yml'deki Discord webhook'una gönderilir.
+discord:
+  enabled: true
+  title: '%event% results'
+  line: '#%place% %player% - %points% points'
