@@ -62,6 +62,10 @@ challenges:
   none: '&8[%prefix%&8] &cŞu anda hiç görev yok.'
   daily: 'Günlük'
   weekly: 'Haftalık'
+  #%resets% içindeki birimler, örn. 2g 5sa, 5sa 12dk veya 40dk
+  time_days: '%amount%g'
+  time_hours: '%amount%sa'
+  time_minutes: '%amount%dk'
   reset: '&8[%prefix%&8] &fGÃ¼nlÃ¼k ve haftalÄ±k gÃ¶rev ilerlemesi sÄ±fÄ±rlandÄ±: &c%player%&f.'
 
 streaks:

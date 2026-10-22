@@ -1,7 +1,7 @@
 milestones:
   '100':
-    - "say %player% reached 100 points!"
+    - "say %player% osiągnął 100 punktów!"
     - "give %player% diamond 1"
   '500':
-    - "broadcast %player% is now a legend with 500 points!"
+    - "broadcast %player% jest teraz legendą z 500 punktami!"
     - "give %player% emerald 5"

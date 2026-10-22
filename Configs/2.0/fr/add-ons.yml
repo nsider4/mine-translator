@@ -1,13 +1,13 @@
 discord:
   #Si url est vide, ceci est ignoré car il n'y aura pas de webhook
   webhook-url: ''
-  message-content: 'Latest game results:'
+  message-content: 'Derniers résultats :'
   img-url: 'https://www.spigotmc.org/data/resource_icons/107/107781.jpg?1676494289'
   username: 'Chat Games'
-  title: 'Chat Games Result'
-  description: 'The winner is:'
+  title: 'Résultat de Chat Games'
+  description: 'Le gagnant est :'
   winner-field: '%winner% (%time%)'
-  game-field: 'Game: %game%'
+  game-field: 'Jeu : %game%'
 
 
 #Le fichier où les journaux seront enregistrés

@@ -62,6 +62,10 @@ challenges:
   none: '&8[%prefix%&8] &cGerade gibt es keine Aufgaben.'
   daily: 'Tägliche'
   weekly: 'Wöchentliche'
+  #Die Einheiten in %resets%, z. B. 2T 5Std, 5Std 12Min oder 40Min
+  time_days: '%amount%T'
+  time_hours: '%amount%Std'
+  time_minutes: '%amount%Min'
   reset: '&8[%prefix%&8] &fFortschritt der täglichen und wöchentlichen Aufgaben von &c%player% &fzurückgesetzt.'
 
 streaks:

@@ -31,7 +31,7 @@ challenge:
       - '[consolecmd] give %player% emerald 8'
     7:
       - '[consolecmd] give %player% diamond 4'
-      - '[broadcast] &d%player% &fhas completed every daily challenge &d%day% &fdays in a row!'
+      - '[broadcast] &d%player% &fukończył wszystkie dzienne wyzwania &d%day% &fdni z rzędu!'
 
 daily:
   enabled: true

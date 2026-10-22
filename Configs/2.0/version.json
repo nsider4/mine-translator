@@ -9,8 +9,8 @@
         "en_ca",
         "en_nz"
       ],
-      "version": 1,
-      "hash": "ebbcadf461ce4bbf68e2d7e7e6c4702269d4f8ba808106117b2aa4dfc5be8544"
+      "version": 2,
+      "hash": "cdfccf6ce1b4201b700e4b1279a6286d23a9983c0de0956e4d2470acb11bd8e2"
     },
     "es": {
       "name": "Español",
@@ -23,8 +23,8 @@
         "es_uy",
         "es_ve"
       ],
-      "version": 1,
-      "hash": "bb81eeefa114ea830b4ca96c8fac6e3548756b23931dc412aeca0749072b4a60"
+      "version": 2,
+      "hash": "18d26b0d33e58e71fb15fe2d0a57b097e4c72f1aeb9e39ee1891afc1a4070ee8"
     },
     "fr": {
       "name": "Français",
@@ -32,8 +32,8 @@
         "fr_fr",
         "fr_ca"
       ],
-      "version": 1,
-      "hash": "d053c88642b2442b3548e7128908bea145f9330e6bd1909914266cda0cbb8207"
+      "version": 2,
+      "hash": "8bd85e5847dc9f450121cd60831a93a9dfb4cdb792f50fa0753db5fe3bf04326"
     },
     "pt": {
       "name": "Português",
@@ -41,8 +41,8 @@
         "pt_br",
         "pt_pt"
       ],
-      "version": 1,
-      "hash": "327469bad5e3a4452fc0c76c1f4fffb7321623a8b6792fdafc5303b3520a53a0"
+      "version": 2,
+      "hash": "519d6eb97c0816c0a73c079b2adbf5ee16ef329c9e9a2c3f15f1f33507c0dba2"
     },
     "de": {
       "name": "Deutsch",
@@ -51,16 +51,16 @@
         "de_at",
         "de_ch"
       ],
-      "version": 1,
-      "hash": "89e179a4e0defdb365041e2009b8e6d2645ee6f30c303a966091eb302f6882e4"
+      "version": 2,
+      "hash": "c2e4fbaa93ed8e63d5bc949a506136cf63d0166a1be7c67b6f78aca43b1734dd"
     },
     "it": {
       "name": "Italiano",
       "lang": [
         "it_it"
       ],
-      "version": 1,
-      "hash": "10a7ff877b279fe9598b5f7852b868b340e94788790988fc174119baccb7494c"
+      "version": 2,
+      "hash": "1212912e120e7da4cfb31085a7577e7e1b8e89ee2a0d287daf818b358491e7ec"
     },
     "nl": {
       "name": "Nederlands",
@@ -68,32 +68,32 @@
         "nl_nl",
         "nl_be"
       ],
-      "version": 1,
-      "hash": "78334c9acd3371e01982c560ba6bf61919687a6ea100547a498e09e095459220"
+      "version": 2,
+      "hash": "99a257c7f81d1dc7801146ca53d4a8b8f3218abb5bac42284ca7447805de313e"
     },
     "pl": {
       "name": "Polski",
       "lang": [
         "pl_pl"
       ],
-      "version": 1,
-      "hash": "751f96f7ac257bcdc4f0aefaae33167c5b1c30239311f2e83a1b235ce51bde31"
+      "version": 2,
+      "hash": "5ac4352c8ea3c6f426d39d8e885198ddefc7d28a7880d700febb0c350dcddb01"
     },
     "ru": {
       "name": "Русский",
       "lang": [
         "ru_ru"
       ],
-      "version": 1,
-      "hash": "0bbbd9ac277b2526956c90b3727165e60eb71de298925b3fe3b82afe6c6c943a"
+      "version": 2,
+      "hash": "59728ac2405a0dff1d7c0d763f8d208908c7cfbc51640ae8068900f228912a1a"
     },
     "tr": {
       "name": "Türkçe",
       "lang": [
         "tr_tr"
       ],
-      "version": 1,
-      "hash": "929bd608cba87f79bf398f7ab16367c69b9b1e6f52ca70676acb1bef2be231b5"
+      "version": 2,
+      "hash": "a8794e9d4b38115ce47ffb610c6fe2c815103bafd20a2c6ff17987dcb132acb3"
     }
   },
   "files": [

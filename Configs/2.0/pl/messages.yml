@@ -62,6 +62,10 @@ challenges:
   none: '&8[%prefix%&8] &cTeraz nie ma żadnych wyzwań.'
   daily: 'Dzienne'
   weekly: 'Tygodniowe'
+  #Jednostki w %resets%, np. 2d 5godz, 5godz 12min lub 40min
+  time_days: '%amount%d'
+  time_hours: '%amount%godz'
+  time_minutes: '%amount%min'
   reset: '&8[%prefix%&8] &fPostęp dziennych i tygodniowych wyzwań gracza &c%player% &fzostał zresetowany.'
 
 streaks:

@@ -62,6 +62,10 @@ challenges:
   none: '&8[%prefix%&8] &cNão há desafios agora.'
   daily: 'diário'
   weekly: 'semanal'
+  #As unidades de %resets%, ex.: 2d 5h, 5h 12min ou 40min
+  time_days: '%amount%d'
+  time_hours: '%amount%h'
+  time_minutes: '%amount%min'
   reset: '&8[%prefix%&8] &fO progresso dos desafios diários e semanais de &c%player% &ffoi zerado.'
 
 streaks:

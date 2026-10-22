@@ -25,7 +25,7 @@ unscramble:
   rewards:
     1:
       reward_1:
-        minimum-players: 2 #Online players-based condition, reward can only be chosen if there are 2 or more players online
+        minimum-players: 2 #Bedingung nach Spielern online: Die Belohnung kann nur gezogen werden, wenn 2 oder mehr Spieler online sind
         chance: 50
         data:
           - '10.0%~ [consolecmd] give %player% diamond_block 3 has:test.permission'

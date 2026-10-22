@@ -62,6 +62,10 @@ challenges:
   none: '&8[%prefix%&8] &cСейчас нет испытаний.'
   daily: 'Ежедневные'
   weekly: 'Еженедельные'
+  #Единицы в %resets%, напр. 2д 5ч, 5ч 12мин или 40мин
+  time_days: '%amount%д'
+  time_hours: '%amount%ч'
+  time_minutes: '%amount%мин'
   reset: '&8[%prefix%&8] &fПрогресс ежедневных и еженедельных испытаний игрока &c%player% &fсброшен.'
 
 streaks:
