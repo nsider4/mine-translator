@@ -11,9 +11,12 @@ check-update: true
 lang: 'en_us'
 
 #Bu yapılandırma dosyalarının dili: mesajlar, menüler, kelime listeleri, bilgi yarışması, yorumlar...
-#  auto: yukarıdaki 'lang' değişince, o dilin çevrilmiş dosyaları varsa geçiş yapar
+#Tamamen çevrilmiş: en, es, fr, pt, de, it, nl, pl, ru, tr, zh, zh_tw, ja, ko, uk, cs, sv, hu, vi, id
+#(zh Basitleştirilmiş Çince, zh_tw Geleneksel Çince). 'lang' değerin listede yoksa blok,
+#eşya ve yaratık adları yine çevrilir, ancak bu dosyalar kendi dillerinde kalır (varsayılan olarak İngilizce).
+#  auto: yukarıdaki 'lang' değiştiğinde, o dil tamamen çevrilmişse değiştir
 #  none: asla geçiş yapma
-#  ya da bir dil kodu: en, es, fr, pt, de, it, nl, pl, ru, tr
+#  ya da yukarıdaki dil kodlarından biri
 #Geçişte ayarların ve onlarda yaptığın değişiklikler korunur; kendi mesajların
 #çeviriyle değiştirilir (eski dosyalar önce backups/ klasörüne kopyalanır). Çeviriler
 #https://github.com/nsider4/mine-translator adresinden (Configs klasörü) indirilir ve kendiliğinden

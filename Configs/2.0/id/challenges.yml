@@ -1,0 +1,136 @@
+#TANTANGAN HARIAN DAN MINGGUAN
+#
+#Semua orang mendapat tantangan yang sama. Kemajuan dihitung saat pemain bermain; tantangan
+#yang selesai menampilkan "Siap diambil" di /chatgames challenges, dan /chatgames claim membayarnya.
+#Hadiah yang belum diambil hilang saat tantangan direset.
+#
+#JENIS TANTANGAN (amount adalah jumlah yang dibutuhkan):
+#  WIN_GAMES    menangkan game chat atau balapan, di peringkat mana pun
+#  WIN_GAME     menangkan satu game atau balapan, diatur dengan 'game' (mis. game: unscramble)
+#  WIN_RACES    menangkan balapan
+#  PLAY_GLOBAL  pecahkan game global tepat waktu
+#  WIN_GLOBAL   selesaikan game global di peringkat berhadiah
+#  FAST_WIN     menangkan game chat dalam 'seconds' detik atau kurang (balapan tidak dihitung)
+#  EARN_POINTS  dapatkan poin dari game
+#  PLAY_EVENT   ikuti acara game
+#
+#Setiap tantangan punya:
+#  name / description: ditampilkan di chat dan menu. %amount%, %game%, dan %seconds% diisi otomatis.
+#  icon: item di menu (nama material)
+#  rewards: baris seperti di rewards.yml (peluang dengan '<chance>%~ ', izin dengan 'has:<permission>').
+#           %player% dan %challenge% (namanya) diisi otomatis.
+#
+#ID (win_3, fast_1...) disimpan bersama kemajuan pemain: gunakan hanya a-z, 0-9, - dan _,
+#dan mengubahnya akan memulai ulang kemajuan tantangan itu.
+
+#Zona waktu awal hari, untuk tantangan dan runtunan, mis. Asia/Jakarta atau America/New_York.
+#Kosong memakai zona waktu server.
+timezone: ''
+
+daily:
+  enabled: true
+  #fixed: setiap tantangan di bawah aktif setiap hari.
+  #random: setiap hari diundi 'amount' tantangan darinya (sama untuk semua orang).
+  mode: random
+  amount: 3
+  challenges:
+    win_3:
+      type: WIN_GAMES
+      amount: 3
+      name: '&ePemanasan'
+      description: '&7Menangkan %amount% game chat'
+      icon: GOLD_NUGGET
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    win_8:
+      type: WIN_GAMES
+      amount: 8
+      name: '&6Sedang Panas'
+      description: '&7Menangkan %amount% game chat'
+      icon: GOLD_INGOT
+      rewards:
+        - '[consolecmd] give %player% gold_ingot 8'
+    unscramble_2:
+      type: WIN_GAME
+      game: unscramble
+      amount: 2
+      name: '&bPenyihir Kata'
+      description: '&7Menangkan %amount% game %game%'
+      icon: BOOK
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    math_2:
+      type: WIN_GAME
+      game: math
+      amount: 2
+      name: '&bKalkulator Manusia'
+      description: '&7Menangkan %amount% game %game%'
+      icon: PAPER
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    fast_1:
+      type: FAST_WIN
+      seconds: 5
+      amount: 1
+      name: '&cJari Cepat'
+      description: '&7Menangkan game chat dalam %seconds% detik atau kurang'
+      icon: FEATHER
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    race_1:
+      type: WIN_RACES
+      amount: 1
+      name: '&aPembalap'
+      description: '&7Menangkan balapan'
+      icon: IRON_PICKAXE
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    points_5:
+      type: EARN_POINTS
+      amount: 5
+      name: '&dPengumpul Poin'
+      description: '&7Dapatkan %amount% poin'
+      icon: EXPERIENCE_BOTTLE
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    global_1:
+      type: PLAY_GLOBAL
+      amount: 1
+      name: '&3Pemain Tim'
+      description: '&7Pecahkan game global tepat waktu'
+      icon: COMPASS
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+
+weekly:
+  enabled: true
+  #Hari dimulainya setiap minggu.
+  reset-day: MONDAY
+  mode: fixed
+  amount: 3
+  challenges:
+    win_25:
+      type: WIN_GAMES
+      amount: 25
+      name: '&6Juara Mingguan'
+      description: '&7Menangkan %amount% game chat minggu ini'
+      icon: DIAMOND
+      rewards:
+        - '[consolecmd] give %player% diamond 3'
+    fast_5:
+      type: FAST_WIN
+      seconds: 4
+      amount: 5
+      name: '&cKilat'
+      description: '&7Menangkan %amount% game chat dalam %seconds% detik atau kurang'
+      icon: BLAZE_POWDER
+      rewards:
+        - '[consolecmd] give %player% diamond 2'
+    global_5:
+      type: WIN_GLOBAL
+      amount: 5
+      name: '&3Favorit Penonton'
+      description: '&7Selesaikan %amount% game global di peringkat berhadiah'
+      icon: BEACON
+      rewards:
+        - '[consolecmd] give %player% diamond 2'

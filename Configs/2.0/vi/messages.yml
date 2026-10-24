@@ -1,0 +1,735 @@
+unknown_command: '&8[%prefix%&8] &cLệnh không xác định. Hãy thử lệnh khác!'
+config_reloaded: '&8[%prefix%&8] &fĐã tải lại các tệp cấu hình!'
+config_reload_failed: '&8[%prefix%&8] &cMột số tệp không tải được; hãy xem console. Các tệp đó giữ giá trị trước đó.'
+not_enough_permissions: '&8[%prefix%&8] &cBạn không có đủ quyền dùng lệnh này!'
+player_only_command: '&8[%prefix%&8] &cChỉ người chơi mới dùng được lệnh này!'
+player_deleted: '&8[%prefix%&8] &cNgười chơi &f%player% &cđã bị xóa khỏi cơ sở dữ liệu!'
+player_not_found: '&8[%prefix%&8] &fKhông tìm thấy người chơi &c%player%'
+number_not_found_commands: '&8[%prefix%&8] &cKhông tìm thấy số cho lệnh'
+points_added: '&8[%prefix%&8] &fĐã thêm &a%amount% &fđiểm cho &c%player%'
+points_removed: '&8[%prefix%&8] &fĐã trừ &a%amount% &fđiểm của &c%player%'
+points_set: '&8[%prefix%&8] &fĐã đặt điểm của &c%player% &fthành &a%amount%'
+player_points: '&8[%prefix%&8] &fBạn có &a%amount% &fđiểm!'
+in_cooldown: '&8[%prefix%&8] &cBạn chưa dùng được, hãy đợi &e%time_left%s &ctrước khi dùng lại lệnh'
+type_not_found: '&8[%prefix%&8] &fKhông tìm thấy loại vật liệu/thực thể cho &c%type%'
+inventory_full: '&8[%prefix%&8] &cTúi đồ của bạn đã đầy! &fPhần thưởng đã rơi tại chỗ bạn đứng'
+
+no_winner_placeholder: '---'
+cannot_start_from_disabled: '&8[%prefix%&8] &cBạn không thể bắt đầu trò chơi chat trong thế giới bị tắt!'
+toggle_game: '&8[%prefix%&8] &fTrò chơi chat hiện: &a%state%&f!'
+toggle_sound: '&8[%prefix%&8] &fÂm thanh trò chơi chat hiện: &a%state%&f!'
+toggleAllGames: '&8[%prefix%&8] &fTất cả trò chơi chat hiện: &a%state% &c(TẤT CẢ)&f!'
+state-ON: 'BẬT'
+state-OFF: 'TẮT'
+game_started: '&8[%prefix%&8] &aBạn đã bắt đầu trò chơi chat %game% trong khung chat của mình!'
+invalid_arguments: '&8[%prefix%&8] &fĐã xảy ra lỗi khi kiểm tra tham số của lệnh!'
+cant_log_local: '&8[%prefix%&8] &cBạn không thể xem nhật ký vì tùy chọn này đang bị tắt trong cấu hình!'
+toggle_game_other: '&8[%prefix%&8] &fTrò chơi chat của &c%player% &fhiện: &a%state%&f!'
+toggle_sound_other: '&8[%prefix%&8] &fÂm thanh trò chơi chat của &c%player% &fhiện: &a%state%&f!'
+player_points_other: '&8[%prefix%&8] &c%player% &fcó &a%amount% &fđiểm!'
+data_loading: '&8[%prefix%&8] &cDữ liệu của người chơi này vẫn đang tải, hãy thử lại sau giây lát.'
+usage: '&8[%prefix%&8] &cCách dùng: &f%usage%'
+game_already_running: '&8[%prefix%&8] &cĐang có một trò chơi chat! Hãy kết thúc nó trước bằng &f/chatgames stop&c.'
+game_not_started: '&8[%prefix%&8] &cKhông thể bắt đầu %game% với các giá trị đó. Chi tiết trong console.'
+no_games_enabled: '&8[%prefix%&8] &cHiện không có trò chơi nào được bật.'
+game_stopped: '&8[%prefix%&8] &fĐã dừng trò chơi đang chạy mà không có người thắng.'
+no_game_running: '&8[%prefix%&8] &cHiện không có trò chơi chat nào đang chạy.'
+global_not_enabled: '&8[%prefix%&8] &f%game% &cchưa được bật làm trò chơi toàn cầu trong global_games.yml.'
+unknown_game: '&8[%prefix%&8] &cKhông có trò chơi nào tên &f%game%&c.'
+unknown_menu: '&8[%prefix%&8] &cKhông có menu nào tên &f%menu%&c.'
+
+presets:
+  loaded: '&8[%prefix%&8] &fĐã tải bộ &a%preset% &f(%games%).'
+  cleared: '&8[%prefix%&8] &fKhông còn bộ nào đang hoạt động; dùng các trò chơi được bật trong games.yml.'
+  saved: '&8[%prefix%&8] &fĐã lưu các trò chơi đang bật thành bộ &a%preset% &f(%games%).'
+  not_found: '&8[%prefix%&8] &cKhông có bộ nào tên &f%preset%&c.'
+  invalid_name: '&8[%prefix%&8] &cTên bộ chỉ được chứa chữ cái không dấu, số, - và _ (tối đa 32).'
+  list_header: '&8[%prefix%&8] &eCác bộ:'
+  list_entry: '&7- &f%preset%%active% &8(%games%)'
+  active_marker: ' &a(đang dùng)'
+  list_empty: '&8[%prefix%&8] &cChưa thiết lập bộ nào trong presets.yml.'
+
+challenges:
+  completed: '&8[%prefix%&8] &aĐã hoàn thành thử thách %period%: &f%challenge%&a! Nhận thưởng bằng &f/chatgames claim&a.'
+  claimed: '&8[%prefix%&8] &aBạn đã nhận &f%challenge%&a!'
+  nothing_to_claim: '&8[%prefix%&8] &cHiện bạn không có gì để nhận.'
+  #/chatgames challenges. %period% bên dưới là 'hằng ngày' hoặc 'hằng tuần'; %resets% là thời gian còn lại, vd. 5g 12p
+  header: '&8[%prefix%&8] &eThử thách %period% &7(hoàn thành %completed%/%total%, đặt lại sau %resets%)'
+  entry: '&7- %challenge% &8- &7%description% &f%progress%/%amount% %status%'
+  status_in_progress: ''
+  status_ready: '&a[Có thể nhận]'
+  status_claimed: '&7[Đã nhận]'
+  none: '&8[%prefix%&8] &cHiện không có thử thách nào.'
+  daily: 'hằng ngày'
+  weekly: 'hằng tuần'
+  #Đơn vị trong %resets%, vd. 2n 5g, 5g 12p hoặc 40p
+  time_days: '%amount%n'
+  time_hours: '%amount%g'
+  time_minutes: '%amount%p'
+  reset: '&8[%prefix%&8] &fĐã đặt lại thử thách hằng ngày và hằng tuần của &c%player%&f.'
+
+streaks:
+  grew: '&8[%prefix%&8] &a%streak% &acủa bạn giờ là &f%days% &angày! Nhận thưởng bằng &f/chatgames claim&a.'
+  #%days% là một ngày hoặc một khoảng như 3-5, khi nhận nhiều ngày cùng lúc
+  claimed: '&8[%prefix%&8] &aBạn đã nhận thưởng %streak% &a(ngày %days%)!'
+  header: '&8[%prefix%&8] &eChuỗi:'
+  entry: '&7- %streak% &8- &f%days% &7ngày, tốt nhất &f%longest% %status%'
+  status_ready: '&a[%unclaimed% để nhận]'
+  status_today: '&7[hôm nay đã xong]'
+  status_waiting: '&e[hôm nay chưa xong]'
+  none: '&8[%prefix%&8] &cChuỗi đang bị tắt.'
+  set: '&8[%prefix%&8] &fĐã đặt %streak% &fcủa &c%player% &fthành &a%days% &fngày.'
+  unknown: '&8[%prefix%&8] &cKhông có chuỗi nào tên &f%type%&c. Dùng challenge, daily hoặc global.'
+
+events:
+  unknown: '&8[%prefix%&8] &cKhông có sự kiện nào tên &f%event%&c.'
+  started: '&8[%prefix%&8] &fĐã bắt đầu %event%&f.'
+  already_running: '&8[%prefix%&8] &cMột sự kiện đang diễn ra: %event%&c.'
+  cancelled: '&8[%prefix%&8] &cMột plugin khác đã hủy %event%&c.'
+  not_running: '&8[%prefix%&8] &cKhông có sự kiện nào đang diễn ra.'
+  stopped: '&8[%prefix%&8] &fĐã dừng %event%&f.'
+  list_header: '&8[%prefix%&8] &eSự kiện:'
+  list_entry: '&7- &f%id% &8(%event%&8) &7%steps% trò chơi, tiếp theo: &f%next%%running%'
+  list_running: ' &a(đang diễn ra, trò %step%/%steps%)'
+  list_empty: '&8[%prefix%&8] &cChưa thiết lập sự kiện nào trong events.yml.'
+  not_scheduled: 'chưa lên lịch'
+  top_header: '&8[%prefix%&8] &eNhiều điểm sự kiện nhất trong %event%&e:'
+  top_entry: '&c%spot%. &f%player% &8| &e%points% &7điểm'
+  top_empty: '&8[%prefix%&8] &cChưa ai ghi điểm trong %event%&c.'
+
+discord:
+  test_sent: '&8[%prefix%&8] &fĐã gửi &a%amount% &ftin nhắn thử lên Discord. Nếu không thấy gì, console sẽ cho biết lý do.'
+  leaderboard_posted: '&8[%prefix%&8] &fĐã gửi bảng xếp hạng lên Discord.'
+  disabled: '&8[%prefix%&8] &cTin nhắn Discord đang tắt: đặt &fenabled: true &ctrong discord.yml.'
+  no_channel: '&8[%prefix%&8] &f%section% &ckhông có kênh webhook hay kênh DiscordSRV trong discord.yml.'
+  unknown_message: '&8[%prefix%&8] &cKhông có tin nhắn Discord nào tên &f%message%&c.'
+  empty_message: '&8[%prefix%&8] &f%message% &ctrống hoặc không có trong discord.yml.'
+
+logs:
+  no_logs: "&cKhông có nhật ký hoặc đã xảy ra lỗi."
+  header: "&8[%prefix%&8] &eCác &6%amount% &emục nhật ký gần nhất:"
+  entries:
+    # Các mục nhật ký về trò chơi
+    game:
+      start: "&aBắt đầu trò chơi: &f%game% | &aCó đáp án: &f%hasAnswer% | &aĐáp án: &f%answer%"
+      end: "&aKết thúc trò chơi: &f%game% | &aCó người thắng: &f%hasWinner% | &aNgười thắng: &f%winners% | &aĐáp án: &f%answer%"
+
+    # Các mục nhật ký về cuộc đua vật liệu
+    race:
+      start: "&aBắt đầu đua: &f%race% | &aVật liệu: &f%material% | &aSố lượng: &f%amount%"
+      end: "&aKết thúc đua: &f%race% | &aCó người thắng: &f%hasWinner% | &aNgười thắng: &f%winner% | &aVật liệu: &f%material% | &aSố lượng: &f%amount%"
+
+    # Mục riêng cho cuộc đua HUNT (đua với thực thể)
+    hunt:
+      start: "&aBắt đầu đua: &f%race% | &aThực thể: &f%entity% | &aSố lượng: &f%amount%"
+      end: "&aKết thúc đua: &f%race% | &aCó người thắng: &f%hasWinner% | &aNgười thắng: &f%winner% | &aThực thể: &f%entity% | &aSố lượng: &f%amount%"
+
+#Bạn có thể tùy ý dùng <center> trong các tin nhắn bảng xếp hạng.
+top:
+  #Có thể để trống để tắt một tin nhắn cụ thể. (Trừ 'format' và 'player-stat-format')
+  header: '&b&m---------&e&lTOP CHAT&b&m---------'
+  #Giá trị separators là tin nhắn ngăn cách top 10 người chơi với phần đầu và chân!
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%points% &7điểm'
+  player-stat-format: '&7Bạn có &e&l%player_points% &7trận thắng'
+  total-stat-format: '&7Tổng số trò chơi đã thắng trên máy chủ: &6&l%total_wins%'
+  footer: '&b&m---------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cChưa có dữ liệu! Hãy thắng một trò chơi chat để nhận điểm!'
+
+TypersTop:
+  #Có thể để trống để tắt một tin nhắn cụ thể. (Trừ 'format' và 'player-stat-format')
+  header: '&b&m---------&e&lTOP NHANH NHẤT&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6s'
+  player-stat-format: '&7Thời gian tốt nhất của bạn: &e&l%fastest_time%&6s'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cChưa có dữ liệu! Hãy thắng một trò chơi chat và trở thành người nhanh nhất!'
+  top_disabled_message: '&8[%prefix%&8] &cTính năng này hiện đang tắt!'
+
+GameTypersTop:
+  #Có thể để trống để tắt một tin nhắn cụ thể. (Trừ 'format' và 'player-stat-format')
+  header: '&b&m---------&e&lTOP NHANH NHẤT - %game%&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6s'
+  player-stat-format: '&7Thời gian tốt nhất của bạn: &e&l%fastest_time%&6s'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cChưa có dữ liệu! Hãy thắng một trò chơi chat và trở thành người nhanh nhất!'
+  top_disabled_message: '&8[%prefix%&8] &cTính năng này hiện đang tắt!'
+
+help_command:
+  - '&7&m-------------------------------------------------'
+  - '&e&l-ChatGames-'
+  - '&6'
+  - '&6&lLỆNH:'
+  - '&6'
+  - '&a/chatgames menu [menu] &f- &3Mở menu: hồ sơ, thử thách, chuỗi, bảng xếp hạng (hoặc bất kỳ menu nào trong menus.yml).'
+  - '&a/chatgames profile [player] &f- &3Hiển thị thống kê của bạn (hoặc của người khác).'
+  - '&a/chatgames top &f- &3Hiển thị 10 người chơi nhiều điểm nhất.'
+  - '&a/chatgames fastest [game] &f- &3Hiển thị người thắng nhanh nhất, tổng thể hoặc trong một trò.'
+  - '&a/chatgames points [player] &f- &3Hiển thị điểm của bạn (hoặc của người khác).'
+  - '&a/chatgames challenges &f- &3Hiển thị thử thách hằng ngày và hằng tuần của bạn.'
+  - '&a/chatgames streaks &f- &3Hiển thị các chuỗi của bạn.'
+  - '&a/chatgames claim &f- &3Nhận thưởng của các thử thách và chuỗi đã hoàn thành.'
+  - '&a/chatgames event [list|top <event>] &f- &3Hiển thị các sự kiện trò chơi hoặc người ghi nhiều điểm nhất trong một sự kiện.'
+  - '&a/chatgames toggle [player] &f- &3Bật hoặc tắt trò chơi chat cho bạn.'
+  - '&a/chatgames togglesound [player] &f- &3Bật hoặc tắt âm thanh trò chơi chat.'
+  - '&6'
+  - '&c&lQUẢN TRỊ:'
+  - '&a/chatgames admin &f- &3Mở menu quản trị.'
+  - '&a/chatgames debug &f- &3Mở menu gỡ lỗi: thử bất kỳ trò nào một cách riêng tư, không có thưởng.'
+  - '&a/chatgames (game) [values] &f- &3Bắt đầu trò đó ngay, tùy chọn với từ/giá trị của bạn.'
+  - '&a/chatgames any &f- &3Bắt đầu trò mà vòng xoay sẽ chọn tiếp theo.'
+  - '&a/chatgames global <game> [values] &f- &3Bắt đầu trò chơi toàn cầu: ai trả lời kịp đều thắng.'
+  - '&a/chatgames event start <event> | stop &f- &3Bắt đầu hoặc dừng một sự kiện trò chơi.'
+  - '&a/chatgames stop &f- &3Kết thúc trò đang chạy mà không có người thắng.'
+  - '&a/chatgames toggleAll &f- &3Bật hoặc tắt vòng xoay trò chơi tự động.'
+  - '&a/chatgames preset <list|load|save> [name] &f- &3Quản lý các bộ trò chơi.'
+  - '&a/chatgames +points|-points|setpoints <player> <amount> &f- &3Thay đổi điểm của người chơi.'
+  - '&a/chatgames remove <player> &f- &3Xóa dữ liệu của người chơi.'
+  - '&a/chatgames challenges reset <player> &f- &3Đặt lại thử thách của người chơi.'
+  - '&a/chatgames streak set <player> <challenge|daily|global> <days> &f- &3Đặt chuỗi của người chơi.'
+  - '&a/chatgames logs [amount] &f- &3Hiển thị nhật ký trò chơi gần đây.'
+  - '&a/chatgames discord <test <message|all>|leaderboard> &f- &3Gửi tin nhắn thử hoặc bảng xếp hạng lên Discord.'
+  - '&a/chatgames reload &f- &3Tải lại các tệp cấu hình.'
+  - '&6'
+  - '&2&lLOẠI TRÒ CHƠI:'
+  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace, tame, shear'
+  - '&7&m-------------------------------------------------'
+
+#Dùng <center> trong tin nhắn DANH SÁCH để căn giữa: các dòng có nó sẽ nằm giữa!
+
+#############################
+##    TIN NHẮN TRÒ CHƠI CHAT    ##
+#############################
+#Dùng chung cho mọi trò. Một trò có thể ghi đè bằng 'hint_message' / 'countdown_actionbar' riêng trong mục của nó bên dưới.
+hint_message: '&8[%prefix%&8] &eGợi ý: &f%hint%'
+countdown_actionbar: '&7Còn &e%seconds%s'
+
+waiting_for_other_winners: '&8[%prefix%&8] &aĐúng rồi! &fĐang chờ thêm người thắng...'
+wrong_case: '&8[%prefix%&8] &cGần đúng... Kiểm tra chữ hoa chữ thường!'
+  #TRONG correct_message CỦA MỌI TRÒ, BẠN CÓ THỂ DÙNG "%display_name%" THAY CHO %player%.
+  #
+  #BẠN CŨNG CÓ THỂ DÙNG %points_<position>% ĐỂ HIỂN THỊ ĐIỂM CỦA NGƯỜI CHƠI ĐÃ THẮNG.
+  #
+  #Để hiển thị người thắng thứ 1, 2, 3, v.v. dùng %winner_<position>%, và thời gian của từng người là %time_<position>%
+
+  ##VÍ DỤ VỚI 2 NGƯỜI THẮNG:
+  #
+  #correct_message:
+  #- ''
+  #- '<center>&r✓ ✯ %prefix% &r✯ ✓'
+  #- ''
+  #- '&7Đáp án đúng là `&e%correct_answer%&7`! Người thắng:'
+  #- '<center>&f1. &a%winner_1% - (&c%time_1%s&7)'
+  #- '<center>&f2. &a%winner_2% - (&c%time_2%s&7)'
+#- ''
+unscramble:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToGuess% giây&f để &dsắp xếp lại&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7đã sắp xếp đúng `&e%correct_answer%&7` (&c%time_1%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cđã hết! &fTrò Sắp xếp chữ đã kết thúc!'
+    - '<center>Đáp án đúng là &e%correct_answer%&f!'
+    - ''
+
+unreverse:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToGuess% giây&f để &dđảo ngược&f từ: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7đã đảo ngược `&e%correct_answer%&7` nhanh nhất (&c%time_1%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cđã hết! &fTrò Đảo ngược đã kết thúc!'
+    - '<center>Đáp án đúng là &e%correct_answer%&f!'
+    - ''
+
+reaction:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToGuess% giây&f để &dgõ&f từ: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7đã gõ `&e%correct_answer%&7` nhanh nhất (&c%time_1%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cđã hết! &fTrò phản xạ đã kết thúc!'
+    - '<center>Đáp án đúng là &e%correct_answer%&f!'
+    - ''
+
+guess_the_number:
+  hint_message: '&8[%prefix%&8] &eGợi ý: số nằm trong khoảng &f%hint%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToGuess% giây&f để &dđoán số &ftrong khoảng:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7trả lời đầu tiên `&e%correct_answer%&7` (&c%time_1%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cđã hết! &fTrò Đoán số đã kết thúc!'
+    - '<center>Đáp án đúng là &e%correct_answer%&f!'
+    - ''
+
+memorize:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToMemorize% giây&f để &dghi nhớ &fdanh sách này:'
+    - ''
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  messageAfterMemorized:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToGuess% giây&f để gõ lại danh sách &dđúng thứ tự&f!'
+    - ''
+    - '<center>&fNgăn cách các mục bằng dấu phẩy! (vd. `&btáo, chuối, sô cô la&f`)'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7đã gõ danh sách đầu tiên và nhận giải! (&c%time_1%s&7)'
+    - ''
+    - '<center>&fDanh sách là: &f`&b%correct_answer%&f`'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cđã hết! &fTrò Ghi nhớ đã kết thúc!'
+    - ''
+    - '<center>&fDanh sách là: &f`&b%correct_answer%&f`'
+    - ''
+
+sequence:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToGuess% giây&f để &dtiếp tục dãy số&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  hint_message: '&8[%prefix%&8] &eGợi ý: số tiếp theo là &f%hint%'
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7tìm ra `&e%correct_answer%&7` đầu tiên (&c%time_1%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cđã hết! &fTrò Dãy số đã kết thúc!'
+    - '<center>Số tiếp theo là &e%correct_answer%&f!'
+    - ''
+
+clickable:
+  clickableText: '&aNhấn vào đây!'
+  hoverText: '&eNhấn vào đây!'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToGuess% giây&f để &dnhấn&f vào chữ:'
+    - ''
+    - '<center>&b%clickableText%'
+    - ''
+  #USE %winner_
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7đã nhấn vào chữ nhanh nhất (&c%time_1%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cđã hết! &fTrò nhấn chữ đã kết thúc!'
+    - ''
+
+fillout:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToGuess% giây&f để &dđiền&f từ: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7đã điền `&e%correct_answer%&7` nhanh nhất (&c%time_1%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cđã hết! &fTrò Điền chữ đã kết thúc!'
+    - '<center>Đáp án đúng là &e%correct_answer%&f!'
+    - ''
+
+hoverable:
+  hoverableText: '&eRê chuột vào đây!'
+  hoverText: '&b%selection%'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToGuess% giây&f để &dgõ&f từ trong chữ hiện khi rê chuột:'
+    - ''
+    - '<center>&b%hoverableText%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7đã gõ `&e%correct_answer%&7` nhanh nhất (&c%time_1%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cđã hết! &fTrò rê chuột đã kết thúc!'
+    - '<center>Đáp án đúng là &e%correct_answer%&f!'
+    - ''
+
+#Trò này tạo một chuỗi ký tự ngẫu nhiên với độ dài cho trước
+random:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToGuess% giây&f để &dgõ&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7đã gõ `&e%correct_answer%&7` nhanh nhất (&c%time_1%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cđã hết! &fTrò ký tự ngẫu nhiên đã kết thúc!'
+    - '<center>Đáp án đúng là &e%correct_answer%&f!'
+    - ''
+
+math:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToGuess% giây&f để &dgiải&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7đã ra `&e%correct_answer%&7` nhanh nhất (&c%time_1%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cđã hết! &fTrò toán học đã kết thúc!'
+    - '<center>Đáp án đúng là &e%correct_answer%&f!'
+    - ''
+
+variable:
+  #Đây là định dạng chúng xuất hiện; bạn có thể đổi số lần %symbol% lặp lại trong 'line1and2-format', nhưng mọi biến ở dòng 3 phải giữ nguyên.
+  line1and2-format: '&c%symbol%&f + &c%symbol%&f + &c%symbol%&f = &e'
+  line3-format: '&c%symbol_1%&f + &c%symbol_2%&f + &b%toGet% &f= &e%result%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToGuess% giây&f để &dtìm&f: `&b%symbol%&f`'
+    - ''
+    - '<center>%line_1%'
+    - '<center>%line_2%'
+    - '<center>%line_3%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7đã ra `&e%correct_answer%&7` nhanh nhất (&c%time_1%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cđã hết! &fTrò biến số đã kết thúc!'
+    - '<center>Đáp án đúng là &e%correct_answer%&f!'
+    - ''
+
+#%selection% là các manh mối, %difficulty% là easy/medium/hard.
+word_association:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToGuess% giây&f để tìm &dmối liên hệ&f:'
+    - '<center>&b%selection%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7đã tìm ra mối liên hệ `&e%correct_answer%&7` (&c%time_1%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cđã hết! &fKhông ai tìm ra mối liên hệ.'
+    - '<center>Đáp án là &e%correct_answer%&f!'
+    - ''
+
+trivia:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToGuess% giây&f để &dtrả lời&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7trả lời đầu tiên `&e%correct_answer%&7` (&c%time_1%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cđã hết! &fTrò đố vui đã kết thúc!'
+    - '<center>Đáp án đúng là &e%correct_answer%&f!'
+    - ''
+
+#ĐUA
+#Hiện các cuộc đua chưa hỗ trợ nhiều người thắng: tôi không thấy ý nghĩa, vì đây là "đua" hay "thử thách người chơi", phần thưởng nên dành cho người đầu tiên.
+
+#%value% là vật liệu hoặc sinh vật, %amount% là số lượng, %timeToComplete% là giới hạn thời gian tính bằng giây.
+#Trong correct_message: %winner%, %winner_displayname%, %time% (giây) và %points% (điểm của người thắng).
+
+hunt:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToComplete% giây&f để &dsăn&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7đã săn `&e%amount%&fx &3%value%&7` (&c%time%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cđã hết! &fThử thách Săn bắt đã kết thúc!'
+
+mine:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToComplete% giây&f để &dđào&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7đã đào `&e%amount%&fx &3%value%&7` (&c%time%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cđã hết! &fThử thách Đào đã kết thúc!'
+
+place:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToComplete% giây&f để &dđặt&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7đã đặt `&e%amount%&fx &3%value%&7` (&c%time%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cđã hết! &fThử thách Xây dựng đã kết thúc!'
+
+fish:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToComplete% giây&f để &dcâu&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7đã câu `&e%amount%&fx &3%value%&7` (&c%time%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cđã hết! &fThử thách Câu cá đã kết thúc!'
+
+eat:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToComplete% giây&f để &dăn&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7đã ăn `&e%amount%&fx &3%value%&7` (&c%time%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cđã hết! &fThử thách Ăn uống đã kết thúc!'
+
+craft:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToComplete% giây&f để &dchế tạo&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7đã chế tạo `&e%amount%&fx &3%value%&7` (&c%time%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cđã hết! &fThử thách Chế tạo đã kết thúc!'
+furnace:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToComplete% giây&f để &dnấu&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7đã nấu `&e%amount%&fx &3%value%&7` (&c%time%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cđã hết! &fThử thách Nấu ăn đã kết thúc!'
+
+tame:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToComplete% giây&f để &dthuần hóa&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7đã thuần hóa `&e%amount%&fx &3%value%&7` (&c%time%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cđã hết! &fThử thách Thuần hóa đã kết thúc!'
+
+shear:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fBạn có &e%timeToComplete% giây&f để &dxén lông&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7đã xén lông `&e%amount%&fx &3%value%&7` (&c%time%s&7) và nhận giải!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cđã hết! &fThử thách Xén lông đã kết thúc!'

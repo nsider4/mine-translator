@@ -112,7 +112,7 @@ clickable:
   timeToGuess_seconds: 20
   #__Kapatmak için sonraki 2 değeri boş bırak__
   titleMessage: '&eMetne tıkla'
-  subtitleMessage: '&fSÃ¼re: &e%timeToGuess%s'
+  subtitleMessage: '&fSüre: &e%timeToGuess%s'
 
 fillout:
   enable: true
@@ -150,7 +150,7 @@ hoverable:
   timeToGuess_seconds: 20
   #__Kapatmak için sonraki 2 değeri boş bırak__
   titleMessage: '&eMetnin üstüne gel'
-  subtitleMessage: '&fSÃ¼re: &e%timeToGuess%s'
+  subtitleMessage: '&fSüre: &e%timeToGuess%s'
 
 #Bu oyunda verilen uzunlukta rastgele karakterlerden bir dizi oluşturulur
 random:

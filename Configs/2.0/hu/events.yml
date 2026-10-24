@@ -1,0 +1,108 @@
+#JÁTÉKESEMÉNYEK
+#
+#Egy esemény egymás után játszott játékok sorozata. Minden játék helyezés szerint oszt eseménypontokat;
+#amikor az utolsó véget ér, a legtöbb eseménypontot gyűjtő játékosok nyerik az esemény
+#jutalmait. Amíg egy esemény fut, a normál játékrotáció és a globális játékok várnak.
+#
+#Indíts egyet a /chatgames event start <event> paranccsal, vagy hagyd, hogy az ütemezés indítsa.
+#A /chatgames event top <event> megmutatja, ki szerezte a legtöbbet benne az idők során.
+#
+#Minden esemény:
+#  name: a játékosoknak látszik (a színkódok működnek)
+#  schedule: mikor indul magától, pl. 'SATURDAY 20:00' vagy 'DAILY 18:30' (vagy hagyd ki).
+#            Az időzóna a challenges.yml-ben lévő.
+#  minimum-players: online játékosok, akik kellenek, hogy az ütemezés elindítsa (a parancs ezt figyelmen kívül hagyja)
+#  pause-seconds: másodpercek egy játék vége és a következő kezdete között
+#  points: eseménypontok az 1., 2., 3.... helyért minden játékban
+#  participation-points: eseménypontok mindenki másnak, aki teljesít. Globális játékban, ha
+#                        a szerver eléri a célt, mindenki pontot kap, aki eleget hozzájárult:
+#                        'points' a legnagyobb hozzájárulóknak, ezek a többieknek.
+#                        Ha a cél nem teljesül, abban a játékban senki sem kap pontot.
+#  steps: a játékok, sorrendben. Mindegyik:
+#    game: a játék vagy verseny, mint a games.yml / races.yml-ben
+#    global: true, hogy globális játékként fusson (a szerver együtt játszik; lásd global_games.yml).
+#            A Számolás mindig globális.
+#    time: másodpercek a válaszra (vagy egy verseny befejezésére), a játék saját értéke helyett
+#    winners: hányan nyerhetnek egy normál csetjátékot, a játék saját értéke helyett
+#    args: az értékek, mint a /chatgames <game> után, pl. 'stone 16' egy bányászversenyhez
+#    settings: bármely más games.yml érték, amit ennél a játéknál módosítani kell, pl. {difficulty: hard}
+#  rewards: jutalomsorok végső helyezés szerint (1, 2, 3...), és 'participation' mindenki másnak,
+#           aki pontot szerzett. Ugyanazok a sorok, mint a rewards.yml-ben ('<chance>%~ ' és 'has:<permission>' működik).
+
+events:
+  weekend_cup:
+    name: '&6&lHétvégi kupa'
+    schedule:
+      - 'SATURDAY 20:00'
+    minimum-players: 3
+    pause-seconds: 15
+    points: [5, 3, 1]
+    participation-points: 1
+    steps:
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+        time: 25
+      - game: word_association
+        global: true
+        settings:
+          difficulty: hard
+      - game: trivia
+        winners: 3
+      - game: mine
+        global: true
+        time: 120
+        args: 'stone 100'
+    rewards:
+      1:
+        - '[consolecmd] give %player% diamond 5'
+      2:
+        - '[consolecmd] give %player% diamond 3'
+      3:
+        - '[consolecmd] give %player% diamond 1'
+      participation:
+        - '[consolecmd] give %player% iron_ingot 3'
+
+  quick_quiz:
+    name: '&b&lGyorskvíz'
+    minimum-players: 2
+    pause-seconds: 8
+    points: [3, 2, 1]
+    participation-points: 0
+    steps:
+      - game: reaction
+        winners: 3
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+    rewards:
+      1:
+        - '[consolecmd] give %player% gold_ingot 5'
+
+messages:
+  #Mindenkinek. %event% a neve, %steps% a játékok száma, %pause% a köztük lévő másodpercek.
+  start:
+    - ''
+    - '&6&l» ESEMÉNY: %event% &findul! &e%steps% &fjáték, a legtöbb eseménypont nyer.'
+    - ''
+  #Minden játék előtt. %step% a sorszáma, %game% a játék.
+  step:
+    - '&6&l» %event% &f- &e%step%/%steps%&f. játék: &e%game%'
+  #Minden játékosnak, aki pontot szerez egy játékban. %points% amit szerzett, %total% az eseménybeli összesítése.
+  step_points: '&8[%prefix%&8] &a+%points% eseménypont &7(összesen %total%)'
+  #Mindenkinek a végén. %count% játékos szerzett pontot; %winner_<n>% és %points_<n>% az első három.
+  end:
+    - ''
+    - '&6&l» %event% &fvéget ért! &e%count% &fjátékos szerzett pontot.'
+    - '&f  1. &e%winner_1% &7%points_1%  &f2. &e%winner_2% &7%points_2%  &f3. &e%winner_3% &7%points_3%'
+    - ''
+  nobody:
+    - '&6&l» %event% &fvéget ért! &cSenki sem szerzett pontot.'
+  #Minden pontot szerzett játékosnak a vége után. %place% / %count%.
+  result: '&f&8[%prefix%&8] &e#%place% &fhelyen végeztél %count% közül, &e%points% &feseményponttal.'
+  stopped:
+    - '&6&l» %event% &cleállítva.'
+
+#Az események kezdete és a végeredmény a Discordra kerül a discord.yml beállításai szerint.

@@ -1,0 +1,735 @@
+unknown_command: '&8[%prefix%&8] &c不明なコマンドです。別のものを試してください！'
+config_reloaded: '&8[%prefix%&8] &f設定ファイルを再読み込みしました！'
+config_reload_failed: '&8[%prefix%&8] &c一部のファイルを読み込めませんでした。コンソールを確認してください。それらのファイルは前の値のままです。'
+not_enough_permissions: '&8[%prefix%&8] &cこのコマンドを実行する権限がありません！'
+player_only_command: '&8[%prefix%&8] &cこのコマンドはプレイヤーしか実行できません！'
+player_deleted: '&8[%prefix%&8] &cプレイヤー &f%player% &cをデータベースから削除しました！'
+player_not_found: '&8[%prefix%&8] &fプレイヤーが見つかりません：&c%player%'
+number_not_found_commands: '&8[%prefix%&8] &cコマンドに使う数が見つかりません'
+points_added: '&8[%prefix%&8] &c%player% &fに &a%amount% &fポイントを追加しました'
+points_removed: '&8[%prefix%&8] &c%player% &fから &a%amount% &fポイントを削除しました'
+points_set: '&8[%prefix%&8] &c%player% &fのポイントを &a%amount% &fに設定しました'
+player_points: '&8[%prefix%&8] &fあなたは &a%amount% &fポイント持っています！'
+in_cooldown: '&8[%prefix%&8] &cまだ使えません。&e%time_left%s &c待ってからもう一度使ってください'
+type_not_found: '&8[%prefix%&8] &f素材/エンティティの種類が見つかりません：&c%type%'
+inventory_full: '&8[%prefix%&8] &cインベントリがいっぱいです！&f報酬はあなたの場所にドロップしました'
+
+no_winner_placeholder: '---'
+cannot_start_from_disabled: '&8[%prefix%&8] &c無効なワールドではチャットゲームを開始できません！'
+toggle_game: '&8[%prefix%&8] &fチャットゲームを &a%state% &fにしました！'
+toggle_sound: '&8[%prefix%&8] &fチャットゲームのサウンドを &a%state% &fにしました！'
+toggleAllGames: '&8[%prefix%&8] &c全&fチャットゲームを &a%state% &fにしました！'
+state-ON: 'オン'
+state-OFF: 'オフ'
+game_started: '&8[%prefix%&8] &aチャットで %game% のチャットゲームを開始しました！'
+invalid_arguments: '&8[%prefix%&8] &fコマンドの引数を確認中に問題が発生しました！'
+cant_log_local: '&8[%prefix%&8] &c設定でこのオプションが無効なので、ログメッセージは見られません！'
+toggle_game_other: '&f&8[%prefix%&8] &c%player% &fのチャットゲームを &a%state% &fにしました！'
+toggle_sound_other: '&f&8[%prefix%&8] &c%player% &fのチャットゲームのサウンドを &a%state% &fにしました！'
+player_points_other: '&8[%prefix%&8] &c%player% &fは &a%amount% &fポイント持っています！'
+data_loading: '&8[%prefix%&8] &cそのプレイヤーのデータはまだ読み込み中です。少し待ってから試してください。'
+usage: '&8[%prefix%&8] &c使い方：&f%usage%'
+game_already_running: '&8[%prefix%&8] &cチャットゲームがすでに進行中です！先に &f/chatgames stop &cで終了してください。'
+game_not_started: '&8[%prefix%&8] &cその値では %game% ゲームを開始できませんでした。詳しくはコンソールを見てください。'
+no_games_enabled: '&8[%prefix%&8] &c現在有効なゲームがありません。'
+game_stopped: '&8[%prefix%&8] &f現在のゲームは勝者なしで停止されました。'
+no_game_running: '&8[%prefix%&8] &c今は進行中のチャットゲームがありません。'
+global_not_enabled: '&8[%prefix%&8] &f%game% &cは global_games.yml でグローバルゲームとして有効になっていません。'
+unknown_game: '&8[%prefix%&8] &c&f%game% &cというゲームはありません。'
+unknown_menu: '&8[%prefix%&8] &c&f%menu% &cというメニューはありません。'
+
+presets:
+  loaded: '&8[%prefix%&8] &fプリセット &a%preset% &f(%games%) を読み込みました。'
+  cleared: '&8[%prefix%&8] &fプリセットは使われなくなりました。games.yml で有効なゲームが使われます。'
+  saved: '&8[%prefix%&8] &f有効なゲームをプリセット &a%preset% &f(%games%) として保存しました。'
+  not_found: '&8[%prefix%&8] &c&f%preset% &cというプリセットはありません。'
+  invalid_name: '&8[%prefix%&8] &cプリセット名に使えるのは英字、数字、- と _ だけです（32 文字まで）。'
+  list_header: '&8[%prefix%&8] &eプリセット：'
+  list_entry: '&7- &f%preset%%active% &8(%games%)'
+  active_marker: ' &a(使用中)'
+  list_empty: '&8[%prefix%&8] &cpresets.yml にプリセットが設定されていません。'
+
+challenges:
+  completed: '&8[%prefix%&8] &a%period%チャレンジ達成：&f%challenge%&a！&f/chatgames claim &aで受け取ってください。'
+  claimed: '&a&8[%prefix%&8] &f%challenge% &aを受け取りました！'
+  nothing_to_claim: '&8[%prefix%&8] &c今受け取れるものはありません。'
+  #/chatgames challenges。下の %period% は「デイリー」か「ウィークリー」、%resets% は残り時間（例：5時間 12分）
+  header: '&8[%prefix%&8] &e%period%チャレンジ &7（%completed%/%total% 達成、リセットまで %resets%）'
+  entry: '&7- %challenge% &8- &7%description% &f%progress%/%amount% %status%'
+  status_in_progress: ''
+  status_ready: '&a[受け取れます]'
+  status_claimed: '&7[受取済み]'
+  none: '&8[%prefix%&8] &c今はチャレンジがありません。'
+  daily: 'デイリー'
+  weekly: 'ウィークリー'
+  #%resets% の単位。例：2日 5時間、5時間 12分、40分
+  time_days: '%amount%日'
+  time_hours: '%amount%時間'
+  time_minutes: '%amount%分'
+  reset: '&f&8[%prefix%&8] &c%player% &fのデイリーとウィークリーのチャレンジ進行をリセットしました。'
+
+streaks:
+  grew: '&8[%prefix%&8] &a%streak% &aが &f%days% &a日になりました！&f/chatgames claim &aで報酬を受け取ってください。'
+  #%days% は 1 日、または複数日をまとめて受け取ったときの 3-5 のような範囲です
+  claimed: '&8[%prefix%&8] &a%streak% &aの報酬を受け取りました（%days% 日目）！'
+  header: '&8[%prefix%&8] &e連続記録：'
+  entry: '&7- %streak% &8- &f%days% &7日、最高 &f%longest% %status%'
+  status_ready: '&a[%unclaimed% 件受け取れます]'
+  status_today: '&7[今日は達成済み]'
+  status_waiting: '&e[今日は未達成]'
+  none: '&8[%prefix%&8] &c連続記録はオフになっています。'
+  set: '&f&8[%prefix%&8] &c%player% &fの%streak% &fを &a%days% &f日に設定しました。'
+  unknown: '&8[%prefix%&8] &c&f%type% &cという連続記録はありません。challenge、daily、global のどれかを使ってください。'
+
+events:
+  unknown: '&8[%prefix%&8] &c&f%event% &cというイベントはありません。'
+  started: '&8[%prefix%&8] &fイベント %event% &fを開始しました。'
+  already_running: '&8[%prefix%&8] &cすでにイベントが進行中です：%event%&c。'
+  cancelled: '&8[%prefix%&8] &c別のプラグインがイベント %event% &cをキャンセルしました。'
+  not_running: '&8[%prefix%&8] &c進行中のイベントはありません。'
+  stopped: '&8[%prefix%&8] &fイベント %event% &fを停止しました。'
+  list_header: '&8[%prefix%&8] &eイベント：'
+  list_entry: '&7- &f%id% &8(%event%&8) &7%steps% ゲーム、次回：&f%next%%running%'
+  list_running: ' &a(進行中、%step%/%steps% ゲーム目)'
+  list_empty: '&8[%prefix%&8] &cevents.yml にイベントが設定されていません。'
+  not_scheduled: '予定なし'
+  top_header: '&8[%prefix%&8] &e%event% &eでイベントポイントが最も多いプレイヤー：'
+  top_entry: '&c%spot%. &f%player% &8| &e%points% &7ポイント'
+  top_empty: '&8[%prefix%&8] &c%event% &cではまだ誰も得点していません。'
+
+discord:
+  test_sent: '&8[%prefix%&8] &fDiscord にテストメッセージを &a%amount% &f件送りました。何も表示されない場合は、コンソールに理由が出ます。'
+  leaderboard_posted: '&8[%prefix%&8] &fランキングを Discord に送りました。'
+  disabled: '&8[%prefix%&8] &cDiscord メッセージはオフです：discord.yml で &fenabled: true &cにしてください。'
+  no_channel: '&8[%prefix%&8] &f%section% &cには discord.yml で webhook か DiscordSRV のチャンネルがありません。'
+  unknown_message: '&8[%prefix%&8] &c&f%message% &cという Discord メッセージはありません。'
+  empty_message: '&8[%prefix%&8] &f%message% &cは discord.yml で空か、ありません。'
+
+logs:
+  no_logs: "&cログがないか、エラーが発生しました。"
+  header: "&8[%prefix%&8] &e直近 &6%amount% &e件のログ："
+  entries:
+    # ゲーム関連のログ
+    game:
+      start: "&aゲーム開始：&f%game% | &a答えあり：&f%hasAnswer% | &a答え：&f%answer%"
+      end: "&aゲーム終了：&f%game% | &a勝者あり：&f%hasWinner% | &a勝者：&f%winners% | &a答え：&f%answer%"
+
+    # 素材タイプのレースのログ
+    race:
+      start: "&aレース開始：&f%race% | &a素材：&f%material% | &a数：&f%amount%"
+      end: "&aレース終了：&f%race% | &a勝者あり：&f%hasWinner% | &a勝者：&f%winner% | &a素材：&f%material% | &a数：&f%amount%"
+
+    # ハントレース（エンティティタイプのレース）専用のログ
+    hunt:
+      start: "&aレース開始：&f%race% | &aエンティティ：&f%entity% | &a数：&f%amount%"
+      end: "&aレース終了：&f%race% | &a勝者あり：&f%hasWinner% | &a勝者：&f%winner% | &aエンティティ：&f%entity% | &a数：&f%amount%"
+
+#ランキングのメッセージでは、必要なら <center> を使えます。
+top:
+  #特定のメッセージを無効にしたい場合は空にできます。（'format' と 'player-stat-format' を除く）
+  header: '&b&m---------&e&lチャットランキング&b&m---------'
+  #separators の値は、上位 10 人をヘッダーとフッターから離すためのメッセージです！
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%points% &7ポイント'
+  player-stat-format: '&7あなたの勝利数は &e&l%player_points% &7回'
+  total-stat-format: '&7全体のゲーム勝利数：&6&l%total_wins%'
+  footer: '&b&m---------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cまだデータがありません！チャットゲームに勝ってポイントを集めよう！'
+
+TypersTop:
+  #特定のメッセージを無効にしたい場合は空にできます。（'format' と 'player-stat-format' を除く）
+  header: '&b&m---------&e&l最速ランキング&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6秒'
+  player-stat-format: '&7あなたの最速タイムは &e&l%fastest_time%&6秒'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cまだデータがありません！チャットゲームに勝って一番速くなろう！'
+  top_disabled_message: '&8[%prefix%&8] &cこの機能は現在無効です！'
+
+GameTypersTop:
+  #特定のメッセージを無効にしたい場合は空にできます。（'format' と 'player-stat-format' を除く）
+  header: '&b&m---------&e&l最速ランキング - %game%&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6秒'
+  player-stat-format: '&7あなたの最速タイムは &e&l%fastest_time%&6秒'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cまだデータがありません！チャットゲームに勝って一番速くなろう！'
+  top_disabled_message: '&8[%prefix%&8] &cこの機能は現在無効です！'
+
+help_command:
+  - '&7&m-------------------------------------------------'
+  - '&e&l-ChatGames-'
+  - '&6'
+  - '&6&lコマンド：'
+  - '&6'
+  - '&a/chatgames menu [menu] &f- &3メニューを開きます：プロフィール、チャレンジ、連続記録、ランキング（または menus.yml の任意のメニュー）。'
+  - '&a/chatgames profile [player] &f- &3自分（または他のプレイヤー）の統計を表示します。'
+  - '&a/chatgames top &f- &3ポイントが多い上位 10 人を表示します。'
+  - '&a/chatgames fastest [game] &f- &3全体または 1 つのゲームの最速の勝者を表示します。'
+  - '&a/chatgames points [player] &f- &3自分（または他のプレイヤー）のポイントを表示します。'
+  - '&a/chatgames challenges &f- &3デイリーとウィークリーのチャレンジを表示します。'
+  - '&a/chatgames streaks &f- &3連続記録を表示します。'
+  - '&a/chatgames claim &f- &3達成したチャレンジと連続記録の報酬を受け取ります。'
+  - '&a/chatgames event [list|top <event>] &f- &3ゲームイベント、または 1 つのイベントで最も得点した人を表示します。'
+  - '&a/chatgames toggle [player] &f- &3チャットゲームのオン/オフを切り替えます。'
+  - '&a/chatgames togglesound [player] &f- &3チャットゲームのサウンドのオン/オフを切り替えます。'
+  - '&6'
+  - '&c&l管理者：'
+  - '&a/chatgames admin &f- &3管理メニューを開きます。'
+  - '&a/chatgames debug &f- &3デバッグメニューを開きます：どのゲームも報酬なしで個人的にテストできます。'
+  - '&a/chatgames (game) [values] &f- &3そのゲームを今すぐ開始します。自分の単語/値も指定できます。'
+  - '&a/chatgames any &f- &3ローテーションが次に選ぶゲームを開始します。'
+  - '&a/chatgames global <game> [values] &f- &3グローバルゲームを開始します：時間内に答えた全員が勝ちます。'
+  - '&a/chatgames event start <event> | stop &f- &3ゲームイベントを開始または停止します。'
+  - '&a/chatgames stop &f- &3進行中のゲームを勝者なしで終了します。'
+  - '&a/chatgames toggleAll &f- &3ゲームの自動ローテーションをオン/オフします。'
+  - '&a/chatgames preset <list|load|save> [name] &f- &3ゲームのプリセットを管理します。'
+  - '&a/chatgames +points|-points|setpoints <player> <amount> &f- &3プレイヤーのポイントを変更します。'
+  - '&a/chatgames remove <player> &f- &3プレイヤーのデータを削除します。'
+  - '&a/chatgames challenges reset <player> &f- &3プレイヤーのチャレンジ進行を消去します。'
+  - '&a/chatgames streak set <player> <challenge|daily|global> <days> &f- &3プレイヤーの連続記録を設定します。'
+  - '&a/chatgames logs [amount] &f- &3直近のゲームのログを表示します。'
+  - '&a/chatgames discord <test <message|all>|leaderboard> &f- &3Discord にテストメッセージかランキングを送ります。'
+  - '&a/chatgames reload &f- &3設定ファイルを再読み込みします。'
+  - '&6'
+  - '&2&lゲームの種類：'
+  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace, tame, shear'
+  - '&7&m-------------------------------------------------'
+
+#リスト形式のメッセージで <center> を使うと中央寄せになります。それを含む行が中央に表示されます！
+
+#############################
+##    チャットゲームのメッセージ    ##
+#############################
+#すべてのゲームで共通です。各ゲームは下の自分のセクションの 'hint_message' / 'countdown_actionbar' で上書きできます。
+hint_message: '&8[%prefix%&8] &eヒント：&f%hint%'
+countdown_actionbar: '&7残り &e%seconds%秒'
+
+waiting_for_other_winners: '&8[%prefix%&8] &a正解！&fほかの勝者を待っています…'
+wrong_case: '&8[%prefix%&8] &c惜しい…大文字と小文字を確認して！'
+  #すべてのゲームの correct_message で、%player% の代わりに "%display_name%" を使えます。
+  #
+  #%points_<position>% で勝ったプレイヤーのポイントも表示できます。
+  #
+  #1 位、2 位、3 位…の勝者を表示するには %winner_<position>%、それぞれのタイムには %time_<position>% を使います
+
+  ##例：勝者 2 人の場合：
+  #
+  #correct_message:
+  #- ''
+  #- '<center>&r✓ ✯ %prefix% &r✯ ✓'
+  #- ''
+  #- '&7正解は `&e%correct_answer%&7` でした！勝者は：'
+  #- '<center>&f1. &a%winner_1% - (&c%time_1%s&7)'
+  #- '<center>&f2. &a%winner_2% - (&c%time_2%s&7)'
+#- ''
+unscramble:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% 秒&fで&d並べ替えよう&f：`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7が `&e%correct_answer%&7` を正しく並べ替え（&c%time_1%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&cが経過！&f並べ替えゲームは終了です！'
+    - '<center>正解は &e%correct_answer%&f でした！'
+    - ''
+
+unreverse:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% 秒&fでこの単語を&d逆から戻そう&f：`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7が最速で `&e%correct_answer%&7` を元に戻し（&c%time_1%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&cが経過！&f逆さ読みゲームは終了です！'
+    - '<center>正解は &e%correct_answer%&f でした！'
+    - ''
+
+reaction:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% 秒&fでこの単語を&d入力しよう&f：`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7が最速で `&e%correct_answer%&7` を入力し（&c%time_1%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&cが経過！&f反応ゲームは終了です！'
+    - '<center>正解は &e%correct_answer%&f でした！'
+    - ''
+
+guess_the_number:
+  hint_message: '&8[%prefix%&8] &eヒント：範囲は &f%hint%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% 秒&fで次の範囲の&d数を当てよう&f：'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7が最初に `&e%correct_answer%&7` と答え（&c%time_1%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&cが経過！&f数当てゲームは終了です！'
+    - '<center>正解は &e%correct_answer%&f でした！'
+    - ''
+
+memorize:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToMemorize% 秒&fでこのリストを&d覚えよう&f：'
+    - ''
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  messageAfterMemorized:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% 秒&fでリストを&d順番どおりに&f書こう！'
+    - ''
+    - '<center>&f各アイテムはカンマで区切ってね！（例：`&bりんご, バナナ, チョコレート&f`）'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7が最初にリストを書き、賞品をゲット！（&c%time_1%s&7）'
+    - ''
+    - '<center>&fリストは：&f`&b%correct_answer%&f`'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&cが経過！&fメモライズゲームは終了です！'
+    - ''
+    - '<center>&fリストは：&f`&b%correct_answer%&f`'
+    - ''
+
+sequence:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% 秒&fで&d数列を完成させよう&f：'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  hint_message: '&8[%prefix%&8] &eヒント：次の数は &f%hint%'
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7が最初に `&e%correct_answer%&7` を見つけ（&c%time_1%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&cが経過！&f数列ゲームは終了です！'
+    - '<center>次の数は &e%correct_answer%&f でした！'
+    - ''
+
+clickable:
+  clickableText: '&aここをクリック！'
+  hoverText: '&eここをクリック！'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% 秒&fでテキストを&dクリックしよう&f：'
+    - ''
+    - '<center>&b%clickableText%'
+    - ''
+  #USE %winner_
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7が最速でテキストをクリックし（&c%time_1%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&cが経過！&fクリックゲームは終了です！'
+    - ''
+
+fillout:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% 秒&fでこの単語を&d穴埋めしよう&f：`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7が最速で `&e%correct_answer%&7` を埋め（&c%time_1%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&cが経過！&f穴埋めゲームは終了です！'
+    - '<center>正解は &e%correct_answer%&f でした！'
+    - ''
+
+hoverable:
+  hoverableText: '&eここにカーソルを合わせて！'
+  hoverText: '&b%selection%'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% 秒&fでカーソルを合わせて出る単語を&d入力しよう&f：'
+    - ''
+    - '<center>&b%hoverableText%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7が最速で `&e%correct_answer%&7` を入力し（&c%time_1%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&cが経過！&fホバーゲームは終了です！'
+    - '<center>正解は &e%correct_answer%&f でした！'
+    - ''
+
+#このゲームでは、指定した長さのランダムな文字列が作られます
+random:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% 秒&fで&d入力しよう&f：`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7が最速で `&e%correct_answer%&7` を入力し（&c%time_1%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&cが経過！&fランダム文字ゲームは終了です！'
+    - '<center>正解は &e%correct_answer%&f でした！'
+    - ''
+
+math:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% 秒&fで&d計算しよう&f：`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7が最速で `&e%correct_answer%&7` を求め（&c%time_1%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&cが経過！&f計算ゲームは終了です！'
+    - '<center>正解は &e%correct_answer%&f でした！'
+    - ''
+
+variable:
+  #表示される形式です。'line1and2-format' で %symbol% を繰り返す回数は変えられますが、3 行目の変数はすべてこのままにしてください。
+  line1and2-format: '&c%symbol%&f + &c%symbol%&f + &c%symbol%&f = &e'
+  line3-format: '&c%symbol_1%&f + &c%symbol_2%&f + &b%toGet% &f= &e%result%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% 秒&fで&d求めよう&f：`&b%symbol%&f`'
+    - ''
+    - '<center>%line_1%'
+    - '<center>%line_2%'
+    - '<center>%line_3%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7が最速で `&e%correct_answer%&7` を求め（&c%time_1%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&cが経過！&f変数ゲームは終了です！'
+    - '<center>正解は &e%correct_answer%&f でした！'
+    - ''
+
+#%selection% はヒント、%difficulty% は easy/medium/hard です。
+word_association:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% 秒&fで&dつながり&fを見つけよう：'
+    - '<center>&b%selection%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7がつながり `&e%correct_answer%&7` を見つけ（&c%time_1%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&cが経過！&f誰もつながりを見つけられませんでした。'
+    - '<center>答えは &e%correct_answer%&f でした！'
+    - ''
+
+trivia:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% 秒&fで&d答えよう&f：'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7が最初に `&e%correct_answer%&7` と答え（&c%time_1%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&cが経過！&fクイズは終了です！'
+    - '<center>正解は &e%correct_answer%&f でした！'
+    - ''
+
+#レース
+#今のところ、レースは複数の勝者に対応していません。「レース」や「プレイヤーへの挑戦」なので、最初の人が勝つべきだと考えています。
+
+#%value% は素材かモブ、%amount% は数、%timeToComplete% は制限時間（秒）です。
+#correct_message では：%winner%、%winner_displayname%、%time%（秒）、%points%（勝者のポイント）。
+
+hunt:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete% 秒&fで&d狩ろう&f：`&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7が `&e%amount%&fx &3%value%&7` を狩り終え（&c%time%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%秒&cが経過！&fハントチャレンジは終了です！'
+
+mine:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete% 秒&fで&d掘ろう&f：`&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7が `&e%amount%&fx &3%value%&7` を掘り終え（&c%time%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%秒&cが経過！&f採掘チャレンジは終了です！'
+
+place:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete% 秒&fで&d置こう&f：`&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7が `&e%amount%&fx &3%value%&7` を置き終え（&c%time%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%秒&cが経過！&f設置チャレンジは終了です！'
+
+fish:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete% 秒&fで&d釣ろう&f：`&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7が `&e%amount%&fx &3%value%&7` を釣り終え（&c%time%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%秒&cが経過！&f釣りチャレンジは終了です！'
+
+eat:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete% 秒&fで&d食べよう&f：`&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7が `&e%amount%&fx &3%value%&7` を食べ終え（&c%time%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%秒&cが経過！&f食事チャレンジは終了です！'
+
+craft:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete% 秒&fで&dクラフトしよう&f：`&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7が `&e%amount%&fx &3%value%&7` をクラフトし終え（&c%time%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%秒&cが経過！&fクラフトチャレンジは終了です！'
+furnace:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete% 秒&fで&d焼こう&f：`&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7が `&e%amount%&fx &3%value%&7` を焼き終え（&c%time%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%秒&cが経過！&f料理チャレンジは終了です！'
+
+tame:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete% 秒&fで&d飼いならそう&f：`&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7が `&e%amount%&fx &3%value%&7` を飼いならし終え（&c%time%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%秒&cが経過！&f飼いならしチャレンジは終了です！'
+
+shear:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete% 秒&fで&d毛を刈ろう&f：`&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7が `&e%amount%&fx &3%value%&7` の毛を刈り終え（&c%time%s&7）、賞品をゲット！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%秒&cが経過！&f毛刈りチャレンジは終了です！'

@@ -1,0 +1,255 @@
+#GLOBÁLIS JÁTÉKOK
+#
+#Egy globális játékban az egész szerver egy csapatként játszik. Minden helyes válasz (vagy globális
+#versenyben minden kibányászott blokk, megölt lény...; Számolásban minden megszámolt szám) egy közös
+#pontszámhoz adódik. Senkinek sem kell a leggyorsabbnak lennie: ha a pontszám időben eléri a célt, mindenki,
+#aki hozzájárult, megkapja a jutalmat. Ha előbb lejár az idő, a játék sikertelen.
+#
+#  A csetjátékok kérdések sorozataként futnak. Minden játékos minden kérdésre egyszer válaszolhat, és
+#  a következő kérdés 'answers-per-question' helyes válasz vagy 'question-seconds' után jön.
+#  A válaszok mindig rejtettek, így nem másolhatók.
+#  A versenyek mindenki haladását együtt számolják, pl. 500 kő, amit az egész szerver bányászott ki.
+#  Számolás (csak globálisan): számoljatok együtt a csetben, üzenetenként egy szám.
+#
+#A globális játékok véletlenszerűen indulnak egy normál játék után, időzítővel,
+#a /chatgames global <game> [values] paranccsal vagy egy esemény lépéseként (events.yml).
+#A haladás a boss-sávon (1.9+) vagy az akciósávon (1.8) látszik.
+
+triggers:
+  #Százalékos esély, hogy egy normál játék vagy verseny után globális játék indul (0 = soha).
+  chance-after-game: 10
+  #Másodpercek a normál játék vége és a globális játék kezdete között.
+  delay-seconds: 5
+  #Percek az időzítővel indított globális játékok között (0 = ki).
+  interval-minutes: 0
+  #Online játékosok, akik kellenek, hogy a globális játék magától induljon (a parancs ezt figyelmen kívül hagyja).
+  minimum-players: 2
+
+progress-bar:
+  enabled: true
+  #Boss-sáv színe: BLUE, GREEN, PINK, PURPLE, RED, WHITE vagy YELLOW.
+  color: YELLOW
+  #SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12 vagy SEGMENTED_20.
+  style: SEGMENTED_10
+  #A cél azon százalékai, amelyeket a csetben bejelent, amikor a szerver eléri őket.
+  announce-at: [25, 50, 75]
+
+#Az alábbi minden játék használja minden olyan értékhez, amit maga nem állít be.
+#  goal: a szerver számára szükséges helyes válaszok (versenyeknél tárgyak/lények)
+#  duration-seconds: mennyi ideje van a szervernek
+#  min-contribution: a legkisebb hozzájárulás, amivel egy játékos jutalmat kap
+#  points: amit minden jutalmazott játékos kap a cél elérésekor
+#  points-per-contribution: extra pont egy játékos minden hozzájárulásáért
+#  answers-per-question: csak csetjátékok, hány játékos válaszolhat egy kérdésre
+#  question-seconds: csak csetjátékok, egy kérdés leghosszabb ideje
+defaults:
+  goal: 10
+  duration-seconds: 120
+  min-contribution: 1
+  points: 1
+  points-per-contribution: 0
+  answers-per-question: 3
+  question-seconds: 15
+
+#Jutalmak a rewards.yml formátumában (chance, minimum-players, '<chance>%~ ' és 'has:<permission>'
+#mind működik). %player% a játékos, %contribution% a hozzájárulása.
+#Egy játék saját 'rewards' szakasza ezeket felváltja annál a játéknál.
+rewards:
+  #Mindenki, aki legalább min-contribution mértékben hozzájárult, a cél elérésekor.
+  completed:
+    reward_1:
+      data:
+        - '[consolecmd] give %player% iron_ingot 3'
+  #Ugyanezek a játékosok, amikor lejár az idő. Üres: nincs vigaszdíj.
+  failed: {}
+  #Extra a legnagyobb hozzájárulóknak a cél elérésekor, helyezés szerint.
+  top-contributors:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% diamond 1'
+    2:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 3'
+    3:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 1'
+
+#Helyőrzők minden üzenetben: %game% %goal% (szám) %goal_text% (pl. "500 Stone")
+#%progress% %percent% %time% (hátralévő másodperc) %duration%
+messages:
+  start:
+    - ''
+    - '&6&l» GLOBÁLIS %game%! &fAz egész szerver együtt játszik.'
+    - '&f  Gyűjtsetek &e%goal% helyes választ &f&e%time%mp&f alatt. Mindenki jutalmat kap, aki segít!'
+    - '&7  Minden kérdés %answers% választ fogad, ne várjatok másokra.'
+    - ''
+  race_start:
+    - ''
+    - '&6&l» GLOBÁLIS VERSENY! &fAz egész szerver együtt játszik.'
+    - '&f  Gyűjtsetek együtt &e%goal% %value% &fanyagot &e%time%mp&f alatt. Mindenki jutalmat kap, aki segít!'
+    - ''
+  count_start:
+    - ''
+    - '&6&l» GLOBÁLIS SZÁMOLÁS! &fSzámoljatok együtt &e%start%&f-tól &e%target%&f-ig, &e%step%&f-es lépésekben!'
+    - '&7  Üzenetenként egy szám, sorrendben. Senki sem számol kétszer egymás után. %time%mp a befejezésre.'
+    - ''
+  #Minden kérdés fölött. %question% a sorszáma.
+  question:
+    - '&6&l» GLOBÁLIS &7%question%. kérdés &8| &e%progress%&7/&e%goal%'
+  #Amikor egy kérdés ideje lejár. %answer% a válasza. Üresen hagyva csendben marad.
+  question_over: '&8» &7A válasz ez volt: &f%answer%&7.'
+  #Annak a játékosnak, akinek a válasza számított. %contribution% az eddigi összes hozzájárulása.
+  answered: '&8[%prefix%&8] &aHelyes! &7A hozzájárulásod: &f%contribution% &7a szerver &f%progress%/%goal%&7 eredményéből.'
+  #%reached% az épp elért százalék.
+  milestone: '&6&l» &e%reached%% &fkész! &7(%progress%/%goal%, %time%mp van hátra)'
+  #Egy számított szám, a játékos üzenete helyett megjelenítve. %player% %number%
+  counted: '&e%player% &8» &f%number%'
+  #Egy hiba. %player% %number% %next% (amit vártunk) %start% %reason% %mistakes% %max_mistakes%
+  count_broken:
+    - '&c%player% ezt mondta: %number%: %reason%'
+    - '&fA számolás újrakezdődik innen: &e%start%&f.'
+  #A játékot befejező hiba (on-mistake: fail, vagy elérte a max-mistakes értéket).
+  count_broken_final:
+    - '&c%player% ezt mondta: %number%: %reason%'
+  count_reasons:
+    ahead: 'túl előre ment (a következő szám %next% volt)'
+    behind: 'ezt már megszámolták (a következő szám %next% volt)'
+    repeated: 'ezt a számot épp most mondták'
+    twice: 'senki sem számolhat két számot egymás után'
+  #%count% játékos kapott jutalmat, %contributors% vett részt, %seconds% ideig tartott.
+  #%top_<n>% és %top_<n>_amount%: a három legnagyobb hozzájáruló.
+  completed:
+    - ''
+    - '&6&l» CÉL ELÉRVE! &fA szerver megszerezte: &e%goal_text% &f&e%seconds%mp&f alatt.'
+    - '&f  Top: &e%top_1% &7(%top_1_amount%)  &e%top_2% &7(%top_2_amount%)  &e%top_3% &7(%top_3_amount%)'
+    - '&f  &e%count% &fjátékos kapja a jutalmat.'
+    - ''
+  failed:
+    - ''
+    - '&6&l» GLOBÁLIS JÁTÉK VÉGE! &fA szerver eljutott: &e%progress%/%goal% &7(%percent%%)&f. Legközelebb jobban megy!'
+    - ''
+  #Minden jutalmazott játékosnak a cél elérésekor. %points% amit szerzett.
+  rewarded: '&8[%prefix%&8] &aHozzájárulásod: &f%contribution%&a, szereztél &f%points% &apontot!'
+  #Annak a játékosnak, aki a min-contribution értéknél kevesebbel járult hozzá. %min% ez a minimum.
+  too_little: '&8[%prefix%&8] &7Hozzájárulásod: %contribution%; a jutalomhoz legalább %min% kellett.'
+  #A boss-sáv (vagy az akciósáv 1.8-on).
+  bar: '&6Globális %game% &8| &f%progress%/%goal% &8| &e%time%mp'
+
+#A %goal_text% összeállításához használt szavak.
+words:
+  answers: 'helyes válasz'
+  to: '–'
+
+#A globálisan játszható játékok. A Jegyezd meg és a Találd ki a számot nem.
+#Mindegyik beállíthatja az enabled-et és bármit a 'defaults'-ból, plusz saját 'rewards'-ot.
+games:
+  reaction:
+    enabled: true
+    goal: 10
+    duration-seconds: 90
+    question-seconds: 10
+  unscramble:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  math:
+    enabled: true
+    goal: 15
+    duration-seconds: 150
+  sequence:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  trivia:
+    enabled: true
+    goal: 8
+    duration-seconds: 180
+    question-seconds: 20
+  word_association:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  fillout:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  unreverse:
+    enabled: false
+  random:
+    enabled: false
+  variable:
+    enabled: false
+  hoverable:
+    enabled: false
+  clickable:
+    enabled: false
+  #Számoljatok együtt. A cél a választott mód számainak száma.
+  count:
+    enabled: true
+    duration-seconds: 120
+    #Senki sem mondhat két számot egymás után.
+    no-double-count: true
+    #reset: egy hiba újrakezdi a számolást; fail: egy hiba befejezi a játékot.
+    on-mistake: reset
+    #reset esetén: a hibák száma, amely így is befejezi a játékot (0 = nincs korlát).
+    max-mistakes: 5
+    #Egyet véletlenszerűen választ; a /chatgames global count <mode> kiválaszt egyet.
+    #A 'step' az, amennyivel minden szám nő (az irány a start és target szerint alakul).
+    modes:
+      up:
+        start: 1
+        target: 20
+        step: 1
+      down:
+        start: 15
+        target: 1
+        step: 1
+      evens:
+        start: 2
+        target: 30
+        step: 2
+      fives:
+        start: 5
+        target: 75
+        step: 5
+  #Globális versenyek: az egész szerver a cél felé gyűjt. A célok a races.yml-ből jönnek;
+  #/chatgames global mine STONE 500 mindkettőt beállítja.
+  mine:
+    enabled: true
+    goal: 200
+    duration-seconds: 240
+  hunt:
+    enabled: true
+    goal: 40
+    duration-seconds: 240
+  place:
+    enabled: false
+    goal: 200
+    duration-seconds: 240
+  fish:
+    enabled: false
+    goal: 20
+    duration-seconds: 300
+  eat:
+    enabled: false
+    goal: 30
+    duration-seconds: 240
+  craft:
+    enabled: false
+    goal: 100
+    duration-seconds: 240
+  furnace:
+    enabled: false
+    goal: 64
+    duration-seconds: 300
+  tame:
+    enabled: false
+    goal: 15
+    duration-seconds: 300
+  shear:
+    enabled: false
+    goal: 40
+    duration-seconds: 240

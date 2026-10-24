@@ -1,0 +1,367 @@
+#############################
+######    채팅 게임    ######
+#############################
+#모든 게임이 받는 설정(없는 항목은 표시된 기본값을 씁니다):
+#  enable: true/false
+#  weight: 1             다른 게임과 비교해 로테이션이 이 게임을 고를 확률(0 = 고르지 않음).
+#                        같은 게임은 두 번 연속으로 진행되지 않습니다.
+#  winners: 1            한 라운드에 이길 수 있는 플레이어 수.
+#  points: 1             1승당 포인트(/chatgames top).
+#  case-sensitive: false 대소문자만 틀린 플레이어는 'wrong_case' 메시지를 받습니다.
+#  timeToGuess_seconds: 20
+#  min-answer-ms: 400    이보다 빠른 정답은 무시되고 기록됩니다. 사람은 그렇게 빨리 읽고
+#                        입력할 수 없고, 채팅 봇만 가능합니다. 0이면 이 검사를 끕니다.
+#  hints:                라운드 중에 힌트가 나옵니다. messages.yml의 'hint_message'를 씁니다.
+#    enable: false
+#    after-percent: 50   시간이 이만큼 지나면 첫 힌트가 나오고, 나머지는 남은 시간에 나뉘어 나옵니다.
+#    max: 1              최대 3.
+#  countdown:            남은 시간을 액션 바에 표시합니다. 모든 버전에서 작동합니다(1.8부터 26.x).
+#    enable: false
+#    last-seconds: 10    마지막 N초 동안만 표시합니다. 0이면 라운드 내내 표시합니다.
+#  titleMessage / subtitleMessage: 둘 다 비우면 제목을 보내지 않습니다.
+unscramble:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #플레이어가 맞히고, 풀고, 입력하는 등에 주어지는 시간(초).
+  timeToGuess_seconds: 20
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a단어 맞추기'
+
+unreverse:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #플레이어가 맞히고, 풀고, 입력하는 등에 주어지는 시간(초).
+  timeToGuess_seconds: 20
+  #다음 2개를 비우면 꺼집니다
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a거꾸로 읽기'
+
+reaction:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #플레이어가 맞히고, 풀고, 입력하는 등에 주어지는 시간(초).
+  timeToGuess_seconds: 20
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a입력하기'
+
+guess_the_number:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+  #이 값은 바꾸지 마세요
+  case-sensitive: false
+
+  lower-limit: 1
+  upper-limit: 20
+
+  #플레이어가 맞히고, 풀고, 입력하는 등에 주어지는 시간(초).
+  timeToGuess_seconds: 20
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a입력하기'
+
+clickable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #플레이어가 맞히고, 풀고, 입력하는 등에 주어지는 시간(초).
+  timeToGuess_seconds: 20
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&e글자를 클릭하세요'
+  subtitleMessage: '&f남은 시간 &e%timeToGuess%s'
+
+fillout:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #빈칸 채우기 게임에서 숨기는 글자의 비율입니다. 1부터 100까지. 낮을수록 숨겨지는 글자가 적습니다.
+  difficulty: 30
+  case-sensitive: true
+  #플레이어가 맞히고, 풀고, 입력하는 등에 주어지는 시간(초).
+  timeToGuess_seconds: 20
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a빈칸 채우기'
+
+hoverable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #플레이어가 맞히고, 풀고, 입력하는 등에 주어지는 시간(초).
+  timeToGuess_seconds: 20
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&e글자에 마우스를 올리세요'
+  subtitleMessage: '&f남은 시간 &e%timeToGuess%s'
+
+#이 게임에서는 정해진 길이의 무작위 문자열이 만들어집니다
+random:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #플레이어가 맞히고, 풀고, 입력하는 등에 주어지는 시간(초).
+  timeToGuess_seconds: 20
+  #이 게임에서 무작위로 만들 문자열의 길이. 범위 형식은 <lower>-<higher>. 한 길이만 원하면 양쪽에 같은 수를 쓰세요
+  lengthRange: 6-8
+  #사용 가능한 종류: ALPHA(영문자), ALPHANUMERIC(영문자와 숫자), NUMERIC(숫자), SYMBOLIC(기호),
+  #LOWERCASE_ALPHA(모두 소문자), UPPERCASE_ALPHA(모두 대문자), HEXADECIMAL(16진수 문자: 0123456789ABCDEF)
+  #CUSTOM('custom_characters'에 있는 것을 사용)
+  character_type: ALPHANUMERIC
+  #type이 "CUSTOM"일 때만 이 줄을 사용합니다
+  custom_characters: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a입력하기'
+
+math:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #이 값은 바꾸지 마세요
+  case-sensitive: false
+  #플레이어가 맞히고, 풀고, 입력하는 등에 주어지는 시간(초).
+  timeToGuess_seconds: 20
+  #난이도별 무작위 수 범위:
+  #1 - (1-9)
+  #2 - (1-99)
+  #3 - (1-999)
+  #4 - (1-9999)
+  #5 - (1-99999)
+  difficulty: 2
+  #문제마다 연산자 수: 1 -> "12 + 7", 2 -> "12 + 7 x 3"
+  operations: 1
+  #solve: 결과 구하기("12 + 7 x 3").  missing-value: 숨은 수 찾기("12 + ? x 3 = 33").
+  #라운드마다 나열된 모드 중 하나를 고릅니다.
+  modes:
+    - solve
+    - missing-value
+  #사용할 연산자. 나열된 4개가 전부입니다. 다 쓰지 않으려면 지워도 됩니다. 최소 1개는 남겨 두세요
+  #나눗셈 결과는 항상 정수입니다.
+  operators:
+    - '+'
+    - '-'
+    - 'x'
+    - '/'
+
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a계산하기'
+
+variable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #이 값은 바꾸지 마세요
+  case-sensitive: false
+  #플레이어가 맞히고, 풀고, 입력하는 등에 주어지는 시간(초).
+  timeToGuess_seconds: 20
+
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&b풀어라'
+  subtitleMessage: '&a구할 것: &7`&b%symbol%&7`'
+
+  #무작위 결과 수의 범위
+  result-min: 20
+  result-max: 100
+
+  toGet: '✗'
+  #추가할 수 있는 다른 기호: ✪❃✿✠❂♫♪❦♡♤♢✦☾☽✹
+  data:
+    - '✯;10'
+    - '♛;15'
+    - '❅;20'
+    - '♫;25'
+
+sequence:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #이 값은 바꾸지 마세요
+  case-sensitive: false
+
+  #플레이어가 맞히고, 풀고, 입력하는 등에 주어지는 시간(초).
+  timeToGuess_seconds: 25
+
+  #플레이어는 수열을 보고 다음 수를 입력합니다. 예: "3, 6, 12, 24, ?" -> 48
+  #규칙: 더하기(3, 7, 11), 곱하기(2, 6, 18), 제곱(4, 9, 16), 번갈아(5, 9, 7, 11), 피보나치(2, 3, 5, 8)
+  patterns:
+    - add
+    - multiply
+    - squares
+    - alternating
+    - fibonacci
+  #1-3. 난이도가 높을수록 더 어려운 규칙(제곱과 번갈아는 2부터, 피보나치는 3)과 더 큰 수가 나옵니다.
+  difficulty: 2
+  #'?' 앞에 보여줄 수의 개수(4-8)
+  shown-terms: 5
+
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a수열을 완성하세요'
+
+memorize:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+
+  listLength: 3
+  #라운드마다 다음 풀 중 하나에서 아이템을 가져옵니다(words.yml -> memorize.pools 참고):
+  #shopping_list, words, colors, numbers, blocks, mobs 또는 직접 만든 목록
+  pools:
+    - shopping_list
+    - words
+    - colors
+    - numbers
+    - blocks
+    - mobs
+  #false이면 아이템을 아무 순서로나 입력해도 됩니다
+  order-matters: true
+
+  #플레이어가 외우고, 풀고, 입력하는 등에 주어지는 시간(초).
+  timeToMemorize: 7
+
+  #플레이어가 맞히고, 풀고, 입력하는 등에 주어지는 시간(초).
+  timeToGuess_seconds: 20
+  #다음 2개를 비우면 꺼집니다
+  titleMessage: '&b기억하기'
+  subtitleMessage: '&a이 목록을 기억해 보세요!'
+
+#단서 3개, 숨은 연결 1개(연상 단어는 words.yml에 있습니다).
+#difficulty: easy, medium, hard 또는 mixed. 어려운 라운드는 단서를 하나만 보여 주고 나머지는
+#힌트로 공개하므로 힌트를 켜 두세요(max 2면 단서 3개가 모두 나옵니다).
+word_association:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  difficulty: mixed
+  hints:
+    enable: true
+    after-percent: 34
+    max: 2
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  timeToGuess_seconds: 30
+  titleMessage: '&b단어 연상'
+  subtitleMessage: '&a채팅을 보세요!'
+
+trivia:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  #플레이어가 맞히고, 풀고, 입력하는 등에 주어지는 시간(초).
+  timeToGuess_seconds: 20
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&b퀴즈'
+  subtitleMessage: '&a채팅을 보세요!'

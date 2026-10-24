@@ -97,6 +97,14 @@ events:
   top_entry: '&c%spot%. &f%player% &8| &e%points% &7punti'
   top_empty: '&8[%prefix%&8] &cNessuno ha ancora segnato in %event%&c.'
 
+discord:
+  test_sent: '&8[%prefix%&8] &fInviati &a%amount% &fmessaggi di prova su Discord. Se non compare nulla, la console dice perché.'
+  leaderboard_posted: '&8[%prefix%&8] &fLa classifica è stata inviata su Discord.'
+  disabled: '&8[%prefix%&8] &cI messaggi Discord sono disattivati: imposta &fenabled: true &cin discord.yml.'
+  no_channel: '&8[%prefix%&8] &f%section% &cnon ha nessun canale con webhook o canale DiscordSRV in discord.yml.'
+  unknown_message: '&8[%prefix%&8] &cNon esiste nessun messaggio Discord chiamato &f%message%&c.'
+  empty_message: '&8[%prefix%&8] &f%message% &cè vuoto o manca in discord.yml.'
+
 logs:
   no_logs: "&cNessun log disponibile o si è verificato un errore."
   header: "&8[%prefix%&8] &eUltimi &6%amount% &elog:"
@@ -184,10 +192,11 @@ help_command:
   - '&a/chatgames challenges reset <player> &f- &3Azzera i progressi delle sfide di un giocatore.'
   - '&a/chatgames streak set <player> <challenge|daily|global> <days> &f- &3Imposta la serie di un giocatore.'
   - '&a/chatgames logs [amount] &f- &3Mostra gli ultimi log dei giochi.'
+  - '&a/chatgames discord <test <message|all>|leaderboard> &f- &3Invia un messaggio di prova o la classifica su Discord.'
   - '&a/chatgames reload &f- &3Ricarica i file di configurazione.'
   - '&6'
   - '&2&lTIPI DI GIOCO:'
-  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace'
+  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace, tame, shear'
   - '&7&m-------------------------------------------------'
 
 #Usa <center> nei messaggi a LISTA per centrarli: le righe che lo contengono saranno centrate!
@@ -686,3 +695,41 @@ furnace:
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
     - '<center>&f%timeToComplete%s &cscaduti! &fLa sfida di cottura è finita!'
+
+tame:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fHai &e%timeToComplete% secondi &fper &daddomesticare&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7ha finito di addomesticare `&e%amount%&fx &3%value%&7` (&c%time%s&7) e vince un premio!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cscaduti! &fLa sfida di addomesticamento è finita!'
+
+shear:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fHai &e%timeToComplete% secondi &fper &dtosare&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7ha finito di tosare `&e%amount%&fx &3%value%&7` (&c%time%s&7) e vince un premio!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cscaduti! &fLa sfida di tosatura è finita!'

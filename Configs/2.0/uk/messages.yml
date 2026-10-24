@@ -1,0 +1,735 @@
+unknown_command: '&8[%prefix%&8] &cНевідома команда. Спробуй щось інше!'
+config_reloaded: '&8[%prefix%&8] &fФайли налаштувань перезавантажено!'
+config_reload_failed: '&8[%prefix%&8] &cДеякі файли не завантажилися; перевір консоль. Ці файли зберігають попередні значення.'
+not_enough_permissions: '&8[%prefix%&8] &cУ тебе недостатньо дозволів для цієї команди!'
+player_only_command: '&8[%prefix%&8] &cЦю команду можуть виконувати лише гравці!'
+player_deleted: '&8[%prefix%&8] &cГравця &f%player% &cвидалено з бази даних!'
+player_not_found: '&8[%prefix%&8] &fНе вдалося знайти гравця &c%player%'
+number_not_found_commands: '&8[%prefix%&8] &cНе вдалося знайти число для команди'
+points_added: '&8[%prefix%&8] &fДодано &a%amount% &fочок гравцю &c%player%'
+points_removed: '&8[%prefix%&8] &fЗнято &a%amount% &fочок у гравця &c%player%'
+points_set: '&8[%prefix%&8] &fОчки гравця &c%player% &fвстановлено на &a%amount%'
+player_points: '&8[%prefix%&8] &fУ тебе &a%amount% &fочок!'
+in_cooldown: '&8[%prefix%&8] &cЦе ще не можна використати, зачекай &e%time_left%с &cперед повторним використанням команди'
+type_not_found: '&8[%prefix%&8] &fНе вдалося знайти тип матеріалу/сутності для &c%type%'
+inventory_full: '&8[%prefix%&8] &cТвій інвентар заповнений! &fНагороду викинуто на твоєму місці'
+
+no_winner_placeholder: '---'
+cannot_start_from_disabled: '&8[%prefix%&8] &cНе можна почати чат-гру у вимкненому світі!'
+toggle_game: '&8[%prefix%&8] &fЧат-ігри тепер: &a%state%&f!'
+toggle_sound: '&8[%prefix%&8] &fЗвуки чат-ігор тепер: &a%state%&f!'
+toggleAllGames: '&8[%prefix%&8] &fУсі чат-ігри тепер: &a%state% &c(УСІ)&f!'
+state-ON: 'УВІМК.'
+state-OFF: 'ВИМК.'
+game_started: '&8[%prefix%&8] &aТи почав чат-гру %game% у своєму чаті!'
+invalid_arguments: '&8[%prefix%&8] &fПід час перевірки аргументів команди сталася проблема!'
+cant_log_local: '&8[%prefix%&8] &cТи не можеш бачити повідомлення журналу, бо цю опцію вимкнено в налаштуваннях!'
+toggle_game_other: '&8[%prefix%&8] &fЧат-ігри для &c%player% &fтепер: &a%state%&f!'
+toggle_sound_other: '&8[%prefix%&8] &fЗвуки чат-ігор для &c%player% &fтепер: &a%state%&f!'
+player_points_other: '&8[%prefix%&8] &c%player% &fмає &a%amount% &fочок!'
+data_loading: '&8[%prefix%&8] &cДані цього гравця ще завантажуються, спробуй за мить.'
+usage: '&8[%prefix%&8] &cВикористання: &f%usage%'
+game_already_running: '&8[%prefix%&8] &cЧат-гра вже йде! Спершу заверши її командою &f/chatgames stop&c.'
+game_not_started: '&8[%prefix%&8] &cГру %game% не вдалося почати з цими значеннями. Подробиці в консолі.'
+no_games_enabled: '&8[%prefix%&8] &cЗараз не увімкнено жодної гри.'
+game_stopped: '&8[%prefix%&8] &fПоточну гру зупинено без переможця.'
+no_game_running: '&8[%prefix%&8] &cЗараз не йде жодна чат-гра.'
+global_not_enabled: '&8[%prefix%&8] &f%game% &cне увімкнено як глобальну гру в global_games.yml.'
+unknown_game: '&8[%prefix%&8] &cНемає гри з назвою &f%game%&c.'
+unknown_menu: '&8[%prefix%&8] &cНемає меню з назвою &f%menu%&c.'
+
+presets:
+  loaded: '&8[%prefix%&8] &fЗавантажено набір &a%preset% &f(%games%).'
+  cleared: '&8[%prefix%&8] &fЖоден набір більше не активний; використовуються ігри, увімкнені в games.yml.'
+  saved: '&8[%prefix%&8] &fУвімкнені ігри збережено як набір &a%preset% &f(%games%).'
+  not_found: '&8[%prefix%&8] &cНемає набору з назвою &f%preset%&c.'
+  invalid_name: '&8[%prefix%&8] &cНазви наборів можуть містити лише латинські літери, цифри, - і _ (до 32).'
+  list_header: '&8[%prefix%&8] &eНабори:'
+  list_entry: '&7- &f%preset%%active% &8(%games%)'
+  active_marker: ' &a(активний)'
+  list_empty: '&8[%prefix%&8] &cУ presets.yml не налаштовано жодного набору.'
+
+challenges:
+  completed: '&8[%prefix%&8] &a%period% завдання виконано: &f%challenge%&a! Забери нагороду командою &f/chatgames claim&a.'
+  claimed: '&8[%prefix%&8] &aТи забрав &f%challenge%&a!'
+  nothing_to_claim: '&8[%prefix%&8] &cЗараз тобі нічого забирати.'
+  #/chatgames challenges. %period% нижче — 'щоденне' або 'щотижневе'; %resets% — час, що залишився, напр. 5г 12хв
+  header: '&8[%prefix%&8] &e%period% завдання &7(виконано %completed%/%total%, скидання через %resets%)'
+  entry: '&7- %challenge% &8- &7%description% &f%progress%/%amount% %status%'
+  status_in_progress: ''
+  status_ready: '&a[Можна забрати]'
+  status_claimed: '&7[Забрано]'
+  none: '&8[%prefix%&8] &cЗараз немає завдань.'
+  daily: 'Щоденне'
+  weekly: 'Щотижневе'
+  #Одиниці в %resets%, напр. 2д 5г, 5г 12хв або 40хв
+  time_days: '%amount%д'
+  time_hours: '%amount%г'
+  time_minutes: '%amount%хв'
+  reset: '&8[%prefix%&8] &fСкинуто прогрес щоденних і щотижневих завдань гравця &c%player%&f.'
+
+streaks:
+  grew: '&8[%prefix%&8] &aТвоя %streak% &aтепер &f%days% &aдн.! Забери нагороду командою &f/chatgames claim&a.'
+  #%days% — один день або діапазон на кшталт 3-5, коли забирається кілька днів одразу
+  claimed: '&8[%prefix%&8] &aТи забрав нагороду за %streak% &a(день %days%)!'
+  header: '&8[%prefix%&8] &eСерії:'
+  entry: '&7- %streak% &8- &f%days% &7дн., найкраща &f%longest% %status%'
+  status_ready: '&a[%unclaimed% забрати]'
+  status_today: '&7[сьогодні виконано]'
+  status_waiting: '&e[сьогодні не виконано]'
+  none: '&8[%prefix%&8] &cСерії вимкнено.'
+  set: '&8[%prefix%&8] &f%streak% &fгравця &c%player% &fвстановлено на &a%days% &fдн.'
+  unknown: '&8[%prefix%&8] &cНемає серії з назвою &f%type%&c. Використовуй challenge, daily або global.'
+
+events:
+  unknown: '&8[%prefix%&8] &cНемає події з назвою &f%event%&c.'
+  started: '&8[%prefix%&8] &fПочато подію %event%&f.'
+  already_running: '&8[%prefix%&8] &cПодія вже йде: %event%&c.'
+  cancelled: '&8[%prefix%&8] &cІнший плагін скасував подію %event%&c.'
+  not_running: '&8[%prefix%&8] &cЖодна подія не йде.'
+  stopped: '&8[%prefix%&8] &fЗупинено подію %event%&f.'
+  list_header: '&8[%prefix%&8] &eПодії:'
+  list_entry: '&7- &f%id% &8(%event%&8) &7ігор: %steps%, наступна: &f%next%%running%'
+  list_running: ' &a(йде, гра %step%/%steps%)'
+  list_empty: '&8[%prefix%&8] &cУ events.yml не налаштовано жодної події.'
+  not_scheduled: 'не заплановано'
+  top_header: '&8[%prefix%&8] &eНайбільше очок події в %event%&e:'
+  top_entry: '&c%spot%. &f%player% &8| &e%points% &7очок'
+  top_empty: '&8[%prefix%&8] &cУ %event% &cще ніхто не набрав очок.'
+
+discord:
+  test_sent: '&8[%prefix%&8] &fНадіслано &a%amount% &fтестових повідомлень у Discord. Якщо нічого не з''явилося, причину покаже консоль.'
+  leaderboard_posted: '&8[%prefix%&8] &fРейтинг надіслано в Discord.'
+  disabled: '&8[%prefix%&8] &cПовідомлення Discord вимкнено: встанови &fenabled: true &cу discord.yml.'
+  no_channel: '&8[%prefix%&8] &f%section% &cне має каналу з вебхуком або каналом DiscordSRV у discord.yml.'
+  unknown_message: '&8[%prefix%&8] &cНемає повідомлення Discord з назвою &f%message%&c.'
+  empty_message: '&8[%prefix%&8] &f%message% &cпорожнє або відсутнє в discord.yml.'
+
+logs:
+  no_logs: "&cЖурналів немає або сталася помилка."
+  header: "&8[%prefix%&8] &eОстанні &6%amount% &eзаписів журналу:"
+  entries:
+    # Записи журналу про ігри
+    game:
+      start: "&aПочаток гри: &f%game% | &aЄ відповідь: &f%hasAnswer% | &aВідповідь: &f%answer%"
+      end: "&aКінець гри: &f%game% | &aЄ переможець: &f%hasWinner% | &aПереможці: &f%winners% | &aВідповідь: &f%answer%"
+
+    # Записи журналу про перегони з матеріалами
+    race:
+      start: "&aПочаток перегонів: &f%race% | &aМатеріал: &f%material% | &aКількість: &f%amount%"
+      end: "&aКінець перегонів: &f%race% | &aЄ переможець: &f%hasWinner% | &aПереможець: &f%winner% | &aМатеріал: &f%material% | &aКількість: &f%amount%"
+
+    # Окремий запис для перегонів HUNT (перегони із сутностями)
+    hunt:
+      start: "&aПочаток перегонів: &f%race% | &aСутність: &f%entity% | &aКількість: &f%amount%"
+      end: "&aКінець перегонів: &f%race% | &aЄ переможець: &f%hasWinner% | &aПереможець: &f%winner% | &aСутність: &f%entity% | &aКількість: &f%amount%"
+
+#За бажання в повідомленнях рейтингу можна використовувати <center>.
+top:
+  #Можна залишити порожнім, щоб вимкнути певне повідомлення. (Окрім 'format' і 'player-stat-format')
+  header: '&b&m---------&e&lТОП ЧАТУ&b&m---------'
+  #Значення separators — це повідомлення, що відділяє топ-10 гравців від заголовка й нижнього рядка!
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%points% &7очок'
+  player-stat-format: '&7У тебе &e&l%player_points% &7перемог'
+  total-stat-format: '&7Усього виграно ігор на сервері: &6&l%total_wins%'
+  footer: '&b&m---------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cДаних ще немає! Виграй чат-гру й отримай очки!'
+
+TypersTop:
+  #Можна залишити порожнім, щоб вимкнути певне повідомлення. (Окрім 'format' і 'player-stat-format')
+  header: '&b&m---------&e&lТОП НАЙШВИДШИХ&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6с'
+  player-stat-format: '&7Твій найкращий час: &e&l%fastest_time%&6с'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cДаних ще немає! Виграй чат-гру й будь найшвидшим!'
+  top_disabled_message: '&8[%prefix%&8] &cЦя функція зараз вимкнена!'
+
+GameTypersTop:
+  #Можна залишити порожнім, щоб вимкнути певне повідомлення. (Окрім 'format' і 'player-stat-format')
+  header: '&b&m---------&e&lТОП НАЙШВИДШИХ - %game%&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6с'
+  player-stat-format: '&7Твій найкращий час: &e&l%fastest_time%&6с'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cДаних ще немає! Виграй чат-гру й будь найшвидшим!'
+  top_disabled_message: '&8[%prefix%&8] &cЦя функція зараз вимкнена!'
+
+help_command:
+  - '&7&m-------------------------------------------------'
+  - '&e&l-ChatGames-'
+  - '&6'
+  - '&6&lКОМАНДИ:'
+  - '&6'
+  - '&a/chatgames menu [menu] &f- &3Відкриває меню: профіль, завдання, серії, рейтинги (або будь-яке меню з menus.yml).'
+  - '&a/chatgames profile [player] &f- &3Показує твою статистику (або іншого гравця).'
+  - '&a/chatgames top &f- &3Показує 10 гравців із найбільшою кількістю очок.'
+  - '&a/chatgames fastest [game] &f- &3Показує найшвидших переможців, загалом або в одній грі.'
+  - '&a/chatgames points [player] &f- &3Показує твої очки (або іншого гравця).'
+  - '&a/chatgames challenges &f- &3Показує твої щоденні й щотижневі завдання.'
+  - '&a/chatgames streaks &f- &3Показує твої серії.'
+  - '&a/chatgames claim &f- &3Забирає нагороди за виконані завдання й серії.'
+  - '&a/chatgames event [list|top <event>] &f- &3Показує ігрові події або тих, хто набрав найбільше в одній.'
+  - '&a/chatgames toggle [player] &f- &3Вмикає або вимикає для тебе чат-ігри.'
+  - '&a/chatgames togglesound [player] &f- &3Вмикає або вимикає звуки чат-ігор.'
+  - '&6'
+  - '&c&lАДМІН:'
+  - '&a/chatgames admin &f- &3Відкриває меню адміністратора.'
+  - '&a/chatgames debug &f- &3Відкриває меню налагодження: перевір будь-яку гру приватно, без нагород.'
+  - '&a/chatgames (game) [values] &f- &3Починає цю гру зараз, за бажання з твоїм словом/значеннями.'
+  - '&a/chatgames any &f- &3Починає гру, яку ротація обрала б наступною.'
+  - '&a/chatgames global <game> [values] &f- &3Починає глобальну гру: виграють усі, хто встигне відповісти.'
+  - '&a/chatgames event start <event> | stop &f- &3Починає або зупиняє ігрову подію.'
+  - '&a/chatgames stop &f- &3Завершує поточну гру без переможця.'
+  - '&a/chatgames toggleAll &f- &3Вмикає або вимикає автоматичну ротацію ігор.'
+  - '&a/chatgames preset <list|load|save> [name] &f- &3Керує наборами ігор.'
+  - '&a/chatgames +points|-points|setpoints <player> <amount> &f- &3Змінює очки гравця.'
+  - '&a/chatgames remove <player> &f- &3Видаляє дані гравця.'
+  - '&a/chatgames challenges reset <player> &f- &3Скидає прогрес завдань гравця.'
+  - '&a/chatgames streak set <player> <challenge|daily|global> <days> &f- &3Встановлює серію гравця.'
+  - '&a/chatgames logs [amount] &f- &3Показує останні журнали ігор.'
+  - '&a/chatgames discord <test <message|all>|leaderboard> &f- &3Надсилає тестове повідомлення або рейтинг у Discord.'
+  - '&a/chatgames reload &f- &3Перезавантажує файли налаштувань.'
+  - '&6'
+  - '&2&lТИПИ ІГОР:'
+  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace, tame, shear'
+  - '&7&m-------------------------------------------------'
+
+#Використовуй <center> у повідомленнях-СПИСКАХ, щоб центрувати їх: рядки з ним будуть по центру!
+
+#############################
+##    ПОВІДОМЛЕННЯ ЧАТ-ІГОР    ##
+#############################
+#Спільні для всіх ігор. Гра може перевизначити їх власними 'hint_message' / 'countdown_actionbar' у своєму розділі нижче.
+hint_message: '&8[%prefix%&8] &eПідказка: &f%hint%'
+countdown_actionbar: '&7Залишилось &e%seconds%с'
+
+waiting_for_other_winners: '&8[%prefix%&8] &aПравильно! &fЧекаємо на інших переможців...'
+wrong_case: '&8[%prefix%&8] &cМайже... Перевір великі й малі літери!'
+  #У correct_message УСІХ ІГОР МОЖНА ВИКОРИСТОВУВАТИ "%display_name%" ЗАМІСТЬ %player%.
+  #
+  #ТАКОЖ МОЖНА ВИКОРИСТОВУВАТИ %points_<position>%, ЩОБ ПОКАЗАТИ ОЧКИ ГРАВЦЯ, ЯКИЙ ВИГРАВ.
+  #
+  #Щоб показати 1-го, 2-го, 3-го переможця тощо, використовуйте %winner_<position>%, а для часу кожного — %time_<position>%
+
+  ##ПРИКЛАД ІЗ 2 ПЕРЕМОЖЦЯМИ:
+  #
+  #correct_message:
+  #- ''
+  #- '<center>&r✓ ✯ %prefix% &r✯ ✓'
+  #- ''
+  #- '&7Правильна відповідь: `&e%correct_answer%&7`! Переможці:'
+  #- '<center>&f1. &a%winner_1% - (&c%time_1%s&7)'
+  #- '<center>&f2. &a%winner_2% - (&c%time_2%s&7)'
+#- ''
+unscramble:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToGuess% секунд&f, щоб &dрозплутати&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7правильно розплутав `&e%correct_answer%&7` (&c%time_1%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%с &cминуло! &fГру «Розплутай» завершено!'
+    - '<center>Правильна відповідь: &e%correct_answer%&f!'
+    - ''
+
+unreverse:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToGuess% секунд&f, щоб &dперевернути&f слово: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7найшвидше перевернув `&e%correct_answer%&7` (&c%time_1%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%с &cминуло! &fГру «Переверни» завершено!'
+    - '<center>Правильна відповідь: &e%correct_answer%&f!'
+    - ''
+
+reaction:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToGuess% секунд&f, щоб &dнаписати&f слово: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7найшвидше написав `&e%correct_answer%&7` (&c%time_1%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%с &cминуло! &fГру на реакцію завершено!'
+    - '<center>Правильна відповідь: &e%correct_answer%&f!'
+    - ''
+
+guess_the_number:
+  hint_message: '&8[%prefix%&8] &eПідказка: число між &f%hint%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToGuess% секунд&f, щоб &dвгадати число &fу діапазоні:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7першим відповів `&e%correct_answer%&7` (&c%time_1%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%с &cминуло! &fГру «Вгадай число» завершено!'
+    - '<center>Правильна відповідь: &e%correct_answer%&f!'
+    - ''
+
+memorize:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToMemorize% секунд&f, щоб &dзапам''ятати &fцей список:'
+    - ''
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  messageAfterMemorized:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToGuess% секунд&f, щоб написати список &dпо порядку&f!'
+    - ''
+    - '<center>&fРозділяй предмети комами! (напр. `&bяблуко, банан, шоколад&f`)'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7першим написав список і отримав приз! (&c%time_1%с&7)'
+    - ''
+    - '<center>&fСписок був: &f`&b%correct_answer%&f`'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%с &cминуло! &fГру «Запам''ятай» завершено!'
+    - ''
+    - '<center>&fСписок був: &f`&b%correct_answer%&f`'
+    - ''
+
+sequence:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToGuess% секунд&f, щоб &dпродовжити послідовність&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  hint_message: '&8[%prefix%&8] &eПідказка: наступне число &f%hint%'
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7першим знайшов `&e%correct_answer%&7` (&c%time_1%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%с &cминуло! &fГру «Послідовність» завершено!'
+    - '<center>Наступне число було &e%correct_answer%&f!'
+    - ''
+
+clickable:
+  clickableText: '&aНатисни тут!'
+  hoverText: '&eНатисни тут!'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToGuess% секунд&f, щоб &dнатиснути&f на текст:'
+    - ''
+    - '<center>&b%clickableText%'
+    - ''
+  #USE %winner_
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7найшвидше натиснув на текст (&c%time_1%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%с &cминуло! &fГру з натисканням завершено!'
+    - ''
+
+fillout:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToGuess% секунд&f, щоб &dзаповнити&f слово: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7найшвидше заповнив `&e%correct_answer%&7` (&c%time_1%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%с &cминуло! &fГру «Заповни пропуски» завершено!'
+    - '<center>Правильна відповідь: &e%correct_answer%&f!'
+    - ''
+
+hoverable:
+  hoverableText: '&eНаведи сюди!'
+  hoverText: '&b%selection%'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToGuess% секунд&f, щоб &dнаписати&f слово з підказки при наведенні:'
+    - ''
+    - '<center>&b%hoverableText%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7найшвидше написав `&e%correct_answer%&7` (&c%time_1%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%с &cминуло! &fГру з наведенням завершено!'
+    - '<center>Правильна відповідь: &e%correct_answer%&f!'
+    - ''
+
+#У цій грі створюється рядок заданої довжини з випадкових символів
+random:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToGuess% секунд&f, щоб &dнаписати&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7найшвидше написав `&e%correct_answer%&7` (&c%time_1%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%с &cминуло! &fГру з випадковими символами завершено!'
+    - '<center>Правильна відповідь: &e%correct_answer%&f!'
+    - ''
+
+math:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToGuess% секунд&f, щоб &dрозв''язати&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7найшвидше отримав `&e%correct_answer%&7` (&c%time_1%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%с &cминуло! &fГру з математики завершено!'
+    - '<center>Правильна відповідь: &e%correct_answer%&f!'
+    - ''
+
+variable:
+  #Це формат, у якому вони з'являться; можна змінити, скільки разів %symbol% повторюється в 'line1and2-format', але всі змінні в рядку 3 мають лишатися як є.
+  line1and2-format: '&c%symbol%&f + &c%symbol%&f + &c%symbol%&f = &e'
+  line3-format: '&c%symbol_1%&f + &c%symbol_2%&f + &b%toGet% &f= &e%result%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToGuess% секунд&f, щоб &dзнайти&f: `&b%symbol%&f`'
+    - ''
+    - '<center>%line_1%'
+    - '<center>%line_2%'
+    - '<center>%line_3%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7найшвидше отримав `&e%correct_answer%&7` (&c%time_1%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%с &cминуло! &fГру зі змінною завершено!'
+    - '<center>Правильна відповідь: &e%correct_answer%&f!'
+    - ''
+
+#%selection% — підказки, %difficulty% — easy/medium/hard.
+word_association:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToGuess% секунд&f, щоб знайти &dзв''язок&f:'
+    - '<center>&b%selection%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7знайшов зв''язок `&e%correct_answer%&7` (&c%time_1%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%с &cминуло! &fНіхто не знайшов зв''язок.'
+    - '<center>Відповідь була &e%correct_answer%&f!'
+    - ''
+
+trivia:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToGuess% секунд&f, щоб &dвідповісти&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7першим відповів `&e%correct_answer%&7` (&c%time_1%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%с &cминуло! &fВікторину завершено!'
+    - '<center>Правильна відповідь: &e%correct_answer%&f!'
+    - ''
+
+#ПЕРЕГОНИ
+#Наразі перегони не підтримують кількох переможців: я не бачу в цьому сенсу, адже це «перегони» або «виклики гравцям», де нагорода має дістатися першому.
+
+#%value% — матеріал або моб, %amount% — скільки, %timeToComplete% — обмеження часу в секундах.
+#У correct_message: %winner%, %winner_displayname%, %time% (секунди) і %points% (очки переможця).
+
+hunt:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToComplete% секунд&f, щоб &dвполювати&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7вполював `&e%amount%&fx &3%value%&7` (&c%time%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%с &cминуло! &fВиклик «Полювання» завершено!'
+
+mine:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToComplete% секунд&f, щоб &dдобути&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7добув `&e%amount%&fx &3%value%&7` (&c%time%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%с &cминуло! &fВиклик «Видобуток» завершено!'
+
+place:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToComplete% секунд&f, щоб &dпоставити&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7поставив `&e%amount%&fx &3%value%&7` (&c%time%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%с &cминуло! &fВиклик «Будівництво» завершено!'
+
+fish:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToComplete% секунд&f, щоб &dвиловити&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7виловив `&e%amount%&fx &3%value%&7` (&c%time%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%с &cминуло! &fВиклик «Риболовля» завершено!'
+
+eat:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToComplete% секунд&f, щоб &dз''їсти&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7з''їв `&e%amount%&fx &3%value%&7` (&c%time%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%с &cминуло! &fВиклик «Їжа» завершено!'
+
+craft:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToComplete% секунд&f, щоб &dскрафтити&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7скрафтив `&e%amount%&fx &3%value%&7` (&c%time%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%с &cминуло! &fВиклик «Крафт» завершено!'
+furnace:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToComplete% секунд&f, щоб &dприготувати&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7приготував `&e%amount%&fx &3%value%&7` (&c%time%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%с &cминуло! &fВиклик «Готування» завершено!'
+
+tame:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToComplete% секунд&f, щоб &dприручити&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7приручив `&e%amount%&fx &3%value%&7` (&c%time%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%с &cминуло! &fВиклик «Приручення» завершено!'
+
+shear:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fУ тебе &e%timeToComplete% секунд&f, щоб &dпостригти&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7постриг `&e%amount%&fx &3%value%&7` (&c%time%с&7) і отримав приз!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%с &cминуло! &fВиклик «Стрижка» завершено!'

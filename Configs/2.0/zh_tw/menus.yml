@@ -1,0 +1,1158 @@
+#選單
+#
+#'menus:' 下的每個選單都有 'title'、以 'rows' 表示的大小（1-6）和它的 'items'。你可以修改
+#任意按鈕的功能、新增按鈕，或新增全新的選單（用 /chatgames menu <id> 開啟，
+#或者把每個選單放到 menus/ 資料夾裡單獨的檔案中，命名為 <id>.yml）。
+#
+#每個物品：
+#  slot：放在哪裡，從 0（左上角）到 rows*9-1。'slots: [0, 1, '9-17']' 會重複放置。
+#  material：1.8 到 26.x 的任意物品名：新名或舊名都可以（lime_dye / INK_SACK:10 / 351:10），
+#            或者 'head:<玩家名、材质或 textures.minecraft.net 网址>'
+#  name / lore：顏色程式碼（&a，以及 1.16+ 的 &#RRGGBB）和 PlaceholderAPI 變數都可以使用。
+#  amount, glow: true, enchantments: ['SHARPNESS:1'], flags: [HIDE_ATTRIBUTES], head: '%player%',
+#  custom-model-data: 1001 (1.14+)、item-model: 'namespace:key' (1.21.2+)、color: '#FF0000'（皮革）
+#  actions：點選後按順序執行的操作。還有 left-actions、right-actions、shift-left-actions、
+#           shift-right-actions、middle-actions 和 drop-actions（沒有設定時都使用 actions）。
+#  view-requirements：只有每一行都透過時才顯示這個物品
+#  click-requirements：某一行不透過時，執行 'deny-actions' 而不是 actions
+#  state + when-off：當 state 為 false 時，when-off 中的鍵會替換物品自身的鍵
+#                    （不要寫 'off'：YAML 會把單獨的 off 讀作 false）
+#不寫某個物品即可隱藏它。'filler' 會填滿所有空格子；刪掉它就沒有填充。
+#
+#操作：
+#  [command] <command>        你執行該命令               [console] <command>   由控制檯執行
+#  [message] <text>           發給你的訊息               [broadcast] <text>    發給所有人
+#  [sound] <sound> [volume] [pitch]   1.8 到 26.x 的任意聲音名
+#  [open] <menu> [values]     開啟另一個選單             [switch] <menu> [values]  同上，但 [back] 會跳過它
+#  [back] [menu]              返回上一個選單（或指定選單，或關閉）
+#  [refresh]  [close]  [next-page]  [previous-page]  [wait] <ticks>
+#  [chatgames:no-permission]  傳送沒有許可權的訊息
+#  各選單專用的操作寫在擁有它們的選單上方。
+#
+#條件，每行一個（每一行都必須透過；行首加 ! 表示取反）：
+#  permission <node>     比較式，例如 '%chatgames_points% >= 100'（==、!=、>=、<=、>、<）
+#  或者一個為 true / on / yes / 非 0 數字的值
+#
+#列出內容的選單（挑戰、遊戲、活動……）會把它們按順序放進 'list-slots'，
+#並用選單的 'templates' 繪製。條目多於格子時，操作為
+#[next-page] / [previous-page] 的物品用來翻頁；沒有頁可翻時它們會隱藏。
+#只包含一個列表變數的 lore 行（例如 '%game_wins%'）會變成多行。
+#每個選單還都有 %player%、%page%、%pages% 和 %entries%（列表有多少條目）。
+
+#遊戲的名稱和圖示，用於所有選單和提到遊戲的訊息（%game%）中。
+#沒有列在這裡的遊戲以它的鍵命名。
+game-names:
+  unscramble: '還原單詞'
+  unreverse: '倒轉還原'
+  reaction: '反應'
+  guess_the_number: '猜數字'
+  clickable: '點選'
+  fillout: '填空'
+  hoverable: '懸停'
+  random: '隨機字元'
+  math: '數學'
+  variable: '變數'
+  sequence: '數列'
+  memorize: '記憶'
+  word_association: '詞語聯想'
+  trivia: '知識問答'
+  count: '計數'
+  hunt: '狩獵'
+  mine: '挖掘'
+  place: '放置'
+  fish: '釣魚'
+  eat: '進食'
+  craft: '合成'
+  furnace: '燒製'
+  tame: '馴服'
+  shear: '剪毛'
+game-icons:
+  unscramble: book
+  math: redstone
+  trivia: enchanted_book
+  reaction: feather
+  clickable: stone_button
+  random: ender_pearl
+  unreverse: compass
+  variable: name_tag
+  guess_the_number: clock
+  memorize: map
+  sequence: ladder
+  fillout: paper
+  hoverable: ender_eye
+  word_association: lead
+  count: clock
+  hunt: iron_sword
+  place: grass_block
+  mine: iron_pickaxe
+  fish: fishing_rod
+  eat: cooked_beef
+  craft: crafting_table
+  furnace: furnace
+  tame: bone
+  shear: shears
+
+formats:
+  #還沒有排名的玩家顯示這個，而不是名次
+  no-rank: '-'
+
+#發給玩家，來自除錯選單。把一行留空（''）則不傳送。
+messages:
+  debug-round: '&8[&c除錯&8] &f新的私人 &e%game% &f回合（答案：&a%answer%&f），生成用時 &e%generated% 毫秒&f。只有你能看到。'
+  debug-failed: '&8[&c除錯&8] &c無法生成 %game% 回合；控制檯會說明原因。'
+  debug-race: '&8[&c除錯&8] &c競賽在世界中進行，所以不能在這裡測試。用 /chatgames <race> 開始一場。'
+  debug-no-letters: '&8[&c除錯&8] &7這個答案沒有字母，所以不會有大小寫錯誤。'
+  debug-timeout-started: '&8[&c除錯&8] &7正在等待 &e%time%s &7的時間限制結束……'
+  debug-timeout: '&8[&c除錯&8] &e%game%&7：時間到。玩家會被告知答案是 &f%answer%&7。'
+  #%verdict% 是下面的其中一行
+  debug-result: '&8[&c除錯&8] &e%game% &7| 在 &e%ms% 毫秒&7後輸入了 &f%input%&7：%verdict%'
+  debug-verdicts:
+    accepted: '&a已接受 &7（會獲得名次和 &e%points% &7點數）'
+    wrong: '&c錯誤 &7（已忽略）'
+    wrong-case: '&6大小寫錯誤 &7（會提示玩家檢查）'
+    macro: '&c視為宏而忽略 &7（快於 min-answer-ms，&e%min_ms% 毫秒&7）'
+    late: '&c太晚了 &7（超過時間限制）'
+
+menus:
+
+  #/chatgames menu。%points% %rank% %wins% %claimable%（可領取的獎勵）、
+  #%daily_completed% %daily_total% %weekly_completed% %weekly_total%,
+  #%games_on% / %sound_on%（true 或 false）以及 %games_state% / %sound_state%（開啟/關閉文字）
+  main:
+    title: '&8&lChatGames'
+    rows: 3
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      profile:
+        slot: 10
+        material: player_head
+        head: '%player%'
+        name: '&e&l你的資料'
+        lore:
+          - '&7點數：&e%points% &8(%rank%)'
+          - '&7勝場：&e%wins%'
+          - ''
+          - '&e點選檢視你的統計'
+        actions: ['[open] profile']
+      challenges:
+        slot: 11
+        material: writable_book
+        name: '&a&l挑戰'
+        lore:
+          - '&7每日：&e%daily_completed%&7/&e%daily_total%'
+          - '&7每週：&e%weekly_completed%&7/&e%weekly_total%'
+          - '&7可領取的獎勵：&e%claimable%'
+          - ''
+          - '&e點選開啟'
+        actions: ['[open] challenges daily']
+      streaks:
+        slot: 12
+        material: blaze_powder
+        name: '&6&l連續記錄'
+        lore:
+          - '&7每天都玩，讓它們延續下去。'
+          - ''
+          - '&e點選開啟'
+        actions: ['[open] streaks']
+      leaderboards:
+        slot: 13
+        material: gold_ingot
+        name: '&e&l排行榜'
+        lore:
+          - '&7點數最高和最快的玩家。'
+          - ''
+          - '&e點選開啟'
+        actions: ['[open] leaderboards']
+      games-toggle:
+        slot: 15
+        material: lime_dye
+        name: '&f聊天遊戲：%games_state%'
+        lore:
+          - '&7點選為你關閉聊天遊戲。'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7點選為你開啟聊天遊戲。'
+      sound-toggle:
+        slot: 16
+        material: note_block
+        name: '&f遊戲聲音：%sound_state%'
+        lore:
+          - '&7點選關閉遊戲聲音。'
+        state: '%sound_on%'
+        actions: ['[command] chatgames togglesound', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7點選開啟遊戲聲音。'
+      admin:
+        slot: 22
+        material: command_block
+        name: '&c&l管理'
+        lore:
+          - '&7開始遊戲、活動、預設……'
+        view-requirements: ['permission chatgames.admin']
+        actions: ['[open] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&c關閉'
+        actions: ['[close]']
+
+  #/chatgames profile [player]。%target% %points% %rank% %wins% %race_wins% %global_played%
+  #%global_won%（已完成） %contributions% %events_played% %event_wins% %event_best_place% %fastest% %challenges_completed%
+  #%milestones% %milestones_total% %streak_<challenge|daily|global>% 和 %streak_<...>_longest%。
+  #列表：%game_wins% 和 %game_fastest%。[open] profile <name> 開啟別人的資料。
+  profile:
+    title: '&8資料：%target%'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7還沒有'
+      game-wins: '&7%game%：&f%wins%'
+      game-fastest: '&7%game%：&f%time%s'
+    items:
+      head:
+        slot: 4
+        material: player_head
+        head: '%target%'
+        name: '&e&l%target%'
+        lore:
+          - '&7點數：&e%points% &8(%rank%)'
+      wins:
+        slot: 19
+        material: diamond
+        name: '&b&l勝場'
+        lore:
+          - '&7聊天遊戲勝場：&f%wins%'
+          - '&7競賽勝場：&f%race_wins%'
+          - ''
+          - '%game_wins%'
+      fastest:
+        slot: 20
+        material: clock
+        name: '&e&l最快時間'
+        lore:
+          - '&7總體最佳：&f%fastest%'
+          - ''
+          - '%game_fastest%'
+      global:
+        slot: 21
+        material: beacon
+        name: '&3&l全服遊戲'
+        lore:
+          - '&7參與：&f%global_played%'
+          - '&7完成：&f%global_won%'
+          - '&7貢獻：&f%contributions%'
+      events:
+        slot: 23
+        material: nether_star
+        name: '&6&l活動'
+        lore:
+          - '&7參與：&f%events_played%'
+          - '&7獲勝：&f%event_wins%'
+          - '&7最佳名次：&f%event_best_place%'
+      streaks:
+        slot: 24
+        material: blaze_powder
+        name: '&6&l連續記錄'
+        lore:
+          - '&7挑戰：&f%streak_challenge% &8（最佳 %streak_challenge_longest%）'
+          - '&7每日勝利：&f%streak_daily% &8（最佳 %streak_daily_longest%）'
+          - '&7全服：&f%streak_global% &8（最佳 %streak_global_longest%）'
+      progress:
+        slot: 25
+        material: experience_bottle
+        name: '&a&l進度'
+        lore:
+          - '&7點數：&f%points%'
+          - '&7達成的里程碑：&f%milestones%&7/&f%milestones_total%'
+          - '&7完成的挑戰：&f%challenges_completed%'
+      back:
+        slot: 36
+        material: arrow
+        name: '&7返回'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&c關閉'
+        actions: ['[close]']
+
+  #[open] challenges <daily|weekly>。%period% %period_key% %completed% %total% %resets%。
+  #條目：%challenge% %id% %description% %progress% %amount% %percent% %bar% %icon%。
+  #[chatgames:claim-challenge] <period> <id> 領取一個挑戰。
+  challenges:
+    title: '&8%period%挑戰'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    progress-bar:
+      length: 10
+      done: '&a|'
+      left: '&7|'
+    items:
+      tab-daily:
+        slot: 2
+        material: sunflower
+        name: '&e&l每日'
+        glow: true
+        lore:
+          - '&7正在顯示今天的挑戰。'
+        state: '%period_key% == daily'
+        actions: ['[switch] challenges daily']
+        when-off:
+          glow: false
+          lore:
+            - '&e點選顯示今天的挑戰'
+      tab-weekly:
+        slot: 6
+        material: clock
+        name: '&b&l每週'
+        glow: true
+        lore:
+          - '&7正在顯示本週的挑戰。'
+        state: '%period_key% == weekly'
+        actions: ['[switch] challenges weekly']
+        when-off:
+          glow: false
+          lore:
+            - '&e點選顯示本週的挑戰'
+      info:
+        slot: 4
+        material: book
+        name: '&f%period%：&e%completed%&7/&e%total% &f已完成'
+        lore:
+          - '&7新挑戰重新整理倒計時：&f%resets%'
+      none:
+        slot: 22
+        material: barrier
+        name: '&7現在沒有%period%挑戰'
+        view-requirements: ['%entries% == 0']
+      claim-all:
+        slot: 40
+        material: chest
+        name: '&a&l全部領取'
+        lore:
+          - '&7領取所有已完成的挑戰'
+          - '&7和連續記錄獎勵。'
+        actions: ['[command] chatgames claim', '[wait] 2', '[refresh]']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7上一頁'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7下一頁 &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7返回'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&c關閉'
+        actions: ['[close]']
+    templates:
+      in-progress:
+        material: '%icon%'
+        name: '%challenge%'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&7進行中'
+      ready:
+        material: '%icon%'
+        glow: true
+        name: '%challenge% &a&l（已完成）'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&a&l點選領取你的獎勵！'
+        actions: ['[chatgames:claim-challenge] %period_key% %id%', '[refresh]']
+      claimed:
+        material: lime_stained_glass_pane
+        name: '%challenge% &7（已領取）'
+        lore:
+          - '%description%'
+          - ''
+          - '&a獎勵已領取'
+
+  #每個連續記錄都有 %streak_<type>%（天數）、%streak_<type>_name%、%streak_<type>_longest%、
+  #%streak_<type>_unclaimed% 和 %streak_<type>_enabled%，其中 <type> 為 challenge、daily 或 global。
+  #每個連續記錄的 7 天獎勵階梯放在以它命名的列表中，第 1 到 7 天（第二週為 8-14……）。
+  #階梯天數：%day% %ladder_day%（它的獎勵日，1-7） %type% %streak%，以及 %today%（今天為 true）。
+  #[chatgames:claim-streak] <type> 領取某個連續記錄所有未領取的天數。
+  streaks:
+    title: '&8連續記錄'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    lists:
+      challenge: ['11-17']
+      daily: ['20-26']
+      global: ['29-35']
+    items:
+      challenge:
+        slot: 10
+        material: writable_book
+        name: '%streak_challenge_name%'
+        lore:
+          - '&7每天完成所有每日挑戰。'
+          - ''
+          - '&7當前：&f%streak_challenge% &7天 &8（最佳 %streak_challenge_longest%）'
+          - '&7可領取天數：&e%streak_challenge_unclaimed%'
+        view-requirements: ['%streak_challenge_enabled%']
+        click-requirements: ['%streak_challenge_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] challenge', '[refresh]']
+      daily:
+        slot: 19
+        material: gold_ingot
+        name: '%streak_daily_name%'
+        lore:
+          - '&7每天至少贏一局遊戲。'
+          - ''
+          - '&7當前：&f%streak_daily% &7天 &8（最佳 %streak_daily_longest%）'
+          - '&7可領取天數：&e%streak_daily_unclaimed%'
+        view-requirements: ['%streak_daily_enabled%']
+        click-requirements: ['%streak_daily_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] daily', '[refresh]']
+      global:
+        slot: 28
+        material: beacon
+        name: '%streak_global_name%'
+        lore:
+          - '&7每天完成一局全服遊戲。'
+          - ''
+          - '&7當前：&f%streak_global% &7天 &8（最佳 %streak_global_longest%）'
+          - '&7可領取天數：&e%streak_global_unclaimed%'
+        view-requirements: ['%streak_global_enabled%']
+        click-requirements: ['%streak_global_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] global', '[refresh]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7返回'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&c關閉'
+        actions: ['[close]']
+    templates:
+      day-claimed:
+        material: lime_stained_glass_pane
+        glow: '%today%'
+        name: '&a第 %day% 天 &7（已領取）'
+      day-ready:
+        material: chest
+        glow: '%today%'
+        name: '&e&l第 %day% 天'
+        lore:
+          - '&a&l點選領取！'
+        actions: ['[chatgames:claim-streak] %type%', '[refresh]']
+      day-today:
+        material: yellow_stained_glass_pane
+        glow: true
+        name: '&e第 %day% 天 &7（今天）'
+        lore:
+          - '&7今天繼續保持連續記錄'
+          - '&7即可解鎖此獎勵。'
+      day-locked:
+        material: red_stained_glass_pane
+        name: '&c第 %day% 天'
+        lore:
+          - '&7尚未達到。'
+
+  #%points_rank% %fastest_rank% %total_points%；列表 %top_points% 和 %top_fastest%（top-size 行）
+  leaderboards:
+    title: '&8排行榜'
+    rows: 3
+    top-size: 10
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7還沒有人'
+    items:
+      points:
+        slot: 10
+        material: gold_block
+        name: '&e&l點數最多'
+        lore:
+          - '%top_points%'
+      fastest:
+        slot: 11
+        material: clock
+        name: '&b&l打字最快'
+        lore:
+          - '%top_fastest%'
+      you:
+        slot: 13
+        material: player_head
+        head: '%player%'
+        name: '&a&l你'
+        lore:
+          - '&7點數排名：&f%points_rank%'
+          - '&7最快排名：&f%fastest_rank%'
+          - ''
+          - '&7所有人獲得的點數：&f%total_points%'
+      games:
+        slot: 15
+        material: book
+        name: '&d&l各遊戲最快'
+        lore:
+          - '&e點選檢視所有遊戲'
+        actions: ['[open] leaderboard-games']
+      events:
+        slot: 16
+        material: nether_star
+        name: '&6&l活動'
+        lore:
+          - '&e點選檢視活動'
+        view-requirements: ['permission chatgames.event']
+        actions: ['[open] leaderboard-events']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7返回'
+        actions: ['[back] main']
+      close:
+        slot: 26
+        material: barrier
+        name: '&c關閉'
+        actions: ['[close]']
+
+  #每個遊戲和競賽一個條目：%game% %key% %icon%，以及 %top%（該遊戲最快的玩家）
+  leaderboard-games:
+    title: '&8各遊戲最快'
+    rows: 6
+    top-size: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7還沒有人'
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7上一頁'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7下一頁 &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7返回'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 53
+        material: barrier
+        name: '&c關閉'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&e&l%game%'
+        lore:
+          - '%top%'
+
+  #每個活動一個條目：%event% %id% %steps%
+  leaderboard-events:
+    title: '&8活動排行榜'
+    rows: 4
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7沒有設定任何活動'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7上一頁'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7下一頁 &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7返回'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 35
+        material: barrier
+        name: '&c關閉'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7%steps% 局遊戲'
+          - ''
+          - '&e點選檢視誰得分最多'
+        actions: ['[close]', '[command] chatgames event top %id%']
+
+  #/chatgames admin。%current_game% %next_game% %rotation_state% %event% %preset%，
+  #%rotation_on% 和 %games_on%（true 或 false）。每個按鈕執行對應的命令，
+  #命令會像手動輸入一樣檢查自己的許可權。
+  admin:
+    title: '&4&lChatGames 管理'
+    rows: 5
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7無'
+    items:
+      status:
+        slot: 4
+        material: repeater
+        name: '&f&l狀態'
+        lore:
+          - '&7進行中：&f%current_game%'
+          - '&7下一局遊戲：&f%next_game%'
+          - '&7輪換：%rotation_state%'
+          - '&7活動：&f%event%'
+          - '&7預設：&f%preset%'
+      start-game:
+        slot: 19
+        material: diamond_sword
+        name: '&a&l開始遊戲'
+        lore:
+          - '&7任意遊戲或競賽，立即開始。'
+        actions: ['[open] admin-start']
+      global:
+        slot: 20
+        material: beacon
+        name: '&3&l開始全服遊戲'
+        lore:
+          - '&7所有及時完成的人都能獲勝。'
+        actions: ['[open] admin-global']
+      events:
+        slot: 21
+        material: nether_star
+        name: '&6&l活動'
+        lore:
+          - '&7開始或停止遊戲活動。'
+        actions: ['[open] admin-events']
+      presets:
+        slot: 23
+        material: chest
+        name: '&d&l預設'
+        lore:
+          - '&7載入一組啟用的遊戲。'
+        actions: ['[open] admin-presets']
+      logs:
+        slot: 24
+        material: oak_sign
+        name: '&f&l日誌'
+        lore:
+          - '&7在聊天中顯示最近的遊戲。'
+        actions: ['[open] admin-logs']
+      stop:
+        slot: 25
+        material: red_wool
+        name: '&c&l停止遊戲'
+        lore:
+          - '&7結束正在進行的遊戲，沒有贏家。'
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      toggle:
+        slot: 29
+        material: lime_dye
+        name: '&f你的聊天遊戲：&a開啟'
+        lore:
+          - '&7點選為你關閉它們。'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&f你的聊天遊戲：&c關閉'
+          lore:
+            - '&7點選為你開啟它們。'
+      toggle-all:
+        slot: 30
+        material: lime_dye
+        name: '&f遊戲輪換：&a開啟'
+        lore:
+          - '&7點選為所有人停止自動遊戲。'
+        state: '%rotation_on%'
+        #toggleAll 在全域性執行緒上完成，在 Folia 上會晚一個 tick
+        actions: ['[command] chatgames toggleAll', '[wait] 2', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&f遊戲輪換：&c關閉'
+          lore:
+            - '&7點選重新開始自動遊戲。'
+      reload:
+        slot: 32
+        material: hopper
+        name: '&e&l重新載入'
+        lore:
+          - '&7重新載入所有配置檔案。'
+        actions: ['[close]', '[command] chatgames reload']
+      debug:
+        slot: 33
+        material: command_block
+        name: '&c&l除錯'
+        lore:
+          - '&7私下測試任意遊戲。'
+        view-requirements: ['permission chatgames.debug']
+        actions: ['[open] debug']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7返回'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&c關閉'
+        actions: ['[close]']
+
+  #每個遊戲和競賽：%game% %key%（與命令中相同） %icon%
+  admin-start:
+    title: '&8開始遊戲'
+    rows: 6
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7上一頁'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7下一頁 &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7返回'
+        actions: ['[back] admin']
+      close:
+        slot: 53
+        material: barrier
+        name: '&c關閉'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&a%game%'
+        lore:
+          - '&7聊天遊戲'
+          - '&e點選開始'
+        actions: ['[close]', '[command] chatgames %key%']
+      race:
+        material: '%icon%'
+        name: '&6%game%'
+        lore:
+          - '&7競賽'
+          - '&e點選開始'
+        actions: ['[close]', '[command] chatgames %key%']
+
+  #global_games.yml 中啟用的遊戲：%game% %key% %icon% %goal% %duration% %points%。
+  #正在進行的那局：%global_running% %global_game% %global_goal%（例如 "500 石頭"）
+  #%global_progress% %global_goal_amount% %global_percent% %global_contributors% %global_time_left%
+  admin-global:
+    title: '&8全服遊戲'
+    rows: 5
+    update-interval: 20
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    items:
+      status:
+        slot: 4
+        material: beacon
+        name: '&3&l進行中：&f%global_game%'
+        lore:
+          - '&7目標：&f%global_goal%'
+          - '&7進度：&e%global_progress%&7/&e%global_goal_amount% &8(%global_percent%%)'
+          - '&7參與的玩家：&f%global_contributors%'
+          - '&7剩餘時間：&f%global_time_left%s'
+          - ''
+          - '&c點選停止（沒有獎勵）'
+        view-requirements: ['%global_running%']
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      idle:
+        slot: 4
+        material: gray_dye
+        name: '&7沒有正在進行的全服遊戲'
+        lore:
+          - '&7在下面選一個開始。'
+        view-requirements: ['!%global_running%']
+      none:
+        slot: 22
+        material: barrier
+        name: '&7沒有啟用任何全服遊戲'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7上一頁'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7下一頁 &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7返回'
+        actions: ['[back] admin']
+      close:
+        slot: 44
+        material: barrier
+        name: '&c關閉'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&3全服%game%'
+        lore:
+          - '&7目標：&f%goal% 個正確答案'
+          - '&7時間：&f%duration%s'
+          - '&7點數：&f%points%'
+          - ''
+          - '&e點選開始'
+        actions: ['[close]', '[command] chatgames global %key%']
+      race:
+        material: '%icon%'
+        name: '&3全服%game%競賽'
+        lore:
+          - '&7目標：一起完成 &f%goal%'
+          - '&7時間：&f%duration%s'
+          - '&7點數：&f%points%'
+          - ''
+          - '&e點選開始'
+        actions: ['[close]', '[command] chatgames global %key%']
+      count:
+        material: '%icon%'
+        name: '&3全服%game%'
+        lore:
+          - '&7在聊天中一起計數'
+          - '&7時間：&f%duration%s'
+          - '&7點數：&f%points%'
+          - ''
+          - '&e點選開始'
+        actions: ['[close]', '[command] chatgames global %key%']
+
+  #events.yml 中的活動：%event% %id% %steps%，正在進行的活動還有 %step%（當前進行的遊戲）
+  admin-events:
+    title: '&8活動'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7events.yml 中沒有設定任何活動'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7上一頁'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7下一頁 &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7返回'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&c關閉'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7%steps% 局遊戲'
+          - ''
+          - '&e點選開始'
+        actions: ['[command] chatgames event start %id%', '[wait] 2', '[refresh]']
+      running:
+        material: nether_star
+        glow: true
+        name: '%event% &a（進行中）'
+        lore:
+          - '&7第 %step% 局，共 %steps% 局'
+          - ''
+          - '&c點選停止'
+        actions: ['[command] chatgames event stop', '[wait] 2', '[refresh]']
+
+  #預設以及 'none'（games.yml 中的啟用開關）：%preset% %games%
+  admin-presets:
+    title: '&8預設'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7上一頁'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7下一頁 &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7返回'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&c關閉'
+        actions: ['[close]']
+    templates:
+      preset:
+        material: chest
+        name: '&d%preset%'
+        lore:
+          - '&7遊戲：&f%games%'
+          - ''
+          - '&e點選載入'
+        actions: ['[command] chatgames preset load %preset%', '[wait] 2', '[refresh]']
+      active:
+        material: ender_chest
+        glow: true
+        name: '&d%preset% &a（使用中）'
+        lore:
+          - '&7遊戲：&f%games%'
+
+  #完全在這裡構建：可以隨意新增或修改數量
+  admin-logs:
+    title: '&8日誌'
+    rows: 3
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      last-10:
+        slot: 11
+        material: paper
+        name: '&f最近 &e10 &f局遊戲'
+        lore: ['&e點選在聊天中顯示']
+        actions: ['[close]', '[command] chatgames logs 10']
+      last-25:
+        slot: 12
+        material: paper
+        name: '&f最近 &e25 &f局遊戲'
+        lore: ['&e點選在聊天中顯示']
+        actions: ['[close]', '[command] chatgames logs 25']
+      last-50:
+        slot: 14
+        material: paper
+        name: '&f最近 &e50 &f局遊戲'
+        lore: ['&e點選在聊天中顯示']
+        actions: ['[close]', '[command] chatgames logs 50']
+      last-100:
+        slot: 15
+        material: paper
+        name: '&f最近 &e100 &f局遊戲'
+        lore: ['&e點選在聊天中顯示']
+        actions: ['[close]', '[command] chatgames logs 100']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7返回'
+        actions: ['[back] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&c關閉'
+        actions: ['[close]']
+
+  #/chatgames debug：所有聊天遊戲（%game% %key% %icon%）。[chatgames:debug] <game> 開始一個
+  #私人回合並開啟 debug-session。
+  debug:
+    title: '&4除錯：選擇一個遊戲'
+    rows: 4
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7上一頁'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7下一頁 &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7返回'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&c關閉'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&c%game%'
+        lore:
+          - '&7生成一個私人回合。'
+          - '&7沒有獎勵，不儲存任何東西。'
+        actions: ['[chatgames:debug] %key%']
+
+  #私人回合：%game% %key% %icon% %question% %answer% %time% %min_ms% %case_sensitive%
+  #%winners% %points% %hints% %generated%；列表 %placeholders% 和 %answers%。
+  #[chatgames:debug-answer] <correct|wrong|wrong-case> [ms] 傳送一個模擬答案（在 ms 之後）；
+  #[chatgames:debug-timeout] 等待時間限制結束；[chatgames:debug-reroll] 生成新回合；
+  #[chatgames:debug-end] 結束會話。
+  debug-session:
+    title: '&4除錯：%game%'
+    rows: 5
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    #每個延遲一個“在 X 毫秒後正確作答”按鈕，放在 'delays' 列表格子中
+    delays: [100, 500, 1000, 5000]
+    lists:
+      delays: ['29-32']
+    items:
+      question:
+        slot: 11
+        material: '%icon%'
+        name: '&e&l題目'
+        lore:
+          - '&f%question%'
+          - ''
+          - '%placeholders%'
+      answer:
+        slot: 13
+        material: emerald
+        name: '&a&l可接受的答案'
+        lore:
+          - '%answers%'
+      settings:
+        slot: 15
+        material: repeater
+        name: '&f&l設定'
+        lore:
+          - '&7時間限制：&f%time%s'
+          - '&7最短作答時間：&f%min_ms% 毫秒'
+          - '&7區分大小寫：%case_sensitive%'
+          - '&7贏家數：&f%winners%  &7點數：&f%points%'
+          - '&7準備的提示：&f%hints%'
+          - '&7生成用時：&f%generated% 毫秒'
+      correct-now:
+        slot: 28
+        material: lime_wool
+        name: '&a立即正確作答'
+        lore:
+          - '&7比任何人都快：展示'
+          - '&7反宏檢查的效果。'
+        actions: ['[chatgames:debug-answer] correct']
+      wrong:
+        slot: 33
+        material: red_wool
+        name: '&c錯誤作答'
+        actions: ['[chatgames:debug-answer] wrong']
+      wrong-case:
+        slot: 34
+        material: orange_wool
+        name: '&6用錯誤的大小寫作答'
+        actions: ['[chatgames:debug-answer] wrong-case']
+      timeout:
+        slot: 39
+        material: clock
+        name: '&e讓它超時'
+        lore:
+          - '&7等待時間限制結束，然後報告。'
+        actions: ['[chatgames:debug-timeout]']
+      reroll:
+        slot: 41
+        material: ender_pearl
+        name: '&d新回合'
+        actions: ['[chatgames:debug-reroll]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7返回'
+        actions: ['[chatgames:debug-end]', '[back] debug']
+      close:
+        slot: 44
+        material: barrier
+        name: '&c關閉'
+        actions: ['[close]']
+    templates:
+      correct-after:
+        material: yellow_wool
+        name: '&e在 %ms% 毫秒後正確作答'
+        actions: ['[chatgames:debug-answer] correct %ms%']

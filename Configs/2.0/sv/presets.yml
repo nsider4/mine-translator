@@ -1,0 +1,41 @@
+# ChatGames-samlingar: namngivna uppsättningar spel för den automatiska rotationen.
+#
+# Medan en samling är aktiv väljer rotationen bara dess spel, och 'enable'-flaggorna
+# i games.yml / races.yml ignoreras. Sätt 'active' till none för att använda flaggorna igen.
+# Lopp i en samling körs bara när lopp är påslagna i races.yml (enable-races).
+#
+# Kommandon (behörighet chatgames.preset):
+#   /chatgames preset list
+#   /chatgames preset load <name>   (eller 'none')
+#   /chatgames preset save <name>   sparar spelen som är aktiverade just nu som en samling
+#
+# Pluginet skriver om den här filen när du använder de kommandona.
+
+active: none
+
+presets:
+  weekend_set:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+
+  minimal_set:
+    games:
+      - reaction
+
+  full_rotation:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+      - guess_the_number
+      - memorize
+      - sequence
+      - clickable
+      - fillout
+      - hoverable
+      - random
+      - math
+      - variable
+      - trivia

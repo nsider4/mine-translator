@@ -1,0 +1,72 @@
+#SÉRIE
+#
+#Dny po sobě, kdy hráč něco udělal. Vynechaný den začne sérii znovu
+#od 1 a do té doby nevyzvednuté odměny propadnou. Dny začínají v časovém pásmu nastaveném v
+#challenges.yml.
+#  challenge: splněny všechny denní úkoly
+#  daily:     vyhrána aspoň jedna hra (nebo dokončena globální hra na místě s odměnou)
+#  global:    včas vyřešena aspoň jedna globální hra
+#
+#Každý den, kdy série roste, vyplatí odměnu toho dne, vyzvedává se přes /chatgames claim.
+#Odměny jsou řádky jako v rewards.yml; %player%, %streak% (název) a %day% se doplní.
+
+#Po 7. dni: 'repeat' vyplácí odměnu 7. dne každý den, 'loop' začne znovu od 1. dne.
+after-day-7: repeat
+
+challenge:
+  enabled: true
+  name: '&dSérie úkolů'
+  rewards:
+    1:
+      - '[consolecmd] give %player% iron_ingot 4'
+    2:
+      - '[consolecmd] give %player% iron_ingot 8'
+    3:
+      - '[consolecmd] give %player% gold_ingot 4'
+    4:
+      - '[consolecmd] give %player% gold_ingot 8'
+    5:
+      - '[consolecmd] give %player% emerald 4'
+    6:
+      - '[consolecmd] give %player% emerald 8'
+    7:
+      - '[consolecmd] give %player% diamond 4'
+      - '[broadcast] &d%player% &fsplnil všechny denní úkoly &d%day% &fdní po sobě!'
+
+daily:
+  enabled: true
+  name: '&6Série denních výher'
+  rewards:
+    1:
+      - '[consolecmd] give %player% iron_ingot 2'
+    2:
+      - '[consolecmd] give %player% iron_ingot 4'
+    3:
+      - '[consolecmd] give %player% gold_ingot 2'
+    4:
+      - '[consolecmd] give %player% gold_ingot 4'
+    5:
+      - '[consolecmd] give %player% emerald 2'
+    6:
+      - '[consolecmd] give %player% emerald 4'
+    7:
+      - '[consolecmd] give %player% diamond 2'
+
+global:
+  enabled: true
+  name: '&3Globální série'
+  rewards:
+    1:
+      - '[consolecmd] give %player% iron_ingot 2'
+    2:
+      - '[consolecmd] give %player% iron_ingot 4'
+    3:
+      - '[consolecmd] give %player% gold_ingot 2'
+    4:
+      - '[consolecmd] give %player% gold_ingot 4'
+    5:
+      - '[consolecmd] give %player% emerald 2'
+    6:
+      - '[consolecmd] give %player% emerald 4'
+    7:
+      - '[consolecmd] give %player% diamond 2'

@@ -97,6 +97,14 @@ events:
   top_entry: '&c%spot%. &f%player% &8| &e%points% &7pkt.'
   top_empty: '&8[%prefix%&8] &cNikt jeszcze nie zdobył punktów w %event%&c.'
 
+discord:
+  test_sent: '&8[%prefix%&8] &fWysłano &a%amount% &fwiadomości testowych na Discorda. Jeśli nic się nie pojawi, konsola powie dlaczego.'
+  leaderboard_posted: '&8[%prefix%&8] &fRanking został wysłany na Discorda.'
+  disabled: '&8[%prefix%&8] &cWiadomości na Discorda są wyłączone: ustaw &fenabled: true &cw discord.yml.'
+  no_channel: '&8[%prefix%&8] &f%section% &cnie ma w discord.yml kanału z webhookiem ani kanału DiscordSRV.'
+  unknown_message: '&8[%prefix%&8] &cNie ma wiadomości Discorda o nazwie &f%message%&c.'
+  empty_message: '&8[%prefix%&8] &f%message% &cjest pusta lub brakuje jej w discord.yml.'
+
 logs:
   no_logs: "&cBrak dostępnych logów lub wystąpił błąd."
   header: "&8[%prefix%&8] &eOstatnie &6%amount% &elogów:"
@@ -184,10 +192,11 @@ help_command:
   - '&a/chatgames challenges reset <player> &f- &3Czyści postęp wyzwań gracza.'
   - '&a/chatgames streak set <player> <challenge|daily|global> <days> &f- &3Ustawia serię gracza.'
   - '&a/chatgames logs [amount] &f- &3Pokazuje ostatnie logi gier.'
+  - '&a/chatgames discord <test <message|all>|leaderboard> &f- &3Wysyła wiadomość testową lub ranking na Discorda.'
   - '&a/chatgames reload &f- &3Przeładowuje pliki konfiguracyjne.'
   - '&6'
   - '&2&lTYPY GIER:'
-  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace'
+  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace, tame, shear'
   - '&7&m-------------------------------------------------'
 
 #Użyj <center> w wiadomościach LISTY, aby je wyśrodkować; linie z tym będą wyśrodkowane!
@@ -686,3 +695,41 @@ furnace:
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
     - '<center>&f%timeToComplete%s &cminęło! &fWyzwanie pieczenia się skończyło!'
+
+tame:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMasz &e%timeToComplete% sekund&f, aby &doswoić&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7oswoił `&e%amount%&fx &3%value%&7` (&c%time%s&7) i wygrywa nagrodę!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cminęło! &fWyzwanie oswajania się skończyło!'
+
+shear:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMasz &e%timeToComplete% sekund&f, aby &dostrzyc&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7ostrzygł `&e%amount%&fx &3%value%&7` (&c%time%s&7) i wygrywa nagrodę!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cminęło! &fWyzwanie strzyżenia się skończyło!'

@@ -11,9 +11,12 @@ check-update: true
 lang: 'en_us'
 
 #La lingua di questi file di configurazione: messaggi, menu, liste di parole, quiz, commenti...
-#  auto: cambiarli quando 'lang' qui sopra cambia, se quella lingua ha file tradotti
+#Tradotti completamente: en, es, fr, pt, de, it, nl, pl, ru, tr, zh, zh_tw, ja, ko, uk, cs, sv, hu, vi, id
+#(zh è il cinese semplificato, zh_tw il cinese tradizionale). Se il tuo 'lang' non è tra questi, i nomi di blocchi,
+#oggetti e mob vengono comunque tradotti, ma questi file mantengono la loro lingua (inglese di default).
+#  auto: cambiarli quando cambia 'lang' qui sopra, se quella lingua è tradotta completamente
 #  none: non cambiarli mai
-#  oppure un codice lingua: en, es, fr, pt, de, it, nl, pl, ru, tr
+#  oppure uno dei codici lingua qui sopra
 #Il cambio mantiene le tue impostazioni e le modifiche che ci hai fatto; i tuoi messaggi personalizzati
 #vengono sostituiti dalla traduzione (prima i vecchi file vengono copiati in backups/). Le traduzioni
 #vengono scaricate da https://github.com/nsider4/mine-translator (cartella Configs) e aggiornate

@@ -97,6 +97,14 @@ events:
   top_entry: '&c%spot%. &f%player% &8| &e%points% &7points'
   top_empty: '&8[%prefix%&8] &cPersonne n''a encore marqué dans %event%&c.'
 
+discord:
+  test_sent: '&8[%prefix%&8] &f&a%amount% &fmessage(s) de test envoyé(s) sur Discord. Si rien n''apparaît, la console dit pourquoi.'
+  leaderboard_posted: '&8[%prefix%&8] &fLe classement a été envoyé sur Discord.'
+  disabled: '&8[%prefix%&8] &cLes messages Discord sont désactivés : mettez &fenabled: true &cdans discord.yml.'
+  no_channel: '&8[%prefix%&8] &f%section% &cn''a aucun salon avec un webhook ou un salon DiscordSRV dans discord.yml.'
+  unknown_message: '&8[%prefix%&8] &cIl n''y a pas de message Discord nommé &f%message%&c.'
+  empty_message: '&8[%prefix%&8] &f%message% &cest vide ou absent de discord.yml.'
+
 logs:
   no_logs: "&cAucun journal disponible ou une erreur s'est produite."
   header: "&8[%prefix%&8] &e&6%amount% &edernières entrées du journal :"
@@ -184,10 +192,11 @@ help_command:
   - '&a/chatgames challenges reset <player> &f- &3Efface la progression des défis d''un joueur.'
   - '&a/chatgames streak set <player> <challenge|daily|global> <days> &f- &3Définit la série d''un joueur.'
   - '&a/chatgames logs [amount] &f- &3Affiche les derniers journaux de jeux.'
+  - '&a/chatgames discord <test <message|all>|leaderboard> &f- &3Envoie un message de test ou le classement sur Discord.'
   - '&a/chatgames reload &f- &3Recharge les fichiers de configuration.'
   - '&6'
   - '&2&lTYPES DE JEUX :'
-  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace'
+  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace, tame, shear'
   - '&7&m-------------------------------------------------'
 
 #Utilisez <center> dans les messages en LISTE pour les centrer : les lignes qui le contiennent seront centrées !
@@ -686,3 +695,41 @@ furnace:
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
     - '<center>&f%timeToComplete%s &cécoulées ! &fLe défi de cuisson est terminé !'
+
+tame:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fVous avez &e%timeToComplete% secondes &fpour &dapprivoiser&f : `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7a fini d''apprivoiser `&e%amount%&fx &3%value%&7` (&c%time%s&7) et gagne un prix !'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cécoulées ! &fLe défi d''apprivoisement est terminé !'
+
+shear:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fVous avez &e%timeToComplete% secondes &fpour &dtondre&f : `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7a fini de tondre `&e%amount%&fx &3%value%&7` (&c%time%s&7) et gagne un prix !'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cécoulées ! &fLe défi de tonte est terminé !'

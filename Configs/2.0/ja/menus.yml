@@ -1,0 +1,1158 @@
+#メニュー
+#
+#'menus:' の下のメニューにはそれぞれ 'title'、'rows' での大きさ（1-6）、そして 'items' があります。
+#どのボタンの動作も変えられ、ボタンを追加したり、まったく新しいメニューを追加したりできます（/chatgames menu <id> で開きます。
+#または menus/ フォルダーに <id>.yml という名前で 1 つずつファイルを置きます）。
+#
+#各アイテム：
+#  slot：置く場所。0（左上）から rows*9-1 まで。'slots: [0, 1, '9-17']' で繰り返し置けます。
+#  material：1.8 から 26.x までの任意のアイテム名。新しい名前でも古い名前でも OK（lime_dye / INK_SACK:10 / 351:10）、
+#            または 'head:<プレイヤー名、テクスチャー、または textures.minecraft.net の URL>'
+#  name / lore：カラーコード（&a、1.16+ では &#RRGGBB）と PlaceholderAPI のプレースホルダーが使えます。
+#  amount, glow: true, enchantments: ['SHARPNESS:1'], flags: [HIDE_ATTRIBUTES], head: '%player%',
+#  custom-model-data: 1001 (1.14+)、item-model: 'namespace:key' (1.21.2+)、color: '#FF0000'（革）
+#  actions：クリックしたときの動作を順番に。left-actions、right-actions、shift-left-actions、
+#           shift-right-actions、middle-actions、drop-actions もあります（なければ actions が使われます）。
+#  view-requirements：すべての行を満たしたときだけアイテムが表示されます
+#  click-requirements：満たさない行があると、actions の代わりに 'deny-actions' が実行されます
+#  state + when-off：state が false のとき、when-off のキーがアイテム自身のキーを置き換えます
+#                    （'off' は不可：YAML は単独の off を false と読みます）
+#アイテムを書かなければ非表示になります。'filler' は空きスロットをすべて埋めます。消せば埋めません。
+#
+#動作：
+#  [command] <command>        自分がコマンドを実行         [console] <command>   コンソールが実行
+#  [message] <text>           自分へのメッセージ           [broadcast] <text>    全員へ
+#  [sound] <sound> [volume] [pitch]   1.8 から 26.x までの任意のサウンド名
+#  [open] <menu> [values]     別のメニューを開く           [switch] <menu> [values]  同じだが [back] では飛ばされる
+#  [back] [menu]              前のメニュー（または指定のメニュー、なければ閉じる）
+#  [refresh]  [close]  [next-page]  [previous-page]  [wait] <ticks>
+#  [chatgames:no-permission]  権限がないときのメッセージを送る
+#  メニュー専用の動作は、それを持つメニューの上に書いてあります。
+#
+#条件。1 行に 1 つ（すべての行を満たす必要があります。行頭に ! を付けると反転します）：
+#  permission <node>     '%chatgames_points% >= 100' のような比較（==、!=、>=、<=、>、<）
+#  または true / on / yes / 0 以外の数になる値
+#
+#一覧を表示するメニュー（チャレンジ、ゲーム、イベント…）は、それらを 'list-slots' に順番に置き、
+#メニューの 'templates' で描きます。スロットより項目が多い場合、動作が
+#[next-page] / [previous-page] のアイテムでページをめくれます。めくるページがないと非表示になります。
+#'%game_wins%' のように一覧のプレースホルダーだけの lore の行は、複数行になります。
+#どのメニューにも %player%、%page%、%pages%、%entries%（一覧の項目数）があります。
+
+#ゲームの名前とアイコン。すべてのメニューと、ゲーム名を出すメッセージ（%game%）で使われます。
+#ここにないゲームはキーの名前で表示されます。
+game-names:
+  unscramble: '並べ替え'
+  unreverse: '逆さ読み'
+  reaction: '反応'
+  guess_the_number: '数当て'
+  clickable: 'クリック'
+  fillout: '穴埋め'
+  hoverable: 'ホバー'
+  random: 'ランダム文字'
+  math: '計算'
+  variable: '変数'
+  sequence: '数列'
+  memorize: 'メモライズ'
+  word_association: '連想ゲーム'
+  trivia: 'クイズ'
+  count: 'カウント'
+  hunt: 'ハント'
+  mine: '採掘'
+  place: '設置'
+  fish: '釣り'
+  eat: '食事'
+  craft: 'クラフト'
+  furnace: '料理'
+  tame: '飼いならし'
+  shear: '毛刈り'
+game-icons:
+  unscramble: book
+  math: redstone
+  trivia: enchanted_book
+  reaction: feather
+  clickable: stone_button
+  random: ender_pearl
+  unreverse: compass
+  variable: name_tag
+  guess_the_number: clock
+  memorize: map
+  sequence: ladder
+  fillout: paper
+  hoverable: ender_eye
+  word_association: lead
+  count: clock
+  hunt: iron_sword
+  place: grass_block
+  mine: iron_pickaxe
+  fish: fishing_rod
+  eat: cooked_beef
+  craft: crafting_table
+  furnace: furnace
+  tame: bone
+  shear: shears
+
+formats:
+  #まだ順位がないプレイヤーに、順位の代わりに表示されます
+  no-rank: '-'
+
+#デバッグメニューからプレイヤーへ。行を空（''）にすると何も送りません。
+messages:
+  debug-round: '&8[&cDEBUG&8] &f新しいプライベートな &e%game% &fラウンド（答え：&a%answer%&f）、生成時間 &e%generated% ms&f。あなたにしか見えません。'
+  debug-failed: '&8[&cDEBUG&8] &c%game% のラウンドを作れませんでした。理由はコンソールに出ます。'
+  debug-race: '&8[&cDEBUG&8] &cレースはワールドで行うので、ここではテストできません。/chatgames <race> で開始してください。'
+  debug-no-letters: '&8[&cDEBUG&8] &7この答えには文字がないので、大文字・小文字を間違えようがありません。'
+  debug-timeout-started: '&7&8[&cDEBUG&8] &e%time%s &7の制限時間が過ぎるのを待っています…'
+  debug-timeout: '&8[&cDEBUG&8] &e%game%&7：時間切れ。プレイヤーには答えが &f%answer%&7 だったと伝えられます。'
+  #%verdict% は下の行のどれかです
+  debug-result: '&8[&cDEBUG&8] &e%game% &7| &e%ms% ms&7 後に &f%input% &7と入力：%verdict%'
+  debug-verdicts:
+    accepted: '&a受理 &7（順位がつき &e%points% &7ポイントを獲得）'
+    wrong: '&c不正解 &7（無視）'
+    wrong-case: '&6大文字・小文字の間違い &7（プレイヤーに確認するよう伝えます）'
+    macro: '&cマクロとして無視 &7（min-answer-ms より速い、&e%min_ms% ms&7）'
+    late: '&c遅すぎ &7（制限時間後）'
+
+menus:
+
+  #/chatgames menu。%points% %rank% %wins% %claimable%（受け取れる報酬）、
+  #%daily_completed% %daily_total% %weekly_completed% %weekly_total%,
+  #%games_on% / %sound_on%（true か false）と %games_state% / %sound_state%（オン/オフの文字）
+  main:
+    title: '&8&lChatGames'
+    rows: 3
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      profile:
+        slot: 10
+        material: player_head
+        head: '%player%'
+        name: '&e&lプロフィール'
+        lore:
+          - '&7ポイント：&e%points% &8(%rank%)'
+          - '&7勝利数：&e%wins%'
+          - ''
+          - '&eクリックで統計を見る'
+        actions: ['[open] profile']
+      challenges:
+        slot: 11
+        material: writable_book
+        name: '&a&lチャレンジ'
+        lore:
+          - '&7デイリー：&e%daily_completed%&7/&e%daily_total%'
+          - '&7ウィークリー：&e%weekly_completed%&7/&e%weekly_total%'
+          - '&7受け取れる報酬：&e%claimable%'
+          - ''
+          - '&eクリックで開く'
+        actions: ['[open] challenges daily']
+      streaks:
+        slot: 12
+        material: blaze_powder
+        name: '&6&l連続記録'
+        lore:
+          - '&7毎日遊んで続けよう。'
+          - ''
+          - '&eクリックで開く'
+        actions: ['[open] streaks']
+      leaderboards:
+        slot: 13
+        material: gold_ingot
+        name: '&e&lランキング'
+        lore:
+          - '&7ポイント上位と最速のプレイヤー。'
+          - ''
+          - '&eクリックで開く'
+        actions: ['[open] leaderboards']
+      games-toggle:
+        slot: 15
+        material: lime_dye
+        name: '&fチャットゲーム：%games_state%'
+        lore:
+          - '&7クリックでチャットゲームをオフにします。'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7クリックでチャットゲームをオンにします。'
+      sound-toggle:
+        slot: 16
+        material: note_block
+        name: '&fゲームサウンド：%sound_state%'
+        lore:
+          - '&7クリックでゲームサウンドをオフにします。'
+        state: '%sound_on%'
+        actions: ['[command] chatgames togglesound', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7クリックでゲームサウンドをオンにします。'
+      admin:
+        slot: 22
+        material: command_block
+        name: '&c&l管理'
+        lore:
+          - '&7ゲーム、イベント、プリセットを開始…'
+        view-requirements: ['permission chatgames.admin']
+        actions: ['[open] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&c閉じる'
+        actions: ['[close]']
+
+  #/chatgames profile [player]。%target% %points% %rank% %wins% %race_wins% %global_played%
+  #%global_won%（達成） %contributions% %events_played% %event_wins% %event_best_place% %fastest% %challenges_completed%
+  #%milestones% %milestones_total% %streak_<challenge|daily|global>% と %streak_<...>_longest%。
+  #一覧：%game_wins% と %game_fastest%。[open] profile <name> でほかの人のを開きます。
+  profile:
+    title: '&8プロフィール：%target%'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7まだなし'
+      game-wins: '&7%game%：&f%wins%'
+      game-fastest: '&7%game%：&f%time%s'
+    items:
+      head:
+        slot: 4
+        material: player_head
+        head: '%target%'
+        name: '&e&l%target%'
+        lore:
+          - '&7ポイント：&e%points% &8(%rank%)'
+      wins:
+        slot: 19
+        material: diamond
+        name: '&b&l勝利数'
+        lore:
+          - '&7チャットゲームの勝利：&f%wins%'
+          - '&7レースの勝利：&f%race_wins%'
+          - ''
+          - '%game_wins%'
+      fastest:
+        slot: 20
+        material: clock
+        name: '&e&l最速タイム'
+        lore:
+          - '&7全体のベスト：&f%fastest%'
+          - ''
+          - '%game_fastest%'
+      global:
+        slot: 21
+        material: beacon
+        name: '&3&lグローバルゲーム'
+        lore:
+          - '&7参加：&f%global_played%'
+          - '&7達成：&f%global_won%'
+          - '&7貢献：&f%contributions%'
+      events:
+        slot: 23
+        material: nether_star
+        name: '&6&lイベント'
+        lore:
+          - '&7参加：&f%events_played%'
+          - '&7優勝：&f%event_wins%'
+          - '&7最高順位：&f%event_best_place%'
+      streaks:
+        slot: 24
+        material: blaze_powder
+        name: '&6&l連続記録'
+        lore:
+          - '&7チャレンジ：&f%streak_challenge% &8（最高 %streak_challenge_longest%）'
+          - '&7デイリー勝利：&f%streak_daily% &8（最高 %streak_daily_longest%）'
+          - '&7グローバル：&f%streak_global% &8（最高 %streak_global_longest%）'
+      progress:
+        slot: 25
+        material: experience_bottle
+        name: '&a&l進行状況'
+        lore:
+          - '&7ポイント：&f%points%'
+          - '&7達成したマイルストーン：&f%milestones%&7/&f%milestones_total%'
+          - '&7達成したチャレンジ：&f%challenges_completed%'
+      back:
+        slot: 36
+        material: arrow
+        name: '&7戻る'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&c閉じる'
+        actions: ['[close]']
+
+  #[open] challenges <daily|weekly>。%period% %period_key% %completed% %total% %resets%。
+  #項目：%challenge% %id% %description% %progress% %amount% %percent% %bar% %icon%。
+  #[chatgames:claim-challenge] <period> <id> で 1 つ受け取ります。
+  challenges:
+    title: '&8%period%チャレンジ'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    progress-bar:
+      length: 10
+      done: '&a|'
+      left: '&7|'
+    items:
+      tab-daily:
+        slot: 2
+        material: sunflower
+        name: '&e&lデイリー'
+        glow: true
+        lore:
+          - '&7今日のチャレンジを表示中。'
+        state: '%period_key% == daily'
+        actions: ['[switch] challenges daily']
+        when-off:
+          glow: false
+          lore:
+            - '&eクリックで今日のチャレンジを表示'
+      tab-weekly:
+        slot: 6
+        material: clock
+        name: '&b&lウィークリー'
+        glow: true
+        lore:
+          - '&7今週のチャレンジを表示中。'
+        state: '%period_key% == weekly'
+        actions: ['[switch] challenges weekly']
+        when-off:
+          glow: false
+          lore:
+            - '&eクリックで今週のチャレンジを表示'
+      info:
+        slot: 4
+        material: book
+        name: '&f%period%：&e%completed%&7/&e%total% &f達成'
+        lore:
+          - '&7新しいチャレンジまで &f%resets%'
+      none:
+        slot: 22
+        material: barrier
+        name: '&7今は%period%チャレンジがありません'
+        view-requirements: ['%entries% == 0']
+      claim-all:
+        slot: 40
+        material: chest
+        name: '&a&lすべて受け取る'
+        lore:
+          - '&7達成したチャレンジと連続記録の'
+          - '&7報酬をすべて受け取ります。'
+        actions: ['[command] chatgames claim', '[wait] 2', '[refresh]']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7前のページ'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7次のページ &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7戻る'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&c閉じる'
+        actions: ['[close]']
+    templates:
+      in-progress:
+        material: '%icon%'
+        name: '%challenge%'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&7進行中'
+      ready:
+        material: '%icon%'
+        glow: true
+        name: '%challenge% &a&l（達成）'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&a&lクリックで報酬を受け取る！'
+        actions: ['[chatgames:claim-challenge] %period_key% %id%', '[refresh]']
+      claimed:
+        material: lime_stained_glass_pane
+        name: '%challenge% &7（受取済み）'
+        lore:
+          - '%description%'
+          - ''
+          - '&a報酬を受け取りました'
+
+  #連続記録にはそれぞれ %streak_<type>%（日数）、%streak_<type>_name%、%streak_<type>_longest%、
+  #%streak_<type>_unclaimed%、%streak_<type>_enabled% があり、<type> は challenge、daily、global です。
+  #それぞれの 7 日間の報酬ラダーは、その名前の一覧に 1 日目から 7 日目まで入ります（2 週目は 8-14…）。
+  #ラダーの日：%day% %ladder_day%（報酬の日、1-7） %type% %streak%、%today%（今日の日なら true）。
+  #[chatgames:claim-streak] <type> で、その連続記録の未受取の日をすべて受け取ります。
+  streaks:
+    title: '&8連続記録'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    lists:
+      challenge: ['11-17']
+      daily: ['20-26']
+      global: ['29-35']
+    items:
+      challenge:
+        slot: 10
+        material: writable_book
+        name: '%streak_challenge_name%'
+        lore:
+          - '&7毎日、デイリーチャレンジをすべて達成する。'
+          - ''
+          - '&7現在：&f%streak_challenge% &7日 &8（最高 %streak_challenge_longest%）'
+          - '&7受け取れる日数：&e%streak_challenge_unclaimed%'
+        view-requirements: ['%streak_challenge_enabled%']
+        click-requirements: ['%streak_challenge_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] challenge', '[refresh]']
+      daily:
+        slot: 19
+        material: gold_ingot
+        name: '%streak_daily_name%'
+        lore:
+          - '&7毎日 1 回以上ゲームに勝つ。'
+          - ''
+          - '&7現在：&f%streak_daily% &7日 &8（最高 %streak_daily_longest%）'
+          - '&7受け取れる日数：&e%streak_daily_unclaimed%'
+        view-requirements: ['%streak_daily_enabled%']
+        click-requirements: ['%streak_daily_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] daily', '[refresh]']
+      global:
+        slot: 28
+        material: beacon
+        name: '%streak_global_name%'
+        lore:
+          - '&7毎日グローバルゲームを 1 回達成する。'
+          - ''
+          - '&7現在：&f%streak_global% &7日 &8（最高 %streak_global_longest%）'
+          - '&7受け取れる日数：&e%streak_global_unclaimed%'
+        view-requirements: ['%streak_global_enabled%']
+        click-requirements: ['%streak_global_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] global', '[refresh]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7戻る'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&c閉じる'
+        actions: ['[close]']
+    templates:
+      day-claimed:
+        material: lime_stained_glass_pane
+        glow: '%today%'
+        name: '&a%day% 日目 &7（受取済み）'
+      day-ready:
+        material: chest
+        glow: '%today%'
+        name: '&e&l%day% 日目'
+        lore:
+          - '&a&lクリックで受け取る！'
+        actions: ['[chatgames:claim-streak] %type%', '[refresh]']
+      day-today:
+        material: yellow_stained_glass_pane
+        glow: true
+        name: '&e%day% 日目 &7（今日）'
+        lore:
+          - '&7今日も連続記録を続けて'
+          - '&7この報酬を解放しよう。'
+      day-locked:
+        material: red_stained_glass_pane
+        name: '&c%day% 日目'
+        lore:
+          - '&7まだ届いていません。'
+
+  #%points_rank% %fastest_rank% %total_points%、一覧は %top_points% と %top_fastest%（top-size 行）
+  leaderboards:
+    title: '&8ランキング'
+    rows: 3
+    top-size: 10
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7まだ誰もいません'
+    items:
+      points:
+        slot: 10
+        material: gold_block
+        name: '&e&lポイント最多'
+        lore:
+          - '%top_points%'
+      fastest:
+        slot: 11
+        material: clock
+        name: '&b&l最速タイパー'
+        lore:
+          - '%top_fastest%'
+      you:
+        slot: 13
+        material: player_head
+        head: '%player%'
+        name: '&a&lあなた'
+        lore:
+          - '&7ポイント順位：&f%points_rank%'
+          - '&7最速順位：&f%fastest_rank%'
+          - ''
+          - '&7全員が獲得したポイント：&f%total_points%'
+      games:
+        slot: 15
+        material: book
+        name: '&d&lゲームごとの最速'
+        lore:
+          - '&eクリックですべてのゲームを見る'
+        actions: ['[open] leaderboard-games']
+      events:
+        slot: 16
+        material: nether_star
+        name: '&6&lイベント'
+        lore:
+          - '&eクリックでイベントを見る'
+        view-requirements: ['permission chatgames.event']
+        actions: ['[open] leaderboard-events']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7戻る'
+        actions: ['[back] main']
+      close:
+        slot: 26
+        material: barrier
+        name: '&c閉じる'
+        actions: ['[close]']
+
+  #ゲームとレースごとに 1 項目：%game% %key% %icon%、%top%（そのゲームの最速プレイヤー）
+  leaderboard-games:
+    title: '&8ゲームごとの最速'
+    rows: 6
+    top-size: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7まだ誰もいません'
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7前のページ'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7次のページ &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7戻る'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 53
+        material: barrier
+        name: '&c閉じる'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&e&l%game%'
+        lore:
+          - '%top%'
+
+  #イベントごとに 1 項目：%event% %id% %steps%
+  leaderboard-events:
+    title: '&8イベントランキング'
+    rows: 4
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7イベントが設定されていません'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7前のページ'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7次のページ &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7戻る'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 35
+        material: barrier
+        name: '&c閉じる'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7%steps% ゲーム'
+          - ''
+          - '&eクリックで最も得点した人を見る'
+        actions: ['[close]', '[command] chatgames event top %id%']
+
+  #/chatgames admin。%current_game% %next_game% %rotation_state% %event% %preset%、
+  #%rotation_on% と %games_on%（true か false）。各ボタンは対応するコマンドを実行し、
+  #入力したときと同じように権限が確認されます。
+  admin:
+    title: '&4&lChatGames 管理'
+    rows: 5
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7なし'
+    items:
+      status:
+        slot: 4
+        material: repeater
+        name: '&f&l状態'
+        lore:
+          - '&7進行中：&f%current_game%'
+          - '&7次のゲームまで：&f%next_game%'
+          - '&7ローテーション：%rotation_state%'
+          - '&7イベント：&f%event%'
+          - '&7プリセット：&f%preset%'
+      start-game:
+        slot: 19
+        material: diamond_sword
+        name: '&a&lゲームを開始'
+        lore:
+          - '&7どのゲームやレースでも、今すぐ。'
+        actions: ['[open] admin-start']
+      global:
+        slot: 20
+        material: beacon
+        name: '&3&lグローバルゲームを開始'
+        lore:
+          - '&7時間内に達成した全員が勝ちます。'
+        actions: ['[open] admin-global']
+      events:
+        slot: 21
+        material: nether_star
+        name: '&6&lイベント'
+        lore:
+          - '&7ゲームイベントを開始または停止します。'
+        actions: ['[open] admin-events']
+      presets:
+        slot: 23
+        material: chest
+        name: '&d&lプリセット'
+        lore:
+          - '&7有効なゲームのセットを読み込みます。'
+        actions: ['[open] admin-presets']
+      logs:
+        slot: 24
+        material: oak_sign
+        name: '&f&lログ'
+        lore:
+          - '&7直近のゲームをチャットに表示します。'
+        actions: ['[open] admin-logs']
+      stop:
+        slot: 25
+        material: red_wool
+        name: '&c&lゲームを停止'
+        lore:
+          - '&7進行中のゲームを勝者なしで終了します。'
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      toggle:
+        slot: 29
+        material: lime_dye
+        name: '&fあなたのチャットゲーム：&aオン'
+        lore:
+          - '&7クリックでオフにします。'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&fあなたのチャットゲーム：&cオフ'
+          lore:
+            - '&7クリックでオンにします。'
+      toggle-all:
+        slot: 30
+        material: lime_dye
+        name: '&fゲームローテーション：&aオン'
+        lore:
+          - '&7クリックで全員の自動ゲームを止めます。'
+        state: '%rotation_on%'
+        #toggleAll はグローバルスレッドで終わります。Folia では 1 tick 後です
+        actions: ['[command] chatgames toggleAll', '[wait] 2', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&fゲームローテーション：&cオフ'
+          lore:
+            - '&7クリックで自動ゲームを再開します。'
+      reload:
+        slot: 32
+        material: hopper
+        name: '&e&l再読み込み'
+        lore:
+          - '&7すべての設定ファイルを再読み込みします。'
+        actions: ['[close]', '[command] chatgames reload']
+      debug:
+        slot: 33
+        material: command_block
+        name: '&c&lデバッグ'
+        lore:
+          - '&7どのゲームも個人的にテストします。'
+        view-requirements: ['permission chatgames.debug']
+        actions: ['[open] debug']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7戻る'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&c閉じる'
+        actions: ['[close]']
+
+  #すべてのゲームとレース：%game% %key%（コマンドと同じ） %icon%
+  admin-start:
+    title: '&8ゲームを開始'
+    rows: 6
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7前のページ'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7次のページ &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7戻る'
+        actions: ['[back] admin']
+      close:
+        slot: 53
+        material: barrier
+        name: '&c閉じる'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&a%game%'
+        lore:
+          - '&7チャットゲーム'
+          - '&eクリックで開始'
+        actions: ['[close]', '[command] chatgames %key%']
+      race:
+        material: '%icon%'
+        name: '&6%game%'
+        lore:
+          - '&7レース'
+          - '&eクリックで開始'
+        actions: ['[close]', '[command] chatgames %key%']
+
+  #global_games.yml で有効なゲーム：%game% %key% %icon% %goal% %duration% %points%。
+  #進行中のもの：%global_running% %global_game% %global_goal%（例："500 石"）
+  #%global_progress% %global_goal_amount% %global_percent% %global_contributors% %global_time_left%
+  admin-global:
+    title: '&8グローバルゲーム'
+    rows: 5
+    update-interval: 20
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    items:
+      status:
+        slot: 4
+        material: beacon
+        name: '&3&l進行中：&f%global_game%'
+        lore:
+          - '&7目標：&f%global_goal%'
+          - '&7進行：&e%global_progress%&7/&e%global_goal_amount% &8(%global_percent%%)'
+          - '&7協力中のプレイヤー：&f%global_contributors%'
+          - '&7残り時間：&f%global_time_left%s'
+          - ''
+          - '&cクリックで停止（報酬なし）'
+        view-requirements: ['%global_running%']
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      idle:
+        slot: 4
+        material: gray_dye
+        name: '&7進行中のグローバルゲームはありません'
+        lore:
+          - '&7下から 1 つ選んで開始します。'
+        view-requirements: ['!%global_running%']
+      none:
+        slot: 22
+        material: barrier
+        name: '&7有効なグローバルゲームがありません'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7前のページ'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7次のページ &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7戻る'
+        actions: ['[back] admin']
+      close:
+        slot: 44
+        material: barrier
+        name: '&c閉じる'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&3グローバル%game%'
+        lore:
+          - '&7目標：正解 &f%goal% 回'
+          - '&7時間：&f%duration%s'
+          - '&7ポイント：&f%points%'
+          - ''
+          - '&eクリックで開始'
+        actions: ['[close]', '[command] chatgames global %key%']
+      race:
+        material: '%icon%'
+        name: '&3グローバル%game%レース'
+        lore:
+          - '&7目標：みんなで &f%goal%'
+          - '&7時間：&f%duration%s'
+          - '&7ポイント：&f%points%'
+          - ''
+          - '&eクリックで開始'
+        actions: ['[close]', '[command] chatgames global %key%']
+      count:
+        material: '%icon%'
+        name: '&3グローバル%game%'
+        lore:
+          - '&7チャットでみんなで数えよう'
+          - '&7時間：&f%duration%s'
+          - '&7ポイント：&f%points%'
+          - ''
+          - '&eクリックで開始'
+        actions: ['[close]', '[command] chatgames global %key%']
+
+  #events.yml のイベント：%event% %id% %steps%、開催中のものには %step%（今のゲーム）
+  admin-events:
+    title: '&8イベント'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7events.yml にイベントが設定されていません'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7前のページ'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7次のページ &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7戻る'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&c閉じる'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7%steps% ゲーム'
+          - ''
+          - '&eクリックで開始'
+        actions: ['[command] chatgames event start %id%', '[wait] 2', '[refresh]']
+      running:
+        material: nether_star
+        glow: true
+        name: '%event% &a（進行中）'
+        lore:
+          - '&7%steps% ゲーム中 %step% ゲーム目'
+          - ''
+          - '&cクリックで停止'
+        actions: ['[command] chatgames event stop', '[wait] 2', '[refresh]']
+
+  #プリセットと 'none'（games.yml の有効フラグ）：%preset% %games%
+  admin-presets:
+    title: '&8プリセット'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7前のページ'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7次のページ &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7戻る'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&c閉じる'
+        actions: ['[close]']
+    templates:
+      preset:
+        material: chest
+        name: '&d%preset%'
+        lore:
+          - '&7ゲーム：&f%games%'
+          - ''
+          - '&eクリックで読み込む'
+        actions: ['[command] chatgames preset load %preset%', '[wait] 2', '[refresh]']
+      active:
+        material: ender_chest
+        glow: true
+        name: '&d%preset% &a（使用中）'
+        lore:
+          - '&7ゲーム：&f%games%'
+
+  #すべてここで作られています。数は自由に追加・変更できます
+  admin-logs:
+    title: '&8ログ'
+    rows: 3
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      last-10:
+        slot: 11
+        material: paper
+        name: '&f直近 &e10 &fゲーム'
+        lore: ['&eクリックでチャットに表示']
+        actions: ['[close]', '[command] chatgames logs 10']
+      last-25:
+        slot: 12
+        material: paper
+        name: '&f直近 &e25 &fゲーム'
+        lore: ['&eクリックでチャットに表示']
+        actions: ['[close]', '[command] chatgames logs 25']
+      last-50:
+        slot: 14
+        material: paper
+        name: '&f直近 &e50 &fゲーム'
+        lore: ['&eクリックでチャットに表示']
+        actions: ['[close]', '[command] chatgames logs 50']
+      last-100:
+        slot: 15
+        material: paper
+        name: '&f直近 &e100 &fゲーム'
+        lore: ['&eクリックでチャットに表示']
+        actions: ['[close]', '[command] chatgames logs 100']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7戻る'
+        actions: ['[back] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&c閉じる'
+        actions: ['[close]']
+
+  #/chatgames debug：すべてのチャットゲーム（%game% %key% %icon%）。[chatgames:debug] <game> で
+  #プライベートなラウンドを始め、debug-session を開きます。
+  debug:
+    title: '&4デバッグ：ゲームを選ぶ'
+    rows: 4
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7前のページ'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7次のページ &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7戻る'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&c閉じる'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&c%game%'
+        lore:
+          - '&7プライベートなラウンドを作ります。'
+          - '&7報酬なし、何も保存されません。'
+        actions: ['[chatgames:debug] %key%']
+
+  #プライベートなラウンド：%game% %key% %icon% %question% %answer% %time% %min_ms% %case_sensitive%
+  #%winners% %points% %hints% %generated%、一覧は %placeholders% と %answers%。
+  #[chatgames:debug-answer] <correct|wrong|wrong-case> [ms] で模擬回答を送ります（ms 後）。
+  #[chatgames:debug-timeout] は制限時間まで待ちます。[chatgames:debug-reroll] は新しいラウンドを作ります。
+  #[chatgames:debug-end] でセッションを終了します。
+  debug-session:
+    title: '&4デバッグ：%game%'
+    rows: 5
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    #待ち時間ごとに「X ms 後に正解する」ボタンが 1 つ、'delays' 一覧のスロットに置かれます
+    delays: [100, 500, 1000, 5000]
+    lists:
+      delays: ['29-32']
+    items:
+      question:
+        slot: 11
+        material: '%icon%'
+        name: '&e&l問題'
+        lore:
+          - '&f%question%'
+          - ''
+          - '%placeholders%'
+      answer:
+        slot: 13
+        material: emerald
+        name: '&a&l受理される答え'
+        lore:
+          - '%answers%'
+      settings:
+        slot: 15
+        material: repeater
+        name: '&f&l設定'
+        lore:
+          - '&7制限時間：&f%time%s'
+          - '&7最短回答時間：&f%min_ms% ms'
+          - '&7大文字・小文字の区別：%case_sensitive%'
+          - '&7勝者数：&f%winners%  &7ポイント：&f%points%'
+          - '&7用意されたヒント：&f%hints%'
+          - '&7生成時間：&f%generated% ms'
+      correct-now:
+        slot: 28
+        material: lime_wool
+        name: '&a今すぐ正解する'
+        lore:
+          - '&7どんな人よりも速い：アンチマクロの'
+          - '&7チェックが働く様子を見られます。'
+        actions: ['[chatgames:debug-answer] correct']
+      wrong:
+        slot: 33
+        material: red_wool
+        name: '&c不正解で答える'
+        actions: ['[chatgames:debug-answer] wrong']
+      wrong-case:
+        slot: 34
+        material: orange_wool
+        name: '&6大文字・小文字を間違えて答える'
+        actions: ['[chatgames:debug-answer] wrong-case']
+      timeout:
+        slot: 39
+        material: clock
+        name: '&e時間切れにする'
+        lore:
+          - '&7制限時間まで待ってから報告します。'
+        actions: ['[chatgames:debug-timeout]']
+      reroll:
+        slot: 41
+        material: ender_pearl
+        name: '&d新しいラウンド'
+        actions: ['[chatgames:debug-reroll]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7戻る'
+        actions: ['[chatgames:debug-end]', '[back] debug']
+      close:
+        slot: 44
+        material: barrier
+        name: '&c閉じる'
+        actions: ['[close]']
+    templates:
+      correct-after:
+        material: yellow_wool
+        name: '&e%ms% ms 後に正解する'
+        actions: ['[chatgames:debug-answer] correct %ms%']

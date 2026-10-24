@@ -1,0 +1,41 @@
+# ChatGames 預設：用於自動輪換的命名遊戲組合。
+#
+# 預設啟用時，輪換隻會選擇其中的遊戲，games.yml / races.yml 中的 'enable'
+# 開關會被忽略。把 'active' 設為 none 即可重新使用這些開關。
+# 預設中的競賽只有在 races.yml 中開啟競賽（enable-races）時才會進行。
+#
+# 命令（許可權 chatgames.preset）：
+#   /chatgames preset list
+#   /chatgames preset load <name>   （或 'none'）
+#   /chatgames preset save <name>   把當前啟用的遊戲儲存為預設
+#
+# 使用這些命令時，外掛會重寫此檔案。
+
+active: none
+
+presets:
+  weekend_set:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+
+  minimal_set:
+    games:
+      - reaction
+
+  full_rotation:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+      - guess_the_number
+      - memorize
+      - sequence
+      - clickable
+      - fillout
+      - hoverable
+      - random
+      - math
+      - variable
+      - trivia

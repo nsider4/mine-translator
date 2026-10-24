@@ -1,0 +1,255 @@
+#ГЛОБАЛЬНІ ІГРИ
+#
+#У глобальній грі весь сервер грає однією командою. Кожна правильна відповідь (або, у глобальних
+#перегонах, кожен добутий блок, убитий моб...; у Рахунку — кожне назване число) додається до одного спільного
+#рахунку. Нікому не треба бути найшвидшим: коли рахунок вчасно досягає мети, кожен, хто
+#долучився, отримує нагороду. Якщо час закінчиться раніше, гру провалено.
+#
+#  Чат-ігри йдуть потоком питань. Кожен гравець може відповісти на кожне питання один раз, і
+#  наступне питання з'являється після 'answers-per-question' правильних відповідей або 'question-seconds'.
+#  Відповіді завжди приховані, тож їх не можна скопіювати.
+#  Перегони рахують прогрес усіх разом, напр. 500 каменю, добутого всім сервером.
+#  Рахунок (лише глобально): рахуйте разом у чаті, по одному числу в повідомленні.
+#
+#Глобальні ігри починаються випадково після звичайної гри, за таймером, командою
+#/chatgames global <game> [values] або як крок події (events.yml).
+#Прогрес показується на панелі боса (1.9+) або на панелі дій (1.8).
+
+triggers:
+  #Відсоток шансу, що глобальна гра почнеться після кінця звичайної гри чи перегонів (0 = ніколи).
+  chance-after-game: 10
+  #Секунди між кінцем звичайної гри й початком глобальної.
+  delay-seconds: 5
+  #Хвилини між глобальними іграми за таймером (0 = вимкнено).
+  interval-minutes: 0
+  #Гравців онлайн, потрібних, щоб глобальна гра почалася сама (команда це ігнорує).
+  minimum-players: 2
+
+progress-bar:
+  enabled: true
+  #Колір панелі боса: BLUE, GREEN, PINK, PURPLE, RED, WHITE або YELLOW.
+  color: YELLOW
+  #SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12 або SEGMENTED_20.
+  style: SEGMENTED_10
+  #Відсотки мети, які оголошуються в чаті, коли сервер їх досягає.
+  announce-at: [25, 50, 75]
+
+#Використовуються кожною грою нижче для будь-якого значення, яке вона не задає сама.
+#  goal: правильні відповіді (або, для перегонів, предмети/моби), потрібні серверу
+#  duration-seconds: скільки часу має сервер
+#  min-contribution: найменший внесок гравця для отримання нагороди
+#  points: що отримує кожен нагороджений гравець, коли мету досягнуто
+#  points-per-contribution: додаткові очки за кожен внесок гравця
+#  answers-per-question: лише чат-ігри, скільки гравців можуть відповісти на одне питання
+#  question-seconds: лише чат-ігри, найдовший час показу одного питання
+defaults:
+  goal: 10
+  duration-seconds: 120
+  min-contribution: 1
+  points: 1
+  points-per-contribution: 0
+  answers-per-question: 3
+  question-seconds: 15
+
+#Нагороди у форматі rewards.yml (chance, minimum-players, '<chance>%~ ' і 'has:<permission>'
+#усе працює). %player% — гравець, а %contribution% — його внесок.
+#Власний розділ 'rewards' гри замінює ці для тієї гри.
+rewards:
+  #Кожному, хто вніс щонайменше min-contribution, коли мету досягнуто.
+  completed:
+    reward_1:
+      data:
+        - '[consolecmd] give %player% iron_ingot 3'
+  #Тим самим гравцям, коли час минає. Порожньо: без утішного призу.
+  failed: {}
+  #Додатково найбільшим учасникам, коли мету досягнуто, за місцем.
+  top-contributors:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% diamond 1'
+    2:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 3'
+    3:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 1'
+
+#Заповнювачі в кожному повідомленні: %game% %goal% (число) %goal_text% (напр. "500 Stone")
+#%progress% %percent% %time% (залишилось секунд) %duration%
+messages:
+  start:
+    - ''
+    - '&6&l» ГЛОБАЛЬНА ГРА: %game%! &fУвесь сервер грає разом.'
+    - '&f  Дайте &e%goal% правильних відповідей &fза &e%time%с&f. Кожен, хто допоможе, отримає нагороду!'
+    - '&7  Кожне питання приймає %answers% відповідей, тож не чекайте на інших.'
+    - ''
+  race_start:
+    - ''
+    - '&6&l» ГЛОБАЛЬНІ ПЕРЕГОНИ! &fУвесь сервер грає разом.'
+    - '&f  Зберіть разом &e%goal% %value% &fза &e%time%с&f. Кожен, хто допоможе, отримає нагороду!'
+    - ''
+  count_start:
+    - ''
+    - '&6&l» ГЛОБАЛЬНИЙ РАХУНОК! &fРахуйте разом від &e%start% &fдо &e%target% &fз кроком &e%step%&f!'
+    - '&7  По одному числу в повідомленні, по порядку. Ніхто не рахує двічі поспіль. %time%с, щоб закінчити.'
+    - ''
+  #Над кожним питанням. %question% — його номер.
+  question:
+    - '&6&l» ГЛОБАЛЬНА &7Питання #%question% &8| &e%progress%&7/&e%goal%'
+  #Коли час питання минає. %answer% — його відповідь. Порожньо, щоб мовчати.
+  question_over: '&8» &7Відповідь була &f%answer%&7.'
+  #Гравцю, чия відповідь зарахована. %contribution% — його внесок на цей момент.
+  answered: '&8[%prefix%&8] &aПравильно! &7Твій внесок — &f%contribution% &7із &f%progress%/%goal% &7сервера.'
+  #%reached% — щойно досягнутий відсоток.
+  milestone: '&6&l» &e%reached%% &fвиконано! &7(%progress%/%goal%, залишилось %time%с)'
+  #Зараховане число, показане замість повідомлення гравця. %player% %number%
+  counted: '&e%player% &8» &f%number%'
+  #Помилка. %player% %number% %next% (очікуване) %start% %reason% %mistakes% %max_mistakes%
+  count_broken:
+    - '&c%player% сказав %number%: %reason%'
+    - '&fРахунок починається знову з &e%start%&f.'
+  #Помилка, що завершує гру (on-mistake: fail або досягнуто max-mistakes).
+  count_broken_final:
+    - '&c%player% сказав %number%: %reason%'
+  count_reasons:
+    ahead: 'забагато вперед (наступне число було %next%)'
+    behind: 'це вже рахували (наступне число було %next%)'
+    repeated: 'це число щойно сказали'
+    twice: 'ніхто не може рахувати два числа поспіль'
+  #%count% гравців нагороджено, %contributors% взяли участь, %seconds% це тривало.
+  #%top_<n>% і %top_<n>_amount%: троє найбільших учасників.
+  completed:
+    - ''
+    - '&6&l» МЕТУ ДОСЯГНУТО! &fСервер зібрав &e%goal_text% &fза &e%seconds%с&f.'
+    - '&f  Топ: &e%top_1% &7(%top_1_amount%)  &e%top_2% &7(%top_2_amount%)  &e%top_3% &7(%top_3_amount%)'
+    - '&f  Нагороду отримують &e%count% &fгравців.'
+    - ''
+  failed:
+    - ''
+    - '&6&l» ГЛОБАЛЬНУ ГРУ ЗАВЕРШЕНО! &fСервер дійшов до &e%progress%/%goal% &7(%percent%%)&f. Пощастить наступного разу!'
+    - ''
+  #Кожному нагородженому гравцю, коли мету досягнуто. %points% — те, що він заробив.
+  rewarded: '&8[%prefix%&8] &aТвій внесок — &f%contribution%&a, ти заробив &f%points% &aочок!'
+  #Гравцю, який вніс менше за min-contribution. %min% — цей мінімум.
+  too_little: '&8[%prefix%&8] &7Твій внесок — %contribution%; для нагороди потрібно щонайменше %min%.'
+  #Панель боса (або панель дій на 1.8).
+  bar: '&6Глобальна гра: %game% &8| &f%progress%/%goal% &8| &e%time%с'
+
+#Слова для побудови %goal_text%.
+words:
+  answers: 'правильних відповідей'
+  to: 'до'
+
+#Ігри, у які можна грати глобально. «Запам'ятай» і «Вгадай число» не можна.
+#Кожна може задати enabled і будь-що з 'defaults', плюс власні 'rewards'.
+games:
+  reaction:
+    enabled: true
+    goal: 10
+    duration-seconds: 90
+    question-seconds: 10
+  unscramble:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  math:
+    enabled: true
+    goal: 15
+    duration-seconds: 150
+  sequence:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  trivia:
+    enabled: true
+    goal: 8
+    duration-seconds: 180
+    question-seconds: 20
+  word_association:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  fillout:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  unreverse:
+    enabled: false
+  random:
+    enabled: false
+  variable:
+    enabled: false
+  hoverable:
+    enabled: false
+  clickable:
+    enabled: false
+  #Рахуйте разом. Його мета — скільки чисел має обраний режим.
+  count:
+    enabled: true
+    duration-seconds: 120
+    #Ніхто не може сказати два числа поспіль.
+    no-double-count: true
+    #reset: помилка починає рахунок знову; fail: помилка завершує гру.
+    on-mistake: reset
+    #З reset: кількість помилок, що все одно завершує гру (0 = без обмеження).
+    max-mistakes: 5
+    #Обирається один випадково; /chatgames global count <mode> обирає конкретний.
+    #'step' — наскільки зростає кожне число (напрямок залежить від start і target).
+    modes:
+      up:
+        start: 1
+        target: 20
+        step: 1
+      down:
+        start: 15
+        target: 1
+        step: 1
+      evens:
+        start: 2
+        target: 30
+        step: 2
+      fives:
+        start: 5
+        target: 75
+        step: 5
+  #Глобальні перегони: увесь сервер збирає до мети. Цілі беруться з races.yml;
+  #/chatgames global mine STONE 500 задає обидва.
+  mine:
+    enabled: true
+    goal: 200
+    duration-seconds: 240
+  hunt:
+    enabled: true
+    goal: 40
+    duration-seconds: 240
+  place:
+    enabled: false
+    goal: 200
+    duration-seconds: 240
+  fish:
+    enabled: false
+    goal: 20
+    duration-seconds: 300
+  eat:
+    enabled: false
+    goal: 30
+    duration-seconds: 240
+  craft:
+    enabled: false
+    goal: 100
+    duration-seconds: 240
+  furnace:
+    enabled: false
+    goal: 64
+    duration-seconds: 300
+  tame:
+    enabled: false
+    goal: 15
+    duration-seconds: 300
+  shear:
+    enabled: false
+    goal: 40
+    duration-seconds: 240

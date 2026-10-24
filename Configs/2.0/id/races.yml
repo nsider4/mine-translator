@@ -1,0 +1,550 @@
+enable-races: true
+
+creative-enabled: true
+#Tautan berguna untuk menambah DATA:
+#
+#https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+#https://helpch.at/docs/1.8/index.html?org/bukkit/entity/EntityType.html
+#https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+#https://helpch.at/docs/1.8/org/bukkit/Material.html
+
+#Nama bisa baru atau lama (MOOSHROOM atau MUSHROOM_COW, COD atau RAW_FISH): dicocokkan dengan versi
+#servermu. Nama yang tidak ada di versimu (mis. blok 1.21 di 1.8) dilewati, dengan catatan di konsol.
+#
+#Setiap balapan juga menerima (opsional):
+#  points: 1     #poin yang didapat pemenang (bawaan 1)
+#  weight: 1     #seberapa sering rotasi memilihnya dibanding game lain (bawaan 1, 0 = tidak pernah)
+#
+#Admin bisa memulai balapan dengan nilai sendiri: /chatgames <race> <material/mob> [amount]
+#Tanpa jumlah, salah satu yang tercantum di bawah untuk material/mob itu dipakai. Pemenang mendapat hadiah yang tercantum
+#untuk material dan jumlah itu persis, atau tidak ada jika tidak tercantum di sini (poin tetap diberikan).
+
+hunt:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&bBERBURU'
+  subtitleMessage: '&aBunuh %amount% %value%!'
+
+  #Apakah mob yang muncul dari blok spawner atau telur spawn dihitung.
+  count-spawner-mobs: true
+  #Apakah mob MythicMobs juga dihitung sebagai mob dasarnya (zombie MythicMobs sebagai ZOMBIE).
+  count-mythic-mobs: true
+
+  data:
+    #Nilai-nilai ini harus ID mob Minecraft yang valid (lihat Tautan berguna di awal file)
+    #Dengan MythicMobs terpasang, mythic:<mob type> adalah salah satu mob-nya (contoh ada di akhir daftar ini)
+    ZOMBIE:
+      3:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+
+    CREEPER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SKELETON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SPIDER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    PIG:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SHEEP:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    COW:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    CHICKEN:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SALMON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    #mythic:SkeletonKing:
+    #  1:
+    #    rewards:
+    #      - reward_1
+
+mine:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&bMENAMBANG'
+  subtitleMessage: '&aTambang %amount% %value%!'
+
+  data:
+    #Nilai-nilai ini harus ID material Minecraft yang valid (lihat Tautan berguna di awal file)
+    STONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRASS_BLOCK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRAVEL:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIORITE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+place:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&bMEMBANGUN'
+  subtitleMessage: '&aLetakkan %amount% %value%!'
+
+  data:
+    #Nilai-nilai ini harus ID material Minecraft yang valid (lihat Tautan berguna di awal file)
+    COBBLESTONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+fish:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&bMEMANCING'
+  subtitleMessage: '&aPancing %amount% %value%!'
+
+  data:
+    #Nilai-nilai ini harus ID material Minecraft yang valid (lihat Tautan berguna di awal file)
+    COD:
+      1:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+          - reward_3
+    SALMON:
+      1:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+          - reward_3
+    PUFFERFISH:
+      1:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+          - reward_3
+    BOWL:
+      1:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+eat:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&bMAKAN'
+  subtitleMessage: '&aMakan %amount% %value%!'
+
+  data:
+    #Nilai-nilai ini harus ID material Minecraft yang valid (lihat Tautan berguna di awal file)
+    COOKED_BEEF:
+      1:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_CHICKEN:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BAKED_POTATO:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BREAD:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    GOLDEN_APPLE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+
+craft:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&bMEMBUAT'
+  subtitleMessage: '&aBuat %amount% %value%!'
+
+  data:
+    #Nilai-nilai ini harus ID material Minecraft yang valid (lihat Tautan berguna di awal file)
+    FURNACE:
+      2:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+      4:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+          - reward_3
+    CHEST:
+      2:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+      4:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+          - reward_3
+    CRAFTING_TABLE:
+      4:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+      8:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_1
+          - reward_2
+      12:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      32:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+      48:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_1
+          - reward_2
+      64:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+furnace:
+  enable: true
+
+  timeToComplete_seconds: 150
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&bMEMASAK'
+  subtitleMessage: '&aMasak %amount% %value%!'
+
+  data:
+    #Nilai-nilai ini harus ID material Minecraft yang valid (lihat Tautan berguna di awal file)
+    GOLD_INGOT:
+      3:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+      6:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+          - reward_3
+    IRON_INGOT:
+      3:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+      6:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_BEEF:
+      3:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+      6:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_COD:
+      3:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+      6:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+tame:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&bMENJINAKKAN'
+  subtitleMessage: '&aJinakkan %amount% %value%!'
+
+  data:
+    #Nilai-nilai ini harus ID mob Minecraft yang valid (lihat Tautan berguna di awal file)
+    #Hanya mob yang bisa dijinakkan di versimu yang dipakai: OCELOT hingga 1.13, CAT sejak 1.14.
+    WOLF:
+      1:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    CAT:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    OCELOT:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    HORSE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    PARROT:
+      1:
+        rewards:
+          - reward_2
+          - reward_3
+
+shear:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&bMENCUKUR'
+  subtitleMessage: '&aCukur %amount% %value%!'
+
+  data:
+    #Nilai-nilai ini harus ID mob Minecraft yang valid (lihat Tautan berguna di awal file)
+    SHEEP:
+      3:
+        #JUMLAH SEMUA PELUANG HADIAH YANG KAMU TAMBAHKAN TIDAK BOLEH MELEBIHI 100%
+        rewards:
+          - reward_1
+          - reward_2
+      6:
+        rewards:
+          - reward_2
+          - reward_3
+    MOOSHROOM:
+      1:
+        rewards:
+          - reward_1
+          - reward_2

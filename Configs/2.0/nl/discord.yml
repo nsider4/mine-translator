@@ -1,0 +1,405 @@
+#Plaatst spelresultaten, races, globale spellen, events en meer op Discord.
+#
+#Berichten gaan via de webhook van een kanaal (niets te installeren), via de bot van de
+#DiscordSRV-plugin, of allebei. Test elk bericht met /chatgames discord test <message>.
+enabled: true
+
+#__KANALEN__
+#Waar berichten heen gaan. Noem ze zoals je wilt; elke melding hieronder noemt de kanalen die ze gebruikt.
+#  webhook: de webhook-URL van een kanaal. In Discord: Kanaal bewerken > Integraties > Webhooks >
+#           Nieuwe webhook > Webhook-URL kopiëren. Houd hem geheim: wie hem heeft, kan daar posten.
+#  discordsrv: post in plaats daarvan met je DiscordSRV-bot (vereist DiscordSRV). Een kanaalnaam uit de
+#              Channels-sectie van de config.yml van DiscordSRV (bijv. global), of een kanaal-ID.
+#  username / avatar: de naam en afbeelding die webhookposts tonen (een bot houdt de zijne).
+channels:
+  main:
+    webhook: ''
+    discordsrv: ''
+    username: 'Chat Games'
+    avatar: 'https://www.spigotmc.org/data/resource_icons/107/107781.jpg?1676494289'
+
+#__ALGEMEEN__
+#Getoond in voetteksten als %server%
+server-name: 'Minecraft Server'
+#De afbeelding voor %winner_head% / %player_head%. %name% en %uuid% worden ingevuld.
+player-head-url: 'https://mc-heads.net/avatar/%name%/128'
+#Rol-ID's die berichten mogen pingen (schrijf <@&ID> in een tekst). Niets anders pingt ooit: niet
+#@everyone, en niets in de naam of het antwoord van een speler.
+#Voor een ID zet je in Discord de ontwikkelaarsmodus aan (Instellingen > Geavanceerd) en klik je met rechts op de rol.
+allowed-role-pings: []
+#Met DiscordSRV tonen %winner_mention% / %player_mention% het gekoppelde Discord-account van een speler
+#(anders zijn naam). true pingt hem ook.
+ping-linked-players: false
+#Spellen en races die nooit geplaatst worden
+ignored-games: []
+
+#Kleuren (%game_color%) en emoji (%game_emoji%) per spel. Kleuren: '#RRGGBB' of een naam.
+#Emoji: namen zoals :trophy: (de lijst staat aan het eind van dit bestand), of een serveremoji als <:name:ID>.
+#Plak geen emojitekens in dit bestand: 1.8-servers kunnen een bestand met emoji niet lezen.
+styles:
+  default: {color: '#5865F2', emoji: ':video_game:'}
+  unscramble: {color: '#F1C40F', emoji: ':abc:'}
+  unreverse: {color: '#E67E22', emoji: ':repeat:'}
+  reaction: {color: '#E74C3C', emoji: ':zap:'}
+  random: {color: '#9B59B6', emoji: ':game_die:'}
+  fillout: {color: '#3498DB', emoji: ':pencil2:'}
+  variable: {color: '#1ABC9C', emoji: ':heavy_plus_sign:'}
+  clickable: {color: '#2ECC71', emoji: ':point_up:'}
+  hoverable: {color: '#16A085', emoji: ':eyes:'}
+  math: {color: '#E91E63', emoji: ':heavy_division_sign:'}
+  sequence: {color: '#00BCD4', emoji: ':1234:'}
+  memorize: {color: '#8E44AD', emoji: ':brain:'}
+  guess_the_number: {color: '#FF9800', emoji: ':question:'}
+  trivia: {color: '#3F51B5', emoji: ':books:'}
+  word_association: {color: '#009688', emoji: ':link:'}
+  count: {color: '#607D8B', emoji: ':1234:'}
+  hunt: {color: '#C0392B', emoji: ':crossed_swords:'}
+  mine: {color: '#7F8C8D', emoji: ':pick:'}
+  place: {color: '#A0522D', emoji: ':bricks:'}
+  fish: {color: '#2980B9', emoji: ':fishing_pole_and_fish:'}
+  eat: {color: '#D35400', emoji: ':poultry_leg:'}
+  craft: {color: '#8D6E63', emoji: ':hammer_and_pick:'}
+  furnace: {color: '#E25822', emoji: ':fire:'}
+  tame: {color: '#C69C6D', emoji: ':bone:'}
+  shear: {color: '#ECF0F1', emoji: ':scissors:'}
+
+#Hoe lijsten geschreven worden: winnaars, helpers, standen en klassementen.
+#%medal% is de medaille van plek 1-3, en other-places die van de rest.
+lists:
+  medals: [':first_place:', ':second_place:', ':third_place:']
+  other-places: '`%place%.`'
+  winner: '%medal% **%player%** `%time%s`'
+  contributor: '%medal% **%player%** `%amount%`'
+  standing: '%medal% **%player%** `%points% ptn`'
+  leaderboard: '%medal% **%player%** `%value%`'
+  #Getoond in plaats van een lege lijst
+  empty: '-# Nog niemand'
+
+#__BERICHTEN__
+#Elk bericht heeft 'content' (gewone tekst boven de embed) en/of een 'embed':
+#  color, author (name, icon, url), title, url, description, thumbnail, image,
+#  fields (name, value, inline), footer (text, icon), timestamp (true toont de verzendtijd).
+#Een tekst kan één regel zijn of een lijst van regels. Een regel met alleen lege placeholders
+#valt weg, net als een leeg veld. PlaceholderAPI-placeholders die geen speler nodig hebben werken ook.
+#Discord-opmaak werkt in beschrijvingen en veldwaarden: '### ' begint een kop, '-# ' kleine grijze
+#tekst, '> ' een citaat, **vet**, `code`.
+#<t:%ends_unix%:R> toont "over 20 seconden" in de tijd van elke lezer en telt af.
+#In elk bericht: %server%, en bij spellen %game% %game_key% %game_emoji% %game_color%.
+
+#Chatspellen. %question% %time_limit% %ends_unix% %winners_needed% %points%
+games:
+  enabled: true
+  channels: [main]
+  #true: post als een spel begint en verander die post daarna in het resultaat. false: post alleen het resultaat.
+  live: true
+  #Memorize toont zijn lijst hier nooit: spelers zouden hem op Discord kunnen lezen.
+  hidden-question: 'Kijk in de spelchat!'
+  start:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%'
+      title: 'Nieuwe ronde'
+      description:
+        - '### %question%'
+        - '-# Antwoord in de spelchat om te winnen.'
+      fields:
+        - name: ':stopwatch: Eindigt'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+        - name: ':sparkles: Beloning'
+          value: '`%points% ptn`'
+          inline: true
+        - name: ':busts_in_silhouette: Winnaars'
+          value: '`%winners_needed%`'
+          inline: true
+      footer: '%server%'
+  #%winner% %winner_head% %winner_mention% %time% %answer% %points% %winner_count%
+  #%winners% (alle winnaars, één per regel) %other_winners% (allemaal behalve de eerste)
+  win:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%'
+      title: ':trophy:  %winner% heeft het!'
+      thumbnail: '%winner_head%'
+      description:
+        - '-# Het antwoord was'
+        - '### %answer%'
+      fields:
+        - name: ':stopwatch: Tijd'
+          value: '`%time%s`'
+          inline: true
+        - name: ':sparkles: Punten'
+          value: '`+%points%`'
+          inline: true
+        - name: ':medal: Ook goed geantwoord'
+          value: '%other_winners%'
+          inline: false
+      footer: '%server%'
+      timestamp: true
+  #%answer% %question% %time_limit%
+  expired:
+    enabled: true
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%'
+      title: ':hourglass:  De tijd is om'
+      description:
+        - '-# Niemand had het. Het antwoord was'
+        - '### %answer%'
+      footer: '%server%'
+      timestamp: true
+  #Als een stafflid het spel stopt (past alleen een live post aan)
+  stopped:
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%'
+      title: ':no_entry:  Ronde gestopt'
+      description:
+        - '-# Een stafflid heeft deze ronde vroegtijdig beëindigd.'
+      footer: '%server%'
+      timestamp: true
+
+#Races. %target% %amount% %time_limit% %ends_unix% %points%
+races:
+  enabled: true
+  channels: [main]
+  live: true
+  start:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%-race'
+      title: 'Race gestart'
+      description:
+        - '### %amount%x %target%'
+        - '-# Wie het eerst klaar is, wint.'
+      fields:
+        - name: ':stopwatch: Eindigt'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+        - name: ':sparkles: Beloning'
+          value: '`%points% ptn`'
+          inline: true
+      footer: '%server%'
+  #%winner% %winner_head% %winner_mention% %time% %points%
+  win:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%-race'
+      title: ':checkered_flag:  %winner% heeft de race gewonnen!'
+      thumbnail: '%winner_head%'
+      description:
+        - '### %amount%x %target%'
+      fields:
+        - name: ':stopwatch: Tijd'
+          value: '`%time%s`'
+          inline: true
+        - name: ':sparkles: Punten'
+          value: '`+%points%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  expired:
+    enabled: true
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%-race'
+      title: ':hourglass:  De tijd is om'
+      description:
+        - '### %amount%x %target%'
+        - '-# Niemand was op tijd klaar.'
+      footer: '%server%'
+      timestamp: true
+  stopped:
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%-race'
+      title: ':no_entry:  Race gestopt'
+      description:
+        - '-# Een stafflid heeft deze race vroegtijdig beëindigd.'
+      footer: '%server%'
+      timestamp: true
+
+#Globale spellen, waarin de hele server naar één doel werkt.
+#%goal% (bijv. "500 Stone") %progress% %goal_amount% %percent% %bar% %contributors% %time_limit% %ends_unix%
+global:
+  enabled: true
+  channels: [main]
+  #true: de post toont de voortgangsbalk en wordt bijgewerkt terwijl het spel loopt
+  live: true
+  #Hoe vaak de live post hooguit wordt bijgewerkt (alleen als de voortgang veranderde)
+  update-seconds: 15
+  bar: {length: 16, full: '█', empty: '░'}
+  progress:
+    embed:
+      color: '%game_color%'
+      author: ':globe_with_meridians:  Globaal %game%'
+      title: 'De hele server speelt samen'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+        - '-# %progress% / %goal_amount%'
+      fields:
+        - name: ':busts_in_silhouette: Helpen mee'
+          value: '`%contributors%`'
+          inline: true
+        - name: ':stopwatch: Eindigt'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+      footer: '%server%'
+  #%top_contributors% (de grootste helpers, één per regel)
+  completed:
+    embed:
+      color: '#57F287'
+      author: ':globe_with_meridians:  Globaal %game%'
+      title: ':tada:  Doel bereikt!'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+      fields:
+        - name: ':medal: Grootste helpers'
+          value: '%top_contributors%'
+          inline: true
+        - name: ':busts_in_silhouette: Geholpen'
+          value: '`%contributors%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  failed:
+    embed:
+      color: '#ED4245'
+      author: ':globe_with_meridians:  Globaal %game%'
+      title: ':x:  Doel niet bereikt'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+        - '-# %progress% / %goal_amount%'
+      fields:
+        - name: ':medal: Grootste helpers'
+          value: '%top_contributors%'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #Hoeveel helpers %top_contributors% toont
+  top-size: 5
+
+#Spelevents (events.yml). %event%
+events:
+  enabled: true
+  channels: [main]
+  #%games% (hoeveel spellen het heeft)
+  start:
+    embed:
+      color: '#FEE75C'
+      author: ':calendar:  Spelevenement'
+      title: '%event% is begonnen!'
+      description:
+        - '-# Win de spellen achter elkaar om evenementpunten te verdienen.'
+      fields:
+        - name: ':video_game: Spellen'
+          value: '`%games%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #%standings% %players% (hoeveel er scoorden) %winner% %winner_head% %winner_mention%
+  end:
+    embed:
+      color: '#FEE75C'
+      author: ':calendar:  Spelevenement'
+      title: ':trophy:  Uitslag van %event%'
+      thumbnail: '%winner_head%'
+      description:
+        - '%standings%'
+      fields:
+        - name: ':crown: Winnaar'
+          value: '%winner_mention%'
+          inline: true
+        - name: ':busts_in_silhouette: Spelers'
+          value: '`%players%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #Hoeveel plaatsen %standings% toont
+  standings-size: 10
+
+#De reeks van een speler bereikt een aantal dagen op rij (streaks.yml). %player% %player_head% %player_mention% %streak% %days%
+streaks:
+  enabled: false
+  channels: [main]
+  #Alleen deze aantallen dagen worden geplaatst
+  days: [7, 14, 30, 60, 100, 365]
+  message:
+    embed:
+      color: '#E67E22'
+      author: {name: '%player%', icon: '%player_head%'}
+      title: ':fire:  %days% dagen op rij!'
+      description:
+        - '-# %streak%'
+      footer: '%server%'
+      timestamp: true
+
+#Een speler voltooit een dagelijkse of wekelijkse uitdaging. %player% %player_head% %player_mention% %challenge% %period%
+challenges:
+  enabled: false
+  channels: [main]
+  #Wat %period% toont
+  periods:
+    daily: 'Dagelijkse'
+    weekly: 'Wekelijkse'
+  message:
+    embed:
+      color: '#57F287'
+      author: {name: '%player%', icon: '%player_head%'}
+      title: ':white_check_mark:  Uitdaging voltooid'
+      description:
+        - '### %challenge%'
+        - '-# %period% uitdaging'
+      footer: '%server%'
+      timestamp: true
+
+#Een klassement, geplaatst op vaste tijden en met /chatgames discord leaderboard.
+#%leaderboard% %total_points% (alle spelers samen)
+leaderboard:
+  enabled: false
+  channels: [main]
+  #Servertijd, 24 uur, bijv. ['12:00', '20:00']
+  times: ['20:00']
+  #points, of fastest (de snelste antwoorden van alle spellen)
+  type: points
+  size: 10
+  message:
+    embed:
+      color: '#5865F2'
+      author: ':bar_chart:  Ranglijst'
+      title: 'Beste spelers'
+      description:
+        - '%leaderboard%'
+        - ''
+        - '-# In totaal %total_points% punten gewonnen'
+      footer: '%server%'
+      timestamp: true
+
+#__EMOJI__
+#De namen die je als :name: in elke tekst hierboven kunt schrijven:
+#  trophy, first_place, second_place, third_place, medal, military_medal, crown, star, star2,
+#  sparkles, tada, confetti_ball, fire, zap, boom, 100, gem, moneybag, gift, video_game, game_die,
+#  jigsaw, dart, checkered_flag, stopwatch, timer, alarm_clock, hourglass, hourglass_flowing_sand,
+#  clock, calendar, white_check_mark, heavy_check_mark, x, no_entry, warning, question, grey_question,
+#  exclamation, bell, loudspeaker, mega, speech_balloon, thought_balloon, brain, bulb, abc, abcd,
+#  capital_abcd, 1234, symbols, pencil, pencil2, memo, book, books, scroll, clipboard, link, mag,
+#  eyes, eye, repeat, arrows_counterclockwise, leftwards_arrow_with_hook, heavy_plus_sign,
+#  heavy_minus_sign, heavy_multiplication_x, heavy_division_sign, infinity, keycap_ten,
+#  mouse_three_button, point_up, point_right, point_down, raised_hands, clap, muscle, handshake, wave,
+#  thinking, sunglasses, partying_face, rocket, earth_americas, globe_with_meridians,
+#  busts_in_silhouette, bust_in_silhouette, bar_chart, chart_with_upwards_trend,
+#  chart_with_downwards_trend, crossed_swords, dagger, bow_and_arrow, shield, pick, hammer,
+#  hammer_and_pick, tools, axe, bricks, fishing_pole_and_fish, fish, tropical_fish, meat_on_bone,
+#  poultry_leg, bread, apple, green_apple, cake, cookie, fork_and_knife, cooking, bone, dog, cat,
+#  horse, parrot, sheep, ram, scissors, cow, pig, chicken, zombie, skull, seedling, evergreen_tree,
+#  deciduous_tree, mushroom, rock, diamond_shape_with_a_dot_inside, large_blue_diamond,
+#  small_orange_diamond, red_circle, orange_circle, yellow_circle, green_circle, blue_circle,
+#  purple_circle, white_circle, black_circle, green_square, white_large_square, black_large_square,
+#  arrow_right, arrow_up, arrow_down, small_red_triangle_down, small_red_triangle, lock, unlock, key,
+#  new, up, cool, free, information_source, heart, green_heart, blue_heart, yellow_heart,
+#  purple_heart, orange_heart, map, compass, label, ticket, tickets, admission_tickets, joystick,
+#  slot_machine, spades, clubs, hearts, diamonds, beginner, game_controller, pushpin, round_pushpin,
+#  triangular_flag_on_post

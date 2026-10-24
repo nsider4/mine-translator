@@ -105,8 +105,4 @@ messages:
   stopped:
     - '&6&l» %event% &cdurduruldu.'
 
-#Ayarlanmışsa son sıralama config.yml'deki Discord webhook'una gönderilir.
-discord:
-  enabled: true
-  title: '%event% results'
-  line: '#%place% %player% - %points% points'
+#Etkinlik başlangıçları ve son sıralamalar discord.yml'deki ayarlara göre Discord'a gönderilir.

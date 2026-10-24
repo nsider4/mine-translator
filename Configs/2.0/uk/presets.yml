@@ -1,0 +1,41 @@
+# Набори ChatGames: іменовані набори ігор для автоматичної ротації.
+#
+# Поки набір активний, ротація обирає лише його ігри, а прапорці 'enable'
+# у games.yml / races.yml ігноруються. Встановіть 'active' на none, щоб знову використовувати ці прапорці.
+# Перегони в наборі йдуть, лише коли перегони увімкнено в races.yml (enable-races).
+#
+# Команди (дозвіл chatgames.preset):
+#   /chatgames preset list
+#   /chatgames preset load <name>   (або 'none')
+#   /chatgames preset save <name>   зберігає ігри, увімкнені зараз, як набір
+#
+# Плагін перезаписує цей файл, коли ви використовуєте ці команди.
+
+active: none
+
+presets:
+  weekend_set:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+
+  minimal_set:
+    games:
+      - reaction
+
+  full_rotation:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+      - guess_the_number
+      - memorize
+      - sequence
+      - clickable
+      - fillout
+      - hoverable
+      - random
+      - math
+      - variable
+      - trivia

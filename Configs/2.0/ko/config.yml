@@ -1,0 +1,125 @@
+#############################
+######    설정    #######
+#############################
+check-update: true
+
+#서버의 언어입니다. 블록, 아이템, 몹 이름(레이스와 기억하기 게임에서 사용)이
+#이 언어로 번역되며, 140개 이상의 언어를 지원합니다. 언어 ID는 여기에서 확인하세요:
+#https://github.com/nsider4/mine-translator/blob/main/language_names.txt
+#이름은 translations/ 에 다운로드되며, 새 Minecraft 버전이 나오면
+#자동으로 업데이트됩니다. 여기를 바꾸면 /chatgames reload 후 적용됩니다.
+lang: 'en_us'
+
+#이 설정 파일들의 언어: 메시지, 메뉴, 단어 목록, 퀴즈, 주석...
+#전체 번역: en, es, fr, pt, de, it, nl, pl, ru, tr, zh, zh_tw, ja, ko, uk, cs, sv, hu, vi, id
+#(zh는 중국어 간체, zh_tw는 중국어 번체). 'lang'이 목록에 없어도 블록,
+#아이템, 몹 이름은 번역되지만, 이 파일들은 원래 언어로 유지됩니다 (기본값은 영어).
+#  auto: 위의 'lang'이 바뀌고 그 언어가 전체 번역되어 있으면 전환
+#  none: 바꾸지 않습니다
+#  또는 위 언어 코드 중 하나
+#전환해도 설정과 직접 바꾼 내용은 그대로 유지됩니다. 직접 쓴 메시지는
+#번역으로 바뀝니다(기존 파일은 먼저 backups/ 에 복사됩니다). 번역은
+#https://github.com/nsider4/mine-translator (Configs 폴더)에서 다운로드되며
+#자동으로 업데이트됩니다. 그곳에서 언어를 더 추가할 수 있습니다.
+config-language: 'auto'
+
+#저장 방식, 사용 가능: SQLite 또는 MySQL
+Storage: 'SQLite'
+
+#ChatGames의 모든 데이터를 저장할 테이블 이름
+table_name: 'chatgames'
+
+#ChatGames의 모든 최단 기록을 저장할 테이블 이름
+fastest_times_table: 'chatgames_fastest_times'
+
+SQLite:
+  Filename: 'chatgames-data'
+
+MySQL:
+  host: 'localhost'
+  port: '3306'
+  user: 'root'
+  password: 'password'
+  database: 'chatgame'
+  connection-parameters: '?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8'
+  Pool-Settings:
+    max-pool-size: 10
+    min-idle: 10
+    max-lifetime: 180000
+    keep-alive-time: 60000
+    time-out: 20000
+
+disabled-worlds:
+  - 'example_world'
+
+prefix: '&c&lC&d&lH&b&lA&a&lT &6&lG&e&lA&a&lM&c&lE&b&lS'
+
+#false이면 'chatgames.start.*' 권한이 있는 플레이어만 시작할 수 있습니다
+allow_starting_from_disabled: true
+
+#false이면 플레이어가 정답을 맞혔을 때 원래 보내지 않는 메시지를 취소하지 않습니다
+cancel-message-when-winning: true
+
+#채팅 게임이 시작되기 위해 온라인이어야 하는 최소 플레이어 수
+min_players_online: 1
+
+#무작위 게임이 다시 선택되기까지 걸리는 시간입니다.
+#-1로 하면 작업이 완전히 꺼집니다. -1일 때는 randomDelay도 쓸 수 없습니다
+time_minutes: 25
+
+#켜면 게임이 끝날 때마다 'randomDelay.minimum'부터 'randomDelay.limit'까지의 무작위 수를 만들어 다음 게임까지의 대기 시간으로 씁니다
+#이 옵션을 켜면 'time_minutes' 값은 무시됩니다(-1이면 작업이 없으므로 예외).
+randomDelay:
+  enable: false
+  #시간 단위입니다. 다른 값은 'seconds'이며, 바꾼다면 최솟값을 게임의 'timeToGuess_seconds'보다 크게 하는 것을 권장합니다
+  timeUnit: 'minutes'
+  minimum: 1
+  limit: 25
+
+
+#이 옵션을 끄면 게임을 보는 데 chatgames.play 권한이 필요하지 않습니다
+use-permission-toplay: false
+
+#false이면 'chatgames.play' 권한이 있는(즉 참여할 수 있는) 플레이어만 셉니다.
+#true이면 투명 상태(vanish)인 플레이어를 뺀 모든 온라인 플레이어를 셉니다.
+count-all-players: false
+
+#true이면 가장 빠른 타이핑 순위(/chatgames fastest)를 만듭니다. false이면 이 순위는 꺼집니다.
+fastest-typers-top: true
+
+#PlaceholderAPI 플레이스홀더(PlaceholderAPI 필요):
+#  나:           %chatgames_points%, %chatgames_wins%, %chatgames_wins_<game>%, %chatgames_race_wins%,
+#                %chatgames_global_played%, %chatgames_global_won%, %chatgames_toggle%, %chatgames_sound_toggle%
+#                %chatgames_events_played%, %chatgames_event_wins%, %chatgames_event_best_place% (0 = 아직 없음)
+#  내 기록:      %chatgames_personal_best% (모든 채팅 게임), %chatgames_fastest_<game>% (레이스 포함)
+#  내 순위:      %chatgames_show_current_pos_top% (포인트), %chatgames_show_current_pos_fastest% (최고 기록)
+#  포인트 순위:  %chatgames_top_<n>% (이름), %chatgames_points_top_<n>%, %chatgames_total_points%
+#  최단 순위:    %chatgames_fastest_<n>% (이름, 채팅 게임), %chatgames_fastest_time_<n>%,
+#                %chatgames_fastest_<game>_<n>%, %chatgames_fastest_<game>_time_<n>%
+#  지금:         %chatgames_game_running%, %chatgames_current_game%, %chatgames_next_game_in% (초)
+#  레이스:       %chatgames_race_target%, %chatgames_race_amount%, %chatgames_race_progress% (내 것)
+#  도전 과제:    %chatgames_daily_completed%, %chatgames_daily_total%, %chatgames_weekly_completed%,
+#                %chatgames_weekly_total%, %chatgames_challenges_completed% (전체 기간)
+#  연속 기록:    %chatgames_streak_<type>%, %chatgames_streak_<type>_longest% (<type>은 challenge, daily, global)
+#  게임 이벤트:  %chatgames_event_running%, %chatgames_event_name%, %chatgames_event_step%, %chatgames_event_steps%,
+#                %chatgames_event_points%, %chatgames_event_place% (진행 중인 이벤트에서의 내 값)
+#  <game>은 games.yml에 있는 게임 이름(예: unscramble, guess_the_number), <n>은 순위(1, 2, 3...)입니다.
+placeholders:
+  #순위 플레이스홀더(top_<n>, fastest_<n>, 순위...)를 다시 만드는 간격(초).
+  #승자가 나온 게임이 끝난 뒤에도 다시 만들어집니다. 내 포인트, 승리 수, 기록은 항상 실시간입니다.
+  refresh-seconds: 60
+  #보여줄 것이 없을 때 표시: 빈 순위 칸, 아직 없는 최고 기록, 진행 중인 게임 없음...
+  empty-value: ''
+
+#채팅 게임이 시작될 때 플레이어에게 들려줄 소리!
+GameSounds:
+  volume: 0.5
+  pitch: 1.0
+  #이 중 하나를 비워 두면 꺼집니다
+  #리소스 팩의 소리도 쓸 수 있습니다. 네임스페이스와 함께 쓰세요. 예: 'myserver:custom.ding'
+  win: 'minecraft:entity.experience_orb.pickup'
+  game-start: 'minecraft:entity.player.levelup'
+  time-expired: 'minecraft:entity.villager.no'
+  wrong-case: 'minecraft:block.note_block.bass'
+
+#게임 프리셋(켜진 게임들의 이름 붙은 묶음)은 presets.yml에 있습니다.

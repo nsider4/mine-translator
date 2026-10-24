@@ -64,6 +64,8 @@ game-names:
   eat: 'Еда'
   craft: 'Крафт'
   furnace: 'Готовка'
+  tame: 'Приручение'
+  shear: 'Стрижка'
 game-icons:
   unscramble: book
   math: redstone
@@ -87,6 +89,8 @@ game-icons:
   eat: cooked_beef
   craft: crafting_table
   furnace: furnace
+  tame: bone
+  shear: shears
 
 formats:
   #Показывается вместо ранга для игроков, которых ещё нет в рейтинге

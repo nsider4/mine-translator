@@ -1,0 +1,405 @@
+#ゲームの結果、レース、グローバルゲーム、イベントなどを Discord に投稿します。
+#
+#メッセージはチャンネルの webhook（インストール不要）、DiscordSRV プラグインの
+#ボット、またはその両方で送られます。/chatgames discord test <message> で各メッセージを試せます。
+enabled: true
+
+#__チャンネル__
+#メッセージの送り先。名前は自由です。下の各通知が使うチャンネルを並べます。
+#  webhook：チャンネルの webhook の URL。Discord で：チャンネルの編集 > 連携サービス > ウェブフック >
+#           新しいウェブフック > ウェブフック URL をコピー。秘密にしてください。知っている人は誰でもそこに投稿できます。
+#  discordsrv：代わりに DiscordSRV のボットで投稿します（DiscordSRV が必要）。DiscordSRV の config.yml の
+#              Channels セクションにあるチャンネル名（例：global）か、チャンネル ID。
+#  username / avatar：webhook の投稿に表示される名前と画像（ボットは自分のものを使います）。
+channels:
+  main:
+    webhook: ''
+    discordsrv: ''
+    username: 'Chat Games'
+    avatar: 'https://www.spigotmc.org/data/resource_icons/107/107781.jpg?1676494289'
+
+#__全般__
+#フッターに %server% として表示されます
+server-name: 'Minecraft Server'
+#%winner_head% / %player_head% の画像。%name% と %uuid% が入ります。
+player-head-url: 'https://mc-heads.net/avatar/%name%/128'
+#メッセージでメンションしてよいロールの ID（テキストに <@&ID> と書きます）。それ以外は決してメンションしません：
+#@everyone も、プレイヤーの名前や答えに含まれるものもです。
+#ID を取るには、Discord で開発者モードをオンにして（設定 > 詳細設定）、ロールを右クリックします。
+allowed-role-pings: []
+#DiscordSRV では、%winner_mention% / %player_mention% がプレイヤーの連携した Discord アカウントを表示します
+#（なければ名前）。true にするとメンションもします。
+ping-linked-players: false
+#投稿しないゲームとレース
+ignored-games: []
+
+#ゲームごとの色（%game_color%）と絵文字（%game_emoji%）。色：'#RRGGBB' か色の名前。
+#絵文字：:trophy: のような名前（一覧はこのファイルの最後）、またはサーバー絵文字 <:name:ID>。
+#このファイルに絵文字の文字を貼らないでください。1.8 のサーバーはそれを含むファイルを読めません。
+styles:
+  default: {color: '#5865F2', emoji: ':video_game:'}
+  unscramble: {color: '#F1C40F', emoji: ':abc:'}
+  unreverse: {color: '#E67E22', emoji: ':repeat:'}
+  reaction: {color: '#E74C3C', emoji: ':zap:'}
+  random: {color: '#9B59B6', emoji: ':game_die:'}
+  fillout: {color: '#3498DB', emoji: ':pencil2:'}
+  variable: {color: '#1ABC9C', emoji: ':heavy_plus_sign:'}
+  clickable: {color: '#2ECC71', emoji: ':point_up:'}
+  hoverable: {color: '#16A085', emoji: ':eyes:'}
+  math: {color: '#E91E63', emoji: ':heavy_division_sign:'}
+  sequence: {color: '#00BCD4', emoji: ':1234:'}
+  memorize: {color: '#8E44AD', emoji: ':brain:'}
+  guess_the_number: {color: '#FF9800', emoji: ':question:'}
+  trivia: {color: '#3F51B5', emoji: ':books:'}
+  word_association: {color: '#009688', emoji: ':link:'}
+  count: {color: '#607D8B', emoji: ':1234:'}
+  hunt: {color: '#C0392B', emoji: ':crossed_swords:'}
+  mine: {color: '#7F8C8D', emoji: ':pick:'}
+  place: {color: '#A0522D', emoji: ':bricks:'}
+  fish: {color: '#2980B9', emoji: ':fishing_pole_and_fish:'}
+  eat: {color: '#D35400', emoji: ':poultry_leg:'}
+  craft: {color: '#8D6E63', emoji: ':hammer_and_pick:'}
+  furnace: {color: '#E25822', emoji: ':fire:'}
+  tame: {color: '#C69C6D', emoji: ':bone:'}
+  shear: {color: '#ECF0F1', emoji: ':scissors:'}
+
+#一覧の書き方：勝者、貢献者、順位、ランキング。
+#%medal% は 1-3 位のメダル、それ以外は other-places です。
+lists:
+  medals: [':first_place:', ':second_place:', ':third_place:']
+  other-places: '`%place%.`'
+  winner: '%medal% **%player%** `%time%s`'
+  contributor: '%medal% **%player%** `%amount%`'
+  standing: '%medal% **%player%** `%points% pt`'
+  leaderboard: '%medal% **%player%** `%value%`'
+  #一覧が空のときに代わりに表示
+  empty: '-# まだ誰もいません'
+
+#__メッセージ__
+#各メッセージには 'content'（埋め込みの上のふつうの文）と/または 'embed' があります：
+#  color、author（name、icon、url）、title、url、description、thumbnail、image、
+#  fields（name、value、inline）、footer（text、icon）、timestamp（true で送信時刻を表示）。
+#テキストは 1 行でも、行のリストでも構いません。中身のないプレースホルダーだけの行は
+#省かれ、空のフィールドも同じです。プレイヤーが不要な PlaceholderAPI のプレースホルダーも使えます。
+#説明とフィールドの値では Discord の書式が使えます：'### ' で見出し、'-# ' で小さな灰色の
+#文字、'> ' で引用、**太字**、`コード`。
+#<t:%ends_unix%:R> は読む人それぞれの時刻で「20 秒後」と表示し、カウントダウンします。
+#すべてのメッセージで：%server%、ゲームでは %game% %game_key% %game_emoji% %game_color%。
+
+#チャットゲーム。%question% %time_limit% %ends_unix% %winners_needed% %points%
+games:
+  enabled: true
+  channels: [main]
+  #true：ゲーム開始時に投稿し、その投稿を結果に編集します。false：結果だけを投稿します。
+  live: true
+  #メモライズはここでリストを表示しません。Discord で読めてしまうからです。
+  hidden-question: 'ゲームのチャットを見て！'
+  start:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%'
+      title: '新しいラウンド'
+      description:
+        - '### %question%'
+        - '-# ゲームのチャットで答えて勝とう。'
+      fields:
+        - name: ':stopwatch: 終了'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+        - name: ':sparkles: 報酬'
+          value: '`%points% pt`'
+          inline: true
+        - name: ':busts_in_silhouette: 勝者数'
+          value: '`%winners_needed%`'
+          inline: true
+      footer: '%server%'
+  #%winner% %winner_head% %winner_mention% %time% %answer% %points% %winner_count%
+  #%winners%（勝者全員、1 行に 1 人） %other_winners%（1 位以外の全員）
+  win:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%'
+      title: ':trophy:  %winner% が正解！'
+      thumbnail: '%winner_head%'
+      description:
+        - '-# 答えは'
+        - '### %answer%'
+      fields:
+        - name: ':stopwatch: タイム'
+          value: '`%time%s`'
+          inline: true
+        - name: ':sparkles: ポイント'
+          value: '`+%points%`'
+          inline: true
+        - name: ':medal: ほかの正解者'
+          value: '%other_winners%'
+          inline: false
+      footer: '%server%'
+      timestamp: true
+  #%answer% %question% %time_limit%
+  expired:
+    enabled: true
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%'
+      title: ':hourglass:  時間切れ'
+      description:
+        - '-# 誰も正解しませんでした。答えは'
+        - '### %answer%'
+      footer: '%server%'
+      timestamp: true
+  #スタッフがゲームを止めたとき（ライブ投稿を編集するだけ）
+  stopped:
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%'
+      title: ':no_entry:  ラウンド停止'
+      description:
+        - '-# スタッフがこのラウンドを早めに終了しました。'
+      footer: '%server%'
+      timestamp: true
+
+#レース。%target% %amount% %time_limit% %ends_unix% %points%
+races:
+  enabled: true
+  channels: [main]
+  live: true
+  start:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%レース'
+      title: 'レース開始'
+      description:
+        - '### %amount%x %target%'
+        - '-# 最初に終えたプレイヤーの勝ち。'
+      fields:
+        - name: ':stopwatch: 終了'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+        - name: ':sparkles: 報酬'
+          value: '`%points% pt`'
+          inline: true
+      footer: '%server%'
+  #%winner% %winner_head% %winner_mention% %time% %points%
+  win:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%レース'
+      title: ':checkered_flag:  %winner% がレースに勝利！'
+      thumbnail: '%winner_head%'
+      description:
+        - '### %amount%x %target%'
+      fields:
+        - name: ':stopwatch: タイム'
+          value: '`%time%s`'
+          inline: true
+        - name: ':sparkles: ポイント'
+          value: '`+%points%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  expired:
+    enabled: true
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%レース'
+      title: ':hourglass:  時間切れ'
+      description:
+        - '### %amount%x %target%'
+        - '-# 時間内に終えた人はいませんでした。'
+      footer: '%server%'
+      timestamp: true
+  stopped:
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%レース'
+      title: ':no_entry:  レース停止'
+      description:
+        - '-# スタッフがこのレースを早めに終了しました。'
+      footer: '%server%'
+      timestamp: true
+
+#グローバルゲーム。サーバー全体が 1 つの目標に向かいます。
+#%goal%（例："500 石"） %progress% %goal_amount% %percent% %bar% %contributors% %time_limit% %ends_unix%
+global:
+  enabled: true
+  channels: [main]
+  #true：投稿に進行バーを表示し、ゲーム中に更新します
+  live: true
+  #ライブ投稿を更新する最短間隔（進行が変わったときだけ）
+  update-seconds: 15
+  bar: {length: 16, full: '█', empty: '░'}
+  progress:
+    embed:
+      color: '%game_color%'
+      author: ':globe_with_meridians:  グローバル %game%'
+      title: 'サーバー全体で一緒に遊ぼう'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+        - '-# %progress% / %goal_amount%'
+      fields:
+        - name: ':busts_in_silhouette: 協力中'
+          value: '`%contributors%`'
+          inline: true
+        - name: ':stopwatch: 終了'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+      footer: '%server%'
+  #%top_contributors%（貢献が大きい人、1 行に 1 人）
+  completed:
+    embed:
+      color: '#57F287'
+      author: ':globe_with_meridians:  グローバル %game%'
+      title: ':tada:  目標達成！'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+      fields:
+        - name: ':medal: トップ協力者'
+          value: '%top_contributors%'
+          inline: true
+        - name: ':busts_in_silhouette: 協力した人数'
+          value: '`%contributors%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  failed:
+    embed:
+      color: '#ED4245'
+      author: ':globe_with_meridians:  グローバル %game%'
+      title: ':x:  目標未達成'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+        - '-# %progress% / %goal_amount%'
+      fields:
+        - name: ':medal: トップ協力者'
+          value: '%top_contributors%'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #%top_contributors% に表示する貢献者の数
+  top-size: 5
+
+#ゲームイベント（events.yml）。%event%
+events:
+  enabled: true
+  channels: [main]
+  #%games%（ゲームの数）
+  start:
+    embed:
+      color: '#FEE75C'
+      author: ':calendar:  ゲームイベント'
+      title: '%event% が始まった！'
+      description:
+        - '-# ゲームに続けて勝ってイベントポイントを稼ごう。'
+      fields:
+        - name: ':video_game: ゲーム'
+          value: '`%games%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #%standings% %players%（得点した人数） %winner% %winner_head% %winner_mention%
+  end:
+    embed:
+      color: '#FEE75C'
+      author: ':calendar:  ゲームイベント'
+      title: ':trophy:  %event% の結果'
+      thumbnail: '%winner_head%'
+      description:
+        - '%standings%'
+      fields:
+        - name: ':crown: 優勝'
+          value: '%winner_mention%'
+          inline: true
+        - name: ':busts_in_silhouette: プレイヤー'
+          value: '`%players%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #%standings% に表示する順位の数
+  standings-size: 10
+
+#プレイヤーの連続記録が一定の日数に達したとき（streaks.yml）。%player% %player_head% %player_mention% %streak% %days%
+streaks:
+  enabled: false
+  channels: [main]
+  #これらの日数だけ投稿します
+  days: [7, 14, 30, 60, 100, 365]
+  message:
+    embed:
+      color: '#E67E22'
+      author: {name: '%player%', icon: '%player_head%'}
+      title: ':fire:  %days% 日連続！'
+      description:
+        - '-# %streak%'
+      footer: '%server%'
+      timestamp: true
+
+#プレイヤーがデイリーかウィークリーのチャレンジを達成したとき。%player% %player_head% %player_mention% %challenge% %period%
+challenges:
+  enabled: false
+  channels: [main]
+  #%period% に表示するもの
+  periods:
+    daily: 'デイリー'
+    weekly: 'ウィークリー'
+  message:
+    embed:
+      color: '#57F287'
+      author: {name: '%player%', icon: '%player_head%'}
+      title: ':white_check_mark:  チャレンジ達成'
+      description:
+        - '### %challenge%'
+        - '-# %period%チャレンジ'
+      footer: '%server%'
+      timestamp: true
+
+#ランキング。決まった時刻と /chatgames discord leaderboard で投稿されます。
+#%leaderboard% %total_points%（全プレイヤーの合計）
+leaderboard:
+  enabled: false
+  channels: [main]
+  #サーバーの時刻、24 時間制。例：['12:00', '20:00']
+  times: ['20:00']
+  #points、または fastest（全ゲームで最も速い回答）
+  type: points
+  size: 10
+  message:
+    embed:
+      color: '#5865F2'
+      author: ':bar_chart:  ランキング'
+      title: 'トッププレイヤー'
+      description:
+        - '%leaderboard%'
+        - ''
+        - '-# 合計 %total_points% ポイント獲得'
+      footer: '%server%'
+      timestamp: true
+
+#__絵文字__
+#上のどのテキストでも :name: と書ける名前：
+#  trophy, first_place, second_place, third_place, medal, military_medal, crown, star, star2,
+#  sparkles, tada, confetti_ball, fire, zap, boom, 100, gem, moneybag, gift, video_game, game_die,
+#  jigsaw, dart, checkered_flag, stopwatch, timer, alarm_clock, hourglass, hourglass_flowing_sand,
+#  clock, calendar, white_check_mark, heavy_check_mark, x, no_entry, warning, question, grey_question,
+#  exclamation, bell, loudspeaker, mega, speech_balloon, thought_balloon, brain, bulb, abc, abcd,
+#  capital_abcd, 1234, symbols, pencil, pencil2, memo, book, books, scroll, clipboard, link, mag,
+#  eyes, eye, repeat, arrows_counterclockwise, leftwards_arrow_with_hook, heavy_plus_sign,
+#  heavy_minus_sign, heavy_multiplication_x, heavy_division_sign, infinity, keycap_ten,
+#  mouse_three_button, point_up, point_right, point_down, raised_hands, clap, muscle, handshake, wave,
+#  thinking, sunglasses, partying_face, rocket, earth_americas, globe_with_meridians,
+#  busts_in_silhouette, bust_in_silhouette, bar_chart, chart_with_upwards_trend,
+#  chart_with_downwards_trend, crossed_swords, dagger, bow_and_arrow, shield, pick, hammer,
+#  hammer_and_pick, tools, axe, bricks, fishing_pole_and_fish, fish, tropical_fish, meat_on_bone,
+#  poultry_leg, bread, apple, green_apple, cake, cookie, fork_and_knife, cooking, bone, dog, cat,
+#  horse, parrot, sheep, ram, scissors, cow, pig, chicken, zombie, skull, seedling, evergreen_tree,
+#  deciduous_tree, mushroom, rock, diamond_shape_with_a_dot_inside, large_blue_diamond,
+#  small_orange_diamond, red_circle, orange_circle, yellow_circle, green_circle, blue_circle,
+#  purple_circle, white_circle, black_circle, green_square, white_large_square, black_large_square,
+#  arrow_right, arrow_up, arrow_down, small_red_triangle_down, small_red_triangle, lock, unlock, key,
+#  new, up, cool, free, information_source, heart, green_heart, blue_heart, yellow_heart,
+#  purple_heart, orange_heart, map, compass, label, ticket, tickets, admission_tickets, joystick,
+#  slot_machine, spades, clubs, hearts, diamonds, beginner, game_controller, pushpin, round_pushpin,
+#  triangular_flag_on_post

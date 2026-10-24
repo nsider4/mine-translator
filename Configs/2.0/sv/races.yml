@@ -1,0 +1,550 @@
+enable-races: true
+
+creative-enabled: true
+#Användbara länkar för att lägga till DATA:
+#
+#https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+#https://helpch.at/docs/1.8/index.html?org/bukkit/entity/EntityType.html
+#https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+#https://helpch.at/docs/1.8/org/bukkit/Material.html
+
+#Namn kan vara nya eller gamla (MOOSHROOM eller MUSHROOM_COW, COD eller RAW_FISH): de matchas mot din servers
+#version. Namn som inte finns i din version (t.ex. ett 1.21-block på 1.8) hoppas över, med en notis i konsolen.
+#
+#Varje lopp tar också (valfritt):
+#  points: 1     #poäng som vinnaren får (standard 1)
+#  weight: 1     #hur ofta rotationen väljer det jämfört med andra spel (standard 1, 0 = aldrig)
+#
+#Administratörer kan starta ett lopp med egna värden: /chatgames <race> <material/mob> [amount]
+#Utan antal används ett av dem som listas nedan för det materialet/den varelsen. Vinnaren får belöningarna som listas
+#för exakt det materialet och antalet, eller inga om de inte listas här (poäng ges ändå).
+
+hunt:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&bJAKT'
+  subtitleMessage: '&aDöda %amount% %value%!'
+
+  #Om varelser som skapats av spawnerblock eller spawnägg ska räknas.
+  count-spawner-mobs: true
+  #Om MythicMobs-varelser också räknas som varelsen de bygger på (en MythicMobs-zombie som ZOMBIE).
+  count-mythic-mobs: true
+
+  data:
+    #Dessa värden måste vara giltiga Minecraft-varelse-ID:n (se Användbara länkar högst upp i filen)
+    #Med MythicMobs installerat är mythic:<mob type> en av dess varelser (ett exempel finns i slutet av listan)
+    ZOMBIE:
+      3:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+
+    CREEPER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SKELETON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SPIDER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    PIG:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SHEEP:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    COW:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    CHICKEN:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SALMON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    #mythic:SkeletonKing:
+    #  1:
+    #    rewards:
+    #      - reward_1
+
+mine:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&bGRUVA'
+  subtitleMessage: '&aHacka %amount% %value%!'
+
+  data:
+    #Dessa värden måste vara giltiga Minecraft-material-ID:n (se Användbara länkar högst upp i filen)
+    STONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRASS_BLOCK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRAVEL:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIORITE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+place:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&bBYGGA'
+  subtitleMessage: '&aPlacera %amount% %value%!'
+
+  data:
+    #Dessa värden måste vara giltiga Minecraft-material-ID:n (se Användbara länkar högst upp i filen)
+    COBBLESTONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+fish:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&bFISKE'
+  subtitleMessage: '&aFiska %amount% %value%!'
+
+  data:
+    #Dessa värden måste vara giltiga Minecraft-material-ID:n (se Användbara länkar högst upp i filen)
+    COD:
+      1:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+          - reward_3
+    SALMON:
+      1:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+          - reward_3
+    PUFFERFISH:
+      1:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+          - reward_3
+    BOWL:
+      1:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+eat:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&bÄTA'
+  subtitleMessage: '&aÄt %amount% %value%!'
+
+  data:
+    #Dessa värden måste vara giltiga Minecraft-material-ID:n (se Användbara länkar högst upp i filen)
+    COOKED_BEEF:
+      1:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_CHICKEN:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BAKED_POTATO:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BREAD:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    GOLDEN_APPLE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+
+craft:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&bTILLVERKA'
+  subtitleMessage: '&aTillverka %amount% %value%!'
+
+  data:
+    #Dessa värden måste vara giltiga Minecraft-material-ID:n (se Användbara länkar högst upp i filen)
+    FURNACE:
+      2:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+      4:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+          - reward_3
+    CHEST:
+      2:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+      4:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+          - reward_3
+    CRAFTING_TABLE:
+      4:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+      8:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_1
+          - reward_2
+      12:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      32:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+      48:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_1
+          - reward_2
+      64:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+furnace:
+  enable: true
+
+  timeToComplete_seconds: 150
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&bMATLAGNING'
+  subtitleMessage: '&aLaga %amount% %value%!'
+
+  data:
+    #Dessa värden måste vara giltiga Minecraft-material-ID:n (se Användbara länkar högst upp i filen)
+    GOLD_INGOT:
+      3:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+      6:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+          - reward_3
+    IRON_INGOT:
+      3:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+      6:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_BEEF:
+      3:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+      6:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_COD:
+      3:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+      6:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+tame:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&bTÄMJA'
+  subtitleMessage: '&aTämj %amount% %value%!'
+
+  data:
+    #Dessa värden måste vara giltiga Minecraft-varelse-ID:n (se Användbara länkar högst upp i filen)
+    #Bara varelser som kan tämjas i din version används: OCELOT upp till 1.13, CAT från 1.14.
+    WOLF:
+      1:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    CAT:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    OCELOT:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    HORSE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    PARROT:
+      1:
+        rewards:
+          - reward_2
+          - reward_3
+
+shear:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&bKLIPPA'
+  subtitleMessage: '&aKlipp %amount% %value%!'
+
+  data:
+    #Dessa värden måste vara giltiga Minecraft-varelse-ID:n (se Användbara länkar högst upp i filen)
+    SHEEP:
+      3:
+        #SUMMAN AV ALLA CHANSER FÖR BELÖNINGAR DU LÄGGER TILL FÅR INTE ÖVERSTIGA 100%
+        rewards:
+          - reward_1
+          - reward_2
+      6:
+        rewards:
+          - reward_2
+          - reward_3
+    MOOSHROOM:
+      1:
+        rewards:
+          - reward_1
+          - reward_2

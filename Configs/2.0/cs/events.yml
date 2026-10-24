@@ -1,0 +1,108 @@
+#HERNÍ UDÁLOSTI
+#
+#Událost je série her hraných jedna po druhé. Každá hra rozdává body události podle
+#umístění; když skončí poslední, hráči s nejvíce body události vyhrají
+#odměny události. Během události běžná rotace her a globální hry čekají.
+#
+#Spusťte ji příkazem /chatgames event start <event>, nebo ji nechte spustit plánem.
+#/chatgames event top <event> ukazuje, kdo v ní za celou dobu získal nejvíc.
+#
+#Každá událost:
+#  name: zobrazí se hráčům (barevné kódy fungují)
+#  schedule: kdy začne sama, např. 'SATURDAY 20:00' nebo 'DAILY 18:30' (nebo vynechte).
+#            Časové pásmo je to z challenges.yml.
+#  minimum-players: hráči online potřební, aby ji plán spustil (příkaz to ignoruje)
+#  pause-seconds: sekundy mezi koncem jedné hry a začátkem další
+#  points: body události za 1., 2., 3.... místo v každé hře
+#  participation-points: body události pro kohokoli dalšího, kdo to stihne. V globální hře, pokud
+#                        server dosáhne cíle, body získá každý, kdo dost přispěl:
+#                        'points' pro největší přispěvatele, tyto pro ostatní.
+#                        Pokud cíle dosaženo není, v té hře nikdo body nezíská.
+#  steps: hry, v pořadí. Každá:
+#    game: hra nebo závod, jako v games.yml / races.yml
+#    global: true, aby se hrála jako globální hra (server hraje společně; viz global_games.yml).
+#            Počítání je vždy globální.
+#    time: sekundy na odpověď (nebo na dokončení závodu) místo vlastního nastavení hry
+#    winners: kolik hráčů může vyhrát běžnou chatovou hru místo vlastního nastavení hry
+#    args: hodnoty, jako po /chatgames <game>, např. 'stone 16' pro závod v těžbě
+#    settings: jakékoli další hodnoty games.yml, které se mají pro tuto hru změnit, např. {difficulty: hard}
+#  rewards: řádky odměn podle konečného umístění (1, 2, 3...) a 'participation' pro všechny ostatní,
+#           kdo získali body. Stejné řádky jako v rewards.yml ('<chance>%~ ' a 'has:<permission>' fungují).
+
+events:
+  weekend_cup:
+    name: '&6&lVíkendový pohár'
+    schedule:
+      - 'SATURDAY 20:00'
+    minimum-players: 3
+    pause-seconds: 15
+    points: [5, 3, 1]
+    participation-points: 1
+    steps:
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+        time: 25
+      - game: word_association
+        global: true
+        settings:
+          difficulty: hard
+      - game: trivia
+        winners: 3
+      - game: mine
+        global: true
+        time: 120
+        args: 'stone 100'
+    rewards:
+      1:
+        - '[consolecmd] give %player% diamond 5'
+      2:
+        - '[consolecmd] give %player% diamond 3'
+      3:
+        - '[consolecmd] give %player% diamond 1'
+      participation:
+        - '[consolecmd] give %player% iron_ingot 3'
+
+  quick_quiz:
+    name: '&b&lRychlý kvíz'
+    minimum-players: 2
+    pause-seconds: 8
+    points: [3, 2, 1]
+    participation-points: 0
+    steps:
+      - game: reaction
+        winners: 3
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+    rewards:
+      1:
+        - '[consolecmd] give %player% gold_ingot 5'
+
+messages:
+  #Všem. %event% je její název, %steps% kolik her, %pause% sekundy mezi nimi.
+  start:
+    - ''
+    - '&6&l» UDÁLOST: %event% &fzačíná! Her: &e%steps%&f, vyhrává nejvíc bodů události.'
+    - ''
+  #Před každou hrou. %step% je její číslo, %game% hra.
+  step:
+    - '&6&l» %event% &f- hra &e%step%/%steps%&f: &e%game%'
+  #Každému hráči, který ve hře získá body. %points% co získal, %total% jeho celkem v události.
+  step_points: '&8[%prefix%&8] &a+%points% bodů události &7(celkem %total%)'
+  #Všem na konci. %count% hráčů získalo body; %winner_<n>% a %points_<n>% první tři.
+  end:
+    - ''
+    - '&6&l» %event% &fskončila! Body získalo &e%count% &fhráčů.'
+    - '&f  1. &e%winner_1% &7%points_1%  &f2. &e%winner_2% &7%points_2%  &f3. &e%winner_3% &7%points_3%'
+    - ''
+  nobody:
+    - '&6&l» %event% &fskončila! &cNikdo nezískal body.'
+  #Každému hráči, který získal body, po skončení. %place% z %count%.
+  result: '&8[%prefix%&8] &fSkončil jsi &e#%place% &fz %count% s &e%points% &fbody události.'
+  stopped:
+    - '&6&l» %event% &cbyla zastavena.'
+
+#Začátky událostí a konečné pořadí se posílají na Discord podle nastavení v discord.yml.

@@ -97,6 +97,14 @@ events:
   top_entry: '&c%spot%. &f%player% &8| &e%points% &7punten'
   top_empty: '&8[%prefix%&8] &cNog niemand heeft gescoord in %event%&c.'
 
+discord:
+  test_sent: '&8[%prefix%&8] &f&a%amount% &ftestbericht(en) naar Discord gestuurd. Verschijnt er niets, dan staat de reden in de console.'
+  leaderboard_posted: '&8[%prefix%&8] &fHet klassement is naar Discord gestuurd.'
+  disabled: '&8[%prefix%&8] &cDiscord-berichten staan uit: zet &fenabled: true &cin discord.yml.'
+  no_channel: '&8[%prefix%&8] &f%section% &cheeft geen kanaal met een webhook of DiscordSRV-kanaal in discord.yml.'
+  unknown_message: '&8[%prefix%&8] &cEr is geen Discord-bericht met de naam &f%message%&c.'
+  empty_message: '&8[%prefix%&8] &f%message% &cis leeg of ontbreekt in discord.yml.'
+
 logs:
   no_logs: "&cGeen logs beschikbaar of er is een fout opgetreden."
   header: "&8[%prefix%&8] &eLaatste &6%amount% &elogs:"
@@ -184,10 +192,11 @@ help_command:
   - '&a/chatgames challenges reset <player> &f- &3Wist de uitdagingsvoortgang van een speler.'
   - '&a/chatgames streak set <player> <challenge|daily|global> <days> &f- &3Stelt de reeks van een speler in.'
   - '&a/chatgames logs [amount] &f- &3Toont de laatste spellogs.'
+  - '&a/chatgames discord <test <message|all>|leaderboard> &f- &3Stuurt een testbericht of het klassement naar Discord.'
   - '&a/chatgames reload &f- &3Herlaadt de configuratiebestanden.'
   - '&6'
   - '&2&lSPELTYPES:'
-  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace'
+  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace, tame, shear'
   - '&7&m-------------------------------------------------'
 
 #Gebruik <center> in LIJST-berichten om ze te centreren; regels met dit worden gecentreerd!
@@ -686,3 +695,41 @@ furnace:
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
     - '<center>&f%timeToComplete%s &czijn voorbij! &fDe kookuitdaging is afgelopen!'
+
+tame:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToComplete% seconden &fom te &dtemmen&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7is klaar met het temmen van `&e%amount%&fx &3%value%&7` (&c%time%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &czijn voorbij! &fDe temuitdaging is afgelopen!'
+
+shear:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fJe hebt &e%timeToComplete% seconden &fom te &dscheren&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7is klaar met het scheren van `&e%amount%&fx &3%value%&7` (&c%time%s&7) en wint een prijs!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &czijn voorbij! &fDe scheeruitdaging is afgelopen!'

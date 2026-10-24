@@ -1,0 +1,405 @@
+#Posílá výsledky her, závody, globální hry, události a další na Discord.
+#
+#Zprávy se posílají přes webhook kanálu (nic se neinstaluje), přes bota
+#pluginu DiscordSRV, nebo obojím. Každou zprávu vyzkoušejte příkazem /chatgames discord test <message>.
+enabled: true
+
+#__KANÁLY__
+#Kam zprávy jdou. Pojmenujte je, jak chcete; každé oznámení níže uvádí kanály, které používá.
+#  webhook: URL webhooku kanálu. V Discordu: Upravit kanál > Integrace > Webhooky >
+#           Nový webhook > Zkopírovat URL webhooku. Držte ho v tajnosti: kdokoli ho má, tam může psát.
+#  discordsrv: posílá místo toho přes vašeho bota DiscordSRV (vyžaduje DiscordSRV). Název kanálu ze
+#              sekce Channels v config.yml DiscordSRV (např. global), nebo ID kanálu.
+#  username / avatar: jméno a obrázek, které ukazují příspěvky webhooku (bot si nechá své).
+channels:
+  main:
+    webhook: ''
+    discordsrv: ''
+    username: 'Chat Games'
+    avatar: 'https://www.spigotmc.org/data/resource_icons/107/107781.jpg?1676494289'
+
+#__OBECNÉ__
+#Zobrazí se v zápatí jako %server%
+server-name: 'Minecraft Server'
+#Obrázek pro %winner_head% / %player_head%. %name% a %uuid% se doplní.
+player-head-url: 'https://mc-heads.net/avatar/%name%/128'
+#ID rolí, které mohou zprávy zmínit (napište <@&ID> do textu). Nic jiného se nikdy nezmíní: ani
+#@everyone, ani nic ve jménu nebo odpovědi hráče.
+#Pro získání ID zapněte v Discordu Vývojářský režim (Nastavení > Pokročilé), pak klikněte pravým na roli.
+allowed-role-pings: []
+#S DiscordSRV ukazují %winner_mention% / %player_mention% propojený účet Discord hráče
+#(jinak jeho jméno). true ho také zmíní.
+ping-linked-players: false
+#Hry a závody, které se nikdy neposílají
+ignored-games: []
+
+#Barvy (%game_color%) a emoji (%game_emoji%) pro každou hru. Barvy: '#RRGGBB' nebo název.
+#Emoji: názvy jako :trophy: (seznam je na konci tohoto souboru), nebo emoji serveru jako <:name:ID>.
+#Nevkládejte do tohoto souboru znaky emoji: servery 1.8 nedokážou přečíst soubor, který je obsahuje.
+styles:
+  default: {color: '#5865F2', emoji: ':video_game:'}
+  unscramble: {color: '#F1C40F', emoji: ':abc:'}
+  unreverse: {color: '#E67E22', emoji: ':repeat:'}
+  reaction: {color: '#E74C3C', emoji: ':zap:'}
+  random: {color: '#9B59B6', emoji: ':game_die:'}
+  fillout: {color: '#3498DB', emoji: ':pencil2:'}
+  variable: {color: '#1ABC9C', emoji: ':heavy_plus_sign:'}
+  clickable: {color: '#2ECC71', emoji: ':point_up:'}
+  hoverable: {color: '#16A085', emoji: ':eyes:'}
+  math: {color: '#E91E63', emoji: ':heavy_division_sign:'}
+  sequence: {color: '#00BCD4', emoji: ':1234:'}
+  memorize: {color: '#8E44AD', emoji: ':brain:'}
+  guess_the_number: {color: '#FF9800', emoji: ':question:'}
+  trivia: {color: '#3F51B5', emoji: ':books:'}
+  word_association: {color: '#009688', emoji: ':link:'}
+  count: {color: '#607D8B', emoji: ':1234:'}
+  hunt: {color: '#C0392B', emoji: ':crossed_swords:'}
+  mine: {color: '#7F8C8D', emoji: ':pick:'}
+  place: {color: '#A0522D', emoji: ':bricks:'}
+  fish: {color: '#2980B9', emoji: ':fishing_pole_and_fish:'}
+  eat: {color: '#D35400', emoji: ':poultry_leg:'}
+  craft: {color: '#8D6E63', emoji: ':hammer_and_pick:'}
+  furnace: {color: '#E25822', emoji: ':fire:'}
+  tame: {color: '#C69C6D', emoji: ':bone:'}
+  shear: {color: '#ECF0F1', emoji: ':scissors:'}
+
+#Jak se píšou seznamy: vítězové, přispěvatelé, pořadí a žebříčky.
+#%medal% je medaile míst 1-3 a other-places pro ostatní.
+lists:
+  medals: [':first_place:', ':second_place:', ':third_place:']
+  other-places: '`%place%.`'
+  winner: '%medal% **%player%** `%time%s`'
+  contributor: '%medal% **%player%** `%amount%`'
+  standing: '%medal% **%player%** `%points% b.`'
+  leaderboard: '%medal% **%player%** `%value%`'
+  #Zobrazí se místo prázdného seznamu
+  empty: '-# Zatím nikdo'
+
+#__ZPRÁVY__
+#Každá zpráva má 'content' (prostý text nad embedem) a/nebo 'embed':
+#  color, author (name, icon, url), title, url, description, thumbnail, image,
+#  fields (name, value, inline), footer (text, icon), timestamp (true ukáže čas odeslání).
+#Text může být jeden řádek nebo seznam řádků. Řádek, který měl jen prázdné zástupné symboly,
+#se vynechá, stejně jako prázdné pole. Fungují i zástupné symboly PlaceholderAPI, které nepotřebují hráče.
+#Formátování Discordu funguje v popisech a hodnotách polí: '### ' začne nadpis, '-# ' malý šedý
+#text, '> ' citaci, **tučně**, `kód`.
+#<t:%ends_unix%:R> ukáže „za 20 sekund“ v čase každého čtenáře a odpočítává.
+#V každé zprávě: %server% a u her %game% %game_key% %game_emoji% %game_color%.
+
+#Chatové hry. %question% %time_limit% %ends_unix% %winners_needed% %points%
+games:
+  enabled: true
+  channels: [main]
+  #true: poslat příspěvek, když hra začne, a pak ho upravit na výsledek. false: poslat jen výsledek.
+  live: true
+  #Zapamatuj si tu nikdy neukazuje svůj seznam: hráči by si ho mohli přečíst na Discordu.
+  hidden-question: 'Podívejte se do herního chatu!'
+  start:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%'
+      title: 'Nové kolo'
+      description:
+        - '### %question%'
+        - '-# Odpovězte v herním chatu a vyhrajte.'
+      fields:
+        - name: ':stopwatch: Konec'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+        - name: ':sparkles: Odměna'
+          value: '`%points% b.`'
+          inline: true
+        - name: ':busts_in_silhouette: Vítězové'
+          value: '`%winners_needed%`'
+          inline: true
+      footer: '%server%'
+  #%winner% %winner_head% %winner_mention% %time% %answer% %points% %winner_count%
+  #%winners% (každý vítěz, jeden na řádek) %other_winners% (všichni kromě prvního)
+  win:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%'
+      title: ':trophy:  %winner% to má!'
+      thumbnail: '%winner_head%'
+      description:
+        - '-# Odpověď byla'
+        - '### %answer%'
+      fields:
+        - name: ':stopwatch: Čas'
+          value: '`%time%s`'
+          inline: true
+        - name: ':sparkles: Body'
+          value: '`+%points%`'
+          inline: true
+        - name: ':medal: Odpověděli také'
+          value: '%other_winners%'
+          inline: false
+      footer: '%server%'
+      timestamp: true
+  #%answer% %question% %time_limit%
+  expired:
+    enabled: true
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%'
+      title: ':hourglass:  Čas vypršel'
+      description:
+        - '-# Nikdo to neuhodl. Odpověď byla'
+        - '### %answer%'
+      footer: '%server%'
+      timestamp: true
+  #Když člen týmu zastaví hru (jen upraví živý příspěvek)
+  stopped:
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%'
+      title: ':no_entry:  Kolo zastaveno'
+      description:
+        - '-# Člen týmu toto kolo předčasně ukončil.'
+      footer: '%server%'
+      timestamp: true
+
+#Závody. %target% %amount% %time_limit% %ends_unix% %points%
+races:
+  enabled: true
+  channels: [main]
+  live: true
+  start:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  Závod: %game%'
+      title: 'Závod začal'
+      description:
+        - '### %amount%x %target%'
+        - '-# Vyhrává ten, kdo dokončí první.'
+      fields:
+        - name: ':stopwatch: Konec'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+        - name: ':sparkles: Odměna'
+          value: '`%points% b.`'
+          inline: true
+      footer: '%server%'
+  #%winner% %winner_head% %winner_mention% %time% %points%
+  win:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  Závod: %game%'
+      title: ':checkered_flag:  %winner% vyhrál závod!'
+      thumbnail: '%winner_head%'
+      description:
+        - '### %amount%x %target%'
+      fields:
+        - name: ':stopwatch: Čas'
+          value: '`%time%s`'
+          inline: true
+        - name: ':sparkles: Body'
+          value: '`+%points%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  expired:
+    enabled: true
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  Závod: %game%'
+      title: ':hourglass:  Čas vypršel'
+      description:
+        - '### %amount%x %target%'
+        - '-# Nikdo to včas nedokončil.'
+      footer: '%server%'
+      timestamp: true
+  stopped:
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  Závod: %game%'
+      title: ':no_entry:  Závod zastaven'
+      description:
+        - '-# Člen týmu tento závod předčasně ukončil.'
+      footer: '%server%'
+      timestamp: true
+
+#Globální hry, kde celý server pracuje na jednom cíli.
+#%goal% (např. "500 Stone") %progress% %goal_amount% %percent% %bar% %contributors% %time_limit% %ends_unix%
+global:
+  enabled: true
+  channels: [main]
+  #true: příspěvek ukazuje ukazatel postupu a aktualizuje se, dokud hra běží
+  live: true
+  #Jak často nejvýš se živý příspěvek aktualizuje (jen když se postup změnil)
+  update-seconds: 15
+  bar: {length: 16, full: '█', empty: '░'}
+  progress:
+    embed:
+      color: '%game_color%'
+      author: ':globe_with_meridians:  Globální hra: %game%'
+      title: 'Celý server hraje společně'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+        - '-# %progress% / %goal_amount%'
+      fields:
+        - name: ':busts_in_silhouette: Pomáhají'
+          value: '`%contributors%`'
+          inline: true
+        - name: ':stopwatch: Konec'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+      footer: '%server%'
+  #%top_contributors% (největší přispěvatelé, jeden na řádek)
+  completed:
+    embed:
+      color: '#57F287'
+      author: ':globe_with_meridians:  Globální hra: %game%'
+      title: ':tada:  Cíl splněn!'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+      fields:
+        - name: ':medal: Nejlepší pomocníci'
+          value: '%top_contributors%'
+          inline: true
+        - name: ':busts_in_silhouette: Pomohli'
+          value: '`%contributors%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  failed:
+    embed:
+      color: '#ED4245'
+      author: ':globe_with_meridians:  Globální hra: %game%'
+      title: ':x:  Cíl nesplněn'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+        - '-# %progress% / %goal_amount%'
+      fields:
+        - name: ':medal: Nejlepší pomocníci'
+          value: '%top_contributors%'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #Kolik přispěvatelů uvádí %top_contributors%
+  top-size: 5
+
+#Herní události (events.yml). %event%
+events:
+  enabled: true
+  channels: [main]
+  #%games% (kolik her má)
+  start:
+    embed:
+      color: '#FEE75C'
+      author: ':calendar:  Herní událost'
+      title: '%event% začala!'
+      description:
+        - '-# Vyhrávejte hry jednu po druhé a získejte body události.'
+      fields:
+        - name: ':video_game: Hry'
+          value: '`%games%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #%standings% %players% (kolik získalo body) %winner% %winner_head% %winner_mention%
+  end:
+    embed:
+      color: '#FEE75C'
+      author: ':calendar:  Herní událost'
+      title: ':trophy:  Výsledky: %event%'
+      thumbnail: '%winner_head%'
+      description:
+        - '%standings%'
+      fields:
+        - name: ':crown: Vítěz'
+          value: '%winner_mention%'
+          inline: true
+        - name: ':busts_in_silhouette: Hráči'
+          value: '`%players%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #Kolik míst uvádí %standings%
+  standings-size: 10
+
+#Série hráče dosáhne určitého počtu dní po sobě (streaks.yml). %player% %player_head% %player_mention% %streak% %days%
+streaks:
+  enabled: false
+  channels: [main]
+  #Posílají se jen tyto počty dní
+  days: [7, 14, 30, 60, 100, 365]
+  message:
+    embed:
+      color: '#E67E22'
+      author: {name: '%player%', icon: '%player_head%'}
+      title: ':fire:  %days% dní po sobě!'
+      description:
+        - '-# %streak%'
+      footer: '%server%'
+      timestamp: true
+
+#Hráč splní denní nebo týdenní úkol. %player% %player_head% %player_mention% %challenge% %period%
+challenges:
+  enabled: false
+  channels: [main]
+  #Co ukazuje %period%
+  periods:
+    daily: 'Denní'
+    weekly: 'Týdenní'
+  message:
+    embed:
+      color: '#57F287'
+      author: {name: '%player%', icon: '%player_head%'}
+      title: ':white_check_mark:  Úkol splněn'
+      description:
+        - '### %challenge%'
+        - '-# %period% úkol'
+      footer: '%server%'
+      timestamp: true
+
+#Žebříček, posílaný v nastavené časy a příkazem /chatgames discord leaderboard.
+#%leaderboard% %total_points% (všichni hráči dohromady)
+leaderboard:
+  enabled: false
+  channels: [main]
+  #Čas serveru, 24hodinový, např. ['12:00', '20:00']
+  times: ['20:00']
+  #points, nebo fastest (nejrychlejší odpovědi ze všech her)
+  type: points
+  size: 10
+  message:
+    embed:
+      color: '#5865F2'
+      author: ':bar_chart:  Žebříček'
+      title: 'Nejlepší hráči'
+      description:
+        - '%leaderboard%'
+        - ''
+        - '-# Celkem získáno %total_points% bodů'
+      footer: '%server%'
+      timestamp: true
+
+#__EMOJI__
+#Názvy, které můžete psát jako :name: v jakémkoli textu výše:
+#  trophy, first_place, second_place, third_place, medal, military_medal, crown, star, star2,
+#  sparkles, tada, confetti_ball, fire, zap, boom, 100, gem, moneybag, gift, video_game, game_die,
+#  jigsaw, dart, checkered_flag, stopwatch, timer, alarm_clock, hourglass, hourglass_flowing_sand,
+#  clock, calendar, white_check_mark, heavy_check_mark, x, no_entry, warning, question, grey_question,
+#  exclamation, bell, loudspeaker, mega, speech_balloon, thought_balloon, brain, bulb, abc, abcd,
+#  capital_abcd, 1234, symbols, pencil, pencil2, memo, book, books, scroll, clipboard, link, mag,
+#  eyes, eye, repeat, arrows_counterclockwise, leftwards_arrow_with_hook, heavy_plus_sign,
+#  heavy_minus_sign, heavy_multiplication_x, heavy_division_sign, infinity, keycap_ten,
+#  mouse_three_button, point_up, point_right, point_down, raised_hands, clap, muscle, handshake, wave,
+#  thinking, sunglasses, partying_face, rocket, earth_americas, globe_with_meridians,
+#  busts_in_silhouette, bust_in_silhouette, bar_chart, chart_with_upwards_trend,
+#  chart_with_downwards_trend, crossed_swords, dagger, bow_and_arrow, shield, pick, hammer,
+#  hammer_and_pick, tools, axe, bricks, fishing_pole_and_fish, fish, tropical_fish, meat_on_bone,
+#  poultry_leg, bread, apple, green_apple, cake, cookie, fork_and_knife, cooking, bone, dog, cat,
+#  horse, parrot, sheep, ram, scissors, cow, pig, chicken, zombie, skull, seedling, evergreen_tree,
+#  deciduous_tree, mushroom, rock, diamond_shape_with_a_dot_inside, large_blue_diamond,
+#  small_orange_diamond, red_circle, orange_circle, yellow_circle, green_circle, blue_circle,
+#  purple_circle, white_circle, black_circle, green_square, white_large_square, black_large_square,
+#  arrow_right, arrow_up, arrow_down, small_red_triangle_down, small_red_triangle, lock, unlock, key,
+#  new, up, cool, free, information_source, heart, green_heart, blue_heart, yellow_heart,
+#  purple_heart, orange_heart, map, compass, label, ticket, tickets, admission_tickets, joystick,
+#  slot_machine, spades, clubs, hearts, diamonds, beginner, game_controller, pushpin, round_pushpin,
+#  triangular_flag_on_post

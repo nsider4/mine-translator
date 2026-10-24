@@ -1,0 +1,1158 @@
+#MENU
+#
+#Každé menu v 'menus:' má 'title', velikost v 'rows' (1-6) a své 'items'. Můžete změnit,
+#co dělá kterékoli tlačítko, přidat tlačítka nebo celá nová menu (otevřete je přes /chatgames menu <id>,
+#nebo dejte každé do vlastního souboru ve složce menus/ s názvem <id>.yml).
+#
+#Každá položka:
+#  slot: kde je, od 0 (vlevo nahoře) do rows*9-1. 'slots: [0, 1, '9-17']' ji opakuje.
+#  material: jakýkoli název předmětu od 1.8 do 26.x: nové nebo staré názvy (lime_dye / INK_SACK:10 / 351:10),
+#            nebo 'head:<jméno hráče, textura nebo URL textures.minecraft.net>'
+#  name / lore: fungují barevné kódy (&a, a &#RRGGBB na 1.16+) a zástupné symboly PlaceholderAPI.
+#  amount, glow: true, enchantments: ['SHARPNESS:1'], flags: [HIDE_ATTRIBUTES], head: '%player%',
+#  custom-model-data: 1001 (1.14+), item-model: 'namespace:key' (1.21.2+), color: '#FF0000' (kůže)
+#  actions: co dělá kliknutí, v pořadí. Také left-actions, right-actions, shift-left-actions,
+#           shift-right-actions, middle-actions a drop-actions (každá bez hodnoty použije actions).
+#  view-requirements: položka se zobrazí, jen když projde každý řádek
+#  click-requirements: když řádek neprojde, místo akcí se spustí 'deny-actions'
+#  state + when-off: když je state nepravdivý, klíče z when-off nahradí vlastní klíče položky
+#                    (ne 'off': YAML čte samotné off jako false)
+#Vynechte položku, abyste ji skryli. 'filler' vyplní každé prázdné místo; odeberte ho, aby nebylo nic.
+#
+#Akce:
+#  [command] <command>        příkaz spustíte vy           [console] <command>   spustí ho konzole
+#  [message] <text>           zpráva pro vás               [broadcast] <text>    pro všechny
+#  [sound] <sound> [volume] [pitch]   jakýkoli název zvuku od 1.8 do 26.x
+#  [open] <menu> [values]     otevře jiné menu             [switch] <menu> [values]  totéž, ale [back] ho přeskočí
+#  [back] [menu]              předchozí menu (nebo uvedené, nebo zavře)
+#  [refresh]  [close]  [next-page]  [previous-page]  [wait] <ticks>
+#  [chatgames:no-permission]  odešle zprávu o chybějícím oprávnění
+#  Akce konkrétních menu jsou popsané nad menu, která je mají.
+#
+#Požadavky, jeden na řádek (každý řádek musí projít; začněte řádek !, abyste ho obrátili):
+#  permission <node>     porovnání jako '%chatgames_points% >= 100' (==, !=, >=, <=, >, <)
+#  nebo hodnota true / on / yes / číslo jiné než 0
+#
+#Menu se seznamy (úkoly, hry, události...) je řadí do 'list-slots' v pořadí,
+#vykreslené podle 'templates' menu. Když je položek víc než míst, položky s akcemi
+#[next-page] / [previous-page] listují stránkami; skryjí se, když není kam listovat.
+#Řádek lore, který je jen zástupný symbol seznamu, jako '%game_wins%', se změní na několik řádků.
+#Každé menu má také %player%, %page%, %pages% a %entries% (kolik položek seznam má).
+
+#Názvy a ikony her v každém menu a ve zprávách, které hru jmenují (%game%).
+#Hra, která tu není, se pojmenuje podle svého klíče.
+game-names:
+  unscramble: 'Rozlušti'
+  unreverse: 'Otoč'
+  reaction: 'Reakce'
+  guess_the_number: 'Hádej číslo'
+  clickable: 'Klikání'
+  fillout: 'Doplň'
+  hoverable: 'Najetí'
+  random: 'Náhodné znaky'
+  math: 'Matematika'
+  variable: 'Proměnná'
+  sequence: 'Řada'
+  memorize: 'Zapamatuj si'
+  word_association: 'Asociace'
+  trivia: 'Kvíz'
+  count: 'Počítání'
+  hunt: 'Lov'
+  mine: 'Těžba'
+  place: 'Stavění'
+  fish: 'Rybaření'
+  eat: 'Jídlo'
+  craft: 'Výroba'
+  furnace: 'Vaření'
+  tame: 'Ochočení'
+  shear: 'Stříhání'
+game-icons:
+  unscramble: book
+  math: redstone
+  trivia: enchanted_book
+  reaction: feather
+  clickable: stone_button
+  random: ender_pearl
+  unreverse: compass
+  variable: name_tag
+  guess_the_number: clock
+  memorize: map
+  sequence: ladder
+  fillout: paper
+  hoverable: ender_eye
+  word_association: lead
+  count: clock
+  hunt: iron_sword
+  place: grass_block
+  mine: iron_pickaxe
+  fish: fishing_rod
+  eat: cooked_beef
+  craft: crafting_table
+  furnace: furnace
+  tame: bone
+  shear: shears
+
+formats:
+  #Zobrazí se místo pořadí u hráčů, kteří ještě nejsou v žebříčku
+  no-rank: '-'
+
+#Hráči, z ladicího menu. Nechte řádek prázdný (''), aby se nic neodeslalo.
+messages:
+  debug-round: '&8[&cDEBUG&8] &fNové soukromé kolo &e%game% &f(odpověď: &a%answer%&f), vygenerováno za &e%generated% ms&f. Vidíš ho jen ty.'
+  debug-failed: '&8[&cDEBUG&8] &cKolo %game% se nepodařilo vygenerovat; konzole řekne proč.'
+  debug-race: '&8[&cDEBUG&8] &cZávody se hrají ve světě, takže je tu nelze vyzkoušet. Spusť jeden pomocí /chatgames <race>.'
+  debug-no-letters: '&8[&cDEBUG&8] &7Tato odpověď nemá písmena, takže velikost písmen nemůže být špatně.'
+  debug-timeout-started: '&8[&cDEBUG&8] &7Čekáme, až uplyne časový limit &e%time%s&7...'
+  debug-timeout: '&8[&cDEBUG&8] &e%game%&7: čas vypršel. Hráčům by se řeklo, že odpověď byla &f%answer%&7.'
+  #%verdict% je jeden z řádků níže
+  debug-result: '&8[&cDEBUG&8] &e%game% &7| napsáno &f%input% &7po &e%ms% ms&7: %verdict%'
+  debug-verdicts:
+    accepted: '&apřijato &7(umístil by se a získal &e%points% &7bodů)'
+    wrong: '&cšpatně &7(ignorováno)'
+    wrong-case: '&6špatná velikost písmen &7(hráči se řekne, ať ji zkontroluje)'
+    macro: '&cignorováno jako makro &7(rychlejší než min-answer-ms, &e%min_ms% ms&7)'
+    late: '&cpříliš pozdě &7(po časovém limitu)'
+
+menus:
+
+  #/chatgames menu. %points% %rank% %wins% %claimable% (odměny připravené k vyzvednutí),
+  #%daily_completed% %daily_total% %weekly_completed% %weekly_total%,
+  #%games_on% / %sound_on% (true nebo false) a %games_state% / %sound_state% (text ZAP./VYP.)
+  main:
+    title: '&8&lChatGames'
+    rows: 3
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      profile:
+        slot: 10
+        material: player_head
+        head: '%player%'
+        name: '&e&lTvůj profil'
+        lore:
+          - '&7Body: &e%points% &8(%rank%)'
+          - '&7Výhry: &e%wins%'
+          - ''
+          - '&eKlikni pro zobrazení statistik'
+        actions: ['[open] profile']
+      challenges:
+        slot: 11
+        material: writable_book
+        name: '&a&lÚkoly'
+        lore:
+          - '&7Denní: &e%daily_completed%&7/&e%daily_total%'
+          - '&7Týdenní: &e%weekly_completed%&7/&e%weekly_total%'
+          - '&7Odměny k vyzvednutí: &e%claimable%'
+          - ''
+          - '&eKlikni pro otevření'
+        actions: ['[open] challenges daily']
+      streaks:
+        slot: 12
+        material: blaze_powder
+        name: '&6&lSérie'
+        lore:
+          - '&7Hraj každý den, ať nepřerušíš série.'
+          - ''
+          - '&eKlikni pro otevření'
+        actions: ['[open] streaks']
+      leaderboards:
+        slot: 13
+        material: gold_ingot
+        name: '&e&lŽebříčky'
+        lore:
+          - '&7Nejvíc bodů a nejrychlejší hráči.'
+          - ''
+          - '&eKlikni pro otevření'
+        actions: ['[open] leaderboards']
+      games-toggle:
+        slot: 15
+        material: lime_dye
+        name: '&fChatové hry: %games_state%'
+        lore:
+          - '&7Klikni pro vypnutí chatových her pro tebe.'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7Klikni pro zapnutí chatových her pro tebe.'
+      sound-toggle:
+        slot: 16
+        material: note_block
+        name: '&fZvuky her: %sound_state%'
+        lore:
+          - '&7Klikni pro vypnutí zvuků her.'
+        state: '%sound_on%'
+        actions: ['[command] chatgames togglesound', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7Klikni pro zapnutí zvuků her.'
+      admin:
+        slot: 22
+        material: command_block
+        name: '&c&lAdmin'
+        lore:
+          - '&7Spouštění her, událostí, sad...'
+        view-requirements: ['permission chatgames.admin']
+        actions: ['[open] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cZavřít'
+        actions: ['[close]']
+
+  #/chatgames profile [player]. %target% %points% %rank% %wins% %race_wins% %global_played%
+  #%global_won% (dokončené) %contributions% %events_played% %event_wins% %event_best_place% %fastest% %challenges_completed%
+  #%milestones% %milestones_total% %streak_<challenge|daily|global>% a %streak_<...>_longest%.
+  #Seznamy: %game_wins% a %game_fastest%. [open] profile <name> otevře profil někoho jiného.
+  profile:
+    title: '&8Profil: %target%'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7zatím nic'
+      game-wins: '&7%game%: &f%wins%'
+      game-fastest: '&7%game%: &f%time%s'
+    items:
+      head:
+        slot: 4
+        material: player_head
+        head: '%target%'
+        name: '&e&l%target%'
+        lore:
+          - '&7Body: &e%points% &8(%rank%)'
+      wins:
+        slot: 19
+        material: diamond
+        name: '&b&lVýhry'
+        lore:
+          - '&7Vyhrané chatové hry: &f%wins%'
+          - '&7Vyhrané závody: &f%race_wins%'
+          - ''
+          - '%game_wins%'
+      fastest:
+        slot: 20
+        material: clock
+        name: '&e&lNejrychlejší časy'
+        lore:
+          - '&7Nejlepší celkově: &f%fastest%'
+          - ''
+          - '%game_fastest%'
+      global:
+        slot: 21
+        material: beacon
+        name: '&3&lGlobální hry'
+        lore:
+          - '&7Odehráno: &f%global_played%'
+          - '&7Dokončeno: &f%global_won%'
+          - '&7Příspěvky: &f%contributions%'
+      events:
+        slot: 23
+        material: nether_star
+        name: '&6&lUdálosti'
+        lore:
+          - '&7Odehráno: &f%events_played%'
+          - '&7Vyhráno: &f%event_wins%'
+          - '&7Nejlepší umístění: &f%event_best_place%'
+      streaks:
+        slot: 24
+        material: blaze_powder
+        name: '&6&lSérie'
+        lore:
+          - '&7Úkoly: &f%streak_challenge% &8(rekord %streak_challenge_longest%)'
+          - '&7Denní výhra: &f%streak_daily% &8(rekord %streak_daily_longest%)'
+          - '&7Globální: &f%streak_global% &8(rekord %streak_global_longest%)'
+      progress:
+        slot: 25
+        material: experience_bottle
+        name: '&a&lPostup'
+        lore:
+          - '&7Body: &f%points%'
+          - '&7Dosažené milníky: &f%milestones%&7/&f%milestones_total%'
+          - '&7Splněné úkoly: &f%challenges_completed%'
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Zpět'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cZavřít'
+        actions: ['[close]']
+
+  #[open] challenges <daily|weekly>. %period% %period_key% %completed% %total% %resets%.
+  #Položky: %challenge% %id% %description% %progress% %amount% %percent% %bar% %icon%.
+  #[chatgames:claim-challenge] <period> <id> vyzvedne jeden.
+  challenges:
+    title: '&8%period% úkoly'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    progress-bar:
+      length: 10
+      done: '&a|'
+      left: '&7|'
+    items:
+      tab-daily:
+        slot: 2
+        material: sunflower
+        name: '&e&lDenní'
+        glow: true
+        lore:
+          - '&7Zobrazeny dnešní úkoly.'
+        state: '%period_key% == daily'
+        actions: ['[switch] challenges daily']
+        when-off:
+          glow: false
+          lore:
+            - '&eKlikni pro zobrazení dnešních úkolů'
+      tab-weekly:
+        slot: 6
+        material: clock
+        name: '&b&lTýdenní'
+        glow: true
+        lore:
+          - '&7Zobrazeny úkoly tohoto týdne.'
+        state: '%period_key% == weekly'
+        actions: ['[switch] challenges weekly']
+        when-off:
+          glow: false
+          lore:
+            - '&eKlikni pro zobrazení úkolů tohoto týdne'
+      info:
+        slot: 4
+        material: book
+        name: '&f%period%: &e%completed%&7/&e%total% &fsplněno'
+        lore:
+          - '&7Nové úkoly za &f%resets%'
+      none:
+        slot: 22
+        material: barrier
+        name: '&7Momentálně žádné úkoly (%period%)'
+        view-requirements: ['%entries% == 0']
+      claim-all:
+        slot: 40
+        material: chest
+        name: '&a&lVyzvednout vše'
+        lore:
+          - '&7Vyzvedne každý splněný úkol'
+          - '&7a odměnu za sérii.'
+        actions: ['[command] chatgames claim', '[wait] 2', '[refresh]']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7Předchozí stránka'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7Další stránka &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Zpět'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cZavřít'
+        actions: ['[close]']
+    templates:
+      in-progress:
+        material: '%icon%'
+        name: '%challenge%'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&7Probíhá'
+      ready:
+        material: '%icon%'
+        glow: true
+        name: '%challenge% &a&l(SPLNĚNO)'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&a&lKlikni pro vyzvednutí odměny!'
+        actions: ['[chatgames:claim-challenge] %period_key% %id%', '[refresh]']
+      claimed:
+        material: lime_stained_glass_pane
+        name: '%challenge% &7(vyzvednuto)'
+        lore:
+          - '%description%'
+          - ''
+          - '&aOdměna vyzvednuta'
+
+  #Každá série má %streak_<type>% (dny), %streak_<type>_name%, %streak_<type>_longest%,
+  #%streak_<type>_unclaimed% a %streak_<type>_enabled%, kde <type> je challenge, daily nebo global.
+  #7denní žebřík každé jde do seznamu s jejím názvem, den 1 až 7 (8-14 ve druhém týdnu...).
+  #Dny žebříku: %day% %ladder_day% (jeho den odměny, 1-7) %type% %streak% a %today% (true v dnešní den).
+  #[chatgames:claim-streak] <type> vyzvedne všechny nevyzvednuté dny série.
+  streaks:
+    title: '&8Série'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    lists:
+      challenge: ['11-17']
+      daily: ['20-26']
+      global: ['29-35']
+    items:
+      challenge:
+        slot: 10
+        material: writable_book
+        name: '%streak_challenge_name%'
+        lore:
+          - '&7Splň každý den všechny denní úkoly.'
+          - ''
+          - '&7Aktuálně: &f%streak_challenge% &7dní &8(rekord %streak_challenge_longest%)'
+          - '&7Dní k vyzvednutí: &e%streak_challenge_unclaimed%'
+        view-requirements: ['%streak_challenge_enabled%']
+        click-requirements: ['%streak_challenge_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] challenge', '[refresh]']
+      daily:
+        slot: 19
+        material: gold_ingot
+        name: '%streak_daily_name%'
+        lore:
+          - '&7Vyhraj každý den aspoň jednu hru.'
+          - ''
+          - '&7Aktuálně: &f%streak_daily% &7dní &8(rekord %streak_daily_longest%)'
+          - '&7Dní k vyzvednutí: &e%streak_daily_unclaimed%'
+        view-requirements: ['%streak_daily_enabled%']
+        click-requirements: ['%streak_daily_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] daily', '[refresh]']
+      global:
+        slot: 28
+        material: beacon
+        name: '%streak_global_name%'
+        lore:
+          - '&7Vyřeš každý den globální hru.'
+          - ''
+          - '&7Aktuálně: &f%streak_global% &7dní &8(rekord %streak_global_longest%)'
+          - '&7Dní k vyzvednutí: &e%streak_global_unclaimed%'
+        view-requirements: ['%streak_global_enabled%']
+        click-requirements: ['%streak_global_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] global', '[refresh]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Zpět'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cZavřít'
+        actions: ['[close]']
+    templates:
+      day-claimed:
+        material: lime_stained_glass_pane
+        glow: '%today%'
+        name: '&aDen %day% &7(vyzvednuto)'
+      day-ready:
+        material: chest
+        glow: '%today%'
+        name: '&e&lDen %day%'
+        lore:
+          - '&a&lKlikni pro vyzvednutí!'
+        actions: ['[chatgames:claim-streak] %type%', '[refresh]']
+      day-today:
+        material: yellow_stained_glass_pane
+        glow: true
+        name: '&eDen %day% &7(dnes)'
+        lore:
+          - '&7Udrž dnes sérii,'
+          - '&7abys odemkl tuto odměnu.'
+      day-locked:
+        material: red_stained_glass_pane
+        name: '&cDen %day%'
+        lore:
+          - '&7Zatím nedosaženo.'
+
+  #%points_rank% %fastest_rank% %total_points%; seznamy %top_points% a %top_fastest% (řádků top-size)
+  leaderboards:
+    title: '&8Žebříčky'
+    rows: 3
+    top-size: 10
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7Zatím nikdo'
+    items:
+      points:
+        slot: 10
+        material: gold_block
+        name: '&e&lNejvíc bodů'
+        lore:
+          - '%top_points%'
+      fastest:
+        slot: 11
+        material: clock
+        name: '&b&lNejrychlejší'
+        lore:
+          - '%top_fastest%'
+      you:
+        slot: 13
+        material: player_head
+        head: '%player%'
+        name: '&a&lTy'
+        lore:
+          - '&7Pořadí v bodech: &f%points_rank%'
+          - '&7Pořadí v rychlosti: &f%fastest_rank%'
+          - ''
+          - '&7Body získané všemi: &f%total_points%'
+      games:
+        slot: 15
+        material: book
+        name: '&d&lNejrychlejší v každé hře'
+        lore:
+          - '&eKlikni pro zobrazení všech her'
+        actions: ['[open] leaderboard-games']
+      events:
+        slot: 16
+        material: nether_star
+        name: '&6&lUdálosti'
+        lore:
+          - '&eKlikni pro zobrazení událostí'
+        view-requirements: ['permission chatgames.event']
+        actions: ['[open] leaderboard-events']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7Zpět'
+        actions: ['[back] main']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cZavřít'
+        actions: ['[close]']
+
+  #Jedna položka na každou hru a závod: %game% %key% %icon% a %top% (nejrychlejší hráči té hry)
+  leaderboard-games:
+    title: '&8Nejrychlejší v každé hře'
+    rows: 6
+    top-size: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7Zatím nikdo'
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7Předchozí stránka'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7Další stránka &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7Zpět'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 53
+        material: barrier
+        name: '&cZavřít'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&e&l%game%'
+        lore:
+          - '%top%'
+
+  #Jedna položka na událost: %event% %id% %steps%
+  leaderboard-events:
+    title: '&8Žebříčky událostí'
+    rows: 4
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7Nejsou nastavené žádné události'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Předchozí stránka'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Další stránka &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Zpět'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cZavřít'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7Her: %steps%'
+          - ''
+          - '&eKlikni a uvidíš, kdo získal nejvíc'
+        actions: ['[close]', '[command] chatgames event top %id%']
+
+  #/chatgames admin. %current_game% %next_game% %rotation_state% %event% %preset%,
+  #%rotation_on% a %games_on% (true nebo false). Každé tlačítko spustí odpovídající příkaz,
+  #který kontroluje vlastní oprávnění, jako by byl napsán.
+  admin:
+    title: '&4&lAdmin ChatGames'
+    rows: 5
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7nic'
+    items:
+      status:
+        slot: 4
+        material: repeater
+        name: '&f&lStav'
+        lore:
+          - '&7Běží: &f%current_game%'
+          - '&7Další hra za: &f%next_game%'
+          - '&7Rotace: %rotation_state%'
+          - '&7Událost: &f%event%'
+          - '&7Sada: &f%preset%'
+      start-game:
+        slot: 19
+        material: diamond_sword
+        name: '&a&lSpustit hru'
+        lore:
+          - '&7Jakoukoli hru nebo závod, hned.'
+        actions: ['[open] admin-start']
+      global:
+        slot: 20
+        material: beacon
+        name: '&3&lSpustit globální hru'
+        lore:
+          - '&7Vyhrají všichni, kdo to stihnou.'
+        actions: ['[open] admin-global']
+      events:
+        slot: 21
+        material: nether_star
+        name: '&6&lUdálosti'
+        lore:
+          - '&7Spustit nebo zastavit herní událost.'
+        actions: ['[open] admin-events']
+      presets:
+        slot: 23
+        material: chest
+        name: '&d&lSady'
+        lore:
+          - '&7Načíst sadu zapnutých her.'
+        actions: ['[open] admin-presets']
+      logs:
+        slot: 24
+        material: oak_sign
+        name: '&f&lProtokoly'
+        lore:
+          - '&7Vypsat poslední hry do chatu.'
+        actions: ['[open] admin-logs']
+      stop:
+        slot: 25
+        material: red_wool
+        name: '&c&lZastavit hru'
+        lore:
+          - '&7Ukončí probíhající hru bez vítěze.'
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      toggle:
+        slot: 29
+        material: lime_dye
+        name: '&fTvoje chatové hry: &aZAP.'
+        lore:
+          - '&7Klikni pro jejich vypnutí pro tebe.'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&fTvoje chatové hry: &cVYP.'
+          lore:
+            - '&7Klikni pro jejich zapnutí pro tebe.'
+      toggle-all:
+        slot: 30
+        material: lime_dye
+        name: '&fRotace her: &aZAP.'
+        lore:
+          - '&7Klikni pro zastavení automatických her pro všechny.'
+        state: '%rotation_on%'
+        #toggleAll se dokončí v globálním vlákně, na Folia o tik později
+        actions: ['[command] chatgames toggleAll', '[wait] 2', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&fRotace her: &cVYP.'
+          lore:
+            - '&7Klikni pro opětovné spuštění automatických her.'
+      reload:
+        slot: 32
+        material: hopper
+        name: '&e&lZnovu načíst'
+        lore:
+          - '&7Znovu načte všechny konfigurační soubory.'
+        actions: ['[close]', '[command] chatgames reload']
+      debug:
+        slot: 33
+        material: command_block
+        name: '&c&lLadění'
+        lore:
+          - '&7Vyzkoušej libovolnou hru soukromě.'
+        view-requirements: ['permission chatgames.debug']
+        actions: ['[open] debug']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Zpět'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cZavřít'
+        actions: ['[close]']
+
+  #Každá hra a závod: %game% %key% (jako v příkazech) %icon%
+  admin-start:
+    title: '&8Spustit hru'
+    rows: 6
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7Předchozí stránka'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7Další stránka &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7Zpět'
+        actions: ['[back] admin']
+      close:
+        slot: 53
+        material: barrier
+        name: '&cZavřít'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&a%game%'
+        lore:
+          - '&7Chatová hra'
+          - '&eKlikni pro spuštění'
+        actions: ['[close]', '[command] chatgames %key%']
+      race:
+        material: '%icon%'
+        name: '&6%game%'
+        lore:
+          - '&7Závod'
+          - '&eKlikni pro spuštění'
+        actions: ['[close]', '[command] chatgames %key%']
+
+  #Hry, které zapíná global_games.yml: %game% %key% %icon% %goal% %duration% %points%.
+  #Ta, která se hraje: %global_running% %global_game% %global_goal% (např. "500 Stone")
+  #%global_progress% %global_goal_amount% %global_percent% %global_contributors% %global_time_left%
+  admin-global:
+    title: '&8Globální hry'
+    rows: 5
+    update-interval: 20
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    items:
+      status:
+        slot: 4
+        material: beacon
+        name: '&3&lHraje se: &f%global_game%'
+        lore:
+          - '&7Cíl: &f%global_goal%'
+          - '&7Postup: &e%global_progress%&7/&e%global_goal_amount% &8(%global_percent%%)'
+          - '&7Pomáhající hráči: &f%global_contributors%'
+          - '&7Zbývající čas: &f%global_time_left%s'
+          - ''
+          - '&cKlikni pro zastavení (bez odměn)'
+        view-requirements: ['%global_running%']
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      idle:
+        slot: 4
+        material: gray_dye
+        name: '&7Nehraje se žádná globální hra'
+        lore:
+          - '&7Vyber jednu níže a spusť ji.'
+        view-requirements: ['!%global_running%']
+      none:
+        slot: 22
+        material: barrier
+        name: '&7Nejsou zapnuté žádné globální hry'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7Předchozí stránka'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7Další stránka &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Zpět'
+        actions: ['[back] admin']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cZavřít'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&3Globální hra: %game%'
+        lore:
+          - '&7Cíl: &f%goal% správných odpovědí'
+          - '&7Čas: &f%duration%s'
+          - '&7Body: &f%points%'
+          - ''
+          - '&eKlikni pro spuštění'
+        actions: ['[close]', '[command] chatgames global %key%']
+      race:
+        material: '%icon%'
+        name: '&3Globální závod: %game%'
+        lore:
+          - '&7Cíl: &f%goal% společně'
+          - '&7Čas: &f%duration%s'
+          - '&7Body: &f%points%'
+          - ''
+          - '&eKlikni pro spuštění'
+        actions: ['[close]', '[command] chatgames global %key%']
+      count:
+        material: '%icon%'
+        name: '&3Globální hra: %game%'
+        lore:
+          - '&7Počítejte společně v chatu'
+          - '&7Čas: &f%duration%s'
+          - '&7Body: &f%points%'
+          - ''
+          - '&eKlikni pro spuštění'
+        actions: ['[close]', '[command] chatgames global %key%']
+
+  #Události events.yml: %event% %id% %steps% a %step% (hra, která se právě hraje) pro probíhající
+  admin-events:
+    title: '&8Události'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7V events.yml nejsou nastavené žádné události'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Předchozí stránka'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Další stránka &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Zpět'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cZavřít'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7Her: %steps%'
+          - ''
+          - '&eKlikni pro spuštění'
+        actions: ['[command] chatgames event start %id%', '[wait] 2', '[refresh]']
+      running:
+        material: nether_star
+        glow: true
+        name: '%event% &a(běží)'
+        lore:
+          - '&7Hra %step% z %steps%'
+          - ''
+          - '&cKlikni pro zastavení'
+        actions: ['[command] chatgames event stop', '[wait] 2', '[refresh]']
+
+  #Sady plus 'none' (příznaky enable v games.yml): %preset% %games%
+  admin-presets:
+    title: '&8Sady'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Předchozí stránka'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Další stránka &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Zpět'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cZavřít'
+        actions: ['[close]']
+    templates:
+      preset:
+        material: chest
+        name: '&d%preset%'
+        lore:
+          - '&7Hry: &f%games%'
+          - ''
+          - '&eKlikni pro načtení'
+        actions: ['[command] chatgames preset load %preset%', '[wait] 2', '[refresh]']
+      active:
+        material: ender_chest
+        glow: true
+        name: '&d%preset% &a(aktivní)'
+        lore:
+          - '&7Hry: &f%games%'
+
+  #Celé sestavené zde: množství přidávejte nebo měňte libovolně
+  admin-logs:
+    title: '&8Protokoly'
+    rows: 3
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      last-10:
+        slot: 11
+        material: paper
+        name: '&fPosledních &e10 &fher'
+        lore: ['&eKlikni pro vypsání do chatu']
+        actions: ['[close]', '[command] chatgames logs 10']
+      last-25:
+        slot: 12
+        material: paper
+        name: '&fPosledních &e25 &fher'
+        lore: ['&eKlikni pro vypsání do chatu']
+        actions: ['[close]', '[command] chatgames logs 25']
+      last-50:
+        slot: 14
+        material: paper
+        name: '&fPosledních &e50 &fher'
+        lore: ['&eKlikni pro vypsání do chatu']
+        actions: ['[close]', '[command] chatgames logs 50']
+      last-100:
+        slot: 15
+        material: paper
+        name: '&fPosledních &e100 &fher'
+        lore: ['&eKlikni pro vypsání do chatu']
+        actions: ['[close]', '[command] chatgames logs 100']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7Zpět'
+        actions: ['[back] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cZavřít'
+        actions: ['[close]']
+
+  #/chatgames debug: každá chatová hra (%game% %key% %icon%). [chatgames:debug] <game> spustí
+  #soukromé kolo a otevře debug-session.
+  debug:
+    title: '&4Ladění: vyber hru'
+    rows: 4
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Předchozí stránka'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Další stránka &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Zpět'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cZavřít'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&c%game%'
+        lore:
+          - '&7Vygeneruje soukromé kolo.'
+          - '&7Bez odměn, nic se neukládá.'
+        actions: ['[chatgames:debug] %key%']
+
+  #Soukromé kolo: %game% %key% %icon% %question% %answer% %time% %min_ms% %case_sensitive%
+  #%winners% %points% %hints% %generated%; seznamy %placeholders% a %answers%.
+  #[chatgames:debug-answer] <correct|wrong|wrong-case> [ms] odešle testovací odpověď (po ms);
+  #[chatgames:debug-timeout] počká, až uplyne časový limit; [chatgames:debug-reroll] vytvoří nové kolo;
+  #[chatgames:debug-end] ukončí relaci.
+  debug-session:
+    title: '&4Ladění: %game%'
+    rows: 5
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    #Jedno tlačítko „odpovědět správně po X ms“ na každou prodlevu, v místech seznamu 'delays'
+    delays: [100, 500, 1000, 5000]
+    lists:
+      delays: ['29-32']
+    items:
+      question:
+        slot: 11
+        material: '%icon%'
+        name: '&e&lOtázka'
+        lore:
+          - '&f%question%'
+          - ''
+          - '%placeholders%'
+      answer:
+        slot: 13
+        material: emerald
+        name: '&a&lPřijímané odpovědi'
+        lore:
+          - '%answers%'
+      settings:
+        slot: 15
+        material: repeater
+        name: '&f&lNastavení'
+        lore:
+          - '&7Časový limit: &f%time%s'
+          - '&7Min. čas odpovědi: &f%min_ms% ms'
+          - '&7Rozlišuje velikost písmen: %case_sensitive%'
+          - '&7Vítězů: &f%winners%  &7Bodů: &f%points%'
+          - '&7Připravené nápovědy: &f%hints%'
+          - '&7Vygenerováno za: &f%generated% ms'
+      correct-now:
+        slot: 28
+        material: lime_wool
+        name: '&aOdpovědět správně hned'
+        lore:
+          - '&7Rychleji než jakýkoli člověk: ukáže'
+          - '&7ochranu proti makrům v akci.'
+        actions: ['[chatgames:debug-answer] correct']
+      wrong:
+        slot: 33
+        material: red_wool
+        name: '&cOdpovědět špatně'
+        actions: ['[chatgames:debug-answer] wrong']
+      wrong-case:
+        slot: 34
+        material: orange_wool
+        name: '&6Odpovědět se špatnou velikostí písmen'
+        actions: ['[chatgames:debug-answer] wrong-case']
+      timeout:
+        slot: 39
+        material: clock
+        name: '&eNechat vypršet čas'
+        lore:
+          - '&7Počká časový limit, pak to oznámí.'
+        actions: ['[chatgames:debug-timeout]']
+      reroll:
+        slot: 41
+        material: ender_pearl
+        name: '&dNové kolo'
+        actions: ['[chatgames:debug-reroll]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Zpět'
+        actions: ['[chatgames:debug-end]', '[back] debug']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cZavřít'
+        actions: ['[close]']
+    templates:
+      correct-after:
+        material: yellow_wool
+        name: '&eOdpovědět správně po %ms% ms'
+        actions: ['[chatgames:debug-answer] correct %ms%']

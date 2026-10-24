@@ -1,0 +1,153 @@
+#可用操作：
+#
+#[playercmd] - 以赢家身份执行命令
+#[consolecmd] - 从控制台执行命令
+#[playermsg] - 给赢家发送消息
+#[broadcast] - 向已启用世界中的所有玩家广播消息
+#[player_as_op] - 以 OP 身份为玩家执行命令
+#
+#按以下方式为奖励添加概率：
+#
+#示例：
+#  - '10.0%~ [consolecmd] give %player% iron_block 5'
+#只有格式与示例相同时才有效：<chance>% 写在开头，后面跟一个 ~ 和一个空格。总是放在命令的最前面
+#
+#没有 % 的命令是 100% 发放的奖励。
+
+#权限检查：
+#
+#写在命令行的末尾。
+#示例：
+#  - '[consolecmd] give %player% iron_block 5 has:test.permission'
+
+#1 表示第一名赢家，如果你在 config.yml 中增加了赢家数并想要不同的奖励，请添加他们的名次（2: 等）
+unscramble:
+  rewards:
+    1:
+      reward_1:
+        minimum-players: 2 #基于在线玩家数的条件，只有在线玩家达到 2 名或以上时才能选中此奖励
+        chance: 50
+        data:
+          - '10.0%~ [consolecmd] give %player% diamond_block 3 has:test.permission'
+          - '[consolecmd] give %player% iron_block 5'
+      reward_2:
+        data:
+          - '[consolecmd] give %player% iron_block 2'
+
+unreverse:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+reaction:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+guess_the_number:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+shoppinglist:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+clickable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+fillout:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+hoverable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+random:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+variable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+math:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+sequence:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+memorize:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+word_association:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+trivia:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+#从这里开始是竞赛的奖励，竞赛只有 1 名赢家
+#
+#使用的是不同的格式！请仔细阅读
+
+races:
+  rewards:
+    #这些是你在 'races.yml' 中填写的奖励
+    reward_1:
+      chance: 50
+      data:
+        - '60.0%~ [consolecmd] give %player% diamond_block 5'
+    #删除 'chance' 值会让奖励/命令总是执行
+    reward_2:
+      data:
+        - '[consolecmd] give %player% iron_block 5'
+        - '[playermsg] &a你赢了！'
+    reward_3:
+      chance: 50
+      data:
+        - '[consolecmd] give %player% diamond_block 3'

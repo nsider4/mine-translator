@@ -1,0 +1,1158 @@
+#МЕНЮ
+#
+#Кожне меню в 'menus:' має 'title', розмір у 'rows' (1-6) і свої 'items'. Можна змінити,
+#що робить будь-яка кнопка, додати кнопки або цілі нові меню (відкриваються через /chatgames menu <id>,
+#або покладіть кожне в окремий файл у теці menus/ з назвою <id>.yml).
+#
+#Кожен предмет:
+#  slot: де він стоїть, від 0 (угорі ліворуч) до rows*9-1. 'slots: [0, 1, '9-17']' повторює його.
+#  material: будь-яка назва предмета від 1.8 до 26.x: нові або старі назви (lime_dye / INK_SACK:10 / 351:10),
+#            або 'head:<ім'я гравця, текстура або URL textures.minecraft.net>'
+#  name / lore: працюють коди кольорів (&a, і &#RRGGBB на 1.16+) та заповнювачі PlaceholderAPI.
+#  amount, glow: true, enchantments: ['SHARPNESS:1'], flags: [HIDE_ATTRIBUTES], head: '%player%',
+#  custom-model-data: 1001 (1.14+), item-model: 'namespace:key' (1.21.2+), color: '#FF0000' (шкіра)
+#  actions: що робить натискання, по порядку. Також left-actions, right-actions, shift-left-actions,
+#           shift-right-actions, middle-actions і drop-actions (кожна за відсутності бере actions).
+#  view-requirements: предмет показується, лише коли проходить кожен рядок
+#  click-requirements: коли рядок не проходить, замість actions виконуються 'deny-actions'
+#  state + when-off: коли state хибний, ключі з when-off замінюють власні ключі предмета
+#                    (не 'off': YAML читає просте off як false)
+#Приберіть предмет, щоб сховати його. 'filler' заповнює кожне порожнє місце; приберіть його, щоб не було нічого.
+#
+#Дії:
+#  [command] <command>        команду виконуєте ви        [console] <command>   її виконує консоль
+#  [message] <text>           повідомлення вам            [broadcast] <text>    усім
+#  [sound] <sound> [volume] [pitch]   будь-яка назва звуку від 1.8 до 26.x
+#  [open] <menu> [values]     відкриває інше меню         [switch] <menu> [values]  те саме, але [back] його пропускає
+#  [back] [menu]              попереднє меню (або вказане, або закриває)
+#  [refresh]  [close]  [next-page]  [previous-page]  [wait] <ticks>
+#  [chatgames:no-permission]  надсилає повідомлення про брак дозволу
+#  Дії окремих меню описано над меню, у яких вони є.
+#
+#Вимоги, по одній на рядок (кожен рядок має пройти; почніть рядок із !, щоб обернути його):
+#  permission <node>     порівняння на кшталт '%chatgames_points% >= 100' (==, !=, >=, <=, >, <)
+#  або значення true / on / yes / число, відмінне від 0
+#
+#Меню-списки (завдання, ігри, події...) розміщують записи в 'list-slots' по порядку,
+#за 'templates' меню. Коли записів більше, ніж місць, предмети з діями
+#[next-page] / [previous-page] гортають сторінки; вони ховаються, коли гортати нікуди.
+#Рядок lore, що містить лише заповнювач списку, як-от '%game_wins%', стає кількома рядками.
+#Кожне меню також має %player%, %page%, %pages% і %entries% (скільки записів у списку).
+
+#Назви та значки ігор у кожному меню й у повідомленнях, що називають гру (%game%).
+#Гра, якої тут немає, називається за своїм ключем.
+game-names:
+  unscramble: 'Розплутай'
+  unreverse: 'Переверни'
+  reaction: 'Реакція'
+  guess_the_number: 'Вгадай число'
+  clickable: 'Натискання'
+  fillout: 'Заповни пропуски'
+  hoverable: 'Наведення'
+  random: 'Випадкові символи'
+  math: 'Математика'
+  variable: 'Змінна'
+  sequence: 'Послідовність'
+  memorize: 'Запам''ятай'
+  word_association: 'Асоціації'
+  trivia: 'Вікторина'
+  count: 'Рахунок'
+  hunt: 'Полювання'
+  mine: 'Видобуток'
+  place: 'Будівництво'
+  fish: 'Риболовля'
+  eat: 'Їжа'
+  craft: 'Крафт'
+  furnace: 'Готування'
+  tame: 'Приручення'
+  shear: 'Стрижка'
+game-icons:
+  unscramble: book
+  math: redstone
+  trivia: enchanted_book
+  reaction: feather
+  clickable: stone_button
+  random: ender_pearl
+  unreverse: compass
+  variable: name_tag
+  guess_the_number: clock
+  memorize: map
+  sequence: ladder
+  fillout: paper
+  hoverable: ender_eye
+  word_association: lead
+  count: clock
+  hunt: iron_sword
+  place: grass_block
+  mine: iron_pickaxe
+  fish: fishing_rod
+  eat: cooked_beef
+  craft: crafting_table
+  furnace: furnace
+  tame: bone
+  shear: shears
+
+formats:
+  #Показується замість місця для гравців, які ще не мають місця в рейтингу
+  no-rank: '-'
+
+#Гравцю, з меню налагодження. Залиште рядок порожнім (''), щоб нічого не надсилати.
+messages:
+  debug-round: '&8[&cDEBUG&8] &fНовий приватний раунд &e%game% &f(відповідь: &a%answer%&f), створено за &e%generated% мс&f. Бачиш його лише ти.'
+  debug-failed: '&8[&cDEBUG&8] &cНе вдалося створити раунд %game%; причину покаже консоль.'
+  debug-race: '&8[&cDEBUG&8] &cПерегони відбуваються у світі, тож тут їх не перевірити. Почни їх командою /chatgames <race>.'
+  debug-no-letters: '&8[&cDEBUG&8] &7У цій відповіді немає літер, тож регістр не може бути неправильним.'
+  debug-timeout-started: '&8[&cDEBUG&8] &7Чекаємо, поки мине ліміт часу &e%time%с&7...'
+  debug-timeout: '&8[&cDEBUG&8] &e%game%&7: час минув. Гравцям сказали б, що відповідь була &f%answer%&7.'
+  #%verdict% — один із рядків нижче
+  debug-result: '&8[&cDEBUG&8] &e%game% &7| написано &f%input% &7за &e%ms% мс&7: %verdict%'
+  debug-verdicts:
+    accepted: '&aприйнято &7(посів би місце й отримав &e%points% &7очок)'
+    wrong: '&cнеправильно &7(ігнорується)'
+    wrong-case: '&6неправильний регістр &7(гравцю кажуть перевірити його)'
+    macro: '&cігнорується як макрос &7(швидше за min-answer-ms, &e%min_ms% мс&7)'
+    late: '&cзапізно &7(після ліміту часу)'
+
+menus:
+
+  #/chatgames menu. %points% %rank% %wins% %claimable% (нагороди, готові до отримання),
+  #%daily_completed% %daily_total% %weekly_completed% %weekly_total%,
+  #%games_on% / %sound_on% (true або false) і %games_state% / %sound_state% (текст УВІМК./ВИМК.)
+  main:
+    title: '&8&lChatGames'
+    rows: 3
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      profile:
+        slot: 10
+        material: player_head
+        head: '%player%'
+        name: '&e&lТвій профіль'
+        lore:
+          - '&7Очки: &e%points% &8(%rank%)'
+          - '&7Перемоги: &e%wins%'
+          - ''
+          - '&eНатисни, щоб побачити статистику'
+        actions: ['[open] profile']
+      challenges:
+        slot: 11
+        material: writable_book
+        name: '&a&lЗавдання'
+        lore:
+          - '&7Щоденні: &e%daily_completed%&7/&e%daily_total%'
+          - '&7Щотижневі: &e%weekly_completed%&7/&e%weekly_total%'
+          - '&7Нагород до отримання: &e%claimable%'
+          - ''
+          - '&eНатисни, щоб відкрити'
+        actions: ['[open] challenges daily']
+      streaks:
+        slot: 12
+        material: blaze_powder
+        name: '&6&lСерії'
+        lore:
+          - '&7Грай щодня, щоб не переривати їх.'
+          - ''
+          - '&eНатисни, щоб відкрити'
+        actions: ['[open] streaks']
+      leaderboards:
+        slot: 13
+        material: gold_ingot
+        name: '&e&lРейтинги'
+        lore:
+          - '&7Найбільше очок і найшвидші гравці.'
+          - ''
+          - '&eНатисни, щоб відкрити'
+        actions: ['[open] leaderboards']
+      games-toggle:
+        slot: 15
+        material: lime_dye
+        name: '&fЧат-ігри: %games_state%'
+        lore:
+          - '&7Натисни, щоб вимкнути для себе чат-ігри.'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7Натисни, щоб увімкнути для себе чат-ігри.'
+      sound-toggle:
+        slot: 16
+        material: note_block
+        name: '&fЗвуки ігор: %sound_state%'
+        lore:
+          - '&7Натисни, щоб вимкнути звуки ігор.'
+        state: '%sound_on%'
+        actions: ['[command] chatgames togglesound', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7Натисни, щоб увімкнути звуки ігор.'
+      admin:
+        slot: 22
+        material: command_block
+        name: '&c&lАдмін'
+        lore:
+          - '&7Запуск ігор, подій, наборів...'
+        view-requirements: ['permission chatgames.admin']
+        actions: ['[open] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cЗакрити'
+        actions: ['[close]']
+
+  #/chatgames profile [player]. %target% %points% %rank% %wins% %race_wins% %global_played%
+  #%global_won% (завершено) %contributions% %events_played% %event_wins% %event_best_place% %fastest% %challenges_completed%
+  #%milestones% %milestones_total% %streak_<challenge|daily|global>% і %streak_<...>_longest%.
+  #Списки: %game_wins% і %game_fastest%. [open] profile <name> відкриває чужий профіль.
+  profile:
+    title: '&8Профіль: %target%'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7ще немає'
+      game-wins: '&7%game%: &f%wins%'
+      game-fastest: '&7%game%: &f%time%с'
+    items:
+      head:
+        slot: 4
+        material: player_head
+        head: '%target%'
+        name: '&e&l%target%'
+        lore:
+          - '&7Очки: &e%points% &8(%rank%)'
+      wins:
+        slot: 19
+        material: diamond
+        name: '&b&lПеремоги'
+        lore:
+          - '&7Виграно чат-ігор: &f%wins%'
+          - '&7Виграно перегонів: &f%race_wins%'
+          - ''
+          - '%game_wins%'
+      fastest:
+        slot: 20
+        material: clock
+        name: '&e&lНайкращий час'
+        lore:
+          - '&7Найкращий загалом: &f%fastest%'
+          - ''
+          - '%game_fastest%'
+      global:
+        slot: 21
+        material: beacon
+        name: '&3&lГлобальні ігри'
+        lore:
+          - '&7Зіграно: &f%global_played%'
+          - '&7Завершено: &f%global_won%'
+          - '&7Внесок: &f%contributions%'
+      events:
+        slot: 23
+        material: nether_star
+        name: '&6&lПодії'
+        lore:
+          - '&7Зіграно: &f%events_played%'
+          - '&7Виграно: &f%event_wins%'
+          - '&7Найкраще місце: &f%event_best_place%'
+      streaks:
+        slot: 24
+        material: blaze_powder
+        name: '&6&lСерії'
+        lore:
+          - '&7Завдання: &f%streak_challenge% &8(рекорд %streak_challenge_longest%)'
+          - '&7Щоденна перемога: &f%streak_daily% &8(рекорд %streak_daily_longest%)'
+          - '&7Глобальна: &f%streak_global% &8(рекорд %streak_global_longest%)'
+      progress:
+        slot: 25
+        material: experience_bottle
+        name: '&a&lПрогрес'
+        lore:
+          - '&7Очки: &f%points%'
+          - '&7Досягнуто етапів: &f%milestones%&7/&f%milestones_total%'
+          - '&7Виконано завдань: &f%challenges_completed%'
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Назад'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cЗакрити'
+        actions: ['[close]']
+
+  #[open] challenges <daily|weekly>. %period% %period_key% %completed% %total% %resets%.
+  #Записи: %challenge% %id% %description% %progress% %amount% %percent% %bar% %icon%.
+  #[chatgames:claim-challenge] <period> <id> забирає одне.
+  challenges:
+    title: '&8%period% завдання'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    progress-bar:
+      length: 10
+      done: '&a|'
+      left: '&7|'
+    items:
+      tab-daily:
+        slot: 2
+        material: sunflower
+        name: '&e&lЩоденні'
+        glow: true
+        lore:
+          - '&7Показано сьогоднішні завдання.'
+        state: '%period_key% == daily'
+        actions: ['[switch] challenges daily']
+        when-off:
+          glow: false
+          lore:
+            - '&eНатисни, щоб показати сьогоднішні завдання'
+      tab-weekly:
+        slot: 6
+        material: clock
+        name: '&b&lЩотижневі'
+        glow: true
+        lore:
+          - '&7Показано завдання цього тижня.'
+        state: '%period_key% == weekly'
+        actions: ['[switch] challenges weekly']
+        when-off:
+          glow: false
+          lore:
+            - '&eНатисни, щоб показати завдання цього тижня'
+      info:
+        slot: 4
+        material: book
+        name: '&f&f%period%: виконано &e%completed%&7/&e%total%'
+        lore:
+          - '&7Нові завдання через &f%resets%'
+      none:
+        slot: 22
+        material: barrier
+        name: '&7Зараз немає завдань (%period%)'
+        view-requirements: ['%entries% == 0']
+      claim-all:
+        slot: 40
+        material: chest
+        name: '&a&lЗабрати все'
+        lore:
+          - '&7Забирає кожне виконане завдання'
+          - '&7і нагороду за серію.'
+        actions: ['[command] chatgames claim', '[wait] 2', '[refresh]']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7Попередня сторінка'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7Наступна сторінка &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Назад'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cЗакрити'
+        actions: ['[close]']
+    templates:
+      in-progress:
+        material: '%icon%'
+        name: '%challenge%'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&7Виконується'
+      ready:
+        material: '%icon%'
+        glow: true
+        name: '%challenge% &a&l(ВИКОНАНО)'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&a&lНатисни, щоб забрати нагороду!'
+        actions: ['[chatgames:claim-challenge] %period_key% %id%', '[refresh]']
+      claimed:
+        material: lime_stained_glass_pane
+        name: '%challenge% &7(забрано)'
+        lore:
+          - '%description%'
+          - ''
+          - '&aНагороду забрано'
+
+  #Кожна серія має %streak_<type>% (дні), %streak_<type>_name%, %streak_<type>_longest%,
+  #%streak_<type>_unclaimed% і %streak_<type>_enabled%, де <type> — challenge, daily або global.
+  #7-денна драбина кожної йде в список із її назвою, день 1-7 (8-14 на другому тижні...).
+  #Дні драбини: %day% %ladder_day% (її день нагороди, 1-7) %type% %streak% і %today% (true в сьогоднішній день).
+  #[chatgames:claim-streak] <type> забирає всі незабрані дні серії.
+  streaks:
+    title: '&8Серії'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    lists:
+      challenge: ['11-17']
+      daily: ['20-26']
+      global: ['29-35']
+    items:
+      challenge:
+        slot: 10
+        material: writable_book
+        name: '%streak_challenge_name%'
+        lore:
+          - '&7Виконуй усі щоденні завдання щодня.'
+          - ''
+          - '&7Зараз: &f%streak_challenge% &7дн. &8(рекорд %streak_challenge_longest%)'
+          - '&7Днів до отримання: &e%streak_challenge_unclaimed%'
+        view-requirements: ['%streak_challenge_enabled%']
+        click-requirements: ['%streak_challenge_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] challenge', '[refresh]']
+      daily:
+        slot: 19
+        material: gold_ingot
+        name: '%streak_daily_name%'
+        lore:
+          - '&7Вигравай хоча б одну гру щодня.'
+          - ''
+          - '&7Зараз: &f%streak_daily% &7дн. &8(рекорд %streak_daily_longest%)'
+          - '&7Днів до отримання: &e%streak_daily_unclaimed%'
+        view-requirements: ['%streak_daily_enabled%']
+        click-requirements: ['%streak_daily_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] daily', '[refresh]']
+      global:
+        slot: 28
+        material: beacon
+        name: '%streak_global_name%'
+        lore:
+          - '&7Розв''язуй глобальну гру щодня.'
+          - ''
+          - '&7Зараз: &f%streak_global% &7дн. &8(рекорд %streak_global_longest%)'
+          - '&7Днів до отримання: &e%streak_global_unclaimed%'
+        view-requirements: ['%streak_global_enabled%']
+        click-requirements: ['%streak_global_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] global', '[refresh]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Назад'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cЗакрити'
+        actions: ['[close]']
+    templates:
+      day-claimed:
+        material: lime_stained_glass_pane
+        glow: '%today%'
+        name: '&aДень %day% &7(забрано)'
+      day-ready:
+        material: chest
+        glow: '%today%'
+        name: '&e&lДень %day%'
+        lore:
+          - '&a&lНатисни, щоб забрати!'
+        actions: ['[chatgames:claim-streak] %type%', '[refresh]']
+      day-today:
+        material: yellow_stained_glass_pane
+        glow: true
+        name: '&eДень %day% &7(сьогодні)'
+        lore:
+          - '&7Не переривай серію сьогодні,'
+          - '&7щоб відкрити цю нагороду.'
+      day-locked:
+        material: red_stained_glass_pane
+        name: '&cДень %day%'
+        lore:
+          - '&7Ще не досягнуто.'
+
+  #%points_rank% %fastest_rank% %total_points%; списки %top_points% і %top_fastest% (рядків top-size)
+  leaderboards:
+    title: '&8Рейтинги'
+    rows: 3
+    top-size: 10
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7Ще нікого'
+    items:
+      points:
+        slot: 10
+        material: gold_block
+        name: '&e&lНайбільше очок'
+        lore:
+          - '%top_points%'
+      fastest:
+        slot: 11
+        material: clock
+        name: '&b&lНайшвидші'
+        lore:
+          - '%top_fastest%'
+      you:
+        slot: 13
+        material: player_head
+        head: '%player%'
+        name: '&a&lТи'
+        lore:
+          - '&7Місце за очками: &f%points_rank%'
+          - '&7Місце за швидкістю: &f%fastest_rank%'
+          - ''
+          - '&7Очок набрали всі разом: &f%total_points%'
+      games:
+        slot: 15
+        material: book
+        name: '&d&lНайшвидші в кожній грі'
+        lore:
+          - '&eНатисни, щоб побачити всі ігри'
+        actions: ['[open] leaderboard-games']
+      events:
+        slot: 16
+        material: nether_star
+        name: '&6&lПодії'
+        lore:
+          - '&eНатисни, щоб побачити події'
+        view-requirements: ['permission chatgames.event']
+        actions: ['[open] leaderboard-events']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7Назад'
+        actions: ['[back] main']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cЗакрити'
+        actions: ['[close]']
+
+  #Один запис на кожну гру й перегони: %game% %key% %icon% і %top% (найшвидші гравці цієї гри)
+  leaderboard-games:
+    title: '&8Найшвидші в кожній грі'
+    rows: 6
+    top-size: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7Ще нікого'
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7Попередня сторінка'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7Наступна сторінка &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7Назад'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 53
+        material: barrier
+        name: '&cЗакрити'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&e&l%game%'
+        lore:
+          - '%top%'
+
+  #Один запис на подію: %event% %id% %steps%
+  leaderboard-events:
+    title: '&8Рейтинги подій'
+    rows: 4
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7Подій не налаштовано'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Попередня сторінка'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Наступна сторінка &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Назад'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cЗакрити'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7Ігор: %steps%'
+          - ''
+          - '&eНатисни, щоб побачити, хто набрав найбільше'
+        actions: ['[close]', '[command] chatgames event top %id%']
+
+  #/chatgames admin. %current_game% %next_game% %rotation_state% %event% %preset%,
+  #%rotation_on% і %games_on% (true або false). Кожна кнопка виконує відповідну команду,
+  #яка перевіряє власний дозвіл, ніби її написали.
+  admin:
+    title: '&4&lАдмін ChatGames'
+    rows: 5
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7немає'
+    items:
+      status:
+        slot: 4
+        material: repeater
+        name: '&f&lСтан'
+        lore:
+          - '&7Зараз іде: &f%current_game%'
+          - '&7Наступна гра через: &f%next_game%'
+          - '&7Ротація: %rotation_state%'
+          - '&7Подія: &f%event%'
+          - '&7Набір: &f%preset%'
+      start-game:
+        slot: 19
+        material: diamond_sword
+        name: '&a&lПочати гру'
+        lore:
+          - '&7Будь-яку гру чи перегони, зараз.'
+        actions: ['[open] admin-start']
+      global:
+        slot: 20
+        material: beacon
+        name: '&3&lПочати глобальну гру'
+        lore:
+          - '&7Виграють усі, хто встигне.'
+        actions: ['[open] admin-global']
+      events:
+        slot: 21
+        material: nether_star
+        name: '&6&lПодії'
+        lore:
+          - '&7Почати або зупинити ігрову подію.'
+        actions: ['[open] admin-events']
+      presets:
+        slot: 23
+        material: chest
+        name: '&d&lНабори'
+        lore:
+          - '&7Завантажити набір увімкнених ігор.'
+        actions: ['[open] admin-presets']
+      logs:
+        slot: 24
+        material: oak_sign
+        name: '&f&lЖурнали'
+        lore:
+          - '&7Вивести останні ігри в чат.'
+        actions: ['[open] admin-logs']
+      stop:
+        slot: 25
+        material: red_wool
+        name: '&c&lЗупинити гру'
+        lore:
+          - '&7Завершує поточну гру без переможця.'
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      toggle:
+        slot: 29
+        material: lime_dye
+        name: '&fТвої чат-ігри: &aУВІМК.'
+        lore:
+          - '&7Натисни, щоб вимкнути їх для себе.'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&fТвої чат-ігри: &cВИМК.'
+          lore:
+            - '&7Натисни, щоб увімкнути їх для себе.'
+      toggle-all:
+        slot: 30
+        material: lime_dye
+        name: '&fРотація ігор: &aУВІМК.'
+        lore:
+          - '&7Натисни, щоб зупинити автоматичні ігри для всіх.'
+        state: '%rotation_on%'
+        #toggleAll завершується в глобальному потоці, на Folia на тік пізніше
+        actions: ['[command] chatgames toggleAll', '[wait] 2', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&fРотація ігор: &cВИМК.'
+          lore:
+            - '&7Натисни, щоб знову запустити автоматичні ігри.'
+      reload:
+        slot: 32
+        material: hopper
+        name: '&e&lПерезавантажити'
+        lore:
+          - '&7Перезавантажує всі файли налаштувань.'
+        actions: ['[close]', '[command] chatgames reload']
+      debug:
+        slot: 33
+        material: command_block
+        name: '&c&lНалагодження'
+        lore:
+          - '&7Перевір будь-яку гру приватно.'
+        view-requirements: ['permission chatgames.debug']
+        actions: ['[open] debug']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Назад'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cЗакрити'
+        actions: ['[close]']
+
+  #Кожна гра й перегони: %game% %key% (як у командах) %icon%
+  admin-start:
+    title: '&8Почати гру'
+    rows: 6
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7Попередня сторінка'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7Наступна сторінка &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7Назад'
+        actions: ['[back] admin']
+      close:
+        slot: 53
+        material: barrier
+        name: '&cЗакрити'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&a%game%'
+        lore:
+          - '&7Чат-гра'
+          - '&eНатисни, щоб почати'
+        actions: ['[close]', '[command] chatgames %key%']
+      race:
+        material: '%icon%'
+        name: '&6%game%'
+        lore:
+          - '&7Перегони'
+          - '&eНатисни, щоб почати'
+        actions: ['[close]', '[command] chatgames %key%']
+
+  #Ігри, які вмикає global_games.yml: %game% %key% %icon% %goal% %duration% %points%.
+  #Поточна: %global_running% %global_game% %global_goal% (напр. "500 Stone")
+  #%global_progress% %global_goal_amount% %global_percent% %global_contributors% %global_time_left%
+  admin-global:
+    title: '&8Глобальні ігри'
+    rows: 5
+    update-interval: 20
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    items:
+      status:
+        slot: 4
+        material: beacon
+        name: '&3&lЗараз іде: &f%global_game%'
+        lore:
+          - '&7Мета: &f%global_goal%'
+          - '&7Прогрес: &e%global_progress%&7/&e%global_goal_amount% &8(%global_percent%%)'
+          - '&7Гравців допомагає: &f%global_contributors%'
+          - '&7Залишилось часу: &f%global_time_left%с'
+          - ''
+          - '&cНатисни, щоб зупинити (без нагород)'
+        view-requirements: ['%global_running%']
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      idle:
+        slot: 4
+        material: gray_dye
+        name: '&7Зараз не йде жодна глобальна гра'
+        lore:
+          - '&7Обери одну нижче, щоб почати її.'
+        view-requirements: ['!%global_running%']
+      none:
+        slot: 22
+        material: barrier
+        name: '&7Не увімкнено жодної глобальної гри'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7Попередня сторінка'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7Наступна сторінка &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Назад'
+        actions: ['[back] admin']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cЗакрити'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&3Глобальна гра: %game%'
+        lore:
+          - '&7Мета: &f%goal% правильних відповідей'
+          - '&7Час: &f%duration%с'
+          - '&7Очки: &f%points%'
+          - ''
+          - '&eНатисни, щоб почати'
+        actions: ['[close]', '[command] chatgames global %key%']
+      race:
+        material: '%icon%'
+        name: '&3Глобальні перегони: %game%'
+        lore:
+          - '&7Мета: &f%goal% разом'
+          - '&7Час: &f%duration%с'
+          - '&7Очки: &f%points%'
+          - ''
+          - '&eНатисни, щоб почати'
+        actions: ['[close]', '[command] chatgames global %key%']
+      count:
+        material: '%icon%'
+        name: '&3Глобальна гра: %game%'
+        lore:
+          - '&7Рахуйте разом у чаті'
+          - '&7Час: &f%duration%с'
+          - '&7Очки: &f%points%'
+          - ''
+          - '&eНатисни, щоб почати'
+        actions: ['[close]', '[command] chatgames global %key%']
+
+  #Події events.yml: %event% %id% %steps% і %step% (гра, що йде зараз) для поточної
+  admin-events:
+    title: '&8Події'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7У events.yml не налаштовано жодної події'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Попередня сторінка'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Наступна сторінка &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Назад'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cЗакрити'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7Ігор: %steps%'
+          - ''
+          - '&eНатисни, щоб почати'
+        actions: ['[command] chatgames event start %id%', '[wait] 2', '[refresh]']
+      running:
+        material: nether_star
+        glow: true
+        name: '%event% &a(іде)'
+        lore:
+          - '&7Гра %step% з %steps%'
+          - ''
+          - '&cНатисни, щоб зупинити'
+        actions: ['[command] chatgames event stop', '[wait] 2', '[refresh]']
+
+  #Набори плюс 'none' (прапорці enable у games.yml): %preset% %games%
+  admin-presets:
+    title: '&8Набори'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Попередня сторінка'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Наступна сторінка &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Назад'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cЗакрити'
+        actions: ['[close]']
+    templates:
+      preset:
+        material: chest
+        name: '&d%preset%'
+        lore:
+          - '&7Ігри: &f%games%'
+          - ''
+          - '&eНатисни, щоб завантажити'
+        actions: ['[command] chatgames preset load %preset%', '[wait] 2', '[refresh]']
+      active:
+        material: ender_chest
+        glow: true
+        name: '&d%preset% &a(активний)'
+        lore:
+          - '&7Ігри: &f%games%'
+
+  #Повністю зібрано тут: додавайте чи змінюйте кількості вільно
+  admin-logs:
+    title: '&8Журнали'
+    rows: 3
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      last-10:
+        slot: 11
+        material: paper
+        name: '&fОстанні &e10 &fігор'
+        lore: ['&eНатисни, щоб вивести їх у чат']
+        actions: ['[close]', '[command] chatgames logs 10']
+      last-25:
+        slot: 12
+        material: paper
+        name: '&fОстанні &e25 &fігор'
+        lore: ['&eНатисни, щоб вивести їх у чат']
+        actions: ['[close]', '[command] chatgames logs 25']
+      last-50:
+        slot: 14
+        material: paper
+        name: '&fОстанні &e50 &fігор'
+        lore: ['&eНатисни, щоб вивести їх у чат']
+        actions: ['[close]', '[command] chatgames logs 50']
+      last-100:
+        slot: 15
+        material: paper
+        name: '&fОстанні &e100 &fігор'
+        lore: ['&eНатисни, щоб вивести їх у чат']
+        actions: ['[close]', '[command] chatgames logs 100']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7Назад'
+        actions: ['[back] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cЗакрити'
+        actions: ['[close]']
+
+  #/chatgames debug: кожна чат-гра (%game% %key% %icon%). [chatgames:debug] <game> починає
+  #приватний раунд і відкриває debug-session.
+  debug:
+    title: '&4Налагодження: обери гру'
+    rows: 4
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Попередня сторінка'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Наступна сторінка &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Назад'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cЗакрити'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&c%game%'
+        lore:
+          - '&7Створює приватний раунд.'
+          - '&7Без нагород, нічого не зберігається.'
+        actions: ['[chatgames:debug] %key%']
+
+  #Приватний раунд: %game% %key% %icon% %question% %answer% %time% %min_ms% %case_sensitive%
+  #%winners% %points% %hints% %generated%; списки %placeholders% і %answers%.
+  #[chatgames:debug-answer] <correct|wrong|wrong-case> [ms] надсилає тестову відповідь (через ms);
+  #[chatgames:debug-timeout] чекає, поки мине ліміт часу; [chatgames:debug-reroll] створює новий раунд;
+  #[chatgames:debug-end] завершує сеанс.
+  debug-session:
+    title: '&4Налагодження: %game%'
+    rows: 5
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    #Одна кнопка «відповісти правильно через X мс» на кожну затримку, у місцях списку 'delays'
+    delays: [100, 500, 1000, 5000]
+    lists:
+      delays: ['29-32']
+    items:
+      question:
+        slot: 11
+        material: '%icon%'
+        name: '&e&lПитання'
+        lore:
+          - '&f%question%'
+          - ''
+          - '%placeholders%'
+      answer:
+        slot: 13
+        material: emerald
+        name: '&a&lПрийняті відповіді'
+        lore:
+          - '%answers%'
+      settings:
+        slot: 15
+        material: repeater
+        name: '&f&lНалаштування'
+        lore:
+          - '&7Ліміт часу: &f%time%с'
+          - '&7Мін. час відповіді: &f%min_ms% мс'
+          - '&7З урахуванням регістру: %case_sensitive%'
+          - '&7Переможців: &f%winners%  &7Очок: &f%points%'
+          - '&7Підготовано підказок: &f%hints%'
+          - '&7Створено за: &f%generated% мс'
+      correct-now:
+        slot: 28
+        material: lime_wool
+        name: '&aВідповісти правильно зараз'
+        lore:
+          - '&7Швидше за будь-яку людину: показує'
+          - '&7роботу захисту від макросів.'
+        actions: ['[chatgames:debug-answer] correct']
+      wrong:
+        slot: 33
+        material: red_wool
+        name: '&cВідповісти неправильно'
+        actions: ['[chatgames:debug-answer] wrong']
+      wrong-case:
+        slot: 34
+        material: orange_wool
+        name: '&6Відповісти з неправильним регістром'
+        actions: ['[chatgames:debug-answer] wrong-case']
+      timeout:
+        slot: 39
+        material: clock
+        name: '&eДочекатися кінця часу'
+        lore:
+          - '&7Чекає ліміт часу, потім звітує.'
+        actions: ['[chatgames:debug-timeout]']
+      reroll:
+        slot: 41
+        material: ender_pearl
+        name: '&dНовий раунд'
+        actions: ['[chatgames:debug-reroll]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Назад'
+        actions: ['[chatgames:debug-end]', '[back] debug']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cЗакрити'
+        actions: ['[close]']
+    templates:
+      correct-after:
+        material: yellow_wool
+        name: '&eВідповісти правильно через %ms% мс'
+        actions: ['[chatgames:debug-answer] correct %ms%']

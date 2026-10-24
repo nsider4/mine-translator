@@ -6,8 +6,8 @@ player_only_command: '&8[%prefix%&8] &cDieser Befehl kann nur von Spielern ausge
 player_deleted: '&8[%prefix%&8] &cDer Spieler &f%player% &cwurde aus der Datenbank entfernt!'
 player_not_found: '&8[%prefix%&8] &fSpieler nicht gefunden: &c%player%'
 number_not_found_commands: '&8[%prefix%&8] &cKeine Zahl für den Befehl gefunden'
-points_added: '&8[%prefix%&8] &fPunkte fÃ¼r &c%player%&f: &a+%amount%'
-points_removed: '&8[%prefix%&8] &fPunkte fÃ¼r &c%player%&f: &a-%amount%'
+points_added: '&8[%prefix%&8] &fPunkte für &c%player%&f: &a+%amount%'
+points_removed: '&8[%prefix%&8] &fPunkte für &c%player%&f: &a-%amount%'
 points_set: '&8[%prefix%&8] &fPunkte von &c%player% &fgesetzt auf &a%amount%'
 player_points: '&8[%prefix%&8] &fDu hast &a%amount% &fPunkte!'
 in_cooldown: '&8[%prefix%&8] &cDu kannst das noch nicht nutzen, warte &e%time_left%s&c, bevor du den Befehl erneut nutzt'
@@ -97,6 +97,14 @@ events:
   top_entry: '&c%spot%. &f%player% &8| &e%points% &7Punkte'
   top_empty: '&8[%prefix%&8] &cIn %event% &chat noch niemand gepunktet.'
 
+discord:
+  test_sent: '&8[%prefix%&8] &f&a%amount% &fTestnachricht(en) an Discord gesendet. Wenn nichts ankommt, steht der Grund in der Konsole.'
+  leaderboard_posted: '&8[%prefix%&8] &fDie Bestenliste wurde an Discord gesendet.'
+  disabled: '&8[%prefix%&8] &cDiscord-Nachrichten sind aus: setze &fenabled: true &cin discord.yml.'
+  no_channel: '&8[%prefix%&8] &f%section% &chat in discord.yml keinen Kanal mit Webhook oder DiscordSRV-Kanal.'
+  unknown_message: '&8[%prefix%&8] &cEs gibt keine Discord-Nachricht namens &f%message%&c.'
+  empty_message: '&8[%prefix%&8] &f%message% &cist in discord.yml leer oder fehlt.'
+
 logs:
   no_logs: "&cKeine Logs verfügbar oder ein Fehler ist aufgetreten."
   header: "&8[%prefix%&8] &eLetzte &6%amount% &eLogs:"
@@ -184,10 +192,11 @@ help_command:
   - '&a/chatgames challenges reset <player> &f- &3Setzt den Aufgabenfortschritt eines Spielers zurück.'
   - '&a/chatgames streak set <player> <challenge|daily|global> <days> &f- &3Setzt die Serie eines Spielers.'
   - '&a/chatgames logs [amount] &f- &3Zeigt die letzten Spiel-Logs.'
+  - '&a/chatgames discord <test <message|all>|leaderboard> &f- &3Sendet eine Testnachricht oder die Bestenliste an Discord.'
   - '&a/chatgames reload &f- &3Lädt die Konfigurationsdateien neu.'
   - '&6'
   - '&2&lSPIELTYPEN:'
-  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace'
+  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace, tame, shear'
   - '&7&m-------------------------------------------------'
 
 #Nutze <center> in LISTEN-Nachrichten, um sie zu zentrieren; Zeilen damit werden zentriert!
@@ -686,3 +695,41 @@ furnace:
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
     - '<center>&f%timeToComplete%s &csind vorbei! &fDie Koch-Herausforderung ist zu Ende!'
+
+tame:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu hast &e%timeToComplete% Sekunden&f zum &dZähmen&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7hat `&e%amount%&fx &3%value%&7` fertig gezähmt (&c%time%s&7) und einen Preis gewonnen!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &csind vorbei! &fDie Zähm-Herausforderung ist zu Ende!'
+
+shear:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu hast &e%timeToComplete% Sekunden&f zum &dScheren&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7hat `&e%amount%&fx &3%value%&7` fertig geschoren (&c%time%s&7) und einen Preis gewonnen!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &csind vorbei! &fDie Scher-Herausforderung ist zu Ende!'

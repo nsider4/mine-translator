@@ -1,0 +1,125 @@
+#############################
+######    CÀI ĐẶT    #######
+#############################
+check-update: true
+
+#Ngôn ngữ của máy chủ. Tên khối, vật phẩm và sinh vật (trong các cuộc đua và trò Ghi nhớ) được dịch
+#sang ngôn ngữ này, hơn 140 ngôn ngữ. Xem ID ngôn ngữ của bạn tại đây:
+#https://github.com/nsider4/mine-translator/blob/main/language_names.txt
+#Các tên được tải về translations/ và tự cập nhật khi có phiên bản Minecraft
+#mới. Thay đổi ở đây có hiệu lực sau /chatgames reload.
+lang: 'en_us'
+
+#Ngôn ngữ của các tệp cấu hình này: tin nhắn, menu, danh sách từ, câu đố, chú thích...
+#Đã dịch đầy đủ: en, es, fr, pt, de, it, nl, pl, ru, tr, zh, zh_tw, ja, ko, uk, cs, sv, hu, vi, id
+#(zh là tiếng Trung giản thể, zh_tw là tiếng Trung phồn thể). Nếu 'lang' của bạn không có ở đây, tên khối,
+#vật phẩm và sinh vật vẫn được dịch, nhưng các tệp này giữ nguyên ngôn ngữ (mặc định là tiếng Anh).
+#  auto: chuyển khi 'lang' ở trên thay đổi, nếu ngôn ngữ đó đã được dịch đầy đủ
+#  none: không bao giờ thay đổi
+#  hoặc một trong các mã ngôn ngữ ở trên
+#Khi chuyển, các cài đặt và thay đổi của bạn được giữ lại; tin nhắn tự viết của bạn
+#được thay bằng bản dịch (các tệp cũ được sao chép vào backups/ trước). Bản dịch
+#được tải từ https://github.com/nsider4/mine-translator (thư mục Configs) và tự
+#cập nhật. Có thể thêm ngôn ngữ khác ở đó.
+config-language: 'auto'
+
+#Kiểu lưu trữ, có sẵn: SQLite hoặc MySQL
+Storage: 'SQLite'
+
+#Tên bảng chứa toàn bộ dữ liệu ChatGames
+table_name: 'chatgames'
+
+#Tên bảng chứa toàn bộ thời gian nhanh nhất của ChatGames
+fastest_times_table: 'chatgames_fastest_times'
+
+SQLite:
+  Filename: 'chatgames-data'
+
+MySQL:
+  host: 'localhost'
+  port: '3306'
+  user: 'root'
+  password: 'password'
+  database: 'chatgame'
+  connection-parameters: '?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8'
+  Pool-Settings:
+    max-pool-size: 10
+    min-idle: 10
+    max-lifetime: 180000
+    keep-alive-time: 60000
+    time-out: 20000
+
+disabled-worlds:
+  - 'example_world'
+
+prefix: '&c&lC&d&lH&b&lA&a&lT &6&lG&e&lA&a&lM&c&lE&b&lS'
+
+#Nếu false, chỉ người chơi có 'chatgames.start.*' mới có thể bắt đầu
+allow_starting_from_disabled: true
+
+#Nếu false, sẽ không hủy tin nhắn thường không được gửi khi người chơi đoán đúng đáp án
+cancel-message-when-winning: true
+
+#Số người chơi trực tuyến tối thiểu để bắt đầu một trò chơi chat
+min_players_online: 1
+
+#Thời gian cho đến khi một trò chơi ngẫu nhiên được chọn lại.
+#Giá trị -1 tắt HOÀN TOÀN tác vụ; với -1 cũng không dùng được randomDelay
+time_minutes: 25
+
+#Nếu bật, sau mỗi trò chơi sẽ tạo một số ngẫu nhiên giữa 'randomDelay.minimum' và 'randomDelay.limit' làm thời gian chờ đến trò tiếp theo
+#Nếu bật mục này, giá trị 'time_minutes' sẽ bị bỏ qua, trừ khi là -1, vì khi đó không có tác vụ.
+randomDelay:
+  enable: false
+  #Đơn vị thời gian, giá trị khác có thể dùng là 'seconds'; nếu đổi, nên đặt minimum lớn hơn 'timeToGuess_seconds' của trò chơi
+  timeUnit: 'minutes'
+  minimum: 1
+  limit: 25
+
+
+#Nếu tắt, không cần quyền chatgames.play để thấy các trò chơi
+use-permission-toplay: false
+
+#Nếu false, chỉ tính người chơi có quyền 'chatgames.play', tức là những người có thể chơi.
+#Nếu true, tính tất cả người chơi trực tuyến trừ người đang ẩn (vanish).
+count-all-players: false
+
+#Nếu true, tạo bảng xếp hạng người nhanh nhất (/chatgames fastest). Nếu false, bảng này bị tắt.
+fastest-typers-top: true
+
+#Placeholder của PlaceholderAPI (cần cài PlaceholderAPI):
+#  Bạn:          %chatgames_points%, %chatgames_wins%, %chatgames_wins_<game>%, %chatgames_race_wins%,
+#                %chatgames_global_played%, %chatgames_global_won%, %chatgames_toggle%, %chatgames_sound_toggle%
+#                %chatgames_events_played%, %chatgames_event_wins%, %chatgames_event_best_place% (0 = chưa có)
+#  Thời gian:    %chatgames_personal_best% (mọi trò chơi chat), %chatgames_fastest_<game>% (cả đua)
+#  Thứ hạng:     %chatgames_show_current_pos_top% (điểm), %chatgames_show_current_pos_fastest% (thời gian tốt nhất)
+#  Top điểm:     %chatgames_top_<n>% (tên), %chatgames_points_top_<n>%, %chatgames_total_points%
+#  Top nhanh:    %chatgames_fastest_<n>% (tên, trò chơi chat), %chatgames_fastest_time_<n>%,
+#                %chatgames_fastest_<game>_<n>%, %chatgames_fastest_<game>_time_<n>%
+#  Hiện tại:     %chatgames_game_running%, %chatgames_current_game%, %chatgames_next_game_in% (giây)
+#  Đua:          %chatgames_race_target%, %chatgames_race_amount%, %chatgames_race_progress% (của bạn)
+#  Thử thách:    %chatgames_daily_completed%, %chatgames_daily_total%, %chatgames_weekly_completed%,
+#                %chatgames_weekly_total%, %chatgames_challenges_completed% (tổng cộng)
+#  Chuỗi:        %chatgames_streak_<type>%, %chatgames_streak_<type>_longest% (<type> là challenge, daily hoặc global)
+#  Sự kiện:      %chatgames_event_running%, %chatgames_event_name%, %chatgames_event_step%, %chatgames_event_steps%,
+#                %chatgames_event_points% và %chatgames_event_place% (của bạn trong sự kiện đang diễn ra)
+#  <game> là tên trò chơi trong games.yml (vd. unscramble, guess_the_number); <n> là thứ hạng (1, 2, 3...).
+placeholders:
+  #Tần suất dựng lại các placeholder bảng xếp hạng (top_<n>, fastest_<n>, thứ hạng...), tính bằng giây.
+  #Chúng cũng được dựng lại sau mỗi trò chơi có người thắng. Điểm, số trận thắng và thời gian của riêng bạn luôn được cập nhật.
+  refresh-seconds: 60
+  #Hiển thị khi không có gì để hiện: chỗ trống trên bảng xếp hạng, chưa có thời gian tốt nhất, không có trò chơi nào...
+  empty-value: ''
+
+#Âm thanh cho người chơi khi một trò chơi chat bắt đầu!
+GameSounds:
+  volume: 0.5
+  pitch: 1.0
+  #ĐỂ TRỐNG BẤT KỲ MỤC NÀO ĐỂ TẮT NÓ
+  #Âm thanh từ gói tài nguyên cũng dùng được: ghi kèm namespace, vd. 'myserver:custom.ding'
+  win: 'minecraft:entity.experience_orb.pickup'
+  game-start: 'minecraft:entity.player.levelup'
+  time-expired: 'minecraft:entity.villager.no'
+  wrong-case: 'minecraft:block.note_block.bass'
+
+#Các bộ trò chơi (tập hợp các trò chơi đã bật có đặt tên) được lưu trong presets.yml.

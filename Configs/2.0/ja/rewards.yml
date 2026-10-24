@@ -1,0 +1,153 @@
+#使える動作：
+#
+#[playercmd] - 勝者としてコマンドを実行
+#[consolecmd] - コンソールからコマンドを実行
+#[playermsg] - 勝者にメッセージを送る
+#[broadcast] - 有効なワールドの全プレイヤーにメッセージを流す
+#[player_as_op] - プレイヤーに OP としてコマンドを実行させる
+#
+#報酬に確率をつけるには次のようにします：
+#
+#例：
+#  - '10.0%~ [consolecmd] give %player% iron_block 5'
+#例と同じ形式のときだけ動きます。先頭に <chance>%、続けて ~ と半角スペース。必ずコマンドの最初に書きます
+#
+#% のないコマンドは 100% もらえる報酬です。
+
+#権限のチェック：
+#
+#コマンドの行の最後に書きます。
+#例：
+#  - '[consolecmd] give %player% iron_block 5 has:test.permission'
+
+#1 は 1 人目の勝者です。config.yml で勝者を増やして別の報酬にしたい場合は、その順位（2: など）を追加します
+unscramble:
+  rewards:
+    1:
+      reward_1:
+        minimum-players: 2 #オンライン人数による条件。オンラインが 2 人以上のときだけこの報酬が選ばれます
+        chance: 50
+        data:
+          - '10.0%~ [consolecmd] give %player% diamond_block 3 has:test.permission'
+          - '[consolecmd] give %player% iron_block 5'
+      reward_2:
+        data:
+          - '[consolecmd] give %player% iron_block 2'
+
+unreverse:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+reaction:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+guess_the_number:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+shoppinglist:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+clickable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+fillout:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+hoverable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+random:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+variable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+math:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+sequence:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+memorize:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+word_association:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+trivia:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+#ここから先は、勝者が 1 人だけのレースの報酬です
+#
+#形式が違います！よく読んでください
+
+races:
+  rewards:
+    #これらは 'races.yml' に書く報酬です
+    reward_1:
+      chance: 50
+      data:
+        - '60.0%~ [consolecmd] give %player% diamond_block 5'
+    #'chance' の値を消すと、その報酬/コマンドは必ず実行されます
+    reward_2:
+      data:
+        - '[consolecmd] give %player% iron_block 5'
+        - '[playermsg] &a勝利！'
+    reward_3:
+      chance: 50
+      data:
+        - '[consolecmd] give %player% diamond_block 3'

@@ -1,0 +1,405 @@
+#把遊戲結果、競賽、全服遊戲、活動等釋出到 Discord。
+#
+#訊息透過頻道 webhook 傳送（無需安裝任何東西），或透過
+#DiscordSRV 外掛的機器人傳送，也可以兩者都用。用 /chatgames discord test <message> 測試每條訊息。
+enabled: true
+
+#__頻道__
+#訊息發到哪裡。名字隨你取；下面的每個通知都會列出它使用的頻道。
+#  webhook：頻道的 webhook 網址。在 Discord 中：編輯頻道 > 整合 > Webhook >
+#           新 Webhook > 複製 Webhook 網址。請保密：任何拿到它的人都能在那裡發帖。
+#  discordsrv：改用你的 DiscordSRV 機器人發帖（需要 DiscordSRV）。填寫 DiscordSRV 的 config.yml 中
+#              Channels 部分的頻道名（例如 global），或頻道 ID。
+#  username / avatar：webhook 發帖顯示的名字和頭像（機器人保持自己的）。
+channels:
+  main:
+    webhook: ''
+    discordsrv: ''
+    username: 'Chat Games'
+    avatar: 'https://www.spigotmc.org/data/resource_icons/107/107781.jpg?1676494289'
+
+#__通用__
+#在頁尾中顯示為 %server%
+server-name: 'Minecraft Server'
+#%winner_head% / %player_head% 的圖片。%name% 和 %uuid% 會被填入。
+player-head-url: 'https://mc-heads.net/avatar/%name%/128'
+#訊息可以提及的身分組 ID（在文字中寫 <@&ID>）。其他任何東西都不會提及：不會
+#@everyone，也不會提及玩家名字或答案中的任何內容。
+#要獲取 ID，請在 Discord 中開啟開發者模式（設定 > 高階），然後右鍵點選身分組。
+allowed-role-pings: []
+#使用 DiscordSRV 時，%winner_mention% / %player_mention% 顯示玩家繫結的 Discord 賬號
+#（否則顯示名字）。設為 true 還會提及他們。
+ping-linked-players: false
+#永遠不釋出的遊戲和競賽
+ignored-games: []
+
+#每個遊戲的顏色（%game_color%）和表情（%game_emoji%）。顏色：'#RRGGBB' 或顏色名。
+#表情：像 :trophy: 這樣的名字（列表在本檔案末尾），或伺服器表情 <:name:ID>。
+#不要把表情字元貼上到這個檔案裡：1.8 伺服器無法讀取含有它們的檔案。
+styles:
+  default: {color: '#5865F2', emoji: ':video_game:'}
+  unscramble: {color: '#F1C40F', emoji: ':abc:'}
+  unreverse: {color: '#E67E22', emoji: ':repeat:'}
+  reaction: {color: '#E74C3C', emoji: ':zap:'}
+  random: {color: '#9B59B6', emoji: ':game_die:'}
+  fillout: {color: '#3498DB', emoji: ':pencil2:'}
+  variable: {color: '#1ABC9C', emoji: ':heavy_plus_sign:'}
+  clickable: {color: '#2ECC71', emoji: ':point_up:'}
+  hoverable: {color: '#16A085', emoji: ':eyes:'}
+  math: {color: '#E91E63', emoji: ':heavy_division_sign:'}
+  sequence: {color: '#00BCD4', emoji: ':1234:'}
+  memorize: {color: '#8E44AD', emoji: ':brain:'}
+  guess_the_number: {color: '#FF9800', emoji: ':question:'}
+  trivia: {color: '#3F51B5', emoji: ':books:'}
+  word_association: {color: '#009688', emoji: ':link:'}
+  count: {color: '#607D8B', emoji: ':1234:'}
+  hunt: {color: '#C0392B', emoji: ':crossed_swords:'}
+  mine: {color: '#7F8C8D', emoji: ':pick:'}
+  place: {color: '#A0522D', emoji: ':bricks:'}
+  fish: {color: '#2980B9', emoji: ':fishing_pole_and_fish:'}
+  eat: {color: '#D35400', emoji: ':poultry_leg:'}
+  craft: {color: '#8D6E63', emoji: ':hammer_and_pick:'}
+  furnace: {color: '#E25822', emoji: ':fire:'}
+  tame: {color: '#C69C6D', emoji: ':bone:'}
+  shear: {color: '#ECF0F1', emoji: ':scissors:'}
+
+#列表的寫法：贏家、貢獻者、排名和排行榜。
+#%medal% 是第 1-3 名的獎牌，其餘名次使用 other-places。
+lists:
+  medals: [':first_place:', ':second_place:', ':third_place:']
+  other-places: '`%place%.`'
+  winner: '%medal% **%player%** `%time%s`'
+  contributor: '%medal% **%player%** `%amount%`'
+  standing: '%medal% **%player%** `%points% 分`'
+  leaderboard: '%medal% **%player%** `%value%`'
+  #列表為空時顯示這個
+  empty: '-# 還沒有人'
+
+#__訊息__
+#每條訊息有 'content'（嵌入內容上方的純文字）和/或 'embed'：
+#  color、author（name、icon、url）、title、url、description、thumbnail、image、
+#  fields（name、value、inline）、footer（text、icon）、timestamp（true 顯示傳送時間）。
+#文字可以是一行，也可以是多行列表。只有變數且變數都為空的行
+#會被省略，空欄位也一樣。不需要玩家的 PlaceholderAPI 變數也可以使用。
+#描述和欄位值中可以使用 Discord 格式：'### ' 開始一個標題，'-# ' 為灰色小字，
+#'> ' 為引用，**粗體**，`程式碼`。
+#<t:%ends_unix%:R> 會以每位讀者自己的時間顯示“20 秒後”，並倒計時。
+#所有訊息中：%server%，遊戲還有 %game% %game_key% %game_emoji% %game_color%。
+
+#聊天遊戲。%question% %time_limit% %ends_unix% %winners_needed% %points%
+games:
+  enabled: true
+  channels: [main]
+  #true：遊戲開始時發帖，之後把這條帖子編輯成結果。false：只發布結果。
+  live: true
+  #記憶遊戲永遠不會在這裡顯示列表：玩家可能會在 Discord 中看到。
+  hidden-question: '看遊戲聊天！'
+  start:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%'
+      title: '新回合'
+      description:
+        - '### %question%'
+        - '-# 在遊戲聊天中作答即可獲勝。'
+      fields:
+        - name: ':stopwatch: 結束'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+        - name: ':sparkles: 獎勵'
+          value: '`%points% 分`'
+          inline: true
+        - name: ':busts_in_silhouette: 贏家數'
+          value: '`%winners_needed%`'
+          inline: true
+      footer: '%server%'
+  #%winner% %winner_head% %winner_mention% %time% %answer% %points% %winner_count%
+  #%winners%（所有贏家，每行一個） %other_winners%（除第一名外的所有人）
+  win:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%'
+      title: ':trophy:  %winner% 答對了！'
+      thumbnail: '%winner_head%'
+      description:
+        - '-# 答案是'
+        - '### %answer%'
+      fields:
+        - name: ':stopwatch: 用時'
+          value: '`%time%s`'
+          inline: true
+        - name: ':sparkles: 點數'
+          value: '`+%points%`'
+          inline: true
+        - name: ':medal: 也答對了'
+          value: '%other_winners%'
+          inline: false
+      footer: '%server%'
+      timestamp: true
+  #%answer% %question% %time_limit%
+  expired:
+    enabled: true
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%'
+      title: ':hourglass:  時間到'
+      description:
+        - '-# 沒有人答對。答案是'
+        - '### %answer%'
+      footer: '%server%'
+      timestamp: true
+  #工作人員停止遊戲時（只編輯實時帖子）
+  stopped:
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%'
+      title: ':no_entry:  回合已停止'
+      description:
+        - '-# 一名工作人員提前結束了這個回合。'
+      footer: '%server%'
+      timestamp: true
+
+#競賽。%target% %amount% %time_limit% %ends_unix% %points%
+races:
+  enabled: true
+  channels: [main]
+  live: true
+  start:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%競賽'
+      title: '競賽開始'
+      description:
+        - '### %amount%x %target%'
+        - '-# 第一個完成的玩家獲勝。'
+      fields:
+        - name: ':stopwatch: 結束'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+        - name: ':sparkles: 獎勵'
+          value: '`%points% 分`'
+          inline: true
+      footer: '%server%'
+  #%winner% %winner_head% %winner_mention% %time% %points%
+  win:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%競賽'
+      title: ':checkered_flag:  %winner% 贏得了競賽！'
+      thumbnail: '%winner_head%'
+      description:
+        - '### %amount%x %target%'
+      fields:
+        - name: ':stopwatch: 用時'
+          value: '`%time%s`'
+          inline: true
+        - name: ':sparkles: 點數'
+          value: '`+%points%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  expired:
+    enabled: true
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%競賽'
+      title: ':hourglass:  時間到'
+      description:
+        - '### %amount%x %target%'
+        - '-# 沒有人及時完成。'
+      footer: '%server%'
+      timestamp: true
+  stopped:
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%競賽'
+      title: ':no_entry:  競賽已停止'
+      description:
+        - '-# 一名工作人員提前結束了這場競賽。'
+      footer: '%server%'
+      timestamp: true
+
+#全服遊戲，整個伺服器朝同一個目標努力。
+#%goal%（例如 "500 石頭"） %progress% %goal_amount% %percent% %bar% %contributors% %time_limit% %ends_unix%
+global:
+  enabled: true
+  channels: [main]
+  #true：帖子顯示進度條，並在遊戲進行時更新
+  live: true
+  #實時帖子最多多久更新一次（只在進度變化時）
+  update-seconds: 15
+  bar: {length: 16, full: '█', empty: '░'}
+  progress:
+    embed:
+      color: '%game_color%'
+      author: ':globe_with_meridians:  全服%game%'
+      title: '整個伺服器一起玩'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+        - '-# %progress% / %goal_amount%'
+      fields:
+        - name: ':busts_in_silhouette: 參與人數'
+          value: '`%contributors%`'
+          inline: true
+        - name: ':stopwatch: 結束'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+      footer: '%server%'
+  #%top_contributors%（貢獻最大的人，每行一個）
+  completed:
+    embed:
+      color: '#57F287'
+      author: ':globe_with_meridians:  全服%game%'
+      title: ':tada:  目標達成！'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+      fields:
+        - name: ':medal: 最佳幫手'
+          value: '%top_contributors%'
+          inline: true
+        - name: ':busts_in_silhouette: 幫忙人數'
+          value: '`%contributors%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  failed:
+    embed:
+      color: '#ED4245'
+      author: ':globe_with_meridians:  全服%game%'
+      title: ':x:  未達成目標'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+        - '-# %progress% / %goal_amount%'
+      fields:
+        - name: ':medal: 最佳幫手'
+          value: '%top_contributors%'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #%top_contributors% 列出多少名貢獻者
+  top-size: 5
+
+#遊戲活動（events.yml）。%event%
+events:
+  enabled: true
+  channels: [main]
+  #%games%（它有多少局遊戲）
+  start:
+    embed:
+      color: '#FEE75C'
+      author: ':calendar:  遊戲活動'
+      title: '%event% 開始了！'
+      description:
+        - '-# 連續贏得遊戲來獲得活動點數。'
+      fields:
+        - name: ':video_game: 遊戲'
+          value: '`%games%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #%standings% %players%（得分人數） %winner% %winner_head% %winner_mention%
+  end:
+    embed:
+      color: '#FEE75C'
+      author: ':calendar:  遊戲活動'
+      title: ':trophy:  %event% 結果'
+      thumbnail: '%winner_head%'
+      description:
+        - '%standings%'
+      fields:
+        - name: ':crown: 贏家'
+          value: '%winner_mention%'
+          inline: true
+        - name: ':busts_in_silhouette: 玩家'
+          value: '`%players%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #%standings% 列出多少個名次
+  standings-size: 10
+
+#玩家的連續記錄達到一定的連續天數（streaks.yml）。%player% %player_head% %player_mention% %streak% %days%
+streaks:
+  enabled: false
+  channels: [main]
+  #只發布這些天數
+  days: [7, 14, 30, 60, 100, 365]
+  message:
+    embed:
+      color: '#E67E22'
+      author: {name: '%player%', icon: '%player_head%'}
+      title: ':fire:  連續 %days% 天！'
+      description:
+        - '-# %streak%'
+      footer: '%server%'
+      timestamp: true
+
+#玩家完成每日或每週挑戰。%player% %player_head% %player_mention% %challenge% %period%
+challenges:
+  enabled: false
+  channels: [main]
+  #%period% 顯示的內容
+  periods:
+    daily: '每日'
+    weekly: '每週'
+  message:
+    embed:
+      color: '#57F287'
+      author: {name: '%player%', icon: '%player_head%'}
+      title: ':white_check_mark:  挑戰完成'
+      description:
+        - '### %challenge%'
+        - '-# %period%挑戰'
+      footer: '%server%'
+      timestamp: true
+
+#排行榜，在設定的時間以及用 /chatgames discord leaderboard 釋出。
+#%leaderboard% %total_points%（所有玩家合計）
+leaderboard:
+  enabled: false
+  channels: [main]
+  #伺服器時間，24 小時制，例如 ['12:00', '20:00']
+  times: ['20:00']
+  #points，或 fastest（所有遊戲中最快的答案）
+  type: points
+  size: 10
+  message:
+    embed:
+      color: '#5865F2'
+      author: ':bar_chart:  排行榜'
+      title: '頂尖玩家'
+      description:
+        - '%leaderboard%'
+        - ''
+        - '-# 總共贏得了 %total_points% 點數'
+      footer: '%server%'
+      timestamp: true
+
+#__表情__
+#上面任何文字中都可以寫成 :name: 的名字：
+#  trophy, first_place, second_place, third_place, medal, military_medal, crown, star, star2,
+#  sparkles, tada, confetti_ball, fire, zap, boom, 100, gem, moneybag, gift, video_game, game_die,
+#  jigsaw, dart, checkered_flag, stopwatch, timer, alarm_clock, hourglass, hourglass_flowing_sand,
+#  clock, calendar, white_check_mark, heavy_check_mark, x, no_entry, warning, question, grey_question,
+#  exclamation, bell, loudspeaker, mega, speech_balloon, thought_balloon, brain, bulb, abc, abcd,
+#  capital_abcd, 1234, symbols, pencil, pencil2, memo, book, books, scroll, clipboard, link, mag,
+#  eyes, eye, repeat, arrows_counterclockwise, leftwards_arrow_with_hook, heavy_plus_sign,
+#  heavy_minus_sign, heavy_multiplication_x, heavy_division_sign, infinity, keycap_ten,
+#  mouse_three_button, point_up, point_right, point_down, raised_hands, clap, muscle, handshake, wave,
+#  thinking, sunglasses, partying_face, rocket, earth_americas, globe_with_meridians,
+#  busts_in_silhouette, bust_in_silhouette, bar_chart, chart_with_upwards_trend,
+#  chart_with_downwards_trend, crossed_swords, dagger, bow_and_arrow, shield, pick, hammer,
+#  hammer_and_pick, tools, axe, bricks, fishing_pole_and_fish, fish, tropical_fish, meat_on_bone,
+#  poultry_leg, bread, apple, green_apple, cake, cookie, fork_and_knife, cooking, bone, dog, cat,
+#  horse, parrot, sheep, ram, scissors, cow, pig, chicken, zombie, skull, seedling, evergreen_tree,
+#  deciduous_tree, mushroom, rock, diamond_shape_with_a_dot_inside, large_blue_diamond,
+#  small_orange_diamond, red_circle, orange_circle, yellow_circle, green_circle, blue_circle,
+#  purple_circle, white_circle, black_circle, green_square, white_large_square, black_large_square,
+#  arrow_right, arrow_up, arrow_down, small_red_triangle_down, small_red_triangle, lock, unlock, key,
+#  new, up, cool, free, information_source, heart, green_heart, blue_heart, yellow_heart,
+#  purple_heart, orange_heart, map, compass, label, ticket, tickets, admission_tickets, joystick,
+#  slot_machine, spades, clubs, hearts, diamonds, beginner, game_controller, pushpin, round_pushpin,
+#  triangular_flag_on_post

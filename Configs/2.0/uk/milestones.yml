@@ -1,0 +1,7 @@
+milestones:
+  '100':
+    - "say %player% набрав 100 очок!"
+    - "give %player% diamond 1"
+  '500':
+    - "broadcast %player% тепер легенда з 500 очками!"
+    - "give %player% emerald 5"

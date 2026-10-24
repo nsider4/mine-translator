@@ -1,0 +1,367 @@
+#############################
+######    CHATOVÉ HRY    ######
+#############################
+#Nastavení, která přijímá každá hra (co chybí, použije zobrazenou výchozí hodnotu):
+#  enable: true/false
+#  weight: 1             Jak pravděpodobně rotace vybere tuto hru oproti ostatním (0 = nikdy).
+#                        Stejná hra nikdy nejde dvakrát po sobě.
+#  winners: 1            Kolik hráčů může vyhrát každé kolo.
+#  points: 1             Body za výhru (/chatgames top).
+#  case-sensitive: false Hráči, kteří se spletli jen ve velikosti písmen, dostanou zprávu 'wrong_case'.
+#  timeToGuess_seconds: 20
+#  min-answer-ms: 400    Správné odpovědi rychlejší než toto se ignorují a zaznamenají: nikdo nečte a nepíše
+#                        tak rychle, chatboti ano. 0 kontrolu vypne.
+#  hints:                Nápovědy se objevují během kola, přes 'hint_message' v messages.yml.
+#    enable: false
+#    after-percent: 50   První nápověda se objeví, když uplyne tolik času; ostatní se rozloží na zbytek.
+#    max: 1              Až 3.
+#  countdown:            Zbývající čas na liště akcí. Funguje na všech verzích (1.8 až 26.x).
+#    enable: false
+#    last-seconds: 10    Jen během posledních N sekund; 0 ho zobrazuje celé kolo.
+#  titleMessage / subtitleMessage: nechte obě prázdné, aby se titulek neodeslal.
+unscramble:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Čas v sekundách, který mají hráči na uhodnutí, vyřešení, napsání atd.
+  timeToGuess_seconds: 20
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aRozlušti'
+
+unreverse:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Čas v sekundách, který mají hráči na uhodnutí, vyřešení, napsání atd.
+  timeToGuess_seconds: 20
+  #Nechte další 2 prázdné, abyste je vypnuli
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aOtoč'
+
+reaction:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Čas v sekundách, který mají hráči na uhodnutí, vyřešení, napsání atd.
+  timeToGuess_seconds: 20
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aNapiš'
+
+guess_the_number:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+  #Toto neměňte
+  case-sensitive: false
+
+  lower-limit: 1
+  upper-limit: 20
+
+  #Čas v sekundách, který mají hráči na uhodnutí, vyřešení, napsání atd.
+  timeToGuess_seconds: 20
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aNapiš'
+
+clickable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Čas v sekundách, který mají hráči na uhodnutí, vyřešení, napsání atd.
+  timeToGuess_seconds: 20
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&eKlikni na text'
+  subtitleMessage: '&fMáš &e%timeToGuess%s'
+
+fillout:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Procento skrytých písmen ve hře Doplň. Hodnota od 1 do 100. Menší čísla znamenají méně skrytých písmen.
+  difficulty: 30
+  case-sensitive: true
+  #Čas v sekundách, který mají hráči na uhodnutí, vyřešení, napsání atd.
+  timeToGuess_seconds: 20
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aDoplň'
+
+hoverable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Čas v sekundách, který mají hráči na uhodnutí, vyřešení, napsání atd.
+  timeToGuess_seconds: 20
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&eNajeď na text'
+  subtitleMessage: '&fMáš &e%timeToGuess%s'
+
+#Tato hra vytvoří řetězec zadané délky z náhodných znaků
+random:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Čas v sekundách, který mají hráči na uhodnutí, vyřešení, napsání atd.
+  timeToGuess_seconds: 20
+  #Délka náhodného řetězce pro tuto hru. Formát rozsahu <lower>-<higher>. Pro jednu délku dejte stejné číslo na obě strany
+  lengthRange: 6-8
+  #Dostupné typy: ALPHA (písmena), ALPHANUMERIC (písmena a číslice), NUMERIC (číslice), SYMBOLIC (symboly),
+  #LOWERCASE_ALPHA (vše malými písmeny), UPPERCASE_ALPHA (vše velkými písmeny), HEXADECIMAL (šestnáctkové znaky: 0123456789ABCDEF)
+  #CUSTOM (použije to, co je v 'custom_characters')
+  character_type: ALPHANUMERIC
+  #Tento řetězec se použije, jen pokud je type "CUSTOM"
+  custom_characters: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aNapiš'
+
+math:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Toto neměňte
+  case-sensitive: false
+  #Čas v sekundách, který mají hráči na uhodnutí, vyřešení, napsání atd.
+  timeToGuess_seconds: 20
+  #Rozsahy náhodných čísel podle obtížnosti:
+  #1 - (1-9)
+  #2 - (1-99)
+  #3 - (1-999)
+  #4 - (1-9999)
+  #5 - (1-99999)
+  difficulty: 2
+  #Kolik operátorů má každá otázka: 1 -> "12 + 7", 2 -> "12 + 7 x 3"
+  operations: 1
+  #solve: vypočítat výsledek ("12 + 7 x 3").  missing-value: najít skryté číslo ("12 + ? x 3 = 33").
+  #Každé kolo vybere jeden z uvedených režimů.
+  modes:
+    - solve
+    - missing-value
+  #Operátory k použití; čtyři uvedené jsou všechny dostupné, nepotřebné můžete odebrat. Vždy nechte aspoň 1
+  #Dělení vždy dá celé číslo.
+  operators:
+    - '+'
+    - '-'
+    - 'x'
+    - '/'
+
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aVypočítej'
+
+variable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Toto neměňte
+  case-sensitive: false
+  #Čas v sekundách, který mají hráči na uhodnutí, vyřešení, napsání atd.
+  timeToGuess_seconds: 20
+
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&bVYŘEŠ'
+  subtitleMessage: '&aNajdi &7`&b%symbol%&7`'
+
+  #Rozsah náhodného výsledného čísla
+  result-min: 20
+  result-max: 100
+
+  toGet: '✗'
+  #Další symboly, které můžete přidat: ✪❃✿✠❂♫♪❦♡♤♢✦☾☽✹
+  data:
+    - '✯;10'
+    - '♛;15'
+    - '❅;20'
+    - '♫;25'
+
+sequence:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Toto neměňte
+  case-sensitive: false
+
+  #Čas v sekundách, který mají hráči na uhodnutí, vyřešení, napsání atd.
+  timeToGuess_seconds: 25
+
+  #Hráči vidí řadu čísel a napíšou další, např. "3, 6, 12, 24, ?" -> 48
+  #Vzory: sčítání (3, 7, 11), násobení (2, 6, 18), čtverce (4, 9, 16), střídání (5, 9, 7, 11), Fibonacci (2, 3, 5, 8)
+  patterns:
+    - add
+    - multiply
+    - squares
+    - alternating
+    - fibonacci
+  #1-3. Vyšší obtížnost dává těžší vzory (čtverce a střídání od 2, Fibonacci na 3) a větší čísla.
+  difficulty: 2
+  #Kolik čísel se zobrazí před '?' (4-8)
+  shown-terms: 5
+
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aDoplň řadu'
+
+memorize:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+
+  listLength: 3
+  #Každé kolo bere předměty z jedné z těchto sad (viz words.yml -> memorize.pools):
+  #shopping_list, words, colors, numbers, blocks, mobs nebo vlastní seznam
+  pools:
+    - shopping_list
+    - words
+    - colors
+    - numbers
+    - blocks
+    - mobs
+  #Pokud false, předměty lze psát v libovolném pořadí
+  order-matters: true
+
+  #Čas v sekundách, který mají hráči na zapamatování, vyřešení, napsání atd.
+  timeToMemorize: 7
+
+  #Čas v sekundách, který mají hráči na uhodnutí, vyřešení, napsání atd.
+  timeToGuess_seconds: 20
+  #Nechte další 2 prázdné, abyste je vypnuli
+  titleMessage: '&bZapamatuj si'
+  subtitleMessage: '&aZkus si zapamatovat tento seznam!'
+
+#Tři nápovědy, jedno skryté spojení (asociace jsou ve words.yml).
+#difficulty: easy, medium, hard nebo mixed. Těžká kola ukazují jednu nápovědu a zbytek odkrývají
+#jako nápovědy, takže pro ně nechte nápovědy zapnuté (max 2 ukáže všechny tři).
+word_association:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  difficulty: mixed
+  hints:
+    enable: true
+    after-percent: 34
+    max: 2
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  timeToGuess_seconds: 30
+  titleMessage: '&bASOCIACE'
+  subtitleMessage: '&aPodívej se do chatu!'
+
+trivia:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  #Čas v sekundách, který mají hráči na uhodnutí, vyřešení, napsání atd.
+  timeToGuess_seconds: 20
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&bKVÍZ'
+  subtitleMessage: '&aPodívej se do chatu!'

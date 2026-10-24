@@ -1,0 +1,108 @@
+#ゲームイベント
+#
+#イベントは続けて行われる一連のゲームです。各ゲームでは順位ごとにイベントポイントが
+#配られ、最後のゲームが終わると、イベントポイントが最も多いプレイヤーがイベントの
+#報酬を獲得します。イベント中は、通常のローテーションとグローバルゲームは待機します。
+#
+#/chatgames event start <event> で開始するか、スケジュールで自動的に開始させます。
+#/chatgames event top <event> は、そのイベントでこれまで最も得点した人を表示します。
+#
+#各イベント：
+#  name：プレイヤーに表示される名前（カラーコードが使えます）
+#  schedule：自動で始まる時刻。例：'SATURDAY 20:00'、'DAILY 18:30'（書かなくても OK）。
+#            タイムゾーンは challenges.yml のものです。
+#  minimum-players：スケジュールで始まるのに必要なオンライン人数（コマンドでは無視）
+#  pause-seconds：ゲームが終わってから次が始まるまでの秒数
+#  points：各ゲームの 1 位、2 位、3 位…のイベントポイント
+#  participation-points：それ以外で達成した人のイベントポイント。グローバルゲームでは、
+#                        サーバーが目標に届くと、十分に貢献した全員が得点します：
+#                        貢献が最も大きかった人には 'points'、残りの人にはこれ。
+#                        目標に届かなければ、そのゲームでは誰も得点しません。
+#  steps：ゲームを順番に。それぞれ：
+#    game：ゲームかレース。games.yml / races.yml と同じ名前
+#    global：true でグローバルゲームとして遊びます（サーバー全体で一緒に。global_games.yml を参照）。
+#            カウントは常にグローバルです。
+#    time：答える（またはレースを終える）までの秒数。ゲーム自身の値の代わりに使います
+#    winners：通常のチャットゲームで何人勝てるか。ゲーム自身の値の代わりに使います
+#    args：/chatgames <game> の後に書く値。例：採掘レースなら 'stone 16'
+#    settings：このゲームで変えたいほかの games.yml の値。例：{difficulty: hard}
+#  rewards：最終順位（1、2、3…）ごとの報酬の行と、得点したほかの全員への
+#           'participation'。rewards.yml と同じ行です（'<chance>%~ ' と 'has:<permission>' が使えます）。
+
+events:
+  weekend_cup:
+    name: '&6&l週末カップ'
+    schedule:
+      - 'SATURDAY 20:00'
+    minimum-players: 3
+    pause-seconds: 15
+    points: [5, 3, 1]
+    participation-points: 1
+    steps:
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+        time: 25
+      - game: word_association
+        global: true
+        settings:
+          difficulty: hard
+      - game: trivia
+        winners: 3
+      - game: mine
+        global: true
+        time: 120
+        args: 'stone 100'
+    rewards:
+      1:
+        - '[consolecmd] give %player% diamond 5'
+      2:
+        - '[consolecmd] give %player% diamond 3'
+      3:
+        - '[consolecmd] give %player% diamond 1'
+      participation:
+        - '[consolecmd] give %player% iron_ingot 3'
+
+  quick_quiz:
+    name: '&b&lクイッククイズ'
+    minimum-players: 2
+    pause-seconds: 8
+    points: [3, 2, 1]
+    participation-points: 0
+    steps:
+      - game: reaction
+        winners: 3
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+    rewards:
+      1:
+        - '[consolecmd] give %player% gold_ingot 5'
+
+messages:
+  #全員へ。%event% は名前、%steps% はゲーム数、%pause% はその間の秒数。
+  start:
+    - ''
+    - '&6&l» イベント：%event% &fが始まります！&e%steps% &fゲーム、イベントポイント最多の人が優勝。'
+    - ''
+  #各ゲームの前に。%step% は番号、%game% はゲーム。
+  step:
+    - '&6&l» %event% &f- ゲーム &e%step%/%steps%&f：&e%game%'
+  #ゲームで得点した各プレイヤーへ。%points% は獲得分、%total% はイベントの合計。
+  step_points: '&8[%prefix%&8] &a+%points% イベントポイント &7（合計 %total%）'
+  #終了時に全員へ。%count% 人が得点。%winner_<n>% と %points_<n>% は上位 3 人。
+  end:
+    - ''
+    - '&6&l» %event% &fが終了！&e%count% &f人が得点しました。'
+    - '&f  1. &e%winner_1% &7%points_1%  &f2. &e%winner_2% &7%points_2%  &f3. &e%winner_3% &7%points_3%'
+    - ''
+  nobody:
+    - '&6&l» %event% &fが終了！&c誰も得点しませんでした。'
+  #終了後、得点した各プレイヤーへ。%count% 人中 %place% 位。
+  result: '&f&8[%prefix%&8] &e%points% &fイベントポイントで、%count% 人中 &e#%place% &f位でした。'
+  stopped:
+    - '&6&l» %event% &cは停止されました。'
+
+#イベントの開始と最終順位は、discord.yml の設定どおり Discord に投稿されます。

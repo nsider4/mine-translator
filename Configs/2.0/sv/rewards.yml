@@ -1,0 +1,153 @@
+#MÖJLIGA ÅTGÄRDER:
+#
+#[playercmd] - Kör kommandot som vinnaren
+#[consolecmd] - Kör kommandot från konsolen
+#[playermsg] - Skickar ett meddelande till vinnaren
+#[broadcast] - Skickar ett meddelande till alla spelare i aktiverade världar
+#[player_as_op] - Kör ett kommando som op åt spelaren
+#
+#LÄGG TILL CHANSER FÖR BELÖNINGAR SÅ HÄR:
+#
+#EXEMPEL:
+#  - '10.0%~ [consolecmd] give %player% iron_block 5'
+#FUNGERAR BARA OM FORMATET ÄR SAMMA SOM I EXEMPLET, MED <chance>% I BÖRJAN FÖLJT AV ~ OCH ETT MELLANSLAG. ALLTID FÖRST I KOMMANDOT
+#
+#KOMMANDON UTAN % BLIR BELÖNINGAR SOM GES TILL 100%.
+
+#BEHÖRIGHETSKONTROLL:
+#
+#LÄGG I SLUTET AV KOMMANDORADEN.
+#Exempel:
+#  - '[consolecmd] give %player% iron_block 5 has:test.permission'
+
+#1 är för den FÖRSTA vinnaren, OM DU LÄGGER TILL FLER VINNARE I config.yml OCH VILL HA ANDRA BELÖNINGAR, LÄGG TILL DERAS PLATS (2:, osv.)
+unscramble:
+  rewards:
+    1:
+      reward_1:
+        minimum-players: 2 #Villkor baserat på spelare online, belöningen kan bara väljas om 2 eller fler spelare är online
+        chance: 50
+        data:
+          - '10.0%~ [consolecmd] give %player% diamond_block 3 has:test.permission'
+          - '[consolecmd] give %player% iron_block 5'
+      reward_2:
+        data:
+          - '[consolecmd] give %player% iron_block 2'
+
+unreverse:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+reaction:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+guess_the_number:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+shoppinglist:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+clickable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+fillout:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+hoverable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+random:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+variable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+math:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+sequence:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+memorize:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+word_association:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+trivia:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+#HÄRIFRÅN ÄR DET BELÖNINGAR FÖR LOPP SOM BARA HAR 1 VINNARE
+#
+#ETT ANNAT FORMAT ANVÄNDS! LÄS NOGA
+
+races:
+  rewards:
+    #DETTA ÄR BELÖNINGARNA DU LÄGGER I 'races.yml'
+    reward_1:
+      chance: 50
+      data:
+        - '60.0%~ [consolecmd] give %player% diamond_block 5'
+    #OM VÄRDET 'chance' TAS BORT SKER BELÖNINGEN/KOMMANDOT ALLTID
+    reward_2:
+      data:
+        - '[consolecmd] give %player% iron_block 5'
+        - '[playermsg] &aDu vann!'
+    reward_3:
+      chance: 50
+      data:
+        - '[consolecmd] give %player% diamond_block 3'

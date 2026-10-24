@@ -1,0 +1,153 @@
+#LEHETSÉGES MŰVELETEK:
+#
+#[playercmd] - A parancsot a győztesként futtatja
+#[consolecmd] - A parancsot a konzolról futtatja
+#[playermsg] - Üzenetet küld a győztesnek
+#[broadcast] - Üzenetet küld minden játékosnak a bekapcsolt világokban
+#[player_as_op] - Parancsot futtat op-ként a játékos nevében
+#
+#ÍGY ADHATSZ ESÉLYT A JUTALMAKHOZ:
+#
+#PÉLDA:
+#  - '10.0%~ [consolecmd] give %player% iron_block 5'
+#CSAK AKKOR MŰKÖDIK, HA A FORMÁTUM UGYANAZ, MINT A PÉLDÁBAN: A <chance>% AZ ELEJÉN, UTÁNA ~ ÉS EGY SZÓKÖZ. MINDIG ELSŐKÉNT A PARANCSBAN
+#
+#A % NÉLKÜLI PARANCSOK 100%-BAN KIOSZTOTT JUTALMAK LESZNEK.
+
+#JOGOSULTSÁG ELLENŐRZÉSE:
+#
+#TEDD A PARANCSSOR VÉGÉRE.
+#Példa:
+#  - '[consolecmd] give %player% iron_block 5 has:test.permission'
+
+#Az 1 az ELSŐ győztesé; HA TÖBB GYŐZTEST ADSZ HOZZÁ A config.yml-BEN, ÉS MÁS JUTALMAKAT SZERETNÉL, ADD HOZZÁ A HELYÜKET (2: stb.)
+unscramble:
+  rewards:
+    1:
+      reward_1:
+        minimum-players: 2 #Online játékosszám alapú feltétel: a jutalom csak akkor választható, ha legalább 2 játékos online
+        chance: 50
+        data:
+          - '10.0%~ [consolecmd] give %player% diamond_block 3 has:test.permission'
+          - '[consolecmd] give %player% iron_block 5'
+      reward_2:
+        data:
+          - '[consolecmd] give %player% iron_block 2'
+
+unreverse:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+reaction:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+guess_the_number:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+shoppinglist:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+clickable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+fillout:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+hoverable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+random:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+variable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+math:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+sequence:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+memorize:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+word_association:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+trivia:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+#INNENTŐL A CSAK 1 GYŐZTESES VERSENYEK JUTALMAI KÖVETKEZNEK
+#
+#MÁS FORMÁTUM HASZNÁLATOS! OLVASD EL FIGYELMESEN
+
+races:
+  rewards:
+    #EZEK A 'races.yml'-BE ÍRT JUTALMAK
+    reward_1:
+      chance: 50
+      data:
+        - '60.0%~ [consolecmd] give %player% diamond_block 5'
+    #A 'chance' ÉRTÉK ELTÁVOLÍTÁSÁVAL A JUTALOM/PARANCS MINDIG MEGTÖRTÉNIK
+    reward_2:
+      data:
+        - '[consolecmd] give %player% iron_block 5'
+        - '[playermsg] &aNyertél!'
+    reward_3:
+      chance: 50
+      data:
+        - '[consolecmd] give %player% diamond_block 3'

@@ -1,0 +1,735 @@
+unknown_command: '&8[%prefix%&8] &cNeznámý příkaz. Zkus něco jiného!'
+config_reloaded: '&8[%prefix%&8] &fKonfigurační soubory byly znovu načteny!'
+config_reload_failed: '&8[%prefix%&8] &cNěkteré soubory se nenačetly; podívej se do konzole. Tyto soubory si ponechají předchozí hodnoty.'
+not_enough_permissions: '&8[%prefix%&8] &cNemáš dostatečná oprávnění pro tento příkaz!'
+player_only_command: '&8[%prefix%&8] &cTento příkaz mohou použít jen hráči!'
+player_deleted: '&8[%prefix%&8] &cHráč &f%player% &cbyl odstraněn z databáze!'
+player_not_found: '&8[%prefix%&8] &fNepodařilo se najít hráče &c%player%'
+number_not_found_commands: '&8[%prefix%&8] &cPro příkaz se nepodařilo najít číslo'
+points_added: '&8[%prefix%&8] &fPřidáno &a%amount% &fbodů hráči &c%player%'
+points_removed: '&8[%prefix%&8] &fOdebráno &a%amount% &fbodů hráči &c%player%'
+points_set: '&8[%prefix%&8] &fBody hráče &c%player% &fnastaveny na &a%amount%'
+player_points: '&8[%prefix%&8] &fMáš &a%amount% &fbodů!'
+in_cooldown: '&8[%prefix%&8] &cTo zatím nemůžeš použít, počkej &e%time_left%s &cpřed dalším použitím příkazu'
+type_not_found: '&8[%prefix%&8] &fNepodařilo se najít typ materiálu/entity pro &c%type%'
+inventory_full: '&8[%prefix%&8] &cTvůj inventář je plný! &fOdměna byla vyhozena na tvém místě'
+
+no_winner_placeholder: '---'
+cannot_start_from_disabled: '&8[%prefix%&8] &cVe vypnutém světě nelze spustit chatovou hru!'
+toggle_game: '&8[%prefix%&8] &fChatové hry jsou nyní: &a%state%&f!'
+toggle_sound: '&8[%prefix%&8] &fZvuky chatových her jsou nyní: &a%state%&f!'
+toggleAllGames: '&8[%prefix%&8] &fVšechny chatové hry jsou nyní: &a%state% &c(VŠECHNY)&f!'
+state-ON: 'ZAP.'
+state-OFF: 'VYP.'
+game_started: '&8[%prefix%&8] &aSpustil jsi chatovou hru %game% ve svém chatu!'
+invalid_arguments: '&8[%prefix%&8] &fPři kontrole argumentů příkazu nastal problém!'
+cant_log_local: '&8[%prefix%&8] &cNemůžeš vidět zprávy protokolu, protože tato možnost je v konfiguraci vypnutá!'
+toggle_game_other: '&8[%prefix%&8] &fChatové hry pro &c%player% &fjsou nyní: &a%state%&f!'
+toggle_sound_other: '&8[%prefix%&8] &fZvuky chatových her pro &c%player% &fjsou nyní: &a%state%&f!'
+player_points_other: '&8[%prefix%&8] &c%player% &fmá &a%amount% &fbodů!'
+data_loading: '&8[%prefix%&8] &cData tohoto hráče se ještě načítají, zkus to za chvíli.'
+usage: '&8[%prefix%&8] &cPoužití: &f%usage%'
+game_already_running: '&8[%prefix%&8] &cChatová hra už běží! Nejdřív ji ukonči pomocí &f/chatgames stop&c.'
+game_not_started: '&8[%prefix%&8] &cHru %game% se s těmito hodnotami nepodařilo spustit. Podrobnosti jsou v konzoli.'
+no_games_enabled: '&8[%prefix%&8] &cMomentálně není zapnutá žádná hra.'
+game_stopped: '&8[%prefix%&8] &fProbíhající hra byla zastavena bez vítěze.'
+no_game_running: '&8[%prefix%&8] &cMomentálně neběží žádná chatová hra.'
+global_not_enabled: '&8[%prefix%&8] &f%game% &cnení v global_games.yml zapnutá jako globální hra.'
+unknown_game: '&8[%prefix%&8] &cŽádná hra se nejmenuje &f%game%&c.'
+unknown_menu: '&8[%prefix%&8] &cŽádné menu se nejmenuje &f%menu%&c.'
+
+presets:
+  loaded: '&8[%prefix%&8] &fNačtena sada &a%preset% &f(%games%).'
+  cleared: '&8[%prefix%&8] &fŽádná sada už není aktivní; používají se hry zapnuté v games.yml.'
+  saved: '&8[%prefix%&8] &fZapnuté hry uloženy jako sada &a%preset% &f(%games%).'
+  not_found: '&8[%prefix%&8] &cŽádná sada se nejmenuje &f%preset%&c.'
+  invalid_name: '&8[%prefix%&8] &cNázvy sad mohou obsahovat jen písmena bez diakritiky, číslice, - a _ (až 32).'
+  list_header: '&8[%prefix%&8] &eSady:'
+  list_entry: '&7- &f%preset%%active% &8(%games%)'
+  active_marker: ' &a(aktivní)'
+  list_empty: '&8[%prefix%&8] &cV presets.yml nejsou nastavené žádné sady.'
+
+challenges:
+  completed: '&8[%prefix%&8] &a%period% úkol splněn: &f%challenge%&a! Vyzvedni si odměnu pomocí &f/chatgames claim&a.'
+  claimed: '&8[%prefix%&8] &aVyzvedl sis &f%challenge%&a!'
+  nothing_to_claim: '&8[%prefix%&8] &cMomentálně nemáš co vyzvednout.'
+  #/chatgames challenges. %period% níže je 'Denní' nebo 'Týdenní'; %resets% je zbývající čas, např. 5h 12m
+  header: '&8[%prefix%&8] &e%period% úkoly &7(splněno %completed%/%total%, reset za %resets%)'
+  entry: '&7- %challenge% &8- &7%description% &f%progress%/%amount% %status%'
+  status_in_progress: ''
+  status_ready: '&a[Lze vyzvednout]'
+  status_claimed: '&7[Vyzvednuto]'
+  none: '&8[%prefix%&8] &cMomentálně nejsou žádné úkoly.'
+  daily: 'Denní'
+  weekly: 'Týdenní'
+  #Jednotky v %resets%, např. 2d 5h, 5h 12m nebo 40m
+  time_days: '%amount%d'
+  time_hours: '%amount%h'
+  time_minutes: '%amount%m'
+  reset: '&8[%prefix%&8] &fPostup denních a týdenních úkolů hráče &c%player% &fbyl vynulován.'
+
+streaks:
+  grew: '&8[%prefix%&8] &aTvoje %streak% &ateď trvá &f%days% &adní! Vyzvedni si odměnu pomocí &f/chatgames claim&a.'
+  #%days% je jeden den nebo rozsah jako 3-5, když se vyzvedává víc dní najednou
+  claimed: '&8[%prefix%&8] &aVyzvedl sis odměnu za %streak% &a(den %days%)!'
+  header: '&8[%prefix%&8] &eSérie:'
+  entry: '&7- %streak% &8- &f%days% &7dní, nejlepší &f%longest% %status%'
+  status_ready: '&a[%unclaimed% k vyzvednutí]'
+  status_today: '&7[dnes splněno]'
+  status_waiting: '&e[dnes nesplněno]'
+  none: '&8[%prefix%&8] &cSérie jsou vypnuté.'
+  set: '&8[%prefix%&8] &f%streak% &fhráče &c%player% &fnastavena na &a%days% &fdní.'
+  unknown: '&8[%prefix%&8] &cŽádná série se nejmenuje &f%type%&c. Použij challenge, daily nebo global.'
+
+events:
+  unknown: '&8[%prefix%&8] &cŽádná událost se nejmenuje &f%event%&c.'
+  started: '&8[%prefix%&8] &fSpuštěna událost %event%&f.'
+  already_running: '&8[%prefix%&8] &cUž probíhá událost: %event%&c.'
+  cancelled: '&8[%prefix%&8] &cJiný plugin zrušil událost %event%&c.'
+  not_running: '&8[%prefix%&8] &cNeprobíhá žádná událost.'
+  stopped: '&8[%prefix%&8] &fUdálost %event% &fbyla zastavena.'
+  list_header: '&8[%prefix%&8] &eUdálosti:'
+  list_entry: '&7- &f%id% &8(%event%&8) &7her: %steps%, další: &f%next%%running%'
+  list_running: ' &a(běží, hra %step%/%steps%)'
+  list_empty: '&8[%prefix%&8] &cV events.yml nejsou nastavené žádné události.'
+  not_scheduled: 'nenaplánováno'
+  top_header: '&8[%prefix%&8] &eNejvíc bodů události v %event%&e:'
+  top_entry: '&c%spot%. &f%player% &8| &e%points% &7bodů'
+  top_empty: '&8[%prefix%&8] &cV %event% &czatím nikdo nezískal body.'
+
+discord:
+  test_sent: '&8[%prefix%&8] &fOdesláno &a%amount% &ftestovacích zpráv na Discord. Pokud se nic neobjevilo, konzole řekne proč.'
+  leaderboard_posted: '&8[%prefix%&8] &fŽebříček odeslán na Discord.'
+  disabled: '&8[%prefix%&8] &cZprávy na Discord jsou vypnuté: nastav &fenabled: true &cv discord.yml.'
+  no_channel: '&8[%prefix%&8] &f%section% &cnemá v discord.yml kanál s webhookem ani kanál DiscordSRV.'
+  unknown_message: '&8[%prefix%&8] &cŽádná zpráva pro Discord se nejmenuje &f%message%&c.'
+  empty_message: '&8[%prefix%&8] &f%message% &cje v discord.yml prázdná nebo chybí.'
+
+logs:
+  no_logs: "&cNejsou žádné protokoly nebo došlo k chybě."
+  header: "&8[%prefix%&8] &ePosledních &6%amount% &ezáznamů protokolu:"
+  entries:
+    # Záznamy protokolu o hrách
+    game:
+      start: "&aZačátek hry: &f%game% | &aMá odpověď: &f%hasAnswer% | &aOdpověď: &f%answer%"
+      end: "&aKonec hry: &f%game% | &aMá vítěze: &f%hasWinner% | &aVítězové: &f%winners% | &aOdpověď: &f%answer%"
+
+    # Záznamy protokolu o závodech s materiály
+    race:
+      start: "&aZačátek závodu: &f%race% | &aMateriál: &f%material% | &aMnožství: &f%amount%"
+      end: "&aKonec závodu: &f%race% | &aMá vítěze: &f%hasWinner% | &aVítěz: &f%winner% | &aMateriál: &f%material% | &aMnožství: &f%amount%"
+
+    # Samostatný záznam pro závody HUNT (závody s entitami)
+    hunt:
+      start: "&aZačátek závodu: &f%race% | &aEntita: &f%entity% | &aMnožství: &f%amount%"
+      end: "&aKonec závodu: &f%race% | &aMá vítěze: &f%hasWinner% | &aVítěz: &f%winner% | &aEntita: &f%entity% | &aMnožství: &f%amount%"
+
+#Ve zprávách žebříčku můžete volitelně použít <center>.
+top:
+  #Můžete nechat prázdné, abyste vypnuli určitou zprávu. (Kromě 'format' a 'player-stat-format')
+  header: '&b&m---------&e&lTOP CHATU&b&m---------'
+  #Hodnota separators je zpráva, která odděluje 10 nejlepších hráčů od záhlaví a zápatí!
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%points% &7bodů'
+  player-stat-format: '&7Máš &e&l%player_points% &7výher'
+  total-stat-format: '&7Celkem vyhraných her na serveru: &6&l%total_wins%'
+  footer: '&b&m---------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cZatím nejsou data! Vyhraj chatovou hru a získej body!'
+
+TypersTop:
+  #Můžete nechat prázdné, abyste vypnuli určitou zprávu. (Kromě 'format' a 'player-stat-format')
+  header: '&b&m---------&e&lTOP NEJRYCHLEJŠÍCH&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6s'
+  player-stat-format: '&7Tvůj nejlepší čas: &e&l%fastest_time%&6s'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cZatím nejsou data! Vyhraj chatovou hru a buď nejrychlejší!'
+  top_disabled_message: '&8[%prefix%&8] &cTato funkce je momentálně vypnutá!'
+
+GameTypersTop:
+  #Můžete nechat prázdné, abyste vypnuli určitou zprávu. (Kromě 'format' a 'player-stat-format')
+  header: '&b&m---------&e&lTOP NEJRYCHLEJŠÍCH - %game%&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6s'
+  player-stat-format: '&7Tvůj nejlepší čas: &e&l%fastest_time%&6s'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cZatím nejsou data! Vyhraj chatovou hru a buď nejrychlejší!'
+  top_disabled_message: '&8[%prefix%&8] &cTato funkce je momentálně vypnutá!'
+
+help_command:
+  - '&7&m-------------------------------------------------'
+  - '&e&l-ChatGames-'
+  - '&6'
+  - '&6&lPŘÍKAZY:'
+  - '&6'
+  - '&a/chatgames menu [menu] &f- &3Otevře menu: profil, úkoly, série, žebříčky (nebo libovolné menu z menus.yml).'
+  - '&a/chatgames profile [player] &f- &3Zobrazí tvé statistiky (nebo jiného hráče).'
+  - '&a/chatgames top &f- &3Zobrazí 10 hráčů s nejvíce body.'
+  - '&a/chatgames fastest [game] &f- &3Zobrazí nejrychlejší vítěze, celkově nebo v jedné hře.'
+  - '&a/chatgames points [player] &f- &3Zobrazí tvé body (nebo jiného hráče).'
+  - '&a/chatgames challenges &f- &3Zobrazí tvé denní a týdenní úkoly.'
+  - '&a/chatgames streaks &f- &3Zobrazí tvé série.'
+  - '&a/chatgames claim &f- &3Vyzvedne odměny za splněné úkoly a série.'
+  - '&a/chatgames event [list|top <event>] &f- &3Zobrazí herní události nebo ty, kdo v jedné získali nejvíc.'
+  - '&a/chatgames toggle [player] &f- &3Zapne nebo vypne chatové hry pro tebe.'
+  - '&a/chatgames togglesound [player] &f- &3Zapne nebo vypne zvuky chatových her.'
+  - '&6'
+  - '&c&lADMIN:'
+  - '&a/chatgames admin &f- &3Otevře menu administrátora.'
+  - '&a/chatgames debug &f- &3Otevře ladicí menu: vyzkoušej libovolnou hru soukromě, bez odměn.'
+  - '&a/chatgames (game) [values] &f- &3Spustí tuto hru hned, volitelně s tvým slovem/hodnotami.'
+  - '&a/chatgames any &f- &3Spustí hru, kterou by rotace vybrala jako další.'
+  - '&a/chatgames global <game> [values] &f- &3Spustí globální hru: vyhrají všichni, kdo stihnou odpovědět.'
+  - '&a/chatgames event start <event> | stop &f- &3Spustí nebo zastaví herní událost.'
+  - '&a/chatgames stop &f- &3Ukončí probíhající hru bez vítěze.'
+  - '&a/chatgames toggleAll &f- &3Zapne nebo vypne automatickou rotaci her.'
+  - '&a/chatgames preset <list|load|save> [name] &f- &3Spravuje sady her.'
+  - '&a/chatgames +points|-points|setpoints <player> <amount> &f- &3Změní body hráče.'
+  - '&a/chatgames remove <player> &f- &3Smaže data hráče.'
+  - '&a/chatgames challenges reset <player> &f- &3Vynuluje postup úkolů hráče.'
+  - '&a/chatgames streak set <player> <challenge|daily|global> <days> &f- &3Nastaví sérii hráče.'
+  - '&a/chatgames logs [amount] &f- &3Zobrazí poslední protokoly her.'
+  - '&a/chatgames discord <test <message|all>|leaderboard> &f- &3Odešle testovací zprávu nebo žebříček na Discord.'
+  - '&a/chatgames reload &f- &3Znovu načte konfigurační soubory.'
+  - '&6'
+  - '&2&lTYPY HER:'
+  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace, tame, shear'
+  - '&7&m-------------------------------------------------'
+
+#Použijte <center> ve zprávách typu SEZNAM, aby se vycentrovaly: řádky s ním budou na střed!
+
+#############################
+##    ZPRÁVY CHATOVÝCH HER    ##
+#############################
+#Společné pro všechny hry. Hra je může přepsat vlastními 'hint_message' / 'countdown_actionbar' ve své sekci níže.
+hint_message: '&8[%prefix%&8] &eNápověda: &f%hint%'
+countdown_actionbar: '&7Zbývá &e%seconds%s'
+
+waiting_for_other_winners: '&8[%prefix%&8] &aSprávně! &fČekáme na další vítěze...'
+wrong_case: '&8[%prefix%&8] &cSkoro... Zkontroluj velká a malá písmena!'
+  #V correct_message VŠECH HER MŮŽETE POUŽÍT "%display_name%" MÍSTO %player%.
+  #
+  #TAKÉ MŮŽETE POUŽÍT %points_<position>% K ZOBRAZENÍ BODŮ HRÁČE, KTERÝ VYHRÁL.
+  #
+  #K zobrazení 1., 2., 3. vítěze atd. použijte %winner_<position>% a pro čas každého %time_<position>%
+
+  ##PŘÍKLAD SE 2 VÍTĚZI:
+  #
+  #correct_message:
+  #- ''
+  #- '<center>&r✓ ✯ %prefix% &r✯ ✓'
+  #- ''
+  #- '&7Správná odpověď byla `&e%correct_answer%&7`! Vítězové:'
+  #- '<center>&f1. &a%winner_1% - (&c%time_1%s&7)'
+  #- '<center>&f2. &a%winner_2% - (&c%time_2%s&7)'
+#- ''
+unscramble:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToGuess% sekund&f na &drozluštění&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7správně rozluštil `&e%correct_answer%&7` (&c%time_1%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cuplynulo! &fHra Rozlušti skončila!'
+    - '<center>Správná odpověď byla &e%correct_answer%&f!'
+    - ''
+
+unreverse:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToGuess% sekund&f na &dotočení&f slova: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7nejrychleji otočil `&e%correct_answer%&7` (&c%time_1%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cuplynulo! &fHra Otoč skončila!'
+    - '<center>Správná odpověď byla &e%correct_answer%&f!'
+    - ''
+
+reaction:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToGuess% sekund&f na &dnapsání&f slova: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7nejrychleji napsal `&e%correct_answer%&7` (&c%time_1%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cuplynulo! &fHra na reakci skončila!'
+    - '<center>Správná odpověď byla &e%correct_answer%&f!'
+    - ''
+
+guess_the_number:
+  hint_message: '&8[%prefix%&8] &eNápověda: číslo je mezi &f%hint%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToGuess% sekund&f na &duhodnutí čísla &fv rozsahu:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7první odpověděl `&e%correct_answer%&7` (&c%time_1%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cuplynulo! &fHra Hádej číslo skončila!'
+    - '<center>Správná odpověď byla &e%correct_answer%&f!'
+    - ''
+
+memorize:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToMemorize% sekund&f na &dzapamatování &ftohoto seznamu:'
+    - ''
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  messageAfterMemorized:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToGuess% sekund&f na napsání seznamu &dve správném pořadí&f!'
+    - ''
+    - '<center>&fPředměty odděluj čárkami! (např. `&bjablko, banán, čokoláda&f`)'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7první napsal seznam a získal cenu! (&c%time_1%s&7)'
+    - ''
+    - '<center>&fSeznam byl: &f`&b%correct_answer%&f`'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cuplynulo! &fHra Zapamatuj si skončila!'
+    - ''
+    - '<center>&fSeznam byl: &f`&b%correct_answer%&f`'
+    - ''
+
+sequence:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToGuess% sekund&f na &ddoplnění řady&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  hint_message: '&8[%prefix%&8] &eNápověda: další číslo je &f%hint%'
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7první našel `&e%correct_answer%&7` (&c%time_1%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cuplynulo! &fHra Řada skončila!'
+    - '<center>Další číslo bylo &e%correct_answer%&f!'
+    - ''
+
+clickable:
+  clickableText: '&aKlikni sem!'
+  hoverText: '&eKlikni sem!'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToGuess% sekund&f na &dkliknutí&f na text:'
+    - ''
+    - '<center>&b%clickableText%'
+    - ''
+  #USE %winner_
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7nejrychleji klikl na text (&c%time_1%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cuplynulo! &fHra s klikáním skončila!'
+    - ''
+
+fillout:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToGuess% sekund&f na &ddoplnění&f slova: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7nejrychleji doplnil `&e%correct_answer%&7` (&c%time_1%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cuplynulo! &fHra Doplň skončila!'
+    - '<center>Správná odpověď byla &e%correct_answer%&f!'
+    - ''
+
+hoverable:
+  hoverableText: '&eNajeď sem!'
+  hoverText: '&b%selection%'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToGuess% sekund&f na &dnapsání&f slova z popisku po najetí:'
+    - ''
+    - '<center>&b%hoverableText%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7nejrychleji napsal `&e%correct_answer%&7` (&c%time_1%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cuplynulo! &fHra s najetím skončila!'
+    - '<center>Správná odpověď byla &e%correct_answer%&f!'
+    - ''
+
+#Tato hra vytvoří řetězec zadané délky z náhodných znaků
+random:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToGuess% sekund&f na &dnapsání&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7nejrychleji napsal `&e%correct_answer%&7` (&c%time_1%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cuplynulo! &fHra s náhodnými znaky skončila!'
+    - '<center>Správná odpověď byla &e%correct_answer%&f!'
+    - ''
+
+math:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToGuess% sekund&f na &dvyřešení&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7nejrychleji dostal `&e%correct_answer%&7` (&c%time_1%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cuplynulo! &fHra s matematikou skončila!'
+    - '<center>Správná odpověď byla &e%correct_answer%&f!'
+    - ''
+
+variable:
+  #Toto je formát, ve kterém se objeví; můžete změnit, kolikrát se %symbol% opakuje v 'line1and2-format', ale všechny proměnné na řádku 3 musí zůstat stejné.
+  line1and2-format: '&c%symbol%&f + &c%symbol%&f + &c%symbol%&f = &e'
+  line3-format: '&c%symbol_1%&f + &c%symbol_2%&f + &b%toGet% &f= &e%result%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToGuess% sekund&f na &dnalezení&f: `&b%symbol%&f`'
+    - ''
+    - '<center>%line_1%'
+    - '<center>%line_2%'
+    - '<center>%line_3%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7nejrychleji dostal `&e%correct_answer%&7` (&c%time_1%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cuplynulo! &fHra s proměnnou skončila!'
+    - '<center>Správná odpověď byla &e%correct_answer%&f!'
+    - ''
+
+#%selection% jsou nápovědy, %difficulty% easy/medium/hard.
+word_association:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToGuess% sekund&f na nalezení &dspojení&f:'
+    - '<center>&b%selection%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7našel spojení `&e%correct_answer%&7` (&c%time_1%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cuplynulo! &fNikdo nenašel spojení.'
+    - '<center>Odpověď byla &e%correct_answer%&f!'
+    - ''
+
+trivia:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToGuess% sekund&f na &dodpověď&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7první odpověděl `&e%correct_answer%&7` (&c%time_1%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &cuplynulo! &fKvíz skončil!'
+    - '<center>Správná odpověď byla &e%correct_answer%&f!'
+    - ''
+
+#ZÁVODY
+#Zatím závody nepodporují více vítězů: nevidím v tom smysl, protože jde o „závody“ nebo „výzvy pro hráče“, kde má odměnu dostat první.
+
+#%value% je materiál nebo mob, %amount% kolik, %timeToComplete% časový limit v sekundách.
+#V correct_message: %winner%, %winner_displayname%, %time% (sekundy) a %points% (body vítěze).
+
+hunt:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToComplete% sekund&f na &dulovení&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7ulovil `&e%amount%&fx &3%value%&7` (&c%time%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cuplynulo! &fVýzva Lov skončila!'
+
+mine:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToComplete% sekund&f na &dvytěžení&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7vytěžil `&e%amount%&fx &3%value%&7` (&c%time%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cuplynulo! &fVýzva Těžba skončila!'
+
+place:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToComplete% sekund&f na &dpoložení&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7položil `&e%amount%&fx &3%value%&7` (&c%time%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cuplynulo! &fVýzva Stavění skončila!'
+
+fish:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToComplete% sekund&f na &dvylovení&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7vylovil `&e%amount%&fx &3%value%&7` (&c%time%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cuplynulo! &fVýzva Rybaření skončila!'
+
+eat:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToComplete% sekund&f na &dsnězení&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7snědl `&e%amount%&fx &3%value%&7` (&c%time%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cuplynulo! &fVýzva Jídlo skončila!'
+
+craft:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToComplete% sekund&f na &dvyrobení&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7vyrobil `&e%amount%&fx &3%value%&7` (&c%time%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cuplynulo! &fVýzva Výroba skončila!'
+furnace:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToComplete% sekund&f na &duvaření&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7uvařil `&e%amount%&fx &3%value%&7` (&c%time%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cuplynulo! &fVýzva Vaření skončila!'
+
+tame:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToComplete% sekund&f na &dochočení&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7ochočil `&e%amount%&fx &3%value%&7` (&c%time%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cuplynulo! &fVýzva Ochočení skončila!'
+
+shear:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fMáš &e%timeToComplete% sekund&f na &dostříhání&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7ostříhal `&e%amount%&fx &3%value%&7` (&c%time%s&7) a získal cenu!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cuplynulo! &fVýzva Stříhání skončila!'

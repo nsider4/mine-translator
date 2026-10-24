@@ -1,0 +1,153 @@
+#가능한 동작:
+#
+#[playercmd] - 승자로서 명령어 실행
+#[consolecmd] - 콘솔에서 명령어 실행
+#[playermsg] - 승자에게 메시지 보내기
+#[broadcast] - 켜진 월드의 모든 플레이어에게 메시지 알리기
+#[player_as_op] - 플레이어에게 OP 권한으로 명령어 실행
+#
+#보상에 확률을 붙이는 방법:
+#
+#예시:
+#  - '10.0%~ [consolecmd] give %player% iron_block 5'
+#예시와 같은 형식일 때만 작동합니다. 맨 앞에 <chance>%, 이어서 ~와 공백 하나. 항상 명령어 맨 앞에 씁니다
+#
+#%가 없는 명령어는 100% 주어지는 보상입니다.
+
+#권한 확인:
+#
+#명령어 줄 끝에 씁니다.
+#예시:
+#  - '[consolecmd] give %player% iron_block 5 has:test.permission'
+
+#1은 첫 번째 승자입니다. config.yml에서 승자를 늘리고 다른 보상을 주려면 그 순위(2: 등)를 추가하세요
+unscramble:
+  rewards:
+    1:
+      reward_1:
+        minimum-players: 2 #온라인 플레이어 수 조건. 온라인이 2명 이상일 때만 이 보상이 뽑힙니다
+        chance: 50
+        data:
+          - '10.0%~ [consolecmd] give %player% diamond_block 3 has:test.permission'
+          - '[consolecmd] give %player% iron_block 5'
+      reward_2:
+        data:
+          - '[consolecmd] give %player% iron_block 2'
+
+unreverse:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+reaction:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+guess_the_number:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+shoppinglist:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+clickable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+fillout:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+hoverable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+random:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+variable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+math:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+sequence:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+memorize:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+word_association:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+trivia:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+#여기부터는 승자가 1명뿐인 레이스의 보상입니다
+#
+#다른 형식을 씁니다! 잘 읽어 보세요
+
+races:
+  rewards:
+    #이것들은 'races.yml'에 넣는 보상입니다
+    reward_1:
+      chance: 50
+      data:
+        - '60.0%~ [consolecmd] give %player% diamond_block 5'
+    #'chance' 값을 지우면 그 보상/명령어는 항상 실행됩니다
+    reward_2:
+      data:
+        - '[consolecmd] give %player% iron_block 5'
+        - '[playermsg] &a승리!'
+    reward_3:
+      chance: 50
+      data:
+        - '[consolecmd] give %player% diamond_block 3'

@@ -1,0 +1,1063 @@
+unscramble:
+  Words:
+    - '물약'
+    - '신호기'
+    - '화살'
+    - '겉날개'
+    - '말'
+    - '돼지'
+    - '양'
+    - '소'
+    - '닭'
+    - '레드스톤'
+    - '크리퍼'
+    - '엔더맨'
+    - '좀비'
+    - '스켈레톤'
+    - '주민'
+    - '네더'
+    - '엔드'
+    - '엔더 상자'
+    - '검'
+    - '제작'
+    - '생물 군계'
+    - '엔드 차원문'
+    - '엔더 진주'
+    - '블레이즈 막대기'
+    - '네더 사마귀'
+    - '영혼 모래'
+    - '고대 잔해'
+    - '우는 흑요석'
+    - '벌통'
+    - '모닥불'
+    - '랜턴'
+    - '주크박스'
+    - '소리 블록'
+    - '음반'
+    - '레버'
+    - '버튼'
+    - '광산 수레'
+    - '관측기'
+    - '피스톤'
+    - '다이아몬드'
+    - '금'
+    - '철'
+    - '흑요석'
+    - '곡괭이'
+    - '꽃'
+    - '묘목'
+    - '이끼'
+    - '횃불'
+    - '상자'
+    - 'Furnace'
+    - '버섯'
+    - '스컬크'
+    - '프리즈머린'
+    - '흙'
+    - '유리'
+    - '셜커'
+    - '테라코타'
+    - '맹그로브'
+    - '발광오징어'
+    - '퇴비통'
+    - '베틀'
+    - '숫돌'
+    - '석재 절단기'
+    - '버섯불'
+    - '자석석'
+    - '자수정'
+    - '개구리불'
+    - '공급기'
+    - '발사기'
+    - '구리'
+    - '네더라이트'
+    - '깃털'
+    - '실'
+    - '화약'
+    - '가죽'
+    - '복어'
+    - '아홀로틀'
+    - '발광석'
+    - '후렴'
+    - 'Pigstep'
+    - '벌집 조각'
+    - '연어'
+    - '토끼'
+    - '망원경'
+    - '가위'
+    - '나침반'
+    - '수선'
+    - '쇠뇌'
+    - '삼지창'
+    - '가마솥'
+    - '안장'
+    - '독서대'
+    - '호퍼'
+    - '삽'
+    - '시계'
+    - '석탄'
+    - '청금석'
+    - '석영'
+    - '주괴'
+    - '올챙이'
+
+unreverse:
+  Words:
+    - '물약'
+    - '신호기'
+    - '화살'
+    - '겉날개'
+    - '말'
+    - '돼지'
+    - '양'
+    - '소'
+    - '닭'
+    - '레드스톤'
+    - '크리퍼'
+    - '엔더맨'
+    - '좀비'
+    - '스켈레톤'
+    - '주민'
+    - '네더'
+    - '엔드'
+    - '엔더 상자'
+    - '검'
+    - '제작'
+    - '생물 군계'
+    - '엔드 차원문'
+    - '엔더 진주'
+    - '블레이즈 막대기'
+    - '네더 사마귀'
+    - '영혼 모래'
+    - '고대 잔해'
+    - '우는 흑요석'
+    - '벌통'
+    - '모닥불'
+    - '랜턴'
+    - '주크박스'
+    - '소리 블록'
+    - '음반'
+    - '레버'
+    - '버튼'
+    - '광산 수레'
+    - '관측기'
+    - '피스톤'
+    - '다이아몬드'
+    - '금'
+    - '철'
+    - '흑요석'
+    - '곡괭이'
+    - '꽃'
+    - '묘목'
+    - '이끼'
+    - '횃불'
+    - '상자'
+    - 'Furnace'
+    - '버섯'
+    - '스컬크'
+    - '프리즈머린'
+    - '흙'
+    - '유리'
+    - '셜커'
+    - '테라코타'
+    - '맹그로브'
+    - '발광오징어'
+    - '퇴비통'
+    - '베틀'
+    - '숫돌'
+    - '석재 절단기'
+    - '버섯불'
+    - '자석석'
+    - '자수정'
+    - '개구리불'
+    - '공급기'
+    - '발사기'
+    - '구리'
+    - '네더라이트'
+    - '깃털'
+    - '실'
+    - '화약'
+    - '가죽'
+    - '복어'
+    - '아홀로틀'
+    - '발광석'
+    - '후렴'
+    - 'Pigstep'
+    - '벌집 조각'
+    - '연어'
+    - '토끼'
+    - '망원경'
+    - '가위'
+    - '나침반'
+    - '수선'
+    - '쇠뇌'
+    - '삼지창'
+    - '가마솥'
+    - '안장'
+    - '독서대'
+    - '호퍼'
+    - '삽'
+    - '시계'
+    - '석탄'
+    - '청금석'
+    - '석영'
+    - '주괴'
+    - '올챙이'
+
+reaction:
+  Words:
+    - '물약'
+    - '신호기'
+    - '화살'
+    - '겉날개'
+    - '말'
+    - '돼지'
+    - '양'
+    - '소'
+    - '닭'
+    - '레드스톤'
+    - '크리퍼'
+    - '엔더맨'
+    - '좀비'
+    - '스켈레톤'
+    - '주민'
+    - '네더'
+    - '엔드'
+    - '엔더 상자'
+    - '검'
+    - '제작'
+    - '생물 군계'
+    - '엔드 차원문'
+    - '엔더 진주'
+    - '블레이즈 막대기'
+    - '네더 사마귀'
+    - '영혼 모래'
+    - '고대 잔해'
+    - '우는 흑요석'
+    - '벌통'
+    - '모닥불'
+    - '랜턴'
+    - '주크박스'
+    - '소리 블록'
+    - '음반'
+    - '레버'
+    - '버튼'
+    - '광산 수레'
+    - '관측기'
+    - '피스톤'
+    - '다이아몬드'
+    - '금'
+    - '철'
+    - '흑요석'
+    - '곡괭이'
+    - '꽃'
+    - '묘목'
+    - '이끼'
+    - '횃불'
+    - '상자'
+    - 'Furnace'
+    - '버섯'
+    - '스컬크'
+    - '프리즈머린'
+    - '흙'
+    - '유리'
+    - '셜커'
+    - '테라코타'
+    - '맹그로브'
+    - '발광오징어'
+    - '퇴비통'
+    - '베틀'
+    - '숫돌'
+    - '석재 절단기'
+    - '버섯불'
+    - '자석석'
+    - '자수정'
+    - '개구리불'
+    - '공급기'
+    - '발사기'
+    - '구리'
+    - '네더라이트'
+    - '깃털'
+    - '실'
+    - '화약'
+    - '가죽'
+    - '복어'
+    - '아홀로틀'
+    - '발광석'
+    - '후렴'
+    - 'Pigstep'
+    - '벌집 조각'
+    - '연어'
+    - '토끼'
+    - '망원경'
+    - '가위'
+    - '나침반'
+    - '수선'
+    - '쇠뇌'
+    - '삼지창'
+    - '가마솥'
+    - '안장'
+    - '독서대'
+    - '호퍼'
+    - '삽'
+    - '시계'
+    - '석탄'
+    - '청금석'
+    - '석영'
+    - '주괴'
+    - '올챙이'
+
+fillout:
+  Words:
+    - '물약'
+    - '신호기'
+    - '화살'
+    - '겉날개'
+    - '말'
+    - '돼지'
+    - '양'
+    - '소'
+    - '닭'
+    - '레드스톤'
+    - '크리퍼'
+    - '엔더맨'
+    - '좀비'
+    - '스켈레톤'
+    - '주민'
+    - '네더'
+    - '엔드'
+    - '엔더 상자'
+    - '검'
+    - '제작'
+    - '생물 군계'
+    - '엔드 차원문'
+    - '엔더 진주'
+    - '블레이즈 막대기'
+    - '네더 사마귀'
+    - '영혼 모래'
+    - '고대 잔해'
+    - '우는 흑요석'
+    - '벌통'
+    - '모닥불'
+    - '랜턴'
+    - '주크박스'
+    - '소리 블록'
+    - '음반'
+    - '레버'
+    - '버튼'
+    - '광산 수레'
+    - '관측기'
+    - '피스톤'
+    - '다이아몬드'
+    - '금'
+    - '철'
+    - '흑요석'
+    - '곡괭이'
+    - '꽃'
+    - '묘목'
+    - '이끼'
+    - '횃불'
+    - '상자'
+    - 'Furnace'
+    - '버섯'
+    - '스컬크'
+    - '프리즈머린'
+    - '흙'
+    - '유리'
+    - '셜커'
+    - '테라코타'
+    - '맹그로브'
+    - '발광오징어'
+    - '퇴비통'
+    - '베틀'
+    - '숫돌'
+    - '석재 절단기'
+    - '버섯불'
+    - '자석석'
+    - '자수정'
+    - '개구리불'
+    - '공급기'
+    - '발사기'
+    - '구리'
+    - '네더라이트'
+    - '깃털'
+    - '실'
+    - '화약'
+    - '가죽'
+    - '복어'
+    - '아홀로틀'
+    - '발광석'
+    - '후렴'
+    - 'Pigstep'
+    - '벌집 조각'
+    - '연어'
+    - '토끼'
+    - '망원경'
+    - '가위'
+    - '나침반'
+    - '수선'
+    - '쇠뇌'
+    - '삼지창'
+    - '가마솥'
+    - '안장'
+    - '독서대'
+    - '호퍼'
+    - '삽'
+    - '시계'
+    - '석탄'
+    - '청금석'
+    - '석영'
+    - '주괴'
+    - '올챙이'
+
+hoverable:
+  Words:
+    - '물약'
+    - '신호기'
+    - '화살'
+    - '겉날개'
+    - '말'
+    - '돼지'
+    - '양'
+    - '소'
+    - '닭'
+    - '레드스톤'
+    - '크리퍼'
+    - '엔더맨'
+    - '좀비'
+    - '스켈레톤'
+    - '주민'
+    - '네더'
+    - '엔드'
+    - '엔더 상자'
+    - '검'
+    - '제작'
+    - '생물 군계'
+    - '엔드 차원문'
+    - '엔더 진주'
+    - '블레이즈 막대기'
+    - '네더 사마귀'
+    - '영혼 모래'
+    - '고대 잔해'
+    - '우는 흑요석'
+    - '벌통'
+    - '모닥불'
+    - '랜턴'
+    - '주크박스'
+    - '소리 블록'
+    - '음반'
+    - '레버'
+    - '버튼'
+    - '광산 수레'
+    - '관측기'
+    - '피스톤'
+    - '다이아몬드'
+    - '금'
+    - '철'
+    - '흑요석'
+    - '곡괭이'
+    - '꽃'
+    - '묘목'
+    - '이끼'
+    - '횃불'
+    - '상자'
+    - 'Furnace'
+    - '버섯'
+    - '스컬크'
+    - '프리즈머린'
+    - '흙'
+    - '유리'
+    - '셜커'
+    - '테라코타'
+    - '맹그로브'
+    - '발광오징어'
+    - '퇴비통'
+    - '베틀'
+    - '숫돌'
+    - '석재 절단기'
+    - '버섯불'
+    - '자석석'
+    - '자수정'
+    - '개구리불'
+    - '공급기'
+    - '발사기'
+    - '구리'
+    - '네더라이트'
+    - '깃털'
+    - '실'
+    - '화약'
+    - '가죽'
+    - '복어'
+    - '아홀로틀'
+    - '발광석'
+    - '후렴'
+    - 'Pigstep'
+    - '벌집 조각'
+    - '연어'
+    - '토끼'
+    - '망원경'
+    - '가위'
+    - '나침반'
+    - '수선'
+    - '쇠뇌'
+    - '삼지창'
+    - '가마솥'
+    - '안장'
+    - '독서대'
+    - '호퍼'
+    - '삽'
+    - '시계'
+    - '석탄'
+    - '청금석'
+    - '석영'
+    - '주괴'
+    - '올챙이'
+
+#기억하기 게임의 아이템 풀입니다. 어떤 것을 쓸지는 games.yml -> memorize.pools에서 고릅니다.
+#'numbers'는 목록이 필요 없습니다. 'blocks'와 'mobs'는 Minecraft ID이며 config.yml에서 정한 언어(lang)로 표시됩니다.
+#다른 이름은 그냥 목록입니다. 여기에 추가하고 games.yml에 그 이름을 적으면 쓸 수 있습니다.
+memorize:
+  pools:
+    shopping_list:
+      - '지팡이 사탕'
+      - '리본'
+      - '스노우볼'
+      - '진저브레드맨'
+      - '썰매'
+      - '징글벨'
+      - '크리스마스트리'
+      - '양말'
+      - '겨우살이'
+      - '반짝이 장식'
+      - '오너먼트'
+      - '포인세티아'
+      - '핫초코'
+      - '산타 모자'
+      - '순록'
+      - '리스'
+      - '크리스마스 전구'
+      - '호두까기 인형'
+      - '크리스마스 쿠키'
+      - '눈사람'
+    words:
+      - '크리퍼'
+      - '다이아몬드'
+      - '에메랄드'
+      - '레드스톤'
+      - '차원문'
+      - '신호기'
+      - '겉날개'
+      - '삼지창'
+      - '안장'
+      - '랜턴'
+      - '나침반'
+      - '모루'
+    colors:
+      - '빨간색'
+      - '주황색'
+      - '노란색'
+      - '연두색'
+      - '초록색'
+      - '청록색'
+      - '하늘색'
+      - '파란색'
+      - '보라색'
+      - '자홍색'
+      - '분홍색'
+      - '갈색'
+      - '검은색'
+      - '흰색'
+      - '회색'
+    blocks:
+      - diamond_block
+      - oak_log
+      - crafting_table
+      - furnace
+      - tnt
+      - bookshelf
+      - glowstone
+      - obsidian
+      - sponge
+      - pumpkin
+      - melon
+      - cactus
+      - ice
+      - sand
+      - gravel
+      - netherrack
+      - end_stone
+      - hay_block
+    mobs:
+      - creeper
+      - zombie
+      - skeleton
+      - spider
+      - enderman
+      - blaze
+      - ghast
+      - slime
+      - witch
+      - villager
+      - cow
+      - pig
+      - sheep
+      - chicken
+      - wolf
+      - ocelot
+      - horse
+      - squid
+
+blacklistedWords:
+  - 'ass'
+  - 'dumb'
+
+trivia:
+  data:
+    1:
+      question: 'Minecraft는 몇 년에 출시됐을까요?'
+      answers:
+        - '2011'
+        - '2009'
+    2:
+      question: 'Minecraft를 만든 사람은 누구일까요?'
+      answers:
+        - 'Notch'
+    3:
+      question: 'Minecraft의 다른 에디션은? Java 에디션과 _______ 에디션?'
+      answers:
+        - '기반암'
+    4:
+      question: 'Minecraft의 다른 에디션은? 베드락 에디션과 ____ 에디션?'
+      answers:
+        - 'Java'
+    5:
+      question: '네더 차원문으로 어느 차원에 갈 수 있을까요?'
+      answers:
+        - '네더'
+    6:
+      question: '블록이 무한하고 하늘을 날 수 있는 게임 모드는?'
+      answers:
+        - '크리에이티브'
+    7:
+      question: '자원을 모으고 배고픔을 관리하며 살아남는 게임 모드는?'
+      answers:
+        - '서바이벌'
+    8:
+      question: '블록을 통과하며 세상을 구경만 하는 게임 모드는?'
+      answers:
+        - '관전자'
+    9:
+      question: '모험 지도를 위한, 블록을 마음대로 부술 수 없는 게임 모드는?'
+      answers:
+        - '모험'
+    10:
+      question: '위더 스켈레톤 머리 3개로 소환하는 몹은?'
+      answers:
+        - '위더'
+    11:
+      question: '모래를 제련하면 어떤 블록이 나올까요?'
+      answers:
+        - '유리'
+    12:
+      question: 'Minecraft에서 가장 강한 도구 재료는?'
+      answers:
+        - '네더라이트'
+    13:
+      question: '위더가 다른 몹을 죽이면 어떤 아이템이 떨어질까요?'
+      answers:
+        - '위더 장미'
+    14:
+      question: 'Minecraft의 건축 높이 제한은?'
+      answers:
+        - '320'
+    15:
+      question: '동굴과 절벽 업데이트가 나온 Minecraft 버전은?'
+      answers:
+        - '1.17'
+    16:
+      question: '어떤 몹을 잡으면 ''세상에서 가장 귀여운 포식자'' 발전 과제를 얻을까요?'
+      answers:
+        - '아홀로틀'
+    17:
+      question: '위더를 처치하면 어떤 아이템이 떨어질까요?'
+      answers:
+        - '네더의 별'
+    18:
+      question: 'Minecraft에는 음반이 몇 개 있을까요?'
+      answers:
+        - '15'
+    19:
+      question: 'Minecraft에는 염소 뿔 종류가 몇 가지 있을까요?'
+      answers:
+        - '8'
+    20:
+      question: '이 조합법은 무엇일까요? 밀 x3 우유 x3 설탕 x2 달걀 x1'
+      answers:
+        - '케이크'
+    21:
+      question: '황금 당근을 만드는 데 금 조각이 몇 개 필요할까요?'
+      answers:
+        - '8'
+    22:
+      question: '갑옷 한 벌을 모두 만드는 데 재료가 몇 개 필요할까요?'
+      answers:
+        - '24'
+    23:
+      question: '월드를 시작하면 어느 차원에서 시작할까요?'
+      answers:
+        - '오버월드'
+    24:
+      question: 'Minecraft에서 가장 흔한 제작 재료는?'
+      answers:
+        - '나무'
+    25:
+      question: '늑대를 길들이는 데 쓰는 재료는?'
+      answers:
+        - '뼈다귀'
+    26:
+      question: '앵무새를 길들이는 데 쓰는 재료는?'
+      answers:
+        - '씨앗'
+    27:
+      question: '고양이를 길들이는 데 쓰는 재료는?'
+      answers:
+        - 'Fish'
+    28:
+      question: '대나무가 자라는 생물 군계는?'
+      answers:
+        - '정글'
+    29:
+      question: '양에게 어떤 이름을 붙이면 색이 계속 바뀔까요?'
+      answers:
+        - 'Jeb_'
+    30:
+      question: 'Minecraft에는 나무 종류가 몇 가지 있을까요?'
+      answers:
+        - '9'
+    31:
+      question: '딥 다크에서 자주 볼 수 있는 몹은?'
+      answers:
+        - '워든'
+    32:
+      question: '엔드 차원에서 다들 자주 찾는 아이템은?'
+      answers:
+        - '겉날개'
+        - '드래곤 알'
+    33:
+      question: '신호기 하나를 최대로 강화하려면 블록이 몇 개 필요할까요?'
+      answers:
+        - '169'
+    34:
+      question: '신호기에 힘을 주지 않는 블록은? 청금석, 에메랄드, 금.'
+      answers:
+        - '청금석'
+    35:
+      question: '제작대 16개를 만드는 데 나무 판자가 몇 개 필요할까요?'
+      answers:
+        - '64'
+    36:
+      question: 'Minecraft에서 현수막을 만드는 데 쓰는 것은?'
+      answers:
+        - '베틀'
+    37:
+      question: '거북이 번개에 맞아 죽으면 어떤 아이템이 떨어질까요?'
+      answers:
+        - '그릇'
+    38:
+      question: '나뭇잎에서 떨어지는 Minecraft 음식은?'
+      answers:
+        - '사과'
+    39:
+      question: '엔더 드래곤을 다시 소환하려면 가스트의 눈물이 몇 개 필요할까요?'
+      answers:
+        - '4'
+    40:
+      question: 'Minecraft에서 식물을 빨리 자라게 하는 아이템은?'
+      answers:
+        - '뼛가루'
+    41:
+      question: '앵무새에게 절대 주면 안 되는 음식은?'
+      answers:
+        - '쿠키'
+    42:
+      question: '엔더 진주 한 묶음은 몇 개일까요?'
+      answers:
+        - '16'
+    43:
+      question: '엔드 차원문을 열려면 엔더의 눈이 몇 개 필요할까요?'
+      answers:
+        - '12'
+    44:
+      question: '소환사가 떨어뜨리는 귀한 아이템은?'
+      answers:
+        - '불사의 토템'
+    45:
+      question: 'Minecraft에는 양털 색이 몇 가지 있을까요?'
+      answers:
+        - '16'
+    46:
+      question: '원목을 제련하면 어떤 아이템이 나올까요?'
+      answers:
+        - '숯'
+    47:
+      question: '네더에서만 얻을 수 있는 음반은?'
+      answers:
+        - 'Pigstep'
+    48:
+      question: '철 골렘을 만들려면 철 블록이 몇 개 필요할까요?'
+      answers:
+        - '4'
+    49:
+      question: '네더라이트 주괴를 만들려면 고대 잔해가 몇 개 필요할까요?'
+      answers:
+        - '4'
+    50:
+      question: '마법 부여대에서 마법을 부여하는 데 필요한 아이템은?'
+      answers:
+        - '청금석'
+        - 'xp'
+
+#단어 연상: 단서 3개, 숨은 연결 1개. 첫 번째 정답이 보여 주는 정답이고,
+#나머지 정답도 인정됩니다. 어려운 것은 단서를 하나씩(힌트로) 보여 줍니다.
+word_association:
+  data:
+    nether_portal:
+      difficulty: easy
+      clues: ['흑요석', '부싯돌과 부시', '보라색']
+      answers: ['네더 차원문', '차원문']
+    creeper:
+      difficulty: easy
+      clues: ['초록색', '쉬익', '폭발']
+      answers: ['크리퍼']
+    enderman:
+      difficulty: easy
+      clues: ['키가 큰', '순간이동', '진주']
+      answers: ['엔더맨']
+    diamond:
+      difficulty: easy
+      clues: ['곡괭이', '파란색', '깊은 곳']
+      answers: ['다이아몬드', '다이아']
+    cake:
+      difficulty: easy
+      clues: ['우유', '달걀', '설탕']
+      answers: ['케이크']
+    bed:
+      difficulty: easy
+      clues: ['양털', '판자', '잠']
+      answers: ['침대']
+    bucket:
+      difficulty: easy
+      clues: ['철', '물', '용암']
+      answers: ['양동이']
+    torch:
+      difficulty: easy
+      clues: ['막대기', '석탄', '빛']
+      answers: ['횃불']
+    sheep:
+      difficulty: easy
+      clues: ['양털', '가위', '매애']
+      answers: ['양']
+    villager:
+      difficulty: easy
+      clues: ['에메랄드', '거래', '흐음']
+      answers: ['주민']
+    zombie:
+      difficulty: easy
+      clues: ['썩은 살점', '밤', '신음']
+      answers: ['좀비']
+    skeleton:
+      difficulty: easy
+      clues: ['뼈', '활', '화살']
+      answers: ['스켈레톤']
+    chest:
+      difficulty: easy
+      clues: ['판자', '보관', '전리품']
+      answers: ['상자']
+    furnace:
+      difficulty: easy
+      clues: ['조약돌', '제련', '연료']
+      answers: ['Furnace']
+    bread:
+      difficulty: easy
+      clues: ['밀', '세 개', '음식']
+      answers: ['빵']
+    cow:
+      difficulty: easy
+      clues: ['가죽', '우유', '소고기']
+      answers: ['소']
+    crafting_table:
+      difficulty: easy
+      clues: ['판자', '격자', '조합법']
+      answers: ['제작대', '작업대']
+    tnt:
+      difficulty: easy
+      clues: ['화약', '모래', '쾅']
+      answers: ['TNT']
+    chicken:
+      difficulty: easy
+      clues: ['달걀', '깃털', '꼬꼬']
+      answers: ['닭']
+    wolf:
+      difficulty: easy
+      clues: ['뼈', 'Tame', '목줄']
+      answers: ['늑대', '개']
+    ender_dragon:
+      difficulty: medium
+      clues: ['엔드', '수정', '달걀']
+      answers: ['엔더 드래곤', '드래곤']
+    wither:
+      difficulty: medium
+      clues: ['영혼 모래', '해골', '네더의 별']
+      answers: ['위더']
+    blaze:
+      difficulty: medium
+      clues: ['막대기', '불', '요새']
+      answers: ['블레이즈']
+    ghast:
+      difficulty: medium
+      clues: ['눈물', '화염구', '떠다니는']
+      answers: ['가스트']
+    enchanting_table:
+      difficulty: medium
+      clues: ['책', '청금석', '레벨']
+      answers: ['마법 부여대', '마법 부여 테이블']
+    beacon:
+      difficulty: medium
+      clues: ['피라미드', '네더의 별', '광선']
+      answers: ['신호기']
+    elytra:
+      difficulty: medium
+      clues: ['엔드 시티', '날개', '활공']
+      answers: ['겉날개']
+    trident:
+      difficulty: medium
+      clues: ['드라운드', '던지기', '급류']
+      answers: ['삼지창']
+    brewing_stand:
+      difficulty: medium
+      clues: ['물약', '블레이즈 가루', '병']
+      answers: ['양조기']
+    piston:
+      difficulty: medium
+      clues: ['레드스톤', '밀기', '끈끈한']
+      answers: ['피스톤']
+    anvil:
+      difficulty: medium
+      clues: ['철 블록', '수리', '이름 바꾸기']
+      answers: ['모루']
+    slime:
+      difficulty: medium
+      clues: ['늪', '튕기기', '공']
+      answers: ['슬라임']
+    witch:
+      difficulty: medium
+      clues: ['물약', '오두막', '낄낄']
+      answers: ['마녀']
+    iron_golem:
+      difficulty: medium
+      clues: ['철 블록', '호박', '마을']
+      answers: ['철 골렘', '골렘']
+    snow_golem:
+      difficulty: medium
+      clues: ['눈', '호박', '눈덩이']
+      answers: ['눈 골렘', '눈사람']
+    compass:
+      difficulty: medium
+      clues: ['철', '레드스톤', '스폰']
+      answers: ['나침반']
+    clock:
+      difficulty: medium
+      clues: ['금', '레드스톤', '시간']
+      answers: ['시계']
+    map:
+      difficulty: medium
+      clues: ['종이', '나침반', '탐험']
+      answers: ['지도']
+    shulker:
+      difficulty: medium
+      clues: ['엔드 시티', '상자', '공중 부양']
+      answers: ['셜커']
+    guardian:
+      difficulty: medium
+      clues: ['바다 유적', '레이저', '프리즈머린']
+      answers: ['가디언']
+    netherite:
+      difficulty: hard
+      clues: ['고대 잔해', '금', '업그레이드']
+      answers: ['네더라이트']
+    totem:
+      difficulty: hard
+      clues: ['소환사', '불사', '두 번째 기회']
+      answers: ['불사의 토템', '토템']
+    conduit:
+      difficulty: hard
+      clues: ['바다의 심장', '앵무조개', '바다']
+      answers: ['전달체']
+    warden:
+      difficulty: hard
+      clues: ['딥 다크', '실명', '스컬크']
+      answers: ['워든']
+    mending:
+      difficulty: hard
+      clues: ['주민', '경험치', '수리']
+      answers: ['수선']
+    phantom:
+      difficulty: hard
+      clues: ['불면증', '막', '밤하늘']
+      answers: ['팬텀']
+    axolotl:
+      difficulty: hard
+      clues: ['무성한 동굴', '양동이', '분홍색']
+      answers: ['아홀로틀']
+    respawn_anchor:
+      difficulty: hard
+      clues: ['발광석', '우는 흑요석', '네더']
+      answers: ['리스폰 정박기']
+    piglin:
+      difficulty: hard
+      clues: ['금', '물물교환', '네더']
+      answers: ['피글린']
+    strider:
+      difficulty: hard
+      clues: ['용암', '뒤틀린 균', '안장']
+      answers: ['스트라이더']
+    lodestone:
+      difficulty: hard
+      clues: ['나침반', '네더라이트 주괴', '길잡이']
+      answers: ['자석석']
+    spyglass:
+      difficulty: hard
+      clues: ['자수정', '구리', '확대']
+      answers: ['망원경']
+    bundle:
+      difficulty: hard
+      clues: ['토끼 가죽', '실', '인벤토리']
+      answers: ['꾸러미']
+    end_portal:
+      difficulty: hard
+      clues: ['요새', '눈', '틀']
+      answers: ['엔드 차원문']
+    silk_touch:
+      difficulty: hard
+      clues: ['마법 부여', '유리', '광석']
+      answers: ['섬세한 손길']
+    observer:
+      difficulty: hard
+      clues: ['레드스톤', '얼굴', '감지']
+      answers: ['관측기']
+    hopper:
+      difficulty: hard
+      clues: ['깔때기', '철', '아이템']
+      answers: ['호퍼']
+    bee:
+      difficulty: hard
+      clues: ['꿀', '꽃', '침']
+      answers: ['꿀벌']
+    sniffer:
+      difficulty: hard
+      clues: ['고대 씨앗', '달걀', '고고학']
+      answers: ['스니퍼']
+    notch:
+      difficulty: hard
+      clues: ['창시자', '사과', 'Mojang']
+      answers: ['Notch']

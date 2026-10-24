@@ -1,0 +1,550 @@
+enable-races: true
+
+creative-enabled: true
+#Užitečné odkazy pro přidání DAT:
+#
+#https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+#https://helpch.at/docs/1.8/index.html?org/bukkit/entity/EntityType.html
+#https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+#https://helpch.at/docs/1.8/org/bukkit/Material.html
+
+#Názvy mohou být nové i staré (MOOSHROOM nebo MUSHROOM_COW, COD nebo RAW_FISH): přiřadí se k verzi vašeho
+#serveru. Názvy, které ve vaší verzi neexistují (např. blok z 1.21 na 1.8), se přeskočí s poznámkou v konzoli.
+#
+#Každý závod také přijímá (volitelně):
+#  points: 1     #body, které vítěz získá (výchozí 1)
+#  weight: 1     #jak často ho rotace vybere oproti jiným hrám (výchozí 1, 0 = nikdy)
+#
+#Admini mohou spustit závod s vlastními hodnotami: /chatgames <race> <material/mob> [amount]
+#Bez množství se použije jedno z uvedených níže pro ten materiál/moba. Vítěz dostane odměny uvedené
+#přesně pro ten materiál a množství, nebo žádné, pokud tu nejsou (body se dají i tak).
+
+hunt:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&bLOV'
+  subtitleMessage: '&aZabij %amount% %value%!'
+
+  #Zda počítat moby, které se objevily ze spawnerů nebo spawn vajec.
+  count-spawner-mobs: true
+  #Zda se moby z MythicMobs počítají jako mob, na kterém jsou založené (zombie z MythicMobs jako ZOMBIE).
+  count-mythic-mobs: true
+
+  data:
+    #Tyto hodnoty musí být platná ID mobů Minecraftu (viz Užitečné odkazy na začátku souboru)
+    #S nainstalovaným MythicMobs je mythic:<mob type> jeden z jeho mobů (příklad je na konci tohoto seznamu)
+    ZOMBIE:
+      3:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+
+    CREEPER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SKELETON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SPIDER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    PIG:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SHEEP:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    COW:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    CHICKEN:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SALMON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    #mythic:SkeletonKing:
+    #  1:
+    #    rewards:
+    #      - reward_1
+
+mine:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&bTĚŽBA'
+  subtitleMessage: '&aVytěž %amount% %value%!'
+
+  data:
+    #Tyto hodnoty musí být platná ID materiálů Minecraftu (viz Užitečné odkazy na začátku souboru)
+    STONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRASS_BLOCK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRAVEL:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIORITE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+place:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&bSTAVĚNÍ'
+  subtitleMessage: '&aPolož %amount% %value%!'
+
+  data:
+    #Tyto hodnoty musí být platná ID materiálů Minecraftu (viz Užitečné odkazy na začátku souboru)
+    COBBLESTONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+fish:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&bRYBAŘENÍ'
+  subtitleMessage: '&aVylov %amount% %value%!'
+
+  data:
+    #Tyto hodnoty musí být platná ID materiálů Minecraftu (viz Užitečné odkazy na začátku souboru)
+    COD:
+      1:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+          - reward_3
+    SALMON:
+      1:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+          - reward_3
+    PUFFERFISH:
+      1:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+          - reward_3
+    BOWL:
+      1:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+eat:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&bJÍDLO'
+  subtitleMessage: '&aSněz %amount% %value%!'
+
+  data:
+    #Tyto hodnoty musí být platná ID materiálů Minecraftu (viz Užitečné odkazy na začátku souboru)
+    COOKED_BEEF:
+      1:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_CHICKEN:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BAKED_POTATO:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BREAD:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    GOLDEN_APPLE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+
+craft:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&bVÝROBA'
+  subtitleMessage: '&aVyrob %amount% %value%!'
+
+  data:
+    #Tyto hodnoty musí být platná ID materiálů Minecraftu (viz Užitečné odkazy na začátku souboru)
+    FURNACE:
+      2:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+      4:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+          - reward_3
+    CHEST:
+      2:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+      4:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+          - reward_3
+    CRAFTING_TABLE:
+      4:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+      8:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_1
+          - reward_2
+      12:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      32:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+      48:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_1
+          - reward_2
+      64:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+furnace:
+  enable: true
+
+  timeToComplete_seconds: 150
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&bVAŘENÍ'
+  subtitleMessage: '&aUvař %amount% %value%!'
+
+  data:
+    #Tyto hodnoty musí být platná ID materiálů Minecraftu (viz Užitečné odkazy na začátku souboru)
+    GOLD_INGOT:
+      3:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+      6:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+          - reward_3
+    IRON_INGOT:
+      3:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+      6:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_BEEF:
+      3:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+      6:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_COD:
+      3:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+      6:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+tame:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&bOCHOČENÍ'
+  subtitleMessage: '&aOchoč %amount% %value%!'
+
+  data:
+    #Tyto hodnoty musí být platná ID mobů Minecraftu (viz Užitečné odkazy na začátku souboru)
+    #Použijí se jen moby, které lze ve vaší verzi ochočit: OCELOT do 1.13, CAT od 1.14.
+    WOLF:
+      1:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    CAT:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    OCELOT:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    HORSE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    PARROT:
+      1:
+        rewards:
+          - reward_2
+          - reward_3
+
+shear:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Nechte další 2 prázdné, abyste je vypnuli__
+  titleMessage: '&bSTŘÍHÁNÍ'
+  subtitleMessage: '&aOstříhej %amount% %value%!'
+
+  data:
+    #Tyto hodnoty musí být platná ID mobů Minecraftu (viz Užitečné odkazy na začátku souboru)
+    SHEEP:
+      3:
+        #SOUČET VŠECH ŠANCÍ ODMĚN, KTERÉ PŘIDÁTE, NESMÍ PŘEKROČIT 100%
+        rewards:
+          - reward_1
+          - reward_2
+      6:
+        rewards:
+          - reward_2
+          - reward_3
+    MOOSHROOM:
+      1:
+        rewards:
+          - reward_1
+          - reward_2

@@ -1,0 +1,153 @@
+#CÁC HÀNH ĐỘNG CÓ THỂ:
+#
+#[playercmd] - Chạy lệnh với tư cách người thắng
+#[consolecmd] - Chạy lệnh từ console
+#[playermsg] - Gửi tin nhắn cho người thắng
+#[broadcast] - Gửi tin nhắn cho mọi người chơi trong các thế giới được bật
+#[player_as_op] - Chạy lệnh với quyền op thay cho người chơi
+#
+#THÊM TỈ LỆ CHO PHẦN THƯỞNG NHƯ SAU:
+#
+#VÍ DỤ:
+#  - '10.0%~ [consolecmd] give %player% iron_block 5'
+#CHỈ HOẠT ĐỘNG NẾU ĐỊNH DẠNG GIỐNG VÍ DỤ, VỚI <chance>% Ở ĐẦU, THEO SAU LÀ ~ VÀ MỘT DẤU CÁCH. LUÔN ĐỨNG ĐẦU TRONG LỆNH
+#
+#CÁC LỆNH KHÔNG CÓ % SẼ LÀ PHẦN THƯỞNG ĐƯỢC TRAO 100%.
+
+#KIỂM TRA QUYỀN:
+#
+#ĐẶT Ở CUỐI DÒNG LỆNH.
+#Ví dụ:
+#  - '[consolecmd] give %player% iron_block 5 has:test.permission'
+
+#Số 1 dành cho người thắng ĐẦU TIÊN, NẾU BẠN THÊM NHIỀU NGƯỜI THẮNG HƠN TRONG config.yml VÀ MUỐN PHẦN THƯỞNG KHÁC, HÃY THÊM THỨ HẠNG CỦA HỌ (2:, v.v.)
+unscramble:
+  rewards:
+    1:
+      reward_1:
+        minimum-players: 2 #Điều kiện theo số người chơi trực tuyến, phần thưởng chỉ được chọn nếu có từ 2 người chơi trở lên
+        chance: 50
+        data:
+          - '10.0%~ [consolecmd] give %player% diamond_block 3 has:test.permission'
+          - '[consolecmd] give %player% iron_block 5'
+      reward_2:
+        data:
+          - '[consolecmd] give %player% iron_block 2'
+
+unreverse:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+reaction:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+guess_the_number:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+shoppinglist:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+clickable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+fillout:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+hoverable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+random:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+variable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+math:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+sequence:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+memorize:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+word_association:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+trivia:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+#TỪ ĐÂY TRỞ ĐI LÀ PHẦN THƯỞNG CHO CÁC CUỘC ĐUA CHỈ CÓ 1 NGƯỜI THẮNG
+#
+#DÙNG ĐỊNH DẠNG KHÁC! HÃY ĐỌC KỸ
+
+races:
+  rewards:
+    #ĐÂY LÀ PHẦN THƯỞNG BẠN ĐẶT TRONG 'races.yml'
+    reward_1:
+      chance: 50
+      data:
+        - '60.0%~ [consolecmd] give %player% diamond_block 5'
+    #XÓA GIÁ TRỊ 'chance' SẼ KHIẾN PHẦN THƯỞNG/LỆNH LUÔN XẢY RA
+    reward_2:
+      data:
+        - '[consolecmd] give %player% iron_block 5'
+        - '[playermsg] &aBạn đã thắng!'
+    reward_3:
+      chance: 50
+      data:
+        - '[consolecmd] give %player% diamond_block 3'

@@ -1,0 +1,550 @@
+enable-races: true
+
+creative-enabled: true
+#添加数据时有用的链接：
+#
+#https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+#https://helpch.at/docs/1.8/index.html?org/bukkit/entity/EntityType.html
+#https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+#https://helpch.at/docs/1.8/org/bukkit/Material.html
+
+#名称可以是新名或旧名（MOOSHROOM 或 MUSHROOM_COW，COD 或 RAW_FISH）：它们会匹配你服务器的
+#版本。你的版本中不存在的名称（例如 1.8 上的 1.21 方块）会被跳过，并在控制台提示。
+#
+#每个竞赛还可以设置（可选）：
+#  points: 1     #赢家获得的积分（默认 1）
+#  weight: 1     #与其他游戏相比，轮换选中它的频率（默认 1，0 = 从不）
+#
+#管理员可以用自己的值开始竞赛：/chatgames <race> <material/mob> [amount]
+#没有指定数量时，使用下面为该材料/生物列出的数量。赢家会获得为
+#这个材料和数量列出的奖励，如果这里没有列出则没有奖励（积分照常发放）。
+
+hunt:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__将以下 2 项留空即可禁用__
+  titleMessage: '&b狩猎'
+  subtitleMessage: '&a击杀 %amount% 个 %value%！'
+
+  #是否计算由刷怪笼或刷怪蛋生成的生物。
+  count-spawner-mobs: true
+  #MythicMobs 生物是否也算作它们所基于的生物（MythicMobs 僵尸算作 ZOMBIE）。
+  count-mythic-mobs: true
+
+  data:
+    #这些值必须是有效的 Minecraft 生物 ID（见文件开头的有用链接）
+    #安装 MythicMobs 后，mythic:<mob type> 表示它的一个生物（示例在这个列表的末尾）
+    ZOMBIE:
+      3:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+
+    CREEPER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SKELETON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SPIDER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    PIG:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SHEEP:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    COW:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    CHICKEN:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SALMON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    #mythic:SkeletonKing:
+    #  1:
+    #    rewards:
+    #      - reward_1
+
+mine:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__将以下 2 项留空即可禁用__
+  titleMessage: '&b挖掘'
+  subtitleMessage: '&a挖掘 %amount% 个 %value%！'
+
+  data:
+    #这些值必须是有效的 Minecraft 材料 ID（见文件开头的有用链接）
+    STONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRASS_BLOCK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRAVEL:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIORITE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+place:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__将以下 2 项留空即可禁用__
+  titleMessage: '&b放置'
+  subtitleMessage: '&a放置 %amount% 个 %value%！'
+
+  data:
+    #这些值必须是有效的 Minecraft 材料 ID（见文件开头的有用链接）
+    COBBLESTONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+fish:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__将以下 2 项留空即可禁用__
+  titleMessage: '&b钓鱼'
+  subtitleMessage: '&a钓到 %amount% 个 %value%！'
+
+  data:
+    #这些值必须是有效的 Minecraft 材料 ID（见文件开头的有用链接）
+    COD:
+      1:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+          - reward_3
+    SALMON:
+      1:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+          - reward_3
+    PUFFERFISH:
+      1:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+          - reward_3
+    BOWL:
+      1:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+eat:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__将以下 2 项留空即可禁用__
+  titleMessage: '&b进食'
+  subtitleMessage: '&a吃掉 %amount% 个 %value%！'
+
+  data:
+    #这些值必须是有效的 Minecraft 材料 ID（见文件开头的有用链接）
+    COOKED_BEEF:
+      1:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_CHICKEN:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BAKED_POTATO:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BREAD:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    GOLDEN_APPLE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+
+craft:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__将以下 2 项留空即可禁用__
+  titleMessage: '&b合成'
+  subtitleMessage: '&a合成 %amount% 个 %value%！'
+
+  data:
+    #这些值必须是有效的 Minecraft 材料 ID（见文件开头的有用链接）
+    FURNACE:
+      2:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+      4:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+          - reward_3
+    CHEST:
+      2:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+      4:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+          - reward_3
+    CRAFTING_TABLE:
+      4:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+      8:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_1
+          - reward_2
+      12:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      32:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+      48:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_1
+          - reward_2
+      64:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+furnace:
+  enable: true
+
+  timeToComplete_seconds: 150
+  #__将以下 2 项留空即可禁用__
+  titleMessage: '&b烧制'
+  subtitleMessage: '&a烧制 %amount% 个 %value%！'
+
+  data:
+    #这些值必须是有效的 Minecraft 材料 ID（见文件开头的有用链接）
+    GOLD_INGOT:
+      3:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+      6:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+          - reward_3
+    IRON_INGOT:
+      3:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+      6:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_BEEF:
+      3:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+      6:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_COD:
+      3:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+      6:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+tame:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__将以下 2 项留空即可禁用__
+  titleMessage: '&b驯服'
+  subtitleMessage: '&a驯服 %amount% 只 %value%！'
+
+  data:
+    #这些值必须是有效的 Minecraft 生物 ID（见文件开头的有用链接）
+    #只使用你的版本中可以驯服的生物：1.13 及以前为 OCELOT，1.14 起为 CAT。
+    WOLF:
+      1:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    CAT:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    OCELOT:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    HORSE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    PARROT:
+      1:
+        rewards:
+          - reward_2
+          - reward_3
+
+shear:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__将以下 2 项留空即可禁用__
+  titleMessage: '&b剪毛'
+  subtitleMessage: '&a给 %amount% 只 %value% 剪毛！'
+
+  data:
+    #这些值必须是有效的 Minecraft 生物 ID（见文件开头的有用链接）
+    SHEEP:
+      3:
+        #你添加的所有奖励的概率之和不能超过 100%
+        rewards:
+          - reward_1
+          - reward_2
+      6:
+        rewards:
+          - reward_2
+          - reward_3
+    MOOSHROOM:
+      1:
+        rewards:
+          - reward_1
+          - reward_2

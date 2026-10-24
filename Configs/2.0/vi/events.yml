@@ -1,0 +1,108 @@
+#SỰ KIỆN TRÒ CHƠI
+#
+#Một sự kiện là chuỗi trò chơi chơi liên tiếp. Mỗi trò trao điểm sự kiện theo
+#thứ hạng; khi trò cuối kết thúc, người chơi có nhiều điểm sự kiện nhất thắng phần thưởng
+#của sự kiện. Khi sự kiện diễn ra, vòng xoay trò chơi thường và trò chơi toàn cầu sẽ chờ.
+#
+#Bắt đầu bằng /chatgames event start <event>, hoặc để lịch tự bắt đầu.
+#/chatgames event top <event> cho thấy ai đã ghi nhiều điểm nhất trong đó theo thời gian.
+#
+#Mỗi sự kiện:
+#  name: hiển thị cho người chơi (mã màu dùng được)
+#  schedule: khi nào nó tự bắt đầu, vd. 'SATURDAY 20:00' hoặc 'DAILY 18:30' (hoặc bỏ qua).
+#            Múi giờ là múi giờ trong challenges.yml.
+#  minimum-players: số người chơi trực tuyến cần để lịch bắt đầu nó (lệnh bỏ qua điều này)
+#  pause-seconds: số giây giữa lúc một trò kết thúc và trò tiếp theo bắt đầu
+#  points: điểm sự kiện cho hạng 1, 2, 3... trong mỗi trò
+#  participation-points: điểm sự kiện cho những người khác hoàn thành. Trong trò chơi toàn cầu, nếu
+#                        máy chủ đạt mục tiêu, mọi người đóng góp đủ đều ghi điểm:
+#                        'points' cho người đóng góp nhiều nhất, các điểm này cho những người còn lại.
+#                        Nếu không đạt mục tiêu, không ai ghi điểm trong trò đó.
+#  steps: các trò, theo thứ tự. Mỗi trò:
+#    game: trò chơi hoặc cuộc đua, như trong games.yml / races.yml
+#    global: true để chơi như trò chơi toàn cầu (máy chủ cùng chơi; xem global_games.yml).
+#            Đếm số luôn là toàn cầu.
+#    time: số giây để trả lời (hoặc hoàn thành cuộc đua), thay cho giá trị riêng của trò
+#    winners: số người có thể thắng một trò chơi chat thường, thay cho giá trị riêng của trò
+#    args: các giá trị, như sau /chatgames <game>, vd. 'stone 16' cho cuộc đua đào
+#    settings: các giá trị games.yml khác cần đổi cho trò này, vd. {difficulty: hard}
+#  rewards: các dòng thưởng theo thứ hạng cuối (1, 2, 3...), và 'participation' cho mọi người khác
+#           đã ghi điểm. Cùng các dòng như rewards.yml ('<chance>%~ ' và 'has:<permission>' dùng được).
+
+events:
+  weekend_cup:
+    name: '&6&lCúp cuối tuần'
+    schedule:
+      - 'SATURDAY 20:00'
+    minimum-players: 3
+    pause-seconds: 15
+    points: [5, 3, 1]
+    participation-points: 1
+    steps:
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+        time: 25
+      - game: word_association
+        global: true
+        settings:
+          difficulty: hard
+      - game: trivia
+        winners: 3
+      - game: mine
+        global: true
+        time: 120
+        args: 'stone 100'
+    rewards:
+      1:
+        - '[consolecmd] give %player% diamond 5'
+      2:
+        - '[consolecmd] give %player% diamond 3'
+      3:
+        - '[consolecmd] give %player% diamond 1'
+      participation:
+        - '[consolecmd] give %player% iron_ingot 3'
+
+  quick_quiz:
+    name: '&b&lĐố nhanh'
+    minimum-players: 2
+    pause-seconds: 8
+    points: [3, 2, 1]
+    participation-points: 0
+    steps:
+      - game: reaction
+        winners: 3
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+    rewards:
+      1:
+        - '[consolecmd] give %player% gold_ingot 5'
+
+messages:
+  #Gửi mọi người. %event% là tên, %steps% là số trò, %pause% là số giây giữa chúng.
+  start:
+    - ''
+    - '&6&l» SỰ KIỆN: %event% &fsắp bắt đầu! &e%steps% &ftrò, nhiều điểm sự kiện nhất sẽ thắng.'
+    - ''
+  #Trước mỗi trò. %step% là số thứ tự, %game% là trò chơi.
+  step:
+    - '&6&l» %event% &f- trò &e%step%/%steps%&f: &e%game%'
+  #Gửi mỗi người chơi ghi điểm trong một trò. %points% là điểm họ nhận, %total% là tổng điểm sự kiện của họ.
+  step_points: '&8[%prefix%&8] &a+%points% điểm sự kiện &7(tổng %total%)'
+  #Gửi mọi người khi kết thúc. %count% người chơi ghi điểm; %winner_<n>% và %points_<n>% là ba người đầu.
+  end:
+    - ''
+    - '&6&l» %event% &fđã kết thúc! &e%count% &fngười chơi ghi điểm.'
+    - '&f  1. &e%winner_1% &7%points_1%  &f2. &e%winner_2% &7%points_2%  &f3. &e%winner_3% &7%points_3%'
+    - ''
+  nobody:
+    - '&6&l» %event% &fđã kết thúc! &cKhông ai ghi điểm.'
+  #Gửi mỗi người chơi đã ghi điểm, sau khi kết thúc. %place% trên %count%.
+  result: '&8[%prefix%&8] &fBạn đứng &e#%place% &ftrên %count% với &e%points% &fđiểm sự kiện.'
+  stopped:
+    - '&6&l» %event% &cđã bị dừng.'
+
+#Thông báo bắt đầu sự kiện và bảng xếp hạng cuối được gửi lên Discord theo cài đặt trong discord.yml.

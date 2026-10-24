@@ -105,8 +105,4 @@ messages:
   stopped:
     - '&6&l» %event% &cis gestopt.'
 
-#De eindstand wordt naar de Discord-webhook in config.yml gestuurd, als die is ingesteld.
-discord:
-  enabled: true
-  title: '%event% results'
-  line: '#%place% %player% - %points% points'
+#De start van events en de eindstanden worden op Discord geplaatst zoals ingesteld in discord.yml.

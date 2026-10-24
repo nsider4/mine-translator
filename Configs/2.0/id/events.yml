@@ -1,0 +1,108 @@
+#ACARA GAME
+#
+#Acara adalah rangkaian game yang dimainkan berturut-turut. Setiap game membagikan poin acara menurut
+#peringkat; saat game terakhir berakhir, pemain dengan poin acara terbanyak memenangkan hadiah
+#acara. Selama acara berjalan, rotasi game biasa dan game global menunggu.
+#
+#Mulai dengan /chatgames event start <event>, atau biarkan jadwal memulainya.
+#/chatgames event top <event> menampilkan siapa yang mencetak terbanyak di acara itu dari waktu ke waktu.
+#
+#Setiap acara:
+#  name: ditampilkan ke pemain (kode warna bisa dipakai)
+#  schedule: kapan acara dimulai sendiri, mis. 'SATURDAY 20:00' atau 'DAILY 18:30' (atau hapus).
+#            Zona waktunya adalah yang ada di challenges.yml.
+#  minimum-players: pemain online yang dibutuhkan agar jadwal memulainya (perintah mengabaikan ini)
+#  pause-seconds: detik antara satu game berakhir dan game berikutnya dimulai
+#  points: poin acara untuk peringkat 1, 2, 3... di setiap game
+#  participation-points: poin acara untuk orang lain yang berhasil. Dalam game global, jika
+#                        server mencapai target, setiap orang yang cukup berkontribusi mendapat poin:
+#                        'points' untuk kontributor terbesar, ini untuk sisanya.
+#                        Jika target tidak tercapai, tidak ada yang mendapat poin di game itu.
+#  steps: game-gamenya, berurutan. Masing-masing:
+#    game: game atau balapan, seperti di games.yml / races.yml
+#    global: true untuk memainkannya sebagai game global (server bermain bersama; lihat global_games.yml).
+#            Hitung selalu global.
+#    time: detik untuk menjawab (atau menyelesaikan balapan), sebagai ganti milik game itu sendiri
+#    winners: berapa yang bisa memenangkan game chat biasa, sebagai ganti milik game itu sendiri
+#    args: nilai-nilainya, seperti setelah /chatgames <game>, mis. 'stone 16' untuk balapan menambang
+#    settings: nilai games.yml lain yang diubah untuk game ini, mis. {difficulty: hard}
+#  rewards: baris hadiah menurut peringkat akhir (1, 2, 3...), dan 'participation' untuk semua orang lain
+#           yang mendapat poin. Baris yang sama seperti rewards.yml ('<chance>%~ ' dan 'has:<permission>' bisa dipakai).
+
+events:
+  weekend_cup:
+    name: '&6&lPiala Akhir Pekan'
+    schedule:
+      - 'SATURDAY 20:00'
+    minimum-players: 3
+    pause-seconds: 15
+    points: [5, 3, 1]
+    participation-points: 1
+    steps:
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+        time: 25
+      - game: word_association
+        global: true
+        settings:
+          difficulty: hard
+      - game: trivia
+        winners: 3
+      - game: mine
+        global: true
+        time: 120
+        args: 'stone 100'
+    rewards:
+      1:
+        - '[consolecmd] give %player% diamond 5'
+      2:
+        - '[consolecmd] give %player% diamond 3'
+      3:
+        - '[consolecmd] give %player% diamond 1'
+      participation:
+        - '[consolecmd] give %player% iron_ingot 3'
+
+  quick_quiz:
+    name: '&b&lKuis Kilat'
+    minimum-players: 2
+    pause-seconds: 8
+    points: [3, 2, 1]
+    participation-points: 0
+    steps:
+      - game: reaction
+        winners: 3
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+    rewards:
+      1:
+        - '[consolecmd] give %player% gold_ingot 5'
+
+messages:
+  #Untuk semua orang. %event% adalah namanya, %steps% jumlah game, %pause% detik di antaranya.
+  start:
+    - ''
+    - '&6&l» ACARA: %event% &fakan dimulai! &e%steps% &fgame, poin acara terbanyak menang.'
+    - ''
+  #Sebelum setiap game. %step% adalah nomornya, %game% gamenya.
+  step:
+    - '&6&l» %event% &f- game &e%step%/%steps%&f: &e%game%'
+  #Untuk setiap pemain yang mendapat poin di sebuah game. %points% yang mereka dapat, %total% total acara mereka.
+  step_points: '&8[%prefix%&8] &a+%points% poin acara &7(total %total%)'
+  #Untuk semua orang di akhir. %count% pemain mendapat poin; %winner_<n>% dan %points_<n>% tiga teratas.
+  end:
+    - ''
+    - '&6&l» %event% &ftelah berakhir! &e%count% &fpemain mendapat poin.'
+    - '&f  1. &e%winner_1% &7%points_1%  &f2. &e%winner_2% &7%points_2%  &f3. &e%winner_3% &7%points_3%'
+    - ''
+  nobody:
+    - '&6&l» %event% &ftelah berakhir! &cTidak ada yang mendapat poin.'
+  #Untuk setiap pemain yang mendapat poin, setelah berakhir. %place% dari %count%.
+  result: '&8[%prefix%&8] &fKamu finis di &e#%place% &fdari %count% dengan &e%points% &fpoin acara.'
+  stopped:
+    - '&6&l» %event% &ctelah dihentikan.'
+
+#Awal acara dan klasemen akhir dikirim ke Discord sesuai pengaturan di discord.yml.

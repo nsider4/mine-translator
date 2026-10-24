@@ -1,0 +1,7 @@
+milestones:
+  '100':
+    - "say %player% elérte a 100 pontot!"
+    - "give %player% diamond 1"
+  '500':
+    - "broadcast %player% most már legenda 500 ponttal!"
+    - "give %player% emerald 5"

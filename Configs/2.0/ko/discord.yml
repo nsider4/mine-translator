@@ -1,0 +1,405 @@
+#게임 결과, 레이스, 글로벌 게임, 이벤트 등을 Discord에 올립니다.
+#
+#메시지는 채널 webhook(설치할 것 없음), DiscordSRV 플러그인의
+#봇, 또는 둘 다로 보냅니다. /chatgames discord test <message>로 각 메시지를 시험하세요.
+enabled: true
+
+#__채널__
+#메시지를 보낼 곳. 이름은 마음대로 짓고, 아래의 각 알림이 쓰는 채널을 적습니다.
+#  webhook: 채널의 webhook URL. Discord에서: 채널 편집 > 연동 > 웹후크 >
+#           새 웹후크 > 웹후크 URL 복사. 비밀로 하세요. 이것을 가진 사람은 누구나 그곳에 글을 올릴 수 있습니다.
+#  discordsrv: 대신 DiscordSRV 봇으로 올립니다(DiscordSRV 필요). DiscordSRV config.yml의
+#              Channels 섹션에 있는 채널 이름(예: global) 또는 채널 ID.
+#  username / avatar: webhook 글에 보이는 이름과 사진(봇은 자기 것을 씁니다).
+channels:
+  main:
+    webhook: ''
+    discordsrv: ''
+    username: 'Chat Games'
+    avatar: 'https://www.spigotmc.org/data/resource_icons/107/107781.jpg?1676494289'
+
+#__일반__
+#바닥글에 %server%로 표시됩니다
+server-name: 'Minecraft Server'
+#%winner_head% / %player_head%의 그림. %name%과 %uuid%가 채워집니다.
+player-head-url: 'https://mc-heads.net/avatar/%name%/128'
+#메시지가 멘션할 수 있는 역할 ID(텍스트에 <@&ID>로 씁니다). 그 밖에는 절대 멘션하지 않습니다:
+#@everyone도, 플레이어 이름이나 답에 들어 있는 것도요.
+#ID를 얻으려면 Discord에서 개발자 모드를 켜고(설정 > 고급) 역할을 오른쪽 클릭하세요.
+allowed-role-pings: []
+#DiscordSRV를 쓰면 %winner_mention% / %player_mention%이 플레이어의 연결된 Discord 계정을 보여 줍니다
+#(없으면 이름). true면 멘션도 합니다.
+ping-linked-players: false
+#절대 올리지 않을 게임과 레이스
+ignored-games: []
+
+#게임별 색(%game_color%)과 이모지(%game_emoji%). 색: '#RRGGBB' 또는 이름.
+#이모지: :trophy: 같은 이름(목록은 이 파일 끝에 있음) 또는 서버 이모지 <:name:ID>.
+#이 파일에 이모지 문자를 붙여 넣지 마세요. 1.8 서버는 그것이 있는 파일을 읽지 못합니다.
+styles:
+  default: {color: '#5865F2', emoji: ':video_game:'}
+  unscramble: {color: '#F1C40F', emoji: ':abc:'}
+  unreverse: {color: '#E67E22', emoji: ':repeat:'}
+  reaction: {color: '#E74C3C', emoji: ':zap:'}
+  random: {color: '#9B59B6', emoji: ':game_die:'}
+  fillout: {color: '#3498DB', emoji: ':pencil2:'}
+  variable: {color: '#1ABC9C', emoji: ':heavy_plus_sign:'}
+  clickable: {color: '#2ECC71', emoji: ':point_up:'}
+  hoverable: {color: '#16A085', emoji: ':eyes:'}
+  math: {color: '#E91E63', emoji: ':heavy_division_sign:'}
+  sequence: {color: '#00BCD4', emoji: ':1234:'}
+  memorize: {color: '#8E44AD', emoji: ':brain:'}
+  guess_the_number: {color: '#FF9800', emoji: ':question:'}
+  trivia: {color: '#3F51B5', emoji: ':books:'}
+  word_association: {color: '#009688', emoji: ':link:'}
+  count: {color: '#607D8B', emoji: ':1234:'}
+  hunt: {color: '#C0392B', emoji: ':crossed_swords:'}
+  mine: {color: '#7F8C8D', emoji: ':pick:'}
+  place: {color: '#A0522D', emoji: ':bricks:'}
+  fish: {color: '#2980B9', emoji: ':fishing_pole_and_fish:'}
+  eat: {color: '#D35400', emoji: ':poultry_leg:'}
+  craft: {color: '#8D6E63', emoji: ':hammer_and_pick:'}
+  furnace: {color: '#E25822', emoji: ':fire:'}
+  tame: {color: '#C69C6D', emoji: ':bone:'}
+  shear: {color: '#ECF0F1', emoji: ':scissors:'}
+
+#목록을 쓰는 방식: 승자, 기여자, 순위, 순위표.
+#%medal%은 1-3등의 메달이고, 나머지는 other-places입니다.
+lists:
+  medals: [':first_place:', ':second_place:', ':third_place:']
+  other-places: '`%place%.`'
+  winner: '%medal% **%player%** `%time%s`'
+  contributor: '%medal% **%player%** `%amount%`'
+  standing: '%medal% **%player%** `%points%점`'
+  leaderboard: '%medal% **%player%** `%value%`'
+  #빈 목록 대신 표시
+  empty: '-# 아직 아무도 없음'
+
+#__메시지__
+#각 메시지에는 'content'(임베드 위의 일반 텍스트) 그리고/또는 'embed'가 있습니다:
+#  color, author(name, icon, url), title, url, description, thumbnail, image,
+#  fields(name, value, inline), footer(text, icon), timestamp(true면 보낸 시간 표시).
+#텍스트는 한 줄이거나 줄 목록일 수 있습니다. 비어 있는 플레이스홀더만 있던 줄은
+#빠지며, 비어 있는 필드도 마찬가지입니다. 플레이어가 필요 없는 PlaceholderAPI 플레이스홀더도 됩니다.
+#설명과 필드 값에서 Discord 서식이 됩니다: '### '은 제목, '-# '은 작은 회색
+#글자, '> '는 인용, **굵게**, `코드`.
+#<t:%ends_unix%:R>는 읽는 사람의 시간으로 "20초 후"처럼 보여 주고 카운트다운합니다.
+#모든 메시지에서: %server%, 게임에서는 %game% %game_key% %game_emoji% %game_color%.
+
+#채팅 게임. %question% %time_limit% %ends_unix% %winners_needed% %points%
+games:
+  enabled: true
+  channels: [main]
+  #true: 게임이 시작될 때 올리고, 그 글을 결과로 수정합니다. false: 결과만 올립니다.
+  live: true
+  #기억하기는 여기에 목록을 보여 주지 않습니다. 플레이어가 Discord에서 볼 수 있으니까요.
+  hidden-question: '게임 채팅을 보세요!'
+  start:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%'
+      title: '새 라운드'
+      description:
+        - '### %question%'
+        - '-# 게임 채팅에서 답하면 이깁니다.'
+      fields:
+        - name: ':stopwatch: 종료'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+        - name: ':sparkles: 보상'
+          value: '`%points%점`'
+          inline: true
+        - name: ':busts_in_silhouette: 승자 수'
+          value: '`%winners_needed%`'
+          inline: true
+      footer: '%server%'
+  #%winner% %winner_head% %winner_mention% %time% %answer% %points% %winner_count%
+  #%winners%(모든 승자, 한 줄에 한 명) %other_winners%(1등을 뺀 모두)
+  win:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%'
+      title: ':trophy:  %winner%님 정답!'
+      thumbnail: '%winner_head%'
+      description:
+        - '-# 정답은'
+        - '### %answer%'
+      fields:
+        - name: ':stopwatch: 기록'
+          value: '`%time%s`'
+          inline: true
+        - name: ':sparkles: 포인트'
+          value: '`+%points%`'
+          inline: true
+        - name: ':medal: 함께 맞힌 사람'
+          value: '%other_winners%'
+          inline: false
+      footer: '%server%'
+      timestamp: true
+  #%answer% %question% %time_limit%
+  expired:
+    enabled: true
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%'
+      title: ':hourglass:  시간 종료'
+      description:
+        - '-# 아무도 맞히지 못했습니다. 정답은'
+        - '### %answer%'
+      footer: '%server%'
+      timestamp: true
+  #스태프가 게임을 멈췄을 때(실시간 글만 수정)
+  stopped:
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%'
+      title: ':no_entry:  라운드 중단'
+      description:
+        - '-# 스태프가 이 라운드를 일찍 끝냈습니다.'
+      footer: '%server%'
+      timestamp: true
+
+#레이스. %target% %amount% %time_limit% %ends_unix% %points%
+races:
+  enabled: true
+  channels: [main]
+  live: true
+  start:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game% 레이스'
+      title: '레이스 시작'
+      description:
+        - '### %amount%x %target%'
+        - '-# 가장 먼저 끝낸 플레이어가 이깁니다.'
+      fields:
+        - name: ':stopwatch: 종료'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+        - name: ':sparkles: 보상'
+          value: '`%points%점`'
+          inline: true
+      footer: '%server%'
+  #%winner% %winner_head% %winner_mention% %time% %points%
+  win:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game% 레이스'
+      title: ':checkered_flag:  %winner%님이 레이스에서 이겼습니다!'
+      thumbnail: '%winner_head%'
+      description:
+        - '### %amount%x %target%'
+      fields:
+        - name: ':stopwatch: 기록'
+          value: '`%time%s`'
+          inline: true
+        - name: ':sparkles: 포인트'
+          value: '`+%points%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  expired:
+    enabled: true
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game% 레이스'
+      title: ':hourglass:  시간 종료'
+      description:
+        - '### %amount%x %target%'
+        - '-# 제시간에 끝낸 사람이 없습니다.'
+      footer: '%server%'
+      timestamp: true
+  stopped:
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game% 레이스'
+      title: ':no_entry:  레이스 중단'
+      description:
+        - '-# 스태프가 이 레이스를 일찍 끝냈습니다.'
+      footer: '%server%'
+      timestamp: true
+
+#글로벌 게임. 서버 전체가 하나의 목표를 향합니다.
+#%goal%(예: "500 돌") %progress% %goal_amount% %percent% %bar% %contributors% %time_limit% %ends_unix%
+global:
+  enabled: true
+  channels: [main]
+  #true: 글에 진행 막대를 보여 주고 게임 중에 업데이트합니다
+  live: true
+  #실시간 글을 업데이트하는 최소 간격(진행도가 바뀌었을 때만)
+  update-seconds: 15
+  bar: {length: 16, full: '█', empty: '░'}
+  progress:
+    embed:
+      color: '%game_color%'
+      author: ':globe_with_meridians:  글로벌 %game%'
+      title: '서버 전체가 함께 플레이합니다'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+        - '-# %progress% / %goal_amount%'
+      fields:
+        - name: ':busts_in_silhouette: 돕는 중'
+          value: '`%contributors%`'
+          inline: true
+        - name: ':stopwatch: 종료'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+      footer: '%server%'
+  #%top_contributors%(가장 많이 기여한 사람, 한 줄에 한 명)
+  completed:
+    embed:
+      color: '#57F287'
+      author: ':globe_with_meridians:  글로벌 %game%'
+      title: ':tada:  목표 달성!'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+      fields:
+        - name: ':medal: 최고의 도우미'
+          value: '%top_contributors%'
+          inline: true
+        - name: ':busts_in_silhouette: 도운 사람'
+          value: '`%contributors%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  failed:
+    embed:
+      color: '#ED4245'
+      author: ':globe_with_meridians:  글로벌 %game%'
+      title: ':x:  목표 미달성'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+        - '-# %progress% / %goal_amount%'
+      fields:
+        - name: ':medal: 최고의 도우미'
+          value: '%top_contributors%'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #%top_contributors%에 표시할 기여자 수
+  top-size: 5
+
+#게임 이벤트(events.yml). %event%
+events:
+  enabled: true
+  channels: [main]
+  #%games%(게임 개수)
+  start:
+    embed:
+      color: '#FEE75C'
+      author: ':calendar:  게임 이벤트'
+      title: '%event% 시작!'
+      description:
+        - '-# 게임을 연달아 이겨 이벤트 포인트를 얻으세요.'
+      fields:
+        - name: ':video_game: 게임'
+          value: '`%games%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #%standings% %players%(득점한 인원) %winner% %winner_head% %winner_mention%
+  end:
+    embed:
+      color: '#FEE75C'
+      author: ':calendar:  게임 이벤트'
+      title: ':trophy:  %event% 결과'
+      thumbnail: '%winner_head%'
+      description:
+        - '%standings%'
+      fields:
+        - name: ':crown: 우승'
+          value: '%winner_mention%'
+          inline: true
+        - name: ':busts_in_silhouette: 플레이어'
+          value: '`%players%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #%standings%에 표시할 순위 수
+  standings-size: 10
+
+#플레이어의 연속 기록이 일정 일수에 도달함(streaks.yml). %player% %player_head% %player_mention% %streak% %days%
+streaks:
+  enabled: false
+  channels: [main]
+  #이 일수만 올립니다
+  days: [7, 14, 30, 60, 100, 365]
+  message:
+    embed:
+      color: '#E67E22'
+      author: {name: '%player%', icon: '%player_head%'}
+      title: ':fire:  %days%일 연속!'
+      description:
+        - '-# %streak%'
+      footer: '%server%'
+      timestamp: true
+
+#플레이어가 일일 또는 주간 도전 과제를 완료함. %player% %player_head% %player_mention% %challenge% %period%
+challenges:
+  enabled: false
+  channels: [main]
+  #%period%에 표시할 것
+  periods:
+    daily: '일일'
+    weekly: '주간'
+  message:
+    embed:
+      color: '#57F287'
+      author: {name: '%player%', icon: '%player_head%'}
+      title: ':white_check_mark:  도전 과제 완료'
+      description:
+        - '### %challenge%'
+        - '-# %period% 도전 과제'
+      footer: '%server%'
+      timestamp: true
+
+#순위표. 정해진 시간과 /chatgames discord leaderboard로 올립니다.
+#%leaderboard% %total_points%(모든 플레이어 합계)
+leaderboard:
+  enabled: false
+  channels: [main]
+  #서버 시간, 24시간제. 예: ['12:00', '20:00']
+  times: ['20:00']
+  #points 또는 fastest(모든 게임에서 가장 빠른 답)
+  type: points
+  size: 10
+  message:
+    embed:
+      color: '#5865F2'
+      author: ':bar_chart:  순위표'
+      title: '상위 플레이어'
+      description:
+        - '%leaderboard%'
+        - ''
+        - '-# 총 %total_points%포인트 획득'
+      footer: '%server%'
+      timestamp: true
+
+#__이모지__
+#위의 어떤 텍스트에서든 :name:으로 쓸 수 있는 이름:
+#  trophy, first_place, second_place, third_place, medal, military_medal, crown, star, star2,
+#  sparkles, tada, confetti_ball, fire, zap, boom, 100, gem, moneybag, gift, video_game, game_die,
+#  jigsaw, dart, checkered_flag, stopwatch, timer, alarm_clock, hourglass, hourglass_flowing_sand,
+#  clock, calendar, white_check_mark, heavy_check_mark, x, no_entry, warning, question, grey_question,
+#  exclamation, bell, loudspeaker, mega, speech_balloon, thought_balloon, brain, bulb, abc, abcd,
+#  capital_abcd, 1234, symbols, pencil, pencil2, memo, book, books, scroll, clipboard, link, mag,
+#  eyes, eye, repeat, arrows_counterclockwise, leftwards_arrow_with_hook, heavy_plus_sign,
+#  heavy_minus_sign, heavy_multiplication_x, heavy_division_sign, infinity, keycap_ten,
+#  mouse_three_button, point_up, point_right, point_down, raised_hands, clap, muscle, handshake, wave,
+#  thinking, sunglasses, partying_face, rocket, earth_americas, globe_with_meridians,
+#  busts_in_silhouette, bust_in_silhouette, bar_chart, chart_with_upwards_trend,
+#  chart_with_downwards_trend, crossed_swords, dagger, bow_and_arrow, shield, pick, hammer,
+#  hammer_and_pick, tools, axe, bricks, fishing_pole_and_fish, fish, tropical_fish, meat_on_bone,
+#  poultry_leg, bread, apple, green_apple, cake, cookie, fork_and_knife, cooking, bone, dog, cat,
+#  horse, parrot, sheep, ram, scissors, cow, pig, chicken, zombie, skull, seedling, evergreen_tree,
+#  deciduous_tree, mushroom, rock, diamond_shape_with_a_dot_inside, large_blue_diamond,
+#  small_orange_diamond, red_circle, orange_circle, yellow_circle, green_circle, blue_circle,
+#  purple_circle, white_circle, black_circle, green_square, white_large_square, black_large_square,
+#  arrow_right, arrow_up, arrow_down, small_red_triangle_down, small_red_triangle, lock, unlock, key,
+#  new, up, cool, free, information_source, heart, green_heart, blue_heart, yellow_heart,
+#  purple_heart, orange_heart, map, compass, label, ticket, tickets, admission_tickets, joystick,
+#  slot_machine, spades, clubs, hearts, diamonds, beginner, game_controller, pushpin, round_pushpin,
+#  triangular_flag_on_post

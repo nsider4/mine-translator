@@ -1,0 +1,1158 @@
+#MENYER
+#
+#Varje meny under 'menus:' har en 'title', en storlek i 'rows' (1-6) och sina 'items'. Du kan ändra
+#vad vilken knapp som helst gör, lägga till knappar eller hela nya menyer (öppna dem med /chatgames menu <id>,
+#eller lägg var och en i en egen fil i mappen menus/, med namnet <id>.yml).
+#
+#Varje föremål:
+#  slot: var det hamnar, från 0 (överst till vänster) till rows*9-1. 'slots: [0, 1, '9-17']' upprepar det.
+#  material: valfritt föremålsnamn från 1.8 till 26.x: nya eller gamla namn (lime_dye / INK_SACK:10 / 351:10),
+#            eller 'head:<spelarnamn, textur eller textures.minecraft.net-URL>'
+#  name / lore: färgkoder (&a, och &#RRGGBB på 1.16+) och PlaceholderAPI-platshållare fungerar.
+#  amount, glow: true, enchantments: ['SHARPNESS:1'], flags: [HIDE_ATTRIBUTES], head: '%player%',
+#  custom-model-data: 1001 (1.14+), item-model: 'namespace:key' (1.21.2+), color: '#FF0000' (läder)
+#  actions: vad ett klick gör, i ordning. Även left-actions, right-actions, shift-left-actions,
+#           shift-right-actions, middle-actions och drop-actions (var och en faller tillbaka på actions).
+#  view-requirements: föremålet visas bara när varje rad godkänns
+#  click-requirements: när en rad inte godkänns körs 'deny-actions' i stället för actions
+#  state + when-off: när state är falskt ersätter when-offs nycklar föremålets egna
+#                    (inte 'off': YAML läser ett ensamt off som false)
+#Utelämna ett föremål för att dölja det. 'filler' fyller varje tom plats; ta bort den för ingen.
+#
+#Åtgärder:
+#  [command] <command>        du kör kommandot             [console] <command>   konsolen kör det
+#  [message] <text>           ett meddelande till dig      [broadcast] <text>    till alla
+#  [sound] <sound> [volume] [pitch]   valfritt ljudnamn från 1.8 till 26.x
+#  [open] <menu> [values]     öppnar en annan meny         [switch] <menu> [values]  samma, men [back] hoppar över den
+#  [back] [menu]              menyn innan (eller den namngivna, eller stänger)
+#  [refresh]  [close]  [next-page]  [previous-page]  [wait] <ticks>
+#  [chatgames:no-permission]  skickar meddelandet om saknad behörighet
+#  Menyspecifika beskrivs ovanför de menyer som har dem.
+#
+#Krav, ett per rad (varje rad måste godkännas; börja en rad med ! för att vända den):
+#  permission <node>     en jämförelse som '%chatgames_points% >= 100' (==, !=, >=, <=, >, <)
+#  eller ett värde som är true / on / yes / ett tal som inte är 0
+#
+#Menyer som listar saker (utmaningar, spel, evenemang...) lägger dem i 'list-slots' i ordning,
+#ritade med menyns 'templates'. Med fler poster än platser bläddrar föremål vars åtgärder är
+#[next-page] / [previous-page] mellan sidorna; de döljs när det inte finns någon sida att gå till.
+#En lore-rad som bara är en listplatshållare, som '%game_wins%', blir flera rader.
+#Varje meny har också %player%, %page%, %pages% och %entries% (hur många poster listan har).
+
+#Namn och ikoner för spel, i alla menyer och i meddelanden som nämner ett spel (%game%).
+#Ett spel som inte finns här får namn efter sin nyckel.
+game-names:
+  unscramble: 'Kasta om'
+  unreverse: 'Vänd'
+  reaction: 'Reaktion'
+  guess_the_number: 'Gissa talet'
+  clickable: 'Klicka'
+  fillout: 'Fyll i'
+  hoverable: 'Hovra'
+  random: 'Slumptecken'
+  math: 'Matte'
+  variable: 'Variabel'
+  sequence: 'Talföljd'
+  memorize: 'Memorera'
+  word_association: 'Ordassociation'
+  trivia: 'Frågesport'
+  count: 'Räkna'
+  hunt: 'Jakt'
+  mine: 'Gruva'
+  place: 'Bygga'
+  fish: 'Fiske'
+  eat: 'Äta'
+  craft: 'Tillverka'
+  furnace: 'Matlagning'
+  tame: 'Tämja'
+  shear: 'Klippa'
+game-icons:
+  unscramble: book
+  math: redstone
+  trivia: enchanted_book
+  reaction: feather
+  clickable: stone_button
+  random: ender_pearl
+  unreverse: compass
+  variable: name_tag
+  guess_the_number: clock
+  memorize: map
+  sequence: ladder
+  fillout: paper
+  hoverable: ender_eye
+  word_association: lead
+  count: clock
+  hunt: iron_sword
+  place: grass_block
+  mine: iron_pickaxe
+  fish: fishing_rod
+  eat: cooked_beef
+  craft: crafting_table
+  furnace: furnace
+  tame: bone
+  shear: shears
+
+formats:
+  #Visas i stället för en placering för spelare som inte är rankade än
+  no-rank: '-'
+
+#Till spelaren, från felsökningsmenyn. Lämna en rad tom ('') för att inte skicka något.
+messages:
+  debug-round: '&8[&cDEBUG&8] &fNy privat &e%game%&f-omgång (svar: &a%answer%&f), skapad på &e%generated% ms&f. Bara du kan se den.'
+  debug-failed: '&8[&cDEBUG&8] &cKunde inte skapa en %game%-omgång; konsolen säger varför.'
+  debug-race: '&8[&cDEBUG&8] &cLopp spelas i världen, så de kan inte testas här. Starta ett med /chatgames <race>.'
+  debug-no-letters: '&8[&cDEBUG&8] &7Det här svaret har inga bokstäver, så versalerna kan inte vara fel.'
+  debug-timeout-started: '&8[&cDEBUG&8] &7Väntar ut tidsgränsen på &e%time%s&7...'
+  debug-timeout: '&8[&cDEBUG&8] &e%game%&7: tiden är ute. Spelarna skulle få veta att svaret var &f%answer%&7.'
+  #%verdict% är en av raderna nedan
+  debug-result: '&8[&cDEBUG&8] &e%game% &7| skrev &f%input% &7efter &e%ms% ms&7: %verdict%'
+  debug-verdicts:
+    accepted: '&agodkänt &7(skulle placera sig och få &e%points% &7poäng)'
+    wrong: '&cfel &7(ignoreras)'
+    wrong-case: '&6fel versaler &7(spelaren uppmanas att kolla dem)'
+    macro: '&cignoreras som makro &7(snabbare än min-answer-ms, &e%min_ms% ms&7)'
+    late: '&cför sent &7(efter tidsgränsen)'
+
+menus:
+
+  #/chatgames menu. %points% %rank% %wins% %claimable% (belöningar redo att hämtas),
+  #%daily_completed% %daily_total% %weekly_completed% %weekly_total%,
+  #%games_on% / %sound_on% (true eller false) och %games_state% / %sound_state% (texten PÅ/AV)
+  main:
+    title: '&8&lChatGames'
+    rows: 3
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      profile:
+        slot: 10
+        material: player_head
+        head: '%player%'
+        name: '&e&lDin profil'
+        lore:
+          - '&7Poäng: &e%points% &8(%rank%)'
+          - '&7Vinster: &e%wins%'
+          - ''
+          - '&eKlicka för att se din statistik'
+        actions: ['[open] profile']
+      challenges:
+        slot: 11
+        material: writable_book
+        name: '&a&lUtmaningar'
+        lore:
+          - '&7Dagliga: &e%daily_completed%&7/&e%daily_total%'
+          - '&7Veckovisa: &e%weekly_completed%&7/&e%weekly_total%'
+          - '&7Belöningar att hämta: &e%claimable%'
+          - ''
+          - '&eKlicka för att öppna'
+        actions: ['[open] challenges daily']
+      streaks:
+        slot: 12
+        material: blaze_powder
+        name: '&6&lSviter'
+        lore:
+          - '&7Spela varje dag för att hålla dem igång.'
+          - ''
+          - '&eKlicka för att öppna'
+        actions: ['[open] streaks']
+      leaderboards:
+        slot: 13
+        material: gold_ingot
+        name: '&e&lTopplistor'
+        lore:
+          - '&7Flest poäng och snabbaste spelarna.'
+          - ''
+          - '&eKlicka för att öppna'
+        actions: ['[open] leaderboards']
+      games-toggle:
+        slot: 15
+        material: lime_dye
+        name: '&fChattspel: %games_state%'
+        lore:
+          - '&7Klicka för att stänga av chattspel för dig.'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7Klicka för att slå på chattspel för dig.'
+      sound-toggle:
+        slot: 16
+        material: note_block
+        name: '&fSpelljud: %sound_state%'
+        lore:
+          - '&7Klicka för att stänga av spelljuden.'
+        state: '%sound_on%'
+        actions: ['[command] chatgames togglesound', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7Klicka för att slå på spelljuden.'
+      admin:
+        slot: 22
+        material: command_block
+        name: '&c&lAdmin'
+        lore:
+          - '&7Starta spel, evenemang, samlingar...'
+        view-requirements: ['permission chatgames.admin']
+        actions: ['[open] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cStäng'
+        actions: ['[close]']
+
+  #/chatgames profile [player]. %target% %points% %rank% %wins% %race_wins% %global_played%
+  #%global_won% (klarade) %contributions% %events_played% %event_wins% %event_best_place% %fastest% %challenges_completed%
+  #%milestones% %milestones_total% %streak_<challenge|daily|global>% och %streak_<...>_longest%.
+  #Listor: %game_wins% och %game_fastest%. [open] profile <name> öppnar någon annans.
+  profile:
+    title: '&8Profil: %target%'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7inga än'
+      game-wins: '&7%game%: &f%wins%'
+      game-fastest: '&7%game%: &f%time%s'
+    items:
+      head:
+        slot: 4
+        material: player_head
+        head: '%target%'
+        name: '&e&l%target%'
+        lore:
+          - '&7Poäng: &e%points% &8(%rank%)'
+      wins:
+        slot: 19
+        material: diamond
+        name: '&b&lVinster'
+        lore:
+          - '&7Vunna chattspel: &f%wins%'
+          - '&7Vunna lopp: &f%race_wins%'
+          - ''
+          - '%game_wins%'
+      fastest:
+        slot: 20
+        material: clock
+        name: '&e&lSnabbaste tider'
+        lore:
+          - '&7Bästa totalt: &f%fastest%'
+          - ''
+          - '%game_fastest%'
+      global:
+        slot: 21
+        material: beacon
+        name: '&3&lGlobala spel'
+        lore:
+          - '&7Spelade: &f%global_played%'
+          - '&7Klarade: &f%global_won%'
+          - '&7Bidrag: &f%contributions%'
+      events:
+        slot: 23
+        material: nether_star
+        name: '&6&lEvenemang'
+        lore:
+          - '&7Spelade: &f%events_played%'
+          - '&7Vunna: &f%event_wins%'
+          - '&7Bästa placering: &f%event_best_place%'
+      streaks:
+        slot: 24
+        material: blaze_powder
+        name: '&6&lSviter'
+        lore:
+          - '&7Utmaning: &f%streak_challenge% &8(rekord %streak_challenge_longest%)'
+          - '&7Daglig vinst: &f%streak_daily% &8(rekord %streak_daily_longest%)'
+          - '&7Global: &f%streak_global% &8(rekord %streak_global_longest%)'
+      progress:
+        slot: 25
+        material: experience_bottle
+        name: '&a&lFramsteg'
+        lore:
+          - '&7Poäng: &f%points%'
+          - '&7Uppnådda milstolpar: &f%milestones%&7/&f%milestones_total%'
+          - '&7Klarade utmaningar: &f%challenges_completed%'
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Tillbaka'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cStäng'
+        actions: ['[close]']
+
+  #[open] challenges <daily|weekly>. %period% %period_key% %completed% %total% %resets%.
+  #Poster: %challenge% %id% %description% %progress% %amount% %percent% %bar% %icon%.
+  #[chatgames:claim-challenge] <period> <id> hämtar en.
+  challenges:
+    title: '&8%period% utmaningar'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    progress-bar:
+      length: 10
+      done: '&a|'
+      left: '&7|'
+    items:
+      tab-daily:
+        slot: 2
+        material: sunflower
+        name: '&e&lDagliga'
+        glow: true
+        lore:
+          - '&7Visar dagens utmaningar.'
+        state: '%period_key% == daily'
+        actions: ['[switch] challenges daily']
+        when-off:
+          glow: false
+          lore:
+            - '&eKlicka för att visa dagens utmaningar'
+      tab-weekly:
+        slot: 6
+        material: clock
+        name: '&b&lVeckovisa'
+        glow: true
+        lore:
+          - '&7Visar veckans utmaningar.'
+        state: '%period_key% == weekly'
+        actions: ['[switch] challenges weekly']
+        when-off:
+          glow: false
+          lore:
+            - '&eKlicka för att visa veckans utmaningar'
+      info:
+        slot: 4
+        material: book
+        name: '&f%period%: &e%completed%&7/&e%total% &fklara'
+        lore:
+          - '&7Nya utmaningar om &f%resets%'
+      none:
+        slot: 22
+        material: barrier
+        name: '&7Inga utmaningar just nu (%period%)'
+        view-requirements: ['%entries% == 0']
+      claim-all:
+        slot: 40
+        material: chest
+        name: '&a&lHämta alla'
+        lore:
+          - '&7Hämtar varje klar utmaning'
+          - '&7och svitbelöning.'
+        actions: ['[command] chatgames claim', '[wait] 2', '[refresh]']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7Föregående sida'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7Nästa sida &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Tillbaka'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cStäng'
+        actions: ['[close]']
+    templates:
+      in-progress:
+        material: '%icon%'
+        name: '%challenge%'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&7Pågår'
+      ready:
+        material: '%icon%'
+        glow: true
+        name: '%challenge% &a&l(KLAR)'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&a&lKlicka för att hämta belöningen!'
+        actions: ['[chatgames:claim-challenge] %period_key% %id%', '[refresh]']
+      claimed:
+        material: lime_stained_glass_pane
+        name: '%challenge% &7(hämtad)'
+        lore:
+          - '%description%'
+          - ''
+          - '&aBelöning hämtad'
+
+  #Varje svit har %streak_<type>% (dagar), %streak_<type>_name%, %streak_<type>_longest%,
+  #%streak_<type>_unclaimed% och %streak_<type>_enabled%, där <type> är challenge, daily eller global.
+  #Var och ens 7-dagarsstege hamnar i listan med dess namn, dag 1 till 7 (8-14 andra veckan...).
+  #Stegens dagar: %day% %ladder_day% (dess belöningsdag, 1-7) %type% %streak% och %today% (true på dagens dag).
+  #[chatgames:claim-streak] <type> hämtar varje ohämtad dag i en svit.
+  streaks:
+    title: '&8Sviter'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    lists:
+      challenge: ['11-17']
+      daily: ['20-26']
+      global: ['29-35']
+    items:
+      challenge:
+        slot: 10
+        material: writable_book
+        name: '%streak_challenge_name%'
+        lore:
+          - '&7Klara varje daglig utmaning varje dag.'
+          - ''
+          - '&7Nu: &f%streak_challenge% &7dagar &8(rekord %streak_challenge_longest%)'
+          - '&7Dagar att hämta: &e%streak_challenge_unclaimed%'
+        view-requirements: ['%streak_challenge_enabled%']
+        click-requirements: ['%streak_challenge_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] challenge', '[refresh]']
+      daily:
+        slot: 19
+        material: gold_ingot
+        name: '%streak_daily_name%'
+        lore:
+          - '&7Vinn minst ett spel varje dag.'
+          - ''
+          - '&7Nu: &f%streak_daily% &7dagar &8(rekord %streak_daily_longest%)'
+          - '&7Dagar att hämta: &e%streak_daily_unclaimed%'
+        view-requirements: ['%streak_daily_enabled%']
+        click-requirements: ['%streak_daily_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] daily', '[refresh]']
+      global:
+        slot: 28
+        material: beacon
+        name: '%streak_global_name%'
+        lore:
+          - '&7Lös ett globalt spel varje dag.'
+          - ''
+          - '&7Nu: &f%streak_global% &7dagar &8(rekord %streak_global_longest%)'
+          - '&7Dagar att hämta: &e%streak_global_unclaimed%'
+        view-requirements: ['%streak_global_enabled%']
+        click-requirements: ['%streak_global_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] global', '[refresh]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Tillbaka'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cStäng'
+        actions: ['[close]']
+    templates:
+      day-claimed:
+        material: lime_stained_glass_pane
+        glow: '%today%'
+        name: '&aDag %day% &7(hämtad)'
+      day-ready:
+        material: chest
+        glow: '%today%'
+        name: '&e&lDag %day%'
+        lore:
+          - '&a&lKlicka för att hämta!'
+        actions: ['[chatgames:claim-streak] %type%', '[refresh]']
+      day-today:
+        material: yellow_stained_glass_pane
+        glow: true
+        name: '&eDag %day% &7(idag)'
+        lore:
+          - '&7Håll svitens gång idag'
+          - '&7för att låsa upp belöningen.'
+      day-locked:
+        material: red_stained_glass_pane
+        name: '&cDag %day%'
+        lore:
+          - '&7Inte nådd än.'
+
+  #%points_rank% %fastest_rank% %total_points%; listor %top_points% och %top_fastest% (top-size rader)
+  leaderboards:
+    title: '&8Topplistor'
+    rows: 3
+    top-size: 10
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7Ingen än'
+    items:
+      points:
+        slot: 10
+        material: gold_block
+        name: '&e&lFlest poäng'
+        lore:
+          - '%top_points%'
+      fastest:
+        slot: 11
+        material: clock
+        name: '&b&lSnabbaste skrivarna'
+        lore:
+          - '%top_fastest%'
+      you:
+        slot: 13
+        material: player_head
+        head: '%player%'
+        name: '&a&lDu'
+        lore:
+          - '&7Placering i poäng: &f%points_rank%'
+          - '&7Placering i snabbhet: &f%fastest_rank%'
+          - ''
+          - '&7Poäng som alla tjänat: &f%total_points%'
+      games:
+        slot: 15
+        material: book
+        name: '&d&lSnabbast per spel'
+        lore:
+          - '&eKlicka för att se alla spel'
+        actions: ['[open] leaderboard-games']
+      events:
+        slot: 16
+        material: nether_star
+        name: '&6&lEvenemang'
+        lore:
+          - '&eKlicka för att se evenemangen'
+        view-requirements: ['permission chatgames.event']
+        actions: ['[open] leaderboard-events']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7Tillbaka'
+        actions: ['[back] main']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cStäng'
+        actions: ['[close]']
+
+  #En post per spel och lopp: %game% %key% %icon% och %top% (spelets snabbaste spelare)
+  leaderboard-games:
+    title: '&8Snabbast per spel'
+    rows: 6
+    top-size: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7Ingen än'
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7Föregående sida'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7Nästa sida &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7Tillbaka'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 53
+        material: barrier
+        name: '&cStäng'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&e&l%game%'
+        lore:
+          - '%top%'
+
+  #En post per evenemang: %event% %id% %steps%
+  leaderboard-events:
+    title: '&8Evenemangstopplistor'
+    rows: 4
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7Inga evenemang är inställda'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Föregående sida'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Nästa sida &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Tillbaka'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cStäng'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7%steps% spel'
+          - ''
+          - '&eKlicka för att se vem som fått mest'
+        actions: ['[close]', '[command] chatgames event top %id%']
+
+  #/chatgames admin. %current_game% %next_game% %rotation_state% %event% %preset%,
+  #%rotation_on% och %games_on% (true eller false). Varje knapp kör motsvarande kommando,
+  #som kontrollerar sin egen behörighet som om det skrevs.
+  admin:
+    title: '&4&lChatGames-admin'
+    rows: 5
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7inget'
+    items:
+      status:
+        slot: 4
+        material: repeater
+        name: '&f&lStatus'
+        lore:
+          - '&7Pågår: &f%current_game%'
+          - '&7Nästa spel om: &f%next_game%'
+          - '&7Rotation: %rotation_state%'
+          - '&7Evenemang: &f%event%'
+          - '&7Samling: &f%preset%'
+      start-game:
+        slot: 19
+        material: diamond_sword
+        name: '&a&lStarta ett spel'
+        lore:
+          - '&7Valfritt spel eller lopp, nu.'
+        actions: ['[open] admin-start']
+      global:
+        slot: 20
+        material: beacon
+        name: '&3&lStarta ett globalt spel'
+        lore:
+          - '&7Alla som hinner i tid vinner.'
+        actions: ['[open] admin-global']
+      events:
+        slot: 21
+        material: nether_star
+        name: '&6&lEvenemang'
+        lore:
+          - '&7Starta eller stoppa ett spelevenemang.'
+        actions: ['[open] admin-events']
+      presets:
+        slot: 23
+        material: chest
+        name: '&d&lSamlingar'
+        lore:
+          - '&7Ladda en uppsättning aktiverade spel.'
+        actions: ['[open] admin-presets']
+      logs:
+        slot: 24
+        material: oak_sign
+        name: '&f&lLoggar'
+        lore:
+          - '&7Skriv ut de senaste spelen i chatten.'
+        actions: ['[open] admin-logs']
+      stop:
+        slot: 25
+        material: red_wool
+        name: '&c&lStoppa spelet'
+        lore:
+          - '&7Avslutar det pågående spelet utan vinnare.'
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      toggle:
+        slot: 29
+        material: lime_dye
+        name: '&fDina chattspel: &aPÅ'
+        lore:
+          - '&7Klicka för att stänga av dem för dig.'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&fDina chattspel: &cAV'
+          lore:
+            - '&7Klicka för att slå på dem för dig.'
+      toggle-all:
+        slot: 30
+        material: lime_dye
+        name: '&fSpelrotation: &aPÅ'
+        lore:
+          - '&7Klicka för att stoppa automatiska spel för alla.'
+        state: '%rotation_on%'
+        #toggleAll slutförs på den globala tråden, en tick senare på Folia
+        actions: ['[command] chatgames toggleAll', '[wait] 2', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&fSpelrotation: &cAV'
+          lore:
+            - '&7Klicka för att starta automatiska spel igen.'
+      reload:
+        slot: 32
+        material: hopper
+        name: '&e&lLadda om'
+        lore:
+          - '&7Laddar om alla konfigurationsfiler.'
+        actions: ['[close]', '[command] chatgames reload']
+      debug:
+        slot: 33
+        material: command_block
+        name: '&c&lFelsökning'
+        lore:
+          - '&7Testa valfritt spel privat.'
+        view-requirements: ['permission chatgames.debug']
+        actions: ['[open] debug']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Tillbaka'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cStäng'
+        actions: ['[close]']
+
+  #Varje spel och lopp: %game% %key% (som i kommandon) %icon%
+  admin-start:
+    title: '&8Starta ett spel'
+    rows: 6
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7Föregående sida'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7Nästa sida &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7Tillbaka'
+        actions: ['[back] admin']
+      close:
+        slot: 53
+        material: barrier
+        name: '&cStäng'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&a%game%'
+        lore:
+          - '&7Chattspel'
+          - '&eKlicka för att starta'
+        actions: ['[close]', '[command] chatgames %key%']
+      race:
+        material: '%icon%'
+        name: '&6%game%'
+        lore:
+          - '&7Lopp'
+          - '&eKlicka för att starta'
+        actions: ['[close]', '[command] chatgames %key%']
+
+  #Spelen som global_games.yml aktiverar: %game% %key% %icon% %goal% %duration% %points%.
+  #Det som spelas: %global_running% %global_game% %global_goal% (t.ex. "500 Stone")
+  #%global_progress% %global_goal_amount% %global_percent% %global_contributors% %global_time_left%
+  admin-global:
+    title: '&8Globala spel'
+    rows: 5
+    update-interval: 20
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    items:
+      status:
+        slot: 4
+        material: beacon
+        name: '&3&lSpelas: &f%global_game%'
+        lore:
+          - '&7Mål: &f%global_goal%'
+          - '&7Framsteg: &e%global_progress%&7/&e%global_goal_amount% &8(%global_percent%%)'
+          - '&7Spelare som hjälper: &f%global_contributors%'
+          - '&7Tid kvar: &f%global_time_left%s'
+          - ''
+          - '&cKlicka för att stoppa det (inga belöningar)'
+        view-requirements: ['%global_running%']
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      idle:
+        slot: 4
+        material: gray_dye
+        name: '&7Inget globalt spel pågår'
+        lore:
+          - '&7Välj ett nedan för att starta det.'
+        view-requirements: ['!%global_running%']
+      none:
+        slot: 22
+        material: barrier
+        name: '&7Inga globala spel är aktiverade'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7Föregående sida'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7Nästa sida &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Tillbaka'
+        actions: ['[back] admin']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cStäng'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&3Globalt %game%'
+        lore:
+          - '&7Mål: &f%goal% rätta svar'
+          - '&7Tid: &f%duration%s'
+          - '&7Poäng: &f%points%'
+          - ''
+          - '&eKlicka för att starta'
+        actions: ['[close]', '[command] chatgames global %key%']
+      race:
+        material: '%icon%'
+        name: '&3Globalt %game%-lopp'
+        lore:
+          - '&7Mål: &f%goal% tillsammans'
+          - '&7Tid: &f%duration%s'
+          - '&7Poäng: &f%points%'
+          - ''
+          - '&eKlicka för att starta'
+        actions: ['[close]', '[command] chatgames global %key%']
+      count:
+        material: '%icon%'
+        name: '&3Globalt %game%'
+        lore:
+          - '&7Räkna tillsammans i chatten'
+          - '&7Tid: &f%duration%s'
+          - '&7Poäng: &f%points%'
+          - ''
+          - '&eKlicka för att starta'
+        actions: ['[close]', '[command] chatgames global %key%']
+
+  #events.yml-evenemang: %event% %id% %steps% och %step% (spelet som spelas nu) för det pågående
+  admin-events:
+    title: '&8Evenemang'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7Inga evenemang är inställda i events.yml'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Föregående sida'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Nästa sida &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Tillbaka'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cStäng'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7%steps% spel'
+          - ''
+          - '&eKlicka för att starta'
+        actions: ['[command] chatgames event start %id%', '[wait] 2', '[refresh]']
+      running:
+        material: nether_star
+        glow: true
+        name: '%event% &a(pågår)'
+        lore:
+          - '&7Spel %step% av %steps%'
+          - ''
+          - '&cKlicka för att stoppa'
+        actions: ['[command] chatgames event stop', '[wait] 2', '[refresh]']
+
+  #Samlingarna plus 'none' (enable-flaggorna i games.yml): %preset% %games%
+  admin-presets:
+    title: '&8Samlingar'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Föregående sida'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Nästa sida &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Tillbaka'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cStäng'
+        actions: ['[close]']
+    templates:
+      preset:
+        material: chest
+        name: '&d%preset%'
+        lore:
+          - '&7Spel: &f%games%'
+          - ''
+          - '&eKlicka för att ladda'
+        actions: ['[command] chatgames preset load %preset%', '[wait] 2', '[refresh]']
+      active:
+        material: ender_chest
+        glow: true
+        name: '&d%preset% &a(aktiv)'
+        lore:
+          - '&7Spel: &f%games%'
+
+  #Helt byggd här: lägg till eller ändra antalen fritt
+  admin-logs:
+    title: '&8Loggar'
+    rows: 3
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      last-10:
+        slot: 11
+        material: paper
+        name: '&fSenaste &e10 &fspelen'
+        lore: ['&eKlicka för att skriva ut dem i chatten']
+        actions: ['[close]', '[command] chatgames logs 10']
+      last-25:
+        slot: 12
+        material: paper
+        name: '&fSenaste &e25 &fspelen'
+        lore: ['&eKlicka för att skriva ut dem i chatten']
+        actions: ['[close]', '[command] chatgames logs 25']
+      last-50:
+        slot: 14
+        material: paper
+        name: '&fSenaste &e50 &fspelen'
+        lore: ['&eKlicka för att skriva ut dem i chatten']
+        actions: ['[close]', '[command] chatgames logs 50']
+      last-100:
+        slot: 15
+        material: paper
+        name: '&fSenaste &e100 &fspelen'
+        lore: ['&eKlicka för att skriva ut dem i chatten']
+        actions: ['[close]', '[command] chatgames logs 100']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7Tillbaka'
+        actions: ['[back] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cStäng'
+        actions: ['[close]']
+
+  #/chatgames debug: varje chattspel (%game% %key% %icon%). [chatgames:debug] <game> startar en
+  #privat omgång och öppnar debug-session.
+  debug:
+    title: '&4Felsökning: välj ett spel'
+    rows: 4
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Föregående sida'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Nästa sida &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Tillbaka'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cStäng'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&c%game%'
+        lore:
+          - '&7Skapar en privat omgång.'
+          - '&7Inga belöningar, inget sparas.'
+        actions: ['[chatgames:debug] %key%']
+
+  #Den privata omgången: %game% %key% %icon% %question% %answer% %time% %min_ms% %case_sensitive%
+  #%winners% %points% %hints% %generated%; listor %placeholders% och %answers%.
+  #[chatgames:debug-answer] <correct|wrong|wrong-case> [ms] skickar ett testsvar (efter ms);
+  #[chatgames:debug-timeout] väntar ut tidsgränsen; [chatgames:debug-reroll] skapar en ny omgång;
+  #[chatgames:debug-end] avslutar sessionen.
+  debug-session:
+    title: '&4Felsökning: %game%'
+    rows: 5
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    #En knapp ”svara rätt efter X ms” per fördröjning, i listplatserna 'delays'
+    delays: [100, 500, 1000, 5000]
+    lists:
+      delays: ['29-32']
+    items:
+      question:
+        slot: 11
+        material: '%icon%'
+        name: '&e&lFråga'
+        lore:
+          - '&f%question%'
+          - ''
+          - '%placeholders%'
+      answer:
+        slot: 13
+        material: emerald
+        name: '&a&lGodkända svar'
+        lore:
+          - '%answers%'
+      settings:
+        slot: 15
+        material: repeater
+        name: '&f&lInställningar'
+        lore:
+          - '&7Tidsgräns: &f%time%s'
+          - '&7Min. svarstid: &f%min_ms% ms'
+          - '&7Skiftlägeskänslig: %case_sensitive%'
+          - '&7Vinnare: &f%winners%  &7Poäng: &f%points%'
+          - '&7Förberedda ledtrådar: &f%hints%'
+          - '&7Skapad på: &f%generated% ms'
+      correct-now:
+        slot: 28
+        material: lime_wool
+        name: '&aSvara rätt nu'
+        lore:
+          - '&7Snabbare än någon människa: visar'
+          - '&7makrokontrollen i arbete.'
+        actions: ['[chatgames:debug-answer] correct']
+      wrong:
+        slot: 33
+        material: red_wool
+        name: '&cSvara fel'
+        actions: ['[chatgames:debug-answer] wrong']
+      wrong-case:
+        slot: 34
+        material: orange_wool
+        name: '&6Svara med fel versaler'
+        actions: ['[chatgames:debug-answer] wrong-case']
+      timeout:
+        slot: 39
+        material: clock
+        name: '&eLåt tiden gå ut'
+        lore:
+          - '&7Väntar tidsgränsen, rapporterar sedan.'
+        actions: ['[chatgames:debug-timeout]']
+      reroll:
+        slot: 41
+        material: ender_pearl
+        name: '&dNy omgång'
+        actions: ['[chatgames:debug-reroll]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Tillbaka'
+        actions: ['[chatgames:debug-end]', '[back] debug']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cStäng'
+        actions: ['[close]']
+    templates:
+      correct-after:
+        material: yellow_wool
+        name: '&eSvara rätt efter %ms% ms'
+        actions: ['[chatgames:debug-answer] correct %ms%']

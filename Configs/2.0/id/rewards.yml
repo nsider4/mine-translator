@@ -1,0 +1,153 @@
+#AKSI YANG MUNGKIN:
+#
+#[playercmd] - Menjalankan perintah sebagai pemenang
+#[consolecmd] - Menjalankan perintah dari konsol
+#[playermsg] - Mengirim pesan ke pemenang
+#[broadcast] - Menyiarkan pesan ke semua pemain di dunia yang aktif
+#[player_as_op] - Menjalankan perintah sebagai op untuk pemain
+#
+#TAMBAHKAN PELUANG KE HADIAH DENGAN CARA BERIKUT:
+#
+#CONTOH:
+#  - '10.0%~ [consolecmd] give %player% iron_block 5'
+#HANYA BEKERJA JIKA FORMATNYA SAMA DENGAN CONTOH, DENGAN <chance>% DI AWAL DIIKUTI ~ DAN SPASI. SELALU PALING DEPAN DI PERINTAH
+#
+#PERINTAH TANPA % AKAN MENJADI HADIAH YANG DIBERIKAN 100%.
+
+#PEMERIKSAAN IZIN:
+#
+#LETAKKAN DI AKHIR BARIS PERINTAH.
+#Contoh:
+#  - '[consolecmd] give %player% iron_block 5 has:test.permission'
+
+#Angka 1 untuk pemenang PERTAMA, JIKA KAMU MENAMBAH PEMENANG DI config.yml DAN INGIN HADIAH BERBEDA, TAMBAHKAN PERINGKAT MEREKA (2:, dst.)
+unscramble:
+  rewards:
+    1:
+      reward_1:
+        minimum-players: 2 #Syarat berdasarkan pemain online, hadiah hanya bisa dipilih jika ada 2 pemain atau lebih yang online
+        chance: 50
+        data:
+          - '10.0%~ [consolecmd] give %player% diamond_block 3 has:test.permission'
+          - '[consolecmd] give %player% iron_block 5'
+      reward_2:
+        data:
+          - '[consolecmd] give %player% iron_block 2'
+
+unreverse:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+reaction:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+guess_the_number:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+shoppinglist:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+clickable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+fillout:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+hoverable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+random:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+variable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+math:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+sequence:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+memorize:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+word_association:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+trivia:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+#MULAI DARI SINI, HADIAH UNTUK BALAPAN YANG HANYA PUNYA 1 PEMENANG
+#
+#FORMAT YANG BERBEDA DIPAKAI! BACA DENGAN TELITI
+
+races:
+  rewards:
+    #INI ADALAH HADIAH YANG KAMU TARUH DI 'races.yml'
+    reward_1:
+      chance: 50
+      data:
+        - '60.0%~ [consolecmd] give %player% diamond_block 5'
+    #MENGHAPUS NILAI 'chance' AKAN MEMBUAT HADIAH/PERINTAH SELALU TERJADI
+    reward_2:
+      data:
+        - '[consolecmd] give %player% iron_block 5'
+        - '[playermsg] &aKamu menang!'
+    reward_3:
+      chance: 50
+      data:
+        - '[consolecmd] give %player% diamond_block 3'

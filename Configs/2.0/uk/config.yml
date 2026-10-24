@@ -1,0 +1,125 @@
+#############################
+######    НАЛАШТУВАННЯ    #######
+#############################
+check-update: true
+
+#Мова сервера. Назви блоків, предметів і мобів (у перегонах і в Запам'ятовуванні) перекладаються
+#нею, понад 140 мов. ID своєї мови дивіться тут:
+#https://github.com/nsider4/mine-translator/blob/main/language_names.txt
+#Назви завантажуються в translations/ і оновлюються самі, коли виходить нова версія
+#Minecraft. Зміна тут діє після /chatgames reload.
+lang: 'en_us'
+
+#Мова цих файлів налаштувань: повідомлення, меню, списки слів, вікторина, коментарі...
+#Повністю перекладено: en, es, fr, pt, de, it, nl, pl, ru, tr, zh, zh_tw, ja, ko, uk, cs, sv, hu, vi, id
+#(zh — спрощена китайська, zh_tw — традиційна китайська). Якщо вашого 'lang' немає в списку, назви блоків,
+#предметів і мобів однаково перекладаються, але ці файли лишаються своєю мовою (типово англійською).
+#  auto: перемикати, коли змінюється 'lang' вище, якщо ця мова перекладена повністю
+#  none: ніколи не змінювати
+#  або один із кодів мови вище
+#Перемикання зберігає ваші налаштування і зміни в них; ваші власні повідомлення
+#замінюються перекладом (старі файли спершу копіюються в backups/). Переклади
+#завантажуються з https://github.com/nsider4/mine-translator (тека Configs) і оновлюються
+#самі. Там можна додати ще мови.
+config-language: 'auto'
+
+#Тип сховища, доступні: SQLite або MySQL
+Storage: 'SQLite'
+
+#Назва таблиці з усіма даними ChatGames
+table_name: 'chatgames'
+
+#Назва таблиці з усіма найшвидшими часами ChatGames
+fastest_times_table: 'chatgames_fastest_times'
+
+SQLite:
+  Filename: 'chatgames-data'
+
+MySQL:
+  host: 'localhost'
+  port: '3306'
+  user: 'root'
+  password: 'password'
+  database: 'chatgame'
+  connection-parameters: '?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8'
+  Pool-Settings:
+    max-pool-size: 10
+    min-idle: 10
+    max-lifetime: 180000
+    keep-alive-time: 60000
+    time-out: 20000
+
+disabled-worlds:
+  - 'example_world'
+
+prefix: '&c&lC&d&lH&b&lA&a&lT &6&lG&e&lA&a&lM&c&lE&b&lS'
+
+#Якщо false, починати зможуть лише гравці з 'chatgames.start.*'
+allow_starting_from_disabled: true
+
+#Якщо false, не скасовуватиметься повідомлення, яке зазвичай не надсилається, коли гравець вгадує правильний варіант
+cancel-message-when-winning: true
+
+#Найменша кількість гравців онлайн, потрібна для початку чат-гри
+min_players_online: 1
+
+#Час, через який знову обирається випадкова гра.
+#Значення -1 вимикає завдання ПОВНІСТЮ; з -1 також не можна використовувати randomDelay
+time_minutes: 25
+
+#Якщо увімкнено, після кожної гри створюється випадкове число від 'randomDelay.minimum' до 'randomDelay.limit' як затримка до наступної гри
+#Якщо це увімкнути, значення 'time_minutes' ігнорується, хіба що воно -1, бо тоді завдання немає.
+randomDelay:
+  enable: false
+  #Одиниця часу, інше можливе значення — 'seconds'; якщо змінюєте, бажано зробити мінімум більшим за 'timeToGuess_seconds' гри
+  timeUnit: 'minutes'
+  minimum: 1
+  limit: 25
+
+
+#Якщо вимкнути, для показу ігор не потрібен буде дозвіл chatgames.play
+use-permission-toplay: false
+
+#Якщо false, рахуються лише гравці з дозволом 'chatgames.play', тобто ті, хто може грати.
+#Якщо true, рахуються всі гравці онлайн, крім невидимих (vanish).
+count-all-players: false
+
+#Якщо true, створюється рейтинг найшвидших (/chatgames fastest). Якщо false, цей рейтинг вимкнено.
+fastest-typers-top: true
+
+#Заповнювачі PlaceholderAPI (потрібен встановлений PlaceholderAPI):
+#  Ви:           %chatgames_points%, %chatgames_wins%, %chatgames_wins_<game>%, %chatgames_race_wins%,
+#                %chatgames_global_played%, %chatgames_global_won%, %chatgames_toggle%, %chatgames_sound_toggle%
+#                %chatgames_events_played%, %chatgames_event_wins%, %chatgames_event_best_place% (0 = ще немає)
+#  Ваш час:      %chatgames_personal_best% (будь-яка чат-гра), %chatgames_fastest_<game>% (і перегони)
+#  Ваше місце:   %chatgames_show_current_pos_top% (очки), %chatgames_show_current_pos_fastest% (найкращий час)
+#  Топ очок:     %chatgames_top_<n>% (ім'я), %chatgames_points_top_<n>%, %chatgames_total_points%
+#  Топ швидких:  %chatgames_fastest_<n>% (ім'я, чат-ігри), %chatgames_fastest_time_<n>%,
+#                %chatgames_fastest_<game>_<n>%, %chatgames_fastest_<game>_time_<n>%
+#  Зараз:        %chatgames_game_running%, %chatgames_current_game%, %chatgames_next_game_in% (секунди)
+#  Перегони:     %chatgames_race_target%, %chatgames_race_amount%, %chatgames_race_progress% (ваш)
+#  Завдання:     %chatgames_daily_completed%, %chatgames_daily_total%, %chatgames_weekly_completed%,
+#                %chatgames_weekly_total%, %chatgames_challenges_completed% (за весь час)
+#  Серії:        %chatgames_streak_<type>%, %chatgames_streak_<type>_longest% (<type> — challenge, daily або global)
+#  Подія:        %chatgames_event_running%, %chatgames_event_name%, %chatgames_event_step%, %chatgames_event_steps%,
+#                %chatgames_event_points% і %chatgames_event_place% (ваші в поточній події)
+#  <game> — назва гри з games.yml (напр. unscramble, guess_the_number); <n> — місце (1, 2, 3...).
+placeholders:
+  #Як часто перебудовуються заповнювачі рейтингу (top_<n>, fastest_<n>, позиції...), у секундах.
+  #Вони також перебудовуються після кожної гри з переможцем. Ваші власні очки, перемоги й час завжди актуальні.
+  refresh-seconds: 60
+  #Показується, коли нічого показати: порожнє місце в рейтингу, ще немає найкращого часу, гра не йде...
+  empty-value: ''
+
+#Звук для гравців, коли починається чат-гра!
+GameSounds:
+  volume: 0.5
+  pitch: 1.0
+  #ЗАЛИШТЕ БУДЬ-ЯКИЙ ІЗ НИХ ПОРОЖНІМ, ЩОБ ВИМКНУТИ
+  #Звуки з ресурс-паку теж працюють: пишіть їх із простором імен, напр. 'myserver:custom.ding'
+  win: 'minecraft:entity.experience_orb.pickup'
+  game-start: 'minecraft:entity.player.levelup'
+  time-expired: 'minecraft:entity.villager.no'
+  wrong-case: 'minecraft:block.note_block.bass'
+
+#Набори ігор (іменовані набори увімкнених ігор) зберігаються в presets.yml.

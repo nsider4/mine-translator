@@ -1,0 +1,735 @@
+unknown_command: '&8[%prefix%&8] &cIsmeretlen parancs. Próbálj valami mást!'
+config_reloaded: '&8[%prefix%&8] &fA konfigurációs fájlok újratöltve!'
+config_reload_failed: '&8[%prefix%&8] &cNéhány fájl nem töltődött be; nézd meg a konzolt. Ezek a fájlok megtartják korábbi értékeiket.'
+not_enough_permissions: '&8[%prefix%&8] &cNincs elég jogod ehhez a parancshoz!'
+player_only_command: '&8[%prefix%&8] &cEzt a parancsot csak játékosok futtathatják!'
+player_deleted: '&c&8[%prefix%&8] &f%player% &cjátékos törölve az adatbázisból!'
+player_not_found: '&8[%prefix%&8] &fNem található a játékos: &c%player%'
+number_not_found_commands: '&8[%prefix%&8] &cNem található szám a parancshoz'
+points_added: '&f&8[%prefix%&8] &a%amount% &fpont hozzáadva neki: &c%player%'
+points_removed: '&f&8[%prefix%&8] &a%amount% &fpont levonva tőle: &c%player%'
+points_set: '&f&8[%prefix%&8] &c%player% &fpontjai beállítva erre: &a%amount%'
+player_points: '&f&8[%prefix%&8] &a%amount% &fpontod van!'
+in_cooldown: '&8[%prefix%&8] &cEzt még nem használhatod, várj &e%time_left%mp&c-et a parancs újbóli használata előtt'
+type_not_found: '&8[%prefix%&8] &fNem található anyag-/entitástípus ehhez: &c%type%'
+inventory_full: '&8[%prefix%&8] &cMegtelt az eszköztárad! &fA jutalom a helyeden a földre esett'
+
+no_winner_placeholder: '---'
+cannot_start_from_disabled: '&8[%prefix%&8] &cKikapcsolt világban nem indíthatsz csetjátékot!'
+toggle_game: '&8[%prefix%&8] &fA csetjátékok most: &a%state%&f!'
+toggle_sound: '&8[%prefix%&8] &fA csetjátékok hangjai most: &a%state%&f!'
+toggleAllGames: '&8[%prefix%&8] &fAz összes csetjáték most: &a%state% &c(MIND)&f!'
+state-ON: 'BE'
+state-OFF: 'KI'
+game_started: '&8[%prefix%&8] &aElindítottad a(z) %game% csetjátékot a csetedben!'
+invalid_arguments: '&8[%prefix%&8] &fHiba történt a parancs argumentumainak ellenőrzésekor!'
+cant_log_local: '&8[%prefix%&8] &cNem láthatod a naplóüzeneteket, mert ez a lehetőség ki van kapcsolva a konfigurációban!'
+toggle_game_other: '&8[%prefix%&8] &fA csetjátékok &c%player% &fszámára most: &a%state%&f!'
+toggle_sound_other: '&8[%prefix%&8] &fA csetjátékok hangjai &c%player% &fszámára most: &a%state%&f!'
+player_points_other: '&8[%prefix%&8] &c%player% &fjátékosnak &a%amount% &fpontja van!'
+data_loading: '&8[%prefix%&8] &cEnnek a játékosnak az adatai még töltődnek, próbáld újra egy pillanat múlva.'
+usage: '&8[%prefix%&8] &cHasználat: &f%usage%'
+game_already_running: '&8[%prefix%&8] &cMár fut egy csetjáték! Előbb fejezd be ezzel: &f/chatgames stop&c.'
+game_not_started: '&8[%prefix%&8] &cA(z) %game% nem indult el ezekkel az értékekkel. A részletek a konzolon vannak.'
+no_games_enabled: '&8[%prefix%&8] &cJelenleg egyetlen játék sincs bekapcsolva.'
+game_stopped: '&8[%prefix%&8] &fA futó játék győztes nélkül leállt.'
+no_game_running: '&8[%prefix%&8] &cJelenleg nem fut csetjáték.'
+global_not_enabled: '&8[%prefix%&8] &f%game% &cnincs globális játékként bekapcsolva a global_games.yml-ben.'
+unknown_game: '&8[%prefix%&8] &cNincs ilyen nevű játék: &f%game%&c.'
+unknown_menu: '&8[%prefix%&8] &cNincs ilyen nevű menü: &f%menu%&c.'
+
+presets:
+  loaded: '&8[%prefix%&8] &fBetöltve a(z) &a%preset% &fcsomag (%games%).'
+  cleared: '&8[%prefix%&8] &fMár egy csomag sem aktív; a games.yml-ben bekapcsolt játékok használatosak.'
+  saved: '&8[%prefix%&8] &fA bekapcsolt játékok mentve &a%preset% &fcsomagként (%games%).'
+  not_found: '&8[%prefix%&8] &cNincs ilyen nevű csomag: &f%preset%&c.'
+  invalid_name: '&8[%prefix%&8] &cA csomagnevek csak ékezet nélküli betűket, számokat, - és _ jelet tartalmazhatnak (legfeljebb 32).'
+  list_header: '&8[%prefix%&8] &eCsomagok:'
+  list_entry: '&7- &f%preset%%active% &8(%games%)'
+  active_marker: ' &a(aktív)'
+  list_empty: '&8[%prefix%&8] &cNincs csomag beállítva a presets.yml-ben.'
+
+challenges:
+  completed: '&8[%prefix%&8] &a%period% kihívás teljesítve: &f%challenge%&a! Vedd át a jutalmat ezzel: &f/chatgames claim&a.'
+  claimed: '&8[%prefix%&8] &aÁtvetted: &f%challenge%&a!'
+  nothing_to_claim: '&8[%prefix%&8] &cJelenleg nincs mit átvenned.'
+  #/chatgames challenges. Az alábbi %period% értéke 'Napi' vagy 'Heti'; %resets% a hátralévő idő, pl. 5ó 12p
+  header: '&8[%prefix%&8] &e%period% kihívások &7(%completed%/%total% kész, visszaáll: %resets%)'
+  entry: '&7- %challenge% &8- &7%description% &f%progress%/%amount% %status%'
+  status_in_progress: ''
+  status_ready: '&a[Átvehető]'
+  status_claimed: '&7[Átvéve]'
+  none: '&8[%prefix%&8] &cJelenleg nincsenek kihívások.'
+  daily: 'Napi'
+  weekly: 'Heti'
+  #Mértékegységek a %resets%-ben, pl. 2n 5ó, 5ó 12p vagy 40p
+  time_days: '%amount%n'
+  time_hours: '%amount%ó'
+  time_minutes: '%amount%p'
+  reset: '&f&8[%prefix%&8] &c%player% &fnapi és heti kihívásai visszaállítva.'
+
+streaks:
+  grew: '&8[%prefix%&8] &aA(z) %streak% &amost &f%days% &anapos! Vedd át a jutalmat ezzel: &f/chatgames claim&a.'
+  #%days% egy nap vagy egy tartomány, pl. 3-5, ha egyszerre több napot veszel át
+  claimed: '&8[%prefix%&8] &aÁtvetted a(z) %streak% &ajutalmát (%days%. nap)!'
+  header: '&8[%prefix%&8] &eSorozatok:'
+  entry: '&7- %streak% &8- &f%days% &7nap, legjobb &f%longest% %status%'
+  status_ready: '&a[%unclaimed% átvehető]'
+  status_today: '&7[ma teljesítve]'
+  status_waiting: '&e[ma még nincs teljesítve]'
+  none: '&8[%prefix%&8] &cA sorozatok ki vannak kapcsolva.'
+  set: '&f&8[%prefix%&8] &c%player% &f%streak% &fsorozata beállítva: &a%days% &fnap.'
+  unknown: '&8[%prefix%&8] &cNincs ilyen nevű sorozat: &f%type%&c. Használd: challenge, daily vagy global.'
+
+events:
+  unknown: '&8[%prefix%&8] &cNincs ilyen nevű esemény: &f%event%&c.'
+  started: '&8[%prefix%&8] &fElindult: %event%&f.'
+  already_running: '&8[%prefix%&8] &cMár fut egy esemény: %event%&c.'
+  cancelled: '&8[%prefix%&8] &cEgy másik plugin megszakította: %event%&c.'
+  not_running: '&8[%prefix%&8] &cNem fut esemény.'
+  stopped: '&8[%prefix%&8] &fLeállítva: %event%&f.'
+  list_header: '&8[%prefix%&8] &eEsemények:'
+  list_entry: '&7- &f%id% &8(%event%&8) &7%steps% játék, következő: &f%next%%running%'
+  list_running: ' &a(fut, %step%/%steps%. játék)'
+  list_empty: '&8[%prefix%&8] &cNincs esemény beállítva az events.yml-ben.'
+  not_scheduled: 'nincs ütemezve'
+  top_header: '&8[%prefix%&8] &eA legtöbb eseménypont itt: %event%&e:'
+  top_entry: '&c%spot%. &f%player% &8| &e%points% &7pont'
+  top_empty: '&8[%prefix%&8] &cMég senki sem szerzett pontot itt: %event%&c.'
+
+discord:
+  test_sent: '&f&8[%prefix%&8] &a%amount% &fteszt üzenet elküldve a Discordra. Ha semmi sem jelent meg, a konzol megmondja, miért.'
+  leaderboard_posted: '&8[%prefix%&8] &fA ranglista elküldve a Discordra.'
+  disabled: '&8[%prefix%&8] &cA Discord-üzenetek ki vannak kapcsolva: állítsd be az &fenabled: true &cértéket a discord.yml-ben.'
+  no_channel: '&8[%prefix%&8] &f%section% &cszakasznak nincs webhookos vagy DiscordSRV-csatornája a discord.yml-ben.'
+  unknown_message: '&8[%prefix%&8] &cNincs ilyen nevű Discord-üzenet: &f%message%&c.'
+  empty_message: '&8[%prefix%&8] &f%message% &cüres vagy hiányzik a discord.yml-ből.'
+
+logs:
+  no_logs: "&cNincsenek naplók, vagy hiba történt."
+  header: "&8[%prefix%&8] &eAz utolsó &6%amount% &enaplóbejegyzés:"
+  entries:
+    # Naplóbejegyzések a játékokról
+    game:
+      start: "&aJáték indult: &f%game% | &aVan válasz: &f%hasAnswer% | &aVálasz: &f%answer%"
+      end: "&aJáték vége: &f%game% | &aVan győztes: &f%hasWinner% | &aGyőztesek: &f%winners% | &aVálasz: &f%answer%"
+
+    # Naplóbejegyzések az anyagos versenyekről
+    race:
+      start: "&aVerseny indult: &f%race% | &aAnyag: &f%material% | &aMennyiség: &f%amount%"
+      end: "&aVerseny vége: &f%race% | &aVan győztes: &f%hasWinner% | &aGyőztes: &f%winner% | &aAnyag: &f%material% | &aMennyiség: &f%amount%"
+
+    # Külön bejegyzés a HUNT versenyekhez (entitásos versenyek)
+    hunt:
+      start: "&aVerseny indult: &f%race% | &aEntitás: &f%entity% | &aMennyiség: &f%amount%"
+      end: "&aVerseny vége: &f%race% | &aVan győztes: &f%hasWinner% | &aGyőztes: &f%winner% | &aEntitás: &f%entity% | &aMennyiség: &f%amount%"
+
+#A ranglista üzeneteiben szabadon használhatod a <center>-t.
+top:
+  #Üresen hagyható egy adott üzenet kikapcsolásához. (Kivéve 'format' és 'player-stat-format')
+  header: '&b&m---------&e&lCSET TOPLISTA&b&m---------'
+  #A separators érték az az üzenet, amely elválasztja a 10 legjobb játékost a fejléctől és a lábléctől!
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%points% &7pont'
+  player-stat-format: '&7&7Győzelmeid: &e&l%player_points%'
+  total-stat-format: '&7Összes megnyert játék a szerveren: &6&l%total_wins%'
+  footer: '&b&m---------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cMég nincs adat! Nyerj meg egy csetjátékot, és szerezz pontokat!'
+
+TypersTop:
+  #Üresen hagyható egy adott üzenet kikapcsolásához. (Kivéve 'format' és 'player-stat-format')
+  header: '&b&m---------&e&lLEGGYORSABBAK&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6mp'
+  player-stat-format: '&7Legjobb időd: &e&l%fastest_time%&6mp'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cMég nincs adat! Nyerj meg egy csetjátékot, és légy a leggyorsabb!'
+  top_disabled_message: '&8[%prefix%&8] &cEz a funkció jelenleg ki van kapcsolva!'
+
+GameTypersTop:
+  #Üresen hagyható egy adott üzenet kikapcsolásához. (Kivéve 'format' és 'player-stat-format')
+  header: '&b&m---------&e&lLEGGYORSABBAK - %game%&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6mp'
+  player-stat-format: '&7Legjobb időd: &e&l%fastest_time%&6mp'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cMég nincs adat! Nyerj meg egy csetjátékot, és légy a leggyorsabb!'
+  top_disabled_message: '&8[%prefix%&8] &cEz a funkció jelenleg ki van kapcsolva!'
+
+help_command:
+  - '&7&m-------------------------------------------------'
+  - '&e&l-ChatGames-'
+  - '&6'
+  - '&6&lPARANCSOK:'
+  - '&6'
+  - '&a/chatgames menu [menu] &f- &3Megnyitja a menüt: profil, kihívások, sorozatok, ranglisták (vagy bármely menüt a menus.yml-ből).'
+  - '&a/chatgames profile [player] &f- &3Megmutatja a statisztikáidat (vagy egy másik játékosét).'
+  - '&a/chatgames top &f- &3Megmutatja a 10 legtöbb pontot szerzett játékost.'
+  - '&a/chatgames fastest [game] &f- &3Megmutatja a leggyorsabb győzteseket, összesítve vagy egy játékban.'
+  - '&a/chatgames points [player] &f- &3Megmutatja a pontjaidat (vagy egy másik játékosét).'
+  - '&a/chatgames challenges &f- &3Megmutatja a napi és heti kihívásaidat.'
+  - '&a/chatgames streaks &f- &3Megmutatja a sorozataidat.'
+  - '&a/chatgames claim &f- &3Átveszi a teljesített kihívások és sorozatok jutalmait.'
+  - '&a/chatgames event [list|top <event>] &f- &3Megmutatja a játékeseményeket, vagy hogy ki szerzett a legtöbbet egyben.'
+  - '&a/chatgames toggle [player] &f- &3Be- vagy kikapcsolja számodra a csetjátékokat.'
+  - '&a/chatgames togglesound [player] &f- &3Be- vagy kikapcsolja a csetjátékok hangjait.'
+  - '&6'
+  - '&c&lADMIN:'
+  - '&a/chatgames admin &f- &3Megnyitja az admin menüt.'
+  - '&a/chatgames debug &f- &3Megnyitja a hibakereső menüt: próbálj ki bármely játékot privátban, jutalom nélkül.'
+  - '&a/chatgames (game) [values] &f- &3Azonnal elindítja a játékot, akár a saját szavaddal/értékeiddel.'
+  - '&a/chatgames any &f- &3Elindítja azt a játékot, amelyet a rotáció következőnek választana.'
+  - '&a/chatgames global <game> [values] &f- &3Globális játékot indít: mindenki nyer, aki időben válaszol.'
+  - '&a/chatgames event start <event> | stop &f- &3Elindít vagy leállít egy játékeseményt.'
+  - '&a/chatgames stop &f- &3Győztes nélkül befejezi a futó játékot.'
+  - '&a/chatgames toggleAll &f- &3Be- vagy kikapcsolja az automatikus játékrotációt.'
+  - '&a/chatgames preset <list|load|save> [name] &f- &3Kezeli a játékcsomagokat.'
+  - '&a/chatgames +points|-points|setpoints <player> <amount> &f- &3Módosítja egy játékos pontjait.'
+  - '&a/chatgames remove <player> &f- &3Törli egy játékos adatait.'
+  - '&a/chatgames challenges reset <player> &f- &3Visszaállítja egy játékos kihívásait.'
+  - '&a/chatgames streak set <player> <challenge|daily|global> <days> &f- &3Beállítja egy játékos sorozatát.'
+  - '&a/chatgames logs [amount] &f- &3Megmutatja a legutóbbi játéknaplókat.'
+  - '&a/chatgames discord <test <message|all>|leaderboard> &f- &3Teszt üzenetet vagy a ranglistát küldi a Discordra.'
+  - '&a/chatgames reload &f- &3Újratölti a konfigurációs fájlokat.'
+  - '&6'
+  - '&2&lJÁTÉKTÍPUSOK:'
+  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace, tame, shear'
+  - '&7&m-------------------------------------------------'
+
+#Használd a <center>-t a LISTA üzenetekben a középre igazításhoz: az ezt tartalmazó sorok középre kerülnek!
+
+#############################
+##    CSETJÁTÉK ÜZENETEK    ##
+#############################
+#Minden játéknál közös. Egy játék felülírhatja őket saját 'hint_message' / 'countdown_actionbar' értékkel a lenti szakaszában.
+hint_message: '&8[%prefix%&8] &eTipp: &f%hint%'
+countdown_actionbar: '&e%seconds%mp &7van hátra'
+
+waiting_for_other_winners: '&8[%prefix%&8] &aHelyes! &fVárunk a többi győztesre...'
+wrong_case: '&8[%prefix%&8] &cMajdnem... Figyelj a kis- és nagybetűkre!'
+  #MINDEN JÁTÉK correct_message ÜZENETÉBEN HASZNÁLHATOD A "%display_name%"-T A %player% HELYETT.
+  #
+  #A %points_<position>% IS HASZNÁLHATÓ A GYŐZTES JÁTÉKOS PONTJAINAK MEGJELENÍTÉSÉRE.
+  #
+  #Az 1., 2., 3. stb. győztes megjelenítéséhez használd a %winner_<position>%-t, az egyes időkhöz a %time_<position>%-t
+
+  ##PÉLDA 2 GYŐZTESSEL:
+  #
+  #correct_message:
+  #- ''
+  #- '<center>&r✓ ✯ %prefix% &r✯ ✓'
+  #- ''
+  #- '&7A helyes válasz: `&e%correct_answer%&7`! Győztesek:'
+  #- '<center>&f1. &a%winner_1% - (&c%time_1%s&7)'
+  #- '<center>&f2. &a%winner_2% - (&c%time_2%s&7)'
+#- ''
+unscramble:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% másodperced &fvan, hogy &dsorba rakd&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7helyesen sorba rakta: `&e%correct_answer%&7` (&c%time_1%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%mp &celtelt! &fA Rakd sorba játék véget ért!'
+    - '<center>A helyes válasz: &e%correct_answer%&f!'
+    - ''
+
+unreverse:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% másodperced &fvan, hogy &dmegfordítsd&f a szót: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7fordította meg leggyorsabban: `&e%correct_answer%&7` (&c%time_1%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%mp &celtelt! &fA Fordítsd meg játék véget ért!'
+    - '<center>A helyes válasz: &e%correct_answer%&f!'
+    - ''
+
+reaction:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% másodperced &fvan, hogy &dbeírd&f a szót: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7írta be leggyorsabban: `&e%correct_answer%&7` (&c%time_1%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%mp &celtelt! &fA reakciójáték véget ért!'
+    - '<center>A helyes válasz: &e%correct_answer%&f!'
+    - ''
+
+guess_the_number:
+  hint_message: '&8[%prefix%&8] &eTipp: a szám ebben a tartományban van: &f%hint%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% másodperced &fvan, hogy &dkitaláld a számot &fa tartományban:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7válaszolt elsőként: `&e%correct_answer%&7` (&c%time_1%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%mp &celtelt! &fA Találd ki a számot játék véget ért!'
+    - '<center>A helyes válasz: &e%correct_answer%&f!'
+    - ''
+
+memorize:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToMemorize% másodperced &fvan, hogy &dmegjegyezd &fezt a listát:'
+    - ''
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  messageAfterMemorized:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% másodperced &fvan, hogy beírd a listát &dsorrendben&f!'
+    - ''
+    - '<center>&fVesszővel válaszd el a tárgyakat! (pl. `&balma, banán, csokoládé&f`)'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7írta be elsőként a listát, és megnyerte a díjat! (&c%time_1%mp&7)'
+    - ''
+    - '<center>&fA lista ez volt: &f`&b%correct_answer%&f`'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%mp &celtelt! &fA Jegyezd meg játék véget ért!'
+    - ''
+    - '<center>&fA lista ez volt: &f`&b%correct_answer%&f`'
+    - ''
+
+sequence:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% másodperced &fvan, hogy &dfolytasd a számsort&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  hint_message: '&8[%prefix%&8] &eTipp: a következő szám &f%hint%'
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7találta meg elsőként: `&e%correct_answer%&7` (&c%time_1%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%mp &celtelt! &fA Számsor játék véget ért!'
+    - '<center>A következő szám ez volt: &e%correct_answer%&f!'
+    - ''
+
+clickable:
+  clickableText: '&aKattints ide!'
+  hoverText: '&eKattints ide!'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% másodperced &fvan, hogy &drákattints&f a szövegre:'
+    - ''
+    - '<center>&b%clickableText%'
+    - ''
+  #USE %winner_
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7kattintott leggyorsabban a szövegre (&c%time_1%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%mp &celtelt! &fA kattintós játék véget ért!'
+    - ''
+
+fillout:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% másodperced &fvan, hogy &dkitöltsd&f a szót: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7töltötte ki leggyorsabban: `&e%correct_answer%&7` (&c%time_1%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%mp &celtelt! &fA Töltsd ki játék véget ért!'
+    - '<center>A helyes válasz: &e%correct_answer%&f!'
+    - ''
+
+hoverable:
+  hoverableText: '&eVidd ide az egeret!'
+  hoverText: '&b%selection%'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% másodperced &fvan, hogy &dbeírd&f a felugró szövegben lévő szót:'
+    - ''
+    - '<center>&b%hoverableText%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7írta be leggyorsabban: `&e%correct_answer%&7` (&c%time_1%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%mp &celtelt! &fA felugró szöveges játék véget ért!'
+    - '<center>A helyes válasz: &e%correct_answer%&f!'
+    - ''
+
+#Ez a játék adott hosszúságú, véletlen karakterekből álló szöveget készít
+random:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% másodperced &fvan, hogy &dbeírd&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7írta be leggyorsabban: `&e%correct_answer%&7` (&c%time_1%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%mp &celtelt! &fA véletlen karakteres játék véget ért!'
+    - '<center>A helyes válasz: &e%correct_answer%&f!'
+    - ''
+
+math:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% másodperced &fvan, hogy &dmegoldd&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7kapta meg leggyorsabban: `&e%correct_answer%&7` (&c%time_1%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%mp &celtelt! &fA matekjáték véget ért!'
+    - '<center>A helyes válasz: &e%correct_answer%&f!'
+    - ''
+
+variable:
+  #Ez a megjelenés formátuma; a 'line1and2-format'-ban módosíthatod, hányszor ismétlődik a %symbol%, de a 3. sor összes változójának maradnia kell.
+  line1and2-format: '&c%symbol%&f + &c%symbol%&f + &c%symbol%&f = &e'
+  line3-format: '&c%symbol_1%&f + &c%symbol_2%&f + &b%toGet% &f= &e%result%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% másodperced &fvan, hogy &dmegtaláld&f: `&b%symbol%&f`'
+    - ''
+    - '<center>%line_1%'
+    - '<center>%line_2%'
+    - '<center>%line_3%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7kapta meg leggyorsabban: `&e%correct_answer%&7` (&c%time_1%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%mp &celtelt! &fA változós játék véget ért!'
+    - '<center>A helyes válasz: &e%correct_answer%&f!'
+    - ''
+
+#%selection% a nyomok, %difficulty% easy/medium/hard.
+word_association:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% másodperced &fvan, hogy megtaláld a &dkapcsolatot&f:'
+    - '<center>&b%selection%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7megtalálta a kapcsolatot: `&e%correct_answer%&7` (&c%time_1%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%mp &celtelt! &fSenki sem találta meg a kapcsolatot.'
+    - '<center>A válasz ez volt: &e%correct_answer%&f!'
+    - ''
+
+trivia:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess% másodperced &fvan, hogy &dválaszolj&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7válaszolt elsőként: `&e%correct_answer%&7` (&c%time_1%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%mp &celtelt! &fA kvíz véget ért!'
+    - '<center>A helyes válasz: &e%correct_answer%&f!'
+    - ''
+
+#VERSENYEK
+#A versenyek jelenleg nem támogatnak több győztest: nem látom értelmét, mivel ezek „versenyek” vagy „játékoskihívások”, ahol a jutalom az elsőt illeti.
+
+#%value% az anyag vagy lény, %amount% a mennyiség, %timeToComplete% az időkorlát másodpercben.
+#A correct_message-ben: %winner%, %winner_displayname%, %time% (másodperc) és %points% (a győztes pontjai).
+
+hunt:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete% másodperced &fvan, hogy &dlevadászd&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7levadászta: `&e%amount%&fx &3%value%&7` (&c%time%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%mp &celtelt! &fA Vadászat kihívás véget ért!'
+
+mine:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete% másodperced &fvan, hogy &dkibányászd&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7kibányászta: `&e%amount%&fx &3%value%&7` (&c%time%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%mp &celtelt! &fA Bányászat kihívás véget ért!'
+
+place:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete% másodperced &fvan, hogy &dlerakd&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7lerakta: `&e%amount%&fx &3%value%&7` (&c%time%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%mp &celtelt! &fAz Építés kihívás véget ért!'
+
+fish:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete% másodperced &fvan, hogy &dkifogd&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7kifogta: `&e%amount%&fx &3%value%&7` (&c%time%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%mp &celtelt! &fA Horgászat kihívás véget ért!'
+
+eat:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete% másodperced &fvan, hogy &dmegedd&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7megette: `&e%amount%&fx &3%value%&7` (&c%time%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%mp &celtelt! &fAz Evés kihívás véget ért!'
+
+craft:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete% másodperced &fvan, hogy &dmegbarkácsold&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7megbarkácsolta: `&e%amount%&fx &3%value%&7` (&c%time%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%mp &celtelt! &fA Barkácsolás kihívás véget ért!'
+furnace:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete% másodperced &fvan, hogy &dmegsüsd&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7megsütötte: `&e%amount%&fx &3%value%&7` (&c%time%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%mp &celtelt! &fA Főzés kihívás véget ért!'
+
+tame:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete% másodperced &fvan, hogy &dmegszelídítsd&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7megszelídítette: `&e%amount%&fx &3%value%&7` (&c%time%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%mp &celtelt! &fA Szelídítés kihívás véget ért!'
+
+shear:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete% másodperced &fvan, hogy &dmegnyírd&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7megnyírta: `&e%amount%&fx &3%value%&7` (&c%time%mp&7), és megnyerte a díjat!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%mp &celtelt! &fA Nyírás kihívás véget ért!'

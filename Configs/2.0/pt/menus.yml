@@ -64,6 +64,8 @@ game-names:
   eat: 'Comer'
   craft: 'Fabricar'
   furnace: 'Culinária'
+  tame: 'Doma'
+  shear: 'Tosquia'
 game-icons:
   unscramble: book
   math: redstone
@@ -87,6 +89,8 @@ game-icons:
   eat: cooked_beef
   craft: crafting_table
   furnace: furnace
+  tame: bone
+  shear: shears
 
 formats:
   #Mostrado no lugar de uma posição para jogadores que ainda não estão no ranking

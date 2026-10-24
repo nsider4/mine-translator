@@ -1,0 +1,735 @@
+unknown_command: '&8[%prefix%&8] &cPerintah tidak dikenal. Coba yang lain!'
+config_reloaded: '&8[%prefix%&8] &fFile konfigurasi telah dimuat ulang!'
+config_reload_failed: '&8[%prefix%&8] &cBeberapa file tidak termuat; periksa konsol. File tersebut tetap memakai nilai sebelumnya.'
+not_enough_permissions: '&8[%prefix%&8] &cKamu tidak punya cukup izin untuk perintah ini!'
+player_only_command: '&8[%prefix%&8] &cHanya pemain yang bisa menjalankan perintah ini!'
+player_deleted: '&8[%prefix%&8] &cPemain &f%player% &ctelah dihapus dari database!'
+player_not_found: '&8[%prefix%&8] &fTidak dapat menemukan pemain &c%player%'
+number_not_found_commands: '&8[%prefix%&8] &cTidak dapat menemukan angka untuk perintah'
+points_added: '&8[%prefix%&8] &fMenambahkan &a%amount% &fpoin ke &c%player%'
+points_removed: '&8[%prefix%&8] &fMengurangi &a%amount% &fpoin dari &c%player%'
+points_set: '&8[%prefix%&8] &fMengatur poin &c%player% &fmenjadi &a%amount%'
+player_points: '&8[%prefix%&8] &fKamu punya &a%amount% &fpoin!'
+in_cooldown: '&8[%prefix%&8] &cKamu belum bisa memakai ini, tunggu &e%time_left%d &csebelum memakai perintah lagi'
+type_not_found: '&8[%prefix%&8] &fTidak dapat menemukan jenis material/entitas untuk &c%type%'
+inventory_full: '&8[%prefix%&8] &cInventarismu penuh! &fHadiah telah dijatuhkan di tempatmu'
+
+no_winner_placeholder: '---'
+cannot_start_from_disabled: '&8[%prefix%&8] &cKamu tidak bisa memulai game chat di dunia yang dimatikan!'
+toggle_game: '&8[%prefix%&8] &fGame chat sekarang: &a%state%&f!'
+toggle_sound: '&8[%prefix%&8] &fSuara game chat sekarang: &a%state%&f!'
+toggleAllGames: '&8[%prefix%&8] &fSemua game chat sekarang: &a%state% &c(SEMUA)&f!'
+state-ON: 'AKTIF'
+state-OFF: 'NONAKTIF'
+game_started: '&8[%prefix%&8] &aKamu memulai game chat %game% di chatmu!'
+invalid_arguments: '&8[%prefix%&8] &fTerjadi masalah saat memeriksa argumen perintah!'
+cant_log_local: '&8[%prefix%&8] &cKamu tidak bisa melihat pesan log karena opsi ini dimatikan di konfigurasi!'
+toggle_game_other: '&8[%prefix%&8] &fGame chat untuk &c%player% &fsekarang: &a%state%&f!'
+toggle_sound_other: '&8[%prefix%&8] &fSuara game chat untuk &c%player% &fsekarang: &a%state%&f!'
+player_points_other: '&8[%prefix%&8] &c%player% &fpunya &a%amount% &fpoin!'
+data_loading: '&8[%prefix%&8] &cData pemain ini masih dimuat, coba lagi sebentar lagi.'
+usage: '&8[%prefix%&8] &cPenggunaan: &f%usage%'
+game_already_running: '&8[%prefix%&8] &cGame chat sedang berjalan! Akhiri dulu dengan &f/chatgames stop&c.'
+game_not_started: '&8[%prefix%&8] &c%game% tidak bisa dimulai dengan nilai tersebut. Detailnya ada di konsol.'
+no_games_enabled: '&8[%prefix%&8] &cSaat ini tidak ada game yang aktif.'
+game_stopped: '&8[%prefix%&8] &fGame yang berjalan dihentikan tanpa pemenang.'
+no_game_running: '&8[%prefix%&8] &cSaat ini tidak ada game chat yang berjalan.'
+global_not_enabled: '&8[%prefix%&8] &f%game% &ctidak diaktifkan sebagai game global di global_games.yml.'
+unknown_game: '&8[%prefix%&8] &cTidak ada game bernama &f%game%&c.'
+unknown_menu: '&8[%prefix%&8] &cTidak ada menu bernama &f%menu%&c.'
+
+presets:
+  loaded: '&8[%prefix%&8] &fMemuat preset &a%preset% &f(%games%).'
+  cleared: '&8[%prefix%&8] &fTidak ada preset aktif lagi; game yang diaktifkan di games.yml dipakai.'
+  saved: '&8[%prefix%&8] &fGame yang aktif disimpan sebagai preset &a%preset% &f(%games%).'
+  not_found: '&8[%prefix%&8] &cTidak ada preset bernama &f%preset%&c.'
+  invalid_name: '&8[%prefix%&8] &cNama preset hanya boleh berisi huruf, angka, - dan _ (maksimal 32).'
+  list_header: '&8[%prefix%&8] &ePreset:'
+  list_entry: '&7- &f%preset%%active% &8(%games%)'
+  active_marker: ' &a(aktif)'
+  list_empty: '&8[%prefix%&8] &cBelum ada preset yang diatur di presets.yml.'
+
+challenges:
+  completed: '&8[%prefix%&8] &aTantangan %period% selesai: &f%challenge%&a! Ambil hadiahnya dengan &f/chatgames claim&a.'
+  claimed: '&8[%prefix%&8] &aKamu mengambil &f%challenge%&a!'
+  nothing_to_claim: '&8[%prefix%&8] &cSaat ini tidak ada yang bisa kamu ambil.'
+  #/chatgames challenges. %period% di bawah adalah 'Harian' atau 'Mingguan'; %resets% adalah sisa waktu, mis. 5j 12m
+  header: '&8[%prefix%&8] &eTantangan %period% &7(%completed%/%total% selesai, direset dalam %resets%)'
+  entry: '&7- %challenge% &8- &7%description% &f%progress%/%amount% %status%'
+  status_in_progress: ''
+  status_ready: '&a[Siap diambil]'
+  status_claimed: '&7[Sudah diambil]'
+  none: '&8[%prefix%&8] &cSaat ini tidak ada tantangan.'
+  daily: 'Harian'
+  weekly: 'Mingguan'
+  #Satuan di %resets%, mis. 2h 5j, 5j 12m, atau 40m
+  time_days: '%amount%j'
+  time_hours: '%amount%j'
+  time_minutes: '%amount%m'
+  reset: '&8[%prefix%&8] &fMereset tantangan harian dan mingguan &c%player%&f.'
+
+streaks:
+  grew: '&8[%prefix%&8] &a%streak% &amilikmu sekarang &f%days% &ahari! Ambil hadiahnya dengan &f/chatgames claim&a.'
+  #%days% adalah satu hari atau rentang seperti 3-5, saat beberapa hari diambil sekaligus
+  claimed: '&8[%prefix%&8] &aKamu mengambil hadiah %streak% &a(hari %days%)!'
+  header: '&8[%prefix%&8] &eRuntunan:'
+  entry: '&7- %streak% &8- &f%days% &7hari, terbaik &f%longest% %status%'
+  status_ready: '&a[%unclaimed% untuk diambil]'
+  status_today: '&7[selesai hari ini]'
+  status_waiting: '&e[belum selesai hari ini]'
+  none: '&8[%prefix%&8] &cRuntunan dimatikan.'
+  set: '&8[%prefix%&8] &fMengatur %streak% &fmilik &c%player% &fmenjadi &a%days% &fhari.'
+  unknown: '&8[%prefix%&8] &cTidak ada runtunan bernama &f%type%&c. Gunakan challenge, daily, atau global.'
+
+events:
+  unknown: '&8[%prefix%&8] &cTidak ada acara bernama &f%event%&c.'
+  started: '&8[%prefix%&8] &fMemulai %event%&f.'
+  already_running: '&8[%prefix%&8] &cSebuah acara sudah berjalan: %event%&c.'
+  cancelled: '&8[%prefix%&8] &cPlugin lain membatalkan %event%&c.'
+  not_running: '&8[%prefix%&8] &cTidak ada acara yang berjalan.'
+  stopped: '&8[%prefix%&8] &fMenghentikan %event%&f.'
+  list_header: '&8[%prefix%&8] &eAcara:'
+  list_entry: '&7- &f%id% &8(%event%&8) &7%steps% game, berikutnya: &f%next%%running%'
+  list_running: ' &a(berjalan, game %step%/%steps%)'
+  list_empty: '&8[%prefix%&8] &cBelum ada acara yang diatur di events.yml.'
+  not_scheduled: 'tidak dijadwalkan'
+  top_header: '&8[%prefix%&8] &ePoin acara terbanyak di %event%&e:'
+  top_entry: '&c%spot%. &f%player% &8| &e%points% &7poin'
+  top_empty: '&8[%prefix%&8] &cBelum ada yang mencetak poin di %event%&c.'
+
+discord:
+  test_sent: '&8[%prefix%&8] &fMengirim &a%amount% &fpesan uji ke Discord. Jika tidak muncul apa-apa, konsol akan memberi tahu alasannya.'
+  leaderboard_posted: '&8[%prefix%&8] &fPapan peringkat dikirim ke Discord.'
+  disabled: '&8[%prefix%&8] &cPesan Discord dimatikan: atur &fenabled: true &cdi discord.yml.'
+  no_channel: '&8[%prefix%&8] &f%section% &ctidak punya channel dengan webhook atau channel DiscordSRV di discord.yml.'
+  unknown_message: '&8[%prefix%&8] &cTidak ada pesan Discord bernama &f%message%&c.'
+  empty_message: '&8[%prefix%&8] &f%message% &ckosong atau tidak ada di discord.yml.'
+
+logs:
+  no_logs: "&cTidak ada log atau terjadi kesalahan."
+  header: "&8[%prefix%&8] &eSebanyak &6%amount% &eentri log terakhir:"
+  entries:
+    # Entri log tentang game
+    game:
+      start: "&aGame dimulai: &f%game% | &aAda jawaban: &f%hasAnswer% | &aJawaban: &f%answer%"
+      end: "&aGame berakhir: &f%game% | &aAda pemenang: &f%hasWinner% | &aPemenang: &f%winners% | &aJawaban: &f%answer%"
+
+    # Entri log tentang balapan material
+    race:
+      start: "&aBalapan dimulai: &f%race% | &aMaterial: &f%material% | &aJumlah: &f%amount%"
+      end: "&aBalapan berakhir: &f%race% | &aAda pemenang: &f%hasWinner% | &aPemenang: &f%winner% | &aMaterial: &f%material% | &aJumlah: &f%amount%"
+
+    # Entri terpisah untuk balapan HUNT (balapan dengan entitas)
+    hunt:
+      start: "&aBalapan dimulai: &f%race% | &aEntitas: &f%entity% | &aJumlah: &f%amount%"
+      end: "&aBalapan berakhir: &f%race% | &aAda pemenang: &f%hasWinner% | &aPemenang: &f%winner% | &aEntitas: &f%entity% | &aJumlah: &f%amount%"
+
+#Kamu bisa memakai <center> di pesan papan peringkat jika mau.
+top:
+  #Bisa dikosongkan untuk mematikan pesan tertentu. (Kecuali 'format' dan 'player-stat-format')
+  header: '&b&m---------&e&lTOP CHAT&b&m---------'
+  #Nilai separators adalah pesan yang memisahkan 10 pemain teratas dari header dan footer!
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%points% &7poin'
+  player-stat-format: '&7Kamu punya &e&l%player_points% &7kemenangan'
+  total-stat-format: '&7Total game dimenangkan di server: &6&l%total_wins%'
+  footer: '&b&m---------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cBelum ada data! Menangkan game chat dan dapatkan poin!'
+
+TypersTop:
+  #Bisa dikosongkan untuk mematikan pesan tertentu. (Kecuali 'format' dan 'player-stat-format')
+  header: '&b&m---------&e&lTOP TERCEPAT&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6d'
+  player-stat-format: '&7Waktu terbaikmu: &e&l%fastest_time%&6d'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cBelum ada data! Menangkan game chat dan jadilah yang tercepat!'
+  top_disabled_message: '&8[%prefix%&8] &cFitur ini sedang dimatikan!'
+
+GameTypersTop:
+  #Bisa dikosongkan untuk mematikan pesan tertentu. (Kecuali 'format' dan 'player-stat-format')
+  header: '&b&m---------&e&lTOP TERCEPAT - %game%&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6d'
+  player-stat-format: '&7Waktu terbaikmu: &e&l%fastest_time%&6d'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cBelum ada data! Menangkan game chat dan jadilah yang tercepat!'
+  top_disabled_message: '&8[%prefix%&8] &cFitur ini sedang dimatikan!'
+
+help_command:
+  - '&7&m-------------------------------------------------'
+  - '&e&l-ChatGames-'
+  - '&6'
+  - '&6&lPERINTAH:'
+  - '&6'
+  - '&a/chatgames menu [menu] &f- &3Membuka menu: profil, tantangan, runtunan, papan peringkat (atau menu apa pun di menus.yml).'
+  - '&a/chatgames profile [player] &f- &3Menampilkan statistikmu (atau pemain lain).'
+  - '&a/chatgames top &f- &3Menampilkan 10 pemain dengan poin terbanyak.'
+  - '&a/chatgames fastest [game] &f- &3Menampilkan pemenang tercepat, keseluruhan atau dalam satu game.'
+  - '&a/chatgames points [player] &f- &3Menampilkan poinmu (atau pemain lain).'
+  - '&a/chatgames challenges &f- &3Menampilkan tantangan harian dan mingguanmu.'
+  - '&a/chatgames streaks &f- &3Menampilkan runtunanmu.'
+  - '&a/chatgames claim &f- &3Mengambil hadiah tantangan dan runtunan yang selesai.'
+  - '&a/chatgames event [list|top <event>] &f- &3Menampilkan acara game atau siapa yang mencetak terbanyak di salah satunya.'
+  - '&a/chatgames toggle [player] &f- &3Menyalakan atau mematikan game chat untukmu.'
+  - '&a/chatgames togglesound [player] &f- &3Menyalakan atau mematikan suara game chat.'
+  - '&6'
+  - '&c&lADMIN:'
+  - '&a/chatgames admin &f- &3Membuka menu admin.'
+  - '&a/chatgames debug &f- &3Membuka menu debug: uji game apa pun secara pribadi, tanpa hadiah.'
+  - '&a/chatgames (game) [values] &f- &3Memulai game itu sekarang, opsional dengan kata/nilaimu sendiri.'
+  - '&a/chatgames any &f- &3Memulai game yang akan dipilih rotasi berikutnya.'
+  - '&a/chatgames global <game> [values] &f- &3Memulai game global: semua yang menjawab tepat waktu menang.'
+  - '&a/chatgames event start <event> | stop &f- &3Memulai atau menghentikan acara game.'
+  - '&a/chatgames stop &f- &3Mengakhiri game yang berjalan tanpa pemenang.'
+  - '&a/chatgames toggleAll &f- &3Menyalakan atau mematikan rotasi game otomatis.'
+  - '&a/chatgames preset <list|load|save> [name] &f- &3Mengelola preset game.'
+  - '&a/chatgames +points|-points|setpoints <player> <amount> &f- &3Mengubah poin pemain.'
+  - '&a/chatgames remove <player> &f- &3Menghapus data pemain.'
+  - '&a/chatgames challenges reset <player> &f- &3Mereset tantangan pemain.'
+  - '&a/chatgames streak set <player> <challenge|daily|global> <days> &f- &3Mengatur runtunan pemain.'
+  - '&a/chatgames logs [amount] &f- &3Menampilkan log game terbaru.'
+  - '&a/chatgames discord <test <message|all>|leaderboard> &f- &3Mengirim pesan uji atau papan peringkat ke Discord.'
+  - '&a/chatgames reload &f- &3Memuat ulang file konfigurasi.'
+  - '&6'
+  - '&2&lJENIS GAME:'
+  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace, tame, shear'
+  - '&7&m-------------------------------------------------'
+
+#Gunakan <center> di pesan DAFTAR untuk menengahkannya: baris yang memakainya akan berada di tengah!
+
+#############################
+##    PESAN GAME CHAT    ##
+#############################
+#Berlaku untuk semua game. Sebuah game bisa menggantinya dengan 'hint_message' / 'countdown_actionbar' sendiri di bagiannya di bawah.
+hint_message: '&8[%prefix%&8] &ePetunjuk: &f%hint%'
+countdown_actionbar: '&7Sisa &e%seconds%d'
+
+waiting_for_other_winners: '&8[%prefix%&8] &aBenar! &fMenunggu pemenang lain...'
+wrong_case: '&8[%prefix%&8] &cHampir... Periksa huruf besar/kecil!'
+  #DI correct_message SEMUA GAME KAMU BISA MEMAKAI "%display_name%" SEBAGAI GANTI %player%.
+  #
+  #KAMU JUGA BISA MEMAKAI %points_<position>% UNTUK MENAMPILKAN POIN PEMAIN YANG MENANG.
+  #
+  #Untuk menampilkan pemenang ke-1, ke-2, ke-3, dst., gunakan %winner_<position>%, dan untuk waktu masing-masing %time_<position>%
+
+  ##CONTOH DENGAN 2 PEMENANG:
+  #
+  #correct_message:
+  #- ''
+  #- '<center>&r✓ ✯ %prefix% &r✯ ✓'
+  #- ''
+  #- '&7Jawaban yang benar adalah `&e%correct_answer%&7`! Pemenangnya:'
+  #- '<center>&f1. &a%winner_1% - (&c%time_1%s&7)'
+  #- '<center>&f2. &a%winner_2% - (&c%time_2%s&7)'
+#- ''
+unscramble:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToGuess% detik&f untuk &dmenyusun ulang&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7menyusun ulang `&e%correct_answer%&7` dengan benar (&c%time_1%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%d &ctelah berlalu! &fGame Susun Ulang berakhir!'
+    - '<center>Jawaban yang benar adalah &e%correct_answer%&f!'
+    - ''
+
+unreverse:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToGuess% detik&f untuk &dmembalik&f kata: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7membalik `&e%correct_answer%&7` paling cepat (&c%time_1%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%d &ctelah berlalu! &fGame Balik Kata berakhir!'
+    - '<center>Jawaban yang benar adalah &e%correct_answer%&f!'
+    - ''
+
+reaction:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToGuess% detik&f untuk &dmengetik&f kata: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7mengetik `&e%correct_answer%&7` paling cepat (&c%time_1%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%d &ctelah berlalu! &fGame reaksi berakhir!'
+    - '<center>Jawaban yang benar adalah &e%correct_answer%&f!'
+    - ''
+
+guess_the_number:
+  hint_message: '&8[%prefix%&8] &ePetunjuk: angkanya di antara &f%hint%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToGuess% detik&f untuk &dmenebak angka &fdalam rentang:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7menjawab pertama `&e%correct_answer%&7` (&c%time_1%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%d &ctelah berlalu! &fGame Tebak Angka berakhir!'
+    - '<center>Jawaban yang benar adalah &e%correct_answer%&f!'
+    - ''
+
+memorize:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToMemorize% detik&f untuk &dmengingat &fdaftar ini:'
+    - ''
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  messageAfterMemorized:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToGuess% detik&f untuk mengetik daftarnya &dsecara berurutan&f!'
+    - ''
+    - '<center>&fPisahkan item dengan koma! (mis. `&bapel, pisang, cokelat&f`)'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7mengetik daftarnya pertama dan memenangkan hadiah! (&c%time_1%d&7)'
+    - ''
+    - '<center>&fDaftarnya adalah: &f`&b%correct_answer%&f`'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%d &ctelah berlalu! &fGame Ingat berakhir!'
+    - ''
+    - '<center>&fDaftarnya adalah: &f`&b%correct_answer%&f`'
+    - ''
+
+sequence:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToGuess% detik&f untuk &dmelanjutkan deret&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  hint_message: '&8[%prefix%&8] &ePetunjuk: angka berikutnya &f%hint%'
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7menemukan `&e%correct_answer%&7` pertama (&c%time_1%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%d &ctelah berlalu! &fGame Deret berakhir!'
+    - '<center>Angka berikutnya adalah &e%correct_answer%&f!'
+    - ''
+
+clickable:
+  clickableText: '&aKlik di sini!'
+  hoverText: '&eKlik di sini!'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToGuess% detik&f untuk &dmengklik&f teksnya:'
+    - ''
+    - '<center>&b%clickableText%'
+    - ''
+  #USE %winner_
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7mengklik teks paling cepat (&c%time_1%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%d &ctelah berlalu! &fGame klik berakhir!'
+    - ''
+
+fillout:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToGuess% detik&f untuk &dmengisi&f kata: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7mengisi `&e%correct_answer%&7` paling cepat (&c%time_1%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%d &ctelah berlalu! &fGame Isi Kata berakhir!'
+    - '<center>Jawaban yang benar adalah &e%correct_answer%&f!'
+    - ''
+
+hoverable:
+  hoverableText: '&eArahkan kursor ke sini!'
+  hoverText: '&b%selection%'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToGuess% detik&f untuk &dmengetik&f kata di teks hover:'
+    - ''
+    - '<center>&b%hoverableText%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7mengetik `&e%correct_answer%&7` paling cepat (&c%time_1%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%d &ctelah berlalu! &fGame hover berakhir!'
+    - '<center>Jawaban yang benar adalah &e%correct_answer%&f!'
+    - ''
+
+#Game ini membuat string dengan panjang tertentu dari karakter acak
+random:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToGuess% detik&f untuk &dmengetik&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7mengetik `&e%correct_answer%&7` paling cepat (&c%time_1%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%d &ctelah berlalu! &fGame karakter acak berakhir!'
+    - '<center>Jawaban yang benar adalah &e%correct_answer%&f!'
+    - ''
+
+math:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToGuess% detik&f untuk &dmemecahkan&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7mendapat `&e%correct_answer%&7` paling cepat (&c%time_1%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%d &ctelah berlalu! &fGame matematika berakhir!'
+    - '<center>Jawaban yang benar adalah &e%correct_answer%&f!'
+    - ''
+
+variable:
+  #Ini format tampilannya; kamu bisa mengubah berapa kali %symbol% diulang di 'line1and2-format', tetapi semua variabel di baris 3 harus tetap ada.
+  line1and2-format: '&c%symbol%&f + &c%symbol%&f + &c%symbol%&f = &e'
+  line3-format: '&c%symbol_1%&f + &c%symbol_2%&f + &b%toGet% &f= &e%result%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToGuess% detik&f untuk &dmencari&f: `&b%symbol%&f`'
+    - ''
+    - '<center>%line_1%'
+    - '<center>%line_2%'
+    - '<center>%line_3%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7mendapat `&e%correct_answer%&7` paling cepat (&c%time_1%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%d &ctelah berlalu! &fGame variabel berakhir!'
+    - '<center>Jawaban yang benar adalah &e%correct_answer%&f!'
+    - ''
+
+#%selection% adalah petunjuknya, %difficulty% easy/medium/hard.
+word_association:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToGuess% detik&f untuk menemukan &dhubungannya&f:'
+    - '<center>&b%selection%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7menemukan hubungan `&e%correct_answer%&7` (&c%time_1%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%d &ctelah berlalu! &fTidak ada yang menemukan hubungannya.'
+    - '<center>Jawabannya adalah &e%correct_answer%&f!'
+    - ''
+
+trivia:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToGuess% detik&f untuk &dmenjawab&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7menjawab pertama `&e%correct_answer%&7` (&c%time_1%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%d &ctelah berlalu! &fKuis berakhir!'
+    - '<center>Jawaban yang benar adalah &e%correct_answer%&f!'
+    - ''
+
+#BALAPAN
+#Untuk saat ini balapan tidak mendukung banyak pemenang: saya tidak melihat gunanya, karena ini "balapan" atau "tantangan pemain" yang hadiahnya untuk yang pertama.
+
+#%value% adalah material atau mob, %amount% jumlahnya, %timeToComplete% batas waktu dalam detik.
+#Di correct_message: %winner%, %winner_displayname%, %time% (detik) dan %points% (poin pemenang).
+
+hunt:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToComplete% detik&f untuk &dberburu&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7memburu `&e%amount%&fx &3%value%&7` (&c%time%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%d &ctelah berlalu! &fTantangan Berburu berakhir!'
+
+mine:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToComplete% detik&f untuk &dmenambang&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7menambang `&e%amount%&fx &3%value%&7` (&c%time%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%d &ctelah berlalu! &fTantangan Menambang berakhir!'
+
+place:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToComplete% detik&f untuk &dmeletakkan&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7meletakkan `&e%amount%&fx &3%value%&7` (&c%time%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%d &ctelah berlalu! &fTantangan Membangun berakhir!'
+
+fish:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToComplete% detik&f untuk &dmemancing&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7memancing `&e%amount%&fx &3%value%&7` (&c%time%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%d &ctelah berlalu! &fTantangan Memancing berakhir!'
+
+eat:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToComplete% detik&f untuk &dmakan&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7memakan `&e%amount%&fx &3%value%&7` (&c%time%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%d &ctelah berlalu! &fTantangan Makan berakhir!'
+
+craft:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToComplete% detik&f untuk &dmembuat&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7membuat `&e%amount%&fx &3%value%&7` (&c%time%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%d &ctelah berlalu! &fTantangan Membuat berakhir!'
+furnace:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToComplete% detik&f untuk &dmemasak&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7memasak `&e%amount%&fx &3%value%&7` (&c%time%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%d &ctelah berlalu! &fTantangan Memasak berakhir!'
+
+tame:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToComplete% detik&f untuk &dmenjinakkan&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7menjinakkan `&e%amount%&fx &3%value%&7` (&c%time%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%d &ctelah berlalu! &fTantangan Menjinakkan berakhir!'
+
+shear:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fKamu punya &e%timeToComplete% detik&f untuk &dmencukur&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7mencukur `&e%amount%&fx &3%value%&7` (&c%time%d&7) dan memenangkan hadiah!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%d &ctelah berlalu! &fTantangan Mencukur berakhir!'

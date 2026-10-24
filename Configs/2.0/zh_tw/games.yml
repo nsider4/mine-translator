@@ -1,0 +1,367 @@
+#############################
+######    聊天遊戲    ######
+#############################
+#每個遊戲都支援的設定（缺少的項使用所示的預設值）：
+#  enable: true/false
+#  weight: 1             與其他遊戲相比，輪換選中此遊戲的可能性（0 = 從不）。
+#                        同一個遊戲不會連續進行兩次。
+#  winners: 1            每局可以有多少名玩家獲勝。
+#  points: 1             每次獲勝的點數（/chatgames top）。
+#  case-sensitive: false 只有大小寫不對的玩家會收到 'wrong_case' 訊息。
+#  timeToGuess_seconds: 20
+#  min-answer-ms: 400    比這更快的正確答案會被忽略並記錄：沒有人能讀得
+#                        這麼快又打得這麼快，只有聊天機器人可以。設為 0 關閉此檢查。
+#  hints:                回合進行中會出現提示，使用 messages.yml 中的 'hint_message'。
+#    enable: false
+#    after-percent: 50   時間過去這麼多時顯示第一個提示；其餘提示分佈在剩餘時間裡。
+#    max: 1              最多 3 個。
+#  countdown:            剩餘時間，顯示在動作列上。所有版本都可用（1.8 到 26.x）。
+#    enable: false
+#    last-seconds: 10    只在最後 N 秒顯示；0 表示整局都顯示。
+#  titleMessage / subtitleMessage：兩者都留空則不傳送標題。
+unscramble:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #玩家猜測、解答、輸入等的時間，單位為秒。
+  timeToGuess_seconds: 20
+  #__將以下 2 項留空即可禁用__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a還原單詞'
+
+unreverse:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #玩家猜測、解答、輸入等的時間，單位為秒。
+  timeToGuess_seconds: 20
+  #將以下 2 項留空即可禁用
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a倒轉還原'
+
+reaction:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #玩家猜測、解答、輸入等的時間，單位為秒。
+  timeToGuess_seconds: 20
+  #__將以下 2 項留空即可禁用__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a輸入'
+
+guess_the_number:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+  #不要修改此項
+  case-sensitive: false
+
+  lower-limit: 1
+  upper-limit: 20
+
+  #玩家猜測、解答、輸入等的時間，單位為秒。
+  timeToGuess_seconds: 20
+  #__將以下 2 項留空即可禁用__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a輸入'
+
+clickable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #玩家猜測、解答、輸入等的時間，單位為秒。
+  timeToGuess_seconds: 20
+  #__將以下 2 項留空即可禁用__
+  titleMessage: '&e點選文字'
+  subtitleMessage: '&f你有 &e%timeToGuess%s'
+
+fillout:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #填空遊戲中隱藏字母的百分比。取值範圍 1 到 100。數值越小，隱藏的字母越少。
+  difficulty: 30
+  case-sensitive: true
+  #玩家猜測、解答、輸入等的時間，單位為秒。
+  timeToGuess_seconds: 20
+  #__將以下 2 項留空即可禁用__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a填空'
+
+hoverable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #玩家猜測、解答、輸入等的時間，單位為秒。
+  timeToGuess_seconds: 20
+  #__將以下 2 項留空即可禁用__
+  titleMessage: '&e懸停文字'
+  subtitleMessage: '&f你有 &e%timeToGuess%s'
+
+#在這個遊戲中，會生成指定長度的隨機字元
+random:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #玩家猜測、解答、輸入等的時間，單位為秒。
+  timeToGuess_seconds: 20
+  #此遊戲隨機生成的字串長度。範圍格式 <lower>-<higher>。如果只想要一個長度，兩邊填相同的數字
+  lengthRange: 6-8
+  #可用型別：ALPHA（字母）、ALPHANUMERIC（字母和數字）、NUMERIC（數字）、SYMBOLIC（符號）、
+  #LOWERCASE_ALPHA（全部小寫字母）、UPPERCASE_ALPHA（全部大寫字母）、HEXADECIMAL（十六進位制字元：0123456789ABCDEF）
+  #CUSTOM（使用 'custom_characters' 中的內容）
+  character_type: ALPHANUMERIC
+  #只有當 type 為 "CUSTOM" 時才會使用這一行
+  custom_characters: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+  #__將以下 2 項留空即可禁用__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a輸入'
+
+math:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #不要修改此項
+  case-sensitive: false
+  #玩家猜測、解答、輸入等的時間，單位為秒。
+  timeToGuess_seconds: 20
+  #難度對應的隨機數範圍：
+  #1 - (1-9)
+  #2 - (1-99)
+  #3 - (1-999)
+  #4 - (1-9999)
+  #5 - (1-99999)
+  difficulty: 2
+  #每道題有幾個運算子：1 -> "12 + 7"，2 -> "12 + 7 x 3"
+  operations: 1
+  #solve：算出結果（"12 + 7 x 3"）。  missing-value：找出被隱藏的數（"12 + ? x 3 = 33"）。
+  #每局從列出的模式中選一個。
+  modes:
+    - solve
+    - missing-value
+  #要使用的運算子，列出的四個是全部可用的，不想全用可以刪掉一些。至少保留 1 個
+  #除法結果總是整數。
+  operators:
+    - '+'
+    - '-'
+    - 'x'
+    - '/'
+
+  #__將以下 2 項留空即可禁用__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a計算'
+
+variable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #不要修改此項
+  case-sensitive: false
+  #玩家猜測、解答、輸入等的時間，單位為秒。
+  timeToGuess_seconds: 20
+
+  #__將以下 2 項留空即可禁用__
+  titleMessage: '&b求解'
+  subtitleMessage: '&a求 &7`&b%symbol%&7`'
+
+  #隨機結果數的範圍
+  result-min: 20
+  result-max: 100
+
+  toGet: '✗'
+  #這裡還有一些可以新增的符號：✪❃✿✠❂♫♪❦♡♤♢✦☾☽✹
+  data:
+    - '✯;10'
+    - '♛;15'
+    - '❅;20'
+    - '♫;25'
+
+sequence:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #不要修改此項
+  case-sensitive: false
+
+  #玩家猜測、解答、輸入等的時間，單位為秒。
+  timeToGuess_seconds: 25
+
+  #玩家看到一個數列，輸入下一個數，例如 "3, 6, 12, 24, ?" -> 48
+  #規律：加法（3, 7, 11）、乘法（2, 6, 18）、平方（4, 9, 16）、交替（5, 9, 7, 11）、斐波那契（2, 3, 5, 8）
+  patterns:
+    - add
+    - multiply
+    - squares
+    - alternating
+    - fibonacci
+  #1-3。難度越高，規律越難（平方和交替從 2 開始，斐波那契為 3），數字也越大。
+  difficulty: 2
+  #在 '?' 之前顯示幾個數（4-8）
+  shown-terms: 5
+
+  #__將以下 2 項留空即可禁用__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a補全數列'
+
+memorize:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+
+  listLength: 3
+  #每局從以下某個池中取物品（見 words.yml -> memorize.pools）：
+  #shopping_list、words、colors、numbers、blocks、mobs，或你自己的列表
+  pools:
+    - shopping_list
+    - words
+    - colors
+    - numbers
+    - blocks
+    - mobs
+  #如果為 false，物品可以按任意順序輸入
+  order-matters: true
+
+  #玩家記憶、解答、輸入等的時間，單位為秒。
+  timeToMemorize: 7
+
+  #玩家猜測、解答、輸入等的時間，單位為秒。
+  timeToGuess_seconds: 20
+  #將以下 2 項留空即可禁用
+  titleMessage: '&b記憶'
+  subtitleMessage: '&a試著記住這個列表！'
+
+#三條線索，一個隱藏的關聯（關聯詞在 words.yml 中）。
+#difficulty：easy、medium、hard 或 mixed。困難回合先顯示一條線索，其他線索
+#作為提示出現，所以困難回合請保持提示開啟（max 2 會顯示全部三條線索）。
+word_association:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  difficulty: mixed
+  hints:
+    enable: true
+    after-percent: 34
+    max: 2
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  timeToGuess_seconds: 30
+  titleMessage: '&b詞語聯想'
+  subtitleMessage: '&a看聊天！'
+
+trivia:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  #玩家猜測、解答、輸入等的時間，單位為秒。
+  timeToGuess_seconds: 20
+  #__將以下 2 項留空即可禁用__
+  titleMessage: '&b知識問答'
+  subtitleMessage: '&a看聊天！'

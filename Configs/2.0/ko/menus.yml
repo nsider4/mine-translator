@@ -1,0 +1,1158 @@
+#메뉴
+#
+#'menus:' 아래의 각 메뉴에는 'title', 'rows'로 정하는 크기(1-6), 그리고 'items'가 있습니다. 어떤
+#버튼의 동작이든 바꿀 수 있고, 버튼이나 완전히 새로운 메뉴를 추가할 수 있습니다(/chatgames menu <id>로 열거나,
+#menus/ 폴더에 <id>.yml이라는 이름으로 하나씩 파일을 둡니다).
+#
+#각 아이템:
+#  slot: 놓을 위치. 0(왼쪽 위)부터 rows*9-1까지. 'slots: [0, 1, '9-17']'로 반복해서 놓을 수 있습니다.
+#  material: 1.8부터 26.x까지의 아무 아이템 이름. 새 이름이나 옛 이름 모두 가능(lime_dye / INK_SACK:10 / 351:10),
+#            또는 'head:<플레이어 이름, 텍스처 또는 textures.minecraft.net URL>'
+#  name / lore: 색상 코드(&a, 1.16+에서는 &#RRGGBB)와 PlaceholderAPI 플레이스홀더를 쓸 수 있습니다.
+#  amount, glow: true, enchantments: ['SHARPNESS:1'], flags: [HIDE_ATTRIBUTES], head: '%player%',
+#  custom-model-data: 1001 (1.14+), item-model: 'namespace:key' (1.21.2+), color: '#FF0000' (가죽)
+#  actions: 클릭했을 때 순서대로 하는 동작. left-actions, right-actions, shift-left-actions,
+#           shift-right-actions, middle-actions, drop-actions도 있습니다(없으면 actions를 씁니다).
+#  view-requirements: 모든 줄을 통과할 때만 아이템이 보입니다
+#  click-requirements: 통과하지 못한 줄이 있으면 actions 대신 'deny-actions'가 실행됩니다
+#  state + when-off: state가 false이면 when-off의 키가 아이템 자신의 키를 대신합니다
+#                    ('off'는 안 됩니다: YAML은 단독 off를 false로 읽습니다)
+#아이템을 빼면 숨겨집니다. 'filler'는 빈 칸을 모두 채웁니다. 없애면 채우지 않습니다.
+#
+#동작:
+#  [command] <command>        내가 명령어 실행             [console] <command>   콘솔이 실행
+#  [message] <text>           나에게 메시지                [broadcast] <text>    모두에게
+#  [sound] <sound> [volume] [pitch]   1.8부터 26.x까지의 아무 소리 이름
+#  [open] <menu> [values]     다른 메뉴 열기               [switch] <menu> [values]  같지만 [back]이 건너뜀
+#  [back] [menu]              이전 메뉴(또는 지정한 메뉴, 없으면 닫기)
+#  [refresh]  [close]  [next-page]  [previous-page]  [wait] <ticks>
+#  [chatgames:no-permission]  권한 없음 메시지를 보냅니다
+#  메뉴 전용 동작은 그 동작이 있는 메뉴 위에 설명되어 있습니다.
+#
+#조건, 한 줄에 하나(모든 줄을 통과해야 하며, 줄 앞에 !를 붙이면 반대가 됩니다):
+#  permission <node>     '%chatgames_points% >= 100' 같은 비교(==, !=, >=, <=, >, <)
+#  또는 true / on / yes / 0이 아닌 수인 값
+#
+#목록을 보여 주는 메뉴(도전 과제, 게임, 이벤트...)는 항목을 'list-slots'에 순서대로 놓고
+#메뉴의 'templates'로 그립니다. 칸보다 항목이 많으면 동작이
+#[next-page] / [previous-page]인 아이템으로 페이지를 넘깁니다. 넘길 페이지가 없으면 숨겨집니다.
+#'%game_wins%'처럼 목록 플레이스홀더만 있는 lore 줄은 여러 줄이 됩니다.
+#모든 메뉴에는 %player%, %page%, %pages%, %entries%(목록의 항목 수)도 있습니다.
+
+#게임의 이름과 아이콘. 모든 메뉴와, 게임 이름을 말하는 메시지(%game%)에서 쓰입니다.
+#여기에 없는 게임은 키 이름으로 표시됩니다.
+game-names:
+  unscramble: '단어 맞추기'
+  unreverse: '거꾸로 읽기'
+  reaction: '반응'
+  guess_the_number: '숫자 맞히기'
+  clickable: '클릭'
+  fillout: '빈칸 채우기'
+  hoverable: '마우스 올리기'
+  random: '무작위 문자'
+  math: '계산'
+  variable: '변수'
+  sequence: '수열'
+  memorize: '기억하기'
+  word_association: '단어 연상'
+  trivia: '퀴즈'
+  count: '숫자 세기'
+  hunt: '사냥'
+  mine: '채굴'
+  place: '설치'
+  fish: '낚시'
+  eat: '먹기'
+  craft: '제작'
+  furnace: '요리'
+  tame: '길들이기'
+  shear: '털 깎기'
+game-icons:
+  unscramble: book
+  math: redstone
+  trivia: enchanted_book
+  reaction: feather
+  clickable: stone_button
+  random: ender_pearl
+  unreverse: compass
+  variable: name_tag
+  guess_the_number: clock
+  memorize: map
+  sequence: ladder
+  fillout: paper
+  hoverable: ender_eye
+  word_association: lead
+  count: clock
+  hunt: iron_sword
+  place: grass_block
+  mine: iron_pickaxe
+  fish: fishing_rod
+  eat: cooked_beef
+  craft: crafting_table
+  furnace: furnace
+  tame: bone
+  shear: shears
+
+formats:
+  #아직 순위가 없는 플레이어에게 순위 대신 표시됩니다
+  no-rank: '-'
+
+#디버그 메뉴에서 플레이어에게. 줄을 비우면('') 아무것도 보내지 않습니다.
+messages:
+  debug-round: '&8[&cDEBUG&8] &f새 비공개 &e%game% &f라운드(정답: &a%answer%&f), 생성 시간 &e%generated% ms&f. 나만 볼 수 있습니다.'
+  debug-failed: '&8[&cDEBUG&8] &c%game% 라운드를 만들 수 없습니다. 이유는 콘솔에 나옵니다.'
+  debug-race: '&8[&cDEBUG&8] &c레이스는 월드에서 진행되므로 여기서 시험할 수 없습니다. /chatgames <race>로 시작하세요.'
+  debug-no-letters: '&8[&cDEBUG&8] &7이 정답에는 글자가 없어서 대소문자가 틀릴 수 없습니다.'
+  debug-timeout-started: '&7&8[&cDEBUG&8] &e%time%s &7제한 시간이 지나기를 기다리는 중...'
+  debug-timeout: '&8[&cDEBUG&8] &e%game%&7: 시간 종료. 플레이어에게는 정답이 &f%answer%&7였다고 알려 줍니다.'
+  #%verdict%는 아래 줄 중 하나입니다
+  debug-result: '&8[&cDEBUG&8] &e%game% &7| &e%ms% ms&7 후 &f%input% &7입력: %verdict%'
+  debug-verdicts:
+    accepted: '&a인정 &7(순위를 얻고 &e%points% &7포인트를 받음)'
+    wrong: '&c오답 &7(무시됨)'
+    wrong-case: '&6대소문자 틀림 &7(플레이어에게 확인하라고 알림)'
+    macro: '&c매크로로 보고 무시 &7(min-answer-ms보다 빠름, &e%min_ms% ms&7)'
+    late: '&c너무 늦음 &7(제한 시간 후)'
+
+menus:
+
+  #/chatgames menu. %points% %rank% %wins% %claimable%(받을 수 있는 보상),
+  #%daily_completed% %daily_total% %weekly_completed% %weekly_total%,
+  #%games_on% / %sound_on%(true 또는 false)과 %games_state% / %sound_state%(켜짐/꺼짐 글자)
+  main:
+    title: '&8&lChatGames'
+    rows: 3
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      profile:
+        slot: 10
+        material: player_head
+        head: '%player%'
+        name: '&e&l내 프로필'
+        lore:
+          - '&7포인트: &e%points% &8(%rank%)'
+          - '&7승리: &e%wins%'
+          - ''
+          - '&e클릭해서 통계 보기'
+        actions: ['[open] profile']
+      challenges:
+        slot: 11
+        material: writable_book
+        name: '&a&l도전 과제'
+        lore:
+          - '&7일일: &e%daily_completed%&7/&e%daily_total%'
+          - '&7주간: &e%weekly_completed%&7/&e%weekly_total%'
+          - '&7받을 보상: &e%claimable%'
+          - ''
+          - '&e클릭해서 열기'
+        actions: ['[open] challenges daily']
+      streaks:
+        slot: 12
+        material: blaze_powder
+        name: '&6&l연속 기록'
+        lore:
+          - '&7매일 플레이해서 이어 가세요.'
+          - ''
+          - '&e클릭해서 열기'
+        actions: ['[open] streaks']
+      leaderboards:
+        slot: 13
+        material: gold_ingot
+        name: '&e&l순위표'
+        lore:
+          - '&7포인트 상위와 가장 빠른 플레이어.'
+          - ''
+          - '&e클릭해서 열기'
+        actions: ['[open] leaderboards']
+      games-toggle:
+        slot: 15
+        material: lime_dye
+        name: '&f채팅 게임: %games_state%'
+        lore:
+          - '&7클릭하면 채팅 게임을 끕니다.'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7클릭하면 채팅 게임을 켭니다.'
+      sound-toggle:
+        slot: 16
+        material: note_block
+        name: '&f게임 소리: %sound_state%'
+        lore:
+          - '&7클릭하면 게임 소리를 끕니다.'
+        state: '%sound_on%'
+        actions: ['[command] chatgames togglesound', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7클릭하면 게임 소리를 켭니다.'
+      admin:
+        slot: 22
+        material: command_block
+        name: '&c&l관리'
+        lore:
+          - '&7게임, 이벤트, 프리셋 시작...'
+        view-requirements: ['permission chatgames.admin']
+        actions: ['[open] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&c닫기'
+        actions: ['[close]']
+
+  #/chatgames profile [player]. %target% %points% %rank% %wins% %race_wins% %global_played%
+  #%global_won%(완료) %contributions% %events_played% %event_wins% %event_best_place% %fastest% %challenges_completed%
+  #%milestones% %milestones_total% %streak_<challenge|daily|global>%와 %streak_<...>_longest%.
+  #목록: %game_wins%와 %game_fastest%. [open] profile <name>은 다른 사람의 프로필을 엽니다.
+  profile:
+    title: '&8프로필: %target%'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7아직 없음'
+      game-wins: '&7%game%: &f%wins%'
+      game-fastest: '&7%game%: &f%time%s'
+    items:
+      head:
+        slot: 4
+        material: player_head
+        head: '%target%'
+        name: '&e&l%target%'
+        lore:
+          - '&7포인트: &e%points% &8(%rank%)'
+      wins:
+        slot: 19
+        material: diamond
+        name: '&b&l승리'
+        lore:
+          - '&7채팅 게임 승리: &f%wins%'
+          - '&7레이스 승리: &f%race_wins%'
+          - ''
+          - '%game_wins%'
+      fastest:
+        slot: 20
+        material: clock
+        name: '&e&l최단 기록'
+        lore:
+          - '&7전체 최고: &f%fastest%'
+          - ''
+          - '%game_fastest%'
+      global:
+        slot: 21
+        material: beacon
+        name: '&3&l글로벌 게임'
+        lore:
+          - '&7참여: &f%global_played%'
+          - '&7완료: &f%global_won%'
+          - '&7기여: &f%contributions%'
+      events:
+        slot: 23
+        material: nether_star
+        name: '&6&l이벤트'
+        lore:
+          - '&7참여: &f%events_played%'
+          - '&7우승: &f%event_wins%'
+          - '&7최고 순위: &f%event_best_place%'
+      streaks:
+        slot: 24
+        material: blaze_powder
+        name: '&6&l연속 기록'
+        lore:
+          - '&7도전 과제: &f%streak_challenge% &8(최고 %streak_challenge_longest%)'
+          - '&7일일 승리: &f%streak_daily% &8(최고 %streak_daily_longest%)'
+          - '&7글로벌: &f%streak_global% &8(최고 %streak_global_longest%)'
+      progress:
+        slot: 25
+        material: experience_bottle
+        name: '&a&l진행도'
+        lore:
+          - '&7포인트: &f%points%'
+          - '&7달성한 마일스톤: &f%milestones%&7/&f%milestones_total%'
+          - '&7완료한 도전 과제: &f%challenges_completed%'
+      back:
+        slot: 36
+        material: arrow
+        name: '&7뒤로'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&c닫기'
+        actions: ['[close]']
+
+  #[open] challenges <daily|weekly>. %period% %period_key% %completed% %total% %resets%.
+  #항목: %challenge% %id% %description% %progress% %amount% %percent% %bar% %icon%.
+  #[chatgames:claim-challenge] <period> <id>로 하나를 받습니다.
+  challenges:
+    title: '&8%period% 도전 과제'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    progress-bar:
+      length: 10
+      done: '&a|'
+      left: '&7|'
+    items:
+      tab-daily:
+        slot: 2
+        material: sunflower
+        name: '&e&l일일'
+        glow: true
+        lore:
+          - '&7오늘의 도전 과제를 보는 중.'
+        state: '%period_key% == daily'
+        actions: ['[switch] challenges daily']
+        when-off:
+          glow: false
+          lore:
+            - '&e클릭해서 오늘의 도전 과제 보기'
+      tab-weekly:
+        slot: 6
+        material: clock
+        name: '&b&l주간'
+        glow: true
+        lore:
+          - '&7이번 주 도전 과제를 보는 중.'
+        state: '%period_key% == weekly'
+        actions: ['[switch] challenges weekly']
+        when-off:
+          glow: false
+          lore:
+            - '&e클릭해서 이번 주 도전 과제 보기'
+      info:
+        slot: 4
+        material: book
+        name: '&f%period%: &e%completed%&7/&e%total% &f완료'
+        lore:
+          - '&7새 도전 과제까지 &f%resets%'
+      none:
+        slot: 22
+        material: barrier
+        name: '&7지금은 %period% 도전 과제가 없습니다'
+        view-requirements: ['%entries% == 0']
+      claim-all:
+        slot: 40
+        material: chest
+        name: '&a&l모두 받기'
+        lore:
+          - '&7완료한 모든 도전 과제와'
+          - '&7연속 기록 보상을 받습니다.'
+        actions: ['[command] chatgames claim', '[wait] 2', '[refresh]']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7이전 페이지'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7다음 페이지 &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7뒤로'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&c닫기'
+        actions: ['[close]']
+    templates:
+      in-progress:
+        material: '%icon%'
+        name: '%challenge%'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&7진행 중'
+      ready:
+        material: '%icon%'
+        glow: true
+        name: '%challenge% &a&l(완료)'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&a&l클릭해서 보상 받기!'
+        actions: ['[chatgames:claim-challenge] %period_key% %id%', '[refresh]']
+      claimed:
+        material: lime_stained_glass_pane
+        name: '%challenge% &7(받음)'
+        lore:
+          - '%description%'
+          - ''
+          - '&a보상 받음'
+
+  #각 연속 기록에는 %streak_<type>%(일수), %streak_<type>_name%, %streak_<type>_longest%,
+  #%streak_<type>_unclaimed%, %streak_<type>_enabled%가 있으며, <type>은 challenge, daily, global입니다.
+  #각각의 7일 보상 사다리는 그 이름의 목록에 1일차부터 7일차까지 들어갑니다(2주차는 8-14...).
+  #사다리 날: %day% %ladder_day%(보상 날, 1-7) %type% %streak%, %today%(오늘이면 true).
+  #[chatgames:claim-streak] <type>은 그 연속 기록의 받지 않은 날을 모두 받습니다.
+  streaks:
+    title: '&8연속 기록'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    lists:
+      challenge: ['11-17']
+      daily: ['20-26']
+      global: ['29-35']
+    items:
+      challenge:
+        slot: 10
+        material: writable_book
+        name: '%streak_challenge_name%'
+        lore:
+          - '&7매일 일일 도전 과제를 모두 완료하세요.'
+          - ''
+          - '&7현재: &f%streak_challenge%&7일 &8(최고 %streak_challenge_longest%)'
+          - '&7받을 날: &e%streak_challenge_unclaimed%'
+        view-requirements: ['%streak_challenge_enabled%']
+        click-requirements: ['%streak_challenge_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] challenge', '[refresh]']
+      daily:
+        slot: 19
+        material: gold_ingot
+        name: '%streak_daily_name%'
+        lore:
+          - '&7매일 게임을 한 번 이상 이기세요.'
+          - ''
+          - '&7현재: &f%streak_daily%&7일 &8(최고 %streak_daily_longest%)'
+          - '&7받을 날: &e%streak_daily_unclaimed%'
+        view-requirements: ['%streak_daily_enabled%']
+        click-requirements: ['%streak_daily_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] daily', '[refresh]']
+      global:
+        slot: 28
+        material: beacon
+        name: '%streak_global_name%'
+        lore:
+          - '&7매일 글로벌 게임을 하나 완료하세요.'
+          - ''
+          - '&7현재: &f%streak_global%&7일 &8(최고 %streak_global_longest%)'
+          - '&7받을 날: &e%streak_global_unclaimed%'
+        view-requirements: ['%streak_global_enabled%']
+        click-requirements: ['%streak_global_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] global', '[refresh]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7뒤로'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&c닫기'
+        actions: ['[close]']
+    templates:
+      day-claimed:
+        material: lime_stained_glass_pane
+        glow: '%today%'
+        name: '&a%day%일차 &7(받음)'
+      day-ready:
+        material: chest
+        glow: '%today%'
+        name: '&e&l%day%일차'
+        lore:
+          - '&a&l클릭해서 받기!'
+        actions: ['[chatgames:claim-streak] %type%', '[refresh]']
+      day-today:
+        material: yellow_stained_glass_pane
+        glow: true
+        name: '&e%day%일차 &7(오늘)'
+        lore:
+          - '&7오늘도 연속 기록을 이어 가서'
+          - '&7이 보상을 여세요.'
+      day-locked:
+        material: red_stained_glass_pane
+        name: '&c%day%일차'
+        lore:
+          - '&7아직 도달하지 않았습니다.'
+
+  #%points_rank% %fastest_rank% %total_points%; 목록 %top_points%와 %top_fastest%(top-size 줄)
+  leaderboards:
+    title: '&8순위표'
+    rows: 3
+    top-size: 10
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7아직 아무도 없음'
+    items:
+      points:
+        slot: 10
+        material: gold_block
+        name: '&e&l최다 포인트'
+        lore:
+          - '%top_points%'
+      fastest:
+        slot: 11
+        material: clock
+        name: '&b&l가장 빠른 타자'
+        lore:
+          - '%top_fastest%'
+      you:
+        slot: 13
+        material: player_head
+        head: '%player%'
+        name: '&a&l나'
+        lore:
+          - '&7포인트 순위: &f%points_rank%'
+          - '&7최단 기록 순위: &f%fastest_rank%'
+          - ''
+          - '&7모두가 얻은 포인트: &f%total_points%'
+      games:
+        slot: 15
+        material: book
+        name: '&d&l게임별 최단 기록'
+        lore:
+          - '&e클릭해서 모든 게임 보기'
+        actions: ['[open] leaderboard-games']
+      events:
+        slot: 16
+        material: nether_star
+        name: '&6&l이벤트'
+        lore:
+          - '&e클릭해서 이벤트 보기'
+        view-requirements: ['permission chatgames.event']
+        actions: ['[open] leaderboard-events']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7뒤로'
+        actions: ['[back] main']
+      close:
+        slot: 26
+        material: barrier
+        name: '&c닫기'
+        actions: ['[close]']
+
+  #게임과 레이스마다 항목 하나: %game% %key% %icon%, %top%(그 게임의 가장 빠른 플레이어)
+  leaderboard-games:
+    title: '&8게임별 최단 기록'
+    rows: 6
+    top-size: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7아직 아무도 없음'
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7이전 페이지'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7다음 페이지 &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7뒤로'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 53
+        material: barrier
+        name: '&c닫기'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&e&l%game%'
+        lore:
+          - '%top%'
+
+  #이벤트마다 항목 하나: %event% %id% %steps%
+  leaderboard-events:
+    title: '&8이벤트 순위표'
+    rows: 4
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7설정된 이벤트가 없습니다'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7이전 페이지'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7다음 페이지 &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7뒤로'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 35
+        material: barrier
+        name: '&c닫기'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7게임 %steps%개'
+          - ''
+          - '&e클릭해서 가장 많이 득점한 사람 보기'
+        actions: ['[close]', '[command] chatgames event top %id%']
+
+  #/chatgames admin. %current_game% %next_game% %rotation_state% %event% %preset%,
+  #%rotation_on%과 %games_on%(true 또는 false). 각 버튼은 해당 명령어를 실행하며,
+  #직접 입력한 것처럼 권한을 확인합니다.
+  admin:
+    title: '&4&lChatGames 관리'
+    rows: 5
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7없음'
+    items:
+      status:
+        slot: 4
+        material: repeater
+        name: '&f&l상태'
+        lore:
+          - '&7진행 중: &f%current_game%'
+          - '&7다음 게임까지: &f%next_game%'
+          - '&7로테이션: %rotation_state%'
+          - '&7이벤트: &f%event%'
+          - '&7프리셋: &f%preset%'
+      start-game:
+        slot: 19
+        material: diamond_sword
+        name: '&a&l게임 시작'
+        lore:
+          - '&7아무 게임이나 레이스를 지금.'
+        actions: ['[open] admin-start']
+      global:
+        slot: 20
+        material: beacon
+        name: '&3&l글로벌 게임 시작'
+        lore:
+          - '&7제시간에 해낸 모두가 이깁니다.'
+        actions: ['[open] admin-global']
+      events:
+        slot: 21
+        material: nether_star
+        name: '&6&l이벤트'
+        lore:
+          - '&7게임 이벤트를 시작하거나 멈춥니다.'
+        actions: ['[open] admin-events']
+      presets:
+        slot: 23
+        material: chest
+        name: '&d&l프리셋'
+        lore:
+          - '&7켜진 게임 묶음을 불러옵니다.'
+        actions: ['[open] admin-presets']
+      logs:
+        slot: 24
+        material: oak_sign
+        name: '&f&l로그'
+        lore:
+          - '&7최근 게임을 채팅에 출력합니다.'
+        actions: ['[open] admin-logs']
+      stop:
+        slot: 25
+        material: red_wool
+        name: '&c&l게임 멈추기'
+        lore:
+          - '&7진행 중인 게임을 승자 없이 끝냅니다.'
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      toggle:
+        slot: 29
+        material: lime_dye
+        name: '&f내 채팅 게임: &a켜짐'
+        lore:
+          - '&7클릭하면 끕니다.'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&f내 채팅 게임: &c꺼짐'
+          lore:
+            - '&7클릭하면 켭니다.'
+      toggle-all:
+        slot: 30
+        material: lime_dye
+        name: '&f게임 로테이션: &a켜짐'
+        lore:
+          - '&7클릭하면 모두의 자동 게임을 멈춥니다.'
+        state: '%rotation_on%'
+        #toggleAll은 글로벌 스레드에서 끝나며, Folia에서는 1틱 뒤입니다
+        actions: ['[command] chatgames toggleAll', '[wait] 2', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&f게임 로테이션: &c꺼짐'
+          lore:
+            - '&7클릭하면 자동 게임을 다시 시작합니다.'
+      reload:
+        slot: 32
+        material: hopper
+        name: '&e&l다시 불러오기'
+        lore:
+          - '&7모든 설정 파일을 다시 불러옵니다.'
+        actions: ['[close]', '[command] chatgames reload']
+      debug:
+        slot: 33
+        material: command_block
+        name: '&c&l디버그'
+        lore:
+          - '&7아무 게임이나 혼자 시험합니다.'
+        view-requirements: ['permission chatgames.debug']
+        actions: ['[open] debug']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7뒤로'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&c닫기'
+        actions: ['[close]']
+
+  #모든 게임과 레이스: %game% %key%(명령어와 같음) %icon%
+  admin-start:
+    title: '&8게임 시작'
+    rows: 6
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7이전 페이지'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7다음 페이지 &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7뒤로'
+        actions: ['[back] admin']
+      close:
+        slot: 53
+        material: barrier
+        name: '&c닫기'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&a%game%'
+        lore:
+          - '&7채팅 게임'
+          - '&e클릭해서 시작'
+        actions: ['[close]', '[command] chatgames %key%']
+      race:
+        material: '%icon%'
+        name: '&6%game%'
+        lore:
+          - '&7레이스'
+          - '&e클릭해서 시작'
+        actions: ['[close]', '[command] chatgames %key%']
+
+  #global_games.yml에서 켜진 게임: %game% %key% %icon% %goal% %duration% %points%.
+  #진행 중인 것: %global_running% %global_game% %global_goal%(예: "500 돌")
+  #%global_progress% %global_goal_amount% %global_percent% %global_contributors% %global_time_left%
+  admin-global:
+    title: '&8글로벌 게임'
+    rows: 5
+    update-interval: 20
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    items:
+      status:
+        slot: 4
+        material: beacon
+        name: '&3&l진행 중: &f%global_game%'
+        lore:
+          - '&7목표: &f%global_goal%'
+          - '&7진행도: &e%global_progress%&7/&e%global_goal_amount% &8(%global_percent%%)'
+          - '&7돕는 플레이어: &f%global_contributors%'
+          - '&7남은 시간: &f%global_time_left%s'
+          - ''
+          - '&c클릭해서 멈추기(보상 없음)'
+        view-requirements: ['%global_running%']
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      idle:
+        slot: 4
+        material: gray_dye
+        name: '&7진행 중인 글로벌 게임이 없습니다'
+        lore:
+          - '&7아래에서 하나를 골라 시작하세요.'
+        view-requirements: ['!%global_running%']
+      none:
+        slot: 22
+        material: barrier
+        name: '&7켜진 글로벌 게임이 없습니다'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7이전 페이지'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7다음 페이지 &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7뒤로'
+        actions: ['[back] admin']
+      close:
+        slot: 44
+        material: barrier
+        name: '&c닫기'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&3글로벌 %game%'
+        lore:
+          - '&7목표: 정답 &f%goal%개'
+          - '&7시간: &f%duration%s'
+          - '&7포인트: &f%points%'
+          - ''
+          - '&e클릭해서 시작'
+        actions: ['[close]', '[command] chatgames global %key%']
+      race:
+        material: '%icon%'
+        name: '&3글로벌 %game% 레이스'
+        lore:
+          - '&7목표: 함께 &f%goal%'
+          - '&7시간: &f%duration%s'
+          - '&7포인트: &f%points%'
+          - ''
+          - '&e클릭해서 시작'
+        actions: ['[close]', '[command] chatgames global %key%']
+      count:
+        material: '%icon%'
+        name: '&3글로벌 %game%'
+        lore:
+          - '&7채팅에서 함께 숫자 세기'
+          - '&7시간: &f%duration%s'
+          - '&7포인트: &f%points%'
+          - ''
+          - '&e클릭해서 시작'
+        actions: ['[close]', '[command] chatgames global %key%']
+
+  #events.yml의 이벤트: %event% %id% %steps%, 진행 중인 이벤트에는 %step%(지금 하는 게임)
+  admin-events:
+    title: '&8이벤트'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7events.yml에 설정된 이벤트가 없습니다'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7이전 페이지'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7다음 페이지 &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7뒤로'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&c닫기'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7게임 %steps%개'
+          - ''
+          - '&e클릭해서 시작'
+        actions: ['[command] chatgames event start %id%', '[wait] 2', '[refresh]']
+      running:
+        material: nether_star
+        glow: true
+        name: '%event% &a(진행 중)'
+        lore:
+          - '&7게임 %step%/%steps%'
+          - ''
+          - '&c클릭해서 멈추기'
+        actions: ['[command] chatgames event stop', '[wait] 2', '[refresh]']
+
+  #프리셋과 'none'(games.yml의 켜기 설정): %preset% %games%
+  admin-presets:
+    title: '&8프리셋'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7이전 페이지'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7다음 페이지 &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7뒤로'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&c닫기'
+        actions: ['[close]']
+    templates:
+      preset:
+        material: chest
+        name: '&d%preset%'
+        lore:
+          - '&7게임: &f%games%'
+          - ''
+          - '&e클릭해서 불러오기'
+        actions: ['[command] chatgames preset load %preset%', '[wait] 2', '[refresh]']
+      active:
+        material: ender_chest
+        glow: true
+        name: '&d%preset% &a(사용 중)'
+        lore:
+          - '&7게임: &f%games%'
+
+  #모두 여기서 만들어집니다: 개수를 자유롭게 추가하거나 바꾸세요
+  admin-logs:
+    title: '&8로그'
+    rows: 3
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      last-10:
+        slot: 11
+        material: paper
+        name: '&f최근 &e10&f게임'
+        lore: ['&e클릭해서 채팅에 출력']
+        actions: ['[close]', '[command] chatgames logs 10']
+      last-25:
+        slot: 12
+        material: paper
+        name: '&f최근 &e25&f게임'
+        lore: ['&e클릭해서 채팅에 출력']
+        actions: ['[close]', '[command] chatgames logs 25']
+      last-50:
+        slot: 14
+        material: paper
+        name: '&f최근 &e50&f게임'
+        lore: ['&e클릭해서 채팅에 출력']
+        actions: ['[close]', '[command] chatgames logs 50']
+      last-100:
+        slot: 15
+        material: paper
+        name: '&f최근 &e100&f게임'
+        lore: ['&e클릭해서 채팅에 출력']
+        actions: ['[close]', '[command] chatgames logs 100']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7뒤로'
+        actions: ['[back] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&c닫기'
+        actions: ['[close]']
+
+  #/chatgames debug: 모든 채팅 게임(%game% %key% %icon%). [chatgames:debug] <game>은
+  #비공개 라운드를 시작하고 debug-session을 엽니다.
+  debug:
+    title: '&4디버그: 게임 고르기'
+    rows: 4
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7이전 페이지'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7다음 페이지 &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7뒤로'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&c닫기'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&c%game%'
+        lore:
+          - '&7비공개 라운드를 만듭니다.'
+          - '&7보상 없음, 저장 안 됨.'
+        actions: ['[chatgames:debug] %key%']
+
+  #비공개 라운드: %game% %key% %icon% %question% %answer% %time% %min_ms% %case_sensitive%
+  #%winners% %points% %hints% %generated%; 목록 %placeholders%와 %answers%.
+  #[chatgames:debug-answer] <correct|wrong|wrong-case> [ms]는 모의 답을 보냅니다(ms 후).
+  #[chatgames:debug-timeout]은 제한 시간까지 기다리고, [chatgames:debug-reroll]은 새 라운드를 만듭니다.
+  #[chatgames:debug-end]는 세션을 끝냅니다.
+  debug-session:
+    title: '&4디버그: %game%'
+    rows: 5
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    #대기 시간마다 "X ms 후 정답" 버튼 하나가 'delays' 목록 칸에 놓입니다
+    delays: [100, 500, 1000, 5000]
+    lists:
+      delays: ['29-32']
+    items:
+      question:
+        slot: 11
+        material: '%icon%'
+        name: '&e&l문제'
+        lore:
+          - '&f%question%'
+          - ''
+          - '%placeholders%'
+      answer:
+        slot: 13
+        material: emerald
+        name: '&a&l인정되는 정답'
+        lore:
+          - '%answers%'
+      settings:
+        slot: 15
+        material: repeater
+        name: '&f&l설정'
+        lore:
+          - '&7제한 시간: &f%time%s'
+          - '&7최소 답변 시간: &f%min_ms% ms'
+          - '&7대소문자 구분: %case_sensitive%'
+          - '&7승자 수: &f%winners%  &7포인트: &f%points%'
+          - '&7준비된 힌트: &f%hints%'
+          - '&7생성 시간: &f%generated% ms'
+      correct-now:
+        slot: 28
+        material: lime_wool
+        name: '&a지금 바로 정답 보내기'
+        lore:
+          - '&7누구보다 빠름: 매크로 방지'
+          - '&7검사가 작동하는 모습을 보여 줍니다.'
+        actions: ['[chatgames:debug-answer] correct']
+      wrong:
+        slot: 33
+        material: red_wool
+        name: '&c틀린 답 보내기'
+        actions: ['[chatgames:debug-answer] wrong']
+      wrong-case:
+        slot: 34
+        material: orange_wool
+        name: '&6대소문자를 틀리게 답하기'
+        actions: ['[chatgames:debug-answer] wrong-case']
+      timeout:
+        slot: 39
+        material: clock
+        name: '&e시간 초과시키기'
+        lore:
+          - '&7제한 시간까지 기다린 뒤 알려 줍니다.'
+        actions: ['[chatgames:debug-timeout]']
+      reroll:
+        slot: 41
+        material: ender_pearl
+        name: '&d새 라운드'
+        actions: ['[chatgames:debug-reroll]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7뒤로'
+        actions: ['[chatgames:debug-end]', '[back] debug']
+      close:
+        slot: 44
+        material: barrier
+        name: '&c닫기'
+        actions: ['[close]']
+    templates:
+      correct-after:
+        material: yellow_wool
+        name: '&e%ms% ms 후 정답 보내기'
+        actions: ['[chatgames:debug-answer] correct %ms%']

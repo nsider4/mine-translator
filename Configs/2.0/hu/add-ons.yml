@@ -1,0 +1,10 @@
+#A Discord-beállítások a discord.yml-ben vannak.
+
+#A fájl, ahová a naplók mentődnek
+log-file: 'game_log.txt'
+
+#Ha true, minden csetesemény a konzolra naplózódik; mindkettő egyszerre is működhet
+log-console: true
+
+#Ha true, minden csetesemény fájlba naplózódik; mindkettő egyszerre is működhet
+log-local: true

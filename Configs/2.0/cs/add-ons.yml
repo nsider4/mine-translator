@@ -1,0 +1,10 @@
+#Nastavení Discordu jsou v discord.yml.
+
+#Soubor, do kterého se budou ukládat protokoly
+log-file: 'game_log.txt'
+
+#Pokud true, zapíše všechny události chatu do konzole; obojí může běžet zároveň
+log-console: true
+
+#Pokud true, zapíše všechny události chatu do souboru; obojí může běžet zároveň
+log-local: true

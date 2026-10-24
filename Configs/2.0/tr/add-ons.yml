@@ -1,14 +1,4 @@
-discord:
-  #url boşsa webhook olmayacağı için bu yok sayılır
-  webhook-url: ''
-  message-content: 'Son oyun sonuçları:'
-  img-url: 'https://www.spigotmc.org/data/resource_icons/107/107781.jpg?1676494289'
-  username: 'Chat Games'
-  title: 'Chat Games Sonucu'
-  description: 'Kazanan:'
-  winner-field: '%winner% (%time%)'
-  game-field: 'Oyun: %game%'
-
+#Discord ayarları discord.yml dosyasında.
 
 #Kayıtların kaydedileceği dosya
 log-file: 'game_log.txt'

@@ -1,0 +1,405 @@
+#Publica en Discord los resultados de los juegos, carreras, juegos globales, eventos y más.
+#
+#Los mensajes se envían por el webhook de un canal (nada que instalar), por el bot del
+#plugin DiscordSRV, o por ambos. Prueba cada mensaje con /chatgames discord test <message>.
+enabled: true
+
+#__CANALES__
+#Adónde van los mensajes. Ponles el nombre que quieras; cada aviso de abajo indica los canales que usa.
+#  webhook: la URL del webhook de un canal. En Discord: Editar canal > Integraciones > Webhooks >
+#           Nuevo webhook > Copiar URL del webhook. Mantenla en secreto: quien la tenga puede publicar ahí.
+#  discordsrv: publica con tu bot de DiscordSRV en su lugar (necesita DiscordSRV). Un nombre de canal de la
+#              sección Channels del config.yml de DiscordSRV (p. ej. global), o un ID de canal.
+#  username / avatar: el nombre y la imagen que muestran las publicaciones del webhook (un bot conserva los suyos).
+channels:
+  main:
+    webhook: ''
+    discordsrv: ''
+    username: 'Chat Games'
+    avatar: 'https://www.spigotmc.org/data/resource_icons/107/107781.jpg?1676494289'
+
+#__GENERAL__
+#Se muestra en los pies como %server%
+server-name: 'Minecraft Server'
+#La imagen de %winner_head% / %player_head%. Se rellenan %name% y %uuid%.
+player-head-url: 'https://mc-heads.net/avatar/%name%/128'
+#IDs de roles que los mensajes pueden mencionar (escribe <@&ID> en un texto). Nada más menciona nunca: ni
+#@everyone, ni nada del nombre o la respuesta de un jugador.
+#Para obtener un ID, activa el Modo desarrollador en Discord (Ajustes > Avanzado) y haz clic derecho en el rol.
+allowed-role-pings: []
+#Con DiscordSRV, %winner_mention% / %player_mention% muestran la cuenta de Discord vinculada de un jugador
+#(si no, su nombre). true también lo menciona.
+ping-linked-players: false
+#Juegos y carreras que nunca se publican
+ignored-games: []
+
+#Colores (%game_color%) y emoji (%game_emoji%) por juego. Colores: '#RRGGBB' o un nombre.
+#Emoji: nombres como :trophy: (la lista está al final de este archivo), o un emoji del servidor como <:name:ID>.
+#No pegues caracteres emoji en este archivo: los servidores 1.8 no pueden leer un archivo que los tenga.
+styles:
+  default: {color: '#5865F2', emoji: ':video_game:'}
+  unscramble: {color: '#F1C40F', emoji: ':abc:'}
+  unreverse: {color: '#E67E22', emoji: ':repeat:'}
+  reaction: {color: '#E74C3C', emoji: ':zap:'}
+  random: {color: '#9B59B6', emoji: ':game_die:'}
+  fillout: {color: '#3498DB', emoji: ':pencil2:'}
+  variable: {color: '#1ABC9C', emoji: ':heavy_plus_sign:'}
+  clickable: {color: '#2ECC71', emoji: ':point_up:'}
+  hoverable: {color: '#16A085', emoji: ':eyes:'}
+  math: {color: '#E91E63', emoji: ':heavy_division_sign:'}
+  sequence: {color: '#00BCD4', emoji: ':1234:'}
+  memorize: {color: '#8E44AD', emoji: ':brain:'}
+  guess_the_number: {color: '#FF9800', emoji: ':question:'}
+  trivia: {color: '#3F51B5', emoji: ':books:'}
+  word_association: {color: '#009688', emoji: ':link:'}
+  count: {color: '#607D8B', emoji: ':1234:'}
+  hunt: {color: '#C0392B', emoji: ':crossed_swords:'}
+  mine: {color: '#7F8C8D', emoji: ':pick:'}
+  place: {color: '#A0522D', emoji: ':bricks:'}
+  fish: {color: '#2980B9', emoji: ':fishing_pole_and_fish:'}
+  eat: {color: '#D35400', emoji: ':poultry_leg:'}
+  craft: {color: '#8D6E63', emoji: ':hammer_and_pick:'}
+  furnace: {color: '#E25822', emoji: ':fire:'}
+  tame: {color: '#C69C6D', emoji: ':bone:'}
+  shear: {color: '#ECF0F1', emoji: ':scissors:'}
+
+#Cómo se escriben las listas: ganadores, colaboradores, clasificaciones y tablas.
+#%medal% es la medalla de los puestos 1-3, y other-places la del resto.
+lists:
+  medals: [':first_place:', ':second_place:', ':third_place:']
+  other-places: '`%place%.`'
+  winner: '%medal% **%player%** `%time%s`'
+  contributor: '%medal% **%player%** `%amount%`'
+  standing: '%medal% **%player%** `%points% pts`'
+  leaderboard: '%medal% **%player%** `%value%`'
+  #Se muestra en lugar de una lista vacía
+  empty: '-# Nadie todavía'
+
+#__MENSAJES__
+#Cada mensaje tiene 'content' (texto normal encima del embed) y/o un 'embed':
+#  color, author (name, icon, url), title, url, description, thumbnail, image,
+#  fields (name, value, inline), footer (text, icon), timestamp (true muestra la hora de envío).
+#Un texto puede ser una línea o una lista de líneas. Una línea que solo tenía marcadores vacíos
+#se omite, igual que un campo vacío. También funcionan los marcadores de PlaceholderAPI que no necesitan jugador.
+#El formato de Discord funciona en descripciones y valores de campos: '### ' empieza un título, '-# ' texto pequeño
+#gris, '> ' una cita, **negrita**, `código`.
+#<t:%ends_unix%:R> muestra "en 20 segundos" en la hora de cada lector, con cuenta atrás.
+#En todos los mensajes: %server%, y en los juegos %game% %game_key% %game_emoji% %game_color%.
+
+#Juegos de chat. %question% %time_limit% %ends_unix% %winners_needed% %points%
+games:
+  enabled: true
+  channels: [main]
+  #true: publica al empezar el juego y luego edita esa publicación con el resultado. false: solo publica el resultado.
+  live: true
+  #Memorize nunca muestra su lista aquí: los jugadores podrían leerla en Discord.
+  hidden-question: '¡Mira el chat del juego!'
+  start:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%'
+      title: 'Nueva ronda'
+      description:
+        - '### %question%'
+        - '-# Responde en el chat del juego para ganar.'
+      fields:
+        - name: ':stopwatch: Termina'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+        - name: ':sparkles: Premio'
+          value: '`%points% pts`'
+          inline: true
+        - name: ':busts_in_silhouette: Ganadores'
+          value: '`%winners_needed%`'
+          inline: true
+      footer: '%server%'
+  #%winner% %winner_head% %winner_mention% %time% %answer% %points% %winner_count%
+  #%winners% (todos los ganadores, uno por línea) %other_winners% (todos menos el primero)
+  win:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%'
+      title: ':trophy:  ¡%winner% lo consiguió!'
+      thumbnail: '%winner_head%'
+      description:
+        - '-# La respuesta era'
+        - '### %answer%'
+      fields:
+        - name: ':stopwatch: Tiempo'
+          value: '`%time%s`'
+          inline: true
+        - name: ':sparkles: Puntos'
+          value: '`+%points%`'
+          inline: true
+        - name: ':medal: También acertaron'
+          value: '%other_winners%'
+          inline: false
+      footer: '%server%'
+      timestamp: true
+  #%answer% %question% %time_limit%
+  expired:
+    enabled: true
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%'
+      title: ':hourglass:  Se acabó el tiempo'
+      description:
+        - '-# Nadie lo consiguió. La respuesta era'
+        - '### %answer%'
+      footer: '%server%'
+      timestamp: true
+  #Cuando alguien del staff detiene el juego (solo edita una publicación en vivo)
+  stopped:
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%'
+      title: ':no_entry:  Ronda detenida'
+      description:
+        - '-# Un miembro del staff terminó esta ronda antes de tiempo.'
+      footer: '%server%'
+      timestamp: true
+
+#Carreras. %target% %amount% %time_limit% %ends_unix% %points%
+races:
+  enabled: true
+  channels: [main]
+  live: true
+  start:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  Carrera de %game%'
+      title: 'Carrera iniciada'
+      description:
+        - '### %amount%x %target%'
+        - '-# El primero en terminar gana.'
+      fields:
+        - name: ':stopwatch: Termina'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+        - name: ':sparkles: Premio'
+          value: '`%points% pts`'
+          inline: true
+      footer: '%server%'
+  #%winner% %winner_head% %winner_mention% %time% %points%
+  win:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  Carrera de %game%'
+      title: ':checkered_flag:  ¡%winner% ganó la carrera!'
+      thumbnail: '%winner_head%'
+      description:
+        - '### %amount%x %target%'
+      fields:
+        - name: ':stopwatch: Tiempo'
+          value: '`%time%s`'
+          inline: true
+        - name: ':sparkles: Puntos'
+          value: '`+%points%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  expired:
+    enabled: true
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  Carrera de %game%'
+      title: ':hourglass:  Se acabó el tiempo'
+      description:
+        - '### %amount%x %target%'
+        - '-# Nadie terminó a tiempo.'
+      footer: '%server%'
+      timestamp: true
+  stopped:
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  Carrera de %game%'
+      title: ':no_entry:  Carrera detenida'
+      description:
+        - '-# Un miembro del staff terminó esta carrera antes de tiempo.'
+      footer: '%server%'
+      timestamp: true
+
+#Juegos globales, en los que todo el servidor trabaja hacia un objetivo.
+#%goal% (p. ej. "500 Stone") %progress% %goal_amount% %percent% %bar% %contributors% %time_limit% %ends_unix%
+global:
+  enabled: true
+  channels: [main]
+  #true: la publicación muestra la barra de progreso y se actualiza mientras dura el juego
+  live: true
+  #Cada cuánto se actualiza, como mucho, la publicación en vivo (solo si cambió el progreso)
+  update-seconds: 15
+  bar: {length: 16, full: '█', empty: '░'}
+  progress:
+    embed:
+      color: '%game_color%'
+      author: ':globe_with_meridians:  %game% global'
+      title: 'Todo el servidor juega junto'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+        - '-# %progress% / %goal_amount%'
+      fields:
+        - name: ':busts_in_silhouette: Ayudando'
+          value: '`%contributors%`'
+          inline: true
+        - name: ':stopwatch: Termina'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+      footer: '%server%'
+  #%top_contributors% (los que más aportaron, uno por línea)
+  completed:
+    embed:
+      color: '#57F287'
+      author: ':globe_with_meridians:  %game% global'
+      title: ':tada:  ¡Objetivo cumplido!'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+      fields:
+        - name: ':medal: Los que más ayudaron'
+          value: '%top_contributors%'
+          inline: true
+        - name: ':busts_in_silhouette: Ayudaron'
+          value: '`%contributors%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  failed:
+    embed:
+      color: '#ED4245'
+      author: ':globe_with_meridians:  %game% global'
+      title: ':x:  Objetivo no cumplido'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+        - '-# %progress% / %goal_amount%'
+      fields:
+        - name: ':medal: Los que más ayudaron'
+          value: '%top_contributors%'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #Cuántos colaboradores lista %top_contributors%
+  top-size: 5
+
+#Eventos de juegos (events.yml). %event%
+events:
+  enabled: true
+  channels: [main]
+  #%games% (cuántos juegos tiene)
+  start:
+    embed:
+      color: '#FEE75C'
+      author: ':calendar:  Evento de juegos'
+      title: '¡%event% ha comenzado!'
+      description:
+        - '-# Gana los juegos seguidos para conseguir puntos del evento.'
+      fields:
+        - name: ':video_game: Juegos'
+          value: '`%games%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #%standings% %players% (cuántos puntuaron) %winner% %winner_head% %winner_mention%
+  end:
+    embed:
+      color: '#FEE75C'
+      author: ':calendar:  Evento de juegos'
+      title: ':trophy:  Resultados de %event%'
+      thumbnail: '%winner_head%'
+      description:
+        - '%standings%'
+      fields:
+        - name: ':crown: Ganador'
+          value: '%winner_mention%'
+          inline: true
+        - name: ':busts_in_silhouette: Jugadores'
+          value: '`%players%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #Cuántos puestos lista %standings%
+  standings-size: 10
+
+#La racha de un jugador llega a un número de días seguidos (streaks.yml). %player% %player_head% %player_mention% %streak% %days%
+streaks:
+  enabled: false
+  channels: [main]
+  #Solo se publican estos números de días
+  days: [7, 14, 30, 60, 100, 365]
+  message:
+    embed:
+      color: '#E67E22'
+      author: {name: '%player%', icon: '%player_head%'}
+      title: ':fire:  ¡%days% días seguidos!'
+      description:
+        - '-# %streak%'
+      footer: '%server%'
+      timestamp: true
+
+#Un jugador completa un desafío diario o semanal. %player% %player_head% %player_mention% %challenge% %period%
+challenges:
+  enabled: false
+  channels: [main]
+  #Lo que muestra %period%
+  periods:
+    daily: 'diario'
+    weekly: 'semanal'
+  message:
+    embed:
+      color: '#57F287'
+      author: {name: '%player%', icon: '%player_head%'}
+      title: ':white_check_mark:  Desafío completado'
+      description:
+        - '### %challenge%'
+        - '-# Desafío %period%'
+      footer: '%server%'
+      timestamp: true
+
+#Una clasificación, publicada a horas fijas y con /chatgames discord leaderboard.
+#%leaderboard% %total_points% (todos los jugadores juntos)
+leaderboard:
+  enabled: false
+  channels: [main]
+  #Hora del servidor, 24 horas, p. ej. ['12:00', '20:00']
+  times: ['20:00']
+  #points, o fastest (las respuestas más rápidas de todos los juegos)
+  type: points
+  size: 10
+  message:
+    embed:
+      color: '#5865F2'
+      author: ':bar_chart:  Clasificación'
+      title: 'Mejores jugadores'
+      description:
+        - '%leaderboard%'
+        - ''
+        - '-# %total_points% puntos ganados en total'
+      footer: '%server%'
+      timestamp: true
+
+#__EMOJI__
+#Los nombres que puedes escribir como :name: en cualquier texto de arriba:
+#  trophy, first_place, second_place, third_place, medal, military_medal, crown, star, star2,
+#  sparkles, tada, confetti_ball, fire, zap, boom, 100, gem, moneybag, gift, video_game, game_die,
+#  jigsaw, dart, checkered_flag, stopwatch, timer, alarm_clock, hourglass, hourglass_flowing_sand,
+#  clock, calendar, white_check_mark, heavy_check_mark, x, no_entry, warning, question, grey_question,
+#  exclamation, bell, loudspeaker, mega, speech_balloon, thought_balloon, brain, bulb, abc, abcd,
+#  capital_abcd, 1234, symbols, pencil, pencil2, memo, book, books, scroll, clipboard, link, mag,
+#  eyes, eye, repeat, arrows_counterclockwise, leftwards_arrow_with_hook, heavy_plus_sign,
+#  heavy_minus_sign, heavy_multiplication_x, heavy_division_sign, infinity, keycap_ten,
+#  mouse_three_button, point_up, point_right, point_down, raised_hands, clap, muscle, handshake, wave,
+#  thinking, sunglasses, partying_face, rocket, earth_americas, globe_with_meridians,
+#  busts_in_silhouette, bust_in_silhouette, bar_chart, chart_with_upwards_trend,
+#  chart_with_downwards_trend, crossed_swords, dagger, bow_and_arrow, shield, pick, hammer,
+#  hammer_and_pick, tools, axe, bricks, fishing_pole_and_fish, fish, tropical_fish, meat_on_bone,
+#  poultry_leg, bread, apple, green_apple, cake, cookie, fork_and_knife, cooking, bone, dog, cat,
+#  horse, parrot, sheep, ram, scissors, cow, pig, chicken, zombie, skull, seedling, evergreen_tree,
+#  deciduous_tree, mushroom, rock, diamond_shape_with_a_dot_inside, large_blue_diamond,
+#  small_orange_diamond, red_circle, orange_circle, yellow_circle, green_circle, blue_circle,
+#  purple_circle, white_circle, black_circle, green_square, white_large_square, black_large_square,
+#  arrow_right, arrow_up, arrow_down, small_red_triangle_down, small_red_triangle, lock, unlock, key,
+#  new, up, cool, free, information_source, heart, green_heart, blue_heart, yellow_heart,
+#  purple_heart, orange_heart, map, compass, label, ticket, tickets, admission_tickets, joystick,
+#  slot_machine, spades, clubs, hearts, diamonds, beginner, game_controller, pushpin, round_pushpin,
+#  triangular_flag_on_post

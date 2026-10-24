@@ -1,0 +1,7 @@
+milestones:
+  '100':
+    - "say %player% dosáhl 100 bodů!"
+    - "give %player% diamond 1"
+  '500':
+    - "broadcast %player% je teď legenda s 500 body!"
+    - "give %player% emerald 5"

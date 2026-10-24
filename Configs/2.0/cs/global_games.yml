@@ -1,0 +1,255 @@
+#GLOBÁLNÍ HRY
+#
+#V globální hře hraje celý server jako jeden tým. Každá správná odpověď (nebo v globálním
+#závodě každý vytěžený blok, zabitý mob...; v Počítání každé napočítané číslo) se přičte k jednomu společnému
+#skóre. Nikdo nemusí být nejrychlejší: když skóre včas dosáhne cíle, každý, kdo
+#přispěl, dostane odměnu. Pokud čas vyprší dřív, hra selže.
+#
+#  Chatové hry běží jako proud otázek. Každý hráč může na každou otázku odpovědět jednou a
+#  další otázka přijde po 'answers-per-question' správných odpovědích nebo po 'question-seconds'.
+#  Odpovědi jsou vždy skryté, takže je nelze opsat.
+#  Závody počítají postup všech dohromady, např. 500 kamene vytěženého celým serverem.
+#  Počítání (hraje se jen globálně): počítejte společně v chatu, jedno číslo na zprávu.
+#
+#Globální hry začínají náhodně po běžné hře, podle časovače, příkazem
+#/chatgames global <game> [values] nebo jako krok události (events.yml).
+#Postup se zobrazuje na liště bosse (1.9+) nebo na liště akcí (1.8).
+
+triggers:
+  #Procentuální šance, že globální hra začne po skončení běžné hry nebo závodu (0 = nikdy).
+  chance-after-game: 10
+  #Sekundy mezi koncem běžné hry a začátkem globální hry.
+  delay-seconds: 5
+  #Minuty mezi globálními hrami spuštěnými časovačem (0 = vypnuto).
+  interval-minutes: 0
+  #Hráči online potřební, aby se globální hra spustila sama (příkaz to ignoruje).
+  minimum-players: 2
+
+progress-bar:
+  enabled: true
+  #Barva lišty bosse: BLUE, GREEN, PINK, PURPLE, RED, WHITE nebo YELLOW.
+  color: YELLOW
+  #SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12 nebo SEGMENTED_20.
+  style: SEGMENTED_10
+  #Procenta cíle oznamovaná v chatu, když jich server dosáhne.
+  announce-at: [25, 50, 75]
+
+#Používá každá hra níže pro jakoukoli hodnotu, kterou sama nenastaví.
+#  goal: správné odpovědi (nebo u závodů předměty/moby), které server potřebuje
+#  duration-seconds: kolik času server má
+#  min-contribution: nejmenší příspěvek hráče, aby dostal odměnu
+#  points: co dostane každý odměněný hráč, když je cíle dosaženo
+#  points-per-contribution: body navíc za každý příspěvek hráče
+#  answers-per-question: jen chatové hry, kolik hráčů může odpovědět na jednu otázku
+#  question-seconds: jen chatové hry, nejdelší doba, po kterou otázka zůstane
+defaults:
+  goal: 10
+  duration-seconds: 120
+  min-contribution: 1
+  points: 1
+  points-per-contribution: 0
+  answers-per-question: 3
+  question-seconds: 15
+
+#Odměny ve formátu rewards.yml (chance, minimum-players, '<chance>%~ ' a 'has:<permission>'
+#všechno funguje). %player% je hráč a %contribution% to, čím přispěl.
+#Vlastní sekce 'rewards' hry je pro tu hru nahradí.
+rewards:
+  #Každý, kdo přispěl aspoň min-contribution, když je cíle dosaženo.
+  completed:
+    reward_1:
+      data:
+        - '[consolecmd] give %player% iron_ingot 3'
+  #Stejní hráči, když vyprší čas. Prázdné: bez útěchy.
+  failed: {}
+  #Navíc pro největší přispěvatele, když je cíle dosaženo, podle umístění.
+  top-contributors:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% diamond 1'
+    2:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 3'
+    3:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 1'
+
+#Zástupné symboly v každé zprávě: %game% %goal% (číslo) %goal_text% (např. "500 Stone")
+#%progress% %percent% %time% (zbývající sekundy) %duration%
+messages:
+  start:
+    - ''
+    - '&6&l» GLOBÁLNÍ HRA: %game%! &fCelý server hraje společně.'
+    - '&f  Získejte &e%goal% správných odpovědí &fza &e%time%s&f. Každý, kdo pomůže, dostane odměnu!'
+    - '&7  Každá otázka přijme %answers% odpovědí, tak nečekejte na ostatní.'
+    - ''
+  race_start:
+    - ''
+    - '&6&l» GLOBÁLNÍ ZÁVOD! &fCelý server hraje společně.'
+    - '&f  Získejte společně &e%goal% %value% &fza &e%time%s&f. Každý, kdo pomůže, dostane odměnu!'
+    - ''
+  count_start:
+    - ''
+    - '&6&l» GLOBÁLNÍ POČÍTÁNÍ! &fPočítejte společně od &e%start% &fdo &e%target% &fpo &e%step%&f!'
+    - '&7  Jedno číslo na zprávu, v pořadí. Nikdo nepočítá dvakrát po sobě. %time%s na dokončení.'
+    - ''
+  #Nad každou otázkou. %question% je její číslo.
+  question:
+    - '&6&l» GLOBÁLNÍ &7Otázka č. %question% &8| &e%progress%&7/&e%goal%'
+  #Když vyprší čas otázky. %answer% je její odpověď. Prázdné, aby se nic neodeslalo.
+  question_over: '&8» &7Odpověď byla &f%answer%&7.'
+  #Hráči, jehož odpověď se započítala. %contribution% je jeho dosavadní celkový příspěvek.
+  answered: '&8[%prefix%&8] &aSprávně! &7Přispěl jsi &f%contribution% &7z &f%progress%/%goal% &7serveru.'
+  #%reached% je právě dosažené procento.
+  milestone: '&6&l» &e%reached%% &fhotovo! &7(%progress%/%goal%, zbývá %time%s)'
+  #Započítané číslo, zobrazené místo zprávy hráče. %player% %number%
+  counted: '&e%player% &8» &f%number%'
+  #Chyba. %player% %number% %next% (co se čekalo) %start% %reason% %mistakes% %max_mistakes%
+  count_broken:
+    - '&c%player% řekl %number%: %reason%'
+    - '&fPočítání začíná znovu od &e%start%&f.'
+  #Chyba, která ukončí hru (on-mistake: fail, nebo dosaženo max-mistakes).
+  count_broken_final:
+    - '&c%player% řekl %number%: %reason%'
+  count_reasons:
+    ahead: 'příliš dopředu (další číslo bylo %next%)'
+    behind: 'to už bylo napočítáno (další číslo bylo %next%)'
+    repeated: 'to číslo právě zaznělo'
+    twice: 'nikdo nesmí počítat dvě čísla po sobě'
+  #%count% hráčů bylo odměněno, %contributors% se zúčastnilo, trvalo to %seconds%.
+  #%top_<n>% a %top_<n>_amount%: tři největší přispěvatelé.
+  completed:
+    - ''
+    - '&6&l» CÍL SPLNĚN! &fServer získal &e%goal_text% &fza &e%seconds%s&f.'
+    - '&f  Top: &e%top_1% &7(%top_1_amount%)  &e%top_2% &7(%top_2_amount%)  &e%top_3% &7(%top_3_amount%)'
+    - '&f  Odměnu dostává &e%count% &fhráčů.'
+    - ''
+  failed:
+    - ''
+    - '&6&l» GLOBÁLNÍ HRA SKONČILA! &fServer došel na &e%progress%/%goal% &7(%percent%%)&f. Příště to vyjde!'
+    - ''
+  #Každému odměněnému hráči, když je cíle dosaženo. %points% je to, co získal.
+  rewarded: '&8[%prefix%&8] &aPřispěl jsi &f%contribution% &aa získal &f%points% &abodů!'
+  #Hráči, který přispěl méně než min-contribution. %min% je to minimum.
+  too_little: '&8[%prefix%&8] &7Přispěl jsi %contribution%; na odměnu bylo potřeba aspoň %min%.'
+  #Lišta bosse (nebo lišta akcí na 1.8).
+  bar: '&6Globální hra: %game% &8| &f%progress%/%goal% &8| &e%time%s'
+
+#Slova pro sestavení %goal_text%.
+words:
+  answers: 'správných odpovědí'
+  to: 'do'
+
+#Hry, které lze hrát globálně. Zapamatuj si a Hádej číslo nelze.
+#Každá může nastavit enabled a cokoli z 'defaults', plus vlastní 'rewards'.
+games:
+  reaction:
+    enabled: true
+    goal: 10
+    duration-seconds: 90
+    question-seconds: 10
+  unscramble:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  math:
+    enabled: true
+    goal: 15
+    duration-seconds: 150
+  sequence:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  trivia:
+    enabled: true
+    goal: 8
+    duration-seconds: 180
+    question-seconds: 20
+  word_association:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  fillout:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  unreverse:
+    enabled: false
+  random:
+    enabled: false
+  variable:
+    enabled: false
+  hoverable:
+    enabled: false
+  clickable:
+    enabled: false
+  #Počítejte společně. Jeho cílem je, kolik čísel má zvolený režim.
+  count:
+    enabled: true
+    duration-seconds: 120
+    #Nikdo nesmí říct dvě čísla po sobě.
+    no-double-count: true
+    #reset: chyba začne počítání znovu; fail: chyba ukončí hru.
+    on-mistake: reset
+    #S reset: počet chyb, který hru stejně ukončí (0 = bez limitu).
+    max-mistakes: 5
+    #Jeden se vybere náhodně; /chatgames global count <mode> vybere konkrétní.
+    #'step' je, o kolik každé číslo stoupne (směr se řídí podle start a target).
+    modes:
+      up:
+        start: 1
+        target: 20
+        step: 1
+      down:
+        start: 15
+        target: 1
+        step: 1
+      evens:
+        start: 2
+        target: 30
+        step: 2
+      fives:
+        start: 5
+        target: 75
+        step: 5
+  #Globální závody: celý server sbírá k cíli. Cíle se berou z races.yml;
+  #/chatgames global mine STONE 500 nastaví obojí.
+  mine:
+    enabled: true
+    goal: 200
+    duration-seconds: 240
+  hunt:
+    enabled: true
+    goal: 40
+    duration-seconds: 240
+  place:
+    enabled: false
+    goal: 200
+    duration-seconds: 240
+  fish:
+    enabled: false
+    goal: 20
+    duration-seconds: 300
+  eat:
+    enabled: false
+    goal: 30
+    duration-seconds: 240
+  craft:
+    enabled: false
+    goal: 100
+    duration-seconds: 240
+  furnace:
+    enabled: false
+    goal: 64
+    duration-seconds: 300
+  tame:
+    enabled: false
+    goal: 15
+    duration-seconds: 300
+  shear:
+    enabled: false
+    goal: 40
+    duration-seconds: 240

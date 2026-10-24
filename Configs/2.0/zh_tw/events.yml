@@ -1,0 +1,108 @@
+#遊戲活動
+#
+#活動是一連串接連進行的遊戲。每局遊戲按名次發放活動點數；
+#最後一局結束時，活動點數最多的玩家獲得活動的
+#獎勵。活動進行時，普通遊戲輪換和全服遊戲會暫停。
+#
+#用 /chatgames event start <event> 開始，或者讓它的日程自動開始。
+#/chatgames event top <event> 顯示歷來在該活動中得分最多的玩家。
+#
+#每個活動：
+#  name：顯示給玩家的名稱（可以使用顏色程式碼）
+#  schedule：自動開始的時間，例如 'SATURDAY 20:00' 或 'DAILY 18:30'（也可以不寫）。
+#            時區使用 challenges.yml 中的設定。
+#  minimum-players：日程自動開始所需的線上玩家數（命令會忽略此項）
+#  pause-seconds：一局遊戲結束到下一局開始之間的秒數
+#  points：每局遊戲中第 1、2、3……名的活動點數
+#  participation-points：其他完成的人獲得的活動點數。在全服遊戲中，如果
+#                        伺服器達到目標，所有貢獻足夠的人都會得分：
+#                        貢獻最大的人得 'points'，其餘的人得這些點數。
+#                        如果沒有達到目標，這局遊戲沒有人得分。
+#  steps：按順序排列的遊戲。每個：
+#    game：遊戲或競賽，與 games.yml / races.yml 中相同
+#    global：設為 true 則作為全服遊戲進行（整個伺服器一起玩；見 global_games.yml）。
+#            計數總是全服遊戲。
+#    time：作答（或完成競賽）的秒數，代替遊戲自己的設定
+#    winners：普通聊天遊戲可以有多少贏家，代替遊戲自己的設定
+#    args：數值，與 /chatgames <game> 後面寫的相同，例如挖掘競賽的 'stone 16'
+#    settings：這局遊戲要修改的其他 games.yml 值，例如 {difficulty: hard}
+#  rewards：按最終名次（1、2、3……）的獎勵行，以及給其他所有
+#           得分者的 'participation'。與 rewards.yml 中的行相同（'<chance>%~ ' 和 'has:<permission>' 都可以使用）。
+
+events:
+  weekend_cup:
+    name: '&6&l週末杯'
+    schedule:
+      - 'SATURDAY 20:00'
+    minimum-players: 3
+    pause-seconds: 15
+    points: [5, 3, 1]
+    participation-points: 1
+    steps:
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+        time: 25
+      - game: word_association
+        global: true
+        settings:
+          difficulty: hard
+      - game: trivia
+        winners: 3
+      - game: mine
+        global: true
+        time: 120
+        args: 'stone 100'
+    rewards:
+      1:
+        - '[consolecmd] give %player% diamond 5'
+      2:
+        - '[consolecmd] give %player% diamond 3'
+      3:
+        - '[consolecmd] give %player% diamond 1'
+      participation:
+        - '[consolecmd] give %player% iron_ingot 3'
+
+  quick_quiz:
+    name: '&b&l快問快答'
+    minimum-players: 2
+    pause-seconds: 8
+    points: [3, 2, 1]
+    participation-points: 0
+    steps:
+      - game: reaction
+        winners: 3
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+    rewards:
+      1:
+        - '[consolecmd] give %player% gold_ingot 5'
+
+messages:
+  #發給所有人。%event% 是活動名，%steps% 是遊戲局數，%pause% 是每局之間的秒數。
+  start:
+    - ''
+    - '&6&l» 活動：%event% &f即將開始！&e%steps% &f局遊戲，活動點數最多者獲勝。'
+    - ''
+  #每局遊戲之前。%step% 是局數，%game% 是遊戲。
+  step:
+    - '&6&l» %event% &f- 第 &e%step%/%steps% &f局：&e%game%'
+  #發給每位在一局遊戲中得分的玩家。%points% 是獲得的點數，%total% 是活動總分。
+  step_points: '&8[%prefix%&8] &a+%points% 活動點數 &7（共 %total%）'
+  #結束時發給所有人。%count% 名玩家得分；%winner_<n>% 和 %points_<n>% 為前三名。
+  end:
+    - ''
+    - '&6&l» %event% &f結束了！&e%count% &f名玩家得分。'
+    - '&f  1. &e%winner_1% &7%points_1%  &f2. &e%winner_2% &7%points_2%  &f3. &e%winner_3% &7%points_3%'
+    - ''
+  nobody:
+    - '&6&l» %event% &f結束了！&c沒有人得分。'
+  #結束後發給每位得分的玩家。%count% 人中的第 %place% 名。
+  result: '&8[%prefix%&8] &f你以 &e%points% &f活動點數在 %count% 人中獲得第 &e%place% &f名。'
+  stopped:
+    - '&6&l» %event% &c已被停止。'
+
+#活動開始和最終排名會按照 discord.yml 中的設定釋出到 Discord。

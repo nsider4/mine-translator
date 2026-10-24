@@ -1,0 +1,125 @@
+#############################
+######    INSTÄLLNINGAR    #######
+#############################
+check-update: true
+
+#Serverns språk. Namn på block, föremål och varelser (i lopp och i Memorera) översätts
+#till det, på över 140 språk. Ditt språks ID finns här:
+#https://github.com/nsider4/mine-translator/blob/main/language_names.txt
+#Namnen laddas ner till translations/ och uppdateras av sig själva när en ny
+#Minecraft-version släpps. En ändring här gäller efter /chatgames reload.
+lang: 'en_us'
+
+#Språket för de här konfigurationsfilerna: meddelanden, menyer, ordlistor, frågesport, kommentarer...
+#Helt översatta: en, es, fr, pt, de, it, nl, pl, ru, tr, zh, zh_tw, ja, ko, uk, cs, sv, hu, vi, id
+#(zh är förenklad kinesiska, zh_tw traditionell kinesiska). Om ditt 'lang' inte finns med översätts namn på block,
+#föremål och varelser ändå, men de här filerna behåller sitt språk (engelska som standard).
+#  auto: byt när 'lang' ovan ändras, om det språket är helt översatt
+#  none: ändra aldrig
+#  eller en av språkkoderna ovan
+#Ett byte behåller dina inställningar och dina ändringar av dem; dina egna meddelanden
+#ersätts av översättningen (de gamla filerna kopieras först till backups/). Översättningarna
+#laddas ner från https://github.com/nsider4/mine-translator (mappen Configs) och uppdateras
+#av sig själva. Fler språk kan läggas till där.
+config-language: 'auto'
+
+#Lagringstyp, tillgängliga: SQLite eller MySQL
+Storage: 'SQLite'
+
+#Namnet på tabellen med all ChatGames-data
+table_name: 'chatgames'
+
+#Namnet på tabellen med alla snabbaste tider i ChatGames
+fastest_times_table: 'chatgames_fastest_times'
+
+SQLite:
+  Filename: 'chatgames-data'
+
+MySQL:
+  host: 'localhost'
+  port: '3306'
+  user: 'root'
+  password: 'password'
+  database: 'chatgame'
+  connection-parameters: '?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8'
+  Pool-Settings:
+    max-pool-size: 10
+    min-idle: 10
+    max-lifetime: 180000
+    keep-alive-time: 60000
+    time-out: 20000
+
+disabled-worlds:
+  - 'example_world'
+
+prefix: '&c&lC&d&lH&b&lA&a&lT &6&lG&e&lA&a&lM&c&lE&b&lS'
+
+#Om false kan bara spelare med 'chatgames.start.*' starta
+allow_starting_from_disabled: true
+
+#Om false avbryts inte meddelandet som normalt inte skickas när en spelare gissar rätt alternativ
+cancel-message-when-winning: true
+
+#Minsta antal spelare online som behövs för att ett chattspel ska starta
+min_players_online: 1
+
+#Tiden tills ett slumpmässigt spel väljs igen.
+#Värdet -1 stänger av uppgiften HELT; med -1 kan randomDelay inte heller användas
+time_minutes: 25
+
+#Om aktiverat skapas efter varje spel ett slumptal mellan 'randomDelay.minimum' och 'randomDelay.limit' som väntetid till nästa spel
+#Om du aktiverar detta ignoreras värdet 'time_minutes', utom om det är -1, för då finns ingen uppgift.
+randomDelay:
+  enable: false
+  #Tidsenhet, det andra möjliga värdet är 'seconds'; om du ändrar den, gör helst minimum större än spelets 'timeToGuess_seconds'
+  timeUnit: 'minutes'
+  minimum: 1
+  limit: 25
+
+
+#Om avstängt behövs inte behörigheten chatgames.play för att se spelen
+use-permission-toplay: false
+
+#Om false räknas bara spelare med behörigheten 'chatgames.play', alltså de som kan spela.
+#Om true räknas alla spelare online utom osynliga (vanish).
+count-all-players: false
+
+#Om true skapas en topplista över de snabbaste (/chatgames fastest). Om false är den topplistan avstängd.
+fastest-typers-top: true
+
+#PlaceholderAPI-platshållare (kräver att PlaceholderAPI är installerat):
+#  Du:           %chatgames_points%, %chatgames_wins%, %chatgames_wins_<game>%, %chatgames_race_wins%,
+#                %chatgames_global_played%, %chatgames_global_won%, %chatgames_toggle%, %chatgames_sound_toggle%
+#                %chatgames_events_played%, %chatgames_event_wins%, %chatgames_event_best_place% (0 = ingen än)
+#  Dina tider:   %chatgames_personal_best% (valfritt chattspel), %chatgames_fastest_<game>% (även lopp)
+#  Din plats:    %chatgames_show_current_pos_top% (poäng), %chatgames_show_current_pos_fastest% (bästa tid)
+#  Topp poäng:   %chatgames_top_<n>% (namn), %chatgames_points_top_<n>%, %chatgames_total_points%
+#  Topp snabbast: %chatgames_fastest_<n>% (namn, chattspel), %chatgames_fastest_time_<n>%,
+#                %chatgames_fastest_<game>_<n>%, %chatgames_fastest_<game>_time_<n>%
+#  Just nu:      %chatgames_game_running%, %chatgames_current_game%, %chatgames_next_game_in% (sekunder)
+#  Lopp:         %chatgames_race_target%, %chatgames_race_amount%, %chatgames_race_progress% (ditt)
+#  Utmaningar:   %chatgames_daily_completed%, %chatgames_daily_total%, %chatgames_weekly_completed%,
+#                %chatgames_weekly_total%, %chatgames_challenges_completed% (totalt)
+#  Sviter:       %chatgames_streak_<type>%, %chatgames_streak_<type>_longest% (<type> är challenge, daily eller global)
+#  Evenemang:    %chatgames_event_running%, %chatgames_event_name%, %chatgames_event_step%, %chatgames_event_steps%,
+#                %chatgames_event_points% och %chatgames_event_place% (dina i det pågående evenemanget)
+#  <game> är ett spelnamn från games.yml (t.ex. unscramble, guess_the_number); <n> är en placering (1, 2, 3...).
+placeholders:
+  #Hur ofta topplistans platshållare (top_<n>, fastest_<n>, placeringar...) byggs om, i sekunder.
+  #De byggs också om efter varje spel med en vinnare. Dina egna poäng, vinster och tider är alltid aktuella.
+  refresh-seconds: 60
+  #Visas när det inte finns något att visa: en tom plats i topplistan, ingen bästa tid än, inget spel igång...
+  empty-value: ''
+
+#Ljud för spelarna när ett chattspel startar!
+GameSounds:
+  volume: 0.5
+  pitch: 1.0
+  #LÄMNA NÅGON AV DEM TOM FÖR ATT STÄNGA AV DEN
+  #Ljud från resurspaket fungerar också: skriv dem med namnrymd, t.ex. 'myserver:custom.ding'
+  win: 'minecraft:entity.experience_orb.pickup'
+  game-start: 'minecraft:entity.player.levelup'
+  time-expired: 'minecraft:entity.villager.no'
+  wrong-case: 'minecraft:block.note_block.bass'
+
+#Spelsamlingar (namngivna uppsättningar aktiverade spel) sparas i presets.yml.

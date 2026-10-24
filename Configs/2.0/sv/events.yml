@@ -1,0 +1,108 @@
+#SPELEVENEMANG
+#
+#Ett evenemang är en serie spel som spelas i följd. Varje spel delar ut evenemangspoäng efter
+#placering; när det sista slutar vinner spelarna med flest evenemangspoäng evenemangets
+#belöningar. Medan ett evenemang pågår väntar den vanliga spelrotationen och de globala spelen.
+#
+#Starta ett med /chatgames event start <event>, eller låt schemat starta det.
+#/chatgames event top <event> visar vem som fått mest i det över tid.
+#
+#Varje evenemang:
+#  name: visas för spelarna (färgkoder fungerar)
+#  schedule: när det startar av sig själv, t.ex. 'SATURDAY 20:00' eller 'DAILY 18:30' (eller utelämna).
+#            Tidszonen är den i challenges.yml.
+#  minimum-players: spelare online som behövs för att schemat ska starta det (kommandot ignorerar detta)
+#  pause-seconds: sekunder mellan att ett spel slutar och nästa startar
+#  points: evenemangspoäng för 1:a, 2:a, 3:e... i varje spel
+#  participation-points: evenemangspoäng för alla andra som klarar det. I ett globalt spel, om
+#                        servern når målet, får alla som bidragit tillräckligt poäng:
+#                        'points' för de största bidragsgivarna, dessa för resten.
+#                        Om målet inte nås får ingen poäng i det spelet.
+#  steps: spelen, i ordning. Varje:
+#    game: spelet eller loppet, som i games.yml / races.yml
+#    global: true för att spela det som ett globalt spel (servern spelar tillsammans; se global_games.yml).
+#            Räkna är alltid globalt.
+#    time: sekunder att svara (eller att avsluta ett lopp), i stället för spelets egna
+#    winners: hur många som kan vinna ett vanligt chattspel, i stället för spelets egna
+#    args: värdena, som efter /chatgames <game>, t.ex. 'stone 16' för ett gruvlopp
+#    settings: andra games.yml-värden att ändra för detta spel, t.ex. {difficulty: hard}
+#  rewards: belöningsrader efter slutplacering (1, 2, 3...), och 'participation' för alla andra
+#           som fick poäng. Samma rader som i rewards.yml ('<chance>%~ ' och 'has:<permission>' fungerar).
+
+events:
+  weekend_cup:
+    name: '&6&lHelgcupen'
+    schedule:
+      - 'SATURDAY 20:00'
+    minimum-players: 3
+    pause-seconds: 15
+    points: [5, 3, 1]
+    participation-points: 1
+    steps:
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+        time: 25
+      - game: word_association
+        global: true
+        settings:
+          difficulty: hard
+      - game: trivia
+        winners: 3
+      - game: mine
+        global: true
+        time: 120
+        args: 'stone 100'
+    rewards:
+      1:
+        - '[consolecmd] give %player% diamond 5'
+      2:
+        - '[consolecmd] give %player% diamond 3'
+      3:
+        - '[consolecmd] give %player% diamond 1'
+      participation:
+        - '[consolecmd] give %player% iron_ingot 3'
+
+  quick_quiz:
+    name: '&b&lSnabbquiz'
+    minimum-players: 2
+    pause-seconds: 8
+    points: [3, 2, 1]
+    participation-points: 0
+    steps:
+      - game: reaction
+        winners: 3
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+    rewards:
+      1:
+        - '[consolecmd] give %player% gold_ingot 5'
+
+messages:
+  #Till alla. %event% är dess namn, %steps% hur många spel, %pause% sekunderna mellan dem.
+  start:
+    - ''
+    - '&6&l» EVENEMANG: %event% &fstartar! &e%steps% &fspel, flest evenemangspoäng vinner.'
+    - ''
+  #Före varje spel. %step% är dess nummer, %game% spelet.
+  step:
+    - '&6&l» %event% &f- spel &e%step%/%steps%&f: &e%game%'
+  #Till varje spelare som får poäng i ett spel. %points% vad de tjänade, %total% deras evenemangstotal.
+  step_points: '&8[%prefix%&8] &a+%points% evenemangspoäng &7(%total% totalt)'
+  #Till alla i slutet. %count% spelare fick poäng; %winner_<n>% och %points_<n>% de tre första.
+  end:
+    - ''
+    - '&6&l» %event% &fär slut! &e%count% &fspelare fick poäng.'
+    - '&f  1. &e%winner_1% &7%points_1%  &f2. &e%winner_2% &7%points_2%  &f3. &e%winner_3% &7%points_3%'
+    - ''
+  nobody:
+    - '&6&l» %event% &fär slut! &cIngen fick poäng.'
+  #Till varje spelare som fick poäng, efter slutet. %place% av %count%.
+  result: '&8[%prefix%&8] &fDu kom &e#%place% &fav %count% med &e%points% &fevenemangspoäng.'
+  stopped:
+    - '&6&l» %event% &char stoppats.'
+
+#Evenemangsstarter och slutställningar skickas till Discord enligt discord.yml.

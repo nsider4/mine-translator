@@ -11,9 +11,12 @@ check-update: true
 lang: 'en_us'
 
 #Die Sprache dieser Konfigurationsdateien: Nachrichten, Menüs, Wortlisten, Quiz, Kommentare...
-#  auto: wechseln, wenn sich 'lang' oben ändert und es für diese Sprache übersetzte Dateien gibt
+#Vollständig übersetzt: en, es, fr, pt, de, it, nl, pl, ru, tr, zh, zh_tw, ja, ko, uk, cs, sv, hu, vi, id
+#(zh ist vereinfachtes Chinesisch, zh_tw traditionelles Chinesisch). Steht dein 'lang' nicht dabei, werden Block-,
+#Item- und Mob-Namen trotzdem übersetzt, aber diese Dateien behalten ihre Sprache (standardmäßig Englisch).
+#  auto: wechseln, wenn sich 'lang' oben ändert, falls diese Sprache vollständig übersetzt ist
 #  none: nie wechseln
-#  oder ein Sprachcode: en, es, fr, pt, de, it, nl, pl, ru, tr
+#  oder einer der Sprachcodes oben
 #Beim Wechsel bleiben deine Einstellungen und deine Änderungen daran erhalten; deine eigenen Nachrichten
 #werden durch die Übersetzung ersetzt (die alten Dateien werden vorher nach backups/ kopiert). Übersetzungen
 #werden von https://github.com/nsider4/mine-translator (Ordner Configs) heruntergeladen und automatisch

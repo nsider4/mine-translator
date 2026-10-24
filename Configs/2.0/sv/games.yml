@@ -1,0 +1,367 @@
+#############################
+######    CHATTSPEL    ######
+#############################
+#Inställningar som varje spel tar (det som saknas använder visat standardvärde):
+#  enable: true/false
+#  weight: 1             Hur troligt det är att rotationen väljer detta spel jämfört med andra (0 = aldrig).
+#                        Samma spel körs aldrig två gånger i rad.
+#  winners: 1            Hur många spelare som kan vinna varje omgång.
+#  points: 1             Poäng per vinst (/chatgames top).
+#  case-sensitive: false Spelare som bara fick versalerna fel får meddelandet 'wrong_case'.
+#  timeToGuess_seconds: 20
+#  min-answer-ms: 400    Rätta svar snabbare än detta ignoreras och loggas: ingen läser och skriver
+#                        så snabbt, chattbotar gör det. 0 stänger av kontrollen.
+#  hints:                Ledtrådar visas under omgången, via 'hint_message' i messages.yml.
+#    enable: false
+#    after-percent: 50   Första ledtråden visas när så mycket av tiden har gått; resten sprids över återstoden.
+#    max: 1              Upp till 3.
+#  countdown:            Återstående tid i åtgärdsfältet. Fungerar på alla versioner (1.8 till 26.x).
+#    enable: false
+#    last-seconds: 10    Bara under de sista N sekunderna; 0 visar den hela omgången.
+#  titleMessage / subtitleMessage: lämna båda tomma för att inte skicka någon titel.
+unscramble:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Tiden i sekunder som spelarna har för att gissa, lösa, skriva osv.
+  timeToGuess_seconds: 20
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aKasta om'
+
+unreverse:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Tiden i sekunder som spelarna har för att gissa, lösa, skriva osv.
+  timeToGuess_seconds: 20
+  #Lämna de 2 följande tomma för att stänga av dem
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aVänd'
+
+reaction:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Tiden i sekunder som spelarna har för att gissa, lösa, skriva osv.
+  timeToGuess_seconds: 20
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aSkriv'
+
+guess_the_number:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+  #Ändra inte detta
+  case-sensitive: false
+
+  lower-limit: 1
+  upper-limit: 20
+
+  #Tiden i sekunder som spelarna har för att gissa, lösa, skriva osv.
+  timeToGuess_seconds: 20
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aSkriv'
+
+clickable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Tiden i sekunder som spelarna har för att gissa, lösa, skriva osv.
+  timeToGuess_seconds: 20
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&eKlicka på texten'
+  subtitleMessage: '&fDu har &e%timeToGuess%s'
+
+fillout:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Procent dolda bokstäver i spelet Fyll i. Värde från 1 till 100. Lägre tal betyder färre dolda bokstäver.
+  difficulty: 30
+  case-sensitive: true
+  #Tiden i sekunder som spelarna har för att gissa, lösa, skriva osv.
+  timeToGuess_seconds: 20
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aFyll i'
+
+hoverable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Tiden i sekunder som spelarna har för att gissa, lösa, skriva osv.
+  timeToGuess_seconds: 20
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&eHovra över texten'
+  subtitleMessage: '&fDu har &e%timeToGuess%s'
+
+#Detta spel skapar en sträng av angiven längd med slumpmässiga tecken
+random:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Tiden i sekunder som spelarna har för att gissa, lösa, skriva osv.
+  timeToGuess_seconds: 20
+  #Längden på den slumpmässiga strängen för detta spel. Intervallformat <lower>-<higher>. För en enda längd, sätt samma tal på båda sidor
+  lengthRange: 6-8
+  #Tillgängliga typer: ALPHA (bokstäver), ALPHANUMERIC (bokstäver och siffror), NUMERIC (siffror), SYMBOLIC (symboler),
+  #LOWERCASE_ALPHA (bara gemener), UPPERCASE_ALPHA (bara versaler), HEXADECIMAL (hexadecimala tecken: 0123456789ABCDEF)
+  #CUSTOM (använder det som står i 'custom_characters')
+  character_type: ALPHANUMERIC
+  #Denna sträng används bara om type är "CUSTOM"
+  custom_characters: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aSkriv'
+
+math:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Ändra inte detta
+  case-sensitive: false
+  #Tiden i sekunder som spelarna har för att gissa, lösa, skriva osv.
+  timeToGuess_seconds: 20
+  #Intervall för slumptal efter svårighet:
+  #1 - (1-9)
+  #2 - (1-99)
+  #3 - (1-999)
+  #4 - (1-9999)
+  #5 - (1-99999)
+  difficulty: 2
+  #Hur många operatorer varje fråga har: 1 -> "12 + 7", 2 -> "12 + 7 x 3"
+  operations: 1
+  #solve: räkna ut resultatet ("12 + 7 x 3").  missing-value: hitta det dolda talet ("12 + ? x 3 = 33").
+  #Varje omgång väljer ett av de listade lägena.
+  modes:
+    - solve
+    - missing-value
+  #Operatorer att använda; de fyra listade är alla som finns, ta bort de du inte vill ha. Behåll alltid minst 1
+  #Division ger alltid ett heltal.
+  operators:
+    - '+'
+    - '-'
+    - 'x'
+    - '/'
+
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aRäkna ut'
+
+variable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Ändra inte detta
+  case-sensitive: false
+  #Tiden i sekunder som spelarna har för att gissa, lösa, skriva osv.
+  timeToGuess_seconds: 20
+
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&bLÖS'
+  subtitleMessage: '&aHitta &7`&b%symbol%&7`'
+
+  #Intervall för det slumpmässiga resultattalet
+  result-min: 20
+  result-max: 100
+
+  toGet: '✗'
+  #Här är fler symboler du kan lägga till: ✪❃✿✠❂♫♪❦♡♤♢✦☾☽✹
+  data:
+    - '✯;10'
+    - '♛;15'
+    - '❅;20'
+    - '♫;25'
+
+sequence:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Ändra inte detta
+  case-sensitive: false
+
+  #Tiden i sekunder som spelarna har för att gissa, lösa, skriva osv.
+  timeToGuess_seconds: 25
+
+  #Spelarna ser en talföljd och skriver nästa tal, t.ex. "3, 6, 12, 24, ?" -> 48
+  #Mönster: addition (3, 7, 11), multiplikation (2, 6, 18), kvadrater (4, 9, 16), växlande (5, 9, 7, 11), Fibonacci (2, 3, 5, 8)
+  patterns:
+    - add
+    - multiply
+    - squares
+    - alternating
+    - fibonacci
+  #1-3. Högre svårighet ger svårare mönster (kvadrater och växlande från 2, Fibonacci på 3) och större tal.
+  difficulty: 2
+  #Hur många tal som visas före '?' (4-8)
+  shown-terms: 5
+
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aFortsätt talföljden'
+
+memorize:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+
+  listLength: 3
+  #Varje omgång tar föremål från en av dessa samlingar (se words.yml -> memorize.pools):
+  #shopping_list, words, colors, numbers, blocks, mobs eller din egen lista
+  pools:
+    - shopping_list
+    - words
+    - colors
+    - numbers
+    - blocks
+    - mobs
+  #Om false kan föremålen skrivas i valfri ordning
+  order-matters: true
+
+  #Tiden i sekunder som spelarna har för att memorera, lösa, skriva osv.
+  timeToMemorize: 7
+
+  #Tiden i sekunder som spelarna har för att gissa, lösa, skriva osv.
+  timeToGuess_seconds: 20
+  #Lämna de 2 följande tomma för att stänga av dem
+  titleMessage: '&bMemorera'
+  subtitleMessage: '&aFörsök memorera den här listan!'
+
+#Tre ledtrådar, en dold koppling (associationerna finns i words.yml).
+#difficulty: easy, medium, hard eller mixed. Svåra omgångar visar en ledtråd och avslöjar resten
+#som ledtrådar, så låt ledtrådarna vara på för dem (max 2 visar alla tre).
+word_association:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  difficulty: mixed
+  hints:
+    enable: true
+    after-percent: 34
+    max: 2
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  timeToGuess_seconds: 30
+  titleMessage: '&bORDASSOCIATION'
+  subtitleMessage: '&aKolla chatten!'
+
+trivia:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  #Tiden i sekunder som spelarna har för att gissa, lösa, skriva osv.
+  timeToGuess_seconds: 20
+  #__Lämna de 2 följande tomma för att stänga av dem__
+  titleMessage: '&bFRÅGESPORT'
+  subtitleMessage: '&aKolla chatten!'

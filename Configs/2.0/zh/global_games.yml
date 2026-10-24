@@ -1,0 +1,255 @@
+#全服游戏
+#
+#在全服游戏中，整个服务器作为一个团队来玩。每个正确答案（在全服
+#竞赛中是每挖一个方块、每杀一个生物……；在计数中是每数一个数）都会加到同一个共享
+#分数中。没有人需要最快：只要分数在时间内达到目标，所有
+#做出贡献的人都会获得奖励。如果时间先用完，游戏就失败了。
+#
+#  聊天游戏会连续出题。每位玩家对每道题只能回答一次，
+#  在 'answers-per-question' 个正确答案或 'question-seconds' 之后出下一题。
+#  答案总是隐藏的，所以无法抄袭。
+#  竞赛会把所有人的进度加在一起，例如全服一起挖 500 个石头。
+#  计数（只能作为全服游戏）：在聊天中一起数数，每条消息一个数字。
+#
+#全服游戏会在普通游戏结束后随机开始、按计时器开始、
+#用 /chatgames global <game> [values] 开始，或作为活动中的一步（events.yml）。
+#进度显示在 Boss 栏（1.9+）或动作栏（1.8）上。
+
+triggers:
+  #普通游戏或竞赛结束后开始全服游戏的概率（百分比，0 = 从不）。
+  chance-after-game: 10
+  #普通游戏结束到全服游戏开始之间的秒数。
+  delay-seconds: 5
+  #按计时器开始的全服游戏之间的分钟数（0 = 关闭）。
+  interval-minutes: 0
+  #全服游戏自动开始所需的在线玩家数（命令会忽略此项）。
+  minimum-players: 2
+
+progress-bar:
+  enabled: true
+  #Boss 栏颜色：BLUE、GREEN、PINK、PURPLE、RED、WHITE 或 YELLOW。
+  color: YELLOW
+  #SOLID、SEGMENTED_6、SEGMENTED_10、SEGMENTED_12 或 SEGMENTED_20。
+  style: SEGMENTED_10
+  #服务器达到目标的这些百分比时会在聊天中公告。
+  announce-at: [25, 50, 75]
+
+#下面每个游戏没有自己设置的值都会使用这里的值。
+#  goal：服务器需要的正确答案数（竞赛则为物品/生物数）
+#  duration-seconds：服务器有多长时间
+#  min-contribution：玩家获得奖励所需的最少贡献
+#  points：达到目标时每位获奖玩家获得的积分
+#  points-per-contribution：玩家每次贡献额外获得的积分
+#  answers-per-question：仅聊天游戏，一道题可以有多少玩家回答
+#  question-seconds：仅聊天游戏，一道题最多显示多久
+defaults:
+  goal: 10
+  duration-seconds: 120
+  min-contribution: 1
+  points: 1
+  points-per-contribution: 0
+  answers-per-question: 3
+  question-seconds: 15
+
+#rewards.yml 格式的奖励（chance、minimum-players、'<chance>%~ ' 和 'has:<permission>'
+#都可以使用）。%player% 是玩家，%contribution% 是他们的贡献。
+#游戏自己的 'rewards' 部分会替换该游戏的这些奖励。
+rewards:
+  #达到目标时，所有贡献至少达到 min-contribution 的人。
+  completed:
+    reward_1:
+      data:
+        - '[consolecmd] give %player% iron_ingot 3'
+  #时间用完时的同一批玩家。留空：没有安慰奖。
+  failed: {}
+  #达到目标时，按名次给贡献最大的人的额外奖励。
+  top-contributors:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% diamond 1'
+    2:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 3'
+    3:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 1'
+
+#所有消息中的变量：%game% %goal%（一个数字） %goal_text%（例如 "500 石头"）
+#%progress% %percent% %time%（剩余秒数） %duration%
+messages:
+  start:
+    - ''
+    - '&6&l» 全服%game%！&f整个服务器一起玩。'
+    - '&f  在 &e%time%s &f内获得 &e%goal% 个正确答案&f。所有帮忙的人都有奖励！'
+    - '&7  每道题需要 %answers% 个答案，所以不用等别人。'
+    - ''
+  race_start:
+    - ''
+    - '&6&l» 全服竞赛！&f整个服务器一起玩。'
+    - '&f  在 &e%time%s &f内一起获得 &e%goal% %value%&f。所有帮忙的人都有奖励！'
+    - ''
+  count_start:
+    - ''
+    - '&6&l» 全服计数！&f一起从 &e%start% &f数到 &e%target%&f，每次 &e%step%&f！'
+    - '&7  每条消息一个数字，按顺序。没有人可以连续数两次。%time%s 内完成。'
+    - ''
+  #每道题上方。%question% 是题号。
+  question:
+    - '&6&l» 全服 &7第 %question% 题 &8| &e%progress%&7/&e%goal%'
+  #一道题的时间用完时。%answer% 是答案。留空则不显示。
+  question_over: '&8» &7答案是 &f%answer%&7。'
+  #发给答案被计入的玩家。%contribution% 是他们目前的总贡献。
+  answered: '&8[%prefix%&8] &a正确！&7你为服务器的 &f%progress%/%goal% &7贡献了 &f%contribution%&7。'
+  #%reached% 是刚刚达到的百分比。
+  milestone: '&6&l» &e%reached%% &f完成！&7（%progress%/%goal%，剩余 %time%s）'
+  #被计入的数字，代替玩家的消息显示。%player% %number%
+  counted: '&e%player% &8» &f%number%'
+  #一次失误。%player% %number% %next%（应该数的数） %start% %reason% %mistakes% %max_mistakes%
+  count_broken:
+    - '&c%player% 说了 %number%：%reason%'
+    - '&f计数从 &e%start% &f重新开始。'
+  #结束游戏的失误（on-mistake: fail，或达到 max-mistakes）。
+  count_broken_final:
+    - '&c%player% 说了 %number%：%reason%'
+  count_reasons:
+    ahead: '跳得太远了（下一个数是 %next%）'
+    behind: '那个数已经数过了（下一个数是 %next%）'
+    repeated: '这个数刚刚有人说过'
+    twice: '没有人可以连续数两个数'
+  #%count% 名玩家获得奖励，%contributors% 名参与，用时 %seconds%。
+  #%top_<n>% 和 %top_<n>_amount%：贡献最大的三个人。
+  completed:
+    - ''
+    - '&6&l» 目标达成！&f服务器在 &e%seconds%s &f内获得了 &e%goal_text%&f。'
+    - '&f  前三：&e%top_1% &7(%top_1_amount%)  &e%top_2% &7(%top_2_amount%)  &e%top_3% &7(%top_3_amount%)'
+    - '&f  &e%count% &f名玩家获得奖励。'
+    - ''
+  failed:
+    - ''
+    - '&6&l» 全服游戏结束！&f服务器达到了 &e%progress%/%goal% &7(%percent%%)&f。下次好运！'
+    - ''
+  #达到目标时发给每位获奖玩家。%points% 是他们获得的积分。
+  rewarded: '&8[%prefix%&8] &a你贡献了 &f%contribution% &a并获得了 &f%points% &a积分！'
+  #发给贡献少于 min-contribution 的玩家。%min% 是最低要求。
+  too_little: '&8[%prefix%&8] &7你贡献了 %contribution%；获得奖励至少需要 %min%。'
+  #Boss 栏（1.8 上为动作栏）。
+  bar: '&6全服%game% &8| &f%progress%/%goal% &8| &e%time%s'
+
+#用于组成 %goal_text% 的词。
+words:
+  answers: '个正确答案'
+  to: '到'
+
+#可以作为全服游戏的游戏。记忆和猜数字不行。
+#每个都可以设置 enabled 以及 'defaults' 中的任何值，还可以有自己的 'rewards'。
+games:
+  reaction:
+    enabled: true
+    goal: 10
+    duration-seconds: 90
+    question-seconds: 10
+  unscramble:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  math:
+    enabled: true
+    goal: 15
+    duration-seconds: 150
+  sequence:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  trivia:
+    enabled: true
+    goal: 8
+    duration-seconds: 180
+    question-seconds: 20
+  word_association:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  fillout:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  unreverse:
+    enabled: false
+  random:
+    enabled: false
+  variable:
+    enabled: false
+  hoverable:
+    enabled: false
+  clickable:
+    enabled: false
+  #一起计数。它的目标是所选模式包含的数字个数。
+  count:
+    enabled: true
+    duration-seconds: 120
+    #没有人可以连续说两个数。
+    no-double-count: true
+    #reset：失误后从头计数；fail：失误后游戏结束。
+    on-mistake: reset
+    #使用 reset 时：仍会结束游戏的失误次数（0 = 不限）。
+    max-mistakes: 5
+    #随机选一个；/chatgames global count <mode> 可以指定。
+    #'step' 是每个数增加的量（方向取决于 start 和 target）。
+    modes:
+      up:
+        start: 1
+        target: 20
+        step: 1
+      down:
+        start: 15
+        target: 1
+        step: 1
+      evens:
+        start: 2
+        target: 30
+        step: 2
+      fives:
+        start: 5
+        target: 75
+        step: 5
+  #全服竞赛：整个服务器一起收集以达到目标。目标来自 races.yml；
+  #/chatgames global mine STONE 500 会同时设置两者。
+  mine:
+    enabled: true
+    goal: 200
+    duration-seconds: 240
+  hunt:
+    enabled: true
+    goal: 40
+    duration-seconds: 240
+  place:
+    enabled: false
+    goal: 200
+    duration-seconds: 240
+  fish:
+    enabled: false
+    goal: 20
+    duration-seconds: 300
+  eat:
+    enabled: false
+    goal: 30
+    duration-seconds: 240
+  craft:
+    enabled: false
+    goal: 100
+    duration-seconds: 240
+  furnace:
+    enabled: false
+    goal: 64
+    duration-seconds: 300
+  tame:
+    enabled: false
+    goal: 15
+    duration-seconds: 300
+  shear:
+    enabled: false
+    goal: 40
+    duration-seconds: 240

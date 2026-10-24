@@ -1,0 +1,367 @@
+#############################
+######    GAME CHAT    ######
+#############################
+#Pengaturan yang diterima setiap game (yang tidak ada memakai nilai bawaan yang ditampilkan):
+#  enable: true/false
+#  weight: 1             Seberapa mungkin rotasi memilih game ini dibanding yang lain (0 = tidak pernah).
+#                        Game yang sama tidak pernah berjalan dua kali berturut-turut.
+#  winners: 1            Berapa pemain yang bisa menang setiap ronde.
+#  points: 1             Poin per kemenangan (/chatgames top).
+#  case-sensitive: false Pemain yang hanya salah huruf besar/kecil mendapat pesan 'wrong_case'.
+#  timeToGuess_seconds: 20
+#  min-answer-ms: 400    Jawaban benar yang lebih cepat dari ini diabaikan dan dicatat: tidak ada yang membaca dan mengetik
+#                        secepat itu, bot chat bisa. 0 mematikan pemeriksaan.
+#  hints:                Petunjuk muncul selama ronde, melalui 'hint_message' di messages.yml.
+#    enable: false
+#    after-percent: 50   Petunjuk pertama muncul setelah waktu sebanyak ini berlalu; sisanya tersebar di sisa waktu.
+#    max: 1              Hingga 3.
+#  countdown:            Sisa waktu di action bar. Bekerja di semua versi (1.8 sampai 26.x).
+#    enable: false
+#    last-seconds: 10    Hanya selama N detik terakhir; 0 menampilkannya sepanjang ronde.
+#  titleMessage / subtitleMessage: kosongkan keduanya agar tidak mengirim judul.
+unscramble:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Waktu dalam detik yang dimiliki pemain untuk menebak, memecahkan, mengetik, dll.
+  timeToGuess_seconds: 20
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aSusun Ulang'
+
+unreverse:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Waktu dalam detik yang dimiliki pemain untuk menebak, memecahkan, mengetik, dll.
+  timeToGuess_seconds: 20
+  #Kosongkan 2 baris berikut untuk mematikannya
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aBalik Kata'
+
+reaction:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Waktu dalam detik yang dimiliki pemain untuk menebak, memecahkan, mengetik, dll.
+  timeToGuess_seconds: 20
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aKetik'
+
+guess_the_number:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+  #Jangan ubah ini
+  case-sensitive: false
+
+  lower-limit: 1
+  upper-limit: 20
+
+  #Waktu dalam detik yang dimiliki pemain untuk menebak, memecahkan, mengetik, dll.
+  timeToGuess_seconds: 20
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aKetik'
+
+clickable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Waktu dalam detik yang dimiliki pemain untuk menebak, memecahkan, mengetik, dll.
+  timeToGuess_seconds: 20
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&eKlik teksnya'
+  subtitleMessage: '&fKamu punya &e%timeToGuess%d'
+
+fillout:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Persentase huruf tersembunyi di game Isi Kata. Nilai dari 1 sampai 100. Angka lebih kecil berarti lebih sedikit huruf tersembunyi.
+  difficulty: 30
+  case-sensitive: true
+  #Waktu dalam detik yang dimiliki pemain untuk menebak, memecahkan, mengetik, dll.
+  timeToGuess_seconds: 20
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aIsi Kata'
+
+hoverable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Waktu dalam detik yang dimiliki pemain untuk menebak, memecahkan, mengetik, dll.
+  timeToGuess_seconds: 20
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&eArahkan kursor ke teks'
+  subtitleMessage: '&fKamu punya &e%timeToGuess%d'
+
+#Game ini membuat string dengan panjang tertentu dari karakter acak
+random:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Waktu dalam detik yang dimiliki pemain untuk menebak, memecahkan, mengetik, dll.
+  timeToGuess_seconds: 20
+  #Panjang string acak untuk game ini. Format rentang <lower>-<higher>. Untuk satu panjang, tulis angka yang sama di kedua sisi
+  lengthRange: 6-8
+  #Jenis yang tersedia: ALPHA (huruf), ALPHANUMERIC (huruf dan angka), NUMERIC (angka), SYMBOLIC (simbol),
+  #LOWERCASE_ALPHA (semua huruf kecil), UPPERCASE_ALPHA (semua huruf besar), HEXADECIMAL (karakter heksadesimal: 0123456789ABCDEF)
+  #CUSTOM (memakai isi 'custom_characters')
+  character_type: ALPHANUMERIC
+  #String ini hanya dipakai jika type adalah "CUSTOM"
+  custom_characters: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aKetik'
+
+math:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Jangan ubah ini
+  case-sensitive: false
+  #Waktu dalam detik yang dimiliki pemain untuk menebak, memecahkan, mengetik, dll.
+  timeToGuess_seconds: 20
+  #Rentang angka acak menurut tingkat kesulitan:
+  #1 - (1-9)
+  #2 - (1-99)
+  #3 - (1-999)
+  #4 - (1-9999)
+  #5 - (1-99999)
+  difficulty: 2
+  #Berapa operator di setiap soal: 1 -> "12 + 7", 2 -> "12 + 7 x 3"
+  operations: 1
+  #solve: hitung hasilnya ("12 + 7 x 3").  missing-value: cari angka tersembunyi ("12 + ? x 3 = 33").
+  #Setiap ronde memilih salah satu mode yang tercantum.
+  modes:
+    - solve
+    - missing-value
+  #Operator yang dipakai; empat yang tercantum adalah semua yang tersedia, hapus yang tidak diinginkan. Selalu sisakan minimal 1
+  #Pembagian selalu menghasilkan bilangan bulat.
+  operators:
+    - '+'
+    - '-'
+    - 'x'
+    - '/'
+
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aHitung'
+
+variable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Jangan ubah ini
+  case-sensitive: false
+  #Waktu dalam detik yang dimiliki pemain untuk menebak, memecahkan, mengetik, dll.
+  timeToGuess_seconds: 20
+
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&bPECAHKAN'
+  subtitleMessage: '&aCari &7`&b%symbol%&7`'
+
+  #Rentang angka hasil acak
+  result-min: 20
+  result-max: 100
+
+  toGet: '✗'
+  #Berikut simbol lain yang bisa kamu tambahkan: ✪❃✿✠❂♫♪❦♡♤♢✦☾☽✹
+  data:
+    - '✯;10'
+    - '♛;15'
+    - '❅;20'
+    - '♫;25'
+
+sequence:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Jangan ubah ini
+  case-sensitive: false
+
+  #Waktu dalam detik yang dimiliki pemain untuk menebak, memecahkan, mengetik, dll.
+  timeToGuess_seconds: 25
+
+  #Pemain melihat deret angka dan mengetik angka berikutnya, mis. "3, 6, 12, 24, ?" -> 48
+  #Pola: penjumlahan (3, 7, 11), perkalian (2, 6, 18), kuadrat (4, 9, 16), selang-seling (5, 9, 7, 11), Fibonacci (2, 3, 5, 8)
+  patterns:
+    - add
+    - multiply
+    - squares
+    - alternating
+    - fibonacci
+  #1-3. Tingkat lebih tinggi memberi pola lebih sulit (kuadrat dan selang-seling dari 2, Fibonacci di 3) dan angka lebih besar.
+  difficulty: 2
+  #Berapa angka ditampilkan sebelum '?' (4-8)
+  shown-terms: 5
+
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aLanjutkan Deret'
+
+memorize:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+
+  listLength: 3
+  #Setiap ronde mengambil item dari salah satu kumpulan ini (lihat words.yml -> memorize.pools):
+  #shopping_list, words, colors, numbers, blocks, mobs, atau daftarmu sendiri
+  pools:
+    - shopping_list
+    - words
+    - colors
+    - numbers
+    - blocks
+    - mobs
+  #Jika false, item boleh diketik dalam urutan apa pun
+  order-matters: true
+
+  #Waktu dalam detik yang dimiliki pemain untuk mengingat, memecahkan, mengetik, dll.
+  timeToMemorize: 7
+
+  #Waktu dalam detik yang dimiliki pemain untuk menebak, memecahkan, mengetik, dll.
+  timeToGuess_seconds: 20
+  #Kosongkan 2 baris berikut untuk mematikannya
+  titleMessage: '&bIngat'
+  subtitleMessage: '&aCoba ingat daftar ini!'
+
+#Tiga petunjuk, satu hubungan tersembunyi (asosiasi ada di words.yml).
+#difficulty: easy, medium, hard, atau mixed. Ronde sulit menampilkan satu petunjuk dan membuka sisanya
+#sebagai petunjuk, jadi biarkan petunjuk aktif untuknya (max 2 menampilkan ketiganya).
+word_association:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  difficulty: mixed
+  hints:
+    enable: true
+    after-percent: 34
+    max: 2
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  timeToGuess_seconds: 30
+  titleMessage: '&bASOSIASI KATA'
+  subtitleMessage: '&aLihat chat!'
+
+trivia:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  #Waktu dalam detik yang dimiliki pemain untuk menebak, memecahkan, mengetik, dll.
+  timeToGuess_seconds: 20
+  #__Kosongkan 2 baris berikut untuk mematikannya__
+  titleMessage: '&bKUIS'
+  subtitleMessage: '&aLihat chat!'

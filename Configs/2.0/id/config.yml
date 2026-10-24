@@ -1,0 +1,125 @@
+#############################
+######    PENGATURAN    #######
+#############################
+check-update: true
+
+#Bahasa server. Nama blok, item, dan mob (dalam balapan dan Ingat) diterjemahkan
+#ke bahasa ini, lebih dari 140 bahasa. Lihat ID bahasamu di sini:
+#https://github.com/nsider4/mine-translator/blob/main/language_names.txt
+#Nama-nama diunduh ke translations/ dan diperbarui sendiri saat versi Minecraft
+#baru dirilis. Perubahan di sini berlaku setelah /chatgames reload.
+lang: 'en_us'
+
+#Bahasa file konfigurasi ini: pesan, menu, daftar kata, kuis, komentar...
+#Diterjemahkan penuh: en, es, fr, pt, de, it, nl, pl, ru, tr, zh, zh_tw, ja, ko, uk, cs, sv, hu, vi, id
+#(zh adalah Mandarin Sederhana, zh_tw Mandarin Tradisional). Jika 'lang' kamu tidak ada di sini, nama blok,
+#item, dan mob tetap diterjemahkan, tetapi file ini tetap dalam bahasanya (bawaan bahasa Inggris).
+#  auto: berganti saat 'lang' di atas berubah, jika bahasa itu diterjemahkan penuh
+#  none: jangan pernah berubah
+#  atau salah satu kode bahasa di atas
+#Berganti bahasa tetap menyimpan pengaturanmu dan perubahannya; pesan buatanmu sendiri
+#diganti dengan terjemahan (file lama disalin dulu ke backups/). Terjemahan
+#diunduh dari https://github.com/nsider4/mine-translator (folder Configs) dan diperbarui
+#sendiri. Bahasa lain bisa ditambahkan di sana.
+config-language: 'auto'
+
+#Jenis penyimpanan, tersedia: SQLite atau MySQL
+Storage: 'SQLite'
+
+#Nama tabel berisi semua data ChatGames
+table_name: 'chatgames'
+
+#Nama tabel berisi semua waktu tercepat ChatGames
+fastest_times_table: 'chatgames_fastest_times'
+
+SQLite:
+  Filename: 'chatgames-data'
+
+MySQL:
+  host: 'localhost'
+  port: '3306'
+  user: 'root'
+  password: 'password'
+  database: 'chatgame'
+  connection-parameters: '?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8'
+  Pool-Settings:
+    max-pool-size: 10
+    min-idle: 10
+    max-lifetime: 180000
+    keep-alive-time: 60000
+    time-out: 20000
+
+disabled-worlds:
+  - 'example_world'
+
+prefix: '&c&lC&d&lH&b&lA&a&lT &6&lG&e&lA&a&lM&c&lE&b&lS'
+
+#Jika false, hanya pemain dengan 'chatgames.start.*' yang bisa memulai
+allow_starting_from_disabled: true
+
+#Jika false, pesan yang biasanya tidak dikirim saat pemain menebak pilihan yang benar tidak dibatalkan
+cancel-message-when-winning: true
+
+#Jumlah minimum pemain online agar game chat dimulai
+min_players_online: 1
+
+#Waktu hingga game acak dipilih lagi.
+#Nilai -1 mematikan tugas SEPENUHNYA; dengan -1, randomDelay juga tidak bisa dipakai
+time_minutes: 25
+
+#Jika aktif, setelah setiap game dibuat angka acak antara 'randomDelay.minimum' dan 'randomDelay.limit' sebagai jeda ke game berikutnya
+#Jika ini diaktifkan, nilai 'time_minutes' diabaikan, kecuali jika -1, karena saat itu tidak ada tugas.
+randomDelay:
+  enable: false
+  #Satuan waktu, nilai lain yang mungkin adalah 'seconds'; jika diubah, sebaiknya minimum lebih besar dari 'timeToGuess_seconds' game
+  timeUnit: 'minutes'
+  minimum: 1
+  limit: 25
+
+
+#Jika dimatikan, izin chatgames.play tidak diperlukan untuk melihat game
+use-permission-toplay: false
+
+#Jika false, hanya pemain dengan izin 'chatgames.play' yang dihitung, yaitu yang bisa bermain.
+#Jika true, semua pemain online dihitung kecuali yang sedang tersembunyi (vanish).
+count-all-players: false
+
+#Jika true, dibuat papan peringkat tercepat (/chatgames fastest). Jika false, papan itu dimatikan.
+fastest-typers-top: true
+
+#Placeholder PlaceholderAPI (perlu PlaceholderAPI terpasang):
+#  Kamu:         %chatgames_points%, %chatgames_wins%, %chatgames_wins_<game>%, %chatgames_race_wins%,
+#                %chatgames_global_played%, %chatgames_global_won%, %chatgames_toggle%, %chatgames_sound_toggle%
+#                %chatgames_events_played%, %chatgames_event_wins%, %chatgames_event_best_place% (0 = belum ada)
+#  Waktumu:      %chatgames_personal_best% (game chat apa pun), %chatgames_fastest_<game>% (termasuk balapan)
+#  Posisimu:     %chatgames_show_current_pos_top% (poin), %chatgames_show_current_pos_fastest% (waktu terbaik)
+#  Top poin:     %chatgames_top_<n>% (nama), %chatgames_points_top_<n>%, %chatgames_total_points%
+#  Top cepat:    %chatgames_fastest_<n>% (nama, game chat), %chatgames_fastest_time_<n>%,
+#                %chatgames_fastest_<game>_<n>%, %chatgames_fastest_<game>_time_<n>%
+#  Sekarang:     %chatgames_game_running%, %chatgames_current_game%, %chatgames_next_game_in% (detik)
+#  Balapan:      %chatgames_race_target%, %chatgames_race_amount%, %chatgames_race_progress% (milikmu)
+#  Tantangan:    %chatgames_daily_completed%, %chatgames_daily_total%, %chatgames_weekly_completed%,
+#                %chatgames_weekly_total%, %chatgames_challenges_completed% (sepanjang waktu)
+#  Runtunan:     %chatgames_streak_<type>%, %chatgames_streak_<type>_longest% (<type> adalah challenge, daily, atau global)
+#  Acara:        %chatgames_event_running%, %chatgames_event_name%, %chatgames_event_step%, %chatgames_event_steps%,
+#                %chatgames_event_points% dan %chatgames_event_place% (milikmu di acara yang berjalan)
+#  <game> adalah nama game dari games.yml (mis. unscramble, guess_the_number); <n> adalah peringkat (1, 2, 3...).
+placeholders:
+  #Seberapa sering placeholder papan peringkat (top_<n>, fastest_<n>, posisi...) dibangun ulang, dalam detik.
+  #Juga dibangun ulang setelah setiap game yang ada pemenangnya. Poin, kemenangan, dan waktumu sendiri selalu terbaru.
+  refresh-seconds: 60
+  #Ditampilkan saat tidak ada yang bisa ditampilkan: tempat kosong di papan peringkat, belum ada waktu terbaik, tidak ada game berjalan...
+  empty-value: ''
+
+#Suara untuk pemain saat game chat dimulai!
+GameSounds:
+  volume: 0.5
+  pitch: 1.0
+  #BIARKAN SALAH SATUNYA KOSONG UNTUK MEMATIKANNYA
+  #Suara dari resource pack juga bisa: tulis dengan namespace, mis. 'myserver:custom.ding'
+  win: 'minecraft:entity.experience_orb.pickup'
+  game-start: 'minecraft:entity.player.levelup'
+  time-expired: 'minecraft:entity.villager.no'
+  wrong-case: 'minecraft:block.note_block.bass'
+
+#Preset game (kumpulan game aktif yang diberi nama) disimpan di presets.yml.

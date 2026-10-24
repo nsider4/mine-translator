@@ -105,8 +105,4 @@ messages:
   stopped:
     - '&6&l» %event% &ca été arrêté.'
 
-#Le classement final est publié sur le webhook Discord de config.yml, s'il y en a un.
-discord:
-  enabled: true
-  title: '%event% results'
-  line: '#%place% %player% - %points% points'
+#Les débuts d'événements et les classements finaux sont publiés sur Discord selon discord.yml.

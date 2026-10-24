@@ -1,0 +1,255 @@
+#GLOBALA SPEL
+#
+#I ett globalt spel spelar hela servern som ett lag. Varje rätt svar (eller, i ett globalt
+#lopp, varje hackat block, dödad varelse...; i Räkna, varje räknat tal) läggs till en gemensam
+#poängsumma. Ingen behöver vara snabbast: när summan når målet i tid får alla som
+#bidrog belöningen. Om tiden tar slut först misslyckas spelet.
+#
+#  Chattspel körs som en ström av frågor. Varje spelare kan svara på varje fråga en gång, och
+#  nästa fråga kommer efter 'answers-per-question' rätta svar eller 'question-seconds'.
+#  Svaren är alltid dolda, så de kan inte kopieras.
+#  Lopp räknar allas framsteg tillsammans, t.ex. 500 sten hackad av hela servern.
+#  Räkna (spelas bara globalt): räkna tillsammans i chatten, ett tal per meddelande.
+#
+#Globala spel startar slumpmässigt efter ett vanligt spel, enligt en timer, med
+#/chatgames global <game> [values] eller som ett steg i ett evenemang (events.yml).
+#Framstegen visas i en bossmätare (1.9+) eller i åtgärdsfältet (1.8).
+
+triggers:
+  #Procentuell chans att ett globalt spel startar efter att ett vanligt spel eller lopp slutat (0 = aldrig).
+  chance-after-game: 10
+  #Sekunder mellan att det vanliga spelet slutar och det globala spelet startar.
+  delay-seconds: 5
+  #Minuter mellan globala spel som startas av timer (0 = av).
+  interval-minutes: 0
+  #Spelare online som behövs för att ett globalt spel ska starta av sig själv (kommandot ignorerar detta).
+  minimum-players: 2
+
+progress-bar:
+  enabled: true
+  #En bossmätarfärg: BLUE, GREEN, PINK, PURPLE, RED, WHITE eller YELLOW.
+  color: YELLOW
+  #SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12 eller SEGMENTED_20.
+  style: SEGMENTED_10
+  #Procent av målet som meddelas i chatten när servern når dit.
+  announce-at: [25, 50, 75]
+
+#Används av varje spel nedan för alla värden det inte sätter själv.
+#  goal: rätta svar (eller, för lopp, föremål/varelser) som servern behöver
+#  duration-seconds: hur lång tid servern har
+#  min-contribution: det minsta en spelare måste bidra med för att belönas
+#  points: vad varje belönad spelare får när målet nås
+#  points-per-contribution: extra poäng för varje bidrag från en spelare
+#  answers-per-question: bara chattspel, hur många spelare som kan svara på en fråga
+#  question-seconds: bara chattspel, den längsta tid en fråga visas
+defaults:
+  goal: 10
+  duration-seconds: 120
+  min-contribution: 1
+  points: 1
+  points-per-contribution: 0
+  answers-per-question: 3
+  question-seconds: 15
+
+#Belöningar i rewards.yml-formatet (chance, minimum-players, '<chance>%~ ' och 'has:<permission>'
+#fungerar alla). %player% är spelaren och %contribution% det de bidrog med.
+#Ett spels egen 'rewards'-sektion ersätter dessa för det spelet.
+rewards:
+  #Alla som bidragit med minst min-contribution, när målet nås.
+  completed:
+    reward_1:
+      data:
+        - '[consolecmd] give %player% iron_ingot 3'
+  #Samma spelare när tiden tar slut. Tomt: inget tröstpris.
+  failed: {}
+  #Extra för de största bidragsgivarna när målet nås, efter placering.
+  top-contributors:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% diamond 1'
+    2:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 3'
+    3:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 1'
+
+#Platshållare i varje meddelande: %game% %goal% (ett tal) %goal_text% (t.ex. "500 Stone")
+#%progress% %percent% %time% (sekunder kvar) %duration%
+messages:
+  start:
+    - ''
+    - '&6&l» GLOBALT %game%! &fHela servern spelar tillsammans.'
+    - '&f  Få &e%goal% rätta svar &finom &e%time%s&f. Alla som hjälper till belönas!'
+    - '&7  Varje fråga tar %answers% svar, så vänta inte på andra.'
+    - ''
+  race_start:
+    - ''
+    - '&6&l» GLOBALT LOPP! &fHela servern spelar tillsammans.'
+    - '&f  Få &e%goal% %value% &ftillsammans inom &e%time%s&f. Alla som hjälper till belönas!'
+    - ''
+  count_start:
+    - ''
+    - '&6&l» GLOBAL RÄKNING! &fRäkna från &e%start% &ftill &e%target% &fi steg om &e%step% &ftillsammans!'
+    - '&7  Ett tal per meddelande, i ordning. Ingen räknar två gånger i rad. %time%s att bli klara.'
+    - ''
+  #Ovanför varje fråga. %question% är dess nummer.
+  question:
+    - '&6&l» GLOBALT &7Fråga #%question% &8| &e%progress%&7/&e%goal%'
+  #När en frågas tid tar slut. %answer% är dess svar. Tomt för att vara tyst.
+  question_over: '&8» &7Svaret var &f%answer%&7.'
+  #Till en spelare vars svar räknades. %contribution% är deras totala hittills.
+  answered: '&8[%prefix%&8] &aRätt! &7Du har bidragit med &f%contribution% &7av serverns &f%progress%/%goal%&7.'
+  #%reached% är procenten som just nåddes.
+  milestone: '&6&l» &e%reached%% &fklart! &7(%progress%/%goal%, %time%s kvar)'
+  #Ett tal som räknades, visat i stället för spelarens meddelande. %player% %number%
+  counted: '&e%player% &8» &f%number%'
+  #Ett misstag. %player% %number% %next% (det som förväntades) %start% %reason% %mistakes% %max_mistakes%
+  count_broken:
+    - '&c%player% sa %number%: %reason%'
+    - '&fRäkningen börjar om från &e%start%&f.'
+  #Misstaget som avslutar spelet (on-mistake: fail, eller max-mistakes nått).
+  count_broken_final:
+    - '&c%player% sa %number%: %reason%'
+  count_reasons:
+    ahead: 'för långt fram (nästa tal var %next%)'
+    behind: 'det var redan räknat (nästa tal var %next%)'
+    repeated: 'det talet sades nyss'
+    twice: 'ingen får räkna två tal i rad'
+  #%count% spelare belönades, %contributors% deltog, det tog %seconds%.
+  #%top_<n>% och %top_<n>_amount%: de tre största bidragsgivarna.
+  completed:
+    - ''
+    - '&6&l» MÅLET NÅTT! &fServern fick &e%goal_text% &fpå &e%seconds%s&f.'
+    - '&f  Topp: &e%top_1% &7(%top_1_amount%)  &e%top_2% &7(%top_2_amount%)  &e%top_3% &7(%top_3_amount%)'
+    - '&f  &e%count% &fspelare får belöningen.'
+    - ''
+  failed:
+    - ''
+    - '&6&l» GLOBALA SPELET ÄR SLUT! &fServern kom till &e%progress%/%goal% &7(%percent%%)&f. Bättre lycka nästa gång!'
+    - ''
+  #Till varje belönad spelare när målet nås. %points% är vad de tjänade.
+  rewarded: '&8[%prefix%&8] &aDu bidrog med &f%contribution% &aoch tjänade &f%points% &apoäng!'
+  #Till en spelare som bidragit med mindre än min-contribution. %min% är det minimumet.
+  too_little: '&8[%prefix%&8] &7Du bidrog med %contribution%; minst %min% behövdes för belöningen.'
+  #Bossmätaren (eller åtgärdsfältet på 1.8).
+  bar: '&6Globalt %game% &8| &f%progress%/%goal% &8| &e%time%s'
+
+#Ord som används för att bygga %goal_text%.
+words:
+  answers: 'rätta svar'
+  to: 'till'
+
+#Spelen som kan spelas globalt. Memorera och Gissa talet kan inte det.
+#Varje kan sätta enabled och allt från 'defaults', plus sina egna 'rewards'.
+games:
+  reaction:
+    enabled: true
+    goal: 10
+    duration-seconds: 90
+    question-seconds: 10
+  unscramble:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  math:
+    enabled: true
+    goal: 15
+    duration-seconds: 150
+  sequence:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  trivia:
+    enabled: true
+    goal: 8
+    duration-seconds: 180
+    question-seconds: 20
+  word_association:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  fillout:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  unreverse:
+    enabled: false
+  random:
+    enabled: false
+  variable:
+    enabled: false
+  hoverable:
+    enabled: false
+  clickable:
+    enabled: false
+  #Räkna tillsammans. Målet är hur många tal det valda läget har.
+  count:
+    enabled: true
+    duration-seconds: 120
+    #Ingen får säga två tal i rad.
+    no-double-count: true
+    #reset: ett misstag startar om räkningen; fail: ett misstag avslutar spelet.
+    on-mistake: reset
+    #Med reset: antalet misstag som avslutar spelet ändå (0 = ingen gräns).
+    max-mistakes: 5
+    #Ett väljs slumpmässigt; /chatgames global count <mode> väljer ett.
+    #'step' är hur mycket varje tal ökar (riktningen följer start och target).
+    modes:
+      up:
+        start: 1
+        target: 20
+        step: 1
+      down:
+        start: 15
+        target: 1
+        step: 1
+      evens:
+        start: 2
+        target: 30
+        step: 2
+      fives:
+        start: 5
+        target: 75
+        step: 5
+  #Globala lopp: hela servern samlar mot målet. Målen kommer från races.yml;
+  #/chatgames global mine STONE 500 sätter båda.
+  mine:
+    enabled: true
+    goal: 200
+    duration-seconds: 240
+  hunt:
+    enabled: true
+    goal: 40
+    duration-seconds: 240
+  place:
+    enabled: false
+    goal: 200
+    duration-seconds: 240
+  fish:
+    enabled: false
+    goal: 20
+    duration-seconds: 300
+  eat:
+    enabled: false
+    goal: 30
+    duration-seconds: 240
+  craft:
+    enabled: false
+    goal: 100
+    duration-seconds: 240
+  furnace:
+    enabled: false
+    goal: 64
+    duration-seconds: 300
+  tame:
+    enabled: false
+    goal: 15
+    duration-seconds: 300
+  shear:
+    enabled: false
+    goal: 40
+    duration-seconds: 240

@@ -1,14 +1,4 @@
-discord:
-  #Se url è vuoto, questo viene ignorato perché non ci sarà nessun webhook
-  webhook-url: ''
-  message-content: 'Ultimi risultati:'
-  img-url: 'https://www.spigotmc.org/data/resource_icons/107/107781.jpg?1676494289'
-  username: 'Chat Games'
-  title: 'Risultato di Chat Games'
-  description: 'Il vincitore è:'
-  winner-field: '%winner% (%time%)'
-  game-field: 'Gioco: %game%'
-
+#Le impostazioni di Discord sono in discord.yml.
 
 #Il file dove verranno salvati i log
 log-file: 'game_log.txt'

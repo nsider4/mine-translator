@@ -1,0 +1,1158 @@
+#MENU
+#
+#Mỗi menu trong 'menus:' có 'title', kích thước 'rows' (1-6) và các 'items'. Bạn có thể đổi
+#chức năng của bất kỳ nút nào, thêm nút hoặc cả menu mới (mở bằng /chatgames menu <id>,
+#hoặc đặt mỗi menu vào một tệp riêng trong thư mục menus/, tên là <id>.yml).
+#
+#Mỗi mục:
+#  slot: vị trí, từ 0 (trên cùng bên trái) đến rows*9-1. 'slots: [0, 1, '9-17']' lặp lại nó.
+#  material: bất kỳ tên vật phẩm nào từ 1.8 đến 26.x: tên mới hoặc cũ (lime_dye / INK_SACK:10 / 351:10),
+#            hoặc 'head:<tên người chơi, texture hoặc URL textures.minecraft.net>'
+#  name / lore: mã màu (&a, và &#RRGGBB trên 1.16+) và placeholder của PlaceholderAPI đều dùng được.
+#  amount, glow: true, enchantments: ['SHARPNESS:1'], flags: [HIDE_ATTRIBUTES], head: '%player%',
+#  custom-model-data: 1001 (1.14+), item-model: 'namespace:key' (1.21.2+), color: '#FF0000' (đồ da)
+#  actions: việc mà một cú nhấn thực hiện, theo thứ tự. Còn có left-actions, right-actions, shift-left-actions,
+#           shift-right-actions, middle-actions và drop-actions (mỗi cái sẽ dùng actions nếu không có).
+#  view-requirements: mục chỉ hiện khi mọi dòng đều đạt
+#  click-requirements: khi một dòng không đạt, 'deny-actions' chạy thay cho actions
+#  state + when-off: khi state là false, các khóa của when-off thay cho khóa của chính mục
+#                    (không phải 'off': YAML đọc off đứng riêng là false)
+#Bỏ một mục đi để ẩn nó. 'filler' lấp mọi ô trống; xóa nó nếu không muốn.
+#
+#Hành động:
+#  [command] <command>        bạn chạy lệnh                [console] <command>   console chạy lệnh
+#  [message] <text>           tin nhắn cho bạn             [broadcast] <text>    cho mọi người
+#  [sound] <sound> [volume] [pitch]   bất kỳ tên âm thanh nào từ 1.8 đến 26.x
+#  [open] <menu> [values]     mở menu khác                 [switch] <menu> [values]  giống vậy, nhưng [back] bỏ qua nó
+#  [back] [menu]              menu trước (hoặc menu được chỉ định, hoặc đóng)
+#  [refresh]  [close]  [next-page]  [previous-page]  [wait] <ticks>
+#  [chatgames:no-permission]  gửi tin nhắn thiếu quyền
+#  Các hành động riêng của menu được mô tả phía trên menu có chúng.
+#
+#Điều kiện, mỗi dòng một điều kiện (mọi dòng phải đạt; bắt đầu dòng bằng ! để đảo ngược):
+#  permission <node>     một phép so sánh như '%chatgames_points% >= 100' (==, !=, >=, <=, >, <)
+#  hoặc một giá trị là true / on / yes / một số khác 0
+#
+#Các menu liệt kê (thử thách, trò chơi, sự kiện...) đặt chúng vào 'list-slots' theo thứ tự,
+#vẽ bằng 'templates' của menu. Khi có nhiều mục hơn số ô, các mục có hành động
+#[next-page] / [previous-page] sẽ lật trang; chúng ẩn đi khi không còn trang để lật.
+#Một dòng lore chỉ chứa placeholder danh sách, như '%game_wins%', sẽ thành nhiều dòng.
+#Mọi menu còn có %player%, %page%, %pages% và %entries% (số mục trong danh sách).
+
+#Tên và biểu tượng của trò chơi, trong mọi menu và trong tin nhắn nhắc đến trò chơi (%game%).
+#Trò chơi không có ở đây sẽ lấy tên theo khóa của nó.
+game-names:
+  unscramble: 'Sắp xếp chữ'
+  unreverse: 'Đảo ngược'
+  reaction: 'Phản xạ'
+  guess_the_number: 'Đoán số'
+  clickable: 'Nhấn chữ'
+  fillout: 'Điền chữ'
+  hoverable: 'Rê chuột'
+  random: 'Ngẫu nhiên'
+  math: 'Toán học'
+  variable: 'Biến số'
+  sequence: 'Dãy số'
+  memorize: 'Ghi nhớ'
+  word_association: 'Liên tưởng từ'
+  trivia: 'Đố vui'
+  count: 'Đếm số'
+  hunt: 'Săn bắt'
+  mine: 'Đào'
+  place: 'Xây dựng'
+  fish: 'Câu cá'
+  eat: 'Ăn uống'
+  craft: 'Chế tạo'
+  furnace: 'Nấu ăn'
+  tame: 'Thuần hóa'
+  shear: 'Xén lông'
+game-icons:
+  unscramble: book
+  math: redstone
+  trivia: enchanted_book
+  reaction: feather
+  clickable: stone_button
+  random: ender_pearl
+  unreverse: compass
+  variable: name_tag
+  guess_the_number: clock
+  memorize: map
+  sequence: ladder
+  fillout: paper
+  hoverable: ender_eye
+  word_association: lead
+  count: clock
+  hunt: iron_sword
+  place: grass_block
+  mine: iron_pickaxe
+  fish: fishing_rod
+  eat: cooked_beef
+  craft: crafting_table
+  furnace: furnace
+  tame: bone
+  shear: shears
+
+formats:
+  #Hiển thị thay cho thứ hạng với người chơi chưa được xếp hạng
+  no-rank: '-'
+
+#Gửi người chơi, từ menu gỡ lỗi. Để trống một dòng ('') để không gửi gì.
+messages:
+  debug-round: '&8[&cDEBUG&8] &fVòng &e%game% &friêng tư mới (đáp án: &a%answer%&f), tạo trong &e%generated% ms&f. Chỉ bạn thấy được.'
+  debug-failed: '&8[&cDEBUG&8] &cKhông thể tạo vòng %game%; console sẽ cho biết lý do.'
+  debug-race: '&8[&cDEBUG&8] &cĐua diễn ra trong thế giới nên không thể thử ở đây. Bắt đầu bằng /chatgames <race>.'
+  debug-no-letters: '&8[&cDEBUG&8] &7Đáp án này không có chữ cái, nên không thể sai chữ hoa/thường.'
+  debug-timeout-started: '&8[&cDEBUG&8] &7Đang chờ hết giới hạn thời gian &e%time%s&7...'
+  debug-timeout: '&8[&cDEBUG&8] &e%game%&7: hết giờ. Người chơi sẽ được báo đáp án là &f%answer%&7.'
+  #%verdict% là một trong các dòng dưới đây
+  debug-result: '&8[&cDEBUG&8] &e%game% &7| đã gõ &f%input% &7sau &e%ms% ms&7: %verdict%'
+  debug-verdicts:
+    accepted: '&ađược chấp nhận &7(sẽ có thứ hạng và nhận &e%points% &7điểm)'
+    wrong: '&csai &7(bỏ qua)'
+    wrong-case: '&6sai chữ hoa/thường &7(người chơi được nhắc kiểm tra)'
+    macro: '&cbị bỏ qua vì là macro &7(nhanh hơn min-answer-ms, &e%min_ms% ms&7)'
+    late: '&cquá muộn &7(sau giới hạn thời gian)'
+
+menus:
+
+  #/chatgames menu. %points% %rank% %wins% %claimable% (phần thưởng sẵn sàng để nhận),
+  #%daily_completed% %daily_total% %weekly_completed% %weekly_total%,
+  #%games_on% / %sound_on% (true hoặc false) và %games_state% / %sound_state% (chữ BẬT/TẮT)
+  main:
+    title: '&8&lChatGames'
+    rows: 3
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      profile:
+        slot: 10
+        material: player_head
+        head: '%player%'
+        name: '&e&lHồ sơ của bạn'
+        lore:
+          - '&7Điểm: &e%points% &8(%rank%)'
+          - '&7Thắng: &e%wins%'
+          - ''
+          - '&eNhấn để xem thống kê'
+        actions: ['[open] profile']
+      challenges:
+        slot: 11
+        material: writable_book
+        name: '&a&lThử thách'
+        lore:
+          - '&7Hằng ngày: &e%daily_completed%&7/&e%daily_total%'
+          - '&7Hằng tuần: &e%weekly_completed%&7/&e%weekly_total%'
+          - '&7Phần thưởng để nhận: &e%claimable%'
+          - ''
+          - '&eNhấn để mở'
+        actions: ['[open] challenges daily']
+      streaks:
+        slot: 12
+        material: blaze_powder
+        name: '&6&lChuỗi'
+        lore:
+          - '&7Chơi mỗi ngày để giữ chuỗi.'
+          - ''
+          - '&eNhấn để mở'
+        actions: ['[open] streaks']
+      leaderboards:
+        slot: 13
+        material: gold_ingot
+        name: '&e&lBảng xếp hạng'
+        lore:
+          - '&7Nhiều điểm nhất và nhanh nhất.'
+          - ''
+          - '&eNhấn để mở'
+        actions: ['[open] leaderboards']
+      games-toggle:
+        slot: 15
+        material: lime_dye
+        name: '&fTrò chơi chat: %games_state%'
+        lore:
+          - '&7Nhấn để tắt trò chơi chat cho bạn.'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7Nhấn để bật trò chơi chat cho bạn.'
+      sound-toggle:
+        slot: 16
+        material: note_block
+        name: '&fÂm thanh trò chơi: %sound_state%'
+        lore:
+          - '&7Nhấn để tắt âm thanh trò chơi.'
+        state: '%sound_on%'
+        actions: ['[command] chatgames togglesound', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7Nhấn để bật âm thanh trò chơi.'
+      admin:
+        slot: 22
+        material: command_block
+        name: '&c&lQuản trị'
+        lore:
+          - '&7Bắt đầu trò chơi, sự kiện, bộ trò chơi...'
+        view-requirements: ['permission chatgames.admin']
+        actions: ['[open] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cĐóng'
+        actions: ['[close]']
+
+  #/chatgames profile [player]. %target% %points% %rank% %wins% %race_wins% %global_played%
+  #%global_won% (hoàn thành) %contributions% %events_played% %event_wins% %event_best_place% %fastest% %challenges_completed%
+  #%milestones% %milestones_total% %streak_<challenge|daily|global>% và %streak_<...>_longest%.
+  #Danh sách: %game_wins% và %game_fastest%. [open] profile <name> mở hồ sơ của người khác.
+  profile:
+    title: '&8Hồ sơ: %target%'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7chưa có'
+      game-wins: '&7%game%: &f%wins%'
+      game-fastest: '&7%game%: &f%time%s'
+    items:
+      head:
+        slot: 4
+        material: player_head
+        head: '%target%'
+        name: '&e&l%target%'
+        lore:
+          - '&7Điểm: &e%points% &8(%rank%)'
+      wins:
+        slot: 19
+        material: diamond
+        name: '&b&lThắng'
+        lore:
+          - '&7Trò chơi chat đã thắng: &f%wins%'
+          - '&7Cuộc đua đã thắng: &f%race_wins%'
+          - ''
+          - '%game_wins%'
+      fastest:
+        slot: 20
+        material: clock
+        name: '&e&lThời gian nhanh nhất'
+        lore:
+          - '&7Tốt nhất tổng thể: &f%fastest%'
+          - ''
+          - '%game_fastest%'
+      global:
+        slot: 21
+        material: beacon
+        name: '&3&lTrò chơi toàn cầu'
+        lore:
+          - '&7Đã chơi: &f%global_played%'
+          - '&7Hoàn thành: &f%global_won%'
+          - '&7Đóng góp: &f%contributions%'
+      events:
+        slot: 23
+        material: nether_star
+        name: '&6&lSự kiện'
+        lore:
+          - '&7Đã chơi: &f%events_played%'
+          - '&7Đã thắng: &f%event_wins%'
+          - '&7Thứ hạng tốt nhất: &f%event_best_place%'
+      streaks:
+        slot: 24
+        material: blaze_powder
+        name: '&6&lChuỗi'
+        lore:
+          - '&7Thử thách: &f%streak_challenge% &8(kỷ lục %streak_challenge_longest%)'
+          - '&7Thắng hằng ngày: &f%streak_daily% &8(kỷ lục %streak_daily_longest%)'
+          - '&7Toàn cầu: &f%streak_global% &8(kỷ lục %streak_global_longest%)'
+      progress:
+        slot: 25
+        material: experience_bottle
+        name: '&a&lTiến độ'
+        lore:
+          - '&7Điểm: &f%points%'
+          - '&7Mốc đã đạt: &f%milestones%&7/&f%milestones_total%'
+          - '&7Thử thách đã hoàn thành: &f%challenges_completed%'
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Quay lại'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cĐóng'
+        actions: ['[close]']
+
+  #[open] challenges <daily|weekly>. %period% %period_key% %completed% %total% %resets%.
+  #Mục: %challenge% %id% %description% %progress% %amount% %percent% %bar% %icon%.
+  #[chatgames:claim-challenge] <period> <id> nhận một mục.
+  challenges:
+    title: '&8Thử thách %period%'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    progress-bar:
+      length: 10
+      done: '&a|'
+      left: '&7|'
+    items:
+      tab-daily:
+        slot: 2
+        material: sunflower
+        name: '&e&lHằng ngày'
+        glow: true
+        lore:
+          - '&7Đang hiện thử thách hôm nay.'
+        state: '%period_key% == daily'
+        actions: ['[switch] challenges daily']
+        when-off:
+          glow: false
+          lore:
+            - '&eNhấn để xem thử thách hôm nay'
+      tab-weekly:
+        slot: 6
+        material: clock
+        name: '&b&lHằng tuần'
+        glow: true
+        lore:
+          - '&7Đang hiện thử thách tuần này.'
+        state: '%period_key% == weekly'
+        actions: ['[switch] challenges weekly']
+        when-off:
+          glow: false
+          lore:
+            - '&eNhấn để xem thử thách tuần này'
+      info:
+        slot: 4
+        material: book
+        name: '&f%period%: &e%completed%&7/&e%total% &fhoàn thành'
+        lore:
+          - '&7Thử thách mới sau &f%resets%'
+      none:
+        slot: 22
+        material: barrier
+        name: '&7Hiện không có thử thách %period%'
+        view-requirements: ['%entries% == 0']
+      claim-all:
+        slot: 40
+        material: chest
+        name: '&a&lNhận tất cả'
+        lore:
+          - '&7Nhận mọi thử thách đã hoàn thành'
+          - '&7và phần thưởng chuỗi.'
+        actions: ['[command] chatgames claim', '[wait] 2', '[refresh]']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7Trang trước'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7Trang sau &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Quay lại'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cĐóng'
+        actions: ['[close]']
+    templates:
+      in-progress:
+        material: '%icon%'
+        name: '%challenge%'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&7Đang thực hiện'
+      ready:
+        material: '%icon%'
+        glow: true
+        name: '%challenge% &a&l(XONG)'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&a&lNhấn để nhận thưởng!'
+        actions: ['[chatgames:claim-challenge] %period_key% %id%', '[refresh]']
+      claimed:
+        material: lime_stained_glass_pane
+        name: '%challenge% &7(đã nhận)'
+        lore:
+          - '%description%'
+          - ''
+          - '&aĐã nhận thưởng'
+
+  #Mỗi chuỗi có %streak_<type>% (ngày), %streak_<type>_name%, %streak_<type>_longest%,
+  #%streak_<type>_unclaimed% và %streak_<type>_enabled%, trong đó <type> là challenge, daily hoặc global.
+  #Thang 7 ngày của mỗi chuỗi nằm trong danh sách mang tên nó, ngày 1 đến 7 (8-14 ở tuần thứ hai...).
+  #Ngày trên thang: %day% %ladder_day% (ngày thưởng, 1-7) %type% %streak%, và %today% (true vào ngày hôm nay).
+  #[chatgames:claim-streak] <type> nhận mọi ngày chưa nhận của một chuỗi.
+  streaks:
+    title: '&8Chuỗi'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    lists:
+      challenge: ['11-17']
+      daily: ['20-26']
+      global: ['29-35']
+    items:
+      challenge:
+        slot: 10
+        material: writable_book
+        name: '%streak_challenge_name%'
+        lore:
+          - '&7Hoàn thành mọi thử thách hằng ngày mỗi ngày.'
+          - ''
+          - '&7Hiện tại: &f%streak_challenge% &7ngày &8(kỷ lục %streak_challenge_longest%)'
+          - '&7Ngày để nhận: &e%streak_challenge_unclaimed%'
+        view-requirements: ['%streak_challenge_enabled%']
+        click-requirements: ['%streak_challenge_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] challenge', '[refresh]']
+      daily:
+        slot: 19
+        material: gold_ingot
+        name: '%streak_daily_name%'
+        lore:
+          - '&7Thắng ít nhất một trò mỗi ngày.'
+          - ''
+          - '&7Hiện tại: &f%streak_daily% &7ngày &8(kỷ lục %streak_daily_longest%)'
+          - '&7Ngày để nhận: &e%streak_daily_unclaimed%'
+        view-requirements: ['%streak_daily_enabled%']
+        click-requirements: ['%streak_daily_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] daily', '[refresh]']
+      global:
+        slot: 28
+        material: beacon
+        name: '%streak_global_name%'
+        lore:
+          - '&7Giải một trò chơi toàn cầu mỗi ngày.'
+          - ''
+          - '&7Hiện tại: &f%streak_global% &7ngày &8(kỷ lục %streak_global_longest%)'
+          - '&7Ngày để nhận: &e%streak_global_unclaimed%'
+        view-requirements: ['%streak_global_enabled%']
+        click-requirements: ['%streak_global_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] global', '[refresh]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Quay lại'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cĐóng'
+        actions: ['[close]']
+    templates:
+      day-claimed:
+        material: lime_stained_glass_pane
+        glow: '%today%'
+        name: '&aNgày %day% &7(đã nhận)'
+      day-ready:
+        material: chest
+        glow: '%today%'
+        name: '&e&lNgày %day%'
+        lore:
+          - '&a&lNhấn để nhận!'
+        actions: ['[chatgames:claim-streak] %type%', '[refresh]']
+      day-today:
+        material: yellow_stained_glass_pane
+        glow: true
+        name: '&eNgày %day% &7(hôm nay)'
+        lore:
+          - '&7Giữ chuỗi hôm nay'
+          - '&7để mở khóa phần thưởng này.'
+      day-locked:
+        material: red_stained_glass_pane
+        name: '&cNgày %day%'
+        lore:
+          - '&7Chưa đạt tới.'
+
+  #%points_rank% %fastest_rank% %total_points%; danh sách %top_points% và %top_fastest% (top-size dòng)
+  leaderboards:
+    title: '&8Bảng xếp hạng'
+    rows: 3
+    top-size: 10
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7Chưa có ai'
+    items:
+      points:
+        slot: 10
+        material: gold_block
+        name: '&e&lNhiều điểm nhất'
+        lore:
+          - '%top_points%'
+      fastest:
+        slot: 11
+        material: clock
+        name: '&b&lGõ nhanh nhất'
+        lore:
+          - '%top_fastest%'
+      you:
+        slot: 13
+        material: player_head
+        head: '%player%'
+        name: '&a&lBạn'
+        lore:
+          - '&7Hạng điểm: &f%points_rank%'
+          - '&7Hạng tốc độ: &f%fastest_rank%'
+          - ''
+          - '&7Tổng điểm của mọi người: &f%total_points%'
+      games:
+        slot: 15
+        material: book
+        name: '&d&lNhanh nhất từng trò'
+        lore:
+          - '&eNhấn để xem mọi trò chơi'
+        actions: ['[open] leaderboard-games']
+      events:
+        slot: 16
+        material: nether_star
+        name: '&6&lSự kiện'
+        lore:
+          - '&eNhấn để xem các sự kiện'
+        view-requirements: ['permission chatgames.event']
+        actions: ['[open] leaderboard-events']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7Quay lại'
+        actions: ['[back] main']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cĐóng'
+        actions: ['[close]']
+
+  #Mỗi trò chơi và cuộc đua một mục: %game% %key% %icon%, và %top% (người nhanh nhất của trò đó)
+  leaderboard-games:
+    title: '&8Nhanh nhất từng trò'
+    rows: 6
+    top-size: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7Chưa có ai'
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7Trang trước'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7Trang sau &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7Quay lại'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 53
+        material: barrier
+        name: '&cĐóng'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&e&l%game%'
+        lore:
+          - '%top%'
+
+  #Mỗi sự kiện một mục: %event% %id% %steps%
+  leaderboard-events:
+    title: '&8Bảng xếp hạng sự kiện'
+    rows: 4
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7Chưa thiết lập sự kiện nào'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Trang trước'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Trang sau &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Quay lại'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cĐóng'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7%steps% trò chơi'
+          - ''
+          - '&eNhấn để xem ai ghi nhiều điểm nhất'
+        actions: ['[close]', '[command] chatgames event top %id%']
+
+  #/chatgames admin. %current_game% %next_game% %rotation_state% %event% %preset%,
+  #%rotation_on% và %games_on% (true hoặc false). Mỗi nút chạy lệnh tương ứng,
+  #lệnh đó tự kiểm tra quyền như thể được gõ.
+  admin:
+    title: '&4&lQuản trị ChatGames'
+    rows: 5
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7không có'
+    items:
+      status:
+        slot: 4
+        material: repeater
+        name: '&f&lTrạng thái'
+        lore:
+          - '&7Đang chạy: &f%current_game%'
+          - '&7Trò tiếp theo sau: &f%next_game%'
+          - '&7Vòng xoay: %rotation_state%'
+          - '&7Sự kiện: &f%event%'
+          - '&7Bộ: &f%preset%'
+      start-game:
+        slot: 19
+        material: diamond_sword
+        name: '&a&lBắt đầu trò chơi'
+        lore:
+          - '&7Bất kỳ trò hoặc cuộc đua nào, ngay bây giờ.'
+        actions: ['[open] admin-start']
+      global:
+        slot: 20
+        material: beacon
+        name: '&3&lBắt đầu trò chơi toàn cầu'
+        lore:
+          - '&7Ai kịp thời gian đều thắng.'
+        actions: ['[open] admin-global']
+      events:
+        slot: 21
+        material: nether_star
+        name: '&6&lSự kiện'
+        lore:
+          - '&7Bắt đầu hoặc dừng một sự kiện trò chơi.'
+        actions: ['[open] admin-events']
+      presets:
+        slot: 23
+        material: chest
+        name: '&d&lBộ trò chơi'
+        lore:
+          - '&7Tải một bộ trò chơi đã bật.'
+        actions: ['[open] admin-presets']
+      logs:
+        slot: 24
+        material: oak_sign
+        name: '&f&lNhật ký'
+        lore:
+          - '&7In các trò gần nhất ra khung chat.'
+        actions: ['[open] admin-logs']
+      stop:
+        slot: 25
+        material: red_wool
+        name: '&c&lDừng trò chơi'
+        lore:
+          - '&7Kết thúc trò đang chạy mà không có người thắng.'
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      toggle:
+        slot: 29
+        material: lime_dye
+        name: '&fTrò chơi chat của bạn: &aBẬT'
+        lore:
+          - '&7Nhấn để tắt cho bạn.'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&fTrò chơi chat của bạn: &cTẮT'
+          lore:
+            - '&7Nhấn để bật cho bạn.'
+      toggle-all:
+        slot: 30
+        material: lime_dye
+        name: '&fVòng xoay trò chơi: &aBẬT'
+        lore:
+          - '&7Nhấn để dừng trò chơi tự động cho mọi người.'
+        state: '%rotation_on%'
+        #toggleAll kết thúc trên luồng toàn cục, trễ một tick trên Folia
+        actions: ['[command] chatgames toggleAll', '[wait] 2', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&fVòng xoay trò chơi: &cTẮT'
+          lore:
+            - '&7Nhấn để chạy lại trò chơi tự động.'
+      reload:
+        slot: 32
+        material: hopper
+        name: '&e&lTải lại'
+        lore:
+          - '&7Tải lại mọi tệp cấu hình.'
+        actions: ['[close]', '[command] chatgames reload']
+      debug:
+        slot: 33
+        material: command_block
+        name: '&c&lGỡ lỗi'
+        lore:
+          - '&7Thử bất kỳ trò nào một cách riêng tư.'
+        view-requirements: ['permission chatgames.debug']
+        actions: ['[open] debug']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Quay lại'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cĐóng'
+        actions: ['[close]']
+
+  #Mọi trò chơi và cuộc đua: %game% %key% (như trong lệnh) %icon%
+  admin-start:
+    title: '&8Bắt đầu trò chơi'
+    rows: 6
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7Trang trước'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7Trang sau &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7Quay lại'
+        actions: ['[back] admin']
+      close:
+        slot: 53
+        material: barrier
+        name: '&cĐóng'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&a%game%'
+        lore:
+          - '&7Trò chơi chat'
+          - '&eNhấn để bắt đầu'
+        actions: ['[close]', '[command] chatgames %key%']
+      race:
+        material: '%icon%'
+        name: '&6%game%'
+        lore:
+          - '&7Đua'
+          - '&eNhấn để bắt đầu'
+        actions: ['[close]', '[command] chatgames %key%']
+
+  #Các trò global_games.yml bật: %game% %key% %icon% %goal% %duration% %points%.
+  #Trò đang chơi: %global_running% %global_game% %global_goal% (vd. "500 Stone")
+  #%global_progress% %global_goal_amount% %global_percent% %global_contributors% %global_time_left%
+  admin-global:
+    title: '&8Trò chơi toàn cầu'
+    rows: 5
+    update-interval: 20
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    items:
+      status:
+        slot: 4
+        material: beacon
+        name: '&3&lĐang chơi: &f%global_game%'
+        lore:
+          - '&7Mục tiêu: &f%global_goal%'
+          - '&7Tiến độ: &e%global_progress%&7/&e%global_goal_amount% &8(%global_percent%%)'
+          - '&7Người chơi đang giúp: &f%global_contributors%'
+          - '&7Thời gian còn lại: &f%global_time_left%s'
+          - ''
+          - '&cNhấn để dừng (không có thưởng)'
+        view-requirements: ['%global_running%']
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      idle:
+        slot: 4
+        material: gray_dye
+        name: '&7Không có trò chơi toàn cầu nào đang chơi'
+        lore:
+          - '&7Chọn một trò bên dưới để bắt đầu.'
+        view-requirements: ['!%global_running%']
+      none:
+        slot: 22
+        material: barrier
+        name: '&7Chưa bật trò chơi toàn cầu nào'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7Trang trước'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7Trang sau &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Quay lại'
+        actions: ['[back] admin']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cĐóng'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&3%game% toàn cầu'
+        lore:
+          - '&7Mục tiêu: &f%goal% câu trả lời đúng'
+          - '&7Thời gian: &f%duration%s'
+          - '&7Điểm: &f%points%'
+          - ''
+          - '&eNhấn để bắt đầu'
+        actions: ['[close]', '[command] chatgames global %key%']
+      race:
+        material: '%icon%'
+        name: '&3Đua %game% toàn cầu'
+        lore:
+          - '&7Mục tiêu: &f%goal% cùng nhau'
+          - '&7Thời gian: &f%duration%s'
+          - '&7Điểm: &f%points%'
+          - ''
+          - '&eNhấn để bắt đầu'
+        actions: ['[close]', '[command] chatgames global %key%']
+      count:
+        material: '%icon%'
+        name: '&3%game% toàn cầu'
+        lore:
+          - '&7Cùng đếm trong khung chat'
+          - '&7Thời gian: &f%duration%s'
+          - '&7Điểm: &f%points%'
+          - ''
+          - '&eNhấn để bắt đầu'
+        actions: ['[close]', '[command] chatgames global %key%']
+
+  #Sự kiện events.yml: %event% %id% %steps%, và %step% (trò đang chơi) cho sự kiện đang chạy
+  admin-events:
+    title: '&8Sự kiện'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7Chưa thiết lập sự kiện nào trong events.yml'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Trang trước'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Trang sau &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Quay lại'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cĐóng'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7%steps% trò chơi'
+          - ''
+          - '&eNhấn để bắt đầu'
+        actions: ['[command] chatgames event start %id%', '[wait] 2', '[refresh]']
+      running:
+        material: nether_star
+        glow: true
+        name: '%event% &a(đang chạy)'
+        lore:
+          - '&7Trò %step% / %steps%'
+          - ''
+          - '&cNhấn để dừng'
+        actions: ['[command] chatgames event stop', '[wait] 2', '[refresh]']
+
+  #Các bộ cùng 'none' (cờ enable trong games.yml): %preset% %games%
+  admin-presets:
+    title: '&8Bộ trò chơi'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Trang trước'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Trang sau &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Quay lại'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cĐóng'
+        actions: ['[close]']
+    templates:
+      preset:
+        material: chest
+        name: '&d%preset%'
+        lore:
+          - '&7Trò chơi: &f%games%'
+          - ''
+          - '&eNhấn để tải'
+        actions: ['[command] chatgames preset load %preset%', '[wait] 2', '[refresh]']
+      active:
+        material: ender_chest
+        glow: true
+        name: '&d%preset% &a(đang dùng)'
+        lore:
+          - '&7Trò chơi: &f%games%'
+
+  #Được dựng hoàn toàn ở đây: thoải mái thêm hoặc đổi số lượng
+  admin-logs:
+    title: '&8Nhật ký'
+    rows: 3
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      last-10:
+        slot: 11
+        material: paper
+        name: '&f&e10 &ftrò gần nhất'
+        lore: ['&eNhấn để in ra khung chat']
+        actions: ['[close]', '[command] chatgames logs 10']
+      last-25:
+        slot: 12
+        material: paper
+        name: '&f&e25 &ftrò gần nhất'
+        lore: ['&eNhấn để in ra khung chat']
+        actions: ['[close]', '[command] chatgames logs 25']
+      last-50:
+        slot: 14
+        material: paper
+        name: '&f&e50 &ftrò gần nhất'
+        lore: ['&eNhấn để in ra khung chat']
+        actions: ['[close]', '[command] chatgames logs 50']
+      last-100:
+        slot: 15
+        material: paper
+        name: '&f&e100 &ftrò gần nhất'
+        lore: ['&eNhấn để in ra khung chat']
+        actions: ['[close]', '[command] chatgames logs 100']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7Quay lại'
+        actions: ['[back] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cĐóng'
+        actions: ['[close]']
+
+  #/chatgames debug: mọi trò chơi chat (%game% %key% %icon%). [chatgames:debug] <game> bắt đầu một
+  #vòng riêng tư và mở debug-session.
+  debug:
+    title: '&4Gỡ lỗi: chọn một trò'
+    rows: 4
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Trang trước'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Trang sau &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Quay lại'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cĐóng'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&c%game%'
+        lore:
+          - '&7Tạo một vòng riêng tư.'
+          - '&7Không có thưởng, không lưu gì.'
+        actions: ['[chatgames:debug] %key%']
+
+  #Vòng riêng tư: %game% %key% %icon% %question% %answer% %time% %min_ms% %case_sensitive%
+  #%winners% %points% %hints% %generated%; danh sách %placeholders% và %answers%.
+  #[chatgames:debug-answer] <correct|wrong|wrong-case> [ms] gửi câu trả lời thử (sau ms);
+  #[chatgames:debug-timeout] chờ hết giới hạn thời gian; [chatgames:debug-reroll] tạo vòng mới;
+  #[chatgames:debug-end] kết thúc phiên.
+  debug-session:
+    title: '&4Gỡ lỗi: %game%'
+    rows: 5
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    #Một nút "trả lời đúng sau X ms" cho mỗi độ trễ, ở các ô danh sách 'delays'
+    delays: [100, 500, 1000, 5000]
+    lists:
+      delays: ['29-32']
+    items:
+      question:
+        slot: 11
+        material: '%icon%'
+        name: '&e&lCâu hỏi'
+        lore:
+          - '&f%question%'
+          - ''
+          - '%placeholders%'
+      answer:
+        slot: 13
+        material: emerald
+        name: '&a&lĐáp án được chấp nhận'
+        lore:
+          - '%answers%'
+      settings:
+        slot: 15
+        material: repeater
+        name: '&f&lCài đặt'
+        lore:
+          - '&7Giới hạn thời gian: &f%time%s'
+          - '&7Thời gian trả lời tối thiểu: &f%min_ms% ms'
+          - '&7Phân biệt chữ hoa/thường: %case_sensitive%'
+          - '&7Người thắng: &f%winners%  &7Điểm: &f%points%'
+          - '&7Gợi ý đã chuẩn bị: &f%hints%'
+          - '&7Tạo trong: &f%generated% ms'
+      correct-now:
+        slot: 28
+        material: lime_wool
+        name: '&aTrả lời đúng ngay'
+        lore:
+          - '&7Nhanh hơn bất kỳ ai: cho thấy'
+          - '&7cách kiểm tra chống macro hoạt động.'
+        actions: ['[chatgames:debug-answer] correct']
+      wrong:
+        slot: 33
+        material: red_wool
+        name: '&cTrả lời sai'
+        actions: ['[chatgames:debug-answer] wrong']
+      wrong-case:
+        slot: 34
+        material: orange_wool
+        name: '&6Trả lời sai chữ hoa/thường'
+        actions: ['[chatgames:debug-answer] wrong-case']
+      timeout:
+        slot: 39
+        material: clock
+        name: '&eĐể hết giờ'
+        lore:
+          - '&7Chờ hết giới hạn thời gian, rồi báo cáo.'
+        actions: ['[chatgames:debug-timeout]']
+      reroll:
+        slot: 41
+        material: ender_pearl
+        name: '&dVòng mới'
+        actions: ['[chatgames:debug-reroll]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Quay lại'
+        actions: ['[chatgames:debug-end]', '[back] debug']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cĐóng'
+        actions: ['[close]']
+    templates:
+      correct-after:
+        material: yellow_wool
+        name: '&eTrả lời đúng sau %ms% ms'
+        actions: ['[chatgames:debug-answer] correct %ms%']

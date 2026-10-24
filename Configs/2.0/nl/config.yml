@@ -11,9 +11,12 @@ check-update: true
 lang: 'en_us'
 
 #De taal van deze configuratiebestanden: berichten, menu's, woordenlijsten, quiz, opmerkingen...
-#  auto: wisselen als 'lang' hierboven verandert, als die taal vertaalde bestanden heeft
+#Volledig vertaald: en, es, fr, pt, de, it, nl, pl, ru, tr, zh, zh_tw, ja, ko, uk, cs, sv, hu, vi, id
+#(zh is vereenvoudigd Chinees, zh_tw traditioneel Chinees). Staat jouw 'lang' er niet bij, dan worden namen van blokken,
+#voorwerpen en mobs nog steeds vertaald, maar deze bestanden houden hun taal (standaard Engels).
+#  auto: wisselen wanneer 'lang' hierboven verandert, als die taal volledig vertaald is
 #  none: nooit wisselen
-#  of een taalcode: en, es, fr, pt, de, it, nl, pl, ru, tr
+#  of een van de taalcodes hierboven
 #Bij het wisselen blijven je instellingen en je wijzigingen daarin behouden; je eigen berichten
 #worden vervangen door de vertaling (de oude bestanden worden eerst naar backups/ gekopieerd). Vertalingen
 #worden gedownload van https://github.com/nsider4/mine-translator (map Configs) en automatisch

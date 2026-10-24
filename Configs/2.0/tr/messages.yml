@@ -3,13 +3,13 @@ config_reloaded: '&8[%prefix%&8] &fYapılandırma dosyaları yeniden yüklendi!'
 config_reload_failed: '&8[%prefix%&8] &cBazı dosyalar yüklenemedi; konsola bak. O dosyalar önceki değerlerini korur.'
 not_enough_permissions: '&8[%prefix%&8] &cBu komutu kullanmak için yeterli iznin yok!'
 player_only_command: '&8[%prefix%&8] &cBu komutu yalnızca oyuncular kullanabilir!'
-player_deleted: '&8[%prefix%&8] &cOyuncu &f%player% &cveritabanÄ±ndan silindi!'
+player_deleted: '&8[%prefix%&8] &cOyuncu &f%player% &cveritabanından silindi!'
 player_not_found: '&8[%prefix%&8] &fOyuncu bulunamadı: &c%player%'
 number_not_found_commands: '&8[%prefix%&8] &cKomutta kullanılacak bir sayı bulunamadı'
 points_added: '&8[%prefix%&8] &fOyuncu: &c%player%&f, eklenen puan: &a%amount%'
-points_removed: '&8[%prefix%&8] &fOyuncu: &c%player%&f, alÄ±nan puan: &a%amount%'
+points_removed: '&8[%prefix%&8] &fOyuncu: &c%player%&f, alınan puan: &a%amount%'
 points_set: '&8[%prefix%&8] &fOyuncu: &c%player%&f, yeni puan: &a%amount%'
-player_points: '&8[%prefix%&8] &fPuanÄ±n: &a%amount%&f!'
+player_points: '&8[%prefix%&8] &fPuanın: &a%amount%&f!'
 in_cooldown: '&8[%prefix%&8] &cBunu henüz kullanamazsın, komutu tekrar kullanmadan önce &e%time_left%s &cbekle'
 type_not_found: '&8[%prefix%&8] &c%type% &fiçin malzeme/varlık türü bulunamadı'
 inventory_full: '&8[%prefix%&8] &cEnvanterin dolu! &fÖdül bulunduğun yere düştü'
@@ -18,7 +18,7 @@ no_winner_placeholder: '---'
 cannot_start_from_disabled: '&8[%prefix%&8] &cKapalı bir dünyadan sohbet oyunu başlatamazsın!'
 toggle_game: '&8[%prefix%&8] &fSohbet etkinlikleri: &a%state%&f.'
 toggle_sound: '&8[%prefix%&8] &fSohbet oyunu sesleri: &a%state%&f.'
-toggleAllGames: '&8[%prefix%&8] &fOtomatik sohbet oyunlarÄ± (&cHERKES&f): &a%state%'
+toggleAllGames: '&8[%prefix%&8] &fOtomatik sohbet oyunları (&cHERKES&f): &a%state%'
 state-ON: 'AÇIK'
 state-OFF: 'KAPALI'
 game_started: '&8[%prefix%&8] &aSohbetinde bir %game% etkinliği başlattın!'
@@ -35,14 +35,14 @@ no_games_enabled: '&8[%prefix%&8] &cŞu anda hiçbir oyun açık değil.'
 game_stopped: '&8[%prefix%&8] &fMevcut oyun kazanan olmadan durduruldu.'
 no_game_running: '&8[%prefix%&8] &cŞu anda süren bir sohbet oyunu yok.'
 global_not_enabled: '&8[%prefix%&8] &f%game% &cglobal_games.yml içinde küresel oyun olarak açık değil.'
-unknown_game: '&8[%prefix%&8] &cÅžu adda bir oyun yok: &f%game%&c.'
-unknown_menu: '&8[%prefix%&8] &cÅžu adda bir menÃ¼ yok: &f%menu%&c.'
+unknown_game: '&8[%prefix%&8] &cŞu adda bir oyun yok: &f%game%&c.'
+unknown_menu: '&8[%prefix%&8] &cŞu adda bir menü yok: &f%menu%&c.'
 
 presets:
-  loaded: '&8[%prefix%&8] &fÃ–n ayar yÃ¼klendi: &a%preset% &f(%games%).'
+  loaded: '&8[%prefix%&8] &fÖn ayar yüklendi: &a%preset% &f(%games%).'
   cleared: '&8[%prefix%&8] &fArtık hiçbir ön ayar etkin değil; games.yml''de açık olan oyunlar kullanılıyor.'
   saved: '&8[%prefix%&8] &fAçık oyunlar &a%preset% &fön ayarı olarak kaydedildi (%games%).'
-  not_found: '&8[%prefix%&8] &cÅžu adda bir Ã¶n ayar yok: &f%preset%&c.'
+  not_found: '&8[%prefix%&8] &cŞu adda bir ön ayar yok: &f%preset%&c.'
   invalid_name: '&8[%prefix%&8] &cÖn ayar adları yalnızca harf, rakam, - ve _ içerebilir (en fazla 32).'
   list_header: '&8[%prefix%&8] &eÖn ayarlar:'
   list_entry: '&7- &f%preset%%active% &8(%games%)'
@@ -51,7 +51,7 @@ presets:
 
 challenges:
   completed: '&8[%prefix%&8] &a%period% görev tamamlandı: &f%challenge%&a! &f/chatgames claim &aile al.'
-  claimed: '&8[%prefix%&8] &aAlÄ±ndÄ±: &f%challenge%&a!'
+  claimed: '&8[%prefix%&8] &aAlındı: &f%challenge%&a!'
   nothing_to_claim: '&8[%prefix%&8] &cŞu anda alınacak bir şeyin yok.'
   #/chatgames challenges. %period% aşağıda 'Günlük' veya 'Haftalık'; %resets% kalan süre, ör. 5h 12m
   header: '&8[%prefix%&8] &e%period% görevler &7(%completed%/%total% tamam, %resets% sonra yenilenir)'
@@ -66,7 +66,7 @@ challenges:
   time_days: '%amount%g'
   time_hours: '%amount%sa'
   time_minutes: '%amount%dk'
-  reset: '&8[%prefix%&8] &fGÃ¼nlÃ¼k ve haftalÄ±k gÃ¶rev ilerlemesi sÄ±fÄ±rlandÄ±: &c%player%&f.'
+  reset: '&8[%prefix%&8] &fGünlük ve haftalık görev ilerlemesi sıfırlandı: &c%player%&f.'
 
 streaks:
   grew: '&8[%prefix%&8] &a%streak% &aartık &f%days% &agün! Ödülü &f/chatgames claim &aile al.'
@@ -78,11 +78,11 @@ streaks:
   status_today: '&7[bugün yapıldı]'
   status_waiting: '&e[bugün henüz değil]'
   none: '&8[%prefix%&8] &cSeriler kapalı.'
-  set: '&8[%prefix%&8] &fOyuncu: &c%player%&f, %streak% &fartÄ±k &a%days% &fgÃ¼n.'
-  unknown: '&8[%prefix%&8] &cÅžu adda bir seri yok: &f%type%&c. challenge, daily veya global kullan.'
+  set: '&8[%prefix%&8] &fOyuncu: &c%player%&f, %streak% &fartık &a%days% &fgün.'
+  unknown: '&8[%prefix%&8] &cŞu adda bir seri yok: &f%type%&c. challenge, daily veya global kullan.'
 
 events:
-  unknown: '&8[%prefix%&8] &cÅžu adda bir etkinlik yok: &f%event%&c.'
+  unknown: '&8[%prefix%&8] &cŞu adda bir etkinlik yok: &f%event%&c.'
   started: '&8[%prefix%&8] &f%event% &fetkinliği başladı.'
   already_running: '&8[%prefix%&8] &cZaten bir etkinlik sürüyor: %event%&c.'
   cancelled: '&8[%prefix%&8] &cBaşka bir eklenti %event% &cetkinliğini iptal etti.'
@@ -96,6 +96,14 @@ events:
   top_header: '&8[%prefix%&8] &e%event% &eiçinde en çok etkinlik puanı:'
   top_entry: '&c%spot%. &f%player% &8| &e%points% &7puan'
   top_empty: '&8[%prefix%&8] &c%event% &ciçinde henüz kimse puan almadı.'
+
+discord:
+  test_sent: '&8[%prefix%&8] &fDiscord''a &a%amount% &ftest mesajı gönderildi. Hiçbir şey görünmezse nedeni konsolda yazar.'
+  leaderboard_posted: '&8[%prefix%&8] &fSıralama Discord''a gönderildi.'
+  disabled: '&8[%prefix%&8] &cDiscord mesajları kapalı: discord.yml içinde &fenabled: true &cyapın.'
+  no_channel: '&8[%prefix%&8] &f%section% &ciçin discord.yml''de webhook''lu ya da DiscordSRV kanallı bir kanal yok.'
+  unknown_message: '&8[%prefix%&8] &cDiscord mesajı &f%message%&c bulunamadı.'
+  empty_message: '&8[%prefix%&8] &f%message% &cdiscord.yml içinde boş ya da eksik.'
 
 logs:
   no_logs: "&cKullanılabilir kayıt yok veya bir hata oluştu."
@@ -123,7 +131,7 @@ top:
   #Ayraç değeri, ilk 10'u üst ve alt bilgiden ayıran mesajdır!
   separators: ''
   format: '&c%spot%. &f%player% &8| &e&l%points% &7puan'
-  player-stat-format: '&7Galibiyet sayÄ±n: &e&l%player_points% &7galibiyet'
+  player-stat-format: '&7Galibiyet sayın: &e&l%player_points% &7galibiyet'
   total-stat-format: '&7Toplam kazanılan oyun: &6&l%total_wins%'
   footer: '&b&m---------------------------'
 
@@ -184,10 +192,11 @@ help_command:
   - '&a/chatgames challenges reset <player> &f- &3Bir oyuncunun görev ilerlemesini temizler.'
   - '&a/chatgames streak set <player> <challenge|daily|global> <days> &f- &3Bir oyuncunun serisini ayarlar.'
   - '&a/chatgames logs [amount] &f- &3Son oyun kayıtlarını gösterir.'
+  - '&a/chatgames discord <test <message|all>|leaderboard> &f- &3Discord''a bir test mesajı ya da sıralamayı gönderir.'
   - '&a/chatgames reload &f- &3Yapılandırma dosyalarını yeniden yükler.'
   - '&6'
   - '&2&lOYUN TÜRLERİ:'
-  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace'
+  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace, tame, shear'
   - '&7&m-------------------------------------------------'
 
 #LİSTE mesajlarını ortalamak için <center> kullan; bunu içeren satırlar ortalanır!
@@ -222,7 +231,7 @@ unscramble:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, &dÃ§Ã¶z&f: `&b%selection%&f`'
+    - '<center>&fSüren &e%timeToGuess% saniye&f, &dçöz&f: `&b%selection%&f`'
     - ''
   correct_message:
     - ''
@@ -243,7 +252,7 @@ unreverse:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, kelimeyi &dters Ã§evir&f: `&b%selection%&f`'
+    - '<center>&fSüren &e%timeToGuess% saniye&f, kelimeyi &dters çevir&f: `&b%selection%&f`'
     - ''
   correct_message:
     - ''
@@ -264,7 +273,7 @@ reaction:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, kelimeyi &dyaz&f: `&b%selection%&f`'
+    - '<center>&fSüren &e%timeToGuess% saniye&f, kelimeyi &dyaz&f: `&b%selection%&f`'
     - ''
   correct_message:
     - ''
@@ -286,7 +295,7 @@ guess_the_number:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, &dsayÄ±yÄ± tahmin et &faralÄ±k:'
+    - '<center>&fSüren &e%timeToGuess% saniye&f, &dsayıyı tahmin et &faralık:'
     - '<center>&f`&b%selection%&f`'
     - ''
   correct_message:
@@ -308,7 +317,7 @@ memorize:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToMemorize% saniye&f, &dezberle &fbu listeyi:'
+    - '<center>&fSüren &e%timeToMemorize% saniye&f, &dezberle &fbu listeyi:'
     - ''
     - '<center>&f`&b%selection%&f`'
     - ''
@@ -316,7 +325,7 @@ memorize:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, listeyi &dsÄ±rasÄ±yla&f yaz!'
+    - '<center>&fSüren &e%timeToGuess% saniye&f, listeyi &dsırasıyla&f yaz!'
     - ''
     - '<center>&fHer öğeyi virgülle ayır! (ör. `&belma, muz, çikolata&f`)'
     - ''
@@ -342,7 +351,7 @@ sequence:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, &ddiziyi tamamla&f:'
+    - '<center>&fSüren &e%timeToGuess% saniye&f, &ddiziyi tamamla&f:'
     - '<center>&f`&b%selection%&f`'
     - ''
   hint_message: '&8[%prefix%&8] &eİpucu: sonraki sayı &f%hint%'
@@ -368,7 +377,7 @@ clickable:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, metne &dtÄ±kla&f:'
+    - '<center>&fSüren &e%timeToGuess% saniye&f, metne &dtıkla&f:'
     - ''
     - '<center>&b%clickableText%'
     - ''
@@ -391,7 +400,7 @@ fillout:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, kelimedeki &dboÅŸluklarÄ± doldur&f: `&b%selection%&f`'
+    - '<center>&fSüren &e%timeToGuess% saniye&f, kelimedeki &dboşlukları doldur&f: `&b%selection%&f`'
     - ''
   correct_message:
     - ''
@@ -415,7 +424,7 @@ hoverable:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, Ã¼stÃ¼ne gelince Ã§Ä±kan kelimeyi &dyaz&f:'
+    - '<center>&fSüren &e%timeToGuess% saniye&f, üstüne gelince çıkan kelimeyi &dyaz&f:'
     - ''
     - '<center>&b%hoverableText%'
     - ''
@@ -439,7 +448,7 @@ random:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, &dyaz&f: `&b%selection%&f`'
+    - '<center>&fSüren &e%timeToGuess% saniye&f, &dyaz&f: `&b%selection%&f`'
     - ''
   correct_message:
     - ''
@@ -460,7 +469,7 @@ math:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, &dÃ§Ã¶z&f: `&b%selection%&f`'
+    - '<center>&fSüren &e%timeToGuess% saniye&f, &dçöz&f: `&b%selection%&f`'
     - ''
   correct_message:
     - ''
@@ -484,7 +493,7 @@ variable:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, &dbul&f: `&b%symbol%&f`'
+    - '<center>&fSüren &e%timeToGuess% saniye&f, &dbul&f: `&b%symbol%&f`'
     - ''
     - '<center>%line_1%'
     - '<center>%line_2%'
@@ -510,7 +519,7 @@ word_association:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, &dbaÄŸlantÄ±yÄ±&f bul:'
+    - '<center>&fSüren &e%timeToGuess% saniye&f, &dbağlantıyı&f bul:'
     - '<center>&b%selection%'
     - ''
   correct_message:
@@ -532,7 +541,7 @@ trivia:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToGuess% saniye&f, &dcevapla&f:'
+    - '<center>&fSüren &e%timeToGuess% saniye&f, &dcevapla&f:'
     - '<center>&f`&b%selection%&f`'
     - ''
   correct_message:
@@ -560,7 +569,7 @@ hunt:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToComplete% saniye&f, &davla&f: `&b%amount%&fx &3%value%`'
+    - '<center>&fSüren &e%timeToComplete% saniye&f, &davla&f: `&b%amount%&fx &3%value%`'
     - ''
   correct_message:
     - ''
@@ -579,7 +588,7 @@ mine:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToComplete% saniye&f, &dkaz&f: `&b%amount%&fx &3%value%`'
+    - '<center>&fSüren &e%timeToComplete% saniye&f, &dkaz&f: `&b%amount%&fx &3%value%`'
     - ''
   correct_message:
     - ''
@@ -598,7 +607,7 @@ place:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToComplete% saniye&f, &dyerleÅŸtir&f: `&b%amount%&fx &3%value%`'
+    - '<center>&fSüren &e%timeToComplete% saniye&f, &dyerleştir&f: `&b%amount%&fx &3%value%`'
     - ''
   correct_message:
     - ''
@@ -617,7 +626,7 @@ fish:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToComplete% saniye&f, &dbalÄ±k tut&f: `&b%amount%&fx &3%value%`'
+    - '<center>&fSüren &e%timeToComplete% saniye&f, &dbalık tut&f: `&b%amount%&fx &3%value%`'
     - ''
   correct_message:
     - ''
@@ -636,7 +645,7 @@ eat:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToComplete% saniye&f, &dye&f: `&b%amount%&fx &3%value%`'
+    - '<center>&fSüren &e%timeToComplete% saniye&f, &dye&f: `&b%amount%&fx &3%value%`'
     - ''
   correct_message:
     - ''
@@ -655,7 +664,7 @@ craft:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToComplete% saniye&f, &dÃ¼ret&f: `&b%amount%&fx &3%value%`'
+    - '<center>&fSüren &e%timeToComplete% saniye&f, &düret&f: `&b%amount%&fx &3%value%`'
     - ''
   correct_message:
     - ''
@@ -673,7 +682,7 @@ furnace:
     - ''
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
-    - '<center>&fSÃ¼ren &e%timeToComplete% saniye&f, &dpiÅŸir&f: `&b%amount%&fx &3%value%`'
+    - '<center>&fSüren &e%timeToComplete% saniye&f, &dpişir&f: `&b%amount%&fx &3%value%`'
     - ''
   correct_message:
     - ''
@@ -686,3 +695,41 @@ furnace:
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
     - '<center>&f%timeToComplete%s &cdoldu! &fPişirme görevi bitti!'
+
+tame:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSüren &e%timeToComplete% saniye&f, &devcilleştir&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7`&e%amount%&fx &3%value%&7` evcilleştirmeyi bitirdi (&c%time%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cdoldu! &fEvcilleştirme görevi bitti!'
+
+shear:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fSüren &e%timeToComplete% saniye&f, &dkırk&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7`&e%amount%&fx &3%value%&7` kırkmayı bitirdi (&c%time%s&7) ve ödül kazandı!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cdoldu! &fKırkma görevi bitti!'

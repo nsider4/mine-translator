@@ -1,0 +1,125 @@
+#############################
+######    BEÁLLÍTÁSOK    #######
+#############################
+check-update: true
+
+#A szerver nyelve. A blokkok, tárgyak és lények nevei (a versenyekben és a Jegyezd meg játékban) erre
+#a nyelvre fordítódnak, több mint 140 nyelven. A nyelved azonosítóját itt találod:
+#https://github.com/nsider4/mine-translator/blob/main/language_names.txt
+#A nevek a translations/ mappába töltődnek le, és maguktól frissülnek, amikor új
+#Minecraft-verzió jelenik meg. Az itteni módosítás a /chatgames reload után érvényes.
+lang: 'en_us'
+
+#E konfigurációs fájlok nyelve: üzenetek, menük, szólisták, kvíz, megjegyzések...
+#Teljesen lefordítva: en, es, fr, pt, de, it, nl, pl, ru, tr, zh, zh_tw, ja, ko, uk, cs, sv, hu, vi, id
+#(zh az egyszerűsített kínai, zh_tw a hagyományos kínai). Ha a 'lang' értéked nincs köztük, a blokkok,
+#tárgyak és lények nevei így is lefordulnak, de ezek a fájlok megtartják a nyelvüket (alapból angol).
+#  auto: váltás, amikor a fenti 'lang' megváltozik, ha az a nyelv teljesen le van fordítva
+#  none: soha ne változzon
+#  vagy a fenti nyelvkódok egyike
+#A váltás megtartja a beállításaidat és azok módosításait; a saját üzeneteidet
+#a fordítás váltja fel (a régi fájlok előbb a backups/ mappába másolódnak). A fordítások
+#innen töltődnek le: https://github.com/nsider4/mine-translator (Configs mappa), és maguktól
+#frissülnek. Ott további nyelvek is hozzáadhatók.
+config-language: 'auto'
+
+#Tárolás típusa, elérhető: SQLite vagy MySQL
+Storage: 'SQLite'
+
+#A ChatGames összes adatát tartalmazó tábla neve
+table_name: 'chatgames'
+
+#A ChatGames összes leggyorsabb idejét tartalmazó tábla neve
+fastest_times_table: 'chatgames_fastest_times'
+
+SQLite:
+  Filename: 'chatgames-data'
+
+MySQL:
+  host: 'localhost'
+  port: '3306'
+  user: 'root'
+  password: 'password'
+  database: 'chatgame'
+  connection-parameters: '?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8'
+  Pool-Settings:
+    max-pool-size: 10
+    min-idle: 10
+    max-lifetime: 180000
+    keep-alive-time: 60000
+    time-out: 20000
+
+disabled-worlds:
+  - 'example_world'
+
+prefix: '&c&lC&d&lH&b&lA&a&lT &6&lG&e&lA&a&lM&c&lE&b&lS'
+
+#Ha false, csak a 'chatgames.start.*' joggal rendelkező játékosok indíthatnak
+allow_starting_from_disabled: true
+
+#Ha false, nem törlődik az az üzenet, amely általában nem küldődik el, amikor egy játékos eltalálja a helyes választ
+cancel-message-when-winning: true
+
+#A csetjáték indításához szükséges legkevesebb online játékos
+min_players_online: 1
+
+#Az idő, amíg újra egy véletlen játék választódik.
+#A -1 érték TELJESEN kikapcsolja a feladatot; -1 esetén a randomDelay sem használható
+time_minutes: 25
+
+#Ha be van kapcsolva, minden játék után egy véletlen szám készül 'randomDelay.minimum' és 'randomDelay.limit' között a következő játékig tartó várakozásként
+#Ha ezt bekapcsolod, a 'time_minutes' értéke figyelmen kívül marad, kivéve ha -1, mert akkor nincs feladat.
+randomDelay:
+  enable: false
+  #Az idő mértékegysége, a másik lehetséges érték 'seconds'; ha módosítod, a minimum legyen nagyobb a játék 'timeToGuess_seconds' értékénél
+  timeUnit: 'minutes'
+  minimum: 1
+  limit: 25
+
+
+#Ha kikapcsolod, a játékok megjelenítéséhez nem kell a chatgames.play jog
+use-permission-toplay: false
+
+#Ha false, csak a 'chatgames.play' joggal rendelkező, vagyis játszani tudó játékosok számítanak.
+#Ha true, minden online játékos számít, kivéve a láthatatlanokat (vanish).
+count-all-players: false
+
+#Ha true, létrejön a leggyorsabbak ranglistája (/chatgames fastest). Ha false, ez a ranglista ki van kapcsolva.
+fastest-typers-top: true
+
+#PlaceholderAPI helyőrzők (telepített PlaceholderAPI szükséges):
+#  Te:           %chatgames_points%, %chatgames_wins%, %chatgames_wins_<game>%, %chatgames_race_wins%,
+#                %chatgames_global_played%, %chatgames_global_won%, %chatgames_toggle%, %chatgames_sound_toggle%
+#                %chatgames_events_played%, %chatgames_event_wins%, %chatgames_event_best_place% (0 = még nincs)
+#  Időid:        %chatgames_personal_best% (bármely csetjáték), %chatgames_fastest_<game>% (versenyek is)
+#  Helyezésed:   %chatgames_show_current_pos_top% (pontok), %chatgames_show_current_pos_fastest% (legjobb idő)
+#  Top pontok:   %chatgames_top_<n>% (név), %chatgames_points_top_<n>%, %chatgames_total_points%
+#  Top gyorsak:  %chatgames_fastest_<n>% (név, csetjátékok), %chatgames_fastest_time_<n>%,
+#                %chatgames_fastest_<game>_<n>%, %chatgames_fastest_<game>_time_<n>%
+#  Most:         %chatgames_game_running%, %chatgames_current_game%, %chatgames_next_game_in% (másodperc)
+#  Verseny:      %chatgames_race_target%, %chatgames_race_amount%, %chatgames_race_progress% (a tiéd)
+#  Kihívások:    %chatgames_daily_completed%, %chatgames_daily_total%, %chatgames_weekly_completed%,
+#                %chatgames_weekly_total%, %chatgames_challenges_completed% (összesen)
+#  Sorozatok:    %chatgames_streak_<type>%, %chatgames_streak_<type>_longest% (<type>: challenge, daily vagy global)
+#  Esemény:      %chatgames_event_running%, %chatgames_event_name%, %chatgames_event_step%, %chatgames_event_steps%,
+#                %chatgames_event_points% és %chatgames_event_place% (a tiéd a futó eseményben)
+#  <game> egy játék neve a games.yml-ből (pl. unscramble, guess_the_number); <n> egy helyezés (1, 2, 3...).
+placeholders:
+  #Milyen gyakran épülnek újra a ranglista helyőrzői (top_<n>, fastest_<n>, helyezések...), másodpercben.
+  #Minden győztessel záruló játék után is újraépülnek. A saját pontjaid, győzelmeid és időid mindig naprakészek.
+  refresh-seconds: 60
+  #Akkor jelenik meg, ha nincs mit mutatni: üres hely a ranglistán, még nincs legjobb idő, nem fut játék...
+  empty-value: ''
+
+#Hang a játékosoknak, amikor csetjáték indul!
+GameSounds:
+  volume: 0.5
+  pitch: 1.0
+  #HAGYD BÁRMELYIKET ÜRESEN A KIKAPCSOLÁSÁHOZ
+  #Az erőforráscsomagok hangjai is működnek: névtérrel írd őket, pl. 'myserver:custom.ding'
+  win: 'minecraft:entity.experience_orb.pickup'
+  game-start: 'minecraft:entity.player.levelup'
+  time-expired: 'minecraft:entity.villager.no'
+  wrong-case: 'minecraft:block.note_block.bass'
+
+#A játékcsomagok (bekapcsolt játékok elnevezett csoportjai) a presets.yml-ben tárolódnak.

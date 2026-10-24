@@ -1,0 +1,10 @@
+#Pengaturan Discord ada di discord.yml.
+
+#File tempat log disimpan
+log-file: 'game_log.txt'
+
+#Jika true, semua peristiwa chat dicatat di konsol, keduanya bisa terjadi bersamaan
+log-console: true
+
+#Jika true, semua peristiwa chat dicatat di file, keduanya bisa terjadi bersamaan
+log-local: true

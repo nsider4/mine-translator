@@ -1,0 +1,136 @@
+#NAPI ÉS HETI KIHÍVÁSOK
+#
+#Mindenki ugyanazokat a kihívásokat kapja. A haladás játék közben számolódik; a teljesített
+#kihívás a /chatgames challenges-ben „Átvehető” jelzést kap, és a /chatgames claim kifizeti.
+#Az át nem vett jutalmak elvesznek, amikor a kihívások visszaállnak.
+#
+#KIHÍVÁSTÍPUSOK (az amount, hogy mennyi kell):
+#  WIN_GAMES    nyerj csetjátékokat vagy versenyeket, bármely helyen
+#  WIN_GAME     nyerj egy adott játékot vagy versenyt, a 'game'-mel megadva (pl. game: unscramble)
+#  WIN_RACES    nyerj versenyeket
+#  PLAY_GLOBAL  oldj meg időben globális játékokat
+#  WIN_GLOBAL   fejezz be globális játékokat jutalmazott helyen
+#  FAST_WIN     nyerj csetjátékokat 'seconds' alatt vagy gyorsabban (a versenyek nem számítanak)
+#  EARN_POINTS  szerezz pontokat játékokból
+#  PLAY_EVENT   vegyél részt játékeseményeken
+#
+#Minden kihívásnak van:
+#  name / description: a csetben és a menüben látszik. A %amount%, %game% és %seconds% kitöltődik.
+#  icon: a menüelem (egy anyagnév)
+#  rewards: sorok, mint a rewards.yml-ben (esélyek '<chance>%~ '-mal, jogok 'has:<permission>'-nel).
+#           A %player% és a %challenge% (a név) kitöltődik.
+#
+#Az azonosítók (win_3, fast_1...) a játékosok haladásával tárolódnak: csak a-z, 0-9, - és _ legyen bennük,
+#és egy megváltoztatása újrakezdi annak a kihívásnak a haladását.
+
+#Az időzóna, amelyben a napok kezdődnek, kihívásokhoz és sorozatokhoz, pl. Europe/Budapest vagy America/New_York.
+#Üresen a szerverét használja.
+timezone: ''
+
+daily:
+  enabled: true
+  #fixed: az alábbi minden kihívás minden nap aktív.
+  #random: minden nap 'amount' darabot sorsol közülük (mindenkinek ugyanazokat).
+  mode: random
+  amount: 3
+  challenges:
+    win_3:
+      type: WIN_GAMES
+      amount: 3
+      name: '&eBemelegítés'
+      description: '&7Nyerj %amount% csetjátékot'
+      icon: GOLD_NUGGET
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    win_8:
+      type: WIN_GAMES
+      amount: 8
+      name: '&6Lendületben'
+      description: '&7Nyerj %amount% csetjátékot'
+      icon: GOLD_INGOT
+      rewards:
+        - '[consolecmd] give %player% gold_ingot 8'
+    unscramble_2:
+      type: WIN_GAME
+      game: unscramble
+      amount: 2
+      name: '&bSzóvarázsló'
+      description: '&7Nyerj %amount% %game% játékot'
+      icon: BOOK
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    math_2:
+      type: WIN_GAME
+      game: math
+      amount: 2
+      name: '&bEmberi számológép'
+      description: '&7Nyerj %amount% %game% játékot'
+      icon: PAPER
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    fast_1:
+      type: FAST_WIN
+      seconds: 5
+      amount: 1
+      name: '&cFürge ujjak'
+      description: '&7Nyerj egy csetjátékot legfeljebb %seconds% másodperc alatt'
+      icon: FEATHER
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    race_1:
+      type: WIN_RACES
+      amount: 1
+      name: '&aVersenyző'
+      description: '&7Nyerj egy versenyt'
+      icon: IRON_PICKAXE
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    points_5:
+      type: EARN_POINTS
+      amount: 5
+      name: '&dPontgyűjtő'
+      description: '&7Szerezz %amount% pontot'
+      icon: EXPERIENCE_BOTTLE
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    global_1:
+      type: PLAY_GLOBAL
+      amount: 1
+      name: '&3Csapatjátékos'
+      description: '&7Oldj meg időben egy globális játékot'
+      icon: COMPASS
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+
+weekly:
+  enabled: true
+  #A nap, amellyel minden hét kezdődik.
+  reset-day: MONDAY
+  mode: fixed
+  amount: 3
+  challenges:
+    win_25:
+      type: WIN_GAMES
+      amount: 25
+      name: '&6A hét bajnoka'
+      description: '&7Nyerj %amount% csetjátékot ezen a héten'
+      icon: DIAMOND
+      rewards:
+        - '[consolecmd] give %player% diamond 3'
+    fast_5:
+      type: FAST_WIN
+      seconds: 4
+      amount: 5
+      name: '&cVillám'
+      description: '&7Nyerj %amount% csetjátékot legfeljebb %seconds% másodperc alatt'
+      icon: BLAZE_POWDER
+      rewards:
+        - '[consolecmd] give %player% diamond 2'
+    global_5:
+      type: WIN_GLOBAL
+      amount: 5
+      name: '&3Közönségkedvenc'
+      description: '&7Fejezz be %amount% globális játékot jutalmazott helyen'
+      icon: BEACON
+      rewards:
+        - '[consolecmd] give %player% diamond 2'

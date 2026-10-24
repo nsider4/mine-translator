@@ -1,0 +1,255 @@
+#GAME GLOBAL
+#
+#Dalam game global seluruh server bermain sebagai satu tim. Setiap jawaban benar (atau, dalam balapan
+#global, setiap blok ditambang, mob dibunuh...; dalam Hitung, setiap angka yang dihitung) menambah satu skor
+#bersama. Tidak ada yang perlu jadi tercepat: saat skor mencapai target tepat waktu, setiap orang yang
+#berkontribusi mendapat hadiah. Jika waktu habis lebih dulu, game gagal.
+#
+#  Game chat berjalan sebagai rangkaian pertanyaan. Setiap pemain bisa menjawab setiap pertanyaan sekali, dan
+#  pertanyaan berikutnya muncul setelah 'answers-per-question' jawaban benar atau 'question-seconds'.
+#  Jawaban selalu disembunyikan, jadi tidak bisa disalin.
+#  Balapan menghitung kemajuan semua orang bersama, mis. 500 Batu yang ditambang seluruh server.
+#  Hitung (hanya dimainkan global): berhitung bersama di chat, satu angka per pesan.
+#
+#Game global dimulai secara acak setelah game biasa, dengan timer, dengan
+#/chatgames global <game> [values], atau sebagai langkah dalam acara (events.yml).
+#Kemajuan ditampilkan di boss bar (1.9+) atau action bar (1.8).
+
+triggers:
+  #Persentase peluang game global dimulai setelah game biasa atau balapan berakhir (0 = tidak pernah).
+  chance-after-game: 10
+  #Detik antara game biasa berakhir dan game global dimulai.
+  delay-seconds: 5
+  #Menit antara game global yang dimulai dengan timer (0 = mati).
+  interval-minutes: 0
+  #Pemain online yang dibutuhkan agar game global dimulai sendiri (perintah mengabaikan ini).
+  minimum-players: 2
+
+progress-bar:
+  enabled: true
+  #Warna boss bar: BLUE, GREEN, PINK, PURPLE, RED, WHITE, atau YELLOW.
+  color: YELLOW
+  #SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12, atau SEGMENTED_20.
+  style: SEGMENTED_10
+  #Persentase target yang diumumkan di chat saat server mencapainya.
+  announce-at: [25, 50, 75]
+
+#Dipakai setiap game di bawah untuk nilai apa pun yang tidak diaturnya sendiri.
+#  goal: jawaban benar (atau, untuk balapan, item/mob) yang dibutuhkan server
+#  duration-seconds: berapa lama waktu yang dimiliki server
+#  min-contribution: kontribusi paling sedikit agar pemain mendapat hadiah
+#  points: yang didapat setiap pemain berhadiah saat target tercapai
+#  points-per-contribution: poin tambahan untuk setiap kontribusi pemain
+#  answers-per-question: hanya game chat, berapa pemain yang bisa menjawab satu pertanyaan
+#  question-seconds: hanya game chat, waktu terlama satu pertanyaan ditampilkan
+defaults:
+  goal: 10
+  duration-seconds: 120
+  min-contribution: 1
+  points: 1
+  points-per-contribution: 0
+  answers-per-question: 3
+  question-seconds: 15
+
+#Hadiah dalam format rewards.yml (chance, minimum-players, '<chance>%~ ' dan 'has:<permission>'
+#semuanya bisa). %player% adalah pemain dan %contribution% kontribusinya.
+#Bagian 'rewards' milik sebuah game menggantikan ini untuk game itu.
+rewards:
+  #Semua yang berkontribusi minimal min-contribution, saat target tercapai.
+  completed:
+    reward_1:
+      data:
+        - '[consolecmd] give %player% iron_ingot 3'
+  #Pemain yang sama saat waktu habis. Kosong: tanpa hadiah hiburan.
+  failed: {}
+  #Tambahan untuk kontributor terbesar saat target tercapai, menurut peringkat.
+  top-contributors:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% diamond 1'
+    2:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 3'
+    3:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 1'
+
+#Placeholder di setiap pesan: %game% %goal% (angka) %goal_text% (mis. "500 Stone")
+#%progress% %percent% %time% (sisa detik) %duration%
+messages:
+  start:
+    - ''
+    - '&6&l» %game% GLOBAL! &fSeluruh server bermain bersama.'
+    - '&f  Dapatkan &e%goal% jawaban benar &fdalam &e%time%d&f. Semua yang membantu mendapat hadiah!'
+    - '&7  Setiap pertanyaan menerima %answers% jawaban, jadi jangan menunggu orang lain.'
+    - ''
+  race_start:
+    - ''
+    - '&6&l» BALAPAN GLOBAL! &fSeluruh server bermain bersama.'
+    - '&f  Kumpulkan &e%goal% %value% &fbersama dalam &e%time%d&f. Semua yang membantu mendapat hadiah!'
+    - ''
+  count_start:
+    - ''
+    - '&6&l» HITUNG GLOBAL! &fHitung bersama dari &e%start% &fsampai &e%target% &fdengan langkah &e%step%&f!'
+    - '&7  Satu angka per pesan, berurutan. Tidak ada yang menghitung dua kali berturut-turut. %time%d untuk menyelesaikan.'
+    - ''
+  #Di atas setiap pertanyaan. %question% adalah nomornya.
+  question:
+    - '&6&l» GLOBAL &7Pertanyaan #%question% &8| &e%progress%&7/&e%goal%'
+  #Saat waktu sebuah pertanyaan habis. %answer% adalah jawabannya. Kosongkan agar diam.
+  question_over: '&8» &7Jawabannya adalah &f%answer%&7.'
+  #Untuk pemain yang jawabannya dihitung. %contribution% adalah total mereka sejauh ini.
+  answered: '&8[%prefix%&8] &aBenar! &7Kamu telah menyumbang &f%contribution% &7dari &f%progress%/%goal% &7milik server.'
+  #%reached% adalah persentase yang baru tercapai.
+  milestone: '&6&l» &e%reached%% &fselesai! &7(%progress%/%goal%, sisa %time%d)'
+  #Angka yang dihitung, ditampilkan sebagai ganti pesan pemain. %player% %number%
+  counted: '&e%player% &8» &f%number%'
+  #Sebuah kesalahan. %player% %number% %next% (yang diharapkan) %start% %reason% %mistakes% %max_mistakes%
+  count_broken:
+    - '&c%player% berkata %number%: %reason%'
+    - '&fHitungan dimulai lagi dari &e%start%&f.'
+  #Kesalahan yang mengakhiri game (on-mistake: fail, atau max-mistakes tercapai).
+  count_broken_final:
+    - '&c%player% berkata %number%: %reason%'
+  count_reasons:
+    ahead: 'terlalu jauh ke depan (angka berikutnya %next%)'
+    behind: 'itu sudah dihitung (angka berikutnya %next%)'
+    repeated: 'angka itu baru saja disebut'
+    twice: 'tidak boleh ada yang menghitung dua angka berturut-turut'
+  #%count% pemain mendapat hadiah, %contributors% ikut serta, butuh %seconds%.
+  #%top_<n>% dan %top_<n>_amount%: tiga kontributor terbesar.
+  completed:
+    - ''
+    - '&6&l» TARGET TERCAPAI! &fServer mendapat &e%goal_text% &fdalam &e%seconds%d&f.'
+    - '&f  Top: &e%top_1% &7(%top_1_amount%)  &e%top_2% &7(%top_2_amount%)  &e%top_3% &7(%top_3_amount%)'
+    - '&f  &e%count% &fpemain mendapat hadiah.'
+    - ''
+  failed:
+    - ''
+    - '&6&l» GAME GLOBAL BERAKHIR! &fServer mencapai &e%progress%/%goal% &7(%percent%%)&f. Semoga beruntung lain kali!'
+    - ''
+  #Untuk setiap pemain berhadiah saat target tercapai. %points% adalah yang mereka dapat.
+  rewarded: '&8[%prefix%&8] &aKamu menyumbang &f%contribution% &adan mendapat &f%points% &apoin!'
+  #Untuk pemain yang menyumbang kurang dari min-contribution. %min% adalah batas minimumnya.
+  too_little: '&8[%prefix%&8] &7Kamu menyumbang %contribution%; dibutuhkan minimal %min% untuk hadiah.'
+  #Boss bar (atau action bar di 1.8).
+  bar: '&6%game% Global &8| &f%progress%/%goal% &8| &e%time%d'
+
+#Kata-kata untuk menyusun %goal_text%.
+words:
+  answers: 'jawaban benar'
+  to: 'sampai'
+
+#Game yang bisa dimainkan secara global. Ingat dan Tebak Angka tidak bisa.
+#Masing-masing bisa mengatur enabled dan apa pun dari 'defaults', plus 'rewards' sendiri.
+games:
+  reaction:
+    enabled: true
+    goal: 10
+    duration-seconds: 90
+    question-seconds: 10
+  unscramble:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  math:
+    enabled: true
+    goal: 15
+    duration-seconds: 150
+  sequence:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  trivia:
+    enabled: true
+    goal: 8
+    duration-seconds: 180
+    question-seconds: 20
+  word_association:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  fillout:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  unreverse:
+    enabled: false
+  random:
+    enabled: false
+  variable:
+    enabled: false
+  hoverable:
+    enabled: false
+  clickable:
+    enabled: false
+  #Berhitung bersama. Targetnya adalah banyak angka pada mode yang dipilih.
+  count:
+    enabled: true
+    duration-seconds: 120
+    #Tidak boleh ada yang menyebut dua angka berturut-turut.
+    no-double-count: true
+    #reset: kesalahan memulai hitungan dari awal; fail: kesalahan mengakhiri game.
+    on-mistake: reset
+    #Dengan reset: jumlah kesalahan yang tetap mengakhiri game (0 = tanpa batas).
+    max-mistakes: 5
+    #Satu dipilih acak; /chatgames global count <mode> memilih satu.
+    #'step' adalah besar kenaikan setiap angka (arahnya mengikuti start dan target).
+    modes:
+      up:
+        start: 1
+        target: 20
+        step: 1
+      down:
+        start: 15
+        target: 1
+        step: 1
+      evens:
+        start: 2
+        target: 30
+        step: 2
+      fives:
+        start: 5
+        target: 75
+        step: 5
+  #Balapan global: seluruh server mengumpulkan menuju target. Target diambil dari races.yml;
+  #/chatgames global mine STONE 500 mengatur keduanya.
+  mine:
+    enabled: true
+    goal: 200
+    duration-seconds: 240
+  hunt:
+    enabled: true
+    goal: 40
+    duration-seconds: 240
+  place:
+    enabled: false
+    goal: 200
+    duration-seconds: 240
+  fish:
+    enabled: false
+    goal: 20
+    duration-seconds: 300
+  eat:
+    enabled: false
+    goal: 30
+    duration-seconds: 240
+  craft:
+    enabled: false
+    goal: 100
+    duration-seconds: 240
+  furnace:
+    enabled: false
+    goal: 64
+    duration-seconds: 300
+  tame:
+    enabled: false
+    goal: 15
+    duration-seconds: 300
+  shear:
+    enabled: false
+    goal: 40
+    duration-seconds: 240

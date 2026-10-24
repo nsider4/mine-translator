@@ -1,0 +1,735 @@
+unknown_command: '&8[%prefix%&8] &c未知命令。換一個試試吧！'
+config_reloaded: '&8[%prefix%&8] &f配置檔案已重新載入！'
+config_reload_failed: '&8[%prefix%&8] &c部分檔案載入失敗，請檢視控制檯。這些檔案保留之前的值。'
+not_enough_permissions: '&8[%prefix%&8] &c你沒有足夠的許可權執行此命令！'
+player_only_command: '&8[%prefix%&8] &c此命令只能由玩家執行！'
+player_deleted: '&8[%prefix%&8] &c玩家 &f%player% &c已從資料庫中刪除！'
+player_not_found: '&8[%prefix%&8] &f找不到玩家 &c%player%'
+number_not_found_commands: '&8[%prefix%&8] &c找不到可用於命令的數字'
+points_added: '&8[%prefix%&8] &f已給 &c%player% &f增加 &a%amount% 點數'
+points_removed: '&8[%prefix%&8] &f已從 &c%player% &f扣除 &a%amount% 點數'
+points_set: '&8[%prefix%&8] &f已將 &c%player% &f的點數設為 &a%amount%'
+player_points: '&8[%prefix%&8] &f你有 &a%amount% &f點數！'
+in_cooldown: '&8[%prefix%&8] &c你還不能使用，請等待 &e%time_left%s &c後再使用此命令'
+type_not_found: '&8[%prefix%&8] &f找不到對應的材料/實體型別：&c%type%'
+inventory_full: '&8[%prefix%&8] &c你的背包已滿！&f獎勵已掉落在你的位置'
+
+no_winner_placeholder: '---'
+cannot_start_from_disabled: '&8[%prefix%&8] &c不能在已禁用的世界中開始聊天遊戲！'
+toggle_game: '&8[%prefix%&8] &f你已將聊天遊戲切換為 &a%state%&f！'
+toggle_sound: '&8[%prefix%&8] &f你已將聊天遊戲聲音切換為 &a%state%&f！'
+toggleAllGames: '&8[%prefix%&8] &f你已&a%state% &c所有&f聊天遊戲！'
+state-ON: '開啟'
+state-OFF: '關閉'
+game_started: '&8[%prefix%&8] &a你已在聊天中開始了一局 %game% 聊天遊戲！'
+invalid_arguments: '&8[%prefix%&8] &f驗證命令引數時出現問題！'
+cant_log_local: '&8[%prefix%&8] &c你無法檢視日誌訊息，因為此選項在配置中已禁用！'
+toggle_game_other: '&8[%prefix%&8] &f你已將 &c%player% &f的聊天遊戲切換為 &a%state%&f！'
+toggle_sound_other: '&8[%prefix%&8] &f你已將 &c%player% &f的聊天遊戲聲音切換為 &a%state%&f！'
+player_points_other: '&8[%prefix%&8] &c%player% &f有 &a%amount% &f點數！'
+data_loading: '&8[%prefix%&8] &c該玩家的資料還在載入中，請稍後再試。'
+usage: '&8[%prefix%&8] &c用法：&f%usage%'
+game_already_running: '&8[%prefix%&8] &c已有一局聊天遊戲在進行！請先用 &f/chatgames stop &c結束它。'
+game_not_started: '&8[%prefix%&8] &c%game% 遊戲無法用這些值開始。詳情請檢視控制檯。'
+no_games_enabled: '&8[%prefix%&8] &c目前沒有啟用任何遊戲。'
+game_stopped: '&8[%prefix%&8] &f當前遊戲已停止，沒有贏家。'
+no_game_running: '&8[%prefix%&8] &c現在沒有正在進行的聊天遊戲。'
+global_not_enabled: '&8[%prefix%&8] &f%game% &c沒有在 global_games.yml 中作為全服遊戲啟用。'
+unknown_game: '&8[%prefix%&8] &c沒有名為 &f%game% &c的遊戲。'
+unknown_menu: '&8[%prefix%&8] &c沒有名為 &f%menu% &c的選單。'
+
+presets:
+  loaded: '&8[%prefix%&8] &f已載入預設 &a%preset% &f(%games%)。'
+  cleared: '&8[%prefix%&8] &f已不再使用任何預設；將使用 games.yml 中啟用的遊戲。'
+  saved: '&8[%prefix%&8] &f已將啟用的遊戲儲存為預設 &a%preset% &f(%games%)。'
+  not_found: '&8[%prefix%&8] &c沒有名為 &f%preset% &c的預設。'
+  invalid_name: '&8[%prefix%&8] &c預設名只能使用字母、數字、- 和 _（最多 32 個）。'
+  list_header: '&8[%prefix%&8] &e預設：'
+  list_entry: '&7- &f%preset%%active% &8(%games%)'
+  active_marker: ' &a(使用中)'
+  list_empty: '&8[%prefix%&8] &cpresets.yml 中沒有配置任何預設。'
+
+challenges:
+  completed: '&8[%prefix%&8] &a%period%挑戰完成：&f%challenge%&a！使用 &f/chatgames claim &a領取。'
+  claimed: '&8[%prefix%&8] &a你領取了 &f%challenge%&a！'
+  nothing_to_claim: '&8[%prefix%&8] &c你現在沒有可領取的東西。'
+  #/chatgames challenges。下面的 %period% 為“每日”或“每週”；%resets% 為剩餘時間，例如 5小時 12分
+  header: '&8[%prefix%&8] &e%period%挑戰 &7（已完成 %completed%/%total%，%resets% 後重置）'
+  entry: '&7- %challenge% &8- &7%description% &f%progress%/%amount% %status%'
+  status_in_progress: ''
+  status_ready: '&a[可以領取]'
+  status_claimed: '&7[已領取]'
+  none: '&8[%prefix%&8] &c現在沒有挑戰。'
+  daily: '每日'
+  weekly: '每週'
+  #%resets% 中的單位，例如 2天 5小時、5小時 12分 或 40分
+  time_days: '%amount%天'
+  time_hours: '%amount%小時'
+  time_minutes: '%amount%分'
+  reset: '&8[%prefix%&8] &f已重置 &c%player% &f的每日和每週挑戰進度。'
+
+streaks:
+  grew: '&8[%prefix%&8] &a你的%streak% &a現在是 &f%days% &a天！使用 &f/chatgames claim &a領取獎勵。'
+  #%days% 是某一天，或者一次領取多天時的範圍，例如 3-5
+  claimed: '&8[%prefix%&8] &a你領取了%streak% &a的獎勵（第 %days% 天）！'
+  header: '&8[%prefix%&8] &e連續記錄：'
+  entry: '&7- %streak% &8- &f%days% &7天，最佳 &f%longest% %status%'
+  status_ready: '&a[%unclaimed% 個可領取]'
+  status_today: '&7[今天已完成]'
+  status_waiting: '&e[今天未完成]'
+  none: '&8[%prefix%&8] &c連續記錄已關閉。'
+  set: '&8[%prefix%&8] &f已將 &c%player% &f的%streak% &f設為 &a%days% &f天。'
+  unknown: '&8[%prefix%&8] &c沒有名為 &f%type% &c的連續記錄。請使用 challenge、daily 或 global。'
+
+events:
+  unknown: '&8[%prefix%&8] &c沒有名為 &f%event% &c的活動。'
+  started: '&8[%prefix%&8] &f已開始活動 %event%&f。'
+  already_running: '&8[%prefix%&8] &c已有活動在進行：%event%&c。'
+  cancelled: '&8[%prefix%&8] &c另一個外掛取消了活動 %event%&c。'
+  not_running: '&8[%prefix%&8] &c沒有正在進行的活動。'
+  stopped: '&8[%prefix%&8] &f已停止活動 %event%&f。'
+  list_header: '&8[%prefix%&8] &e活動：'
+  list_entry: '&7- &f%id% &8(%event%&8) &7%steps% 局遊戲，下次：&f%next%%running%'
+  list_running: ' &a(進行中，第 %step%/%steps% 局)'
+  list_empty: '&8[%prefix%&8] &cevents.yml 中沒有設定任何活動。'
+  not_scheduled: '未安排'
+  top_header: '&8[%prefix%&8] &e%event% &e中活動點數最多的玩家：'
+  top_entry: '&c%spot%. &f%player% &8| &e%points% &7分'
+  top_empty: '&8[%prefix%&8] &c還沒有人在 %event% &c中得分。'
+
+discord:
+  test_sent: '&8[%prefix%&8] &f已向 Discord 傳送 &a%amount% &f條測試訊息。如果沒有顯示，控制檯會說明原因。'
+  leaderboard_posted: '&8[%prefix%&8] &f排行榜已傳送到 Discord。'
+  disabled: '&8[%prefix%&8] &cDiscord 訊息已關閉：請在 discord.yml 中設定 &fenabled: true&c。'
+  no_channel: '&8[%prefix%&8] &f%section% &c在 discord.yml 中沒有設定帶 webhook 或 DiscordSRV 頻道的頻道。'
+  unknown_message: '&8[%prefix%&8] &c沒有名為 &f%message% &c的 Discord 訊息。'
+  empty_message: '&8[%prefix%&8] &f%message% &c在 discord.yml 中為空或不存在。'
+
+logs:
+  no_logs: "&c沒有可用的日誌，或發生了錯誤。"
+  header: "&8[%prefix%&8] &e最近 &6%amount% &e條日誌："
+  entries:
+    # 與遊戲相關的日誌條目
+    game:
+      start: "&a遊戲開始：&f%game% | &a有答案：&f%hasAnswer% | &a答案：&f%answer%"
+      end: "&a遊戲結束：&f%game% | &a有贏家：&f%hasWinner% | &a贏家：&f%winners% | &a答案：&f%answer%"
+
+    # 材料類競賽的日誌條目
+    race:
+      start: "&a競賽開始：&f%race% | &a材料：&f%material% | &a數量：&f%amount%"
+      end: "&a競賽結束：&f%race% | &a有贏家：&f%hasWinner% | &a贏家：&f%winner% | &a材料：&f%material% | &a數量：&f%amount%"
+
+    # 狩獵競賽（實體類競賽）的專用條目
+    hunt:
+      start: "&a競賽開始：&f%race% | &a實體：&f%entity% | &a數量：&f%amount%"
+      end: "&a競賽結束：&f%race% | &a有贏家：&f%hasWinner% | &a贏家：&f%winner% | &a實體：&f%entity% | &a數量：&f%amount%"
+
+#如果願意，可以在排行榜訊息中使用 <center>。
+top:
+  #如果想禁用某條訊息，可以留空。（'format' 和 'player-stat-format' 除外）
+  header: '&b&m---------&e&l聊天排行&b&m---------'
+  #separators 的值是用來把前 10 名玩家與頁首和頁尾隔開的那條訊息！
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%points% &7分'
+  player-stat-format: '&7你獲得了 &e&l%player_points% &7次勝利'
+  total-stat-format: '&7全服總勝場：&6&l%total_wins%'
+  footer: '&b&m---------------------------'
+
+  no_data_message: '&8[%prefix%&8] &c還沒有資料！贏一局聊天遊戲來獲得點數吧！'
+
+TypersTop:
+  #如果想禁用某條訊息，可以留空。（'format' 和 'player-stat-format' 除外）
+  header: '&b&m---------&e&l最快排行&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6秒'
+  player-stat-format: '&7你的最快時間是 &e&l%fastest_time%&6秒'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &c還沒有資料！贏一局聊天遊戲，成為最快的人吧！'
+  top_disabled_message: '&8[%prefix%&8] &c此功能目前已禁用！'
+
+GameTypersTop:
+  #如果想禁用某條訊息，可以留空。（'format' 和 'player-stat-format' 除外）
+  header: '&b&m---------&e&l最快排行 - %game%&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6秒'
+  player-stat-format: '&7你的最快時間是 &e&l%fastest_time%&6秒'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &c還沒有資料！贏一局聊天遊戲，成為最快的人吧！'
+  top_disabled_message: '&8[%prefix%&8] &c此功能目前已禁用！'
+
+help_command:
+  - '&7&m-------------------------------------------------'
+  - '&e&l-ChatGames-'
+  - '&6'
+  - '&6&l命令：'
+  - '&6'
+  - '&a/chatgames menu [menu] &f- &3開啟選單：個人資料、挑戰、連續記錄、排行榜（或 menus.yml 中的任意選單）。'
+  - '&a/chatgames profile [player] &f- &3顯示你的（或其他玩家的）統計。'
+  - '&a/chatgames top &f- &3顯示點數最多的前 10 名玩家。'
+  - '&a/chatgames fastest [game] &f- &3顯示總體或某個遊戲的最快贏家。'
+  - '&a/chatgames points [player] &f- &3顯示你的（或其他玩家的）點數。'
+  - '&a/chatgames challenges &f- &3顯示你的每日和每週挑戰。'
+  - '&a/chatgames streaks &f- &3顯示你的連續記錄。'
+  - '&a/chatgames claim &f- &3領取已完成的挑戰和連續記錄獎勵。'
+  - '&a/chatgames event [list|top <event>] &f- &3顯示遊戲活動，或某個活動中得分最多的玩家。'
+  - '&a/chatgames toggle [player] &f- &3為你開啟或關閉聊天遊戲。'
+  - '&a/chatgames togglesound [player] &f- &3開啟或關閉聊天遊戲聲音。'
+  - '&6'
+  - '&c&l管理員：'
+  - '&a/chatgames admin &f- &3開啟管理選單。'
+  - '&a/chatgames debug &f- &3開啟除錯選單：私下測試任意遊戲，沒有獎勵。'
+  - '&a/chatgames (game) [values] &f- &3立即開始該遊戲，可以使用你自己的單詞/數值。'
+  - '&a/chatgames any &f- &3開始輪換接下來會選的遊戲。'
+  - '&a/chatgames global <game> [values] &f- &3開始一局全服遊戲：所有及時作答的人都能獲勝。'
+  - '&a/chatgames event start <event> | stop &f- &3開始或停止遊戲活動。'
+  - '&a/chatgames stop &f- &3結束正在進行的遊戲，沒有贏家。'
+  - '&a/chatgames toggleAll &f- &3開啟或關閉自動遊戲輪換。'
+  - '&a/chatgames preset <list|load|save> [name] &f- &3管理遊戲預設。'
+  - '&a/chatgames +points|-points|setpoints <player> <amount> &f- &3修改玩家的點數。'
+  - '&a/chatgames remove <player> &f- &3刪除玩家的資料。'
+  - '&a/chatgames challenges reset <player> &f- &3清除玩家的挑戰進度。'
+  - '&a/chatgames streak set <player> <challenge|daily|global> <days> &f- &3設定玩家的連續記錄。'
+  - '&a/chatgames logs [amount] &f- &3顯示最近的遊戲日誌。'
+  - '&a/chatgames discord <test <message|all>|leaderboard> &f- &3向 Discord 傳送測試訊息或排行榜。'
+  - '&a/chatgames reload &f- &3重新載入配置檔案。'
+  - '&6'
+  - '&2&l遊戲型別：'
+  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace, tame, shear'
+  - '&7&m-------------------------------------------------'
+
+#在列表訊息中使用 <center> 可讓訊息居中，帶有它的行會居中顯示！
+
+#############################
+##    聊天遊戲訊息    ##
+#############################
+#所有遊戲共用。遊戲可以在下面自己的部分中用 'hint_message' / 'countdown_actionbar' 覆蓋它們。
+hint_message: '&8[%prefix%&8] &e提示：&f%hint%'
+countdown_actionbar: '&7剩餘 &e%seconds%秒'
+
+waiting_for_other_winners: '&8[%prefix%&8] &a你答對了！&f正在等待其他贏家……'
+wrong_case: '&8[%prefix%&8] &c差一點……檢查一下大小寫！'
+  #在所有遊戲的 correct_message 中，都可以用 "%display_name%" 代替 %player%。
+  #
+  #也可以用 %points_<position>% 顯示獲勝玩家的點數。
+  #
+  #要顯示第 1、2、3 名等贏家，請使用 %winner_<position>%，每人用時請使用 %time_<position>%
+
+  ##示例：2 名贏家的情況：
+  #
+  #correct_message:
+  #- ''
+  #- '<center>&r✓ ✯ %prefix% &r✯ ✓'
+  #- ''
+  #- '&7正確答案是 `&e%correct_answer%&7`！贏家是：'
+  #- '<center>&f1. &a%winner_1% - (&c%time_1%s&7)'
+  #- '<center>&f2. &a%winner_2% - (&c%time_2%s&7)'
+#- ''
+unscramble:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToGuess% 秒&f來&d還原單詞&f：`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7正確還原了 `&e%correct_answer%&7`（&c%time_1%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&c已過！&f還原單詞遊戲結束了！'
+    - '<center>正確答案是 &e%correct_answer%&f！'
+    - ''
+
+unreverse:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToGuess% 秒&f來&d倒轉還原&f這個詞：`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7最快倒轉還原了 `&e%correct_answer%&7`（&c%time_1%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&c已過！&f倒轉還原遊戲結束了！'
+    - '<center>正確答案是 &e%correct_answer%&f！'
+    - ''
+
+reaction:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToGuess% 秒&f來&d輸入&f這個詞：`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7最快輸入了 `&e%correct_answer%&7`（&c%time_1%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&c已過！&f反應遊戲結束了！'
+    - '<center>正確答案是 &e%correct_answer%&f！'
+    - ''
+
+guess_the_number:
+  hint_message: '&8[%prefix%&8] &e提示：範圍是 &f%hint%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToGuess% 秒&f在以下範圍內&d猜數字&f：'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7第一個答出了 `&e%correct_answer%&7`（&c%time_1%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&c已過！&f猜數字遊戲結束了！'
+    - '<center>正確答案是 &e%correct_answer%&f！'
+    - ''
+
+memorize:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToMemorize% 秒&f來&d記住&f這個列表：'
+    - ''
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  messageAfterMemorized:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToGuess% 秒&f把列表&d按順序&f寫出來！'
+    - ''
+    - '<center>&f用逗號分隔每一項！（例如 `&b蘋果, 香蕉, 巧克力&f`）'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7第一個寫出了列表，獲得了獎勵！（&c%time_1%s&7）'
+    - ''
+    - '<center>&f列表是：&f`&b%correct_answer%&f`'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&c已過！&f記憶遊戲結束了！'
+    - ''
+    - '<center>&f列表是：&f`&b%correct_answer%&f`'
+    - ''
+
+sequence:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToGuess% 秒&f來&d補全數列&f：'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  hint_message: '&8[%prefix%&8] &e提示：下一個數是 &f%hint%'
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7第一個找到了 `&e%correct_answer%&7`（&c%time_1%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&c已過！&f數列遊戲結束了！'
+    - '<center>下一個數是 &e%correct_answer%&f！'
+    - ''
+
+clickable:
+  clickableText: '&a點這裡！'
+  hoverText: '&e點這裡！'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToGuess% 秒&f來&d點選&f這段文字：'
+    - ''
+    - '<center>&b%clickableText%'
+    - ''
+  #USE %winner_
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7最快點選了文字（&c%time_1%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&c已過！&f點選遊戲結束了！'
+    - ''
+
+fillout:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToGuess% 秒&f來&d填空&f：`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7最快填出了 `&e%correct_answer%&7`（&c%time_1%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&c已過！&f填空遊戲結束了！'
+    - '<center>正確答案是 &e%correct_answer%&f！'
+    - ''
+
+hoverable:
+  hoverableText: '&e懸停在這裡！'
+  hoverText: '&b%selection%'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToGuess% 秒&f來&d輸入&f懸停文字裡的詞：'
+    - ''
+    - '<center>&b%hoverableText%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7最快輸入了 `&e%correct_answer%&7`（&c%time_1%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&c已過！&f懸停遊戲結束了！'
+    - '<center>正確答案是 &e%correct_answer%&f！'
+    - ''
+
+#在這個遊戲中，會生成指定長度的隨機字元
+random:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToGuess% 秒&f來&d輸入&f：`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7最快輸入了 `&e%correct_answer%&7`（&c%time_1%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&c已過！&f隨機字元遊戲結束了！'
+    - '<center>正確答案是 &e%correct_answer%&f！'
+    - ''
+
+math:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToGuess% 秒&f來&d計算&f：`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7最快算出了 `&e%correct_answer%&7`（&c%time_1%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&c已過！&f數學遊戲結束了！'
+    - '<center>正確答案是 &e%correct_answer%&f！'
+    - ''
+
+variable:
+  #這是它們顯示的格式。你可以修改 'line1and2-format' 中 %symbol% 重複的次數，但第 3 行的所有變數必須保持原樣。
+  line1and2-format: '&c%symbol%&f + &c%symbol%&f + &c%symbol%&f = &e'
+  line3-format: '&c%symbol_1%&f + &c%symbol_2%&f + &b%toGet% &f= &e%result%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToGuess% 秒&f來&d求出&f：`&b%symbol%&f`'
+    - ''
+    - '<center>%line_1%'
+    - '<center>%line_2%'
+    - '<center>%line_3%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7最快算出了 `&e%correct_answer%&7`（&c%time_1%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&c已過！&f變數遊戲結束了！'
+    - '<center>正確答案是 &e%correct_answer%&f！'
+    - ''
+
+#%selection% 是線索，%difficulty% 是 easy/medium/hard。
+word_association:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToGuess% 秒&f來找出&d關聯&f：'
+    - '<center>&b%selection%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7找到了關聯 `&e%correct_answer%&7`（&c%time_1%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&c已過！&f沒有人找到關聯。'
+    - '<center>答案是 &e%correct_answer%&f！'
+    - ''
+
+trivia:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToGuess% 秒&f來&d回答&f：'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7第一個答出了 `&e%correct_answer%&7`（&c%time_1%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%秒&c已過！&f知識問答結束了！'
+    - '<center>正確答案是 &e%correct_answer%&f！'
+    - ''
+
+#競賽
+#目前競賽不支援多名贏家，因為我覺得沒必要：它們是“競賽”或“玩家挑戰”，應該由第一名獲得。
+
+#%value% 是材料或生物，%amount% 是數量，%timeToComplete% 是時間限制（秒）。
+#在 correct_message 中：%winner%、%winner_displayname%、%time%（秒）和 %points%（贏家的點數）。
+
+hunt:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToComplete% 秒&f來&d狩獵&f：`&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7完成了狩獵 `&e%amount%&fx &3%value%&7`（&c%time%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%秒&c已過！&f狩獵挑戰結束了！'
+
+mine:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToComplete% 秒&f來&d挖掘&f：`&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7完成了挖掘 `&e%amount%&fx &3%value%&7`（&c%time%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%秒&c已過！&f挖掘挑戰結束了！'
+
+place:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToComplete% 秒&f來&d放置&f：`&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7完成了放置 `&e%amount%&fx &3%value%&7`（&c%time%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%秒&c已過！&f放置挑戰結束了！'
+
+fish:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToComplete% 秒&f來&d釣到&f：`&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7完成了釣魚 `&e%amount%&fx &3%value%&7`（&c%time%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%秒&c已過！&f釣魚挑戰結束了！'
+
+eat:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToComplete% 秒&f來&d吃掉&f：`&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7吃完了 `&e%amount%&fx &3%value%&7`（&c%time%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%秒&c已過！&f進食挑戰結束了！'
+
+craft:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToComplete% 秒&f來&d合成&f：`&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7完成了合成 `&e%amount%&fx &3%value%&7`（&c%time%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%秒&c已過！&f合成挑戰結束了！'
+furnace:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToComplete% 秒&f來&d燒製&f：`&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7完成了燒製 `&e%amount%&fx &3%value%&7`（&c%time%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%秒&c已過！&f燒製挑戰結束了！'
+
+tame:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToComplete% 秒&f來&d馴服&f：`&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7完成了馴服 `&e%amount%&fx &3%value%&7`（&c%time%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%秒&c已過！&f馴服挑戰結束了！'
+
+shear:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f你有 &e%timeToComplete% 秒&f來&d剪毛&f：`&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7完成了剪毛 `&e%amount%&fx &3%value%&7`（&c%time%s&7），獲得了獎勵！'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%秒&c已過！&f剪毛挑戰結束了！'

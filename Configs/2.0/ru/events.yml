@@ -105,8 +105,4 @@ messages:
   stopped:
     - '&6&l» %event% &cостановлено.'
 
-#Итоговая таблица отправляется в Discord-вебхук из config.yml, если он задан.
-discord:
-  enabled: true
-  title: '%event% results'
-  line: '#%place% %player% - %points% points'
+#Начало событий и итоговые результаты публикуются в Discord по настройкам discord.yml.

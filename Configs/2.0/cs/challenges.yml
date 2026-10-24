@@ -1,0 +1,136 @@
+#DENNÍ A TÝDENNÍ ÚKOLY
+#
+#Všichni dostanou stejné úkoly. Postup se počítá, jak hráči hrají; splněný
+#úkol ukazuje „Lze vyzvednout“ v /chatgames challenges a /chatgames claim ho vyplatí.
+#Nevyzvednuté odměny propadnou, když se úkoly resetují.
+#
+#TYPY ÚKOLŮ (amount je, kolik je potřeba):
+#  WIN_GAMES    vyhrávat chatové hry nebo závody, na jakémkoli místě
+#  WIN_GAME     vyhrávat jednu hru nebo závod, nastavený v 'game' (např. game: unscramble)
+#  WIN_RACES    vyhrávat závody
+#  PLAY_GLOBAL  včas vyřešit globální hry
+#  WIN_GLOBAL   dokončit globální hry na místě s odměnou
+#  FAST_WIN     vyhrávat chatové hry za 'seconds' nebo méně (závody se nepočítají)
+#  EARN_POINTS  získávat body ze her
+#  PLAY_EVENT   účastnit se herních událostí
+#
+#Každý úkol má:
+#  name / description: zobrazí se v chatu a v menu. %amount%, %game% a %seconds% se doplní.
+#  icon: položka v menu (název materiálu)
+#  rewards: řádky jako v rewards.yml (šance s '<chance>%~ ', oprávnění s 'has:<permission>').
+#           %player% a %challenge% (název) se doplní.
+#
+#ID (win_3, fast_1...) se ukládají s postupem hráčů: používejte jen a-z, 0-9, - a _,
+#a změna ID začne postup toho úkolu znovu.
+
+#Časové pásmo, ve kterém začínají dny, pro úkoly a série, např. Europe/Prague nebo America/New_York.
+#Prázdné použije pásmo serveru.
+timezone: ''
+
+daily:
+  enabled: true
+  #fixed: každý úkol níže je aktivní každý den.
+  #random: každý den se vylosuje 'amount' z nich (stejné pro všechny).
+  mode: random
+  amount: 3
+  challenges:
+    win_3:
+      type: WIN_GAMES
+      amount: 3
+      name: '&eRozcvička'
+      description: '&7Vyhraj %amount% chatových her'
+      icon: GOLD_NUGGET
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    win_8:
+      type: WIN_GAMES
+      amount: 8
+      name: '&6V ráži'
+      description: '&7Vyhraj %amount% chatových her'
+      icon: GOLD_INGOT
+      rewards:
+        - '[consolecmd] give %player% gold_ingot 8'
+    unscramble_2:
+      type: WIN_GAME
+      game: unscramble
+      amount: 2
+      name: '&bČaroděj slov'
+      description: '&7Vyhraj %amount% her %game%'
+      icon: BOOK
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    math_2:
+      type: WIN_GAME
+      game: math
+      amount: 2
+      name: '&bLidská kalkulačka'
+      description: '&7Vyhraj %amount% her %game%'
+      icon: PAPER
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    fast_1:
+      type: FAST_WIN
+      seconds: 5
+      amount: 1
+      name: '&cRychlé prsty'
+      description: '&7Vyhraj chatovou hru za %seconds% sekund nebo méně'
+      icon: FEATHER
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    race_1:
+      type: WIN_RACES
+      amount: 1
+      name: '&aZávodník'
+      description: '&7Vyhraj závod'
+      icon: IRON_PICKAXE
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    points_5:
+      type: EARN_POINTS
+      amount: 5
+      name: '&dSběratel bodů'
+      description: '&7Získej %amount% bodů'
+      icon: EXPERIENCE_BOTTLE
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    global_1:
+      type: PLAY_GLOBAL
+      amount: 1
+      name: '&3Týmový hráč'
+      description: '&7Vyřeš včas globální hru'
+      icon: COMPASS
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+
+weekly:
+  enabled: true
+  #Den, kterým začíná každý týden.
+  reset-day: MONDAY
+  mode: fixed
+  amount: 3
+  challenges:
+    win_25:
+      type: WIN_GAMES
+      amount: 25
+      name: '&6Šampion týdne'
+      description: '&7Vyhraj tento týden %amount% chatových her'
+      icon: DIAMOND
+      rewards:
+        - '[consolecmd] give %player% diamond 3'
+    fast_5:
+      type: FAST_WIN
+      seconds: 4
+      amount: 5
+      name: '&cBlesk'
+      description: '&7Vyhraj %amount% chatových her za %seconds% sekund nebo méně'
+      icon: BLAZE_POWDER
+      rewards:
+        - '[consolecmd] give %player% diamond 2'
+    global_5:
+      type: WIN_GLOBAL
+      amount: 5
+      name: '&3Miláček publika'
+      description: '&7Dokonči %amount% globálních her na místě s odměnou'
+      icon: BEACON
+      rewards:
+        - '[consolecmd] give %player% diamond 2'

@@ -1,0 +1,41 @@
+# ChatGames 프리셋: 자동 로테이션용 이름 붙은 게임 묶음.
+#
+# 프리셋이 켜져 있는 동안 로테이션은 그 게임만 고르며, games.yml / races.yml의 'enable'
+# 설정은 무시됩니다. 'active'를 none으로 하면 다시 그 설정을 씁니다.
+# 프리셋의 레이스는 races.yml에서 레이스가 켜져 있을 때(enable-races)만 진행됩니다.
+#
+# 명령어(권한 chatgames.preset):
+#   /chatgames preset list
+#   /chatgames preset load <name>   (또는 'none')
+#   /chatgames preset save <name>   지금 켜진 게임을 프리셋으로 저장
+#
+# 이 명령어를 쓰면 플러그인이 이 파일을 다시 씁니다.
+
+active: none
+
+presets:
+  weekend_set:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+
+  minimal_set:
+    games:
+      - reaction
+
+  full_rotation:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+      - guess_the_number
+      - memorize
+      - sequence
+      - clickable
+      - fillout
+      - hoverable
+      - random
+      - math
+      - variable
+      - trivia

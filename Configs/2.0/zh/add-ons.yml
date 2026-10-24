@@ -1,0 +1,10 @@
+#Discord 设置在 discord.yml 中。
+
+#保存日志的文件
+log-file: 'game_log.txt'
+
+#如果为 true，会在控制台记录所有聊天游戏，可以和文件记录同时启用
+log-console: true
+
+#如果为 true，会把所有聊天游戏记录到文件中，可以和控制台记录同时启用
+log-local: true

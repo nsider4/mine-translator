@@ -1,0 +1,1158 @@
+#MENÜK
+#
+#A 'menus:' alatti minden menünek van 'title' címe, 'rows' mérete (1-6) és 'items' elemei. Megváltoztathatod,
+#mit csinál bármelyik gomb, hozzáadhatsz gombokat vagy teljesen új menüket (nyisd meg őket: /chatgames menu <id>,
+#vagy tedd mindegyiket saját fájlba a menus/ mappában, <id>.yml néven).
+#
+#Minden elem:
+#  slot: hová kerül, 0-tól (bal felül) rows*9-1-ig. 'slots: [0, 1, '9-17']' megismétli.
+#  material: bármely tárgynév 1.8-tól 26.x-ig: új vagy régi nevek (lime_dye / INK_SACK:10 / 351:10),
+#            vagy 'head:<játékosnév, textúra vagy textures.minecraft.net URL>'
+#  name / lore: a színkódok (&a, és 1.16+ esetén &#RRGGBB) és a PlaceholderAPI helyőrzők működnek.
+#  amount, glow: true, enchantments: ['SHARPNESS:1'], flags: [HIDE_ATTRIBUTES], head: '%player%',
+#  custom-model-data: 1001 (1.14+), item-model: 'namespace:key' (1.21.2+), color: '#FF0000' (bőr)
+#  actions: mit csinál egy kattintás, sorrendben. Továbbá left-actions, right-actions, shift-left-actions,
+#           shift-right-actions, middle-actions és drop-actions (mindegyik az actions-re esik vissza).
+#  view-requirements: az elem csak akkor látszik, ha minden sor teljesül
+#  click-requirements: ha egy sor nem teljesül, az actions helyett a 'deny-actions' fut
+#  state + when-off: ha a state hamis, a when-off kulcsai felülírják az elem saját kulcsait
+#                    (nem 'off': a YAML a puszta off-ot false-nak olvassa)
+#Hagyd ki az elemet az elrejtéséhez. A 'filler' kitölt minden üres helyet; töröld, ha nem kell.
+#
+#Műveletek:
+#  [command] <command>        te futtatod a parancsot      [console] <command>   a konzol futtatja
+#  [message] <text>           üzenet neked                 [broadcast] <text>    mindenkinek
+#  [sound] <sound> [volume] [pitch]   bármely hangnév 1.8-tól 26.x-ig
+#  [open] <menu> [values]     másik menüt nyit             [switch] <menu> [values]  ugyanaz, de a [back] átugorja
+#  [back] [menu]              az előző menü (vagy a megnevezett, vagy bezár)
+#  [refresh]  [close]  [next-page]  [previous-page]  [wait] <ticks>
+#  [chatgames:no-permission]  elküldi a hiányzó jog üzenetét
+#  A menüspecifikusak azoknak a menüknek a fölött vannak leírva, amelyekben szerepelnek.
+#
+#Feltételek, soronként egy (minden sornak teljesülnie kell; a ! a sor elején megfordítja):
+#  permission <node>     egy összehasonlítás, pl. '%chatgames_points% >= 100' (==, !=, >=, <=, >, <)
+#  vagy egy érték, ami true / on / yes / 0-tól eltérő szám
+#
+#A listázó menük (kihívások, játékok, események...) sorrendben a 'list-slots' helyekre teszik őket,
+#a menü 'templates' sablonjaival. Ha több bejegyzés van, mint hely, a [next-page] / [previous-page]
+#műveletű elemek lapoznak; elrejtőznek, ha nincs hová lapozni.
+#Az a lore-sor, amely csak egy lista helyőrző, pl. '%game_wins%', több sorrá válik.
+#Minden menüben van %player%, %page%, %pages% és %entries% (hány bejegyzése van a listának) is.
+
+#A játékok nevei és ikonjai minden menüben és a játékot megnevező üzenetekben (%game%).
+#Az itt nem szereplő játék a kulcsáról kap nevet.
+game-names:
+  unscramble: 'Rakd sorba'
+  unreverse: 'Fordítsd meg'
+  reaction: 'Reakció'
+  guess_the_number: 'Találd ki a számot'
+  clickable: 'Kattintós'
+  fillout: 'Töltsd ki'
+  hoverable: 'Felugró'
+  random: 'Véletlen'
+  math: 'Matek'
+  variable: 'Változó'
+  sequence: 'Számsor'
+  memorize: 'Jegyezd meg'
+  word_association: 'Szóasszociáció'
+  trivia: 'Kvíz'
+  count: 'Számolás'
+  hunt: 'Vadászat'
+  mine: 'Bányászat'
+  place: 'Építés'
+  fish: 'Horgászat'
+  eat: 'Evés'
+  craft: 'Barkácsolás'
+  furnace: 'Főzés'
+  tame: 'Szelídítés'
+  shear: 'Nyírás'
+game-icons:
+  unscramble: book
+  math: redstone
+  trivia: enchanted_book
+  reaction: feather
+  clickable: stone_button
+  random: ender_pearl
+  unreverse: compass
+  variable: name_tag
+  guess_the_number: clock
+  memorize: map
+  sequence: ladder
+  fillout: paper
+  hoverable: ender_eye
+  word_association: lead
+  count: clock
+  hunt: iron_sword
+  place: grass_block
+  mine: iron_pickaxe
+  fish: fishing_rod
+  eat: cooked_beef
+  craft: crafting_table
+  furnace: furnace
+  tame: bone
+  shear: shears
+
+formats:
+  #Helyezés helyett jelenik meg a még rangsorolatlan játékosoknál
+  no-rank: '-'
+
+#A játékosnak, a hibakereső menüből. Hagyj egy sort üresen (''), hogy ne küldjön semmit.
+messages:
+  debug-round: '&8[&cDEBUG&8] &fÚj privát &e%game% &fforduló (válasz: &a%answer%&f), elkészült &e%generated% ms&f alatt. Csak te látod.'
+  debug-failed: '&8[&cDEBUG&8] &cNem sikerült %game% fordulót készíteni; a konzol megmondja, miért.'
+  debug-race: '&8[&cDEBUG&8] &cA versenyek a világban zajlanak, ezért itt nem tesztelhetők. Indíts egyet: /chatgames <race>.'
+  debug-no-letters: '&8[&cDEBUG&8] &7Ebben a válaszban nincsenek betűk, így a kis- és nagybetű nem lehet hibás.'
+  debug-timeout-started: '&8[&cDEBUG&8] &7Kivárjuk a(z) &e%time%mp &7időkorlátot...'
+  debug-timeout: '&8[&cDEBUG&8] &e%game%&7: lejárt az idő. A játékosok megtudnák, hogy a válasz &f%answer%&7 volt.'
+  #%verdict% az alábbi sorok egyike
+  debug-result: '&8[&cDEBUG&8] &e%game% &7| beírva: &f%input%&7, &e%ms% ms&7 után: %verdict%'
+  debug-verdicts:
+    accepted: '&aelfogadva &7(helyezést érne el és &e%points% &7pontot kapna)'
+    wrong: '&chibás &7(figyelmen kívül)'
+    wrong-case: '&6hibás kis- és nagybetű &7(a játékost figyelmeztetik)'
+    macro: '&cmakróként figyelmen kívül &7(gyorsabb a min-answer-ms értéknél, &e%min_ms% ms&7)'
+    late: '&ctúl késő &7(az időkorlát után)'
+
+menus:
+
+  #/chatgames menu. %points% %rank% %wins% %claimable% (átvehető jutalmak),
+  #%daily_completed% %daily_total% %weekly_completed% %weekly_total%,
+  #%games_on% / %sound_on% (true vagy false) és %games_state% / %sound_state% (BE/KI szöveg)
+  main:
+    title: '&8&lChatGames'
+    rows: 3
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      profile:
+        slot: 10
+        material: player_head
+        head: '%player%'
+        name: '&e&lProfilod'
+        lore:
+          - '&7Pontok: &e%points% &8(%rank%)'
+          - '&7Győzelmek: &e%wins%'
+          - ''
+          - '&eKattints a statisztikáidért'
+        actions: ['[open] profile']
+      challenges:
+        slot: 11
+        material: writable_book
+        name: '&a&lKihívások'
+        lore:
+          - '&7Napi: &e%daily_completed%&7/&e%daily_total%'
+          - '&7Heti: &e%weekly_completed%&7/&e%weekly_total%'
+          - '&7Átvehető jutalmak: &e%claimable%'
+          - ''
+          - '&eKattints a megnyitáshoz'
+        actions: ['[open] challenges daily']
+      streaks:
+        slot: 12
+        material: blaze_powder
+        name: '&6&lSorozatok'
+        lore:
+          - '&7Játssz minden nap, hogy ne szakadjanak meg.'
+          - ''
+          - '&eKattints a megnyitáshoz'
+        actions: ['[open] streaks']
+      leaderboards:
+        slot: 13
+        material: gold_ingot
+        name: '&e&lRanglisták'
+        lore:
+          - '&7A legtöbb pont és a leggyorsabb játékosok.'
+          - ''
+          - '&eKattints a megnyitáshoz'
+        actions: ['[open] leaderboards']
+      games-toggle:
+        slot: 15
+        material: lime_dye
+        name: '&fCsetjátékok: %games_state%'
+        lore:
+          - '&7Kattints, hogy kikapcsold magadnak a csetjátékokat.'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7Kattints, hogy bekapcsold magadnak a csetjátékokat.'
+      sound-toggle:
+        slot: 16
+        material: note_block
+        name: '&fJátékhangok: %sound_state%'
+        lore:
+          - '&7Kattints a játékhangok kikapcsolásához.'
+        state: '%sound_on%'
+        actions: ['[command] chatgames togglesound', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7Kattints a játékhangok bekapcsolásához.'
+      admin:
+        slot: 22
+        material: command_block
+        name: '&c&lAdmin'
+        lore:
+          - '&7Játékok, események, csomagok indítása...'
+        view-requirements: ['permission chatgames.admin']
+        actions: ['[open] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cBezárás'
+        actions: ['[close]']
+
+  #/chatgames profile [player]. %target% %points% %rank% %wins% %race_wins% %global_played%
+  #%global_won% (teljesített) %contributions% %events_played% %event_wins% %event_best_place% %fastest% %challenges_completed%
+  #%milestones% %milestones_total% %streak_<challenge|daily|global>% és %streak_<...>_longest%.
+  #Listák: %game_wins% és %game_fastest%. [open] profile <name> valaki más profilját nyitja meg.
+  profile:
+    title: '&8Profil: %target%'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7még nincs'
+      game-wins: '&7%game%: &f%wins%'
+      game-fastest: '&7%game%: &f%time%mp'
+    items:
+      head:
+        slot: 4
+        material: player_head
+        head: '%target%'
+        name: '&e&l%target%'
+        lore:
+          - '&7Pontok: &e%points% &8(%rank%)'
+      wins:
+        slot: 19
+        material: diamond
+        name: '&b&lGyőzelmek'
+        lore:
+          - '&7Megnyert csetjátékok: &f%wins%'
+          - '&7Megnyert versenyek: &f%race_wins%'
+          - ''
+          - '%game_wins%'
+      fastest:
+        slot: 20
+        material: clock
+        name: '&e&lLeggyorsabb idők'
+        lore:
+          - '&7Legjobb összesen: &f%fastest%'
+          - ''
+          - '%game_fastest%'
+      global:
+        slot: 21
+        material: beacon
+        name: '&3&lGlobális játékok'
+        lore:
+          - '&7Játszott: &f%global_played%'
+          - '&7Teljesített: &f%global_won%'
+          - '&7Hozzájárulások: &f%contributions%'
+      events:
+        slot: 23
+        material: nether_star
+        name: '&6&lEsemények'
+        lore:
+          - '&7Játszott: &f%events_played%'
+          - '&7Megnyert: &f%event_wins%'
+          - '&7Legjobb helyezés: &f%event_best_place%'
+      streaks:
+        slot: 24
+        material: blaze_powder
+        name: '&6&lSorozatok'
+        lore:
+          - '&7Kihívás: &f%streak_challenge% &8(rekord %streak_challenge_longest%)'
+          - '&7Napi győzelem: &f%streak_daily% &8(rekord %streak_daily_longest%)'
+          - '&7Globális: &f%streak_global% &8(rekord %streak_global_longest%)'
+      progress:
+        slot: 25
+        material: experience_bottle
+        name: '&a&lHaladás'
+        lore:
+          - '&7Pontok: &f%points%'
+          - '&7Elért mérföldkövek: &f%milestones%&7/&f%milestones_total%'
+          - '&7Teljesített kihívások: &f%challenges_completed%'
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Vissza'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cBezárás'
+        actions: ['[close]']
+
+  #[open] challenges <daily|weekly>. %period% %period_key% %completed% %total% %resets%.
+  #Bejegyzések: %challenge% %id% %description% %progress% %amount% %percent% %bar% %icon%.
+  #[chatgames:claim-challenge] <period> <id> átvesz egyet.
+  challenges:
+    title: '&8%period% kihívások'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    progress-bar:
+      length: 10
+      done: '&a|'
+      left: '&7|'
+    items:
+      tab-daily:
+        slot: 2
+        material: sunflower
+        name: '&e&lNapi'
+        glow: true
+        lore:
+          - '&7A mai kihívások láthatók.'
+        state: '%period_key% == daily'
+        actions: ['[switch] challenges daily']
+        when-off:
+          glow: false
+          lore:
+            - '&eKattints a mai kihívásokért'
+      tab-weekly:
+        slot: 6
+        material: clock
+        name: '&b&lHeti'
+        glow: true
+        lore:
+          - '&7A heti kihívások láthatók.'
+        state: '%period_key% == weekly'
+        actions: ['[switch] challenges weekly']
+        when-off:
+          glow: false
+          lore:
+            - '&eKattints a heti kihívásokért'
+      info:
+        slot: 4
+        material: book
+        name: '&f%period%: &e%completed%&7/&e%total% &fkész'
+        lore:
+          - '&7Új kihívások ennyi idő múlva: &f%resets%'
+      none:
+        slot: 22
+        material: barrier
+        name: '&7Jelenleg nincs %period% kihívás'
+        view-requirements: ['%entries% == 0']
+      claim-all:
+        slot: 40
+        material: chest
+        name: '&a&lMindet átveszem'
+        lore:
+          - '&7Átvesz minden teljesített kihívást'
+          - '&7és sorozatjutalmat.'
+        actions: ['[command] chatgames claim', '[wait] 2', '[refresh]']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7Előző oldal'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7Következő oldal &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Vissza'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cBezárás'
+        actions: ['[close]']
+    templates:
+      in-progress:
+        material: '%icon%'
+        name: '%challenge%'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&7Folyamatban'
+      ready:
+        material: '%icon%'
+        glow: true
+        name: '%challenge% &a&l(KÉSZ)'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&a&lKattints a jutalom átvételéhez!'
+        actions: ['[chatgames:claim-challenge] %period_key% %id%', '[refresh]']
+      claimed:
+        material: lime_stained_glass_pane
+        name: '%challenge% &7(átvéve)'
+        lore:
+          - '%description%'
+          - ''
+          - '&aJutalom átvéve'
+
+  #Minden sorozatnak van %streak_<type>% (napok), %streak_<type>_name%, %streak_<type>_longest%,
+  #%streak_<type>_unclaimed% és %streak_<type>_enabled% értéke, ahol <type> challenge, daily vagy global.
+  #Mindegyik 7 napos létrája a nevével azonos listába kerül, 1-7. nap (a második héten 8-14...).
+  #Létranapok: %day% %ladder_day% (a jutalom napja, 1-7) %type% %streak% és %today% (a mai napon true).
+  #[chatgames:claim-streak] <type> egy sorozat összes át nem vett napját átveszi.
+  streaks:
+    title: '&8Sorozatok'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    lists:
+      challenge: ['11-17']
+      daily: ['20-26']
+      global: ['29-35']
+    items:
+      challenge:
+        slot: 10
+        material: writable_book
+        name: '%streak_challenge_name%'
+        lore:
+          - '&7Teljesíts minden napi kihívást minden nap.'
+          - ''
+          - '&7Jelenleg: &f%streak_challenge% &7nap &8(rekord %streak_challenge_longest%)'
+          - '&7Átvehető napok: &e%streak_challenge_unclaimed%'
+        view-requirements: ['%streak_challenge_enabled%']
+        click-requirements: ['%streak_challenge_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] challenge', '[refresh]']
+      daily:
+        slot: 19
+        material: gold_ingot
+        name: '%streak_daily_name%'
+        lore:
+          - '&7Nyerj legalább egy játékot minden nap.'
+          - ''
+          - '&7Jelenleg: &f%streak_daily% &7nap &8(rekord %streak_daily_longest%)'
+          - '&7Átvehető napok: &e%streak_daily_unclaimed%'
+        view-requirements: ['%streak_daily_enabled%']
+        click-requirements: ['%streak_daily_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] daily', '[refresh]']
+      global:
+        slot: 28
+        material: beacon
+        name: '%streak_global_name%'
+        lore:
+          - '&7Oldj meg egy globális játékot minden nap.'
+          - ''
+          - '&7Jelenleg: &f%streak_global% &7nap &8(rekord %streak_global_longest%)'
+          - '&7Átvehető napok: &e%streak_global_unclaimed%'
+        view-requirements: ['%streak_global_enabled%']
+        click-requirements: ['%streak_global_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] global', '[refresh]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Vissza'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cBezárás'
+        actions: ['[close]']
+    templates:
+      day-claimed:
+        material: lime_stained_glass_pane
+        glow: '%today%'
+        name: '&a%day%. nap &7(átvéve)'
+      day-ready:
+        material: chest
+        glow: '%today%'
+        name: '&e&l%day%. nap'
+        lore:
+          - '&a&lKattints az átvételhez!'
+        actions: ['[chatgames:claim-streak] %type%', '[refresh]']
+      day-today:
+        material: yellow_stained_glass_pane
+        glow: true
+        name: '&e%day%. nap &7(ma)'
+        lore:
+          - '&7Tartsd fenn ma a sorozatot,'
+          - '&7hogy feloldd ezt a jutalmat.'
+      day-locked:
+        material: red_stained_glass_pane
+        name: '&c%day%. nap'
+        lore:
+          - '&7Még nem érted el.'
+
+  #%points_rank% %fastest_rank% %total_points%; listák: %top_points% és %top_fastest% (top-size sor)
+  leaderboards:
+    title: '&8Ranglisták'
+    rows: 3
+    top-size: 10
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7Még senki'
+    items:
+      points:
+        slot: 10
+        material: gold_block
+        name: '&e&lLegtöbb pont'
+        lore:
+          - '%top_points%'
+      fastest:
+        slot: 11
+        material: clock
+        name: '&b&lLeggyorsabb gépelők'
+        lore:
+          - '%top_fastest%'
+      you:
+        slot: 13
+        material: player_head
+        head: '%player%'
+        name: '&a&lTe'
+        lore:
+          - '&7Helyezés pontokban: &f%points_rank%'
+          - '&7Helyezés gyorsaságban: &f%fastest_rank%'
+          - ''
+          - '&7Mindenki által szerzett pontok: &f%total_points%'
+      games:
+        slot: 15
+        material: book
+        name: '&d&lLeggyorsabbak játékonként'
+        lore:
+          - '&eKattints az összes játékért'
+        actions: ['[open] leaderboard-games']
+      events:
+        slot: 16
+        material: nether_star
+        name: '&6&lEsemények'
+        lore:
+          - '&eKattints az eseményekért'
+        view-requirements: ['permission chatgames.event']
+        actions: ['[open] leaderboard-events']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7Vissza'
+        actions: ['[back] main']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cBezárás'
+        actions: ['[close]']
+
+  #Egy bejegyzés játékonként és versenyenként: %game% %key% %icon% és %top% (a játék leggyorsabb játékosai)
+  leaderboard-games:
+    title: '&8Leggyorsabbak játékonként'
+    rows: 6
+    top-size: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7Még senki'
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7Előző oldal'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7Következő oldal &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7Vissza'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 53
+        material: barrier
+        name: '&cBezárás'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&e&l%game%'
+        lore:
+          - '%top%'
+
+  #Egy bejegyzés eseményenként: %event% %id% %steps%
+  leaderboard-events:
+    title: '&8Esemény ranglisták'
+    rows: 4
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7Nincs beállított esemény'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Előző oldal'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Következő oldal &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Vissza'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cBezárás'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7%steps% játék'
+          - ''
+          - '&eKattints, hogy lásd, ki szerezte a legtöbbet'
+        actions: ['[close]', '[command] chatgames event top %id%']
+
+  #/chatgames admin. %current_game% %next_game% %rotation_state% %event% %preset%,
+  #%rotation_on% és %games_on% (true vagy false). Minden gomb a megfelelő parancsot futtatja,
+  #amely úgy ellenőrzi a saját jogát, mintha beírták volna.
+  admin:
+    title: '&4&lChatGames Admin'
+    rows: 5
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7nincs'
+    items:
+      status:
+        slot: 4
+        material: repeater
+        name: '&f&lÁllapot'
+        lore:
+          - '&7Fut: &f%current_game%'
+          - '&7Következő játék: &f%next_game%'
+          - '&7Rotáció: %rotation_state%'
+          - '&7Esemény: &f%event%'
+          - '&7Csomag: &f%preset%'
+      start-game:
+        slot: 19
+        material: diamond_sword
+        name: '&a&lJáték indítása'
+        lore:
+          - '&7Bármely játék vagy verseny, most.'
+        actions: ['[open] admin-start']
+      global:
+        slot: 20
+        material: beacon
+        name: '&3&lGlobális játék indítása'
+        lore:
+          - '&7Mindenki nyer, aki időben teljesít.'
+        actions: ['[open] admin-global']
+      events:
+        slot: 21
+        material: nether_star
+        name: '&6&lEsemények'
+        lore:
+          - '&7Játékesemény indítása vagy leállítása.'
+        actions: ['[open] admin-events']
+      presets:
+        slot: 23
+        material: chest
+        name: '&d&lCsomagok'
+        lore:
+          - '&7Bekapcsolt játékok csomagjának betöltése.'
+        actions: ['[open] admin-presets']
+      logs:
+        slot: 24
+        material: oak_sign
+        name: '&f&lNaplók'
+        lore:
+          - '&7Az utolsó játékok kiírása a csetbe.'
+        actions: ['[open] admin-logs']
+      stop:
+        slot: 25
+        material: red_wool
+        name: '&c&lJáték leállítása'
+        lore:
+          - '&7Győztes nélkül befejezi a futó játékot.'
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      toggle:
+        slot: 29
+        material: lime_dye
+        name: '&fCsetjátékaid: &aBE'
+        lore:
+          - '&7Kattints, hogy kikapcsold őket magadnak.'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&fCsetjátékaid: &cKI'
+          lore:
+            - '&7Kattints, hogy bekapcsold őket magadnak.'
+      toggle-all:
+        slot: 30
+        material: lime_dye
+        name: '&fJátékrotáció: &aBE'
+        lore:
+          - '&7Kattints az automatikus játékok leállításához mindenkinek.'
+        state: '%rotation_on%'
+        #a toggleAll a globális szálon fejeződik be, Folián egy tickkel később
+        actions: ['[command] chatgames toggleAll', '[wait] 2', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&fJátékrotáció: &cKI'
+          lore:
+            - '&7Kattints az automatikus játékok újraindításához.'
+      reload:
+        slot: 32
+        material: hopper
+        name: '&e&lÚjratöltés'
+        lore:
+          - '&7Újratölti az összes konfigurációs fájlt.'
+        actions: ['[close]', '[command] chatgames reload']
+      debug:
+        slot: 33
+        material: command_block
+        name: '&c&lHibakeresés'
+        lore:
+          - '&7Bármely játék privát tesztelése.'
+        view-requirements: ['permission chatgames.debug']
+        actions: ['[open] debug']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Vissza'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cBezárás'
+        actions: ['[close]']
+
+  #Minden játék és verseny: %game% %key% (mint a parancsokban) %icon%
+  admin-start:
+    title: '&8Játék indítása'
+    rows: 6
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7Előző oldal'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7Következő oldal &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7Vissza'
+        actions: ['[back] admin']
+      close:
+        slot: 53
+        material: barrier
+        name: '&cBezárás'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&a%game%'
+        lore:
+          - '&7Csetjáték'
+          - '&eKattints az indításhoz'
+        actions: ['[close]', '[command] chatgames %key%']
+      race:
+        material: '%icon%'
+        name: '&6%game%'
+        lore:
+          - '&7Verseny'
+          - '&eKattints az indításhoz'
+        actions: ['[close]', '[command] chatgames %key%']
+
+  #A global_games.yml által bekapcsolt játékok: %game% %key% %icon% %goal% %duration% %points%.
+  #A futó: %global_running% %global_game% %global_goal% (pl. "500 Stone")
+  #%global_progress% %global_goal_amount% %global_percent% %global_contributors% %global_time_left%
+  admin-global:
+    title: '&8Globális játékok'
+    rows: 5
+    update-interval: 20
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    items:
+      status:
+        slot: 4
+        material: beacon
+        name: '&3&lFut: &f%global_game%'
+        lore:
+          - '&7Cél: &f%global_goal%'
+          - '&7Haladás: &e%global_progress%&7/&e%global_goal_amount% &8(%global_percent%%)'
+          - '&7Segítő játékosok: &f%global_contributors%'
+          - '&7Hátralévő idő: &f%global_time_left%mp'
+          - ''
+          - '&cKattints a leállításhoz (jutalom nélkül)'
+        view-requirements: ['%global_running%']
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      idle:
+        slot: 4
+        material: gray_dye
+        name: '&7Nem fut globális játék'
+        lore:
+          - '&7Válassz egyet lent az indításhoz.'
+        view-requirements: ['!%global_running%']
+      none:
+        slot: 22
+        material: barrier
+        name: '&7Nincs bekapcsolt globális játék'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7Előző oldal'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7Következő oldal &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Vissza'
+        actions: ['[back] admin']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cBezárás'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&3Globális %game%'
+        lore:
+          - '&7Cél: &f%goal% helyes válasz'
+          - '&7Idő: &f%duration%mp'
+          - '&7Pontok: &f%points%'
+          - ''
+          - '&eKattints az indításhoz'
+        actions: ['[close]', '[command] chatgames global %key%']
+      race:
+        material: '%icon%'
+        name: '&3Globális %game% verseny'
+        lore:
+          - '&7Cél: &f%goal% közösen'
+          - '&7Idő: &f%duration%mp'
+          - '&7Pontok: &f%points%'
+          - ''
+          - '&eKattints az indításhoz'
+        actions: ['[close]', '[command] chatgames global %key%']
+      count:
+        material: '%icon%'
+        name: '&3Globális %game%'
+        lore:
+          - '&7Számoljatok együtt a csetben'
+          - '&7Idő: &f%duration%mp'
+          - '&7Pontok: &f%points%'
+          - ''
+          - '&eKattints az indításhoz'
+        actions: ['[close]', '[command] chatgames global %key%']
+
+  #events.yml események: %event% %id% %steps% és %step% (az épp futó játék) a futóhoz
+  admin-events:
+    title: '&8Események'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7Nincs esemény beállítva az events.yml-ben'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Előző oldal'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Következő oldal &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Vissza'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cBezárás'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7%steps% játék'
+          - ''
+          - '&eKattints az indításhoz'
+        actions: ['[command] chatgames event start %id%', '[wait] 2', '[refresh]']
+      running:
+        material: nether_star
+        glow: true
+        name: '%event% &a(fut)'
+        lore:
+          - '&7%step%. játék / %steps%'
+          - ''
+          - '&cKattints a leállításhoz'
+        actions: ['[command] chatgames event stop', '[wait] 2', '[refresh]']
+
+  #A csomagok és a 'none' (a games.yml enable jelzői): %preset% %games%
+  admin-presets:
+    title: '&8Csomagok'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Előző oldal'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Következő oldal &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Vissza'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cBezárás'
+        actions: ['[close]']
+    templates:
+      preset:
+        material: chest
+        name: '&d%preset%'
+        lore:
+          - '&7Játékok: &f%games%'
+          - ''
+          - '&eKattints a betöltéshez'
+        actions: ['[command] chatgames preset load %preset%', '[wait] 2', '[refresh]']
+      active:
+        material: ender_chest
+        glow: true
+        name: '&d%preset% &a(aktív)'
+        lore:
+          - '&7Játékok: &f%games%'
+
+  #Teljesen itt épül fel: szabadon adj hozzá vagy módosíts mennyiségeket
+  admin-logs:
+    title: '&8Naplók'
+    rows: 3
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      last-10:
+        slot: 11
+        material: paper
+        name: '&fUtolsó &e10 &fjáték'
+        lore: ['&eKattints a csetbe íráshoz']
+        actions: ['[close]', '[command] chatgames logs 10']
+      last-25:
+        slot: 12
+        material: paper
+        name: '&fUtolsó &e25 &fjáték'
+        lore: ['&eKattints a csetbe íráshoz']
+        actions: ['[close]', '[command] chatgames logs 25']
+      last-50:
+        slot: 14
+        material: paper
+        name: '&fUtolsó &e50 &fjáték'
+        lore: ['&eKattints a csetbe íráshoz']
+        actions: ['[close]', '[command] chatgames logs 50']
+      last-100:
+        slot: 15
+        material: paper
+        name: '&fUtolsó &e100 &fjáték'
+        lore: ['&eKattints a csetbe íráshoz']
+        actions: ['[close]', '[command] chatgames logs 100']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7Vissza'
+        actions: ['[back] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cBezárás'
+        actions: ['[close]']
+
+  #/chatgames debug: minden csetjáték (%game% %key% %icon%). [chatgames:debug] <game> elindít egy
+  #privát fordulót és megnyitja a debug-session menüt.
+  debug:
+    title: '&4Hibakeresés: válassz játékot'
+    rows: 4
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Előző oldal'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Következő oldal &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Vissza'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cBezárás'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&c%game%'
+        lore:
+          - '&7Privát fordulót készít.'
+          - '&7Nincs jutalom, semmi sem mentődik.'
+        actions: ['[chatgames:debug] %key%']
+
+  #A privát forduló: %game% %key% %icon% %question% %answer% %time% %min_ms% %case_sensitive%
+  #%winners% %points% %hints% %generated%; listák: %placeholders% és %answers%.
+  #[chatgames:debug-answer] <correct|wrong|wrong-case> [ms] próbaválaszt küld (ms után);
+  #[chatgames:debug-timeout] kivárja az időkorlátot; [chatgames:debug-reroll] új fordulót készít;
+  #[chatgames:debug-end] befejezi a munkamenetet.
+  debug-session:
+    title: '&4Hibakeresés: %game%'
+    rows: 5
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    #Késleltetésenként egy „helyes válasz X ms után” gomb, a 'delays' lista helyein
+    delays: [100, 500, 1000, 5000]
+    lists:
+      delays: ['29-32']
+    items:
+      question:
+        slot: 11
+        material: '%icon%'
+        name: '&e&lKérdés'
+        lore:
+          - '&f%question%'
+          - ''
+          - '%placeholders%'
+      answer:
+        slot: 13
+        material: emerald
+        name: '&a&lElfogadott válaszok'
+        lore:
+          - '%answers%'
+      settings:
+        slot: 15
+        material: repeater
+        name: '&f&lBeállítások'
+        lore:
+          - '&7Időkorlát: &f%time%mp'
+          - '&7Min. válaszidő: &f%min_ms% ms'
+          - '&7Kis- és nagybetű érzékeny: %case_sensitive%'
+          - '&7Győztesek: &f%winners%  &7Pontok: &f%points%'
+          - '&7Előkészített tippek: &f%hints%'
+          - '&7Elkészült: &f%generated% ms'
+      correct-now:
+        slot: 28
+        material: lime_wool
+        name: '&aHelyes válasz most'
+        lore:
+          - '&7Gyorsabb bármely embernél: megmutatja'
+          - '&7a makróellenőrzés működését.'
+        actions: ['[chatgames:debug-answer] correct']
+      wrong:
+        slot: 33
+        material: red_wool
+        name: '&cHibás válasz'
+        actions: ['[chatgames:debug-answer] wrong']
+      wrong-case:
+        slot: 34
+        material: orange_wool
+        name: '&6Válasz hibás kis- és nagybetűkkel'
+        actions: ['[chatgames:debug-answer] wrong-case']
+      timeout:
+        slot: 39
+        material: clock
+        name: '&eHagyd lejárni az időt'
+        lore:
+          - '&7Kivárja az időkorlátot, aztán jelent.'
+        actions: ['[chatgames:debug-timeout]']
+      reroll:
+        slot: 41
+        material: ender_pearl
+        name: '&dÚj forduló'
+        actions: ['[chatgames:debug-reroll]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Vissza'
+        actions: ['[chatgames:debug-end]', '[back] debug']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cBezárás'
+        actions: ['[close]']
+    templates:
+      correct-after:
+        material: yellow_wool
+        name: '&eHelyes válasz %ms% ms után'
+        actions: ['[chatgames:debug-answer] correct %ms%']

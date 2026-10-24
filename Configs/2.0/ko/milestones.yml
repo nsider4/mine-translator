@@ -1,0 +1,7 @@
+milestones:
+  '100':
+    - "say %player%님이 100포인트에 도달했습니다!"
+    - "give %player% diamond 1"
+  '500':
+    - "broadcast %player%님은 500포인트로 이제 전설입니다!"
+    - "give %player% emerald 5"

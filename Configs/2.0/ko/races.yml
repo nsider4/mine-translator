@@ -1,0 +1,550 @@
+enable-races: true
+
+creative-enabled: true
+#데이터를 추가할 때 유용한 링크:
+#
+#https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+#https://helpch.at/docs/1.8/index.html?org/bukkit/entity/EntityType.html
+#https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+#https://helpch.at/docs/1.8/org/bukkit/Material.html
+
+#이름은 새 이름이나 옛 이름 모두 됩니다(MOOSHROOM 또는 MUSHROOM_COW, COD 또는 RAW_FISH). 서버의
+#버전에 맞춰 찾아집니다. 그 버전에 없는 이름(예: 1.8에서 1.21 블록)은 건너뛰고 콘솔에 알립니다.
+#
+#각 레이스는 다음도 받습니다(선택):
+#  points: 1     #승자가 받는 포인트(기본값 1)
+#  weight: 1     #다른 게임과 비교해 로테이션이 고르는 빈도(기본값 1, 0 = 고르지 않음)
+#
+#관리자는 직접 정한 값으로 레이스를 시작할 수 있습니다: /chatgames <race> <material/mob> [amount]
+#개수를 정하지 않으면 아래에서 그 재료/몹에 적힌 개수를 씁니다. 승자는 정확히
+#그 재료와 개수에 적힌 보상을 받고, 여기에 없으면 보상이 없습니다(포인트는 받습니다).
+
+hunt:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&b사냥'
+  subtitleMessage: '&a%value% %amount%마리를 처치하세요!'
+
+  #스포너 블록이나 생성 알로 나온 몹도 셀지 여부.
+  count-spawner-mobs: true
+  #MythicMobs 몹을 바탕이 된 몹으로도 셀지 여부(MythicMobs 좀비를 ZOMBIE로).
+  count-mythic-mobs: true
+
+  data:
+    #이 값들은 올바른 Minecraft 몹 ID여야 합니다(파일 맨 위의 유용한 링크 참고)
+    #MythicMobs가 있으면 mythic:<mob type>은 그 몹 중 하나입니다(예시는 이 목록 끝에 있습니다)
+    ZOMBIE:
+      3:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+
+    CREEPER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SKELETON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SPIDER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    PIG:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SHEEP:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    COW:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    CHICKEN:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SALMON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    #mythic:SkeletonKing:
+    #  1:
+    #    rewards:
+    #      - reward_1
+
+mine:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&b채굴'
+  subtitleMessage: '&a%value% %amount%개를 캐세요!'
+
+  data:
+    #이 값들은 올바른 Minecraft 재료 ID여야 합니다(파일 맨 위의 유용한 링크 참고)
+    STONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRASS_BLOCK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRAVEL:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIORITE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+place:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&b설치'
+  subtitleMessage: '&a%value% %amount%개를 설치하세요!'
+
+  data:
+    #이 값들은 올바른 Minecraft 재료 ID여야 합니다(파일 맨 위의 유용한 링크 참고)
+    COBBLESTONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+fish:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&b낚시'
+  subtitleMessage: '&a%value% %amount%개를 낚으세요!'
+
+  data:
+    #이 값들은 올바른 Minecraft 재료 ID여야 합니다(파일 맨 위의 유용한 링크 참고)
+    COD:
+      1:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+          - reward_3
+    SALMON:
+      1:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+          - reward_3
+    PUFFERFISH:
+      1:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+          - reward_3
+    BOWL:
+      1:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+          - reward_3
+
+eat:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&b먹기'
+  subtitleMessage: '&a%value% %amount%개를 먹으세요!'
+
+  data:
+    #이 값들은 올바른 Minecraft 재료 ID여야 합니다(파일 맨 위의 유용한 링크 참고)
+    COOKED_BEEF:
+      1:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_CHICKEN:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BAKED_POTATO:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BREAD:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    GOLDEN_APPLE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+
+craft:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&b제작'
+  subtitleMessage: '&a%value% %amount%개를 만드세요!'
+
+  data:
+    #이 값들은 올바른 Minecraft 재료 ID여야 합니다(파일 맨 위의 유용한 링크 참고)
+    FURNACE:
+      2:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+      4:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+          - reward_3
+    CHEST:
+      2:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+      4:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+          - reward_3
+    CRAFTING_TABLE:
+      4:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+      8:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_1
+          - reward_2
+      12:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      32:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+      48:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_1
+          - reward_2
+      64:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+          - reward_3
+
+furnace:
+  enable: true
+
+  timeToComplete_seconds: 150
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&b요리'
+  subtitleMessage: '&a%value% %amount%개를 구우세요!'
+
+  data:
+    #이 값들은 올바른 Minecraft 재료 ID여야 합니다(파일 맨 위의 유용한 링크 참고)
+    GOLD_INGOT:
+      3:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+      6:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+          - reward_3
+    IRON_INGOT:
+      3:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+      6:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_BEEF:
+      3:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+      6:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_COD:
+      3:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+      6:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_2
+          - reward_3
+
+tame:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&b길들이기'
+  subtitleMessage: '&a%value% %amount%마리를 길들이세요!'
+
+  data:
+    #이 값들은 올바른 Minecraft 몹 ID여야 합니다(파일 맨 위의 유용한 링크 참고)
+    #그 버전에서 길들일 수 있는 몹만 씁니다: 1.13까지는 OCELOT, 1.14부터는 CAT.
+    WOLF:
+      1:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    CAT:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    OCELOT:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    HORSE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    PARROT:
+      1:
+        rewards:
+          - reward_2
+          - reward_3
+
+shear:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__다음 2개를 비우면 꺼집니다__
+  titleMessage: '&b털 깎기'
+  subtitleMessage: '&a%value% %amount%마리의 털을 깎으세요!'
+
+  data:
+    #이 값들은 올바른 Minecraft 몹 ID여야 합니다(파일 맨 위의 유용한 링크 참고)
+    SHEEP:
+      3:
+        #추가한 모든 보상의 확률 합은 100%를 넘을 수 없습니다
+        rewards:
+          - reward_1
+          - reward_2
+      6:
+        rewards:
+          - reward_2
+          - reward_3
+    MOOSHROOM:
+      1:
+        rewards:
+          - reward_1
+          - reward_2

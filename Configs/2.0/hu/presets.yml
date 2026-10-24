@@ -1,0 +1,41 @@
+# ChatGames csomagok: elnevezett játékcsoportok az automatikus rotációhoz.
+#
+# Amíg egy csomag aktív, a rotáció csak annak játékait választja, és a games.yml / races.yml
+# 'enable' jelzői figyelmen kívül maradnak. Állítsd az 'active'-ot none-ra, hogy újra azokat használja.
+# A csomag versenyei csak akkor futnak, ha a versenyek be vannak kapcsolva a races.yml-ben (enable-races).
+#
+# Parancsok (jog: chatgames.preset):
+#   /chatgames preset list
+#   /chatgames preset load <name>   (vagy 'none')
+#   /chatgames preset save <name>   a most bekapcsolt játékokat csomagként menti
+#
+# A plugin átírja ezt a fájlt, amikor ezeket a parancsokat használod.
+
+active: none
+
+presets:
+  weekend_set:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+
+  minimal_set:
+    games:
+      - reaction
+
+  full_rotation:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+      - guess_the_number
+      - memorize
+      - sequence
+      - clickable
+      - fillout
+      - hoverable
+      - random
+      - math
+      - variable
+      - trivia

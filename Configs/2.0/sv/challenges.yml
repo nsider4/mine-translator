@@ -1,0 +1,136 @@
+#DAGLIGA OCH VECKOVISA UTMANINGAR
+#
+#Alla får samma utmaningar. Framstegen räknas medan spelarna spelar; en klar
+#utmaning visar ”Redo att hämta” i /chatgames challenges, och /chatgames claim betalar ut den.
+#Belöningar som inte hämtats går förlorade när utmaningarna återställs.
+#
+#UTMANINGSTYPER (amount är hur många som behövs):
+#  WIN_GAMES    vinn chattspel eller lopp, på valfri plats
+#  WIN_GAME     vinn ett spel eller lopp, angivet med 'game' (t.ex. game: unscramble)
+#  WIN_RACES    vinn lopp
+#  PLAY_GLOBAL  lös globala spel i tid
+#  WIN_GLOBAL   avsluta globala spel på en belönad plats
+#  FAST_WIN     vinn chattspel på 'seconds' eller mindre (lopp räknas inte)
+#  EARN_POINTS  tjäna poäng från spel
+#  PLAY_EVENT   delta i spelevenemang
+#
+#Varje utmaning har:
+#  name / description: visas i chatten och menyn. %amount%, %game% och %seconds% fylls i.
+#  icon: menyföremålet (ett materialnamn)
+#  rewards: rader som i rewards.yml (chanser med '<chance>%~ ', behörigheter med 'has:<permission>').
+#           %player% och %challenge% (namnet) fylls i.
+#
+#ID:na (win_3, fast_1...) sparas med spelarnas framsteg: håll dem till a-z, 0-9, - och _,
+#och att ändra ett startar om utmaningens framsteg.
+
+#Tidszonen dagarna börjar i, för utmaningar och sviter, t.ex. Europe/Stockholm eller America/New_York.
+#Tomt använder serverns.
+timezone: ''
+
+daily:
+  enabled: true
+  #fixed: varje utmaning nedan är aktiv varje dag.
+  #random: 'amount' av dem dras varje dag (samma för alla).
+  mode: random
+  amount: 3
+  challenges:
+    win_3:
+      type: WIN_GAMES
+      amount: 3
+      name: '&eUppvärmning'
+      description: '&7Vinn %amount% chattspel'
+      icon: GOLD_NUGGET
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    win_8:
+      type: WIN_GAMES
+      amount: 8
+      name: '&6På rulle'
+      description: '&7Vinn %amount% chattspel'
+      icon: GOLD_INGOT
+      rewards:
+        - '[consolecmd] give %player% gold_ingot 8'
+    unscramble_2:
+      type: WIN_GAME
+      game: unscramble
+      amount: 2
+      name: '&bOrdtrollkarl'
+      description: '&7Vinn %amount% %game%-spel'
+      icon: BOOK
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    math_2:
+      type: WIN_GAME
+      game: math
+      amount: 2
+      name: '&bMänsklig miniräknare'
+      description: '&7Vinn %amount% %game%-spel'
+      icon: PAPER
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    fast_1:
+      type: FAST_WIN
+      seconds: 5
+      amount: 1
+      name: '&cSnabba fingrar'
+      description: '&7Vinn ett chattspel på %seconds% sekunder eller mindre'
+      icon: FEATHER
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    race_1:
+      type: WIN_RACES
+      amount: 1
+      name: '&aRacerförare'
+      description: '&7Vinn ett lopp'
+      icon: IRON_PICKAXE
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    points_5:
+      type: EARN_POINTS
+      amount: 5
+      name: '&dPoängsamlare'
+      description: '&7Tjäna %amount% poäng'
+      icon: EXPERIENCE_BOTTLE
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    global_1:
+      type: PLAY_GLOBAL
+      amount: 1
+      name: '&3Lagspelare'
+      description: '&7Lös ett globalt spel i tid'
+      icon: COMPASS
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+
+weekly:
+  enabled: true
+  #Dagen varje vecka börjar på.
+  reset-day: MONDAY
+  mode: fixed
+  amount: 3
+  challenges:
+    win_25:
+      type: WIN_GAMES
+      amount: 25
+      name: '&6Veckans mästare'
+      description: '&7Vinn %amount% chattspel den här veckan'
+      icon: DIAMOND
+      rewards:
+        - '[consolecmd] give %player% diamond 3'
+    fast_5:
+      type: FAST_WIN
+      seconds: 4
+      amount: 5
+      name: '&cBlixten'
+      description: '&7Vinn %amount% chattspel på %seconds% sekunder eller mindre'
+      icon: BLAZE_POWDER
+      rewards:
+        - '[consolecmd] give %player% diamond 2'
+    global_5:
+      type: WIN_GLOBAL
+      amount: 5
+      name: '&3Publikfavorit'
+      description: '&7Avsluta %amount% globala spel på en belönad plats'
+      icon: BEACON
+      rewards:
+        - '[consolecmd] give %player% diamond 2'

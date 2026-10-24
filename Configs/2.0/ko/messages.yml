@@ -1,0 +1,735 @@
+unknown_command: '&8[%prefix%&8] &c알 수 없는 명령어입니다. 다른 것을 시도해 보세요!'
+config_reloaded: '&8[%prefix%&8] &f설정 파일을 다시 불러왔습니다!'
+config_reload_failed: '&8[%prefix%&8] &c일부 파일을 불러오지 못했습니다. 콘솔을 확인하세요. 해당 파일은 이전 값을 유지합니다.'
+not_enough_permissions: '&8[%prefix%&8] &c이 명령어를 실행할 권한이 없습니다!'
+player_only_command: '&8[%prefix%&8] &c이 명령어는 플레이어만 실행할 수 있습니다!'
+player_deleted: '&8[%prefix%&8] &c플레이어 &f%player%&c을(를) 데이터베이스에서 삭제했습니다!'
+player_not_found: '&8[%prefix%&8] &f플레이어를 찾을 수 없습니다: &c%player%'
+number_not_found_commands: '&8[%prefix%&8] &c명령어에 쓸 숫자를 찾을 수 없습니다'
+points_added: '&8[%prefix%&8] &c%player%&f에게 &a%amount% &f포인트를 추가했습니다'
+points_removed: '&8[%prefix%&8] &c%player%&f에게서 &a%amount% &f포인트를 뺐습니다'
+points_set: '&8[%prefix%&8] &c%player%&f의 포인트를 &a%amount%&f(으)로 설정했습니다'
+player_points: '&8[%prefix%&8] &f포인트가 &a%amount% &f있습니다!'
+in_cooldown: '&8[%prefix%&8] &c아직 사용할 수 없습니다. &e%time_left%s &c후에 다시 사용하세요'
+type_not_found: '&8[%prefix%&8] &f재료/엔티티 종류를 찾을 수 없습니다: &c%type%'
+inventory_full: '&8[%prefix%&8] &c인벤토리가 가득 찼습니다! &f보상을 현재 위치에 떨어뜨렸습니다'
+
+no_winner_placeholder: '---'
+cannot_start_from_disabled: '&8[%prefix%&8] &c비활성화된 월드에서는 채팅 게임을 시작할 수 없습니다!'
+toggle_game: '&8[%prefix%&8] &f채팅 게임을 &a%state% &f상태로 바꿨습니다!'
+toggle_sound: '&8[%prefix%&8] &f채팅 게임 소리를 &a%state% &f상태로 바꿨습니다!'
+toggleAllGames: '&8[%prefix%&8] &c모든 &f채팅 게임을 &a%state% &f상태로 바꿨습니다!'
+state-ON: '켜짐'
+state-OFF: '꺼짐'
+game_started: '&8[%prefix%&8] &a채팅에서 %game% 채팅 게임을 시작했습니다!'
+invalid_arguments: '&8[%prefix%&8] &f명령어의 인수를 확인하는 중 문제가 생겼습니다!'
+cant_log_local: '&8[%prefix%&8] &c설정에서 이 옵션이 꺼져 있어 로그 메시지를 볼 수 없습니다!'
+toggle_game_other: '&f&8[%prefix%&8] &c%player%&f의 채팅 게임을 &a%state% &f상태로 바꿨습니다!'
+toggle_sound_other: '&f&8[%prefix%&8] &c%player%&f의 채팅 게임 소리를 &a%state% &f상태로 바꿨습니다!'
+player_points_other: '&8[%prefix%&8] &c%player%&f의 포인트는 &a%amount%&f입니다!'
+data_loading: '&8[%prefix%&8] &c그 플레이어의 데이터를 아직 불러오는 중입니다. 잠시 후 다시 시도하세요.'
+usage: '&8[%prefix%&8] &c사용법: &f%usage%'
+game_already_running: '&8[%prefix%&8] &c이미 채팅 게임이 진행 중입니다! 먼저 &f/chatgames stop&c(으)로 끝내세요.'
+game_not_started: '&8[%prefix%&8] &c그 값으로는 %game% 게임을 시작할 수 없습니다. 자세한 내용은 콘솔을 확인하세요.'
+no_games_enabled: '&8[%prefix%&8] &c지금 켜진 게임이 없습니다.'
+game_stopped: '&8[%prefix%&8] &f현재 게임을 승자 없이 멈췄습니다.'
+no_game_running: '&8[%prefix%&8] &c지금 진행 중인 채팅 게임이 없습니다.'
+global_not_enabled: '&8[%prefix%&8] &f%game%&c은(는) global_games.yml에서 글로벌 게임으로 켜져 있지 않습니다.'
+unknown_game: '&8[%prefix%&8] &c&f%game%&c(이)라는 게임은 없습니다.'
+unknown_menu: '&8[%prefix%&8] &c&f%menu%&c(이)라는 메뉴는 없습니다.'
+
+presets:
+  loaded: '&8[%prefix%&8] &f프리셋 &a%preset% &f(%games%)을(를) 불러왔습니다.'
+  cleared: '&8[%prefix%&8] &f더 이상 프리셋을 쓰지 않습니다. games.yml에서 켜진 게임을 사용합니다.'
+  saved: '&8[%prefix%&8] &f켜진 게임을 프리셋 &a%preset% &f(%games%)(으)로 저장했습니다.'
+  not_found: '&8[%prefix%&8] &c&f%preset%&c(이)라는 프리셋은 없습니다.'
+  invalid_name: '&8[%prefix%&8] &c프리셋 이름에는 영문자, 숫자, -, _ 만 쓸 수 있습니다(최대 32자).'
+  list_header: '&8[%prefix%&8] &e프리셋:'
+  list_entry: '&7- &f%preset%%active% &8(%games%)'
+  active_marker: ' &a(사용 중)'
+  list_empty: '&8[%prefix%&8] &cpresets.yml에 설정된 프리셋이 없습니다.'
+
+challenges:
+  completed: '&8[%prefix%&8] &a%period% 도전 과제 완료: &f%challenge%&a! &f/chatgames claim&a(으)로 받으세요.'
+  claimed: '&a&8[%prefix%&8] &f%challenge%&a을(를) 받았습니다!'
+  nothing_to_claim: '&8[%prefix%&8] &c지금 받을 것이 없습니다.'
+  #/chatgames challenges. 아래 %period%는 '일일' 또는 '주간', %resets%는 남은 시간(예: 5시간 12분)입니다
+  header: '&8[%prefix%&8] &e%period% 도전 과제 &7(%completed%/%total% 완료, %resets% 후 초기화)'
+  entry: '&7- %challenge% &8- &7%description% &f%progress%/%amount% %status%'
+  status_in_progress: ''
+  status_ready: '&a[받을 수 있음]'
+  status_claimed: '&7[받음]'
+  none: '&8[%prefix%&8] &c지금은 도전 과제가 없습니다.'
+  daily: '일일'
+  weekly: '주간'
+  #%resets%의 단위. 예: 2일 5시간, 5시간 12분, 40분
+  time_days: '%amount%일'
+  time_hours: '%amount%시간'
+  time_minutes: '%amount%분'
+  reset: '&f&8[%prefix%&8] &c%player%&f의 일일 및 주간 도전 과제 진행도를 초기화했습니다.'
+
+streaks:
+  grew: '&8[%prefix%&8] &a%streak%&a이(가) 이제 &f%days%&a일입니다! &f/chatgames claim&a(으)로 보상을 받으세요.'
+  #%days%는 하루, 또는 여러 날을 한꺼번에 받을 때 3-5 같은 범위입니다
+  claimed: '&8[%prefix%&8] &a%streak% &a보상을 받았습니다(%days%일차)!'
+  header: '&8[%prefix%&8] &e연속 기록:'
+  entry: '&7- %streak% &8- &f%days%&7일, 최고 &f%longest% %status%'
+  status_ready: '&a[%unclaimed%개 받을 수 있음]'
+  status_today: '&7[오늘 완료]'
+  status_waiting: '&e[오늘 미완료]'
+  none: '&8[%prefix%&8] &c연속 기록이 꺼져 있습니다.'
+  set: '&f&8[%prefix%&8] &c%player%&f의 %streak%&f을(를) &a%days%&f일로 설정했습니다.'
+  unknown: '&8[%prefix%&8] &c&f%type%&c(이)라는 연속 기록은 없습니다. challenge, daily, global 중 하나를 쓰세요.'
+
+events:
+  unknown: '&8[%prefix%&8] &c&f%event%&c(이)라는 이벤트는 없습니다.'
+  started: '&8[%prefix%&8] &f이벤트 %event%&f을(를) 시작했습니다.'
+  already_running: '&8[%prefix%&8] &c이미 이벤트가 진행 중입니다: %event%&c.'
+  cancelled: '&8[%prefix%&8] &c다른 플러그인이 이벤트 %event%&c을(를) 취소했습니다.'
+  not_running: '&8[%prefix%&8] &c진행 중인 이벤트가 없습니다.'
+  stopped: '&8[%prefix%&8] &f이벤트 %event%&f을(를) 멈췄습니다.'
+  list_header: '&8[%prefix%&8] &e이벤트:'
+  list_entry: '&7- &f%id% &8(%event%&8) &7게임 %steps%개, 다음: &f%next%%running%'
+  list_running: ' &a(진행 중, %step%/%steps%번째 게임)'
+  list_empty: '&8[%prefix%&8] &cevents.yml에 설정된 이벤트가 없습니다.'
+  not_scheduled: '예정 없음'
+  top_header: '&8[%prefix%&8] &e%event%&e에서 이벤트 포인트가 가장 많은 플레이어:'
+  top_entry: '&c%spot%. &f%player% &8| &e%points% &7포인트'
+  top_empty: '&8[%prefix%&8] &c아직 %event%&c에서 점수를 얻은 사람이 없습니다.'
+
+discord:
+  test_sent: '&8[%prefix%&8] &fDiscord에 테스트 메시지 &a%amount%&f개를 보냈습니다. 아무것도 안 보이면 콘솔에 이유가 나옵니다.'
+  leaderboard_posted: '&8[%prefix%&8] &f순위표를 Discord에 보냈습니다.'
+  disabled: '&8[%prefix%&8] &cDiscord 메시지가 꺼져 있습니다: discord.yml에서 &fenabled: true&c로 설정하세요.'
+  no_channel: '&8[%prefix%&8] &f%section%&c에는 discord.yml에 webhook이나 DiscordSRV 채널이 있는 채널이 없습니다.'
+  unknown_message: '&8[%prefix%&8] &c&f%message%&c(이)라는 Discord 메시지는 없습니다.'
+  empty_message: '&8[%prefix%&8] &f%message%&c은(는) discord.yml에서 비어 있거나 없습니다.'
+
+logs:
+  no_logs: "&c로그가 없거나 오류가 발생했습니다."
+  header: "&8[%prefix%&8] &e최근 &6%amount%&e개의 로그:"
+  entries:
+    # 게임 관련 로그 항목
+    game:
+      start: "&a게임 시작: &f%game% | &a정답 있음: &f%hasAnswer% | &a정답: &f%answer%"
+      end: "&a게임 종료: &f%game% | &a승자 있음: &f%hasWinner% | &a승자: &f%winners% | &a정답: &f%answer%"
+
+    # 재료형 레이스의 로그 항목
+    race:
+      start: "&a레이스 시작: &f%race% | &a재료: &f%material% | &a수량: &f%amount%"
+      end: "&a레이스 종료: &f%race% | &a승자 있음: &f%hasWinner% | &a승자: &f%winner% | &a재료: &f%material% | &a수량: &f%amount%"
+
+    # 사냥 레이스(엔티티형 레이스) 전용 항목
+    hunt:
+      start: "&a레이스 시작: &f%race% | &a엔티티: &f%entity% | &a수량: &f%amount%"
+      end: "&a레이스 종료: &f%race% | &a승자 있음: &f%hasWinner% | &a승자: &f%winner% | &a엔티티: &f%entity% | &a수량: &f%amount%"
+
+#원하면 순위 메시지에서 <center>를 쓸 수 있습니다.
+top:
+  #특정 메시지를 끄고 싶으면 비워 둘 수 있습니다. ('format'과 'player-stat-format' 제외)
+  header: '&b&m---------&e&l채팅 순위&b&m---------'
+  #separators 값은 상위 10명을 머리글과 바닥글에서 띄우기 위해 보내는 메시지입니다!
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%points% &7포인트'
+  player-stat-format: '&7나의 승리: &e&l%player_points% &7회'
+  total-stat-format: '&7전체 게임 승리 수: &6&l%total_wins%'
+  footer: '&b&m---------------------------'
+
+  no_data_message: '&8[%prefix%&8] &c아직 데이터가 없습니다! 채팅 게임에서 이겨 포인트를 모으세요!'
+
+TypersTop:
+  #특정 메시지를 끄고 싶으면 비워 둘 수 있습니다. ('format'과 'player-stat-format' 제외)
+  header: '&b&m---------&e&l최단 기록 순위&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6초'
+  player-stat-format: '&7나의 최단 기록: &e&l%fastest_time%&6초'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &c아직 데이터가 없습니다! 채팅 게임에서 이겨 가장 빠른 사람이 되세요!'
+  top_disabled_message: '&8[%prefix%&8] &c이 기능은 현재 꺼져 있습니다!'
+
+GameTypersTop:
+  #특정 메시지를 끄고 싶으면 비워 둘 수 있습니다. ('format'과 'player-stat-format' 제외)
+  header: '&b&m---------&e&l최단 기록 순위 - %game%&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6초'
+  player-stat-format: '&7나의 최단 기록: &e&l%fastest_time%&6초'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &c아직 데이터가 없습니다! 채팅 게임에서 이겨 가장 빠른 사람이 되세요!'
+  top_disabled_message: '&8[%prefix%&8] &c이 기능은 현재 꺼져 있습니다!'
+
+help_command:
+  - '&7&m-------------------------------------------------'
+  - '&e&l-ChatGames-'
+  - '&6'
+  - '&6&l명령어:'
+  - '&6'
+  - '&a/chatgames menu [menu] &f- &3메뉴를 엽니다: 프로필, 도전 과제, 연속 기록, 순위표(또는 menus.yml의 아무 메뉴).'
+  - '&a/chatgames profile [player] &f- &3내(또는 다른 플레이어의) 통계를 보여 줍니다.'
+  - '&a/chatgames top &f- &3포인트가 가장 많은 상위 10명을 보여 줍니다.'
+  - '&a/chatgames fastest [game] &f- &3전체 또는 한 게임의 가장 빠른 승자를 보여 줍니다.'
+  - '&a/chatgames points [player] &f- &3내(또는 다른 플레이어의) 포인트를 보여 줍니다.'
+  - '&a/chatgames challenges &f- &3일일 및 주간 도전 과제를 보여 줍니다.'
+  - '&a/chatgames streaks &f- &3연속 기록을 보여 줍니다.'
+  - '&a/chatgames claim &f- &3완료한 도전 과제와 연속 기록 보상을 받습니다.'
+  - '&a/chatgames event [list|top <event>] &f- &3게임 이벤트, 또는 한 이벤트에서 가장 많이 득점한 사람을 보여 줍니다.'
+  - '&a/chatgames toggle [player] &f- &3채팅 게임을 켜거나 끕니다.'
+  - '&a/chatgames togglesound [player] &f- &3채팅 게임 소리를 켜거나 끕니다.'
+  - '&6'
+  - '&c&l관리자:'
+  - '&a/chatgames admin &f- &3관리자 메뉴를 엽니다.'
+  - '&a/chatgames debug &f- &3디버그 메뉴를 엽니다: 보상 없이 아무 게임이나 혼자 시험합니다.'
+  - '&a/chatgames (game) [values] &f- &3그 게임을 지금 시작합니다. 원하는 단어/값을 지정할 수 있습니다.'
+  - '&a/chatgames any &f- &3로테이션이 다음에 고를 게임을 시작합니다.'
+  - '&a/chatgames global <game> [values] &f- &3글로벌 게임을 시작합니다: 제시간에 답한 모두가 이깁니다.'
+  - '&a/chatgames event start <event> | stop &f- &3게임 이벤트를 시작하거나 멈춥니다.'
+  - '&a/chatgames stop &f- &3진행 중인 게임을 승자 없이 끝냅니다.'
+  - '&a/chatgames toggleAll &f- &3자동 게임 로테이션을 켜거나 끕니다.'
+  - '&a/chatgames preset <list|load|save> [name] &f- &3게임 프리셋을 관리합니다.'
+  - '&a/chatgames +points|-points|setpoints <player> <amount> &f- &3플레이어의 포인트를 바꿉니다.'
+  - '&a/chatgames remove <player> &f- &3플레이어의 데이터를 지웁니다.'
+  - '&a/chatgames challenges reset <player> &f- &3플레이어의 도전 과제 진행도를 지웁니다.'
+  - '&a/chatgames streak set <player> <challenge|daily|global> <days> &f- &3플레이어의 연속 기록을 설정합니다.'
+  - '&a/chatgames logs [amount] &f- &3최근 게임 로그를 보여 줍니다.'
+  - '&a/chatgames discord <test <message|all>|leaderboard> &f- &3Discord에 테스트 메시지나 순위표를 보냅니다.'
+  - '&a/chatgames reload &f- &3설정 파일을 다시 불러옵니다.'
+  - '&6'
+  - '&2&l게임 종류:'
+  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace, tame, shear'
+  - '&7&m-------------------------------------------------'
+
+#목록 메시지에서 <center>를 쓰면 가운데 정렬됩니다. 이것이 있는 줄은 가운데에 표시됩니다!
+
+#############################
+##    채팅 게임 메시지    ##
+#############################
+#모든 게임이 함께 씁니다. 각 게임은 아래 자기 섹션의 'hint_message' / 'countdown_actionbar'로 덮어쓸 수 있습니다.
+hint_message: '&8[%prefix%&8] &e힌트: &f%hint%'
+countdown_actionbar: '&7남은 시간 &e%seconds%초'
+
+waiting_for_other_winners: '&8[%prefix%&8] &a정답입니다! &f다른 승자를 기다리는 중...'
+wrong_case: '&8[%prefix%&8] &c아깝네요... 대소문자를 확인하세요!'
+  #모든 게임의 correct_message에서 %player% 대신 "%display_name%"을 쓸 수 있습니다.
+  #
+  #%points_<position>%로 이긴 플레이어의 포인트도 보여 줄 수 있습니다.
+  #
+  #1등, 2등, 3등 등의 승자를 보여 주려면 %winner_<position>%를, 각자 걸린 시간은 %time_<position>%를 쓰세요
+
+  ##예시: 승자가 2명인 경우:
+  #
+  #correct_message:
+  #- ''
+  #- '<center>&r✓ ✯ %prefix% &r✯ ✓'
+  #- ''
+  #- '&7정답은 `&e%correct_answer%&7`였습니다! 승자는:'
+  #- '<center>&f1. &a%winner_1% - (&c%time_1%s&7)'
+  #- '<center>&f2. &a%winner_2% - (&c%time_2%s&7)'
+#- ''
+unscramble:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess%초 &f안에 단어를 &d맞추세요&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1%&7님이 `&e%correct_answer%&7`을(를) 맞추고(&c%time_1%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%초&c가 지났습니다! &f단어 맞추기 게임이 끝났습니다!'
+    - '<center>정답은 &e%correct_answer%&f였습니다!'
+    - ''
+
+unreverse:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess%초 &f안에 단어를 &d거꾸로 되돌리세요&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1%&7님이 가장 빨리 `&e%correct_answer%&7`을(를) 되돌리고(&c%time_1%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%초&c가 지났습니다! &f거꾸로 읽기 게임이 끝났습니다!'
+    - '<center>정답은 &e%correct_answer%&f였습니다!'
+    - ''
+
+reaction:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess%초 &f안에 단어를 &d입력하세요&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1%&7님이 가장 빨리 `&e%correct_answer%&7`을(를) 입력하고(&c%time_1%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%초&c가 지났습니다! &f반응 게임이 끝났습니다!'
+    - '<center>정답은 &e%correct_answer%&f였습니다!'
+    - ''
+
+guess_the_number:
+  hint_message: '&8[%prefix%&8] &e힌트: 범위는 &f%hint%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess%초 &f안에 다음 범위에서 &d숫자를 맞히세요&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1%&7님이 처음으로 `&e%correct_answer%&7`을(를) 맞히고(&c%time_1%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%초&c가 지났습니다! &f숫자 맞히기 게임이 끝났습니다!'
+    - '<center>정답은 &e%correct_answer%&f였습니다!'
+    - ''
+
+memorize:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToMemorize%초 &f안에 이 목록을 &d기억하세요&f:'
+    - ''
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  messageAfterMemorized:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess%초 &f안에 목록을 &d순서대로&f 다시 쓰세요!'
+    - ''
+    - '<center>&f아이템은 쉼표로 구분하세요! (예: `&b사과, 바나나, 초콜릿&f`)'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1%&7님이 처음으로 목록을 쓰고 상품을 받았습니다! (&c%time_1%s&7)'
+    - ''
+    - '<center>&f목록: &f`&b%correct_answer%&f`'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%초&c가 지났습니다! &f기억하기 게임이 끝났습니다!'
+    - ''
+    - '<center>&f목록: &f`&b%correct_answer%&f`'
+    - ''
+
+sequence:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess%초 &f안에 &d수열을 완성하세요&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  hint_message: '&8[%prefix%&8] &e힌트: 다음 수는 &f%hint%'
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1%&7님이 처음으로 `&e%correct_answer%&7`을(를) 찾고(&c%time_1%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%초&c가 지났습니다! &f수열 게임이 끝났습니다!'
+    - '<center>다음 수는 &e%correct_answer%&f였습니다!'
+    - ''
+
+clickable:
+  clickableText: '&a여기를 클릭!'
+  hoverText: '&e여기를 클릭!'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess%초 &f안에 글자를 &d클릭하세요&f:'
+    - ''
+    - '<center>&b%clickableText%'
+    - ''
+  #USE %winner_
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1%&7님이 가장 빨리 글자를 클릭하고(&c%time_1%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%초&c가 지났습니다! &f클릭 게임이 끝났습니다!'
+    - ''
+
+fillout:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess%초 &f안에 단어의 &d빈칸을 채우세요&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1%&7님이 가장 빨리 `&e%correct_answer%&7`을(를) 채우고(&c%time_1%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%초&c가 지났습니다! &f빈칸 채우기 게임이 끝났습니다!'
+    - '<center>정답은 &e%correct_answer%&f였습니다!'
+    - ''
+
+hoverable:
+  hoverableText: '&e여기에 마우스를 올리세요!'
+  hoverText: '&b%selection%'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess%초 &f안에 마우스를 올리면 나오는 단어를 &d입력하세요&f:'
+    - ''
+    - '<center>&b%hoverableText%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1%&7님이 가장 빨리 `&e%correct_answer%&7`을(를) 입력하고(&c%time_1%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%초&c가 지났습니다! &f마우스 올리기 게임이 끝났습니다!'
+    - '<center>정답은 &e%correct_answer%&f였습니다!'
+    - ''
+
+#이 게임에서는 정해진 길이의 무작위 문자열이 만들어집니다
+random:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess%초 &f안에 &d입력하세요&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1%&7님이 가장 빨리 `&e%correct_answer%&7`을(를) 입력하고(&c%time_1%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%초&c가 지났습니다! &f무작위 문자 게임이 끝났습니다!'
+    - '<center>정답은 &e%correct_answer%&f였습니다!'
+    - ''
+
+math:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess%초 &f안에 &d계산하세요&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1%&7님이 가장 빨리 `&e%correct_answer%&7`을(를) 구하고(&c%time_1%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%초&c가 지났습니다! &f계산 게임이 끝났습니다!'
+    - '<center>정답은 &e%correct_answer%&f였습니다!'
+    - ''
+
+variable:
+  #표시되는 형식입니다. 'line1and2-format'에서 %symbol%의 반복 횟수는 바꿀 수 있지만, 3번째 줄의 변수는 모두 그대로 두어야 합니다.
+  line1and2-format: '&c%symbol%&f + &c%symbol%&f + &c%symbol%&f = &e'
+  line3-format: '&c%symbol_1%&f + &c%symbol_2%&f + &b%toGet% &f= &e%result%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess%초 &f안에 &d구하세요&f: `&b%symbol%&f`'
+    - ''
+    - '<center>%line_1%'
+    - '<center>%line_2%'
+    - '<center>%line_3%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1%&7님이 가장 빨리 `&e%correct_answer%&7`을(를) 구하고(&c%time_1%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%초&c가 지났습니다! &f변수 게임이 끝났습니다!'
+    - '<center>정답은 &e%correct_answer%&f였습니다!'
+    - ''
+
+#%selection%는 단서, %difficulty%는 easy/medium/hard입니다.
+word_association:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess%초 &f안에 &d연결고리&f를 찾으세요:'
+    - '<center>&b%selection%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1%&7님이 연결고리 `&e%correct_answer%&7`을(를) 찾고(&c%time_1%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%초&c가 지났습니다! &f아무도 연결고리를 찾지 못했습니다.'
+    - '<center>정답은 &e%correct_answer%&f였습니다!'
+    - ''
+
+trivia:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToGuess%초 &f안에 &d답하세요&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1%&7님이 처음으로 `&e%correct_answer%&7`을(를) 맞히고(&c%time_1%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%초&c가 지났습니다! &f퀴즈가 끝났습니다!'
+    - '<center>정답은 &e%correct_answer%&f였습니다!'
+    - ''
+
+#레이스
+#지금은 레이스에서 여러 승자를 지원하지 않습니다. '레이스'나 '플레이어 도전'이라 1등만 받아야 한다고 생각하기 때문입니다.
+
+#%value%는 재료나 몹, %amount%는 개수, %timeToComplete%는 제한 시간(초)입니다.
+#correct_message에서: %winner%, %winner_displayname%, %time%(초), %points%(승자의 포인트).
+
+hunt:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete%초 &f안에 &d사냥하세요&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner%&7님이 `&e%amount%&fx &3%value%&7` 사냥을 마치고(&c%time%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%초&c가 지났습니다! &f사냥 도전이 끝났습니다!'
+
+mine:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete%초 &f안에 &d캐세요&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner%&7님이 `&e%amount%&fx &3%value%&7` 채굴을 마치고(&c%time%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%초&c가 지났습니다! &f채굴 도전이 끝났습니다!'
+
+place:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete%초 &f안에 &d설치하세요&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner%&7님이 `&e%amount%&fx &3%value%&7` 설치를 마치고(&c%time%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%초&c가 지났습니다! &f설치 도전이 끝났습니다!'
+
+fish:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete%초 &f안에 &d낚으세요&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner%&7님이 `&e%amount%&fx &3%value%&7` 낚시를 마치고(&c%time%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%초&c가 지났습니다! &f낚시 도전이 끝났습니다!'
+
+eat:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete%초 &f안에 &d먹으세요&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner%&7님이 `&e%amount%&fx &3%value%&7`을(를) 다 먹고(&c%time%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%초&c가 지났습니다! &f먹기 도전이 끝났습니다!'
+
+craft:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete%초 &f안에 &d제작하세요&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner%&7님이 `&e%amount%&fx &3%value%&7` 제작을 마치고(&c%time%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%초&c가 지났습니다! &f제작 도전이 끝났습니다!'
+furnace:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete%초 &f안에 &d구우세요&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner%&7님이 `&e%amount%&fx &3%value%&7`을(를) 다 굽고(&c%time%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%초&c가 지났습니다! &f요리 도전이 끝났습니다!'
+
+tame:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete%초 &f안에 &d길들이세요&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner%&7님이 `&e%amount%&fx &3%value%&7` 길들이기를 마치고(&c%time%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%초&c가 지났습니다! &f길들이기 도전이 끝났습니다!'
+
+shear:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f&e%timeToComplete%초 &f안에 &d털을 깎으세요&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner%&7님이 `&e%amount%&fx &3%value%&7` 털 깎기를 마치고(&c%time%s&7) 상품을 받았습니다!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%초&c가 지났습니다! &f털 깎기 도전이 끝났습니다!'

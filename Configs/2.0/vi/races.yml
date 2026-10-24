@@ -1,0 +1,550 @@
+enable-races: true
+
+creative-enabled: true
+#Liên kết hữu ích để thêm DỮ LIỆU:
+#
+#https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+#https://helpch.at/docs/1.8/index.html?org/bukkit/entity/EntityType.html
+#https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+#https://helpch.at/docs/1.8/org/bukkit/Material.html
+
+#Tên có thể mới hoặc cũ (MOOSHROOM hoặc MUSHROOM_COW, COD hoặc RAW_FISH): chúng được khớp với phiên bản
+#máy chủ của bạn. Tên không có trong phiên bản của bạn (vd. khối 1.21 trên 1.8) bị bỏ qua, kèm ghi chú trong console.
+#
+#Mỗi cuộc đua còn nhận (tùy chọn):
+#  points: 1     #điểm người thắng nhận (mặc định 1)
+#  weight: 1     #tần suất vòng xoay chọn nó so với các trò khác (mặc định 1, 0 = không bao giờ)
+#
+#Quản trị viên có thể bắt đầu đua với giá trị riêng: /chatgames <race> <material/mob> [amount]
+#Nếu không có số lượng, sẽ dùng một trong các số lượng liệt kê bên dưới cho vật liệu/sinh vật đó. Người thắng nhận phần thưởng liệt kê
+#cho đúng vật liệu và số lượng đó, hoặc không có gì nếu chúng không được liệt kê ở đây (vẫn được cộng điểm).
+
+hunt:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__Để trống 2 mục sau để tắt chúng__
+  titleMessage: '&bSĂN BẮT'
+  subtitleMessage: '&aGiết %amount% %value%!'
+
+  #Có tính các sinh vật xuất hiện từ lồng sinh quái hoặc trứng sinh sản hay không.
+  count-spawner-mobs: true
+  #Sinh vật MythicMobs có được tính là sinh vật gốc của chúng không (zombie MythicMobs tính là ZOMBIE).
+  count-mythic-mobs: true
+
+  data:
+    #Các giá trị này phải là ID sinh vật Minecraft hợp lệ (xem Liên kết hữu ích ở đầu tệp)
+    #Khi đã cài MythicMobs, mythic:<mob type> là một sinh vật của nó (ví dụ ở cuối danh sách này)
+    ZOMBIE:
+      3:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+
+    CREEPER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SKELETON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SPIDER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    PIG:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SHEEP:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    COW:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    CHICKEN:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SALMON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    #mythic:SkeletonKing:
+    #  1:
+    #    rewards:
+    #      - reward_1
+
+mine:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Để trống 2 mục sau để tắt chúng__
+  titleMessage: '&bĐÀO'
+  subtitleMessage: '&aĐào %amount% %value%!'
+
+  data:
+    #Các giá trị này phải là ID vật liệu Minecraft hợp lệ (xem Liên kết hữu ích ở đầu tệp)
+    STONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRASS_BLOCK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRAVEL:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIORITE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+place:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Để trống 2 mục sau để tắt chúng__
+  titleMessage: '&bXÂY DỰNG'
+  subtitleMessage: '&aĐặt %amount% %value%!'
+
+  data:
+    #Các giá trị này phải là ID vật liệu Minecraft hợp lệ (xem Liên kết hữu ích ở đầu tệp)
+    COBBLESTONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+fish:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Để trống 2 mục sau để tắt chúng__
+  titleMessage: '&bCÂU CÁ'
+  subtitleMessage: '&aCâu %amount% %value%!'
+
+  data:
+    #Các giá trị này phải là ID vật liệu Minecraft hợp lệ (xem Liên kết hữu ích ở đầu tệp)
+    COD:
+      1:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    SALMON:
+      1:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    PUFFERFISH:
+      1:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    BOWL:
+      1:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+eat:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Để trống 2 mục sau để tắt chúng__
+  titleMessage: '&bĂN UỐNG'
+  subtitleMessage: '&aĂn %amount% %value%!'
+
+  data:
+    #Các giá trị này phải là ID vật liệu Minecraft hợp lệ (xem Liên kết hữu ích ở đầu tệp)
+    COOKED_BEEF:
+      1:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_CHICKEN:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BAKED_POTATO:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BREAD:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    GOLDEN_APPLE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+
+craft:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Để trống 2 mục sau để tắt chúng__
+  titleMessage: '&bCHẾ TẠO'
+  subtitleMessage: '&aChế tạo %amount% %value%!'
+
+  data:
+    #Các giá trị này phải là ID vật liệu Minecraft hợp lệ (xem Liên kết hữu ích ở đầu tệp)
+    FURNACE:
+      2:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+      4:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    CHEST:
+      2:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+      4:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    CRAFTING_TABLE:
+      4:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+      8:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      12:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      32:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+      48:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      64:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+furnace:
+  enable: true
+
+  timeToComplete_seconds: 150
+  #__Để trống 2 mục sau để tắt chúng__
+  titleMessage: '&bNẤU ĂN'
+  subtitleMessage: '&aNấu %amount% %value%!'
+
+  data:
+    #Các giá trị này phải là ID vật liệu Minecraft hợp lệ (xem Liên kết hữu ích ở đầu tệp)
+    GOLD_INGOT:
+      3:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+      6:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    IRON_INGOT:
+      3:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+      6:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_BEEF:
+      3:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+      6:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_COD:
+      3:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+      6:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_2
+          - reward_3
+
+tame:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__Để trống 2 mục sau để tắt chúng__
+  titleMessage: '&bTHUẦN HÓA'
+  subtitleMessage: '&aThuần hóa %amount% %value%!'
+
+  data:
+    #Các giá trị này phải là ID sinh vật Minecraft hợp lệ (xem Liên kết hữu ích ở đầu tệp)
+    #Chỉ dùng sinh vật có thể thuần hóa trong phiên bản của bạn: OCELOT đến 1.13, CAT từ 1.14.
+    WOLF:
+      1:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    CAT:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    OCELOT:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    HORSE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    PARROT:
+      1:
+        rewards:
+          - reward_2
+          - reward_3
+
+shear:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Để trống 2 mục sau để tắt chúng__
+  titleMessage: '&bXÉN LÔNG'
+  subtitleMessage: '&aXén lông %amount% %value%!'
+
+  data:
+    #Các giá trị này phải là ID sinh vật Minecraft hợp lệ (xem Liên kết hữu ích ở đầu tệp)
+    SHEEP:
+      3:
+        #TỔNG TẤT CẢ TỈ LỆ CỦA PHẦN THƯỞNG BẠN THÊM KHÔNG ĐƯỢC VƯỢT QUÁ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      6:
+        rewards:
+          - reward_2
+          - reward_3
+    MOOSHROOM:
+      1:
+        rewards:
+          - reward_1
+          - reward_2

@@ -1,0 +1,735 @@
+unknown_command: '&8[%prefix%&8] &cOkänt kommando. Prova något annat!'
+config_reloaded: '&8[%prefix%&8] &fKonfigurationsfilerna har laddats om!'
+config_reload_failed: '&8[%prefix%&8] &cVissa filer laddades inte; kolla konsolen. De filerna behåller sina tidigare värden.'
+not_enough_permissions: '&8[%prefix%&8] &cDu har inte tillräckliga behörigheter för detta kommando!'
+player_only_command: '&8[%prefix%&8] &cBara spelare kan köra detta kommando!'
+player_deleted: '&8[%prefix%&8] &cSpelaren &f%player% &char tagits bort från databasen!'
+player_not_found: '&8[%prefix%&8] &fKunde inte hitta spelaren &c%player%'
+number_not_found_commands: '&8[%prefix%&8] &cKunde inte hitta ett tal för kommandot'
+points_added: '&8[%prefix%&8] &fLade till &a%amount% &fpoäng till &c%player%'
+points_removed: '&8[%prefix%&8] &fTog bort &a%amount% &fpoäng från &c%player%'
+points_set: '&8[%prefix%&8] &fSatte &c%player%&fs poäng till &a%amount%'
+player_points: '&8[%prefix%&8] &fDu har &a%amount% &fpoäng!'
+in_cooldown: '&8[%prefix%&8] &cDu kan inte använda detta än, vänta &e%time_left%s &cinnan du använder kommandot igen'
+type_not_found: '&8[%prefix%&8] &fKunde inte hitta material-/entitetstypen för &c%type%'
+inventory_full: '&8[%prefix%&8] &cDitt förråd är fullt! &fBelöningen har släppts där du står'
+
+no_winner_placeholder: '---'
+cannot_start_from_disabled: '&8[%prefix%&8] &cDu kan inte starta ett chattspel i en avstängd värld!'
+toggle_game: '&8[%prefix%&8] &fChattspel är nu: &a%state%&f!'
+toggle_sound: '&8[%prefix%&8] &fChattspelsljud är nu: &a%state%&f!'
+toggleAllGames: '&8[%prefix%&8] &fAlla chattspel är nu: &a%state% &c(ALLA)&f!'
+state-ON: 'PÅ'
+state-OFF: 'AV'
+game_started: '&8[%prefix%&8] &aDu startade chattspelet %game% i din chatt!'
+invalid_arguments: '&8[%prefix%&8] &fEtt problem uppstod när kommandots argument kontrollerades!'
+cant_log_local: '&8[%prefix%&8] &cDu kan inte se loggmeddelanden eftersom alternativet är avstängt i konfigurationen!'
+toggle_game_other: '&8[%prefix%&8] &fChattspel för &c%player% &fär nu: &a%state%&f!'
+toggle_sound_other: '&8[%prefix%&8] &fChattspelsljud för &c%player% &fär nu: &a%state%&f!'
+player_points_other: '&8[%prefix%&8] &c%player% &fhar &a%amount% &fpoäng!'
+data_loading: '&8[%prefix%&8] &cDen här spelarens data laddas fortfarande, försök igen om en stund.'
+usage: '&8[%prefix%&8] &cAnvändning: &f%usage%'
+game_already_running: '&8[%prefix%&8] &cEtt chattspel pågår redan! Avsluta det först med &f/chatgames stop&c.'
+game_not_started: '&8[%prefix%&8] &cSpelet %game% kunde inte starta med de värdena. Detaljerna finns i konsolen.'
+no_games_enabled: '&8[%prefix%&8] &cInga spel är aktiverade just nu.'
+game_stopped: '&8[%prefix%&8] &fDet pågående spelet stoppades utan vinnare.'
+no_game_running: '&8[%prefix%&8] &cInget chattspel pågår just nu.'
+global_not_enabled: '&8[%prefix%&8] &f%game% &cär inte aktiverat som globalt spel i global_games.yml.'
+unknown_game: '&8[%prefix%&8] &cDet finns inget spel som heter &f%game%&c.'
+unknown_menu: '&8[%prefix%&8] &cDet finns ingen meny som heter &f%menu%&c.'
+
+presets:
+  loaded: '&8[%prefix%&8] &fLaddade samlingen &a%preset% &f(%games%).'
+  cleared: '&8[%prefix%&8] &fIngen samling är aktiv längre; spelen som är aktiverade i games.yml används.'
+  saved: '&8[%prefix%&8] &fSparade de aktiverade spelen som samlingen &a%preset% &f(%games%).'
+  not_found: '&8[%prefix%&8] &cDet finns ingen samling som heter &f%preset%&c.'
+  invalid_name: '&8[%prefix%&8] &cSamlingsnamn får bara innehålla bokstäver (a-z), siffror, - och _ (upp till 32).'
+  list_header: '&8[%prefix%&8] &eSamlingar:'
+  list_entry: '&7- &f%preset%%active% &8(%games%)'
+  active_marker: ' &a(aktiv)'
+  list_empty: '&8[%prefix%&8] &cInga samlingar är inställda i presets.yml.'
+
+challenges:
+  completed: '&8[%prefix%&8] &aUtmaning klar (%period%): &f%challenge%&a! Hämta belöningen med &f/chatgames claim&a.'
+  claimed: '&8[%prefix%&8] &aDu hämtade &f%challenge%&a!'
+  nothing_to_claim: '&8[%prefix%&8] &cDu har inget att hämta just nu.'
+  #/chatgames challenges. %period% nedan är 'Dagliga' eller 'Veckans'; %resets% är tiden kvar, t.ex. 5h 12m
+  header: '&8[%prefix%&8] &e%period% utmaningar &7(%completed%/%total% klara, återställs om %resets%)'
+  entry: '&7- %challenge% &8- &7%description% &f%progress%/%amount% %status%'
+  status_in_progress: ''
+  status_ready: '&a[Redo att hämta]'
+  status_claimed: '&7[Hämtad]'
+  none: '&8[%prefix%&8] &cDet finns inga utmaningar just nu.'
+  daily: 'Dagliga'
+  weekly: 'Veckans'
+  #Enheter i %resets%, t.ex. 2d 5h, 5h 12m eller 40m
+  time_days: '%amount%d'
+  time_hours: '%amount%h'
+  time_minutes: '%amount%m'
+  reset: '&8[%prefix%&8] &fÅterställde de dagliga och veckovisa utmaningarna för &c%player%&f.'
+
+streaks:
+  grew: '&8[%prefix%&8] &aDin %streak% &aär nu &f%days% &adagar! Hämta belöningen med &f/chatgames claim&a.'
+  #%days% är en dag eller ett intervall som 3-5, när flera dagar hämtas på en gång
+  claimed: '&8[%prefix%&8] &aDu hämtade belöningen för %streak% &a(dag %days%)!'
+  header: '&8[%prefix%&8] &eSviter:'
+  entry: '&7- %streak% &8- &f%days% &7dagar, bästa &f%longest% %status%'
+  status_ready: '&a[%unclaimed% att hämta]'
+  status_today: '&7[klar idag]'
+  status_waiting: '&e[inte klar idag]'
+  none: '&8[%prefix%&8] &cSviter är avstängda.'
+  set: '&8[%prefix%&8] &fSatte &c%player%&fs %streak% &ftill &a%days% &fdagar.'
+  unknown: '&8[%prefix%&8] &cDet finns ingen svit som heter &f%type%&c. Använd challenge, daily eller global.'
+
+events:
+  unknown: '&8[%prefix%&8] &cDet finns inget evenemang som heter &f%event%&c.'
+  started: '&8[%prefix%&8] &fStartade %event%&f.'
+  already_running: '&8[%prefix%&8] &cEtt evenemang pågår redan: %event%&c.'
+  cancelled: '&8[%prefix%&8] &cEtt annat plugin avbröt %event%&c.'
+  not_running: '&8[%prefix%&8] &cInget evenemang pågår.'
+  stopped: '&8[%prefix%&8] &fStoppade %event%&f.'
+  list_header: '&8[%prefix%&8] &eEvenemang:'
+  list_entry: '&7- &f%id% &8(%event%&8) &7%steps% spel, nästa: &f%next%%running%'
+  list_running: ' &a(pågår, spel %step%/%steps%)'
+  list_empty: '&8[%prefix%&8] &cInga evenemang är inställda i events.yml.'
+  not_scheduled: 'inte schemalagt'
+  top_header: '&8[%prefix%&8] &eFlest evenemangspoäng i %event%&e:'
+  top_entry: '&c%spot%. &f%player% &8| &e%points% &7poäng'
+  top_empty: '&8[%prefix%&8] &cIngen har fått poäng i %event% &cän.'
+
+discord:
+  test_sent: '&8[%prefix%&8] &fSkickade &a%amount% &ftestmeddelanden till Discord. Om inget dök upp säger konsolen varför.'
+  leaderboard_posted: '&8[%prefix%&8] &fSkickade topplistan till Discord.'
+  disabled: '&8[%prefix%&8] &cDiscord-meddelanden är avstängda: sätt &fenabled: true &ci discord.yml.'
+  no_channel: '&8[%prefix%&8] &f%section% &char ingen kanal med webhook eller DiscordSRV-kanal i discord.yml.'
+  unknown_message: '&8[%prefix%&8] &cDet finns inget Discord-meddelande som heter &f%message%&c.'
+  empty_message: '&8[%prefix%&8] &f%message% &cär tomt eller saknas i discord.yml.'
+
+logs:
+  no_logs: "&cDet finns inga loggar eller så uppstod ett fel."
+  header: "&8[%prefix%&8] &eDe senaste &6%amount% &eloggposterna:"
+  entries:
+    # Loggposter om spel
+    game:
+      start: "&aSpel startat: &f%game% | &aHar svar: &f%hasAnswer% | &aSvar: &f%answer%"
+      end: "&aSpel slut: &f%game% | &aHar vinnare: &f%hasWinner% | &aVinnare: &f%winners% | &aSvar: &f%answer%"
+
+    # Loggposter om lopp med material
+    race:
+      start: "&aLopp startat: &f%race% | &aMaterial: &f%material% | &aAntal: &f%amount%"
+      end: "&aLopp slut: &f%race% | &aHar vinnare: &f%hasWinner% | &aVinnare: &f%winner% | &aMaterial: &f%material% | &aAntal: &f%amount%"
+
+    # Separat post för HUNT-lopp (lopp med entiteter)
+    hunt:
+      start: "&aLopp startat: &f%race% | &aEntitet: &f%entity% | &aAntal: &f%amount%"
+      end: "&aLopp slut: &f%race% | &aHar vinnare: &f%hasWinner% | &aVinnare: &f%winner% | &aEntitet: &f%entity% | &aAntal: &f%amount%"
+
+#Du kan valfritt använda <center> i topplistans meddelanden.
+top:
+  #Kan lämnas tomt för att stänga av ett visst meddelande. (Utom 'format' och 'player-stat-format')
+  header: '&b&m---------&e&lCHATTOPPEN&b&m---------'
+  #Värdet separators är meddelandet som skiljer de 10 bästa spelarna från rubrik och sidfot!
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%points% &7poäng'
+  player-stat-format: '&7Du har &e&l%player_points% &7vinster'
+  total-stat-format: '&7Totalt vunna spel på servern: &6&l%total_wins%'
+  footer: '&b&m---------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cIngen data än! Vinn ett chattspel och få poäng!'
+
+TypersTop:
+  #Kan lämnas tomt för att stänga av ett visst meddelande. (Utom 'format' och 'player-stat-format')
+  header: '&b&m---------&e&lSNABBASTE&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6s'
+  player-stat-format: '&7Din bästa tid: &e&l%fastest_time%&6s'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cIngen data än! Vinn ett chattspel och var snabbast!'
+  top_disabled_message: '&8[%prefix%&8] &cDen här funktionen är avstängd just nu!'
+
+GameTypersTop:
+  #Kan lämnas tomt för att stänga av ett visst meddelande. (Utom 'format' och 'player-stat-format')
+  header: '&b&m---------&e&lSNABBASTE - %game%&b&m---------'
+  separators: ''
+  format: '&c%spot%. &f%player% &8| &e&l%time%&6s'
+  player-stat-format: '&7Din bästa tid: &e&l%fastest_time%&6s'
+  footer: '&b&m------------------------------'
+
+  no_data_message: '&8[%prefix%&8] &cIngen data än! Vinn ett chattspel och var snabbast!'
+  top_disabled_message: '&8[%prefix%&8] &cDen här funktionen är avstängd just nu!'
+
+help_command:
+  - '&7&m-------------------------------------------------'
+  - '&e&l-ChatGames-'
+  - '&6'
+  - '&6&lKOMMANDON:'
+  - '&6'
+  - '&a/chatgames menu [menu] &f- &3Öppnar menyn: profil, utmaningar, sviter, topplistor (eller valfri meny i menus.yml).'
+  - '&a/chatgames profile [player] &f- &3Visar din statistik (eller en annan spelares).'
+  - '&a/chatgames top &f- &3Visar de 10 spelarna med flest poäng.'
+  - '&a/chatgames fastest [game] &f- &3Visar de snabbaste vinnarna, totalt eller i ett spel.'
+  - '&a/chatgames points [player] &f- &3Visar dina poäng (eller en annan spelares).'
+  - '&a/chatgames challenges &f- &3Visar dina dagliga och veckovisa utmaningar.'
+  - '&a/chatgames streaks &f- &3Visar dina sviter.'
+  - '&a/chatgames claim &f- &3Hämtar belöningarna för klara utmaningar och sviter.'
+  - '&a/chatgames event [list|top <event>] &f- &3Visar spelevenemangen eller vilka som fått mest i ett.'
+  - '&a/chatgames toggle [player] &f- &3Slår på eller av chattspel för dig.'
+  - '&a/chatgames togglesound [player] &f- &3Slår på eller av chattspelsljud.'
+  - '&6'
+  - '&c&lADMIN:'
+  - '&a/chatgames admin &f- &3Öppnar adminmenyn.'
+  - '&a/chatgames debug &f- &3Öppnar felsökningsmenyn: testa valfritt spel privat, utan belöningar.'
+  - '&a/chatgames (game) [values] &f- &3Startar spelet nu, valfritt med ditt eget ord/värden.'
+  - '&a/chatgames any &f- &3Startar spelet som rotationen skulle välja härnäst.'
+  - '&a/chatgames global <game> [values] &f- &3Startar ett globalt spel: alla som hinner svara vinner.'
+  - '&a/chatgames event start <event> | stop &f- &3Startar eller stoppar ett spelevenemang.'
+  - '&a/chatgames stop &f- &3Avslutar det pågående spelet utan vinnare.'
+  - '&a/chatgames toggleAll &f- &3Slår på eller av den automatiska spelrotationen.'
+  - '&a/chatgames preset <list|load|save> [name] &f- &3Hanterar spelsamlingar.'
+  - '&a/chatgames +points|-points|setpoints <player> <amount> &f- &3Ändrar en spelares poäng.'
+  - '&a/chatgames remove <player> &f- &3Raderar en spelares data.'
+  - '&a/chatgames challenges reset <player> &f- &3Återställer en spelares utmaningar.'
+  - '&a/chatgames streak set <player> <challenge|daily|global> <days> &f- &3Sätter en spelares svit.'
+  - '&a/chatgames logs [amount] &f- &3Visar de senaste spelloggarna.'
+  - '&a/chatgames discord <test <message|all>|leaderboard> &f- &3Skickar ett testmeddelande eller topplistan till Discord.'
+  - '&a/chatgames reload &f- &3Laddar om konfigurationsfilerna.'
+  - '&6'
+  - '&2&lSPELTYPER:'
+  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace, tame, shear'
+  - '&7&m-------------------------------------------------'
+
+#Använd <center> i LIST-meddelanden för att centrera dem: rader med det hamnar i mitten!
+
+#############################
+##    CHATTSPELSMEDDELANDEN    ##
+#############################
+#Gemensamma för alla spel. Ett spel kan ersätta dem med egna 'hint_message' / 'countdown_actionbar' i sin sektion nedan.
+hint_message: '&8[%prefix%&8] &eLedtråd: &f%hint%'
+countdown_actionbar: '&e%seconds%s &7kvar'
+
+waiting_for_other_winners: '&8[%prefix%&8] &aRätt! &fVi väntar på fler vinnare...'
+wrong_case: '&8[%prefix%&8] &cNästan... Kolla versalerna!'
+  #I correct_message I ALLA SPEL KAN DU ANVÄNDA "%display_name%" I STÄLLET FÖR %player%.
+  #
+  #DU KAN OCKSÅ ANVÄNDA %points_<position>% FÖR ATT VISA POÄNGEN FÖR SPELAREN SOM VANN.
+  #
+  #För att visa 1:a, 2:a, 3:e vinnaren osv., använd %winner_<position>% och för var och ens tid %time_<position>%
+
+  ##EXEMPEL MED 2 VINNARE:
+  #
+  #correct_message:
+  #- ''
+  #- '<center>&r✓ ✯ %prefix% &r✯ ✓'
+  #- ''
+  #- '&7Rätt svar var `&e%correct_answer%&7`! Vinnarna:'
+  #- '<center>&f1. &a%winner_1% - (&c%time_1%s&7)'
+  #- '<center>&f2. &a%winner_2% - (&c%time_2%s&7)'
+#- ''
+unscramble:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToGuess% sekunder&f på dig att &dkasta om&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7kastade om `&e%correct_answer%&7` rätt (&c%time_1%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &char gått! &fSpelet Kasta om är slut!'
+    - '<center>Rätt svar var &e%correct_answer%&f!'
+    - ''
+
+unreverse:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToGuess% sekunder&f på dig att &dvända&f ordet: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7vände `&e%correct_answer%&7` snabbast (&c%time_1%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &char gått! &fSpelet Vänd är slut!'
+    - '<center>Rätt svar var &e%correct_answer%&f!'
+    - ''
+
+reaction:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToGuess% sekunder&f på dig att &dskriva&f ordet: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7skrev `&e%correct_answer%&7` snabbast (&c%time_1%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &char gått! &fReaktionsspelet är slut!'
+    - '<center>Rätt svar var &e%correct_answer%&f!'
+    - ''
+
+guess_the_number:
+  hint_message: '&8[%prefix%&8] &eLedtråd: talet ligger mellan &f%hint%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToGuess% sekunder&f på dig att &dgissa talet &finom intervallet:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7svarade först `&e%correct_answer%&7` (&c%time_1%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &char gått! &fSpelet Gissa talet är slut!'
+    - '<center>Rätt svar var &e%correct_answer%&f!'
+    - ''
+
+memorize:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToMemorize% sekunder&f på dig att &dmemorera &fden här listan:'
+    - ''
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  messageAfterMemorized:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToGuess% sekunder&f på dig att skriva listan &di ordning&f!'
+    - ''
+    - '<center>&fSeparera föremålen med kommatecken! (t.ex. `&bäpple, banan, choklad&f`)'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7skrev listan först och vann priset! (&c%time_1%s&7)'
+    - ''
+    - '<center>&fListan var: &f`&b%correct_answer%&f`'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &char gått! &fSpelet Memorera är slut!'
+    - ''
+    - '<center>&fListan var: &f`&b%correct_answer%&f`'
+    - ''
+
+sequence:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToGuess% sekunder&f på dig att &dfortsätta talföljden&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  hint_message: '&8[%prefix%&8] &eLedtråd: nästa tal är &f%hint%'
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7hittade först `&e%correct_answer%&7` (&c%time_1%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &char gått! &fSpelet Talföljd är slut!'
+    - '<center>Nästa tal var &e%correct_answer%&f!'
+    - ''
+
+clickable:
+  clickableText: '&aKlicka här!'
+  hoverText: '&eKlicka här!'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToGuess% sekunder&f på dig att &dklicka&f på texten:'
+    - ''
+    - '<center>&b%clickableText%'
+    - ''
+  #USE %winner_
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7klickade snabbast på texten (&c%time_1%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &char gått! &fKlickspelet är slut!'
+    - ''
+
+fillout:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToGuess% sekunder&f på dig att &dfylla i&f ordet: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7fyllde i `&e%correct_answer%&7` snabbast (&c%time_1%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &char gått! &fSpelet Fyll i är slut!'
+    - '<center>Rätt svar var &e%correct_answer%&f!'
+    - ''
+
+hoverable:
+  hoverableText: '&eHovra här!'
+  hoverText: '&b%selection%'
+
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToGuess% sekunder&f på dig att &dskriva&f ordet i hovringstexten:'
+    - ''
+    - '<center>&b%hoverableText%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7skrev `&e%correct_answer%&7` snabbast (&c%time_1%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &char gått! &fHovringsspelet är slut!'
+    - '<center>Rätt svar var &e%correct_answer%&f!'
+    - ''
+
+#Detta spel skapar en sträng av angiven längd med slumpmässiga tecken
+random:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToGuess% sekunder&f på dig att &dskriva&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7skrev `&e%correct_answer%&7` snabbast (&c%time_1%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &char gått! &fSpelet med slumptecken är slut!'
+    - '<center>Rätt svar var &e%correct_answer%&f!'
+    - ''
+
+math:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToGuess% sekunder&f på dig att &dlösa&f: `&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7fick `&e%correct_answer%&7` snabbast (&c%time_1%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &char gått! &fMattespelet är slut!'
+    - '<center>Rätt svar var &e%correct_answer%&f!'
+    - ''
+
+variable:
+  #Detta är formatet de visas i; du kan ändra hur många gånger %symbol% upprepas i 'line1and2-format', men alla variabler på rad 3 måste vara kvar.
+  line1and2-format: '&c%symbol%&f + &c%symbol%&f + &c%symbol%&f = &e'
+  line3-format: '&c%symbol_1%&f + &c%symbol_2%&f + &b%toGet% &f= &e%result%'
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToGuess% sekunder&f på dig att &dhitta&f: `&b%symbol%&f`'
+    - ''
+    - '<center>%line_1%'
+    - '<center>%line_2%'
+    - '<center>%line_3%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7fick `&e%correct_answer%&7` snabbast (&c%time_1%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &char gått! &fVariabelspelet är slut!'
+    - '<center>Rätt svar var &e%correct_answer%&f!'
+    - ''
+
+#%selection% är ledtrådarna, %difficulty% easy/medium/hard.
+word_association:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToGuess% sekunder&f på dig att hitta &dkopplingen&f:'
+    - '<center>&b%selection%'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7hittade kopplingen `&e%correct_answer%&7` (&c%time_1%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &char gått! &fIngen hittade kopplingen.'
+    - '<center>Svaret var &e%correct_answer%&f!'
+    - ''
+
+trivia:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToGuess% sekunder&f på dig att &dsvara&f:'
+    - '<center>&f`&b%selection%&f`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner_1% &7svarade först `&e%correct_answer%&7` (&c%time_1%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToGuess%s &char gått! &fFrågesporten är slut!'
+    - '<center>Rätt svar var &e%correct_answer%&f!'
+    - ''
+
+#LOPP
+#Lopp stöder för närvarande inte flera vinnare: jag ser ingen mening med det, eftersom det är ”lopp” eller ”spelarutmaningar” där belöningen ska gå till den första.
+
+#%value% är materialet eller varelsen, %amount% hur många, %timeToComplete% tidsgränsen i sekunder.
+#I correct_message: %winner%, %winner_displayname%, %time% (sekunder) och %points% (vinnarens poäng).
+
+hunt:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToComplete% sekunder&f på dig att &djaga&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7jagade `&e%amount%&fx &3%value%&7` (&c%time%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &char gått! &fUtmaningen Jakt är slut!'
+
+mine:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToComplete% sekunder&f på dig att &dhacka&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7hackade `&e%amount%&fx &3%value%&7` (&c%time%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &char gått! &fUtmaningen Gruva är slut!'
+
+place:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToComplete% sekunder&f på dig att &dplacera&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7placerade `&e%amount%&fx &3%value%&7` (&c%time%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &char gått! &fUtmaningen Bygga är slut!'
+
+fish:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToComplete% sekunder&f på dig att &dfiska&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7fiskade `&e%amount%&fx &3%value%&7` (&c%time%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &char gått! &fUtmaningen Fiske är slut!'
+
+eat:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToComplete% sekunder&f på dig att &däta&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7åt `&e%amount%&fx &3%value%&7` (&c%time%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &char gått! &fUtmaningen Äta är slut!'
+
+craft:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToComplete% sekunder&f på dig att &dtillverka&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7tillverkade `&e%amount%&fx &3%value%&7` (&c%time%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &char gått! &fUtmaningen Tillverka är slut!'
+furnace:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToComplete% sekunder&f på dig att &dlaga&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7lagade `&e%amount%&fx &3%value%&7` (&c%time%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &char gått! &fUtmaningen Matlagning är slut!'
+
+tame:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToComplete% sekunder&f på dig att &dtämja&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7tämjde `&e%amount%&fx &3%value%&7` (&c%time%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &char gått! &fUtmaningen Tämja är slut!'
+
+shear:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fDu har &e%timeToComplete% sekunder&f på dig att &dklippa&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7klippte `&e%amount%&fx &3%value%&7` (&c%time%s&7) och vann priset!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &char gått! &fUtmaningen Klippa är slut!'

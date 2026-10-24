@@ -132,7 +132,7 @@ messages:
     - '&6&l» KÜRESEL OYUN BİTTİ! &fSunucu &e%progress%/%goal% &7(%percent%%) &fdeğerine ulaştı. Bir dahaki sefere!'
     - ''
   #Hedefe ulaşıldığında ödüllendirilen her oyuncuya. %points% kazandığıdır.
-  rewarded: '&8[%prefix%&8] &aKatkÄ±n: &f%contribution%&a, kazandÄ±ÄŸÄ±n: &f%points% &apuan!'
+  rewarded: '&8[%prefix%&8] &aKatkın: &f%contribution%&a, kazandığın: &f%points% &apuan!'
   #min-contribution değerinden az katkı veren bir oyuncuya. %min% o en düşük değerdir.
   too_little: '&8[%prefix%&8] &7%contribution% katkı verdin; ödül için en az %min% gerekiyordu.'
   #Boss çubuğu (ya da 1.8'de aksiyon çubuğu).
@@ -245,3 +245,11 @@ games:
     enabled: false
     goal: 64
     duration-seconds: 300
+  tame:
+    enabled: false
+    goal: 15
+    duration-seconds: 300
+  shear:
+    enabled: false
+    goal: 40
+    duration-seconds: 240

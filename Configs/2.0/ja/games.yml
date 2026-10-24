@@ -1,0 +1,367 @@
+#############################
+######    チャットゲーム    ######
+#############################
+#すべてのゲームで使える設定（書かれていないものは表示の初期値になります）：
+#  enable: true/false
+#  weight: 1             ほかのゲームと比べて、ローテーションでこのゲームが選ばれやすさ（0 = 選ばれない）。
+#                        同じゲームが 2 回続けて行われることはありません。
+#  winners: 1            1 ラウンドで何人が勝てるか。
+#  points: 1             1 勝あたりのポイント（/chatgames top）。
+#  case-sensitive: false 大文字・小文字だけが違うプレイヤーには 'wrong_case' メッセージが送られます。
+#  timeToGuess_seconds: 20
+#  min-answer-ms: 400    これより速い正解は無視され、記録されます。人はそんなに速く読んで
+#                        入力できません。チャットボットだけです。0 でこのチェックをオフにします。
+#  hints:                ラウンド中にヒントが表示されます。messages.yml の 'hint_message' を使います。
+#    enable: false
+#    after-percent: 50   時間がこれだけ過ぎると最初のヒントが表示されます。残りは残り時間に分散されます。
+#    max: 1              最大 3。
+#  countdown:            残り時間をアクションバーに表示します。すべてのバージョンで動作します（1.8 から 26.x）。
+#    enable: false
+#    last-seconds: 10    最後の N 秒だけ表示します。0 でラウンド中ずっと表示します。
+#  titleMessage / subtitleMessage：両方空にするとタイトルを送りません。
+unscramble:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #プレイヤーが当てる・解く・入力するなどのための時間（秒）。
+  timeToGuess_seconds: 20
+  #__次の 2 つを空にすると無効になります__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a並べ替え'
+
+unreverse:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #プレイヤーが当てる・解く・入力するなどのための時間（秒）。
+  timeToGuess_seconds: 20
+  #次の 2 つを空にすると無効になります
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a逆さ読み'
+
+reaction:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #プレイヤーが当てる・解く・入力するなどのための時間（秒）。
+  timeToGuess_seconds: 20
+  #__次の 2 つを空にすると無効になります__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a入力しよう'
+
+guess_the_number:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+  #これは変更しないでください
+  case-sensitive: false
+
+  lower-limit: 1
+  upper-limit: 20
+
+  #プレイヤーが当てる・解く・入力するなどのための時間（秒）。
+  timeToGuess_seconds: 20
+  #__次の 2 つを空にすると無効になります__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a入力しよう'
+
+clickable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #プレイヤーが当てる・解く・入力するなどのための時間（秒）。
+  timeToGuess_seconds: 20
+  #__次の 2 つを空にすると無効になります__
+  titleMessage: '&eテキストをクリック'
+  subtitleMessage: '&f残り &e%timeToGuess%s'
+
+fillout:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #穴埋めゲームで隠す文字の割合です。1 から 100 まで。小さいほど隠れる文字が少なくなります。
+  difficulty: 30
+  case-sensitive: true
+  #プレイヤーが当てる・解く・入力するなどのための時間（秒）。
+  timeToGuess_seconds: 20
+  #__次の 2 つを空にすると無効になります__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a穴埋め'
+
+hoverable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #プレイヤーが当てる・解く・入力するなどのための時間（秒）。
+  timeToGuess_seconds: 20
+  #__次の 2 つを空にすると無効になります__
+  titleMessage: '&eテキストにカーソルを合わせて'
+  subtitleMessage: '&f残り &e%timeToGuess%s'
+
+#このゲームでは、指定した長さのランダムな文字列が作られます
+random:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #プレイヤーが当てる・解く・入力するなどのための時間（秒）。
+  timeToGuess_seconds: 20
+  #このゲームでランダムに作られる文字列の長さ。範囲の形式は <lower>-<higher>。1 つの長さだけにしたい場合は両側に同じ数を書きます
+  lengthRange: 6-8
+  #使える種類：ALPHA（英字）、ALPHANUMERIC（英字と数字）、NUMERIC（数字）、SYMBOLIC（記号）、
+  #LOWERCASE_ALPHA（すべて小文字）、UPPERCASE_ALPHA（すべて大文字）、HEXADECIMAL（16 進数の文字：0123456789ABCDEF）
+  #CUSTOM（'custom_characters' にあるものを使います）
+  character_type: ALPHANUMERIC
+  #type が "CUSTOM" のときだけこの行が使われます
+  custom_characters: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+  #__次の 2 つを空にすると無効になります__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a入力しよう'
+
+math:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #これは変更しないでください
+  case-sensitive: false
+  #プレイヤーが当てる・解く・入力するなどのための時間（秒）。
+  timeToGuess_seconds: 20
+  #難易度ごとの乱数の範囲：
+  #1 - (1-9)
+  #2 - (1-99)
+  #3 - (1-999)
+  #4 - (1-9999)
+  #5 - (1-99999)
+  difficulty: 2
+  #1 問あたりの演算子の数：1 -> "12 + 7"、2 -> "12 + 7 x 3"
+  operations: 1
+  #solve：結果を求める（"12 + 7 x 3"）。  missing-value：隠れた数を見つける（"12 + ? x 3 = 33"）。
+  #各ラウンドは並べたモードから 1 つを選びます。
+  modes:
+    - solve
+    - missing-value
+  #使う演算子。並べた 4 つが使えるすべてです。全部使わないなら消して構いません。必ず 1 つは残してください
+  #割り算の答えは必ず整数になります。
+  operators:
+    - '+'
+    - '-'
+    - 'x'
+    - '/'
+
+  #__次の 2 つを空にすると無効になります__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a計算しよう'
+
+variable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #これは変更しないでください
+  case-sensitive: false
+  #プレイヤーが当てる・解く・入力するなどのための時間（秒）。
+  timeToGuess_seconds: 20
+
+  #__次の 2 つを空にすると無効になります__
+  titleMessage: '&b解け'
+  subtitleMessage: '&a求めるのは &7`&b%symbol%&7`'
+
+  #ランダムな結果の数の範囲
+  result-min: 20
+  result-max: 100
+
+  toGet: '✗'
+  #追加に使えるほかの記号：✪❃✿✠❂♫♪❦♡♤♢✦☾☽✹
+  data:
+    - '✯;10'
+    - '♛;15'
+    - '❅;20'
+    - '♫;25'
+
+sequence:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #これは変更しないでください
+  case-sensitive: false
+
+  #プレイヤーが当てる・解く・入力するなどのための時間（秒）。
+  timeToGuess_seconds: 25
+
+  #プレイヤーは数列を見て次の数を入力します。例："3, 6, 12, 24, ?" -> 48
+  #パターン：足し算（3, 7, 11）、掛け算（2, 6, 18）、平方（4, 9, 16）、交互（5, 9, 7, 11）、フィボナッチ（2, 3, 5, 8）
+  patterns:
+    - add
+    - multiply
+    - squares
+    - alternating
+    - fibonacci
+  #1-3。難易度が高いほど難しいパターン（平方と交互は 2 から、フィボナッチは 3）と大きな数になります。
+  difficulty: 2
+  #'?' の前に表示する数の個数（4-8）
+  shown-terms: 5
+
+  #__次の 2 つを空にすると無効になります__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&a数列を完成させよう'
+
+memorize:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+
+  listLength: 3
+  #各ラウンドは次のプールのどれかからアイテムを取ります（words.yml -> memorize.pools を参照）：
+  #shopping_list、words、colors、numbers、blocks、mobs、または自分のリスト
+  pools:
+    - shopping_list
+    - words
+    - colors
+    - numbers
+    - blocks
+    - mobs
+  #false の場合、アイテムはどの順番で入力しても構いません
+  order-matters: true
+
+  #プレイヤーが覚える・解く・入力するなどのための時間（秒）。
+  timeToMemorize: 7
+
+  #プレイヤーが当てる・解く・入力するなどのための時間（秒）。
+  timeToGuess_seconds: 20
+  #次の 2 つを空にすると無効になります
+  titleMessage: '&bメモライズ'
+  subtitleMessage: '&aこのリストを覚えよう！'
+
+#3 つのヒントに、1 つの隠れたつながり（連想は words.yml にあります）。
+#difficulty：easy、medium、hard または mixed。hard のラウンドはヒントを 1 つだけ見せ、残りは
+#ヒントとして出すので、hard ではヒントをオンにしてください（max 2 で 3 つすべて表示）。
+word_association:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  difficulty: mixed
+  hints:
+    enable: true
+    after-percent: 34
+    max: 2
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  timeToGuess_seconds: 30
+  titleMessage: '&b連想ゲーム'
+  subtitleMessage: '&aチャットを見て！'
+
+trivia:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  #プレイヤーが当てる・解く・入力するなどのための時間（秒）。
+  timeToGuess_seconds: 20
+  #__次の 2 つを空にすると無効になります__
+  titleMessage: '&bクイズ'
+  subtitleMessage: '&aチャットを見て！'

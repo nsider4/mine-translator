@@ -1,0 +1,136 @@
+#THỬ THÁCH HẰNG NGÀY VÀ HẰNG TUẦN
+#
+#Mọi người nhận cùng các thử thách. Tiến độ được tính khi người chơi chơi; thử thách
+#đã hoàn thành hiện "Có thể nhận" trong /chatgames challenges, và /chatgames claim trả thưởng.
+#Phần thưởng chưa nhận sẽ mất khi các thử thách được đặt lại.
+#
+#LOẠI THỬ THÁCH (amount là số lượng cần):
+#  WIN_GAMES    thắng trò chơi chat hoặc cuộc đua, ở bất kỳ thứ hạng nào
+#  WIN_GAME     thắng một trò hoặc cuộc đua, đặt bằng 'game' (vd. game: unscramble)
+#  WIN_RACES    thắng cuộc đua
+#  PLAY_GLOBAL  giải trò chơi toàn cầu kịp giờ
+#  WIN_GLOBAL   hoàn thành trò chơi toàn cầu ở thứ hạng có thưởng
+#  FAST_WIN     thắng trò chơi chat trong 'seconds' giây hoặc ít hơn (không tính cuộc đua)
+#  EARN_POINTS  kiếm điểm từ trò chơi
+#  PLAY_EVENT   tham gia sự kiện trò chơi
+#
+#Mỗi thử thách có:
+#  name / description: hiển thị trong chat và menu. %amount%, %game% và %seconds% được điền vào.
+#  icon: vật phẩm trên menu (tên vật liệu)
+#  rewards: các dòng như trong rewards.yml (tỉ lệ với '<chance>%~ ', quyền với 'has:<permission>').
+#           %player% và %challenge% (tên) được điền vào.
+#
+#Các ID (win_3, fast_1...) được lưu cùng tiến độ người chơi: chỉ dùng a-z, 0-9, - và _,
+#và đổi một ID sẽ khởi động lại tiến độ của thử thách đó.
+
+#Múi giờ bắt đầu ngày, cho thử thách và chuỗi, vd. Asia/Ho_Chi_Minh hoặc America/New_York.
+#Để trống sẽ dùng múi giờ của máy chủ.
+timezone: ''
+
+daily:
+  enabled: true
+  #fixed: mọi thử thách bên dưới đều hoạt động mỗi ngày.
+  #random: mỗi ngày bốc 'amount' thử thách trong số đó (giống nhau cho mọi người).
+  mode: random
+  amount: 3
+  challenges:
+    win_3:
+      type: WIN_GAMES
+      amount: 3
+      name: '&eKhởi động'
+      description: '&7Thắng %amount% trò chơi chat'
+      icon: GOLD_NUGGET
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    win_8:
+      type: WIN_GAMES
+      amount: 8
+      name: '&6Đang hăng'
+      description: '&7Thắng %amount% trò chơi chat'
+      icon: GOLD_INGOT
+      rewards:
+        - '[consolecmd] give %player% gold_ingot 8'
+    unscramble_2:
+      type: WIN_GAME
+      game: unscramble
+      amount: 2
+      name: '&bPhù thủy chữ'
+      description: '&7Thắng %amount% trò %game%'
+      icon: BOOK
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    math_2:
+      type: WIN_GAME
+      game: math
+      amount: 2
+      name: '&bMáy tính người'
+      description: '&7Thắng %amount% trò %game%'
+      icon: PAPER
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    fast_1:
+      type: FAST_WIN
+      seconds: 5
+      amount: 1
+      name: '&cNgón tay thần tốc'
+      description: '&7Thắng một trò chơi chat trong %seconds% giây hoặc ít hơn'
+      icon: FEATHER
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    race_1:
+      type: WIN_RACES
+      amount: 1
+      name: '&aTay đua'
+      description: '&7Thắng một cuộc đua'
+      icon: IRON_PICKAXE
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    points_5:
+      type: EARN_POINTS
+      amount: 5
+      name: '&dNgười gom điểm'
+      description: '&7Kiếm %amount% điểm'
+      icon: EXPERIENCE_BOTTLE
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    global_1:
+      type: PLAY_GLOBAL
+      amount: 1
+      name: '&3Đồng đội'
+      description: '&7Giải một trò chơi toàn cầu kịp giờ'
+      icon: COMPASS
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+
+weekly:
+  enabled: true
+  #Ngày bắt đầu của mỗi tuần.
+  reset-day: MONDAY
+  mode: fixed
+  amount: 3
+  challenges:
+    win_25:
+      type: WIN_GAMES
+      amount: 25
+      name: '&6Nhà vô địch tuần'
+      description: '&7Thắng %amount% trò chơi chat trong tuần này'
+      icon: DIAMOND
+      rewards:
+        - '[consolecmd] give %player% diamond 3'
+    fast_5:
+      type: FAST_WIN
+      seconds: 4
+      amount: 5
+      name: '&cTia chớp'
+      description: '&7Thắng %amount% trò chơi chat trong %seconds% giây hoặc ít hơn'
+      icon: BLAZE_POWDER
+      rewards:
+        - '[consolecmd] give %player% diamond 2'
+    global_5:
+      type: WIN_GLOBAL
+      amount: 5
+      name: '&3Được yêu thích'
+      description: '&7Hoàn thành %amount% trò chơi toàn cầu ở thứ hạng có thưởng'
+      icon: BEACON
+      rewards:
+        - '[consolecmd] give %player% diamond 2'

@@ -1,0 +1,367 @@
+#############################
+######    ЧАТ-ІГРИ    ######
+#############################
+#Налаштування, які приймає кожна гра (відсутнє бере показане типове значення):
+#  enable: true/false
+#  weight: 1             Наскільки ймовірно, що ротація обере цю гру порівняно з іншими (0 = ніколи).
+#                        Та сама гра ніколи не йде двічі поспіль.
+#  winners: 1            Скільки гравців можуть виграти кожен раунд.
+#  points: 1             Очки за перемогу (/chatgames top).
+#  case-sensitive: false Гравці, які помилилися лише в регістрі, отримують повідомлення 'wrong_case'.
+#  timeToGuess_seconds: 20
+#  min-answer-ms: 400    Правильні відповіді, швидші за це, ігноруються й записуються: ніхто не читає й не друкує
+#                        так швидко, а чат-боти — так. 0 вимикає перевірку.
+#  hints:                Підказки з'являються під час раунду, через 'hint_message' у messages.yml.
+#    enable: false
+#    after-percent: 50   Перша підказка з'являється, коли мине стільки часу; інші розподіляються на решту.
+#    max: 1              До 3.
+#  countdown:            Час, що залишився, на панелі дій. Працює на всіх версіях (від 1.8 до 26.x).
+#    enable: false
+#    last-seconds: 10    Лише впродовж останніх N секунд; 0 показує його весь раунд.
+#  titleMessage / subtitleMessage: залиште обидва порожніми, щоб не надсилати заголовок.
+unscramble:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Час у секундах, який гравці мають, щоб вгадати, розв'язати, написати тощо.
+  timeToGuess_seconds: 20
+  #__Залиште наступні 2 порожніми, щоб вимкнути їх__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aРозплутай'
+
+unreverse:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Час у секундах, який гравці мають, щоб вгадати, розв'язати, написати тощо.
+  timeToGuess_seconds: 20
+  #Залиште наступні 2 порожніми, щоб вимкнути їх
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aПереверни'
+
+reaction:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Час у секундах, який гравці мають, щоб вгадати, розв'язати, написати тощо.
+  timeToGuess_seconds: 20
+  #__Залиште наступні 2 порожніми, щоб вимкнути їх__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aНапиши'
+
+guess_the_number:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+  #Не змінюйте це
+  case-sensitive: false
+
+  lower-limit: 1
+  upper-limit: 20
+
+  #Час у секундах, який гравці мають, щоб вгадати, розв'язати, написати тощо.
+  timeToGuess_seconds: 20
+  #__Залиште наступні 2 порожніми, щоб вимкнути їх__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aНапиши'
+
+clickable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Час у секундах, який гравці мають, щоб вгадати, розв'язати, написати тощо.
+  timeToGuess_seconds: 20
+  #__Залиште наступні 2 порожніми, щоб вимкнути їх__
+  titleMessage: '&eНатисни на текст'
+  subtitleMessage: '&fУ тебе &e%timeToGuess%с'
+
+fillout:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Відсоток прихованих літер у грі «Заповни пропуски». Значення від 1 до 100. Менші числа — менше прихованих літер.
+  difficulty: 30
+  case-sensitive: true
+  #Час у секундах, який гравці мають, щоб вгадати, розв'язати, написати тощо.
+  timeToGuess_seconds: 20
+  #__Залиште наступні 2 порожніми, щоб вимкнути їх__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aЗаповни пропуски'
+
+hoverable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Час у секундах, який гравці мають, щоб вгадати, розв'язати, написати тощо.
+  timeToGuess_seconds: 20
+  #__Залиште наступні 2 порожніми, щоб вимкнути їх__
+  titleMessage: '&eНаведи на текст'
+  subtitleMessage: '&fУ тебе &e%timeToGuess%с'
+
+#У цій грі створюється рядок заданої довжини з випадкових символів
+random:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Час у секундах, який гравці мають, щоб вгадати, розв'язати, написати тощо.
+  timeToGuess_seconds: 20
+  #Довжина випадкового рядка для цієї гри. Формат діапазону <lower>-<higher>. Для однієї довжини поставте те саме число з обох боків
+  lengthRange: 6-8
+  #Доступні типи: ALPHA (літери), ALPHANUMERIC (літери й цифри), NUMERIC (цифри), SYMBOLIC (символи),
+  #LOWERCASE_ALPHA (усі малі літери), UPPERCASE_ALPHA (усі великі літери), HEXADECIMAL (шістнадцяткові символи: 0123456789ABCDEF)
+  #CUSTOM (використовує те, що в 'custom_characters')
+  character_type: ALPHANUMERIC
+  #Цей рядок використовується, лише якщо type — "CUSTOM"
+  custom_characters: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+  #__Залиште наступні 2 порожніми, щоб вимкнути їх__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aНапиши'
+
+math:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Не змінюйте це
+  case-sensitive: false
+  #Час у секундах, який гравці мають, щоб вгадати, розв'язати, написати тощо.
+  timeToGuess_seconds: 20
+  #Діапазони випадкових чисел за складністю:
+  #1 - (1-9)
+  #2 - (1-99)
+  #3 - (1-999)
+  #4 - (1-9999)
+  #5 - (1-99999)
+  difficulty: 2
+  #Скільки операторів має кожне питання: 1 -> "12 + 7", 2 -> "12 + 7 x 3"
+  operations: 1
+  #solve: обчислити результат ("12 + 7 x 3").  missing-value: знайти приховане число ("12 + ? x 3 = 33").
+  #Кожен раунд обирає один із перелічених режимів.
+  modes:
+    - solve
+    - missing-value
+  #Оператори для використання; чотири перелічені — це всі доступні, можна прибрати непотрібні. Завжди залишайте хоча б 1
+  #Ділення завжди дає ціле число.
+  operators:
+    - '+'
+    - '-'
+    - 'x'
+    - '/'
+
+  #__Залиште наступні 2 порожніми, щоб вимкнути їх__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aОбчисли'
+
+variable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Не змінюйте це
+  case-sensitive: false
+  #Час у секундах, який гравці мають, щоб вгадати, розв'язати, написати тощо.
+  timeToGuess_seconds: 20
+
+  #__Залиште наступні 2 порожніми, щоб вимкнути їх__
+  titleMessage: '&bРОЗВ''ЯЖИ'
+  subtitleMessage: '&aЗнайди &7`&b%symbol%&7`'
+
+  #Діапазон випадкового числа-результату
+  result-min: 20
+  result-max: 100
+
+  toGet: '✗'
+  #Ось інші символи, які можна додати: ✪❃✿✠❂♫♪❦♡♤♢✦☾☽✹
+  data:
+    - '✯;10'
+    - '♛;15'
+    - '❅;20'
+    - '♫;25'
+
+sequence:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Не змінюйте це
+  case-sensitive: false
+
+  #Час у секундах, який гравці мають, щоб вгадати, розв'язати, написати тощо.
+  timeToGuess_seconds: 25
+
+  #Гравці бачать послідовність чисел і пишуть наступне, напр. "3, 6, 12, 24, ?" -> 48
+  #Закономірності: додавання (3, 7, 11), множення (2, 6, 18), квадрати (4, 9, 16), чергування (5, 9, 7, 11), Фібоначчі (2, 3, 5, 8)
+  patterns:
+    - add
+    - multiply
+    - squares
+    - alternating
+    - fibonacci
+  #1-3. Вища складність дає складніші закономірності (квадрати й чергування з 2, Фібоначчі на 3) і більші числа.
+  difficulty: 2
+  #Скільки чисел показується перед '?' (4-8)
+  shown-terms: 5
+
+  #__Залиште наступні 2 порожніми, щоб вимкнути їх__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aПродовж послідовність'
+
+memorize:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+
+  listLength: 3
+  #Кожен раунд бере предмети з одного з цих наборів (див. words.yml -> memorize.pools):
+  #shopping_list, words, colors, numbers, blocks, mobs або ваш власний список
+  pools:
+    - shopping_list
+    - words
+    - colors
+    - numbers
+    - blocks
+    - mobs
+  #Якщо false, предмети можна писати в будь-якому порядку
+  order-matters: true
+
+  #Час у секундах, який гравці мають, щоб запам'ятати, розв'язати, написати тощо.
+  timeToMemorize: 7
+
+  #Час у секундах, який гравці мають, щоб вгадати, розв'язати, написати тощо.
+  timeToGuess_seconds: 20
+  #Залиште наступні 2 порожніми, щоб вимкнути їх
+  titleMessage: '&bЗапам''ятай'
+  subtitleMessage: '&aСпробуй запам''ятати цей список!'
+
+#Три підказки, один прихований зв'язок (асоціації — у words.yml).
+#difficulty: easy, medium, hard або mixed. Складні раунди показують одну підказку, а решту відкривають
+#як підказки, тож тримайте для них підказки увімкненими (max 2 показує всі три).
+word_association:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  difficulty: mixed
+  hints:
+    enable: true
+    after-percent: 34
+    max: 2
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  timeToGuess_seconds: 30
+  titleMessage: '&bАСОЦІАЦІЇ'
+  subtitleMessage: '&aДивись у чат!'
+
+trivia:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  #Час у секундах, який гравці мають, щоб вгадати, розв'язати, написати тощо.
+  timeToGuess_seconds: 20
+  #__Залиште наступні 2 порожніми, щоб вимкнути їх__
+  titleMessage: '&bВІКТОРИНА'
+  subtitleMessage: '&aДивись у чат!'

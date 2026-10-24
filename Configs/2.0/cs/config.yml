@@ -1,0 +1,125 @@
+#############################
+######    NASTAVENÍ    #######
+#############################
+check-update: true
+
+#Jazyk serveru. Názvy bloků, předmětů a mobů (v závodech a v Zapamatuj si) se překládají
+#do něj, ve více než 140 jazycích. ID svého jazyka najdete zde:
+#https://github.com/nsider4/mine-translator/blob/main/language_names.txt
+#Názvy se stahují do translations/ a aktualizují se samy, když vyjde nová verze
+#Minecraftu. Změna zde platí po /chatgames reload.
+lang: 'en_us'
+
+#Jazyk těchto konfiguračních souborů: zprávy, menu, seznamy slov, kvíz, komentáře...
+#Plně přeloženo: en, es, fr, pt, de, it, nl, pl, ru, tr, zh, zh_tw, ja, ko, uk, cs, sv, hu, vi, id
+#(zh je zjednodušená čínština, zh_tw tradiční čínština). Pokud tu váš 'lang' není, názvy bloků,
+#předmětů a mobů se i tak překládají, ale tyto soubory zůstanou ve svém jazyce (výchozí je angličtina).
+#  auto: přepnout, když se změní 'lang' výše, pokud je ten jazyk plně přeložen
+#  none: nikdy neměnit
+#  nebo jeden z kódů jazyka výše
+#Přepnutí zachová vaše nastavení a změny v nich; vaše vlastní zprávy
+#se nahradí překladem (staré soubory se nejdřív zkopírují do backups/). Překlady
+#se stahují z https://github.com/nsider4/mine-translator (složka Configs) a aktualizují
+#se samy. Další jazyky se tam dají přidat.
+config-language: 'auto'
+
+#Typ úložiště, dostupné: SQLite nebo MySQL
+Storage: 'SQLite'
+
+#Název tabulky se všemi daty ChatGames
+table_name: 'chatgames'
+
+#Název tabulky se všemi nejrychlejšími časy ChatGames
+fastest_times_table: 'chatgames_fastest_times'
+
+SQLite:
+  Filename: 'chatgames-data'
+
+MySQL:
+  host: 'localhost'
+  port: '3306'
+  user: 'root'
+  password: 'password'
+  database: 'chatgame'
+  connection-parameters: '?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8'
+  Pool-Settings:
+    max-pool-size: 10
+    min-idle: 10
+    max-lifetime: 180000
+    keep-alive-time: 60000
+    time-out: 20000
+
+disabled-worlds:
+  - 'example_world'
+
+prefix: '&c&lC&d&lH&b&lA&a&lT &6&lG&e&lA&a&lM&c&lE&b&lS'
+
+#Pokud false, začít mohou jen hráči s 'chatgames.start.*'
+allow_starting_from_disabled: true
+
+#Pokud false, nezruší se zpráva, která se běžně neodešle, když hráč uhodne správnou možnost
+cancel-message-when-winning: true
+
+#Nejmenší počet hráčů online potřebný ke spuštění chatové hry
+min_players_online: 1
+
+#Čas, po kterém se znovu vybere náhodná hra.
+#Hodnota -1 ÚPLNĚ vypne úlohu; s -1 také nelze použít randomDelay
+time_minutes: 25
+
+#Pokud je zapnuto, po každé hře se vygeneruje náhodné číslo mezi 'randomDelay.minimum' a 'randomDelay.limit' jako prodleva do další hry
+#Pokud to zapnete, hodnota 'time_minutes' se ignoruje, pokud není -1, protože pak žádná úloha není.
+randomDelay:
+  enable: false
+  #Jednotka času, druhá možná hodnota je 'seconds'; pokud ji změníte, je dobré dát minimum větší než 'timeToGuess_seconds' hry
+  timeUnit: 'minutes'
+  minimum: 1
+  limit: 25
+
+
+#Pokud vypnete, k zobrazení her nebude potřeba oprávnění chatgames.play
+use-permission-toplay: false
+
+#Pokud false, počítají se jen hráči s oprávněním 'chatgames.play', tedy ti, kdo mohou hrát.
+#Pokud true, počítají se všichni hráči online kromě neviditelných (vanish).
+count-all-players: false
+
+#Pokud true, vytvoří se žebříček nejrychlejších (/chatgames fastest). Pokud false, je tento žebříček vypnutý.
+fastest-typers-top: true
+
+#Zástupné symboly PlaceholderAPI (vyžaduje nainstalované PlaceholderAPI):
+#  Vy:           %chatgames_points%, %chatgames_wins%, %chatgames_wins_<game>%, %chatgames_race_wins%,
+#                %chatgames_global_played%, %chatgames_global_won%, %chatgames_toggle%, %chatgames_sound_toggle%
+#                %chatgames_events_played%, %chatgames_event_wins%, %chatgames_event_best_place% (0 = zatím žádné)
+#  Váš čas:      %chatgames_personal_best% (jakákoli chatová hra), %chatgames_fastest_<game>% (i závody)
+#  Vaše pozice:  %chatgames_show_current_pos_top% (body), %chatgames_show_current_pos_fastest% (nejlepší čas)
+#  Nejvíc bodů:  %chatgames_top_<n>% (jméno), %chatgames_points_top_<n>%, %chatgames_total_points%
+#  Nejrychlejší: %chatgames_fastest_<n>% (jméno, chatové hry), %chatgames_fastest_time_<n>%,
+#                %chatgames_fastest_<game>_<n>%, %chatgames_fastest_<game>_time_<n>%
+#  Právě teď:    %chatgames_game_running%, %chatgames_current_game%, %chatgames_next_game_in% (sekundy)
+#  Závod:        %chatgames_race_target%, %chatgames_race_amount%, %chatgames_race_progress% (váš)
+#  Úkoly:        %chatgames_daily_completed%, %chatgames_daily_total%, %chatgames_weekly_completed%,
+#                %chatgames_weekly_total%, %chatgames_challenges_completed% (za celou dobu)
+#  Série:        %chatgames_streak_<type>%, %chatgames_streak_<type>_longest% (<type> je challenge, daily nebo global)
+#  Událost:      %chatgames_event_running%, %chatgames_event_name%, %chatgames_event_step%, %chatgames_event_steps%,
+#                %chatgames_event_points% a %chatgames_event_place% (vaše v probíhající události)
+#  <game> je název hry z games.yml (např. unscramble, guess_the_number); <n> je pozice (1, 2, 3...).
+placeholders:
+  #Jak často se přestavují zástupné symboly žebříčku (top_<n>, fastest_<n>, pozice...), v sekundách.
+  #Přestaví se také po každé hře s vítězem. Vaše vlastní body, výhry a časy jsou vždy aktuální.
+  refresh-seconds: 60
+  #Zobrazí se, když není co zobrazit: prázdné místo v žebříčku, zatím žádný nejlepší čas, neběží hra...
+  empty-value: ''
+
+#Zvuk pro hráče, když začne chatová hra!
+GameSounds:
+  volume: 0.5
+  pitch: 1.0
+  #NECHTE KTERÝKOLI Z NICH PRÁZDNÝ, ABYSTE HO VYPNULI
+  #Fungují i zvuky z resource packu: zapište je s jmenným prostorem, např. 'myserver:custom.ding'
+  win: 'minecraft:entity.experience_orb.pickup'
+  game-start: 'minecraft:entity.player.levelup'
+  time-expired: 'minecraft:entity.villager.no'
+  wrong-case: 'minecraft:block.note_block.bass'
+
+#Sady her (pojmenované sady zapnutých her) se ukládají v presets.yml.

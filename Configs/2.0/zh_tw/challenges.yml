@@ -1,0 +1,136 @@
+#每日和每週挑戰
+#
+#所有人獲得相同的挑戰。玩家遊玩時會計算進度；完成的
+#挑戰會在 /chatgames challenges 中顯示“可以領取”，用 /chatgames claim 領取。
+#挑戰重置時，未領取的獎勵會丟失。
+#
+#挑戰型別（amount 是需要的數量）：
+#  WIN_GAMES    贏得聊天遊戲或競賽，任意名次
+#  WIN_GAME     贏得某個遊戲或競賽，用 'game' 設定（例如 game: unscramble）
+#  WIN_RACES    贏得競賽
+#  PLAY_GLOBAL  及時完成全服遊戲
+#  WIN_GLOBAL   在全服遊戲中獲得有獎勵的名次
+#  FAST_WIN     在 'seconds' 秒或更短時間內贏得聊天遊戲（競賽不算）
+#  EARN_POINTS  從遊戲中獲得點數
+#  PLAY_EVENT   參加遊戲活動
+#
+#每個挑戰包含：
+#  name / description：顯示在聊天和選單中。%amount%、%game% 和 %seconds% 會被填入。
+#  icon：選單中的物品（材料名）
+#  rewards：和 rewards.yml 中一樣的行（機率用 '<chance>%~ '，許可權用 'has:<permission>'）。
+#           %player% 和 %challenge%（名稱）會被填入。
+#
+#ID（win_3、fast_1……）會和玩家的進度一起儲存：只使用 a-z、0-9、- 和 _，
+#修改 ID 會重新開始該挑戰的進度。
+
+#挑戰和連續記錄中“一天”開始的時區，例如 Europe/Madrid 或 America/New_York。
+#留空則使用伺服器的時區。
+timezone: ''
+
+daily:
+  enabled: true
+  #fixed：下面的每個挑戰每天都啟用。
+  #random：每天抽取 'amount' 個（所有人相同）。
+  mode: random
+  amount: 3
+  challenges:
+    win_3:
+      type: WIN_GAMES
+      amount: 3
+      name: '&e熱身'
+      description: '&7贏得 %amount% 局聊天遊戲'
+      icon: GOLD_NUGGET
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    win_8:
+      type: WIN_GAMES
+      amount: 8
+      name: '&6勢如破竹'
+      description: '&7贏得 %amount% 局聊天遊戲'
+      icon: GOLD_INGOT
+      rewards:
+        - '[consolecmd] give %player% gold_ingot 8'
+    unscramble_2:
+      type: WIN_GAME
+      game: unscramble
+      amount: 2
+      name: '&b單詞巫師'
+      description: '&7贏得 %amount% 局%game%'
+      icon: BOOK
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    math_2:
+      type: WIN_GAME
+      game: math
+      amount: 2
+      name: '&b人肉計算器'
+      description: '&7贏得 %amount% 局%game%'
+      icon: PAPER
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    fast_1:
+      type: FAST_WIN
+      seconds: 5
+      amount: 1
+      name: '&c快手'
+      description: '&7在 %seconds% 秒或更短時間內贏得一局聊天遊戲'
+      icon: FEATHER
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    race_1:
+      type: WIN_RACES
+      amount: 1
+      name: '&a賽車手'
+      description: '&7贏得一場競賽'
+      icon: IRON_PICKAXE
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    points_5:
+      type: EARN_POINTS
+      amount: 5
+      name: '&d點數收藏家'
+      description: '&7獲得 %amount% 點數'
+      icon: EXPERIENCE_BOTTLE
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    global_1:
+      type: PLAY_GLOBAL
+      amount: 1
+      name: '&3團隊玩家'
+      description: '&7及時完成一局全服遊戲'
+      icon: COMPASS
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+
+weekly:
+  enabled: true
+  #每週開始的那一天。
+  reset-day: MONDAY
+  mode: fixed
+  amount: 3
+  challenges:
+    win_25:
+      type: WIN_GAMES
+      amount: 25
+      name: '&6每週冠軍'
+      description: '&7本週贏得 %amount% 局聊天遊戲'
+      icon: DIAMOND
+      rewards:
+        - '[consolecmd] give %player% diamond 3'
+    fast_5:
+      type: FAST_WIN
+      seconds: 4
+      amount: 5
+      name: '&c閃電'
+      description: '&7在 %seconds% 秒或更短時間內贏得 %amount% 局聊天遊戲'
+      icon: BLAZE_POWDER
+      rewards:
+        - '[consolecmd] give %player% diamond 2'
+    global_5:
+      type: WIN_GLOBAL
+      amount: 5
+      name: '&3人氣之星'
+      description: '&7在 %amount% 局全服遊戲中獲得有獎勵的名次'
+      icon: BEACON
+      rewards:
+        - '[consolecmd] give %player% diamond 2'

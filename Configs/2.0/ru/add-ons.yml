@@ -1,14 +1,4 @@
-discord:
-  #Если url пуст, это игнорируется, так как вебхука нет
-  webhook-url: ''
-  message-content: 'Последние результаты игр:'
-  img-url: 'https://www.spigotmc.org/data/resource_icons/107/107781.jpg?1676494289'
-  username: 'Chat Games'
-  title: 'Результат Chat Games'
-  description: 'Победитель:'
-  winner-field: '%winner% (%time%)'
-  game-field: 'Игра: %game%'
-
+#Настройки Discord находятся в discord.yml.
 
 #Файл, в который будут сохраняться логи
 log-file: 'game_log.txt'

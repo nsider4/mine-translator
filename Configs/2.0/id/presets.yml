@@ -1,0 +1,41 @@
+# Preset ChatGames: kumpulan game bernama untuk rotasi otomatis.
+#
+# Selama preset aktif, rotasi hanya memilih game-nya, dan flag 'enable'
+# di games.yml / races.yml diabaikan. Atur 'active' ke none untuk memakai flag itu lagi.
+# Balapan dalam preset hanya berjalan jika balapan diaktifkan di races.yml (enable-races).
+#
+# Perintah (izin chatgames.preset):
+#   /chatgames preset list
+#   /chatgames preset load <name>   (atau 'none')
+#   /chatgames preset save <name>   menyimpan game yang aktif saat ini sebagai preset
+#
+# Plugin menulis ulang file ini saat kamu memakai perintah tersebut.
+
+active: none
+
+presets:
+  weekend_set:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+
+  minimal_set:
+    games:
+      - reaction
+
+  full_rotation:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+      - guess_the_number
+      - memorize
+      - sequence
+      - clickable
+      - fillout
+      - hoverable
+      - random
+      - math
+      - variable
+      - trivia

@@ -1,0 +1,72 @@
+#連続記録
+#
+#プレイヤーが何かを続けた日数です。1 日でも抜けると連続記録は 1 から
+#やり直しになり、それまでに受け取っていない報酬はなくなります。1 日は
+#challenges.yml で設定したタイムゾーンで始まります。
+#  challenge：デイリーチャレンジをすべて達成した
+#  daily：    ゲームに 1 回以上勝った（またはグローバルゲームを報酬のある順位で終えた）
+#  global：   グローバルゲームを 1 回以上時間内に達成した
+#
+#連続記録が 1 日伸びるたびにその日の報酬が出ます。/chatgames claim で受け取ります。
+#報酬は rewards.yml と同じ行です。%player%、%streak%（名前）、%day% が入ります。
+
+#7 日目の後：'repeat' は毎日 7 日目の報酬を出し、'loop' は 1 日目からやり直します。
+after-day-7: repeat
+
+challenge:
+  enabled: true
+  name: '&dチャレンジ連続記録'
+  rewards:
+    1:
+      - '[consolecmd] give %player% iron_ingot 4'
+    2:
+      - '[consolecmd] give %player% iron_ingot 8'
+    3:
+      - '[consolecmd] give %player% gold_ingot 4'
+    4:
+      - '[consolecmd] give %player% gold_ingot 8'
+    5:
+      - '[consolecmd] give %player% emerald 4'
+    6:
+      - '[consolecmd] give %player% emerald 8'
+    7:
+      - '[consolecmd] give %player% diamond 4'
+      - '[broadcast] &d%player% &fが &d%day% &f日連続でデイリーチャレンジをすべて達成！'
+
+daily:
+  enabled: true
+  name: '&6デイリー連勝記録'
+  rewards:
+    1:
+      - '[consolecmd] give %player% iron_ingot 2'
+    2:
+      - '[consolecmd] give %player% iron_ingot 4'
+    3:
+      - '[consolecmd] give %player% gold_ingot 2'
+    4:
+      - '[consolecmd] give %player% gold_ingot 4'
+    5:
+      - '[consolecmd] give %player% emerald 2'
+    6:
+      - '[consolecmd] give %player% emerald 4'
+    7:
+      - '[consolecmd] give %player% diamond 2'
+
+global:
+  enabled: true
+  name: '&3グローバル連続記録'
+  rewards:
+    1:
+      - '[consolecmd] give %player% iron_ingot 2'
+    2:
+      - '[consolecmd] give %player% iron_ingot 4'
+    3:
+      - '[consolecmd] give %player% gold_ingot 2'
+    4:
+      - '[consolecmd] give %player% gold_ingot 4'
+    5:
+      - '[consolecmd] give %player% emerald 2'
+    6:
+      - '[consolecmd] give %player% emerald 4'
+    7:
+      - '[consolecmd] give %player% diamond 2'

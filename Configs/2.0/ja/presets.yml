@@ -1,0 +1,41 @@
+# ChatGames のプリセット：自動ローテーション用の、名前付きのゲームのセット。
+#
+# プリセットが有効な間、ローテーションはそのゲームだけを選び、games.yml / races.yml の 'enable'
+# フラグは無視されます。'active' を none にすると、またそのフラグが使われます。
+# プリセットのレースは、races.yml でレースがオン（enable-races）のときだけ行われます。
+#
+# コマンド（権限 chatgames.preset）：
+#   /chatgames preset list
+#   /chatgames preset load <name>   （または 'none'）
+#   /chatgames preset save <name>   今有効なゲームをプリセットとして保存
+#
+# これらのコマンドを使うと、プラグインがこのファイルを書き直します。
+
+active: none
+
+presets:
+  weekend_set:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+
+  minimal_set:
+    games:
+      - reaction
+
+  full_rotation:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+      - guess_the_number
+      - memorize
+      - sequence
+      - clickable
+      - fillout
+      - hoverable
+      - random
+      - math
+      - variable
+      - trivia

@@ -1,0 +1,125 @@
+#############################
+######    設定    #######
+#############################
+check-update: true
+
+#伺服器的語言。方塊、物品和生物的名稱（在競賽和記憶遊戲中）會被翻譯
+#成這種語言，支援 140 多種語言。在這裡檢視你的語言 ID：
+#https://github.com/nsider4/mine-translator/blob/main/language_names.txt
+#名稱會下載到 translations/ 中，並在新的 Minecraft 版本釋出時
+#自動更新。修改此處後，執行 /chatgames reload 即可生效。
+lang: 'en_us'
+
+#這些配置檔案的語言：訊息、選單、單詞列表、問答、註釋……
+#完整翻譯：en, es, fr, pt, de, it, nl, pl, ru, tr, zh, zh_tw, ja, ko, uk, cs, sv, hu, vi, id
+#（zh 為簡體中文，zh_tw 為繁體中文）。如果你的 'lang' 不在其中，方塊、
+#物品和生物名稱仍會翻譯，但這些檔案會保持原本的語言（預設為英文）。
+#  auto：當上方的 'lang' 改變且該語言有完整翻譯時切換
+#  none：從不更改
+#  或上方的其中一個語言代碼
+#切換時會保留你的設定以及你對它們做的修改；你自己寫的訊息
+#會被翻譯替換（舊檔案會先複製到 backups/）。翻譯檔案
+#從 https://github.com/nsider4/mine-translator（Configs 資料夾）下載，並會
+#自動更新。更多語言可以在那裡新增。
+config-language: 'auto'
+
+#儲存型別，可選：SQLite 或 MySQL
+Storage: 'SQLite'
+
+#儲存所有 ChatGames 資料的表名
+table_name: 'chatgames'
+
+#儲存所有 ChatGames 最快時間的表名
+fastest_times_table: 'chatgames_fastest_times'
+
+SQLite:
+  Filename: 'chatgames-data'
+
+MySQL:
+  host: 'localhost'
+  port: '3306'
+  user: 'root'
+  password: 'password'
+  database: 'chatgame'
+  connection-parameters: '?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8'
+  Pool-Settings:
+    max-pool-size: 10
+    min-idle: 10
+    max-lifetime: 180000
+    keep-alive-time: 60000
+    time-out: 20000
+
+disabled-worlds:
+  - 'example_world'
+
+prefix: '&c&lC&d&lH&b&lA&a&lT &6&lG&e&lA&a&lM&c&lE&b&lS'
+
+#當此項為 false 時，只有擁有 'chatgames.start.*' 許可權的玩家才能開始遊戲
+allow_starting_from_disabled: true
+
+#如果為 false，玩家猜對時，本來不會傳送的那條訊息將不會被取消
+cancel-message-when-winning: true
+
+#聊天遊戲開始所需的最少線上玩家數
+min_players_online: 1
+
+#再次隨機選擇遊戲所需的時間。
+#設為 -1 會完全禁用此任務；設為 -1 時也無法使用 randomDelay
+time_minutes: 25
+
+#啟用後，每局遊戲結束時，會在 'randomDelay.minimum' 到 'randomDelay.limit' 之間隨機生成一個數，作為下一局遊戲的延遲
+#啟用此項會忽略 'time_minutes' 的值（除非它為 -1，此時沒有任務）。
+randomDelay:
+  enable: false
+  #時間單位，另一個可選值是 'seconds'；如果修改它，建議把最小值設得比遊戲的 'timeToGuess_seconds' 更大
+  timeUnit: 'minutes'
+  minimum: 1
+  limit: 25
+
+
+#關閉此項後，顯示遊戲將不再需要 chatgames.play 許可權
+use-permission-toplay: false
+
+#為 false 時，只統計擁有 'chatgames.play' 許可權（即可以參與遊戲）的玩家。
+#為 true 時，統計除隱身玩家外的所有線上玩家。
+count-all-players: false
+
+#為 true 時，會建立最快打字排行榜（/chatgames fastest）。為 false 時，此排行榜關閉。
+fastest-typers-top: true
+
+#PlaceholderAPI 變數（需要安裝 PlaceholderAPI）：
+#  你自己：       %chatgames_points%, %chatgames_wins%, %chatgames_wins_<game>%, %chatgames_race_wins%,
+#                %chatgames_global_played%, %chatgames_global_won%, %chatgames_toggle%, %chatgames_sound_toggle%
+#                %chatgames_events_played%, %chatgames_event_wins%, %chatgames_event_best_place%（0 = 還沒有）
+#  你的時間：     %chatgames_personal_best%（任意聊天遊戲）, %chatgames_fastest_<game>%（也包括競賽）
+#  你的排名：     %chatgames_show_current_pos_top%（點數）, %chatgames_show_current_pos_fastest%（最佳時間）
+#  點數排行：     %chatgames_top_<n>%（名字）, %chatgames_points_top_<n>%, %chatgames_total_points%
+#  最快排行：     %chatgames_fastest_<n>%（名字，聊天遊戲）, %chatgames_fastest_time_<n>%,
+#                %chatgames_fastest_<game>_<n>%, %chatgames_fastest_<game>_time_<n>%
+#  當前：         %chatgames_game_running%, %chatgames_current_game%, %chatgames_next_game_in%（秒）
+#  競賽：         %chatgames_race_target%, %chatgames_race_amount%, %chatgames_race_progress%（你的）
+#  挑戰：         %chatgames_daily_completed%, %chatgames_daily_total%, %chatgames_weekly_completed%,
+#                %chatgames_weekly_total%, %chatgames_challenges_completed%（歷史總計）
+#  連續記錄：     %chatgames_streak_<type>%, %chatgames_streak_<type>_longest%（<type> 為 challenge、daily 或 global）
+#  遊戲活動：     %chatgames_event_running%, %chatgames_event_name%, %chatgames_event_step%, %chatgames_event_steps%,
+#                %chatgames_event_points% 和 %chatgames_event_place%（你在進行中的活動裡的資料）
+#  <game> 是 games.yml 中的遊戲名（例如 unscramble、guess_the_number）；<n> 是名次（1、2、3……）。
+placeholders:
+  #排行榜變數（top_<n>、fastest_<n>、排名……）的重建間隔，單位為秒。
+  #每局有贏家的遊戲結束後也會重建。你自己的點數、勝場和時間始終是實時的。
+  refresh-seconds: 60
+  #沒有內容可顯示時顯示的文字：排行榜空位、還沒有最佳時間、沒有遊戲在進行……
+  empty-value: ''
+
+#聊天遊戲開始時給玩家播放的聲音！
+GameSounds:
+  volume: 0.5
+  pitch: 1.0
+  #將其中任意一項留空即可禁用
+  #資源包中的聲音也可以使用：帶上名稱空間書寫，例如 'myserver:custom.ding'
+  win: 'minecraft:entity.experience_orb.pickup'
+  game-start: 'minecraft:entity.player.levelup'
+  time-expired: 'minecraft:entity.villager.no'
+  wrong-case: 'minecraft:block.note_block.bass'
+
+#遊戲預設（命名的已啟用遊戲組合）位於 presets.yml。

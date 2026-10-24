@@ -1,0 +1,1063 @@
+unscramble:
+  Words:
+    - '藥水'
+    - '烽火台'
+    - '箭矢'
+    - '鞘翅'
+    - '馬'
+    - '豬'
+    - '綿羊'
+    - '牛'
+    - '雞'
+    - '紅石'
+    - '苦力怕'
+    - '終界使者'
+    - '殭屍'
+    - '骷髏'
+    - '村民'
+    - '地獄'
+    - '終界'
+    - '終界箱'
+    - '劍'
+    - '合成'
+    - '生物群系'
+    - '終界傳送門'
+    - '終界珍珠'
+    - '烈焰桿'
+    - '地獄疙瘩'
+    - '靈魂砂'
+    - '遠古遺骸'
+    - '哭泣的黑曜石'
+    - '蜂箱'
+    - '營火'
+    - '燈籠'
+    - '唱片機'
+    - '音階盒'
+    - '唱片'
+    - '控制桿'
+    - '按鈕'
+    - '礦車'
+    - '偵測器'
+    - '活塞'
+    - '鑽石'
+    - '金'
+    - '鐵'
+    - '黑曜石'
+    - '鎬'
+    - '花'
+    - '樹苗'
+    - '苔蘚'
+    - '火把'
+    - '儲物箱'
+    - 'Furnace'
+    - '蘑菇'
+    - '伏聆'
+    - '海磷石'
+    - '泥土'
+    - '玻璃'
+    - '界伏蚌'
+    - '陶土'
+    - '紅樹林木'
+    - '螢光魷魚'
+    - '堆肥箱'
+    - '紡織機'
+    - '砂輪'
+    - '切石機'
+    - '蕈光體'
+    - '磁石'
+    - '紫水晶'
+    - '蛙光體'
+    - '投擲器'
+    - '發射器'
+    - '銅'
+    - '獄髓'
+    - '羽毛'
+    - '線'
+    - '火藥'
+    - '皮革'
+    - '河豚'
+    - '六角恐龍'
+    - '螢光石'
+    - '歌萊'
+    - 'Pigstep'
+    - '蜂巢'
+    - '鮭魚'
+    - '兔子'
+    - '望遠鏡'
+    - '剪刀'
+    - '羅盤'
+    - '修補'
+    - '弩'
+    - '三叉戟'
+    - '鍋釜'
+    - '鞍'
+    - '講台'
+    - '漏斗'
+    - '鏟'
+    - '時鐘'
+    - '煤炭'
+    - '青金石'
+    - '石英'
+    - '錠'
+    - '蝌蚪'
+
+unreverse:
+  Words:
+    - '藥水'
+    - '烽火台'
+    - '箭矢'
+    - '鞘翅'
+    - '馬'
+    - '豬'
+    - '綿羊'
+    - '牛'
+    - '雞'
+    - '紅石'
+    - '苦力怕'
+    - '終界使者'
+    - '殭屍'
+    - '骷髏'
+    - '村民'
+    - '地獄'
+    - '終界'
+    - '終界箱'
+    - '劍'
+    - '合成'
+    - '生物群系'
+    - '終界傳送門'
+    - '終界珍珠'
+    - '烈焰桿'
+    - '地獄疙瘩'
+    - '靈魂砂'
+    - '遠古遺骸'
+    - '哭泣的黑曜石'
+    - '蜂箱'
+    - '營火'
+    - '燈籠'
+    - '唱片機'
+    - '音階盒'
+    - '唱片'
+    - '控制桿'
+    - '按鈕'
+    - '礦車'
+    - '偵測器'
+    - '活塞'
+    - '鑽石'
+    - '金'
+    - '鐵'
+    - '黑曜石'
+    - '鎬'
+    - '花'
+    - '樹苗'
+    - '苔蘚'
+    - '火把'
+    - '儲物箱'
+    - 'Furnace'
+    - '蘑菇'
+    - '伏聆'
+    - '海磷石'
+    - '泥土'
+    - '玻璃'
+    - '界伏蚌'
+    - '陶土'
+    - '紅樹林木'
+    - '螢光魷魚'
+    - '堆肥箱'
+    - '紡織機'
+    - '砂輪'
+    - '切石機'
+    - '蕈光體'
+    - '磁石'
+    - '紫水晶'
+    - '蛙光體'
+    - '投擲器'
+    - '發射器'
+    - '銅'
+    - '獄髓'
+    - '羽毛'
+    - '線'
+    - '火藥'
+    - '皮革'
+    - '河豚'
+    - '六角恐龍'
+    - '螢光石'
+    - '歌萊'
+    - 'Pigstep'
+    - '蜂巢'
+    - '鮭魚'
+    - '兔子'
+    - '望遠鏡'
+    - '剪刀'
+    - '羅盤'
+    - '修補'
+    - '弩'
+    - '三叉戟'
+    - '鍋釜'
+    - '鞍'
+    - '講台'
+    - '漏斗'
+    - '鏟'
+    - '時鐘'
+    - '煤炭'
+    - '青金石'
+    - '石英'
+    - '錠'
+    - '蝌蚪'
+
+reaction:
+  Words:
+    - '藥水'
+    - '烽火台'
+    - '箭矢'
+    - '鞘翅'
+    - '馬'
+    - '豬'
+    - '綿羊'
+    - '牛'
+    - '雞'
+    - '紅石'
+    - '苦力怕'
+    - '終界使者'
+    - '殭屍'
+    - '骷髏'
+    - '村民'
+    - '地獄'
+    - '終界'
+    - '終界箱'
+    - '劍'
+    - '合成'
+    - '生物群系'
+    - '終界傳送門'
+    - '終界珍珠'
+    - '烈焰桿'
+    - '地獄疙瘩'
+    - '靈魂砂'
+    - '遠古遺骸'
+    - '哭泣的黑曜石'
+    - '蜂箱'
+    - '營火'
+    - '燈籠'
+    - '唱片機'
+    - '音階盒'
+    - '唱片'
+    - '控制桿'
+    - '按鈕'
+    - '礦車'
+    - '偵測器'
+    - '活塞'
+    - '鑽石'
+    - '金'
+    - '鐵'
+    - '黑曜石'
+    - '鎬'
+    - '花'
+    - '樹苗'
+    - '苔蘚'
+    - '火把'
+    - '儲物箱'
+    - 'Furnace'
+    - '蘑菇'
+    - '伏聆'
+    - '海磷石'
+    - '泥土'
+    - '玻璃'
+    - '界伏蚌'
+    - '陶土'
+    - '紅樹林木'
+    - '螢光魷魚'
+    - '堆肥箱'
+    - '紡織機'
+    - '砂輪'
+    - '切石機'
+    - '蕈光體'
+    - '磁石'
+    - '紫水晶'
+    - '蛙光體'
+    - '投擲器'
+    - '發射器'
+    - '銅'
+    - '獄髓'
+    - '羽毛'
+    - '線'
+    - '火藥'
+    - '皮革'
+    - '河豚'
+    - '六角恐龍'
+    - '螢光石'
+    - '歌萊'
+    - 'Pigstep'
+    - '蜂巢'
+    - '鮭魚'
+    - '兔子'
+    - '望遠鏡'
+    - '剪刀'
+    - '羅盤'
+    - '修補'
+    - '弩'
+    - '三叉戟'
+    - '鍋釜'
+    - '鞍'
+    - '講台'
+    - '漏斗'
+    - '鏟'
+    - '時鐘'
+    - '煤炭'
+    - '青金石'
+    - '石英'
+    - '錠'
+    - '蝌蚪'
+
+fillout:
+  Words:
+    - '藥水'
+    - '烽火台'
+    - '箭矢'
+    - '鞘翅'
+    - '馬'
+    - '豬'
+    - '綿羊'
+    - '牛'
+    - '雞'
+    - '紅石'
+    - '苦力怕'
+    - '終界使者'
+    - '殭屍'
+    - '骷髏'
+    - '村民'
+    - '地獄'
+    - '終界'
+    - '終界箱'
+    - '劍'
+    - '合成'
+    - '生物群系'
+    - '終界傳送門'
+    - '終界珍珠'
+    - '烈焰桿'
+    - '地獄疙瘩'
+    - '靈魂砂'
+    - '遠古遺骸'
+    - '哭泣的黑曜石'
+    - '蜂箱'
+    - '營火'
+    - '燈籠'
+    - '唱片機'
+    - '音階盒'
+    - '唱片'
+    - '控制桿'
+    - '按鈕'
+    - '礦車'
+    - '偵測器'
+    - '活塞'
+    - '鑽石'
+    - '金'
+    - '鐵'
+    - '黑曜石'
+    - '鎬'
+    - '花'
+    - '樹苗'
+    - '苔蘚'
+    - '火把'
+    - '儲物箱'
+    - 'Furnace'
+    - '蘑菇'
+    - '伏聆'
+    - '海磷石'
+    - '泥土'
+    - '玻璃'
+    - '界伏蚌'
+    - '陶土'
+    - '紅樹林木'
+    - '螢光魷魚'
+    - '堆肥箱'
+    - '紡織機'
+    - '砂輪'
+    - '切石機'
+    - '蕈光體'
+    - '磁石'
+    - '紫水晶'
+    - '蛙光體'
+    - '投擲器'
+    - '發射器'
+    - '銅'
+    - '獄髓'
+    - '羽毛'
+    - '線'
+    - '火藥'
+    - '皮革'
+    - '河豚'
+    - '六角恐龍'
+    - '螢光石'
+    - '歌萊'
+    - 'Pigstep'
+    - '蜂巢'
+    - '鮭魚'
+    - '兔子'
+    - '望遠鏡'
+    - '剪刀'
+    - '羅盤'
+    - '修補'
+    - '弩'
+    - '三叉戟'
+    - '鍋釜'
+    - '鞍'
+    - '講台'
+    - '漏斗'
+    - '鏟'
+    - '時鐘'
+    - '煤炭'
+    - '青金石'
+    - '石英'
+    - '錠'
+    - '蝌蚪'
+
+hoverable:
+  Words:
+    - '藥水'
+    - '烽火台'
+    - '箭矢'
+    - '鞘翅'
+    - '馬'
+    - '豬'
+    - '綿羊'
+    - '牛'
+    - '雞'
+    - '紅石'
+    - '苦力怕'
+    - '終界使者'
+    - '殭屍'
+    - '骷髏'
+    - '村民'
+    - '地獄'
+    - '終界'
+    - '終界箱'
+    - '劍'
+    - '合成'
+    - '生物群系'
+    - '終界傳送門'
+    - '終界珍珠'
+    - '烈焰桿'
+    - '地獄疙瘩'
+    - '靈魂砂'
+    - '遠古遺骸'
+    - '哭泣的黑曜石'
+    - '蜂箱'
+    - '營火'
+    - '燈籠'
+    - '唱片機'
+    - '音階盒'
+    - '唱片'
+    - '控制桿'
+    - '按鈕'
+    - '礦車'
+    - '偵測器'
+    - '活塞'
+    - '鑽石'
+    - '金'
+    - '鐵'
+    - '黑曜石'
+    - '鎬'
+    - '花'
+    - '樹苗'
+    - '苔蘚'
+    - '火把'
+    - '儲物箱'
+    - 'Furnace'
+    - '蘑菇'
+    - '伏聆'
+    - '海磷石'
+    - '泥土'
+    - '玻璃'
+    - '界伏蚌'
+    - '陶土'
+    - '紅樹林木'
+    - '螢光魷魚'
+    - '堆肥箱'
+    - '紡織機'
+    - '砂輪'
+    - '切石機'
+    - '蕈光體'
+    - '磁石'
+    - '紫水晶'
+    - '蛙光體'
+    - '投擲器'
+    - '發射器'
+    - '銅'
+    - '獄髓'
+    - '羽毛'
+    - '線'
+    - '火藥'
+    - '皮革'
+    - '河豚'
+    - '六角恐龍'
+    - '螢光石'
+    - '歌萊'
+    - 'Pigstep'
+    - '蜂巢'
+    - '鮭魚'
+    - '兔子'
+    - '望遠鏡'
+    - '剪刀'
+    - '羅盤'
+    - '修補'
+    - '弩'
+    - '三叉戟'
+    - '鍋釜'
+    - '鞍'
+    - '講台'
+    - '漏斗'
+    - '鏟'
+    - '時鐘'
+    - '煤炭'
+    - '青金石'
+    - '石英'
+    - '錠'
+    - '蝌蚪'
+
+#記憶遊戲的物品池。games.yml -> memorize.pools 決定使用哪些。
+#'numbers' 不需要列表。'blocks' 和 'mobs' 是 Minecraft ID，以 config.yml 中設定的語言（lang）顯示。
+#其他名稱都是普通列表：在這裡新增一個，並在 games.yml 中列出它的名字即可使用。
+memorize:
+  pools:
+    shopping_list:
+      - '柺杖糖'
+      - '綵帶'
+      - '雪花玻璃球'
+      - '薑餅人'
+      - '雪橇'
+      - '鈴鐺'
+      - '聖誕樹'
+      - '聖誕襪'
+      - '槲寄生'
+      - '金銀絲帶'
+      - '掛飾'
+      - '一品紅'
+      - '熱可可'
+      - '聖誕帽'
+      - '馴鹿'
+      - '花環'
+      - '聖誕彩燈'
+      - '胡桃夾子'
+      - '聖誕餅乾'
+      - '雪人'
+    words:
+      - '苦力怕'
+      - '鑽石'
+      - '綠寶石'
+      - '紅石'
+      - '傳送門'
+      - '烽火台'
+      - '鞘翅'
+      - '三叉戟'
+      - '鞍'
+      - '燈籠'
+      - '羅盤'
+      - '鐵砧'
+    colors:
+      - '紅色'
+      - '橙色'
+      - '黃色'
+      - '黃綠色'
+      - '綠色'
+      - '青色'
+      - '淡藍色'
+      - '藍色'
+      - '紫色'
+      - '品紅色'
+      - '粉紅色'
+      - '棕色'
+      - '黑色'
+      - '白色'
+      - '灰色'
+    blocks:
+      - diamond_block
+      - oak_log
+      - crafting_table
+      - furnace
+      - tnt
+      - bookshelf
+      - glowstone
+      - obsidian
+      - sponge
+      - pumpkin
+      - melon
+      - cactus
+      - ice
+      - sand
+      - gravel
+      - netherrack
+      - end_stone
+      - hay_block
+    mobs:
+      - creeper
+      - zombie
+      - skeleton
+      - spider
+      - enderman
+      - blaze
+      - ghast
+      - slime
+      - witch
+      - villager
+      - cow
+      - pig
+      - sheep
+      - chicken
+      - wolf
+      - ocelot
+      - horse
+      - squid
+
+blacklistedWords:
+  - 'ass'
+  - 'dumb'
+
+trivia:
+  data:
+    1:
+      question: 'Minecraft 是哪一年釋出的？'
+      answers:
+        - '2011'
+        - '2009'
+    2:
+      question: 'Minecraft 的創造者是誰？'
+      answers:
+        - 'Notch'
+    3:
+      question: '說出 Minecraft 的另一個版本。Java 版和 _______ 版？'
+      answers:
+        - '基岩'
+    4:
+      question: '說出 Minecraft 的另一個版本。基岩版和 ____ 版？'
+      answers:
+        - 'Java'
+    5:
+      question: '透過地獄傳送門會進入哪個維度？'
+      answers:
+        - '地獄'
+    6:
+      question: '哪個遊戲模式擁有無限的方塊，還可以飛行？'
+      answers:
+        - '創造'
+    7:
+      question: '哪個遊戲模式需要收集資源、保持飢餓值並活下去？'
+      answers:
+        - '生存'
+    8:
+      question: '哪個遊戲模式可以穿過方塊，只能觀看世界？'
+      answers:
+        - '旁觀'
+    9:
+      question: '哪個遊戲模式專為冒險地圖設計，不能隨意破壞方塊？'
+      answers:
+        - '冒險'
+    10:
+      question: '用 3 個凋零骷髏頭顱會召喚出什麼生物？'
+      answers:
+        - '凋零怪'
+    11:
+      question: '熔鍊沙子會得到什麼方塊？'
+      answers:
+        - '玻璃'
+    12:
+      question: 'Minecraft 中最強的工具材料是什麼？'
+      answers:
+        - '獄髓'
+    13:
+      question: '凋零怪殺死其他生物時會掉落什麼物品？'
+      answers:
+        - '凋零玫瑰'
+    14:
+      question: 'Minecraft 的建築高度上限是多少？'
+      answers:
+        - '320'
+    15:
+      question: '洞穴與山崖更新是 Minecraft 的哪個版本？'
+      answers:
+        - '1.17'
+    16:
+      question: '捕獲哪種生物會獲得“最萌捕食者”進度？'
+      answers:
+        - '六角恐龍'
+    17:
+      question: '凋零怪被殺死時會掉落什麼物品？'
+      answers:
+        - '地獄之星'
+    18:
+      question: 'Minecraft 中有多少張唱片？'
+      answers:
+        - '15'
+    19:
+      question: 'Minecraft 中有多少種山羊角？'
+      answers:
+        - '8'
+    20:
+      question: '這是什麼的配方？小麥 x3 牛奶 x3 糖 x2 雞蛋 x1'
+      answers:
+        - '蛋糕'
+    21:
+      question: '合成一個金胡蘿蔔需要多少個金粒？'
+      answers:
+        - '8'
+    22:
+      question: '合成一整套盔甲需要多少份材料？'
+      answers:
+        - '24'
+    23:
+      question: '開始一個世界時，你在哪個維度？'
+      answers:
+        - '主世界'
+    24:
+      question: 'Minecraft 中最常見的合成材料是什麼？'
+      answers:
+        - '木頭'
+    25:
+      question: '用什麼材料馴服狼？'
+      answers:
+        - '骨頭'
+    26:
+      question: '用什麼材料馴服鸚鵡？'
+      answers:
+        - '種子'
+    27:
+      question: '用什麼材料馴服貓？'
+      answers:
+        - 'Fish'
+    28:
+      question: '竹子生長在哪個生物群系？'
+      answers:
+        - '叢林'
+    29:
+      question: '給羊取什麼名字會讓它變換顏色？'
+      answers:
+        - 'Jeb_'
+    30:
+      question: 'Minecraft 中有多少種木頭？'
+      answers:
+        - '9'
+    31:
+      question: '深淵裡經常能找到什麼生物？'
+      answers:
+        - '伏守者'
+    32:
+      question: '在終界維度裡，人們經常去找什麼物品？'
+      answers:
+        - '鞘翅'
+        - '龍蛋'
+    33:
+      question: '讓 1 個烽火台達到滿級需要多少個方塊？'
+      answers:
+        - '169'
+    34:
+      question: '哪種方塊不能為烽火台供能？青金石方塊、綠寶石方塊、黃金方塊。'
+      answers:
+        - '青金石'
+    35:
+      question: '合成 16 個工作台需要多少塊木板？'
+      answers:
+        - '64'
+    36:
+      question: '在 Minecraft 中用什麼來製作旗幟？'
+      answers:
+        - '紡織機'
+    37:
+      question: '海龜被閃電劈死時會掉落什麼物品？'
+      answers:
+        - '碗'
+    38:
+      question: '樹葉會掉落哪種 Minecraft 食物？'
+      answers:
+        - '蘋果'
+    39:
+      question: '重新召喚終界龍需要多少滴幽靈之淚？'
+      answers:
+        - '4'
+    40:
+      question: '在 Minecraft 中用什麼物品讓植物長得更快？'
+      answers:
+        - '骨粉'
+    41:
+      question: '絕對不能喂鸚鵡吃什麼食物？'
+      answers:
+        - '餅乾'
+    42:
+      question: '一組終界珍珠有多少個？'
+      answers:
+        - '16'
+    43:
+      question: '開啟終界傳送門需要多少個終界之眼？'
+      answers:
+        - '12'
+    44:
+      question: '喚魔者會掉落什麼珍貴物品？'
+      answers:
+        - '不死圖騰'
+    45:
+      question: 'Minecraft 中有多少種顏色的羊毛？'
+      answers:
+        - '16'
+    46:
+      question: '熔鍊原木會得到什麼物品？'
+      answers:
+        - '木炭'
+    47:
+      question: '哪張唱片只能在地獄獲得？'
+      answers:
+        - 'Pigstep'
+    48:
+      question: '召喚一個鐵魔像需要多少個鐵方塊？'
+      answers:
+        - '4'
+    49:
+      question: '合成一個獄髓錠需要多少個遠古遺骸？'
+      answers:
+        - '4'
+    50:
+      question: '在附魔台附魔需要什麼物品？'
+      answers:
+        - '青金石'
+        - 'xp'
+
+#詞語聯想：三條線索，一個隱藏的關聯。第一個答案是顯示的那個；
+#其他答案也會被接受。困難的題目每次只顯示一條線索（作為提示）。
+word_association:
+  data:
+    nether_portal:
+      difficulty: easy
+      clues: ['黑曜石', '打火石', '紫色']
+      answers: ['地獄傳送門', '傳送門']
+    creeper:
+      difficulty: easy
+      clues: ['綠色', '嘶嘶聲', '爆炸']
+      answers: ['苦力怕']
+    enderman:
+      difficulty: easy
+      clues: ['高個子', '傳送', '珍珠']
+      answers: ['終界使者']
+    diamond:
+      difficulty: easy
+      clues: ['鎬', '藍色', '深處']
+      answers: ['鑽石', '鑽石']
+    cake:
+      difficulty: easy
+      clues: ['牛奶', '雞蛋', '糖']
+      answers: ['蛋糕']
+    bed:
+      difficulty: easy
+      clues: ['羊毛', '木板', '睡覺']
+      answers: ['床']
+    bucket:
+      difficulty: easy
+      clues: ['鐵', '水', '熔岩']
+      answers: ['鐵桶']
+    torch:
+      difficulty: easy
+      clues: ['木棒', '煤炭', '光源']
+      answers: ['火把']
+    sheep:
+      difficulty: easy
+      clues: ['羊毛', '剪刀', '咩']
+      answers: ['綿羊']
+    villager:
+      difficulty: easy
+      clues: ['綠寶石', '交易', '嗯？']
+      answers: ['村民']
+    zombie:
+      difficulty: easy
+      clues: ['腐肉', '夜晚', '呻吟']
+      answers: ['殭屍']
+    skeleton:
+      difficulty: easy
+      clues: ['骨頭', '弓', '箭']
+      answers: ['骷髏']
+    chest:
+      difficulty: easy
+      clues: ['木板', '儲存', '戰利品']
+      answers: ['儲物箱']
+    furnace:
+      difficulty: easy
+      clues: ['鵝卵石', '熔鍊', '燃料']
+      answers: ['Furnace']
+    bread:
+      difficulty: easy
+      clues: ['小麥', '三個', '食物']
+      answers: ['麵包']
+    cow:
+      difficulty: easy
+      clues: ['皮革', '牛奶', '牛肉']
+      answers: ['牛']
+    crafting_table:
+      difficulty: easy
+      clues: ['木板', '網格', '配方']
+      answers: ['工作台', '合成台']
+    tnt:
+      difficulty: easy
+      clues: ['火藥', '沙', '轟']
+      answers: ['TNT']
+    chicken:
+      difficulty: easy
+      clues: ['雞蛋', '羽毛', '咯咯']
+      answers: ['雞']
+    wolf:
+      difficulty: easy
+      clues: ['骨頭', 'Tame', '項圈']
+      answers: ['狼', '狗']
+    ender_dragon:
+      difficulty: medium
+      clues: ['終界', '水晶', '雞蛋']
+      answers: ['終界龍', '龍']
+    wither:
+      difficulty: medium
+      clues: ['靈魂砂', '頭顱', '地獄之星']
+      answers: ['凋零怪']
+    blaze:
+      difficulty: medium
+      clues: ['烈焰桿', '火', '要塞']
+      answers: ['烈焰使者']
+    ghast:
+      difficulty: medium
+      clues: ['眼淚', '火球', '飄浮']
+      answers: ['地獄幽靈']
+    enchanting_table:
+      difficulty: medium
+      clues: ['書', '青金石', '等級']
+      answers: ['附魔台', '附魔桌']
+    beacon:
+      difficulty: medium
+      clues: ['金字塔', '地獄之星', '光柱']
+      answers: ['烽火台']
+    elytra:
+      difficulty: medium
+      clues: ['終界城', '翅膀', '滑翔']
+      answers: ['鞘翅']
+    trident:
+      difficulty: medium
+      clues: ['沉屍', '投擲', '波濤']
+      answers: ['三叉戟']
+    brewing_stand:
+      difficulty: medium
+      clues: ['藥水', '烈焰粉', '瓶子']
+      answers: ['釀造台']
+    piston:
+      difficulty: medium
+      clues: ['紅石', '推動', '粘性']
+      answers: ['活塞']
+    anvil:
+      difficulty: medium
+      clues: ['鐵方塊', '修復', '重新命名']
+      answers: ['鐵砧']
+    slime:
+      difficulty: medium
+      clues: ['沼澤', '彈跳', '球']
+      answers: ['史萊姆']
+    witch:
+      difficulty: medium
+      clues: ['藥水', '小屋', '怪笑']
+      answers: ['女巫']
+    iron_golem:
+      difficulty: medium
+      clues: ['鐵方塊', '南瓜', '村莊']
+      answers: ['鐵魔像', '魔像']
+    snow_golem:
+      difficulty: medium
+      clues: ['雪', '南瓜', '雪球']
+      answers: ['雪人', '雪人']
+    compass:
+      difficulty: medium
+      clues: ['鐵', '紅石', '出生點']
+      answers: ['羅盤']
+    clock:
+      difficulty: medium
+      clues: ['金', '紅石', '時間']
+      answers: ['時鐘']
+    map:
+      difficulty: medium
+      clues: ['紙', '羅盤', '探索']
+      answers: ['地圖']
+    shulker:
+      difficulty: medium
+      clues: ['終界城', '盒子', '懸浮']
+      answers: ['界伏蚌']
+    guardian:
+      difficulty: medium
+      clues: ['海底神殿', '鐳射', '海磷石']
+      answers: ['深海守衛']
+    netherite:
+      difficulty: hard
+      clues: ['遠古遺骸', '金', '升級']
+      answers: ['獄髓']
+    totem:
+      difficulty: hard
+      clues: ['喚魔者', '不死', '第二次機會']
+      answers: ['不死圖騰', '圖騰']
+    conduit:
+      difficulty: hard
+      clues: ['海洋之心', '鸚鵡螺', '海洋']
+      answers: ['海靈核心']
+    warden:
+      difficulty: hard
+      clues: ['深淵', '失明', '伏聆']
+      answers: ['伏守者']
+    mending:
+      difficulty: hard
+      clues: ['村民', '經驗', '修復']
+      answers: ['修補']
+    phantom:
+      difficulty: hard
+      clues: ['失眠', '膜', '夜空']
+      answers: ['夜魅']
+    axolotl:
+      difficulty: hard
+      clues: ['蒼鬱洞窟', '鐵桶', '粉紅色']
+      answers: ['六角恐龍']
+    respawn_anchor:
+      difficulty: hard
+      clues: ['螢光石', '哭泣的黑曜石', '地獄']
+      answers: ['重生錨']
+    piglin:
+      difficulty: hard
+      clues: ['金', '以物易物', '地獄']
+      answers: ['豬布林']
+    strider:
+      difficulty: hard
+      clues: ['熔岩', '扭曲蕈菇', '鞍']
+      answers: ['熾足獸']
+    lodestone:
+      difficulty: hard
+      clues: ['羅盤', '獄髓錠', '路標']
+      answers: ['磁石']
+    spyglass:
+      difficulty: hard
+      clues: ['紫水晶', '銅', '縮放']
+      answers: ['望遠鏡']
+    bundle:
+      difficulty: hard
+      clues: ['兔子皮', '線', '物品欄']
+      answers: ['束口袋']
+    end_portal:
+      difficulty: hard
+      clues: ['要塞', '眼睛', '框架']
+      answers: ['終界傳送門']
+    silk_touch:
+      difficulty: hard
+      clues: ['附魔', '玻璃', '礦石']
+      answers: ['絲綢之觸']
+    observer:
+      difficulty: hard
+      clues: ['紅石', '臉', '偵測']
+      answers: ['偵測器']
+    hopper:
+      difficulty: hard
+      clues: ['漏斗', '鐵', '物品']
+      answers: ['漏斗']
+    bee:
+      difficulty: hard
+      clues: ['蜂蜜', '花朵', '蜇']
+      answers: ['蜜蜂']
+    sniffer:
+      difficulty: hard
+      clues: ['遠古種子', '雞蛋', '考古']
+      answers: ['嗅探獸']
+    notch:
+      difficulty: hard
+      clues: ['創造者', '蘋果', 'Mojang']
+      answers: ['Notch']

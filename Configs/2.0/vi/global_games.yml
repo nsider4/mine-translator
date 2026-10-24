@@ -1,0 +1,255 @@
+#TRÒ CHƠI TOÀN CẦU
+#
+#Trong trò chơi toàn cầu, cả máy chủ chơi như một đội. Mỗi câu trả lời đúng (hoặc trong cuộc đua
+#toàn cầu, mỗi khối đào được, sinh vật bị giết...; trong Đếm số, mỗi số được đếm) cộng vào một số điểm
+#chung. Không ai cần phải nhanh nhất: khi điểm đạt mục tiêu kịp giờ, mọi người
+#đã đóng góp đều nhận thưởng. Nếu hết giờ trước, trò chơi thất bại.
+#
+#  Trò chơi chat chạy như một chuỗi câu hỏi. Mỗi người chơi có thể trả lời mỗi câu một lần, và
+#  câu tiếp theo đến sau 'answers-per-question' câu trả lời đúng hoặc 'question-seconds'.
+#  Câu trả lời luôn bị ẩn nên không thể chép.
+#  Cuộc đua tính tiến độ của mọi người cùng nhau, vd. 500 đá được cả máy chủ đào.
+#  Đếm số (chỉ chơi toàn cầu): cùng đếm trong khung chat, mỗi tin nhắn một số.
+#
+#Trò chơi toàn cầu bắt đầu ngẫu nhiên sau một trò thường, theo hẹn giờ, bằng
+#/chatgames global <game> [values], hoặc như một bước trong sự kiện (events.yml).
+#Tiến độ hiển thị trên thanh boss (1.9+) hoặc thanh hành động (1.8).
+
+triggers:
+  #Tỉ lệ phần trăm trò chơi toàn cầu bắt đầu sau khi một trò thường hoặc cuộc đua kết thúc (0 = không bao giờ).
+  chance-after-game: 10
+  #Số giây giữa lúc trò thường kết thúc và trò toàn cầu bắt đầu.
+  delay-seconds: 5
+  #Số phút giữa các trò toàn cầu bắt đầu theo hẹn giờ (0 = tắt).
+  interval-minutes: 0
+  #Số người chơi trực tuyến cần để trò toàn cầu tự bắt đầu (lệnh bỏ qua điều này).
+  minimum-players: 2
+
+progress-bar:
+  enabled: true
+  #Màu thanh boss: BLUE, GREEN, PINK, PURPLE, RED, WHITE hoặc YELLOW.
+  color: YELLOW
+  #SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12 hoặc SEGMENTED_20.
+  style: SEGMENTED_10
+  #Các mức phần trăm của mục tiêu được thông báo trong chat khi máy chủ đạt tới.
+  announce-at: [25, 50, 75]
+
+#Được mọi trò bên dưới dùng cho bất kỳ giá trị nào nó không tự đặt.
+#  goal: số câu trả lời đúng (hoặc, với cuộc đua, vật phẩm/sinh vật) máy chủ cần
+#  duration-seconds: thời gian máy chủ có
+#  min-contribution: đóng góp tối thiểu của người chơi để được thưởng
+#  points: điểm mỗi người chơi được thưởng nhận khi đạt mục tiêu
+#  points-per-contribution: điểm thêm cho mỗi lần đóng góp của người chơi
+#  answers-per-question: chỉ trò chơi chat, số người có thể trả lời một câu hỏi
+#  question-seconds: chỉ trò chơi chat, thời gian tối đa một câu hỏi tồn tại
+defaults:
+  goal: 10
+  duration-seconds: 120
+  min-contribution: 1
+  points: 1
+  points-per-contribution: 0
+  answers-per-question: 3
+  question-seconds: 15
+
+#Phần thưởng theo định dạng rewards.yml (chance, minimum-players, '<chance>%~ ' và 'has:<permission>'
+#đều dùng được). %player% là người chơi và %contribution% là phần họ đóng góp.
+#Mục 'rewards' riêng của một trò sẽ thay thế các mục này cho trò đó.
+rewards:
+  #Mọi người đã đóng góp ít nhất min-contribution, khi đạt mục tiêu.
+  completed:
+    reward_1:
+      data:
+        - '[consolecmd] give %player% iron_ingot 3'
+  #Cùng những người chơi đó khi hết giờ. Để trống: không có giải an ủi.
+  failed: {}
+  #Thêm cho những người đóng góp nhiều nhất khi đạt mục tiêu, theo thứ hạng.
+  top-contributors:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% diamond 1'
+    2:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 3'
+    3:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 1'
+
+#Placeholder trong mọi tin nhắn: %game% %goal% (một số) %goal_text% (vd. "500 Stone")
+#%progress% %percent% %time% (số giây còn lại) %duration%
+messages:
+  start:
+    - ''
+    - '&6&l» %game% TOÀN CẦU! &fCả máy chủ cùng chơi.'
+    - '&f  Đạt &e%goal% câu trả lời đúng &ftrong &e%time%s&f. Ai giúp sức đều được thưởng!'
+    - '&7  Mỗi câu hỏi nhận %answers% câu trả lời, nên đừng chờ người khác.'
+    - ''
+  race_start:
+    - ''
+    - '&6&l» ĐUA TOÀN CẦU! &fCả máy chủ cùng chơi.'
+    - '&f  Cùng nhau thu &e%goal% %value% &ftrong &e%time%s&f. Ai giúp sức đều được thưởng!'
+    - ''
+  count_start:
+    - ''
+    - '&6&l» ĐẾM SỐ TOÀN CẦU! &fCùng đếm từ &e%start% &fđến &e%target% &fvới bước &e%step%&f!'
+    - '&7  Mỗi tin nhắn một số, theo thứ tự. Không ai đếm hai lần liên tiếp. %time%s để hoàn thành.'
+    - ''
+  #Phía trên mỗi câu hỏi. %question% là số thứ tự của nó.
+  question:
+    - '&6&l» TOÀN CẦU &7Câu hỏi #%question% &8| &e%progress%&7/&e%goal%'
+  #Khi hết giờ của một câu hỏi. %answer% là đáp án. Để trống để im lặng.
+  question_over: '&8» &7Đáp án là &f%answer%&7.'
+  #Gửi người chơi có câu trả lời được tính. %contribution% là tổng đóng góp của họ đến giờ.
+  answered: '&8[%prefix%&8] &aĐúng rồi! &7Bạn đã đóng góp &f%contribution% &7trong &f%progress%/%goal% &7của máy chủ.'
+  #%reached% là mức phần trăm vừa đạt.
+  milestone: '&6&l» &e%reached%% &fhoàn thành! &7(%progress%/%goal%, còn %time%s)'
+  #Một số được tính, hiển thị thay cho tin nhắn của người chơi. %player% %number%
+  counted: '&e%player% &8» &f%number%'
+  #Một lỗi. %player% %number% %next% (số mong đợi) %start% %reason% %mistakes% %max_mistakes%
+  count_broken:
+    - '&c%player% đã nói %number%: %reason%'
+    - '&fViệc đếm bắt đầu lại từ &e%start%&f.'
+  #Lỗi khiến trò chơi kết thúc (on-mistake: fail, hoặc đạt max-mistakes).
+  count_broken_final:
+    - '&c%player% đã nói %number%: %reason%'
+  count_reasons:
+    ahead: 'vượt quá xa (số tiếp theo là %next%)'
+    behind: 'số đó đã được đếm (số tiếp theo là %next%)'
+    repeated: 'số đó vừa được nói'
+    twice: 'không ai được đếm hai số liên tiếp'
+  #%count% người chơi được thưởng, %contributors% người tham gia, mất %seconds%.
+  #%top_<n>% và %top_<n>_amount%: ba người đóng góp nhiều nhất.
+  completed:
+    - ''
+    - '&6&l» ĐÃ ĐẠT MỤC TIÊU! &fMáy chủ đã đạt &e%goal_text% &ftrong &e%seconds%s&f.'
+    - '&f  Top: &e%top_1% &7(%top_1_amount%)  &e%top_2% &7(%top_2_amount%)  &e%top_3% &7(%top_3_amount%)'
+    - '&f  &e%count% &fngười chơi nhận thưởng.'
+    - ''
+  failed:
+    - ''
+    - '&6&l» TRÒ CHƠI TOÀN CẦU KẾT THÚC! &fMáy chủ đạt &e%progress%/%goal% &7(%percent%%)&f. Chúc may mắn lần sau!'
+    - ''
+  #Gửi mỗi người chơi được thưởng khi đạt mục tiêu. %points% là số điểm họ nhận.
+  rewarded: '&8[%prefix%&8] &aBạn đã đóng góp &f%contribution% &avà nhận &f%points% &ađiểm!'
+  #Gửi người chơi đóng góp ít hơn min-contribution. %min% là mức tối thiểu đó.
+  too_little: '&8[%prefix%&8] &7Bạn đã đóng góp %contribution%; cần ít nhất %min% để nhận thưởng.'
+  #Thanh boss (hoặc thanh hành động trên 1.8).
+  bar: '&6%game% toàn cầu &8| &f%progress%/%goal% &8| &e%time%s'
+
+#Các từ dùng để tạo %goal_text%.
+words:
+  answers: 'câu trả lời đúng'
+  to: 'đến'
+
+#Các trò có thể chơi toàn cầu. Ghi nhớ và Đoán số thì không.
+#Mỗi trò có thể đặt enabled và bất kỳ mục nào trong 'defaults', cùng 'rewards' riêng.
+games:
+  reaction:
+    enabled: true
+    goal: 10
+    duration-seconds: 90
+    question-seconds: 10
+  unscramble:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  math:
+    enabled: true
+    goal: 15
+    duration-seconds: 150
+  sequence:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  trivia:
+    enabled: true
+    goal: 8
+    duration-seconds: 180
+    question-seconds: 20
+  word_association:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  fillout:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  unreverse:
+    enabled: false
+  random:
+    enabled: false
+  variable:
+    enabled: false
+  hoverable:
+    enabled: false
+  clickable:
+    enabled: false
+  #Cùng nhau đếm. Mục tiêu là số lượng số của chế độ được chọn.
+  count:
+    enabled: true
+    duration-seconds: 120
+    #Không ai được nói hai số liên tiếp.
+    no-double-count: true
+    #reset: một lỗi khiến việc đếm bắt đầu lại; fail: một lỗi kết thúc trò chơi.
+    on-mistake: reset
+    #Với reset: số lỗi vẫn khiến trò chơi kết thúc (0 = không giới hạn).
+    max-mistakes: 5
+    #Chọn ngẫu nhiên một chế độ; /chatgames global count <mode> chọn một chế độ cụ thể.
+    #'step' là mức tăng của mỗi số (chiều đi theo start và target).
+    modes:
+      up:
+        start: 1
+        target: 20
+        step: 1
+      down:
+        start: 15
+        target: 1
+        step: 1
+      evens:
+        start: 2
+        target: 30
+        step: 2
+      fives:
+        start: 5
+        target: 75
+        step: 5
+  #Đua toàn cầu: cả máy chủ cùng thu thập hướng tới mục tiêu. Mục tiêu lấy từ races.yml;
+  #/chatgames global mine STONE 500 đặt cả hai.
+  mine:
+    enabled: true
+    goal: 200
+    duration-seconds: 240
+  hunt:
+    enabled: true
+    goal: 40
+    duration-seconds: 240
+  place:
+    enabled: false
+    goal: 200
+    duration-seconds: 240
+  fish:
+    enabled: false
+    goal: 20
+    duration-seconds: 300
+  eat:
+    enabled: false
+    goal: 30
+    duration-seconds: 240
+  craft:
+    enabled: false
+    goal: 100
+    duration-seconds: 240
+  furnace:
+    enabled: false
+    goal: 64
+    duration-seconds: 300
+  tame:
+    enabled: false
+    goal: 15
+    duration-seconds: 300
+  shear:
+    enabled: false
+    goal: 40
+    duration-seconds: 240

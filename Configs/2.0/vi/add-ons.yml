@@ -1,0 +1,10 @@
+#Cài đặt Discord nằm trong discord.yml.
+
+#Tệp lưu nhật ký
+log-file: 'game_log.txt'
+
+#Nếu true, ghi mọi sự kiện chat vào console, cả hai có thể cùng lúc
+log-console: true
+
+#Nếu true, ghi mọi sự kiện chat vào tệp, cả hai có thể cùng lúc
+log-local: true

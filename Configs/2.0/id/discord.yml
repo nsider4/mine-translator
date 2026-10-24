@@ -1,0 +1,405 @@
+#Mengirim hasil game, balapan, game global, acara, dan lainnya ke Discord.
+#
+#Pesan dikirim melalui webhook channel (tidak perlu memasang apa pun), melalui bot
+#plugin DiscordSRV, atau keduanya. Uji setiap pesan dengan /chatgames discord test <message>.
+enabled: true
+
+#__CHANNEL__
+#Ke mana pesan dikirim. Beri nama sesukamu; setiap notifikasi di bawah mencantumkan channel yang dipakainya.
+#  webhook: URL webhook channel. Di Discord: Edit Channel > Integrasi > Webhook >
+#           Webhook Baru > Salin URL Webhook. Rahasiakan: siapa pun yang memilikinya bisa mengirim pesan ke sana.
+#  discordsrv: mengirim melalui bot DiscordSRV-mu (perlu DiscordSRV). Nama channel dari
+#              bagian Channels di config.yml DiscordSRV (mis. global), atau ID channel.
+#  username / avatar: nama dan gambar yang ditampilkan postingan webhook (bot memakai miliknya sendiri).
+channels:
+  main:
+    webhook: ''
+    discordsrv: ''
+    username: 'Chat Games'
+    avatar: 'https://www.spigotmc.org/data/resource_icons/107/107781.jpg?1676494289'
+
+#__UMUM__
+#Ditampilkan di footer sebagai %server%
+server-name: 'Minecraft Server'
+#Gambar untuk %winner_head% / %player_head%. %name% dan %uuid% diisi otomatis.
+player-head-url: 'https://mc-heads.net/avatar/%name%/128'
+#ID peran yang boleh di-ping oleh pesan (tulis <@&ID> di teks). Tidak ada hal lain yang pernah di-ping: bukan
+#@everyone, dan bukan apa pun di nama atau jawaban pemain.
+#Untuk mendapat ID, aktifkan Mode Pengembang di Discord (Pengaturan > Lanjutan), lalu klik kanan perannya.
+allowed-role-pings: []
+#Dengan DiscordSRV, %winner_mention% / %player_mention% menampilkan akun Discord yang ditautkan pemain
+#(jika tidak, namanya). true juga mem-ping mereka.
+ping-linked-players: false
+#Game dan balapan yang tidak pernah dikirim
+ignored-games: []
+
+#Warna (%game_color%) dan emoji (%game_emoji%) per game. Warna: '#RRGGBB' atau nama.
+#Emoji: nama seperti :trophy: (daftarnya di akhir file ini), atau emoji server sebagai <:name:ID>.
+#Jangan tempel karakter emoji ke file ini: server 1.8 tidak bisa membaca file yang berisi emoji.
+styles:
+  default: {color: '#5865F2', emoji: ':video_game:'}
+  unscramble: {color: '#F1C40F', emoji: ':abc:'}
+  unreverse: {color: '#E67E22', emoji: ':repeat:'}
+  reaction: {color: '#E74C3C', emoji: ':zap:'}
+  random: {color: '#9B59B6', emoji: ':game_die:'}
+  fillout: {color: '#3498DB', emoji: ':pencil2:'}
+  variable: {color: '#1ABC9C', emoji: ':heavy_plus_sign:'}
+  clickable: {color: '#2ECC71', emoji: ':point_up:'}
+  hoverable: {color: '#16A085', emoji: ':eyes:'}
+  math: {color: '#E91E63', emoji: ':heavy_division_sign:'}
+  sequence: {color: '#00BCD4', emoji: ':1234:'}
+  memorize: {color: '#8E44AD', emoji: ':brain:'}
+  guess_the_number: {color: '#FF9800', emoji: ':question:'}
+  trivia: {color: '#3F51B5', emoji: ':books:'}
+  word_association: {color: '#009688', emoji: ':link:'}
+  count: {color: '#607D8B', emoji: ':1234:'}
+  hunt: {color: '#C0392B', emoji: ':crossed_swords:'}
+  mine: {color: '#7F8C8D', emoji: ':pick:'}
+  place: {color: '#A0522D', emoji: ':bricks:'}
+  fish: {color: '#2980B9', emoji: ':fishing_pole_and_fish:'}
+  eat: {color: '#D35400', emoji: ':poultry_leg:'}
+  craft: {color: '#8D6E63', emoji: ':hammer_and_pick:'}
+  furnace: {color: '#E25822', emoji: ':fire:'}
+  tame: {color: '#C69C6D', emoji: ':bone:'}
+  shear: {color: '#ECF0F1', emoji: ':scissors:'}
+
+#Cara daftar ditulis: pemenang, kontributor, klasemen, dan papan peringkat.
+#%medal% adalah medali peringkat 1-3, dan other-places untuk sisanya.
+lists:
+  medals: [':first_place:', ':second_place:', ':third_place:']
+  other-places: '`%place%.`'
+  winner: '%medal% **%player%** `%time%s`'
+  contributor: '%medal% **%player%** `%amount%`'
+  standing: '%medal% **%player%** `%points% poin`'
+  leaderboard: '%medal% **%player%** `%value%`'
+  #Ditampilkan sebagai ganti daftar kosong
+  empty: '-# Belum ada'
+
+#__PESAN__
+#Setiap pesan punya 'content' (teks biasa di atas embed) dan/atau 'embed':
+#  color, author (name, icon, url), title, url, description, thumbnail, image,
+#  fields (name, value, inline), footer (text, icon), timestamp (true menampilkan waktu pengiriman).
+#Teks bisa satu baris atau daftar baris. Baris yang hanya berisi placeholder kosong
+#dihapus, begitu juga field yang kosong. Placeholder PlaceholderAPI yang tidak butuh pemain juga bisa dipakai.
+#Format Discord bisa dipakai di deskripsi dan nilai field: '### ' memulai judul, '-# ' teks kecil
+#abu-abu, '> ' kutipan, **tebal**, `kode`.
+#<t:%ends_unix%:R> menampilkan "dalam 20 detik" dalam waktu setiap pembaca, menghitung mundur.
+#Di setiap pesan: %server%, dan untuk game %game% %game_key% %game_emoji% %game_color%.
+
+#Game chat. %question% %time_limit% %ends_unix% %winners_needed% %points%
+games:
+  enabled: true
+  channels: [main]
+  #true: kirim saat game dimulai, lalu edit postingan itu menjadi hasilnya. false: hanya kirim hasilnya.
+  live: true
+  #Ingat tidak pernah menampilkan daftarnya di sini: pemain bisa membacanya di Discord.
+  hidden-question: 'Lihat chat game!'
+  start:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%'
+      title: 'Ronde baru'
+      description:
+        - '### %question%'
+        - '-# Jawab di chat game untuk menang.'
+      fields:
+        - name: ':stopwatch: Berakhir'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+        - name: ':sparkles: Hadiah'
+          value: '`%points% poin`'
+          inline: true
+        - name: ':busts_in_silhouette: Pemenang'
+          value: '`%winners_needed%`'
+          inline: true
+      footer: '%server%'
+  #%winner% %winner_head% %winner_mention% %time% %answer% %points% %winner_count%
+  #%winners% (setiap pemenang, satu per baris) %other_winners% (semua kecuali yang pertama)
+  win:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%'
+      title: ':trophy:  %winner% berhasil!'
+      thumbnail: '%winner_head%'
+      description:
+        - '-# Jawabannya adalah'
+        - '### %answer%'
+      fields:
+        - name: ':stopwatch: Waktu'
+          value: '`%time%s`'
+          inline: true
+        - name: ':sparkles: Poin'
+          value: '`+%points%`'
+          inline: true
+        - name: ':medal: Juga menjawab'
+          value: '%other_winners%'
+          inline: false
+      footer: '%server%'
+      timestamp: true
+  #%answer% %question% %time_limit%
+  expired:
+    enabled: true
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%'
+      title: ':hourglass:  Waktu habis'
+      description:
+        - '-# Tidak ada yang berhasil. Jawabannya adalah'
+        - '### %answer%'
+      footer: '%server%'
+      timestamp: true
+  #Saat staf menghentikan game (hanya mengedit postingan langsung)
+  stopped:
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%'
+      title: ':no_entry:  Ronde dihentikan'
+      description:
+        - '-# Staf mengakhiri ronde ini lebih awal.'
+      footer: '%server%'
+      timestamp: true
+
+#Balapan. %target% %amount% %time_limit% %ends_unix% %points%
+races:
+  enabled: true
+  channels: [main]
+  live: true
+  start:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  Balapan %game%'
+      title: 'Balapan dimulai'
+      description:
+        - '### %amount%x %target%'
+        - '-# Pemain pertama yang selesai menang.'
+      fields:
+        - name: ':stopwatch: Berakhir'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+        - name: ':sparkles: Hadiah'
+          value: '`%points% poin`'
+          inline: true
+      footer: '%server%'
+  #%winner% %winner_head% %winner_mention% %time% %points%
+  win:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  Balapan %game%'
+      title: ':checkered_flag:  %winner% memenangkan balapan!'
+      thumbnail: '%winner_head%'
+      description:
+        - '### %amount%x %target%'
+      fields:
+        - name: ':stopwatch: Waktu'
+          value: '`%time%s`'
+          inline: true
+        - name: ':sparkles: Poin'
+          value: '`+%points%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  expired:
+    enabled: true
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  Balapan %game%'
+      title: ':hourglass:  Waktu habis'
+      description:
+        - '### %amount%x %target%'
+        - '-# Tidak ada yang selesai tepat waktu.'
+      footer: '%server%'
+      timestamp: true
+  stopped:
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  Balapan %game%'
+      title: ':no_entry:  Balapan dihentikan'
+      description:
+        - '-# Staf mengakhiri balapan ini lebih awal.'
+      footer: '%server%'
+      timestamp: true
+
+#Game global, saat seluruh server bekerja menuju satu target.
+#%goal% (mis. "500 Stone") %progress% %goal_amount% %percent% %bar% %contributors% %time_limit% %ends_unix%
+global:
+  enabled: true
+  channels: [main]
+  #true: postingan menampilkan bilah kemajuan dan diperbarui selama game berjalan
+  live: true
+  #Seberapa sering paling banyak postingan langsung diperbarui (hanya jika kemajuan berubah)
+  update-seconds: 15
+  bar: {length: 16, full: '█', empty: '░'}
+  progress:
+    embed:
+      color: '%game_color%'
+      author: ':globe_with_meridians:  %game% Global'
+      title: 'Seluruh server bermain bersama'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+        - '-# %progress% / %goal_amount%'
+      fields:
+        - name: ':busts_in_silhouette: Membantu'
+          value: '`%contributors%`'
+          inline: true
+        - name: ':stopwatch: Berakhir'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+      footer: '%server%'
+  #%top_contributors% (kontributor terbesar, satu per baris)
+  completed:
+    embed:
+      color: '#57F287'
+      author: ':globe_with_meridians:  %game% Global'
+      title: ':tada:  Target tercapai!'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+      fields:
+        - name: ':medal: Penolong teratas'
+          value: '%top_contributors%'
+          inline: true
+        - name: ':busts_in_silhouette: Telah membantu'
+          value: '`%contributors%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  failed:
+    embed:
+      color: '#ED4245'
+      author: ':globe_with_meridians:  %game% Global'
+      title: ':x:  Target tidak tercapai'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+        - '-# %progress% / %goal_amount%'
+      fields:
+        - name: ':medal: Penolong teratas'
+          value: '%top_contributors%'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #Berapa kontributor yang dicantumkan %top_contributors%
+  top-size: 5
+
+#Acara game (events.yml). %event%
+events:
+  enabled: true
+  channels: [main]
+  #%games% (jumlah game-nya)
+  start:
+    embed:
+      color: '#FEE75C'
+      author: ':calendar:  Acara game'
+      title: '%event% telah dimulai!'
+      description:
+        - '-# Menangkan game berturut-turut untuk mendapat poin acara.'
+      fields:
+        - name: ':video_game: Game'
+          value: '`%games%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #%standings% %players% (berapa yang mendapat poin) %winner% %winner_head% %winner_mention%
+  end:
+    embed:
+      color: '#FEE75C'
+      author: ':calendar:  Acara game'
+      title: ':trophy:  Hasil %event%'
+      thumbnail: '%winner_head%'
+      description:
+        - '%standings%'
+      fields:
+        - name: ':crown: Pemenang'
+          value: '%winner_mention%'
+          inline: true
+        - name: ':busts_in_silhouette: Pemain'
+          value: '`%players%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #Berapa peringkat yang dicantumkan %standings%
+  standings-size: 10
+
+#Runtunan pemain mencapai sejumlah hari berturut-turut (streaks.yml). %player% %player_head% %player_mention% %streak% %days%
+streaks:
+  enabled: false
+  channels: [main]
+  #Hanya jumlah hari ini yang dikirim
+  days: [7, 14, 30, 60, 100, 365]
+  message:
+    embed:
+      color: '#E67E22'
+      author: {name: '%player%', icon: '%player_head%'}
+      title: ':fire:  %days% hari berturut-turut!'
+      description:
+        - '-# %streak%'
+      footer: '%server%'
+      timestamp: true
+
+#Pemain menyelesaikan tantangan harian atau mingguan. %player% %player_head% %player_mention% %challenge% %period%
+challenges:
+  enabled: false
+  channels: [main]
+  #Yang ditampilkan %period%
+  periods:
+    daily: 'Harian'
+    weekly: 'Mingguan'
+  message:
+    embed:
+      color: '#57F287'
+      author: {name: '%player%', icon: '%player_head%'}
+      title: ':white_check_mark:  Tantangan selesai'
+      description:
+        - '### %challenge%'
+        - '-# Tantangan %period%'
+      footer: '%server%'
+      timestamp: true
+
+#Papan peringkat, dikirim pada waktu yang ditentukan dan lewat /chatgames discord leaderboard.
+#%leaderboard% %total_points% (semua pemain bersama)
+leaderboard:
+  enabled: false
+  channels: [main]
+  #Waktu server, 24 jam, mis. ['12:00', '20:00']
+  times: ['20:00']
+  #points, atau fastest (jawaban tercepat dari semua game)
+  type: points
+  size: 10
+  message:
+    embed:
+      color: '#5865F2'
+      author: ':bar_chart:  Papan Peringkat'
+      title: 'Pemain teratas'
+      description:
+        - '%leaderboard%'
+        - ''
+        - '-# Total %total_points% poin dimenangkan'
+      footer: '%server%'
+      timestamp: true
+
+#__EMOJI__
+#Nama yang bisa kamu tulis sebagai :name: di teks mana pun di atas:
+#  trophy, first_place, second_place, third_place, medal, military_medal, crown, star, star2,
+#  sparkles, tada, confetti_ball, fire, zap, boom, 100, gem, moneybag, gift, video_game, game_die,
+#  jigsaw, dart, checkered_flag, stopwatch, timer, alarm_clock, hourglass, hourglass_flowing_sand,
+#  clock, calendar, white_check_mark, heavy_check_mark, x, no_entry, warning, question, grey_question,
+#  exclamation, bell, loudspeaker, mega, speech_balloon, thought_balloon, brain, bulb, abc, abcd,
+#  capital_abcd, 1234, symbols, pencil, pencil2, memo, book, books, scroll, clipboard, link, mag,
+#  eyes, eye, repeat, arrows_counterclockwise, leftwards_arrow_with_hook, heavy_plus_sign,
+#  heavy_minus_sign, heavy_multiplication_x, heavy_division_sign, infinity, keycap_ten,
+#  mouse_three_button, point_up, point_right, point_down, raised_hands, clap, muscle, handshake, wave,
+#  thinking, sunglasses, partying_face, rocket, earth_americas, globe_with_meridians,
+#  busts_in_silhouette, bust_in_silhouette, bar_chart, chart_with_upwards_trend,
+#  chart_with_downwards_trend, crossed_swords, dagger, bow_and_arrow, shield, pick, hammer,
+#  hammer_and_pick, tools, axe, bricks, fishing_pole_and_fish, fish, tropical_fish, meat_on_bone,
+#  poultry_leg, bread, apple, green_apple, cake, cookie, fork_and_knife, cooking, bone, dog, cat,
+#  horse, parrot, sheep, ram, scissors, cow, pig, chicken, zombie, skull, seedling, evergreen_tree,
+#  deciduous_tree, mushroom, rock, diamond_shape_with_a_dot_inside, large_blue_diamond,
+#  small_orange_diamond, red_circle, orange_circle, yellow_circle, green_circle, blue_circle,
+#  purple_circle, white_circle, black_circle, green_square, white_large_square, black_large_square,
+#  arrow_right, arrow_up, arrow_down, small_red_triangle_down, small_red_triangle, lock, unlock, key,
+#  new, up, cool, free, information_source, heart, green_heart, blue_heart, yellow_heart,
+#  purple_heart, orange_heart, map, compass, label, ticket, tickets, admission_tickets, joystick,
+#  slot_machine, spades, clubs, hearts, diamonds, beginner, game_controller, pushpin, round_pushpin,
+#  triangular_flag_on_post

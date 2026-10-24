@@ -1,0 +1,125 @@
+#############################
+######    設定    #######
+#############################
+check-update: true
+
+#サーバーの言語です。ブロック・アイテム・モブの名前（レースとメモライズで使用）は
+#この言語に翻訳されます。140 以上の言語に対応しています。言語の ID はこちらで確認できます：
+#https://github.com/nsider4/mine-translator/blob/main/language_names.txt
+#名前は translations/ にダウンロードされ、新しい Minecraft のバージョンが出ると
+#自動で更新されます。ここを変更したら /chatgames reload で反映されます。
+lang: 'en_us'
+
+#これらの設定ファイルの言語：メッセージ、メニュー、単語リスト、クイズ、コメント…
+#完全翻訳済み: en, es, fr, pt, de, it, nl, pl, ru, tr, zh, zh_tw, ja, ko, uk, cs, sv, hu, vi, id
+#(zh は簡体字中国語、zh_tw は繁体字中国語)。'lang' がこの中にない場合も、ブロック・
+#アイテム・モブの名前は翻訳されますが、これらのファイルは元の言語のままです (デフォルトは英語)。
+#  auto: 上の 'lang' が変わったとき、その言語が完全翻訳済みなら切り替える
+#  none：変更しない
+#  または上の言語コードのいずれか
+#切り替えても設定と、あなたが加えた変更はそのまま残ります。自分で書いたメッセージは
+#翻訳に置き換えられます（古いファイルは先に backups/ にコピーされます）。翻訳は
+#https://github.com/nsider4/mine-translator（Configs フォルダー）からダウンロードされ、
+#自動で更新されます。言語はそこで追加できます。
+config-language: 'auto'
+
+#保存方式。使用可能：SQLite または MySQL
+Storage: 'SQLite'
+
+#ChatGames の全データを保存するテーブルの名前
+table_name: 'chatgames'
+
+#ChatGames の最速タイムをすべて保存するテーブルの名前
+fastest_times_table: 'chatgames_fastest_times'
+
+SQLite:
+  Filename: 'chatgames-data'
+
+MySQL:
+  host: 'localhost'
+  port: '3306'
+  user: 'root'
+  password: 'password'
+  database: 'chatgame'
+  connection-parameters: '?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8'
+  Pool-Settings:
+    max-pool-size: 10
+    min-idle: 10
+    max-lifetime: 180000
+    keep-alive-time: 60000
+    time-out: 20000
+
+disabled-worlds:
+  - 'example_world'
+
+prefix: '&c&lC&d&lH&b&lA&a&lT &6&lG&e&lA&a&lM&c&lE&b&lS'
+
+#false のときは、'chatgames.start.*' を持つプレイヤーだけが開始できます
+allow_starting_from_disabled: true
+
+#false の場合、プレイヤーが正解したときに通常は送信されないメッセージがキャンセルされなくなります
+cancel-message-when-winning: true
+
+#チャットゲームが始まるために必要な最低オンライン人数
+min_players_online: 1
+
+#ランダムなゲームが再び選ばれるまでの時間。
+#-1 にするとタスクが完全に無効になります。-1 のときは randomDelay も使えません
+time_minutes: 25
+
+#有効にすると、ゲームが終わるたびに 'randomDelay.minimum' から 'randomDelay.limit' までの乱数を作り、次のゲームまでの待ち時間にします
+#これを有効にすると 'time_minutes' の値は無視されます（-1 の場合はタスクがないので別です）。
+randomDelay:
+  enable: false
+  #時間の単位。もう一つの値は 'seconds' です。変更する場合、最小値はゲームの 'timeToGuess_seconds' より大きくするのがおすすめです
+  timeUnit: 'minutes'
+  minimum: 1
+  limit: 25
+
+
+#これをオフにすると、ゲームを表示するのに chatgames.play 権限が不要になります
+use-permission-toplay: false
+
+#false の場合、'chatgames.play' 権限を持つ（つまり参加できる）プレイヤーだけを数えます。
+#true の場合、透明化（バニッシュ）中のプレイヤー以外のオンラインプレイヤー全員を数えます。
+count-all-players: false
+
+#true の場合、最速タイピングのランキング（/chatgames fastest）を作ります。false の場合、このランキングはオフになります。
+fastest-typers-top: true
+
+#PlaceholderAPI のプレースホルダー（PlaceholderAPI が必要です）：
+#  自分：         %chatgames_points%, %chatgames_wins%, %chatgames_wins_<game>%, %chatgames_race_wins%,
+#                %chatgames_global_played%, %chatgames_global_won%, %chatgames_toggle%, %chatgames_sound_toggle%
+#                %chatgames_events_played%, %chatgames_event_wins%, %chatgames_event_best_place%（0 = まだなし）
+#  自分のタイム： %chatgames_personal_best%（どのチャットゲームでも）, %chatgames_fastest_<game>%（レースも）
+#  自分の順位：   %chatgames_show_current_pos_top%（ポイント）, %chatgames_show_current_pos_fastest%（ベストタイム）
+#  ポイント上位： %chatgames_top_<n>%（名前）, %chatgames_points_top_<n>%, %chatgames_total_points%
+#  最速上位：     %chatgames_fastest_<n>%（名前、チャットゲーム）, %chatgames_fastest_time_<n>%,
+#                %chatgames_fastest_<game>_<n>%, %chatgames_fastest_<game>_time_<n>%
+#  現在：         %chatgames_game_running%, %chatgames_current_game%, %chatgames_next_game_in%（秒）
+#  レース：       %chatgames_race_target%, %chatgames_race_amount%, %chatgames_race_progress%（自分の）
+#  チャレンジ：   %chatgames_daily_completed%, %chatgames_daily_total%, %chatgames_weekly_completed%,
+#                %chatgames_weekly_total%, %chatgames_challenges_completed%（累計）
+#  連続記録：     %chatgames_streak_<type>%, %chatgames_streak_<type>_longest%（<type> は challenge、daily、global）
+#  イベント：     %chatgames_event_running%, %chatgames_event_name%, %chatgames_event_step%, %chatgames_event_steps%,
+#                %chatgames_event_points% と %chatgames_event_place%（開催中のイベントでの自分の値）
+#  <game> は games.yml にあるゲーム名（例：unscramble、guess_the_number）、<n> は順位（1、2、3…）です。
+placeholders:
+  #ランキングのプレースホルダー（top_<n>、fastest_<n>、順位…）を作り直す間隔（秒）。
+  #勝者が出たゲームの後にも作り直されます。自分のポイント・勝利数・タイムは常にリアルタイムです。
+  refresh-seconds: 60
+  #表示するものがないときに表示される文字：ランキングの空き、ベストタイムなし、ゲームなし…
+  empty-value: ''
+
+#チャットゲームが始まったときにプレイヤーに鳴らすサウンド！
+GameSounds:
+  volume: 0.5
+  pitch: 1.0
+  #どれかを空にすると無効になります
+  #リソースパックのサウンドも使えます。名前空間付きで書きます。例：'myserver:custom.ding'
+  win: 'minecraft:entity.experience_orb.pickup'
+  game-start: 'minecraft:entity.player.levelup'
+  time-expired: 'minecraft:entity.villager.no'
+  wrong-case: 'minecraft:block.note_block.bass'
+
+#ゲームのプリセット（有効なゲームの名前付きセット）は presets.yml にあります。

@@ -1,0 +1,367 @@
+#############################
+######    CSETJÁTÉKOK    ######
+#############################
+#Beállítások, amelyeket minden játék elfogad (ami hiányzik, a látható alapértéket kapja):
+#  enable: true/false
+#  weight: 1             Mennyire valószínű, hogy a rotáció ezt a játékot választja a többihez képest (0 = soha).
+#                        Ugyanaz a játék soha nem jön kétszer egymás után.
+#  winners: 1            Hány játékos nyerhet fordulónként.
+#  points: 1             Pont győzelmenként (/chatgames top).
+#  case-sensitive: false A csak kis- és nagybetűt eltévesztő játékosok a 'wrong_case' üzenetet kapják.
+#  timeToGuess_seconds: 20
+#  min-answer-ms: 400    Az ennél gyorsabb helyes válaszok figyelmen kívül maradnak és naplózódnak: senki sem olvas és gépel
+#                        ilyen gyorsan, a csetbotok igen. 0 kikapcsolja az ellenőrzést.
+#  hints:                A tippek a forduló közben jelennek meg, a messages.yml 'hint_message' üzenetével.
+#    enable: false
+#    after-percent: 50   Az első tipp ennyi idő eltelte után jelenik meg; a többi a maradékra oszlik el.
+#    max: 1              Legfeljebb 3.
+#  countdown:            A hátralévő idő az akciósávon. Minden verzión működik (1.8-tól 26.x-ig).
+#    enable: false
+#    last-seconds: 10    Csak az utolsó N másodpercben; 0 esetén az egész fordulóban látszik.
+#  titleMessage / subtitleMessage: hagyd mindkettőt üresen, hogy ne küldjön címet.
+unscramble:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Az idő másodpercben, amennyi a játékosoknak jut a kitalálásra, megoldásra, beírásra stb.
+  timeToGuess_seconds: 20
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aRakd sorba'
+
+unreverse:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Az idő másodpercben, amennyi a játékosoknak jut a kitalálásra, megoldásra, beírásra stb.
+  timeToGuess_seconds: 20
+  #Hagyd üresen a következő 2-t a kikapcsolásukhoz
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aFordítsd meg'
+
+reaction:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Az idő másodpercben, amennyi a játékosoknak jut a kitalálásra, megoldásra, beírásra stb.
+  timeToGuess_seconds: 20
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aÍrd be'
+
+guess_the_number:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+  #Ezt ne változtasd meg
+  case-sensitive: false
+
+  lower-limit: 1
+  upper-limit: 20
+
+  #Az idő másodpercben, amennyi a játékosoknak jut a kitalálásra, megoldásra, beírásra stb.
+  timeToGuess_seconds: 20
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aÍrd be'
+
+clickable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Az idő másodpercben, amennyi a játékosoknak jut a kitalálásra, megoldásra, beírásra stb.
+  timeToGuess_seconds: 20
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&eKattints a szövegre'
+  subtitleMessage: '&fIdőd: &e%timeToGuess%mp'
+
+fillout:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #A rejtett betűk százaléka a Töltsd ki játékban. 1 és 100 közötti érték. Kisebb szám kevesebb rejtett betűt jelent.
+  difficulty: 30
+  case-sensitive: true
+  #Az idő másodpercben, amennyi a játékosoknak jut a kitalálásra, megoldásra, beírásra stb.
+  timeToGuess_seconds: 20
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aTöltsd ki'
+
+hoverable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Az idő másodpercben, amennyi a játékosoknak jut a kitalálásra, megoldásra, beírásra stb.
+  timeToGuess_seconds: 20
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&eVidd az egeret a szövegre'
+  subtitleMessage: '&fIdőd: &e%timeToGuess%mp'
+
+#Ez a játék adott hosszúságú, véletlen karakterekből álló szöveget készít
+random:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: true
+  #Az idő másodpercben, amennyi a játékosoknak jut a kitalálásra, megoldásra, beírásra stb.
+  timeToGuess_seconds: 20
+  #A véletlen szöveg hossza ehhez a játékhoz. Tartomány formátuma: <lower>-<higher>. Egyetlen hosszhoz írd ugyanazt a számot mindkét oldalra
+  lengthRange: 6-8
+  #Elérhető típusok: ALPHA (betűk), ALPHANUMERIC (betűk és számok), NUMERIC (számok), SYMBOLIC (szimbólumok),
+  #LOWERCASE_ALPHA (csupa kisbetű), UPPERCASE_ALPHA (csupa nagybetű), HEXADECIMAL (hexadecimális karakterek: 0123456789ABCDEF)
+  #CUSTOM (a 'custom_characters' tartalmát használja)
+  character_type: ALPHANUMERIC
+  #Ez a szöveg csak akkor használatos, ha a type "CUSTOM"
+  custom_characters: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aÍrd be'
+
+math:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Ezt ne változtasd meg
+  case-sensitive: false
+  #Az idő másodpercben, amennyi a játékosoknak jut a kitalálásra, megoldásra, beírásra stb.
+  timeToGuess_seconds: 20
+  #Véletlen számok tartománya nehézség szerint:
+  #1 - (1-9)
+  #2 - (1-99)
+  #3 - (1-999)
+  #4 - (1-9999)
+  #5 - (1-99999)
+  difficulty: 2
+  #Hány műveleti jel van egy kérdésben: 1 -> "12 + 7", 2 -> "12 + 7 x 3"
+  operations: 1
+  #solve: számold ki az eredményt ("12 + 7 x 3").  missing-value: találd meg a rejtett számot ("12 + ? x 3 = 33").
+  #Minden forduló a felsorolt módok egyikét választja.
+  modes:
+    - solve
+    - missing-value
+  #Használandó műveleti jelek; a felsorolt négy az összes elérhető, a nem kívántakat eltávolíthatod. Mindig hagyj legalább 1-et
+  #Az osztás mindig egész számot ad.
+  operators:
+    - '+'
+    - '-'
+    - 'x'
+    - '/'
+
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aSzámold ki'
+
+variable:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Ezt ne változtasd meg
+  case-sensitive: false
+  #Az idő másodpercben, amennyi a játékosoknak jut a kitalálásra, megoldásra, beírásra stb.
+  timeToGuess_seconds: 20
+
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&bOLDD MEG'
+  subtitleMessage: '&aKeresd meg: &7`&b%symbol%&7`'
+
+  #A véletlen eredményszám tartománya
+  result-min: 20
+  result-max: 100
+
+  toGet: '✗'
+  #Itt van még néhány szimbólum, amit hozzáadhatsz: ✪❃✿✠❂♫♪❦♡♤♢✦☾☽✹
+  data:
+    - '✯;10'
+    - '♛;15'
+    - '❅;20'
+    - '♫;25'
+
+sequence:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  #Ezt ne változtasd meg
+  case-sensitive: false
+
+  #Az idő másodpercben, amennyi a játékosoknak jut a kitalálásra, megoldásra, beírásra stb.
+  timeToGuess_seconds: 25
+
+  #A játékosok egy számsort látnak, és beírják a következőt, pl. "3, 6, 12, 24, ?" -> 48
+  #Minták: összeadás (3, 7, 11), szorzás (2, 6, 18), négyzetek (4, 9, 16), váltakozó (5, 9, 7, 11), Fibonacci (2, 3, 5, 8)
+  patterns:
+    - add
+    - multiply
+    - squares
+    - alternating
+    - fibonacci
+  #1-3. Nagyobb nehézség nehezebb mintákat (négyzetek és váltakozó 2-től, Fibonacci 3-on) és nagyobb számokat ad.
+  difficulty: 2
+  #Hány szám látszik a '?' előtt (4-8)
+  shown-terms: 5
+
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&b%selection%'
+  subtitleMessage: '&aFolytasd a számsort'
+
+memorize:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+
+  listLength: 3
+  #Minden forduló az alábbi készletek egyikéből vesz tárgyakat (lásd words.yml -> memorize.pools):
+  #shopping_list, words, colors, numbers, blocks, mobs vagy a saját listád
+  pools:
+    - shopping_list
+    - words
+    - colors
+    - numbers
+    - blocks
+    - mobs
+  #Ha false, a tárgyak bármilyen sorrendben beírhatók
+  order-matters: true
+
+  #Az idő másodpercben, amennyi a játékosoknak jut a megjegyzésre, megoldásra, beírásra stb.
+  timeToMemorize: 7
+
+  #Az idő másodpercben, amennyi a játékosoknak jut a kitalálásra, megoldásra, beírásra stb.
+  timeToGuess_seconds: 20
+  #Hagyd üresen a következő 2-t a kikapcsolásukhoz
+  titleMessage: '&bJegyezd meg'
+  subtitleMessage: '&aPróbáld megjegyezni ezt a listát!'
+
+#Három nyom, egy rejtett kapcsolat (az asszociációk a words.yml-ben vannak).
+#difficulty: easy, medium, hard vagy mixed. A nehéz fordulók egy nyomot mutatnak, a többit
+#tippként fedik fel, ezért hozzájuk hagyd bekapcsolva a tippeket (max 2 mind a hármat megmutatja).
+word_association:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  difficulty: mixed
+  hints:
+    enable: true
+    after-percent: 34
+    max: 2
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  timeToGuess_seconds: 30
+  titleMessage: '&bSZÓASSZOCIÁCIÓ'
+  subtitleMessage: '&aNézd a csetet!'
+
+trivia:
+  enable: true
+  winners: 1
+  weight: 1
+  points: 1
+  hints:
+    enable: true
+    after-percent: 50
+    max: 1
+  countdown:
+    enable: true
+    last-seconds: 10
+
+  case-sensitive: false
+  #Az idő másodpercben, amennyi a játékosoknak jut a kitalálásra, megoldásra, beírásra stb.
+  timeToGuess_seconds: 20
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&bKVÍZ'
+  subtitleMessage: '&aNézd a csetet!'

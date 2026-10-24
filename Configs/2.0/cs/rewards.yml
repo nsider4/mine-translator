@@ -1,0 +1,153 @@
+#MOŽNÉ AKCE:
+#
+#[playercmd] - Spustí příkaz jako vítěz
+#[consolecmd] - Spustí příkaz z konzole
+#[playermsg] - Pošle zprávu vítězi
+#[broadcast] - Pošle zprávu všem hráčům v zapnutých světech
+#[player_as_op] - Spustí příkaz za hráče s právy operátora
+#
+#PŘIDEJTE ODMĚNÁM ŠANCE TAKTO:
+#
+#PŘÍKLAD:
+#  - '10.0%~ [consolecmd] give %player% iron_block 5'
+#FUNGUJE JEN TEHDY, KDYŽ JE FORMÁT STEJNÝ JAKO V PŘÍKLADU: <chance>% NA ZAČÁTKU, PAK ~ A MEZERA. VŽDY JAKO PRVNÍ V PŘÍKAZU
+#
+#PŘÍKAZY BEZ % BUDOU ODMĚNY UDĚLENÉ NA 100 %.
+
+#KONTROLA OPRÁVNĚNÍ:
+#
+#DEJTE NA KONEC ŘÁDKU PŘÍKAZU.
+#Příklad:
+#  - '[consolecmd] give %player% iron_block 5 has:test.permission'
+
+#1 je pro PRVNÍHO vítěze; POKUD PŘIDÁTE V config.yml VÍC VÍTĚZŮ A CHCETE JINÉ ODMĚNY, PŘIDEJTE JEJICH MÍSTO (2: atd.)
+unscramble:
+  rewards:
+    1:
+      reward_1:
+        minimum-players: 2 #Podmínka podle hráčů online: odměnu lze vybrat jen tehdy, když jsou online 2 nebo více hráčů
+        chance: 50
+        data:
+          - '10.0%~ [consolecmd] give %player% diamond_block 3 has:test.permission'
+          - '[consolecmd] give %player% iron_block 5'
+      reward_2:
+        data:
+          - '[consolecmd] give %player% iron_block 2'
+
+unreverse:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+reaction:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+guess_the_number:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+shoppinglist:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+clickable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+fillout:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+hoverable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+random:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+variable:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+math:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+sequence:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+memorize:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+word_association:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+trivia:
+  rewards:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% iron_block 5'
+
+#ODTUD DÁL JSOU ODMĚNY PRO ZÁVODY, KTERÉ MAJÍ JEN 1 VÍTĚZE
+#
+#POUŽÍVÁ SE JINÝ FORMÁT! ČTĚTE POZORNĚ
+
+races:
+  rewards:
+    #TOTO JSOU ODMĚNY, KTERÉ ZADÁTE V 'races.yml'
+    reward_1:
+      chance: 50
+      data:
+        - '60.0%~ [consolecmd] give %player% diamond_block 5'
+    #ODEBRÁNÍ HODNOTY 'chance' ZPŮSOBÍ, ŽE SE ODMĚNA/PŘÍKAZ PROVEDE VŽDY
+    reward_2:
+      data:
+        - '[consolecmd] give %player% iron_block 5'
+        - '[playermsg] &aVyhrál jsi!'
+    reward_3:
+      chance: 50
+      data:
+        - '[consolecmd] give %player% diamond_block 3'

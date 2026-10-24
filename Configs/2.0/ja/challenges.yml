@@ -1,0 +1,136 @@
+#デイリーとウィークリーのチャレンジ
+#
+#全員が同じチャレンジを受けます。進行はプレイ中に数えられます。達成した
+#チャレンジは /chatgames challenges で「受け取れます」と表示され、/chatgames claim で受け取れます。
+#受け取らなかった報酬は、チャレンジのリセット時になくなります。
+#
+#チャレンジの種類（amount は必要な数）：
+#  WIN_GAMES    チャットゲームかレースに勝つ（順位は問わない）
+#  WIN_GAME     'game' で指定した 1 つのゲームかレースに勝つ（例：game: unscramble）
+#  WIN_RACES    レースに勝つ
+#  PLAY_GLOBAL  グローバルゲームを時間内に達成する
+#  WIN_GLOBAL   グローバルゲームを報酬のある順位で終える
+#  FAST_WIN     チャットゲームに 'seconds' 秒以内で勝つ（レースは数えない）
+#  EARN_POINTS  ゲームでポイントを稼ぐ
+#  PLAY_EVENT   ゲームイベントに参加する
+#
+#各チャレンジの項目：
+#  name / description：チャットとメニューに表示されます。%amount%、%game%、%seconds% が入ります。
+#  icon：メニューのアイテム（素材名）
+#  rewards：rewards.yml と同じ行（確率は '<chance>%~ '、権限は 'has:<permission>'）。
+#           %player% と %challenge%（名前）が入ります。
+#
+#ID（win_3、fast_1…）はプレイヤーの進行と一緒に保存されます。a-z、0-9、- と _ だけにしてください。
+#ID を変えると、そのチャレンジの進行は最初からになります。
+
+#チャレンジと連続記録の 1 日が始まるタイムゾーン。例：Europe/Madrid、America/New_York。
+#空ならサーバーのものを使います。
+timezone: ''
+
+daily:
+  enabled: true
+  #fixed：下のチャレンジがすべて毎日有効になります。
+  #random：毎日 'amount' 個が選ばれます（全員同じ）。
+  mode: random
+  amount: 3
+  challenges:
+    win_3:
+      type: WIN_GAMES
+      amount: 3
+      name: '&eウォーミングアップ'
+      description: '&7チャットゲームに %amount% 回勝つ'
+      icon: GOLD_NUGGET
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    win_8:
+      type: WIN_GAMES
+      amount: 8
+      name: '&6絶好調'
+      description: '&7チャットゲームに %amount% 回勝つ'
+      icon: GOLD_INGOT
+      rewards:
+        - '[consolecmd] give %player% gold_ingot 8'
+    unscramble_2:
+      type: WIN_GAME
+      game: unscramble
+      amount: 2
+      name: '&b言葉の魔法使い'
+      description: '&7%game% に %amount% 回勝つ'
+      icon: BOOK
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    math_2:
+      type: WIN_GAME
+      game: math
+      amount: 2
+      name: '&b人間電卓'
+      description: '&7%game% に %amount% 回勝つ'
+      icon: PAPER
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    fast_1:
+      type: FAST_WIN
+      seconds: 5
+      amount: 1
+      name: '&c早指し'
+      description: '&7チャットゲームに %seconds% 秒以内で勝つ'
+      icon: FEATHER
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    race_1:
+      type: WIN_RACES
+      amount: 1
+      name: '&aレーサー'
+      description: '&7レースに勝つ'
+      icon: IRON_PICKAXE
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    points_5:
+      type: EARN_POINTS
+      amount: 5
+      name: '&dポイントコレクター'
+      description: '&7%amount% ポイント稼ぐ'
+      icon: EXPERIENCE_BOTTLE
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    global_1:
+      type: PLAY_GLOBAL
+      amount: 1
+      name: '&3チームプレイヤー'
+      description: '&7グローバルゲームを時間内に達成する'
+      icon: COMPASS
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+
+weekly:
+  enabled: true
+  #毎週が始まる曜日。
+  reset-day: MONDAY
+  mode: fixed
+  amount: 3
+  challenges:
+    win_25:
+      type: WIN_GAMES
+      amount: 25
+      name: '&6週間チャンピオン'
+      description: '&7今週チャットゲームに %amount% 回勝つ'
+      icon: DIAMOND
+      rewards:
+        - '[consolecmd] give %player% diamond 3'
+    fast_5:
+      type: FAST_WIN
+      seconds: 4
+      amount: 5
+      name: '&c稲妻'
+      description: '&7チャットゲームに %seconds% 秒以内で %amount% 回勝つ'
+      icon: BLAZE_POWDER
+      rewards:
+        - '[consolecmd] give %player% diamond 2'
+    global_5:
+      type: WIN_GLOBAL
+      amount: 5
+      name: '&3みんなの人気者'
+      description: '&7グローバルゲームを報酬のある順位で %amount% 回終える'
+      icon: BEACON
+      rewards:
+        - '[consolecmd] give %player% diamond 2'

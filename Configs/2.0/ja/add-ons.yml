@@ -1,0 +1,10 @@
+#Discord の設定は discord.yml にあります。
+
+#ログを保存するファイル
+log-file: 'game_log.txt'
+
+#true の場合、すべてのチャットゲームをコンソールに記録します。ファイルと同時に使えます
+log-console: true
+
+#true の場合、すべてのチャットゲームをファイルに記録します。コンソールと同時に使えます
+log-local: true

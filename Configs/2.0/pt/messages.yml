@@ -97,6 +97,14 @@ events:
   top_entry: '&c%spot%. &f%player% &8| &e%points% &7pontos'
   top_empty: '&8[%prefix%&8] &cNinguém pontuou em %event% &cainda.'
 
+discord:
+  test_sent: '&8[%prefix%&8] &fForam enviadas &a%amount% &fmensagem(ns) de teste para o Discord. Se nada aparecer, o console diz o porquê.'
+  leaderboard_posted: '&8[%prefix%&8] &fO ranking foi enviado para o Discord.'
+  disabled: '&8[%prefix%&8] &cAs mensagens do Discord estão desligadas: defina &fenabled: true &cem discord.yml.'
+  no_channel: '&8[%prefix%&8] &f%section% &cnão tem nenhum canal com webhook ou canal do DiscordSRV em discord.yml.'
+  unknown_message: '&8[%prefix%&8] &cNão existe nenhuma mensagem do Discord chamada &f%message%&c.'
+  empty_message: '&8[%prefix%&8] &f%message% &cestá vazia ou falta em discord.yml.'
+
 logs:
   no_logs: "&cNenhum registro disponível ou ocorreu um erro."
   header: "&8[%prefix%&8] &eÚltimos &6%amount% &eregistros:"
@@ -184,10 +192,11 @@ help_command:
   - '&a/chatgames challenges reset <player> &f- &3Zera o progresso de desafios de um jogador.'
   - '&a/chatgames streak set <player> <challenge|daily|global> <days> &f- &3Define a sequência de um jogador.'
   - '&a/chatgames logs [amount] &f- &3Mostra os últimos registros de jogos.'
+  - '&a/chatgames discord <test <message|all>|leaderboard> &f- &3Envia uma mensagem de teste ou o ranking para o Discord.'
   - '&a/chatgames reload &f- &3Recarrega os arquivos de configuração.'
   - '&6'
   - '&2&lTIPOS DE JOGO:'
-  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace'
+  - '&5unscramble, unreverse, reaction, random, fillout, variable, clickable, math, sequence, memorize, guess_the_number, trivia, word_association, hoverable, hunt, mine, place, fish, craft, eat, furnace, tame, shear'
   - '&7&m-------------------------------------------------'
 
 #Use <center> nas mensagens em LISTA para centralizá-las; as linhas com isso ficarão centralizadas!
@@ -686,3 +695,41 @@ furnace:
     - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
     - ''
     - '<center>&f%timeToComplete%s &cesgotados! &fO desafio de culinária acabou!'
+
+tame:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fVocê tem &e%timeToComplete% segundos &fpara &ddomar&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7terminou de domar `&e%amount%&fx &3%value%&7` (&c%time%s&7) e ganhou um prêmio!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cesgotados! &fO desafio de doma acabou!'
+
+shear:
+  gameStartAnnouncement:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&fVocê tem &e%timeToComplete% segundos &fpara &dtosquiar&f: `&b%amount%&fx &3%value%`'
+    - ''
+  correct_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix% &r✯ ✓'
+    - ''
+    - '<center>&a%winner% &7terminou de tosquiar `&e%amount%&fx &3%value%&7` (&c%time%s&7) e ganhou um prêmio!'
+    - ''
+  time_expired_message:
+    - ''
+    - '<center>&r✓ ✯ %prefix%&r ✯ ✓'
+    - ''
+    - '<center>&f%timeToComplete%s &cesgotados! &fO desafio de tosquia acabou!'

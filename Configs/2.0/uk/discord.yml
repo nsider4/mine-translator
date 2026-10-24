@@ -1,0 +1,405 @@
+#Публікує результати ігор, перегони, глобальні ігри, події та інше в Discord.
+#
+#Повідомлення надсилаються через вебхук каналу (нічого не треба встановлювати), через бота
+#плагіна DiscordSRV або обома способами. Перевірте кожне повідомлення командою /chatgames discord test <message>.
+enabled: true
+
+#__КАНАЛИ__
+#Куди йдуть повідомлення. Називайте їх як завгодно; кожне сповіщення нижче перелічує канали, які використовує.
+#  webhook: URL вебхука каналу. У Discord: Редагувати канал > Інтеграції > Вебхуки >
+#           Новий вебхук > Копіювати URL вебхука. Тримайте його в таємниці: будь-хто з ним може туди писати.
+#  discordsrv: публікує через вашого бота DiscordSRV (потрібен DiscordSRV). Назва каналу з
+#              розділу Channels у config.yml DiscordSRV (напр. global) або ID каналу.
+#  username / avatar: ім'я та зображення, які показують публікації вебхука (бот зберігає власні).
+channels:
+  main:
+    webhook: ''
+    discordsrv: ''
+    username: 'Chat Games'
+    avatar: 'https://www.spigotmc.org/data/resource_icons/107/107781.jpg?1676494289'
+
+#__ЗАГАЛЬНЕ__
+#Показується в нижніх колонтитулах як %server%
+server-name: 'Minecraft Server'
+#Зображення для %winner_head% / %player_head%. %name% і %uuid% підставляються.
+player-head-url: 'https://mc-heads.net/avatar/%name%/128'
+#ID ролей, які повідомлення можуть згадувати (пишіть <@&ID> у тексті). Більше ніхто ніколи не згадується: ні
+#@everyone, ні щось в імені чи відповіді гравця.
+#Щоб отримати ID, увімкніть режим розробника в Discord (Налаштування > Розширені), потім клацніть роль правою кнопкою.
+allowed-role-pings: []
+#З DiscordSRV %winner_mention% / %player_mention% показують прив'язаний акаунт Discord гравця
+#(інакше його ім'я). true також згадує його.
+ping-linked-players: false
+#Ігри й перегони, які ніколи не публікуються
+ignored-games: []
+
+#Кольори (%game_color%) та емодзі (%game_emoji%) для кожної гри. Кольори: '#RRGGBB' або назва.
+#Емодзі: назви на кшталт :trophy: (список у кінці цього файлу) або емодзі сервера як <:name:ID>.
+#Не вставляйте символи емодзі в цей файл: сервери 1.8 не можуть прочитати файл, де вони є.
+styles:
+  default: {color: '#5865F2', emoji: ':video_game:'}
+  unscramble: {color: '#F1C40F', emoji: ':abc:'}
+  unreverse: {color: '#E67E22', emoji: ':repeat:'}
+  reaction: {color: '#E74C3C', emoji: ':zap:'}
+  random: {color: '#9B59B6', emoji: ':game_die:'}
+  fillout: {color: '#3498DB', emoji: ':pencil2:'}
+  variable: {color: '#1ABC9C', emoji: ':heavy_plus_sign:'}
+  clickable: {color: '#2ECC71', emoji: ':point_up:'}
+  hoverable: {color: '#16A085', emoji: ':eyes:'}
+  math: {color: '#E91E63', emoji: ':heavy_division_sign:'}
+  sequence: {color: '#00BCD4', emoji: ':1234:'}
+  memorize: {color: '#8E44AD', emoji: ':brain:'}
+  guess_the_number: {color: '#FF9800', emoji: ':question:'}
+  trivia: {color: '#3F51B5', emoji: ':books:'}
+  word_association: {color: '#009688', emoji: ':link:'}
+  count: {color: '#607D8B', emoji: ':1234:'}
+  hunt: {color: '#C0392B', emoji: ':crossed_swords:'}
+  mine: {color: '#7F8C8D', emoji: ':pick:'}
+  place: {color: '#A0522D', emoji: ':bricks:'}
+  fish: {color: '#2980B9', emoji: ':fishing_pole_and_fish:'}
+  eat: {color: '#D35400', emoji: ':poultry_leg:'}
+  craft: {color: '#8D6E63', emoji: ':hammer_and_pick:'}
+  furnace: {color: '#E25822', emoji: ':fire:'}
+  tame: {color: '#C69C6D', emoji: ':bone:'}
+  shear: {color: '#ECF0F1', emoji: ':scissors:'}
+
+#Як записуються списки: переможці, учасники, результати й рейтинги.
+#%medal% — медаль місць 1-3, а other-places — для решти.
+lists:
+  medals: [':first_place:', ':second_place:', ':third_place:']
+  other-places: '`%place%.`'
+  winner: '%medal% **%player%** `%time%s`'
+  contributor: '%medal% **%player%** `%amount%`'
+  standing: '%medal% **%player%** `%points% оч.`'
+  leaderboard: '%medal% **%player%** `%value%`'
+  #Показується замість порожнього списку
+  empty: '-# Ще нікого'
+
+#__ПОВІДОМЛЕННЯ__
+#Кожне повідомлення має 'content' (простий текст над вбудовуванням) і/або 'embed':
+#  color, author (name, icon, url), title, url, description, thumbnail, image,
+#  fields (name, value, inline), footer (text, icon), timestamp (true показує час надсилання).
+#Текст може бути одним рядком або списком рядків. Рядок, у якому були лише порожні заповнювачі,
+#пропускається, як і порожнє поле. Заповнювачі PlaceholderAPI, яким не потрібен гравець, теж працюють.
+#Форматування Discord працює в описах і значеннях полів: '### ' починає заголовок, '-# ' дрібний сірий
+#текст, '> ' цитату, **жирний**, `код`.
+#<t:%ends_unix%:R> показує «через 20 секунд» у часі кожного читача, з відліком.
+#У кожному повідомленні: %server%, а для ігор %game% %game_key% %game_emoji% %game_color%.
+
+#Чат-ігри. %question% %time_limit% %ends_unix% %winners_needed% %points%
+games:
+  enabled: true
+  channels: [main]
+  #true: публікувати, коли гра починається, а потім змінити цю публікацію на результат. false: публікувати лише результат.
+  live: true
+  #«Запам'ятай» ніколи не показує тут свій список: гравці могли б прочитати його в Discord.
+  hidden-question: 'Дивіться в ігровий чат!'
+  start:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%'
+      title: 'Новий раунд'
+      description:
+        - '### %question%'
+        - '-# Відповідайте в ігровому чаті, щоб виграти.'
+      fields:
+        - name: ':stopwatch: Кінець'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+        - name: ':sparkles: Нагорода'
+          value: '`%points% оч.`'
+          inline: true
+        - name: ':busts_in_silhouette: Переможці'
+          value: '`%winners_needed%`'
+          inline: true
+      footer: '%server%'
+  #%winner% %winner_head% %winner_mention% %time% %answer% %points% %winner_count%
+  #%winners% (кожен переможець, по одному на рядок) %other_winners% (усі, крім першого)
+  win:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  %game%'
+      title: ':trophy:  %winner% відповів!'
+      thumbnail: '%winner_head%'
+      description:
+        - '-# Відповідь була'
+        - '### %answer%'
+      fields:
+        - name: ':stopwatch: Час'
+          value: '`%time%s`'
+          inline: true
+        - name: ':sparkles: Очки'
+          value: '`+%points%`'
+          inline: true
+        - name: ':medal: Також відповіли'
+          value: '%other_winners%'
+          inline: false
+      footer: '%server%'
+      timestamp: true
+  #%answer% %question% %time_limit%
+  expired:
+    enabled: true
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%'
+      title: ':hourglass:  Час минув'
+      description:
+        - '-# Ніхто не відповів. Відповідь була'
+        - '### %answer%'
+      footer: '%server%'
+      timestamp: true
+  #Коли адміністратор зупиняє гру (лише змінює живу публікацію)
+  stopped:
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  %game%'
+      title: ':no_entry:  Раунд зупинено'
+      description:
+        - '-# Адміністратор завершив цей раунд достроково.'
+      footer: '%server%'
+      timestamp: true
+
+#Перегони. %target% %amount% %time_limit% %ends_unix% %points%
+races:
+  enabled: true
+  channels: [main]
+  live: true
+  start:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  Перегони: %game%'
+      title: 'Перегони почалися'
+      description:
+        - '### %amount%x %target%'
+        - '-# Перемагає той, хто першим завершить.'
+      fields:
+        - name: ':stopwatch: Кінець'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+        - name: ':sparkles: Нагорода'
+          value: '`%points% оч.`'
+          inline: true
+      footer: '%server%'
+  #%winner% %winner_head% %winner_mention% %time% %points%
+  win:
+    embed:
+      color: '%game_color%'
+      author: '%game_emoji%  Перегони: %game%'
+      title: ':checkered_flag:  %winner% виграв перегони!'
+      thumbnail: '%winner_head%'
+      description:
+        - '### %amount%x %target%'
+      fields:
+        - name: ':stopwatch: Час'
+          value: '`%time%s`'
+          inline: true
+        - name: ':sparkles: Очки'
+          value: '`+%points%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  expired:
+    enabled: true
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  Перегони: %game%'
+      title: ':hourglass:  Час минув'
+      description:
+        - '### %amount%x %target%'
+        - '-# Ніхто не встиг вчасно.'
+      footer: '%server%'
+      timestamp: true
+  stopped:
+    embed:
+      color: '#4E5058'
+      author: '%game_emoji%  Перегони: %game%'
+      title: ':no_entry:  Перегони зупинено'
+      description:
+        - '-# Адміністратор завершив ці перегони достроково.'
+      footer: '%server%'
+      timestamp: true
+
+#Глобальні ігри, де весь сервер працює на одну мету.
+#%goal% (напр. "500 Stone") %progress% %goal_amount% %percent% %bar% %contributors% %time_limit% %ends_unix%
+global:
+  enabled: true
+  channels: [main]
+  #true: публікація показує смугу прогресу й оновлюється, поки йде гра
+  live: true
+  #Як часто щонайбільше оновлюється жива публікація (лише коли прогрес змінився)
+  update-seconds: 15
+  bar: {length: 16, full: '█', empty: '░'}
+  progress:
+    embed:
+      color: '%game_color%'
+      author: ':globe_with_meridians:  Глобальна гра: %game%'
+      title: 'Увесь сервер грає разом'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+        - '-# %progress% / %goal_amount%'
+      fields:
+        - name: ':busts_in_silhouette: Допомагають'
+          value: '`%contributors%`'
+          inline: true
+        - name: ':stopwatch: Кінець'
+          value: '<t:%ends_unix%:R>'
+          inline: true
+      footer: '%server%'
+  #%top_contributors% (найбільші учасники, по одному на рядок)
+  completed:
+    embed:
+      color: '#57F287'
+      author: ':globe_with_meridians:  Глобальна гра: %game%'
+      title: ':tada:  Мету досягнуто!'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+      fields:
+        - name: ':medal: Найкращі помічники'
+          value: '%top_contributors%'
+          inline: true
+        - name: ':busts_in_silhouette: Допомогли'
+          value: '`%contributors%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  failed:
+    embed:
+      color: '#ED4245'
+      author: ':globe_with_meridians:  Глобальна гра: %game%'
+      title: ':x:  Мету не досягнуто'
+      description:
+        - '### %goal%'
+        - '`%bar%` **%percent%%**'
+        - '-# %progress% / %goal_amount%'
+      fields:
+        - name: ':medal: Найкращі помічники'
+          value: '%top_contributors%'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #Скільки учасників перелічує %top_contributors%
+  top-size: 5
+
+#Ігрові події (events.yml). %event%
+events:
+  enabled: true
+  channels: [main]
+  #%games% (скільки в ній ігор)
+  start:
+    embed:
+      color: '#FEE75C'
+      author: ':calendar:  Ігрова подія'
+      title: '%event% почалася!'
+      description:
+        - '-# Вигравайте ігри одну за одною, щоб заробити очки події.'
+      fields:
+        - name: ':video_game: Ігри'
+          value: '`%games%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #%standings% %players% (скільки набрали очки) %winner% %winner_head% %winner_mention%
+  end:
+    embed:
+      color: '#FEE75C'
+      author: ':calendar:  Ігрова подія'
+      title: ':trophy:  Результати: %event%'
+      thumbnail: '%winner_head%'
+      description:
+        - '%standings%'
+      fields:
+        - name: ':crown: Переможець'
+          value: '%winner_mention%'
+          inline: true
+        - name: ':busts_in_silhouette: Гравці'
+          value: '`%players%`'
+          inline: true
+      footer: '%server%'
+      timestamp: true
+  #Скільки місць перелічує %standings%
+  standings-size: 10
+
+#Серія гравця досягає певної кількості днів поспіль (streaks.yml). %player% %player_head% %player_mention% %streak% %days%
+streaks:
+  enabled: false
+  channels: [main]
+  #Публікуються лише ці кількості днів
+  days: [7, 14, 30, 60, 100, 365]
+  message:
+    embed:
+      color: '#E67E22'
+      author: {name: '%player%', icon: '%player_head%'}
+      title: ':fire:  %days% дн. поспіль!'
+      description:
+        - '-# %streak%'
+      footer: '%server%'
+      timestamp: true
+
+#Гравець виконує щоденне або щотижневе завдання. %player% %player_head% %player_mention% %challenge% %period%
+challenges:
+  enabled: false
+  channels: [main]
+  #Що показує %period%
+  periods:
+    daily: 'Щоденне'
+    weekly: 'Щотижневе'
+  message:
+    embed:
+      color: '#57F287'
+      author: {name: '%player%', icon: '%player_head%'}
+      title: ':white_check_mark:  Завдання виконано'
+      description:
+        - '### %challenge%'
+        - '-# %period% завдання'
+      footer: '%server%'
+      timestamp: true
+
+#Рейтинг, що публікується в задані години й командою /chatgames discord leaderboard.
+#%leaderboard% %total_points% (усі гравці разом)
+leaderboard:
+  enabled: false
+  channels: [main]
+  #Час сервера, 24-годинний, напр. ['12:00', '20:00']
+  times: ['20:00']
+  #points або fastest (найшвидші відповіді всіх ігор)
+  type: points
+  size: 10
+  message:
+    embed:
+      color: '#5865F2'
+      author: ':bar_chart:  Рейтинг'
+      title: 'Найкращі гравці'
+      description:
+        - '%leaderboard%'
+        - ''
+        - '-# Усього виграно %total_points% очок'
+      footer: '%server%'
+      timestamp: true
+
+#__ЕМОДЗІ__
+#Назви, які можна писати як :name: у будь-якому тексті вище:
+#  trophy, first_place, second_place, third_place, medal, military_medal, crown, star, star2,
+#  sparkles, tada, confetti_ball, fire, zap, boom, 100, gem, moneybag, gift, video_game, game_die,
+#  jigsaw, dart, checkered_flag, stopwatch, timer, alarm_clock, hourglass, hourglass_flowing_sand,
+#  clock, calendar, white_check_mark, heavy_check_mark, x, no_entry, warning, question, grey_question,
+#  exclamation, bell, loudspeaker, mega, speech_balloon, thought_balloon, brain, bulb, abc, abcd,
+#  capital_abcd, 1234, symbols, pencil, pencil2, memo, book, books, scroll, clipboard, link, mag,
+#  eyes, eye, repeat, arrows_counterclockwise, leftwards_arrow_with_hook, heavy_plus_sign,
+#  heavy_minus_sign, heavy_multiplication_x, heavy_division_sign, infinity, keycap_ten,
+#  mouse_three_button, point_up, point_right, point_down, raised_hands, clap, muscle, handshake, wave,
+#  thinking, sunglasses, partying_face, rocket, earth_americas, globe_with_meridians,
+#  busts_in_silhouette, bust_in_silhouette, bar_chart, chart_with_upwards_trend,
+#  chart_with_downwards_trend, crossed_swords, dagger, bow_and_arrow, shield, pick, hammer,
+#  hammer_and_pick, tools, axe, bricks, fishing_pole_and_fish, fish, tropical_fish, meat_on_bone,
+#  poultry_leg, bread, apple, green_apple, cake, cookie, fork_and_knife, cooking, bone, dog, cat,
+#  horse, parrot, sheep, ram, scissors, cow, pig, chicken, zombie, skull, seedling, evergreen_tree,
+#  deciduous_tree, mushroom, rock, diamond_shape_with_a_dot_inside, large_blue_diamond,
+#  small_orange_diamond, red_circle, orange_circle, yellow_circle, green_circle, blue_circle,
+#  purple_circle, white_circle, black_circle, green_square, white_large_square, black_large_square,
+#  arrow_right, arrow_up, arrow_down, small_red_triangle_down, small_red_triangle, lock, unlock, key,
+#  new, up, cool, free, information_source, heart, green_heart, blue_heart, yellow_heart,
+#  purple_heart, orange_heart, map, compass, label, ticket, tickets, admission_tickets, joystick,
+#  slot_machine, spades, clubs, hearts, diamonds, beginner, game_controller, pushpin, round_pushpin,
+#  triangular_flag_on_post

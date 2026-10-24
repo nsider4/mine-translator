@@ -1,0 +1,108 @@
+#게임 이벤트
+#
+#이벤트는 연달아 진행되는 일련의 게임입니다. 각 게임은 순위별로 이벤트 포인트를 주고,
+#마지막 게임이 끝나면 이벤트 포인트가 가장 많은 플레이어가 이벤트
+#보상을 받습니다. 이벤트 중에는 일반 게임 로테이션과 글로벌 게임이 기다립니다.
+#
+#/chatgames event start <event>로 시작하거나 일정에 맞춰 저절로 시작되게 하세요.
+#/chatgames event top <event>는 그 이벤트에서 지금까지 가장 많이 득점한 사람을 보여 줍니다.
+#
+#각 이벤트:
+#  name: 플레이어에게 보이는 이름(색상 코드 사용 가능)
+#  schedule: 저절로 시작되는 때. 예: 'SATURDAY 20:00' 또는 'DAILY 18:30'(빼도 됩니다).
+#            시간대는 challenges.yml의 것입니다.
+#  minimum-players: 일정으로 시작되는 데 필요한 온라인 플레이어 수(명령어는 이를 무시)
+#  pause-seconds: 게임 하나가 끝나고 다음이 시작되기까지의 초
+#  points: 각 게임의 1등, 2등, 3등...의 이벤트 포인트
+#  participation-points: 그 밖에 해낸 사람의 이벤트 포인트. 글로벌 게임에서
+#                        서버가 목표에 닿으면 충분히 기여한 모두가 득점합니다:
+#                        가장 많이 기여한 사람은 'points', 나머지는 이것.
+#                        목표에 닿지 못하면 그 게임에서는 아무도 득점하지 않습니다.
+#  steps: 게임을 순서대로. 각각:
+#    game: 게임이나 레이스, games.yml / races.yml과 같은 이름
+#    global: true면 글로벌 게임으로 합니다(서버 전체가 함께, global_games.yml 참고).
+#            숫자 세기는 항상 글로벌입니다.
+#    time: 답하는(또는 레이스를 끝내는) 데 주는 초, 게임 자체 값 대신
+#    winners: 일반 채팅 게임에서 이길 수 있는 인원, 게임 자체 값 대신
+#    args: /chatgames <game> 뒤에 쓰는 값. 예: 채굴 레이스에 'stone 16'
+#    settings: 이 게임에서 바꿀 다른 games.yml 값. 예: {difficulty: hard}
+#  rewards: 최종 순위(1, 2, 3...)별 보상 줄, 그리고 득점한 나머지 모두를 위한
+#           'participation'. rewards.yml과 같은 줄입니다('<chance>%~ '와 'has:<permission>' 작동).
+
+events:
+  weekend_cup:
+    name: '&6&l주말 컵'
+    schedule:
+      - 'SATURDAY 20:00'
+    minimum-players: 3
+    pause-seconds: 15
+    points: [5, 3, 1]
+    participation-points: 1
+    steps:
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+        time: 25
+      - game: word_association
+        global: true
+        settings:
+          difficulty: hard
+      - game: trivia
+        winners: 3
+      - game: mine
+        global: true
+        time: 120
+        args: 'stone 100'
+    rewards:
+      1:
+        - '[consolecmd] give %player% diamond 5'
+      2:
+        - '[consolecmd] give %player% diamond 3'
+      3:
+        - '[consolecmd] give %player% diamond 1'
+      participation:
+        - '[consolecmd] give %player% iron_ingot 3'
+
+  quick_quiz:
+    name: '&b&l스피드 퀴즈'
+    minimum-players: 2
+    pause-seconds: 8
+    points: [3, 2, 1]
+    participation-points: 0
+    steps:
+      - game: reaction
+        winners: 3
+      - game: unscramble
+        winners: 3
+      - game: math
+        winners: 3
+    rewards:
+      1:
+        - '[consolecmd] give %player% gold_ingot 5'
+
+messages:
+  #모두에게. %event%는 이름, %steps%는 게임 수, %pause%는 게임 사이의 초.
+  start:
+    - ''
+    - '&6&l» 이벤트: %event% &f시작합니다! &e%steps%&f개 게임, 이벤트 포인트가 가장 많은 사람이 우승.'
+    - ''
+  #각 게임 전에. %step%은 번호, %game%은 게임.
+  step:
+    - '&6&l» %event% &f- 게임 &e%step%/%steps%&f: &e%game%'
+  #게임에서 득점한 각 플레이어에게. %points%는 얻은 점수, %total%은 이벤트 합계.
+  step_points: '&8[%prefix%&8] &a+%points% 이벤트 포인트 &7(합계 %total%)'
+  #끝날 때 모두에게. %count%명이 득점, %winner_<n>%와 %points_<n>%는 상위 3명.
+  end:
+    - ''
+    - '&6&l» %event% &f끝! &e%count%&f명이 득점했습니다.'
+    - '&f  1. &e%winner_1% &7%points_1%  &f2. &e%winner_2% &7%points_2%  &f3. &e%winner_3% &7%points_3%'
+    - ''
+  nobody:
+    - '&6&l» %event% &f끝! &c아무도 득점하지 못했습니다.'
+  #끝난 뒤 득점한 각 플레이어에게. %count%명 중 %place%등.
+  result: '&8[%prefix%&8] &f이벤트 포인트 &e%points%&f점으로 %count%명 중 &e#%place%&f등입니다.'
+  stopped:
+    - '&6&l» %event% &c이벤트가 중단되었습니다.'
+
+#이벤트 시작과 최종 순위는 discord.yml 설정대로 Discord에 올라갑니다.

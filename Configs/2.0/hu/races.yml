@@ -1,0 +1,550 @@
+enable-races: true
+
+creative-enabled: true
+#Hasznos linkek ADATOK hozzáadásához:
+#
+#https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+#https://helpch.at/docs/1.8/index.html?org/bukkit/entity/EntityType.html
+#https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+#https://helpch.at/docs/1.8/org/bukkit/Material.html
+
+#A nevek lehetnek újak vagy régiek (MOOSHROOM vagy MUSHROOM_COW, COD vagy RAW_FISH): a szervered
+#verziójához igazodnak. A verziódban nem létező nevek (pl. egy 1.21-es blokk 1.8-on) kimaradnak, konzolüzenettel.
+#
+#Minden verseny elfogadja még (opcionális):
+#  points: 1     #a győztes pontjai (alapértelmezett 1)
+#  weight: 1     #milyen gyakran választja a rotáció más játékokhoz képest (alapértelmezett 1, 0 = soha)
+#
+#Az adminok saját értékekkel indíthatnak versenyt: /chatgames <race> <material/mob> [amount]
+#Mennyiség nélkül az adott anyaghoz/lényhez lent felsoroltak egyike használatos. A győztes azokat a jutalmakat kapja,
+#amelyek pontosan ahhoz az anyaghoz és mennyiséghez vannak felsorolva, vagy semmit, ha itt nincsenek (pontot így is kap).
+
+hunt:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&bVADÁSZAT'
+  subtitleMessage: '&aÖlj meg ennyit: %amount% %value%!'
+
+  #Számítsanak-e az idézőkből vagy idézőtojásokból megjelent lények.
+  count-spawner-mobs: true
+  #A MythicMobs lényei számítsanak-e az alapul szolgáló lényként (egy MythicMobs zombi ZOMBIE-ként).
+  count-mythic-mobs: true
+
+  data:
+    #Ezeknek érvényes Minecraft lényazonosítóknak kell lenniük (lásd a Hasznos linkeket a fájl elején)
+    #Telepített MythicMobs esetén a mythic:<mob type> annak egyik lénye (példa a lista végén)
+    ZOMBIE:
+      3:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+
+    CREEPER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SKELETON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SPIDER:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    PIG:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SHEEP:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    COW:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    CHICKEN:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    SALMON:
+      3:
+        rewards:
+          - reward_2
+      5:
+        rewards:
+          - reward_1
+    #mythic:SkeletonKing:
+    #  1:
+    #    rewards:
+    #      - reward_1
+
+mine:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&bBÁNYÁSZAT'
+  subtitleMessage: '&aBányássz ennyit: %amount% %value%!'
+
+  data:
+    #Ezeknek érvényes Minecraft anyagazonosítóknak kell lenniük (lásd a Hasznos linkeket a fájl elején)
+    STONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRASS_BLOCK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    GRAVEL:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIORITE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+place:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&bÉPÍTÉS'
+  subtitleMessage: '&aRakj le ennyit: %amount% %value%!'
+
+  data:
+    #Ezeknek érvényes Minecraft anyagazonosítóknak kell lenniük (lásd a Hasznos linkeket a fájl elején)
+    COBBLESTONE:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    DIRT:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    SAND:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    NETHERRACK:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      16:
+        rewards:
+          - reward_1
+          - reward_2
+      32:
+        rewards:
+          - reward_2
+          - reward_3
+
+fish:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&bHORGÁSZAT'
+  subtitleMessage: '&aFogj ennyit: %amount% %value%!'
+
+  data:
+    #Ezeknek érvényes Minecraft anyagazonosítóknak kell lenniük (lásd a Hasznos linkeket a fájl elején)
+    COD:
+      1:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+          - reward_3
+    SALMON:
+      1:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+          - reward_3
+    PUFFERFISH:
+      1:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_1
+          - reward_2
+      3:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+          - reward_3
+    BOWL:
+      1:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+          - reward_3
+
+eat:
+  enable: true
+
+  timeToComplete_seconds: 60
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&bEVÉS'
+  subtitleMessage: '&aEgyél ennyit: %amount% %value%!'
+
+  data:
+    #Ezeknek érvényes Minecraft anyagazonosítóknak kell lenniük (lásd a Hasznos linkeket a fájl elején)
+    COOKED_BEEF:
+      1:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_CHICKEN:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BAKED_POTATO:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    BREAD:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    GOLDEN_APPLE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+
+craft:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&bBARKÁCSOLÁS'
+  subtitleMessage: '&aBarkácsolj ennyit: %amount% %value%!'
+
+  data:
+    #Ezeknek érvényes Minecraft anyagazonosítóknak kell lenniük (lásd a Hasznos linkeket a fájl elején)
+    FURNACE:
+      2:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+      4:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+          - reward_3
+    CHEST:
+      2:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+      4:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_1
+          - reward_2
+      8:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+          - reward_3
+    CRAFTING_TABLE:
+      4:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+      8:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_1
+          - reward_2
+      12:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+          - reward_3
+    TORCH:
+      32:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+      48:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_1
+          - reward_2
+      64:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+          - reward_3
+
+furnace:
+  enable: true
+
+  timeToComplete_seconds: 150
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&bFŐZÉS'
+  subtitleMessage: '&aSüss ennyit: %amount% %value%!'
+
+  data:
+    #Ezeknek érvényes Minecraft anyagazonosítóknak kell lenniük (lásd a Hasznos linkeket a fájl elején)
+    GOLD_INGOT:
+      3:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+      6:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+          - reward_3
+    IRON_INGOT:
+      3:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+      6:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_BEEF:
+      3:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+      6:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+          - reward_3
+    COOKED_COD:
+      3:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+      6:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_1
+          - reward_2
+      9:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_2
+          - reward_3
+
+tame:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&bSZELÍDÍTÉS'
+  subtitleMessage: '&aSzelídíts meg ennyit: %amount% %value%!'
+
+  data:
+    #Ezeknek érvényes Minecraft lényazonosítóknak kell lenniük (lásd a Hasznos linkeket a fájl elején)
+    #Csak a verziódban megszelídíthető lények használatosak: OCELOT 1.13-ig, CAT 1.14-től.
+    WOLF:
+      1:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    CAT:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    OCELOT:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    HORSE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    PARROT:
+      1:
+        rewards:
+          - reward_2
+          - reward_3
+
+shear:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Hagyd üresen a következő 2-t a kikapcsolásukhoz__
+  titleMessage: '&bNYÍRÁS'
+  subtitleMessage: '&aNyírj meg ennyit: %amount% %value%!'
+
+  data:
+    #Ezeknek érvényes Minecraft lényazonosítóknak kell lenniük (lásd a Hasznos linkeket a fájl elején)
+    SHEEP:
+      3:
+        #A HOZZÁADOTT JUTALMAK ESÉLYEINEK ÖSSZEGE NEM HALADHATJA MEG A 100%-OT
+        rewards:
+          - reward_1
+          - reward_2
+      6:
+        rewards:
+          - reward_2
+          - reward_3
+    MOOSHROOM:
+      1:
+        rewards:
+          - reward_1
+          - reward_2

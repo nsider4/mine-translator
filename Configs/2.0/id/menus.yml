@@ -1,0 +1,1158 @@
+#MENU
+#
+#Setiap menu di bawah 'menus:' punya 'title', ukuran dalam 'rows' (1-6), dan 'items'-nya. Kamu bisa mengubah
+#fungsi tombol apa pun, menambah tombol, atau menu baru (buka dengan /chatgames menu <id>,
+#atau taruh masing-masing di file sendiri di folder menus/, bernama <id>.yml).
+#
+#Setiap item:
+#  slot: posisinya, dari 0 (kiri atas) sampai rows*9-1. 'slots: [0, 1, '9-17']' mengulanginya.
+#  material: nama item apa pun dari 1.8 sampai 26.x: nama baru atau lama (lime_dye / INK_SACK:10 / 351:10),
+#            atau 'head:<nama pemain, tekstur, atau URL textures.minecraft.net>'
+#  name / lore: kode warna (&a, dan &#RRGGBB di 1.16+) serta placeholder PlaceholderAPI bisa dipakai.
+#  amount, glow: true, enchantments: ['SHARPNESS:1'], flags: [HIDE_ATTRIBUTES], head: '%player%',
+#  custom-model-data: 1001 (1.14+), item-model: 'namespace:key' (1.21.2+), color: '#FF0000' (kulit)
+#  actions: apa yang dilakukan klik, berurutan. Juga left-actions, right-actions, shift-left-actions,
+#           shift-right-actions, middle-actions, dan drop-actions (masing-masing kembali ke actions jika kosong).
+#  view-requirements: item hanya tampil jika setiap baris terpenuhi
+#  click-requirements: jika satu baris gagal, 'deny-actions' dijalankan sebagai ganti actions
+#  state + when-off: jika state bernilai false, kunci when-off menggantikan kunci item itu sendiri
+#                    (bukan 'off': YAML membaca off tanpa tanda kutip sebagai false)
+#Hapus item untuk menyembunyikannya. 'filler' mengisi setiap slot kosong; hapus jika tidak perlu.
+#
+#Aksi:
+#  [command] <command>        kamu menjalankan perintah    [console] <command>   konsol menjalankannya
+#  [message] <text>           pesan untukmu                [broadcast] <text>    untuk semua orang
+#  [sound] <sound> [volume] [pitch]   nama suara apa pun dari 1.8 sampai 26.x
+#  [open] <menu> [values]     membuka menu lain            [switch] <menu> [values]  sama, tapi [back] melewatinya
+#  [back] [menu]              menu sebelumnya (atau menu yang disebut, atau menutup)
+#  [refresh]  [close]  [next-page]  [previous-page]  [wait] <ticks>
+#  [chatgames:no-permission]  mengirim pesan tidak punya izin
+#  Aksi khusus menu dijelaskan di atas menu yang memilikinya.
+#
+#Syarat, satu per baris (setiap baris harus terpenuhi; awali baris dengan ! untuk membaliknya):
+#  permission <node>     perbandingan seperti '%chatgames_points% >= 100' (==, !=, >=, <=, >, <)
+#  atau nilai true / on / yes / angka selain 0
+#
+#Menu yang berisi daftar (tantangan, game, acara...) menaruhnya di 'list-slots' secara berurutan,
+#digambar dengan 'templates' menu. Jika entri lebih banyak dari slot, item dengan aksi
+#[next-page] / [previous-page] membalik halaman; item itu tersembunyi jika tidak ada halaman lain.
+#Baris lore yang hanya berisi placeholder daftar, seperti '%game_wins%', menjadi beberapa baris.
+#Setiap menu juga punya %player%, %page%, %pages%, dan %entries% (jumlah entri dalam daftar).
+
+#Nama dan ikon game, di setiap menu dan di pesan yang menyebut game (%game%).
+#Game yang tidak tercantum di sini dinamai dari kuncinya.
+game-names:
+  unscramble: 'Susun Ulang'
+  unreverse: 'Balik Kata'
+  reaction: 'Reaksi'
+  guess_the_number: 'Tebak Angka'
+  clickable: 'Klik'
+  fillout: 'Isi Kata'
+  hoverable: 'Hover'
+  random: 'Acak'
+  math: 'Matematika'
+  variable: 'Variabel'
+  sequence: 'Deret'
+  memorize: 'Ingat'
+  word_association: 'Asosiasi Kata'
+  trivia: 'Kuis'
+  count: 'Hitung'
+  hunt: 'Berburu'
+  mine: 'Menambang'
+  place: 'Membangun'
+  fish: 'Memancing'
+  eat: 'Makan'
+  craft: 'Membuat'
+  furnace: 'Memasak'
+  tame: 'Menjinakkan'
+  shear: 'Mencukur'
+game-icons:
+  unscramble: book
+  math: redstone
+  trivia: enchanted_book
+  reaction: feather
+  clickable: stone_button
+  random: ender_pearl
+  unreverse: compass
+  variable: name_tag
+  guess_the_number: clock
+  memorize: map
+  sequence: ladder
+  fillout: paper
+  hoverable: ender_eye
+  word_association: lead
+  count: clock
+  hunt: iron_sword
+  place: grass_block
+  mine: iron_pickaxe
+  fish: fishing_rod
+  eat: cooked_beef
+  craft: crafting_table
+  furnace: furnace
+  tame: bone
+  shear: shears
+
+formats:
+  #Ditampilkan sebagai ganti peringkat untuk pemain yang belum berperingkat
+  no-rank: '-'
+
+#Untuk pemain, dari menu debug. Kosongkan baris ('') agar tidak mengirim apa pun.
+messages:
+  debug-round: '&8[&cDEBUG&8] &fRonde &e%game% &fpribadi baru (jawaban: &a%answer%&f), dibuat dalam &e%generated% ms&f. Hanya kamu yang bisa melihatnya.'
+  debug-failed: '&8[&cDEBUG&8] &cTidak dapat membuat ronde %game%; konsol akan memberi tahu alasannya.'
+  debug-race: '&8[&cDEBUG&8] &cBalapan dimainkan di dunia, jadi tidak bisa diuji di sini. Mulai dengan /chatgames <race>.'
+  debug-no-letters: '&8[&cDEBUG&8] &7Jawaban ini tidak berisi huruf, jadi huruf besar/kecil tidak mungkin salah.'
+  debug-timeout-started: '&8[&cDEBUG&8] &7Menunggu batas waktu &e%time%d &7habis...'
+  debug-timeout: '&8[&cDEBUG&8] &e%game%&7: waktu habis. Pemain akan diberi tahu jawabannya adalah &f%answer%&7.'
+  #%verdict% adalah salah satu baris di bawah
+  debug-result: '&8[&cDEBUG&8] &e%game% &7| mengetik &f%input% &7setelah &e%ms% ms&7: %verdict%'
+  debug-verdicts:
+    accepted: '&aditerima &7(akan mendapat peringkat dan &e%points% &7poin)'
+    wrong: '&csalah &7(diabaikan)'
+    wrong-case: '&6salah huruf besar/kecil &7(pemain diminta memeriksanya)'
+    macro: '&cdiabaikan sebagai makro &7(lebih cepat dari min-answer-ms, &e%min_ms% ms&7)'
+    late: '&cterlambat &7(setelah batas waktu)'
+
+menus:
+
+  #/chatgames menu. %points% %rank% %wins% %claimable% (hadiah siap diambil),
+  #%daily_completed% %daily_total% %weekly_completed% %weekly_total%,
+  #%games_on% / %sound_on% (true atau false) dan %games_state% / %sound_state% (teks AKTIF/NONAKTIF)
+  main:
+    title: '&8&lChatGames'
+    rows: 3
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      profile:
+        slot: 10
+        material: player_head
+        head: '%player%'
+        name: '&e&lProfilmu'
+        lore:
+          - '&7Poin: &e%points% &8(%rank%)'
+          - '&7Kemenangan: &e%wins%'
+          - ''
+          - '&eKlik untuk melihat statistikmu'
+        actions: ['[open] profile']
+      challenges:
+        slot: 11
+        material: writable_book
+        name: '&a&lTantangan'
+        lore:
+          - '&7Harian: &e%daily_completed%&7/&e%daily_total%'
+          - '&7Mingguan: &e%weekly_completed%&7/&e%weekly_total%'
+          - '&7Hadiah untuk diambil: &e%claimable%'
+          - ''
+          - '&eKlik untuk membuka'
+        actions: ['[open] challenges daily']
+      streaks:
+        slot: 12
+        material: blaze_powder
+        name: '&6&lRuntunan'
+        lore:
+          - '&7Bermainlah setiap hari agar tetap berlanjut.'
+          - ''
+          - '&eKlik untuk membuka'
+        actions: ['[open] streaks']
+      leaderboards:
+        slot: 13
+        material: gold_ingot
+        name: '&e&lPapan Peringkat'
+        lore:
+          - '&7Poin terbanyak dan pemain tercepat.'
+          - ''
+          - '&eKlik untuk membuka'
+        actions: ['[open] leaderboards']
+      games-toggle:
+        slot: 15
+        material: lime_dye
+        name: '&fGame chat: %games_state%'
+        lore:
+          - '&7Klik untuk mematikan game chat untukmu.'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7Klik untuk menyalakan game chat untukmu.'
+      sound-toggle:
+        slot: 16
+        material: note_block
+        name: '&fSuara game: %sound_state%'
+        lore:
+          - '&7Klik untuk mematikan suara game.'
+        state: '%sound_on%'
+        actions: ['[command] chatgames togglesound', '[refresh]']
+        when-off:
+          material: gray_dye
+          lore:
+            - '&7Klik untuk menyalakan suara game.'
+      admin:
+        slot: 22
+        material: command_block
+        name: '&c&lAdmin'
+        lore:
+          - '&7Mulai game, acara, preset...'
+        view-requirements: ['permission chatgames.admin']
+        actions: ['[open] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cTutup'
+        actions: ['[close]']
+
+  #/chatgames profile [player]. %target% %points% %rank% %wins% %race_wins% %global_played%
+  #%global_won% (selesai) %contributions% %events_played% %event_wins% %event_best_place% %fastest% %challenges_completed%
+  #%milestones% %milestones_total% %streak_<challenge|daily|global>% dan %streak_<...>_longest%.
+  #Daftar: %game_wins% dan %game_fastest%. [open] profile <name> membuka profil orang lain.
+  profile:
+    title: '&8Profil: %target%'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7belum ada'
+      game-wins: '&7%game%: &f%wins%'
+      game-fastest: '&7%game%: &f%time%d'
+    items:
+      head:
+        slot: 4
+        material: player_head
+        head: '%target%'
+        name: '&e&l%target%'
+        lore:
+          - '&7Poin: &e%points% &8(%rank%)'
+      wins:
+        slot: 19
+        material: diamond
+        name: '&b&lKemenangan'
+        lore:
+          - '&7Game chat dimenangkan: &f%wins%'
+          - '&7Balapan dimenangkan: &f%race_wins%'
+          - ''
+          - '%game_wins%'
+      fastest:
+        slot: 20
+        material: clock
+        name: '&e&lWaktu Tercepat'
+        lore:
+          - '&7Terbaik keseluruhan: &f%fastest%'
+          - ''
+          - '%game_fastest%'
+      global:
+        slot: 21
+        material: beacon
+        name: '&3&lGame Global'
+        lore:
+          - '&7Dimainkan: &f%global_played%'
+          - '&7Selesai: &f%global_won%'
+          - '&7Kontribusi: &f%contributions%'
+      events:
+        slot: 23
+        material: nether_star
+        name: '&6&lAcara'
+        lore:
+          - '&7Dimainkan: &f%events_played%'
+          - '&7Dimenangkan: &f%event_wins%'
+          - '&7Peringkat terbaik: &f%event_best_place%'
+      streaks:
+        slot: 24
+        material: blaze_powder
+        name: '&6&lRuntunan'
+        lore:
+          - '&7Tantangan: &f%streak_challenge% &8(rekor %streak_challenge_longest%)'
+          - '&7Menang harian: &f%streak_daily% &8(rekor %streak_daily_longest%)'
+          - '&7Global: &f%streak_global% &8(rekor %streak_global_longest%)'
+      progress:
+        slot: 25
+        material: experience_bottle
+        name: '&a&lKemajuan'
+        lore:
+          - '&7Poin: &f%points%'
+          - '&7Pencapaian diraih: &f%milestones%&7/&f%milestones_total%'
+          - '&7Tantangan selesai: &f%challenges_completed%'
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Kembali'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cTutup'
+        actions: ['[close]']
+
+  #[open] challenges <daily|weekly>. %period% %period_key% %completed% %total% %resets%.
+  #Entri: %challenge% %id% %description% %progress% %amount% %percent% %bar% %icon%.
+  #[chatgames:claim-challenge] <period> <id> mengambil satu.
+  challenges:
+    title: '&8Tantangan %period%'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    progress-bar:
+      length: 10
+      done: '&a|'
+      left: '&7|'
+    items:
+      tab-daily:
+        slot: 2
+        material: sunflower
+        name: '&e&lHarian'
+        glow: true
+        lore:
+          - '&7Menampilkan tantangan hari ini.'
+        state: '%period_key% == daily'
+        actions: ['[switch] challenges daily']
+        when-off:
+          glow: false
+          lore:
+            - '&eKlik untuk melihat tantangan hari ini'
+      tab-weekly:
+        slot: 6
+        material: clock
+        name: '&b&lMingguan'
+        glow: true
+        lore:
+          - '&7Menampilkan tantangan minggu ini.'
+        state: '%period_key% == weekly'
+        actions: ['[switch] challenges weekly']
+        when-off:
+          glow: false
+          lore:
+            - '&eKlik untuk melihat tantangan minggu ini'
+      info:
+        slot: 4
+        material: book
+        name: '&f%period%: &e%completed%&7/&e%total% &fselesai'
+        lore:
+          - '&7Tantangan baru dalam &f%resets%'
+      none:
+        slot: 22
+        material: barrier
+        name: '&7Saat ini tidak ada tantangan %period%'
+        view-requirements: ['%entries% == 0']
+      claim-all:
+        slot: 40
+        material: chest
+        name: '&a&lAmbil Semua'
+        lore:
+          - '&7Mengambil setiap tantangan yang selesai'
+          - '&7dan hadiah runtunan.'
+        actions: ['[command] chatgames claim', '[wait] 2', '[refresh]']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7Halaman sebelumnya'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7Halaman berikutnya &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Kembali'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cTutup'
+        actions: ['[close]']
+    templates:
+      in-progress:
+        material: '%icon%'
+        name: '%challenge%'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&7Sedang berjalan'
+      ready:
+        material: '%icon%'
+        glow: true
+        name: '%challenge% &a&l(SELESAI)'
+        lore:
+          - '%description%'
+          - ''
+          - '%bar% &f%progress%&7/&f%amount%'
+          - '&a&lKlik untuk mengambil hadiahmu!'
+        actions: ['[chatgames:claim-challenge] %period_key% %id%', '[refresh]']
+      claimed:
+        material: lime_stained_glass_pane
+        name: '%challenge% &7(sudah diambil)'
+        lore:
+          - '%description%'
+          - ''
+          - '&aHadiah diambil'
+
+  #Setiap runtunan punya %streak_<type>% (hari), %streak_<type>_name%, %streak_<type>_longest%,
+  #%streak_<type>_unclaimed%, dan %streak_<type>_enabled%, dengan <type> adalah challenge, daily, atau global.
+  #Tangga 7 hari masing-masing masuk ke daftar dengan namanya, hari 1 sampai 7 (8-14 di minggu kedua...).
+  #Hari tangga: %day% %ladder_day% (hari hadiahnya, 1-7) %type% %streak%, dan %today% (true pada hari ini).
+  #[chatgames:claim-streak] <type> mengambil setiap hari runtunan yang belum diambil.
+  streaks:
+    title: '&8Runtunan'
+    rows: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    lists:
+      challenge: ['11-17']
+      daily: ['20-26']
+      global: ['29-35']
+    items:
+      challenge:
+        slot: 10
+        material: writable_book
+        name: '%streak_challenge_name%'
+        lore:
+          - '&7Selesaikan setiap tantangan harian setiap hari.'
+          - ''
+          - '&7Saat ini: &f%streak_challenge% &7hari &8(rekor %streak_challenge_longest%)'
+          - '&7Hari untuk diambil: &e%streak_challenge_unclaimed%'
+        view-requirements: ['%streak_challenge_enabled%']
+        click-requirements: ['%streak_challenge_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] challenge', '[refresh]']
+      daily:
+        slot: 19
+        material: gold_ingot
+        name: '%streak_daily_name%'
+        lore:
+          - '&7Menangkan minimal satu game setiap hari.'
+          - ''
+          - '&7Saat ini: &f%streak_daily% &7hari &8(rekor %streak_daily_longest%)'
+          - '&7Hari untuk diambil: &e%streak_daily_unclaimed%'
+        view-requirements: ['%streak_daily_enabled%']
+        click-requirements: ['%streak_daily_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] daily', '[refresh]']
+      global:
+        slot: 28
+        material: beacon
+        name: '%streak_global_name%'
+        lore:
+          - '&7Pecahkan satu game global setiap hari.'
+          - ''
+          - '&7Saat ini: &f%streak_global% &7hari &8(rekor %streak_global_longest%)'
+          - '&7Hari untuk diambil: &e%streak_global_unclaimed%'
+        view-requirements: ['%streak_global_enabled%']
+        click-requirements: ['%streak_global_unclaimed% > 0']
+        actions: ['[chatgames:claim-streak] global', '[refresh]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Kembali'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cTutup'
+        actions: ['[close]']
+    templates:
+      day-claimed:
+        material: lime_stained_glass_pane
+        glow: '%today%'
+        name: '&aHari %day% &7(sudah diambil)'
+      day-ready:
+        material: chest
+        glow: '%today%'
+        name: '&e&lHari %day%'
+        lore:
+          - '&a&lKlik untuk mengambil!'
+        actions: ['[chatgames:claim-streak] %type%', '[refresh]']
+      day-today:
+        material: yellow_stained_glass_pane
+        glow: true
+        name: '&eHari %day% &7(hari ini)'
+        lore:
+          - '&7Pertahankan runtunan hari ini'
+          - '&7untuk membuka hadiah ini.'
+      day-locked:
+        material: red_stained_glass_pane
+        name: '&cHari %day%'
+        lore:
+          - '&7Belum tercapai.'
+
+  #%points_rank% %fastest_rank% %total_points%; daftar %top_points% dan %top_fastest% (top-size baris)
+  leaderboards:
+    title: '&8Papan Peringkat'
+    rows: 3
+    top-size: 10
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7Belum ada'
+    items:
+      points:
+        slot: 10
+        material: gold_block
+        name: '&e&lPoin Terbanyak'
+        lore:
+          - '%top_points%'
+      fastest:
+        slot: 11
+        material: clock
+        name: '&b&lPengetik Tercepat'
+        lore:
+          - '%top_fastest%'
+      you:
+        slot: 13
+        material: player_head
+        head: '%player%'
+        name: '&a&lKamu'
+        lore:
+          - '&7Peringkat poin: &f%points_rank%'
+          - '&7Peringkat tercepat: &f%fastest_rank%'
+          - ''
+          - '&7Poin yang diraih semua orang: &f%total_points%'
+      games:
+        slot: 15
+        material: book
+        name: '&d&lTercepat per Game'
+        lore:
+          - '&eKlik untuk melihat semua game'
+        actions: ['[open] leaderboard-games']
+      events:
+        slot: 16
+        material: nether_star
+        name: '&6&lAcara'
+        lore:
+          - '&eKlik untuk melihat acara'
+        view-requirements: ['permission chatgames.event']
+        actions: ['[open] leaderboard-events']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7Kembali'
+        actions: ['[back] main']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cTutup'
+        actions: ['[close]']
+
+  #Satu entri per game dan balapan: %game% %key% %icon%, dan %top% (pemain tercepat game itu)
+  leaderboard-games:
+    title: '&8Tercepat per Game'
+    rows: 6
+    top-size: 5
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      entry: '&e#%rank% &f%name% &7- &e%value%'
+      empty: '&7Belum ada'
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7Halaman sebelumnya'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7Halaman berikutnya &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7Kembali'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 53
+        material: barrier
+        name: '&cTutup'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&e&l%game%'
+        lore:
+          - '%top%'
+
+  #Satu entri per acara: %event% %id% %steps%
+  leaderboard-events:
+    title: '&8Papan Peringkat Acara'
+    rows: 4
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7Belum ada acara yang diatur'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Halaman sebelumnya'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Halaman berikutnya &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Kembali'
+        actions: ['[back] leaderboards']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cTutup'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7%steps% game'
+          - ''
+          - '&eKlik untuk melihat siapa yang mencetak terbanyak'
+        actions: ['[close]', '[command] chatgames event top %id%']
+
+  #/chatgames admin. %current_game% %next_game% %rotation_state% %event% %preset%,
+  #%rotation_on% dan %games_on% (true atau false). Setiap tombol menjalankan perintah yang sesuai,
+  #yang memeriksa izinnya sendiri seolah-olah diketik.
+  admin:
+    title: '&4&lAdmin ChatGames'
+    rows: 5
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    formats:
+      none: '&7tidak ada'
+    items:
+      status:
+        slot: 4
+        material: repeater
+        name: '&f&lStatus'
+        lore:
+          - '&7Berjalan: &f%current_game%'
+          - '&7Game berikutnya dalam: &f%next_game%'
+          - '&7Rotasi: %rotation_state%'
+          - '&7Acara: &f%event%'
+          - '&7Preset: &f%preset%'
+      start-game:
+        slot: 19
+        material: diamond_sword
+        name: '&a&lMulai Game'
+        lore:
+          - '&7Game atau balapan apa pun, sekarang.'
+        actions: ['[open] admin-start']
+      global:
+        slot: 20
+        material: beacon
+        name: '&3&lMulai Game Global'
+        lore:
+          - '&7Semua yang berhasil tepat waktu menang.'
+        actions: ['[open] admin-global']
+      events:
+        slot: 21
+        material: nether_star
+        name: '&6&lAcara'
+        lore:
+          - '&7Mulai atau hentikan acara game.'
+        actions: ['[open] admin-events']
+      presets:
+        slot: 23
+        material: chest
+        name: '&d&lPreset'
+        lore:
+          - '&7Muat kumpulan game aktif.'
+        actions: ['[open] admin-presets']
+      logs:
+        slot: 24
+        material: oak_sign
+        name: '&f&lLog'
+        lore:
+          - '&7Tampilkan game terakhir di chat.'
+        actions: ['[open] admin-logs']
+      stop:
+        slot: 25
+        material: red_wool
+        name: '&c&lHentikan Game'
+        lore:
+          - '&7Mengakhiri game yang berjalan tanpa pemenang.'
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      toggle:
+        slot: 29
+        material: lime_dye
+        name: '&fGame chatmu: &aAKTIF'
+        lore:
+          - '&7Klik untuk mematikannya untukmu.'
+        state: '%games_on%'
+        actions: ['[command] chatgames toggle', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&fGame chatmu: &cNONAKTIF'
+          lore:
+            - '&7Klik untuk menyalakannya untukmu.'
+      toggle-all:
+        slot: 30
+        material: lime_dye
+        name: '&fRotasi game: &aAKTIF'
+        lore:
+          - '&7Klik untuk menghentikan game otomatis untuk semua orang.'
+        state: '%rotation_on%'
+        #toggleAll selesai di thread global, satu tick kemudian di Folia
+        actions: ['[command] chatgames toggleAll', '[wait] 2', '[refresh]']
+        when-off:
+          material: gray_dye
+          name: '&fRotasi game: &cNONAKTIF'
+          lore:
+            - '&7Klik untuk memulai game otomatis lagi.'
+      reload:
+        slot: 32
+        material: hopper
+        name: '&e&lMuat Ulang'
+        lore:
+          - '&7Memuat ulang setiap file konfigurasi.'
+        actions: ['[close]', '[command] chatgames reload']
+      debug:
+        slot: 33
+        material: command_block
+        name: '&c&lDebug'
+        lore:
+          - '&7Uji game apa pun secara pribadi.'
+        view-requirements: ['permission chatgames.debug']
+        actions: ['[open] debug']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Kembali'
+        actions: ['[back] main']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cTutup'
+        actions: ['[close]']
+
+  #Setiap game dan balapan: %game% %key% (seperti di perintah) %icon%
+  admin-start:
+    title: '&8Mulai Game'
+    rows: 6
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25', '28-34']
+    items:
+      previous:
+        slot: 48
+        material: arrow
+        name: '&7Halaman sebelumnya'
+        actions: ['[previous-page]']
+      next:
+        slot: 50
+        material: arrow
+        name: '&7Halaman berikutnya &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 45
+        material: arrow
+        name: '&7Kembali'
+        actions: ['[back] admin']
+      close:
+        slot: 53
+        material: barrier
+        name: '&cTutup'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&a%game%'
+        lore:
+          - '&7Game chat'
+          - '&eKlik untuk memulai'
+        actions: ['[close]', '[command] chatgames %key%']
+      race:
+        material: '%icon%'
+        name: '&6%game%'
+        lore:
+          - '&7Balapan'
+          - '&eKlik untuk memulai'
+        actions: ['[close]', '[command] chatgames %key%']
+
+  #Game yang diaktifkan global_games.yml: %game% %key% %icon% %goal% %duration% %points%.
+  #Yang sedang dimainkan: %global_running% %global_game% %global_goal% (mis. "500 Stone")
+  #%global_progress% %global_goal_amount% %global_percent% %global_contributors% %global_time_left%
+  admin-global:
+    title: '&8Game Global'
+    rows: 5
+    update-interval: 20
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['19-25', '28-34']
+    items:
+      status:
+        slot: 4
+        material: beacon
+        name: '&3&lSedang dimainkan: &f%global_game%'
+        lore:
+          - '&7Target: &f%global_goal%'
+          - '&7Kemajuan: &e%global_progress%&7/&e%global_goal_amount% &8(%global_percent%%)'
+          - '&7Pemain yang membantu: &f%global_contributors%'
+          - '&7Sisa waktu: &f%global_time_left%d'
+          - ''
+          - '&cKlik untuk menghentikannya (tanpa hadiah)'
+        view-requirements: ['%global_running%']
+        actions: ['[command] chatgames stop', '[wait] 2', '[refresh]']
+      idle:
+        slot: 4
+        material: gray_dye
+        name: '&7Tidak ada game global yang dimainkan'
+        lore:
+          - '&7Pilih satu di bawah untuk memulainya.'
+        view-requirements: ['!%global_running%']
+      none:
+        slot: 22
+        material: barrier
+        name: '&7Tidak ada game global yang aktif'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 39
+        material: arrow
+        name: '&7Halaman sebelumnya'
+        actions: ['[previous-page]']
+      next:
+        slot: 41
+        material: arrow
+        name: '&7Halaman berikutnya &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Kembali'
+        actions: ['[back] admin']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cTutup'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&3%game% Global'
+        lore:
+          - '&7Target: &f%goal% jawaban benar'
+          - '&7Waktu: &f%duration%d'
+          - '&7Poin: &f%points%'
+          - ''
+          - '&eKlik untuk memulai'
+        actions: ['[close]', '[command] chatgames global %key%']
+      race:
+        material: '%icon%'
+        name: '&3Balapan %game% Global'
+        lore:
+          - '&7Target: &f%goal% bersama-sama'
+          - '&7Waktu: &f%duration%d'
+          - '&7Poin: &f%points%'
+          - ''
+          - '&eKlik untuk memulai'
+        actions: ['[close]', '[command] chatgames global %key%']
+      count:
+        material: '%icon%'
+        name: '&3%game% Global'
+        lore:
+          - '&7Berhitung bersama di chat'
+          - '&7Waktu: &f%duration%d'
+          - '&7Poin: &f%points%'
+          - ''
+          - '&eKlik untuk memulai'
+        actions: ['[close]', '[command] chatgames global %key%']
+
+  #Acara events.yml: %event% %id% %steps%, dan %step% (game yang sedang dimainkan) untuk yang berjalan
+  admin-events:
+    title: '&8Acara'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      none:
+        slot: 13
+        material: barrier
+        name: '&7Belum ada acara yang diatur di events.yml'
+        view-requirements: ['%entries% == 0']
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Halaman sebelumnya'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Halaman berikutnya &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Kembali'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cTutup'
+        actions: ['[close]']
+    templates:
+      event:
+        material: nether_star
+        name: '%event%'
+        lore:
+          - '&7%steps% game'
+          - ''
+          - '&eKlik untuk memulai'
+        actions: ['[command] chatgames event start %id%', '[wait] 2', '[refresh]']
+      running:
+        material: nether_star
+        glow: true
+        name: '%event% &a(berjalan)'
+        lore:
+          - '&7Game %step% dari %steps%'
+          - ''
+          - '&cKlik untuk menghentikan'
+        actions: ['[command] chatgames event stop', '[wait] 2', '[refresh]']
+
+  #Preset ditambah 'none' (flag enable di games.yml): %preset% %games%
+  admin-presets:
+    title: '&8Preset'
+    rows: 4
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Halaman sebelumnya'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Halaman berikutnya &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Kembali'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cTutup'
+        actions: ['[close]']
+    templates:
+      preset:
+        material: chest
+        name: '&d%preset%'
+        lore:
+          - '&7Game: &f%games%'
+          - ''
+          - '&eKlik untuk memuat'
+        actions: ['[command] chatgames preset load %preset%', '[wait] 2', '[refresh]']
+      active:
+        material: ender_chest
+        glow: true
+        name: '&d%preset% &a(aktif)'
+        lore:
+          - '&7Game: &f%games%'
+
+  #Dibangun sepenuhnya di sini: tambah atau ubah jumlahnya sesukamu
+  admin-logs:
+    title: '&8Log'
+    rows: 3
+    open-requirements: ['permission chatgames.admin']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    items:
+      last-10:
+        slot: 11
+        material: paper
+        name: '&f&e10 &fgame terakhir'
+        lore: ['&eKlik untuk menampilkannya di chat']
+        actions: ['[close]', '[command] chatgames logs 10']
+      last-25:
+        slot: 12
+        material: paper
+        name: '&f&e25 &fgame terakhir'
+        lore: ['&eKlik untuk menampilkannya di chat']
+        actions: ['[close]', '[command] chatgames logs 25']
+      last-50:
+        slot: 14
+        material: paper
+        name: '&f&e50 &fgame terakhir'
+        lore: ['&eKlik untuk menampilkannya di chat']
+        actions: ['[close]', '[command] chatgames logs 50']
+      last-100:
+        slot: 15
+        material: paper
+        name: '&f&e100 &fgame terakhir'
+        lore: ['&eKlik untuk menampilkannya di chat']
+        actions: ['[close]', '[command] chatgames logs 100']
+      back:
+        slot: 18
+        material: arrow
+        name: '&7Kembali'
+        actions: ['[back] admin']
+      close:
+        slot: 26
+        material: barrier
+        name: '&cTutup'
+        actions: ['[close]']
+
+  #/chatgames debug: setiap game chat (%game% %key% %icon%). [chatgames:debug] <game> memulai
+  #ronde pribadi dan membuka debug-session.
+  debug:
+    title: '&4Debug: pilih game'
+    rows: 4
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    list-slots: ['10-16', '19-25']
+    items:
+      previous:
+        slot: 30
+        material: arrow
+        name: '&7Halaman sebelumnya'
+        actions: ['[previous-page]']
+      next:
+        slot: 32
+        material: arrow
+        name: '&7Halaman berikutnya &8(%page%/%pages%)'
+        actions: ['[next-page]']
+      back:
+        slot: 27
+        material: arrow
+        name: '&7Kembali'
+        actions: ['[back] admin']
+      close:
+        slot: 35
+        material: barrier
+        name: '&cTutup'
+        actions: ['[close]']
+    templates:
+      game:
+        material: '%icon%'
+        name: '&c%game%'
+        lore:
+          - '&7Membuat ronde pribadi.'
+          - '&7Tanpa hadiah, tidak ada yang disimpan.'
+        actions: ['[chatgames:debug] %key%']
+
+  #Ronde pribadi: %game% %key% %icon% %question% %answer% %time% %min_ms% %case_sensitive%
+  #%winners% %points% %hints% %generated%; daftar %placeholders% dan %answers%.
+  #[chatgames:debug-answer] <correct|wrong|wrong-case> [ms] mengirim jawaban uji (setelah ms);
+  #[chatgames:debug-timeout] menunggu batas waktu habis; [chatgames:debug-reroll] membuat ronde baru;
+  #[chatgames:debug-end] mengakhiri sesi.
+  debug-session:
+    title: '&4Debug: %game%'
+    rows: 5
+    open-requirements: ['permission chatgames.debug']
+    open-deny-actions: ['[chatgames:no-permission]']
+    filler:
+      material: gray_stained_glass_pane
+      name: ' '
+    #Satu tombol "jawab benar setelah X ms" per jeda, di slot daftar 'delays'
+    delays: [100, 500, 1000, 5000]
+    lists:
+      delays: ['29-32']
+    items:
+      question:
+        slot: 11
+        material: '%icon%'
+        name: '&e&lPertanyaan'
+        lore:
+          - '&f%question%'
+          - ''
+          - '%placeholders%'
+      answer:
+        slot: 13
+        material: emerald
+        name: '&a&lJawaban yang diterima'
+        lore:
+          - '%answers%'
+      settings:
+        slot: 15
+        material: repeater
+        name: '&f&lPengaturan'
+        lore:
+          - '&7Batas waktu: &f%time%d'
+          - '&7Waktu jawab min.: &f%min_ms% ms'
+          - '&7Peka huruf besar/kecil: %case_sensitive%'
+          - '&7Pemenang: &f%winners%  &7Poin: &f%points%'
+          - '&7Petunjuk disiapkan: &f%hints%'
+          - '&7Dibuat dalam: &f%generated% ms'
+      correct-now:
+        slot: 28
+        material: lime_wool
+        name: '&aJawab benar sekarang'
+        lore:
+          - '&7Lebih cepat dari manusia mana pun: menunjukkan'
+          - '&7cara kerja pemeriksaan anti-makro.'
+        actions: ['[chatgames:debug-answer] correct']
+      wrong:
+        slot: 33
+        material: red_wool
+        name: '&cJawab salah'
+        actions: ['[chatgames:debug-answer] wrong']
+      wrong-case:
+        slot: 34
+        material: orange_wool
+        name: '&6Jawab dengan huruf besar/kecil salah'
+        actions: ['[chatgames:debug-answer] wrong-case']
+      timeout:
+        slot: 39
+        material: clock
+        name: '&eBiarkan waktu habis'
+        lore:
+          - '&7Menunggu batas waktu, lalu melaporkan.'
+        actions: ['[chatgames:debug-timeout]']
+      reroll:
+        slot: 41
+        material: ender_pearl
+        name: '&dRonde baru'
+        actions: ['[chatgames:debug-reroll]']
+      back:
+        slot: 36
+        material: arrow
+        name: '&7Kembali'
+        actions: ['[chatgames:debug-end]', '[back] debug']
+      close:
+        slot: 44
+        material: barrier
+        name: '&cTutup'
+        actions: ['[close]']
+    templates:
+      correct-after:
+        material: yellow_wool
+        name: '&eJawab benar setelah %ms% ms'
+        actions: ['[chatgames:debug-answer] correct %ms%']

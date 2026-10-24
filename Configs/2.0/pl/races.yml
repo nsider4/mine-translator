@@ -480,3 +480,71 @@ furnace:
         rewards:
           - reward_2
           - reward_3
+
+tame:
+  enable: true
+
+  timeToComplete_seconds: 180
+  #__Zostaw 2 następne puste, aby je wyłączyć__
+  titleMessage: '&bOSWAJANIE'
+  subtitleMessage: '&aOswój %amount% %value%!'
+
+  data:
+    #Te wartości muszą być poprawnymi identyfikatorami stworzeń Minecrafta (zobacz Przydatne linki na górze pliku)
+    #Używane są tylko stworzenia, które można oswoić w twojej wersji: OCELOT do 1.13, CAT od 1.14.
+    WOLF:
+      1:
+        #SUMA WSZYSTKICH SZANS DODANYCH NAGRÓD NIE MOŻE PRZEKROCZYĆ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      2:
+        rewards:
+          - reward_2
+          - reward_3
+    CAT:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    OCELOT:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    HORSE:
+      1:
+        rewards:
+          - reward_1
+          - reward_2
+    PARROT:
+      1:
+        rewards:
+          - reward_2
+          - reward_3
+
+shear:
+  enable: true
+
+  timeToComplete_seconds: 120
+  #__Zostaw 2 następne puste, aby je wyłączyć__
+  titleMessage: '&bSTRZYŻENIE'
+  subtitleMessage: '&aOstrzyż %amount% %value%!'
+
+  data:
+    #Te wartości muszą być poprawnymi identyfikatorami stworzeń Minecrafta (zobacz Przydatne linki na górze pliku)
+    SHEEP:
+      3:
+        #SUMA WSZYSTKICH SZANS DODANYCH NAGRÓD NIE MOŻE PRZEKROCZYĆ 100%
+        rewards:
+          - reward_1
+          - reward_2
+      6:
+        rewards:
+          - reward_2
+          - reward_3
+    MOOSHROOM:
+      1:
+        rewards:
+          - reward_1
+          - reward_2

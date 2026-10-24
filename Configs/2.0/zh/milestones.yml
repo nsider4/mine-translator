@@ -1,0 +1,7 @@
+milestones:
+  '100':
+    - "say %player% 达到了 100 积分！"
+    - "give %player% diamond 1"
+  '500':
+    - "broadcast %player% 拥有 500 积分，现在是传奇了！"
+    - "give %player% emerald 5"

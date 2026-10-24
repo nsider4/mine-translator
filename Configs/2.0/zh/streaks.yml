@@ -1,0 +1,72 @@
+#连续记录
+#
+#玩家连续做某件事的天数。漏掉一天，连续记录就会从 1
+#重新开始，届时还没领取的奖励也会丢失。“一天”从
+#challenges.yml 中设置的时区开始计算。
+#  challenge：完成了所有每日挑战
+#  daily：    至少赢了一局游戏（或在全服游戏中获得有奖励的名次）
+#  global：   至少及时完成了一局全服游戏
+#
+#连续记录每增加一天，都会发放当天的奖励，用 /chatgames claim 领取。
+#奖励是和 rewards.yml 中一样的行；%player%、%streak%（名称）和 %day% 会被填入。
+
+#第 7 天之后：'repeat' 每天发放第 7 天的奖励，'loop' 从第 1 天重新开始。
+after-day-7: repeat
+
+challenge:
+  enabled: true
+  name: '&d挑战连续记录'
+  rewards:
+    1:
+      - '[consolecmd] give %player% iron_ingot 4'
+    2:
+      - '[consolecmd] give %player% iron_ingot 8'
+    3:
+      - '[consolecmd] give %player% gold_ingot 4'
+    4:
+      - '[consolecmd] give %player% gold_ingot 8'
+    5:
+      - '[consolecmd] give %player% emerald 4'
+    6:
+      - '[consolecmd] give %player% emerald 8'
+    7:
+      - '[consolecmd] give %player% diamond 4'
+      - '[broadcast] &d%player% &f已连续 &d%day% &f天完成所有每日挑战！'
+
+daily:
+  enabled: true
+  name: '&6每日胜利连续记录'
+  rewards:
+    1:
+      - '[consolecmd] give %player% iron_ingot 2'
+    2:
+      - '[consolecmd] give %player% iron_ingot 4'
+    3:
+      - '[consolecmd] give %player% gold_ingot 2'
+    4:
+      - '[consolecmd] give %player% gold_ingot 4'
+    5:
+      - '[consolecmd] give %player% emerald 2'
+    6:
+      - '[consolecmd] give %player% emerald 4'
+    7:
+      - '[consolecmd] give %player% diamond 2'
+
+global:
+  enabled: true
+  name: '&3全服连续记录'
+  rewards:
+    1:
+      - '[consolecmd] give %player% iron_ingot 2'
+    2:
+      - '[consolecmd] give %player% iron_ingot 4'
+    3:
+      - '[consolecmd] give %player% gold_ingot 2'
+    4:
+      - '[consolecmd] give %player% gold_ingot 4'
+    5:
+      - '[consolecmd] give %player% emerald 2'
+    6:
+      - '[consolecmd] give %player% emerald 4'
+    7:
+      - '[consolecmd] give %player% diamond 2'

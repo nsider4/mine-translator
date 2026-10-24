@@ -64,6 +64,8 @@ game-names:
   eat: 'Essen'
   craft: 'Herstellen'
   furnace: 'Kochen'
+  tame: 'Zähmen'
+  shear: 'Scheren'
 game-icons:
   unscramble: book
   math: redstone
@@ -87,6 +89,8 @@ game-icons:
   eat: cooked_beef
   craft: crafting_table
   furnace: furnace
+  tame: bone
+  shear: shears
 
 formats:
   #Wird statt eines Rangs für Spieler gezeigt, die noch keinen Rang haben

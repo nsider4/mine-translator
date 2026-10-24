@@ -1,0 +1,136 @@
+#일일 및 주간 도전 과제
+#
+#모두가 같은 도전 과제를 받습니다. 진행도는 플레이하는 동안 세어지며, 완료한
+#도전 과제는 /chatgames challenges에 "받을 수 있음"으로 표시되고 /chatgames claim으로 받습니다.
+#받지 않은 보상은 도전 과제가 초기화될 때 사라집니다.
+#
+#도전 과제 종류(amount는 필요한 개수):
+#  WIN_GAMES    채팅 게임이나 레이스에서 이기기(순위 상관없음)
+#  WIN_GAME     'game'으로 정한 게임이나 레이스 하나에서 이기기(예: game: unscramble)
+#  WIN_RACES    레이스에서 이기기
+#  PLAY_GLOBAL  글로벌 게임을 제시간에 완료하기
+#  WIN_GLOBAL   글로벌 게임을 보상받는 순위로 마치기
+#  FAST_WIN     채팅 게임을 'seconds'초 이내에 이기기(레이스는 제외)
+#  EARN_POINTS  게임에서 포인트 얻기
+#  PLAY_EVENT   게임 이벤트에 참여하기
+#
+#각 도전 과제에는:
+#  name / description: 채팅과 메뉴에 표시됩니다. %amount%, %game%, %seconds%가 채워집니다.
+#  icon: 메뉴 아이템(재료 이름)
+#  rewards: rewards.yml과 같은 줄(확률은 '<chance>%~ ', 권한은 'has:<permission>').
+#           %player%와 %challenge%(이름)가 채워집니다.
+#
+#ID(win_3, fast_1...)는 플레이어의 진행도와 함께 저장됩니다. a-z, 0-9, -, _만 쓰세요.
+#ID를 바꾸면 그 도전 과제의 진행도가 처음부터 시작됩니다.
+
+#도전 과제와 연속 기록에서 하루가 시작되는 시간대. 예: Europe/Madrid, America/New_York.
+#비우면 서버의 시간대를 씁니다.
+timezone: ''
+
+daily:
+  enabled: true
+  #fixed: 아래의 모든 도전 과제가 매일 켜집니다.
+  #random: 매일 'amount'개를 뽑습니다(모두에게 같음).
+  mode: random
+  amount: 3
+  challenges:
+    win_3:
+      type: WIN_GAMES
+      amount: 3
+      name: '&e몸풀기'
+      description: '&7채팅 게임 %amount%번 이기기'
+      icon: GOLD_NUGGET
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    win_8:
+      type: WIN_GAMES
+      amount: 8
+      name: '&6승승장구'
+      description: '&7채팅 게임 %amount%번 이기기'
+      icon: GOLD_INGOT
+      rewards:
+        - '[consolecmd] give %player% gold_ingot 8'
+    unscramble_2:
+      type: WIN_GAME
+      game: unscramble
+      amount: 2
+      name: '&b단어 마법사'
+      description: '&7%game% 게임 %amount%번 이기기'
+      icon: BOOK
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    math_2:
+      type: WIN_GAME
+      game: math
+      amount: 2
+      name: '&b인간 계산기'
+      description: '&7%game% 게임 %amount%번 이기기'
+      icon: PAPER
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    fast_1:
+      type: FAST_WIN
+      seconds: 5
+      amount: 1
+      name: '&c빠른 손'
+      description: '&7채팅 게임을 %seconds%초 이내에 이기기'
+      icon: FEATHER
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    race_1:
+      type: WIN_RACES
+      amount: 1
+      name: '&a레이서'
+      description: '&7레이스 이기기'
+      icon: IRON_PICKAXE
+      rewards:
+        - '[consolecmd] give %player% emerald 2'
+    points_5:
+      type: EARN_POINTS
+      amount: 5
+      name: '&d포인트 수집가'
+      description: '&7포인트 %amount% 얻기'
+      icon: EXPERIENCE_BOTTLE
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+    global_1:
+      type: PLAY_GLOBAL
+      amount: 1
+      name: '&3팀 플레이어'
+      description: '&7글로벌 게임을 제시간에 완료하기'
+      icon: COMPASS
+      rewards:
+        - '[consolecmd] give %player% iron_ingot 8'
+
+weekly:
+  enabled: true
+  #매주 시작되는 요일.
+  reset-day: MONDAY
+  mode: fixed
+  amount: 3
+  challenges:
+    win_25:
+      type: WIN_GAMES
+      amount: 25
+      name: '&6주간 챔피언'
+      description: '&7이번 주에 채팅 게임 %amount%번 이기기'
+      icon: DIAMOND
+      rewards:
+        - '[consolecmd] give %player% diamond 3'
+    fast_5:
+      type: FAST_WIN
+      seconds: 4
+      amount: 5
+      name: '&c번개'
+      description: '&7채팅 게임을 %seconds%초 이내에 %amount%번 이기기'
+      icon: BLAZE_POWDER
+      rewards:
+        - '[consolecmd] give %player% diamond 2'
+    global_5:
+      type: WIN_GLOBAL
+      amount: 5
+      name: '&3모두의 인기인'
+      description: '&7글로벌 게임 %amount%개를 보상받는 순위로 마치기'
+      icon: BEACON
+      rewards:
+        - '[consolecmd] give %player% diamond 2'

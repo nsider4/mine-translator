@@ -1,0 +1,255 @@
+#グローバルゲーム
+#
+#グローバルゲームでは、サーバー全体が 1 つのチームとして遊びます。正解するたびに（グローバル
+#レースではブロックを掘る、モブを倒すたびに…、カウントでは数を 1 つ数えるたびに）共有の 1 つの
+#スコアに加算されます。誰も一番速くなくていいのです。スコアが時間内に目標に届けば、
+#貢献した全員が報酬をもらえます。先に時間切れになると、ゲームは失敗です。
+#
+#  チャットゲームは問題が次々に出ます。各プレイヤーは各問題に 1 回だけ答えられ、
+#  'answers-per-question' 回の正解か 'question-seconds' の後に次の問題が出ます。
+#  答えは常に隠されるので、まねできません。
+#  レースは全員の進行を合計します。例：サーバー全体で石を 500 個掘る。
+#  カウント（グローバル専用）：チャットでみんなで数を数えます。1 メッセージに 1 つの数。
+#
+#グローバルゲームは、通常のゲームの後に確率で、タイマーで、
+#/chatgames global <game> [values] で、またはイベントの 1 ステップ（events.yml）として始まります。
+#進行はボスバー（1.9+）かアクションバー（1.8）に表示されます。
+
+triggers:
+  #通常のゲームやレースの終了後にグローバルゲームが始まる確率（%、0 = なし）。
+  chance-after-game: 10
+  #通常のゲームが終わってからグローバルゲームが始まるまでの秒数。
+  delay-seconds: 5
+  #タイマーで始まるグローバルゲームの間隔（分、0 = オフ）。
+  interval-minutes: 0
+  #グローバルゲームが自動で始まるのに必要なオンライン人数（コマンドでは無視されます）。
+  minimum-players: 2
+
+progress-bar:
+  enabled: true
+  #ボスバーの色：BLUE、GREEN、PINK、PURPLE、RED、WHITE、YELLOW。
+  color: YELLOW
+  #SOLID、SEGMENTED_6、SEGMENTED_10、SEGMENTED_12、SEGMENTED_20。
+  style: SEGMENTED_10
+  #サーバーが到達したときにチャットで知らせる、目標の割合。
+  announce-at: [25, 50, 75]
+
+#下のゲームが自分で設定しない値には、すべてこれが使われます。
+#  goal：サーバーに必要な正解数（レースではアイテム/モブの数）
+#  duration-seconds：サーバーに与えられる時間
+#  min-contribution：報酬をもらうのに必要な最低限の貢献
+#  points：目標達成時に報酬を受ける各プレイヤーがもらうポイント
+#  points-per-contribution：プレイヤーの貢献 1 回ごとの追加ポイント
+#  answers-per-question：チャットゲームのみ。1 問に何人答えられるか
+#  question-seconds：チャットゲームのみ。1 問が表示される最長時間
+defaults:
+  goal: 10
+  duration-seconds: 120
+  min-contribution: 1
+  points: 1
+  points-per-contribution: 0
+  answers-per-question: 3
+  question-seconds: 15
+
+#rewards.yml 形式の報酬（chance、minimum-players、'<chance>%~ '、'has:<permission>' が
+#すべて使えます）。%player% はプレイヤー、%contribution% はその貢献です。
+#ゲーム自身の 'rewards' セクションは、そのゲームについてこれを置き換えます。
+rewards:
+  #目標達成時、min-contribution 以上貢献した全員。
+  completed:
+    reward_1:
+      data:
+        - '[consolecmd] give %player% iron_ingot 3'
+  #時間切れになったときの同じプレイヤー。空：残念賞なし。
+  failed: {}
+  #目標達成時、貢献が最も大きかった人への順位ごとの追加報酬。
+  top-contributors:
+    1:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% diamond 1'
+    2:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 3'
+    3:
+      reward_1:
+        data:
+          - '[consolecmd] give %player% gold_ingot 1'
+
+#すべてのメッセージのプレースホルダー：%game% %goal%（数） %goal_text%（例："500 石"）
+#%progress% %percent% %time%（残り秒数） %duration%
+messages:
+  start:
+    - ''
+    - '&6&l» グローバル %game%！&fサーバー全体で一緒に遊ぼう。'
+    - '&f  &e%time%s &f以内に&e正解 %goal% 回&fを目指そう。協力した全員に報酬！'
+    - '&7  1 問につき %answers% 人が答えられるので、ほかの人を待たないで。'
+    - ''
+  race_start:
+    - ''
+    - '&6&l» グローバルレース！&fサーバー全体で一緒に遊ぼう。'
+    - '&f  &e%time%s &f以内にみんなで &e%goal% %value% &fを集めよう。協力した全員に報酬！'
+    - ''
+  count_start:
+    - ''
+    - '&6&l» グローバルカウント！&fみんなで &e%start% &fから &e%target% &fまで &e%step% &fずつ数えよう！'
+    - '&7  1 メッセージに 1 つの数、順番どおりに。同じ人が 2 回続けて数えるのは禁止。%time%s 以内に。'
+    - ''
+  #各問題の上に表示。%question% は問題の番号です。
+  question:
+    - '&6&l» グローバル &7第 %question% 問 &8| &e%progress%&7/&e%goal%'
+  #問題の時間切れのとき。%answer% はその答え。空にすると何も表示しません。
+  question_over: '&8» &7答えは &f%answer%&7 でした。'
+  #答えがカウントされたプレイヤーへ。%contribution% はそれまでの合計です。
+  answered: '&8[%prefix%&8] &a正解！&7サーバーの &f%progress%/%goal% &7のうち &f%contribution% &7を担当しています。'
+  #%reached% は今到達した割合です。
+  milestone: '&6&l» &e%reached%% &f達成！&7（%progress%/%goal%、残り %time%s）'
+  #カウントされた数。プレイヤーのメッセージの代わりに表示されます。%player% %number%
+  counted: '&e%player% &8» &f%number%'
+  #ミス。%player% %number% %next%（正しい次の数） %start% %reason% %mistakes% %max_mistakes%
+  count_broken:
+    - '&c%player% が %number% と言いました：%reason%'
+    - '&fカウントは &e%start% &fからやり直しです。'
+  #ゲームを終わらせるミス（on-mistake: fail、または max-mistakes に到達）。
+  count_broken_final:
+    - '&c%player% が %number% と言いました：%reason%'
+  count_reasons:
+    ahead: '先に進みすぎ（次の数は %next%）'
+    behind: 'その数はもう数えられた（次の数は %next%）'
+    repeated: 'その数は今言われたばかり'
+    twice: '同じ人が 2 つ続けて数えることはできません'
+  #%count% 人が報酬を受け、%contributors% 人が参加し、%seconds% かかりました。
+  #%top_<n>% と %top_<n>_amount%：貢献が大きかった上位 3 人。
+  completed:
+    - ''
+    - '&6&l» 目標達成！&fサーバーは &e%seconds%s &fで &e%goal_text% &fを達成しました。'
+    - '&f  上位：&e%top_1% &7(%top_1_amount%)  &e%top_2% &7(%top_2_amount%)  &e%top_3% &7(%top_3_amount%)'
+    - '&f  &e%count% &f人が報酬を受け取ります。'
+    - ''
+  failed:
+    - ''
+    - '&6&l» グローバルゲーム終了！&fサーバーは &e%progress%/%goal% &7(%percent%%)&f まで到達。次はがんばろう！'
+    - ''
+  #目標達成時、報酬を受ける各プレイヤーへ。%points% はもらったポイントです。
+  rewarded: '&8[%prefix%&8] &aあなたは &f%contribution% &a貢献し、&f%points% &aポイントを獲得しました！'
+  #貢献が min-contribution 未満のプレイヤーへ。%min% はその最低値です。
+  too_little: '&8[%prefix%&8] &7あなたの貢献は %contribution% でした。報酬には最低 %min% 必要でした。'
+  #ボスバー（1.8 ではアクションバー）。
+  bar: '&6グローバル %game% &8| &f%progress%/%goal% &8| &e%time%s'
+
+#%goal_text% を作るのに使う言葉。
+words:
+  answers: '回の正解'
+  to: 'から'
+
+#グローバルで遊べるゲーム。メモライズと数当てはできません。
+#それぞれ enabled と 'defaults' の任意の値、さらに自分の 'rewards' を設定できます。
+games:
+  reaction:
+    enabled: true
+    goal: 10
+    duration-seconds: 90
+    question-seconds: 10
+  unscramble:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  math:
+    enabled: true
+    goal: 15
+    duration-seconds: 150
+  sequence:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  trivia:
+    enabled: true
+    goal: 8
+    duration-seconds: 180
+    question-seconds: 20
+  word_association:
+    enabled: true
+    goal: 8
+    duration-seconds: 150
+  fillout:
+    enabled: true
+    goal: 10
+    duration-seconds: 150
+  unreverse:
+    enabled: false
+  random:
+    enabled: false
+  variable:
+    enabled: false
+  hoverable:
+    enabled: false
+  clickable:
+    enabled: false
+  #みんなで数える。目標は、選んだモードの数の個数です。
+  count:
+    enabled: true
+    duration-seconds: 120
+    #同じ人が 2 つ続けて数を言うことはできません。
+    no-double-count: true
+    #reset：ミスするとカウントがやり直し。fail：ミスするとゲーム終了。
+    on-mistake: reset
+    #reset のとき：それでもゲームが終わるミスの回数（0 = 無制限）。
+    max-mistakes: 5
+    #ランダムに 1 つ選ばれます。/chatgames global count <mode> で指定できます。
+    #'step' は各数がいくつ増えるか（向きは start と target に従います）。
+    modes:
+      up:
+        start: 1
+        target: 20
+        step: 1
+      down:
+        start: 15
+        target: 1
+        step: 1
+      evens:
+        start: 2
+        target: 30
+        step: 2
+      fives:
+        start: 5
+        target: 75
+        step: 5
+  #グローバルレース：サーバー全体で目標に向けて集めます。対象は races.yml から。
+  #/chatgames global mine STONE 500 で両方を設定します。
+  mine:
+    enabled: true
+    goal: 200
+    duration-seconds: 240
+  hunt:
+    enabled: true
+    goal: 40
+    duration-seconds: 240
+  place:
+    enabled: false
+    goal: 200
+    duration-seconds: 240
+  fish:
+    enabled: false
+    goal: 20
+    duration-seconds: 300
+  eat:
+    enabled: false
+    goal: 30
+    duration-seconds: 240
+  craft:
+    enabled: false
+    goal: 100
+    duration-seconds: 240
+  furnace:
+    enabled: false
+    goal: 64
+    duration-seconds: 300
+  tame:
+    enabled: false
+    goal: 15
+    duration-seconds: 300
+  shear:
+    enabled: false
+    goal: 40
+    duration-seconds: 240

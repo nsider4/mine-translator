@@ -1,0 +1,41 @@
+# Bộ trò chơi ChatGames: các nhóm trò chơi có tên cho vòng xoay tự động.
+#
+# Khi một bộ đang hoạt động, vòng xoay chỉ chọn trò của bộ đó, và các cờ 'enable'
+# trong games.yml / races.yml bị bỏ qua. Đặt 'active' thành none để dùng lại các cờ đó.
+# Cuộc đua trong bộ chỉ chạy khi đua được bật trong races.yml (enable-races).
+#
+# Lệnh (quyền chatgames.preset):
+#   /chatgames preset list
+#   /chatgames preset load <name>   (hoặc 'none')
+#   /chatgames preset save <name>   lưu các trò đang bật thành một bộ
+#
+# Plugin sẽ ghi lại tệp này khi bạn dùng các lệnh đó.
+
+active: none
+
+presets:
+  weekend_set:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+
+  minimal_set:
+    games:
+      - reaction
+
+  full_rotation:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+      - guess_the_number
+      - memorize
+      - sequence
+      - clickable
+      - fillout
+      - hoverable
+      - random
+      - math
+      - variable
+      - trivia

@@ -1,0 +1,10 @@
+#Discord-inställningarna finns i discord.yml.
+
+#Filen där loggarna sparas
+log-file: 'game_log.txt'
+
+#Om true loggas alla chatthändelser i konsolen, båda kan ske samtidigt
+log-console: true
+
+#Om true loggas alla chatthändelser i en fil, båda kan ske samtidigt
+log-local: true

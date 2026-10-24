@@ -1,0 +1,7 @@
+milestones:
+  '100':
+    - "say %player% nådde 100 poäng!"
+    - "give %player% diamond 1"
+  '500':
+    - "broadcast %player% är nu en legend med 500 poäng!"
+    - "give %player% emerald 5"

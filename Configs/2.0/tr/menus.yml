@@ -64,6 +64,8 @@ game-names:
   eat: 'Ye'
   craft: 'Üret'
   furnace: 'Pişir'
+  tame: 'Evcilleştirme'
+  shear: 'Kırkma'
 game-icons:
   unscramble: book
   math: redstone
@@ -87,6 +89,8 @@ game-icons:
   eat: cooked_beef
   craft: crafting_table
   furnace: furnace
+  tame: bone
+  shear: shears
 
 formats:
   #Henüz sıralamada olmayan oyuncular için rütbe yerine gösterilir
@@ -98,10 +102,10 @@ messages:
   debug-failed: '&8[&cDEBUG&8] &c%game% turu oluşturulamadı; nedeni konsolda.'
   debug-race: '&8[&cDEBUG&8] &cYarışlar dünyada oynanır, bu yüzden burada test edilemez. /chatgames <race> ile bir tane başlat.'
   debug-no-letters: '&8[&cDEBUG&8] &7Bu cevapta harf yok, bu yüzden büyük/küçük harf yanlış olamaz.'
-  debug-timeout-started: '&8[&cDEBUG&8] &7SÃ¼re sÄ±nÄ±rÄ± bekleniyor: &e%time%s &7...'
+  debug-timeout-started: '&8[&cDEBUG&8] &7Süre sınırı bekleniyor: &e%time%s &7...'
   debug-timeout: '&8[&cDEBUG&8] &e%game%&7: süre doldu. Oyuncular cevabın &f%answer% &7olduğunu öğrenirdi.'
   #%verdict% aşağıdaki satırlardan biridir
-  debug-result: '&8[&cDEBUG&8] &e%game% &7| &f%input% &7yazÄ±ldÄ±, &e%ms% ms&7 sonra: %verdict%'
+  debug-result: '&8[&cDEBUG&8] &e%game% &7| &f%input% &7yazıldı, &e%ms% ms&7 sonra: %verdict%'
   debug-verdicts:
     accepted: '&akabul edildi &7(bir yer alır ve &e%points% &7puan kazanırdı)'
     wrong: '&cyanlış &7(yok sayıldı)'

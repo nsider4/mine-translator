@@ -1,0 +1,41 @@
+# Sady ChatGames: pojmenované sady her pro automatickou rotaci.
+#
+# Když je sada aktivní, rotace vybírá jen její hry a příznaky 'enable'
+# v games.yml / races.yml se ignorují. Nastavte 'active' na none, abyste znovu použili ty příznaky.
+# Závody v sadě běží, jen když jsou závody zapnuté v races.yml (enable-races).
+#
+# Příkazy (oprávnění chatgames.preset):
+#   /chatgames preset list
+#   /chatgames preset load <name>   (nebo 'none')
+#   /chatgames preset save <name>   uloží hry zapnuté právě teď jako sadu
+#
+# Plugin tento soubor přepíše, když použijete tyto příkazy.
+
+active: none
+
+presets:
+  weekend_set:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+
+  minimal_set:
+    games:
+      - reaction
+
+  full_rotation:
+    games:
+      - unscramble
+      - unreverse
+      - reaction
+      - guess_the_number
+      - memorize
+      - sequence
+      - clickable
+      - fillout
+      - hoverable
+      - random
+      - math
+      - variable
+      - trivia
