@@ -42,9 +42,10 @@ progress-bar:
 #  points-per-contribution：玩家每次貢獻額外獲得的點數
 #  answers-per-question：僅聊天遊戲，一道題可以有多少玩家回答
 #  question-seconds：僅聊天遊戲，一道題最多顯示多久
+#對於聊天遊戲，請讓 goal x question-seconds 不超過 duration-seconds，這樣即使只有一名玩家獨自作答也能達成目標。
 defaults:
   goal: 10
-  duration-seconds: 120
+  duration-seconds: 180
   min-contribution: 1
   points: 1
   points-per-contribution: 0
@@ -149,16 +150,16 @@ games:
   reaction:
     enabled: true
     goal: 10
-    duration-seconds: 90
+    duration-seconds: 120
     question-seconds: 10
   unscramble:
     enabled: true
     goal: 10
-    duration-seconds: 150
+    duration-seconds: 180
   math:
     enabled: true
     goal: 15
-    duration-seconds: 150
+    duration-seconds: 240
   sequence:
     enabled: true
     goal: 8
@@ -175,7 +176,7 @@ games:
   fillout:
     enabled: true
     goal: 10
-    duration-seconds: 150
+    duration-seconds: 180
   unreverse:
     enabled: false
   random:

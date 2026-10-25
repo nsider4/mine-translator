@@ -42,9 +42,10 @@ progress-bar:
 #  points-per-contribution: body navíc za každý příspěvek hráče
 #  answers-per-question: jen chatové hry, kolik hráčů může odpovědět na jednu otázku
 #  question-seconds: jen chatové hry, nejdelší doba, po kterou otázka zůstane
+#U chatových her drž goal x question-seconds v rámci duration-seconds, aby cíl zvládl i jediný hráč, který odpovídá sám.
 defaults:
   goal: 10
-  duration-seconds: 120
+  duration-seconds: 180
   min-contribution: 1
   points: 1
   points-per-contribution: 0
@@ -149,16 +150,16 @@ games:
   reaction:
     enabled: true
     goal: 10
-    duration-seconds: 90
+    duration-seconds: 120
     question-seconds: 10
   unscramble:
     enabled: true
     goal: 10
-    duration-seconds: 150
+    duration-seconds: 180
   math:
     enabled: true
     goal: 15
-    duration-seconds: 150
+    duration-seconds: 240
   sequence:
     enabled: true
     goal: 8
@@ -175,7 +176,7 @@ games:
   fillout:
     enabled: true
     goal: 10
-    duration-seconds: 150
+    duration-seconds: 180
   unreverse:
     enabled: false
   random:

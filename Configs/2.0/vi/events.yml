@@ -90,6 +90,9 @@ messages:
   #Trước mỗi trò. %step% là số thứ tự, %game% là trò chơi.
   step:
     - '&6&l» %event% &f- trò &e%step%/%steps%&f: &e%game%'
+  #Thay vào đó, khi một trò khác (vd. trò chơi toàn cầu) vẫn đang chạy; bước này bắt đầu ngay khi trò đó kết thúc.
+  waiting:
+    - '&6&l» %event% &f- trò &e%step%/%steps% &fsẽ bắt đầu khi trò hiện tại kết thúc.'
   #Gửi mỗi người chơi ghi điểm trong một trò. %points% là điểm họ nhận, %total% là tổng điểm sự kiện của họ.
   step_points: '&8[%prefix%&8] &a+%points% điểm sự kiện &7(tổng %total%)'
   #Gửi mọi người khi kết thúc. %count% người chơi ghi điểm; %winner_<n>% và %points_<n>% là ba người đầu.

@@ -90,6 +90,9 @@ messages:
   #Před každou hrou. %step% je její číslo, %game% hra.
   step:
     - '&6&l» %event% &f- hra &e%step%/%steps%&f: &e%game%'
+  #Místo toho, když ještě běží jiná hra (např. globální hra); krok začne, jakmile skončí.
+  waiting:
+    - '&6&l» %event% &f- hra &e%step%/%steps% &fzačne, až skončí současná hra.'
   #Každému hráči, který ve hře získá body. %points% co získal, %total% jeho celkem v události.
   step_points: '&8[%prefix%&8] &a+%points% bodů události &7(celkem %total%)'
   #Všem na konci. %count% hráčů získalo body; %winner_<n>% a %points_<n>% první tři.

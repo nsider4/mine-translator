@@ -90,6 +90,9 @@ messages:
   #各ゲームの前に。%step% は番号、%game% はゲーム。
   step:
     - '&6&l» %event% &f- ゲーム &e%step%/%steps%&f：&e%game%'
+  #代わりに、別のゲーム（例：グローバルゲーム）がまだ進行中のとき。そのゲームが終わり次第、このステップが始まります。
+  waiting:
+    - '&6&l» %event% &f- ゲーム &e%step%/%steps% &fは、現在のゲームが終わると始まります。'
   #ゲームで得点した各プレイヤーへ。%points% は獲得分、%total% はイベントの合計。
   step_points: '&8[%prefix%&8] &a+%points% イベントポイント &7（合計 %total%）'
   #終了時に全員へ。%count% 人が得点。%winner_<n>% と %points_<n>% は上位 3 人。

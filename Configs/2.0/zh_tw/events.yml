@@ -90,6 +90,9 @@ messages:
   #每局遊戲之前。%step% 是局數，%game% 是遊戲。
   step:
     - '&6&l» %event% &f- 第 &e%step%/%steps% &f局：&e%game%'
+  #改為在另一局遊戲（例如全服遊戲）仍在進行時發送；那局結束後這一步就會開始。
+  waiting:
+    - '&6&l» %event% &f- 第 &e%step%/%steps% &f局將在目前遊戲結束後開始。'
   #發給每位在一局遊戲中得分的玩家。%points% 是獲得的點數，%total% 是活動總分。
   step_points: '&8[%prefix%&8] &a+%points% 活動點數 &7（共 %total%）'
   #結束時發給所有人。%count% 名玩家得分；%winner_<n>% 和 %points_<n>% 為前三名。

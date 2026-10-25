@@ -42,9 +42,10 @@ progress-bar:
 #  points-per-contribution: 플레이어의 기여마다 주는 추가 포인트
 #  answers-per-question: 채팅 게임 전용, 한 문제에 답할 수 있는 플레이어 수
 #  question-seconds: 채팅 게임 전용, 한 문제가 떠 있는 최대 시간
+#채팅 게임은 goal x question-seconds가 duration-seconds를 넘지 않게 하세요. 혼자 답하는 플레이어 한 명도 목표에 닿을 수 있습니다.
 defaults:
   goal: 10
-  duration-seconds: 120
+  duration-seconds: 180
   min-contribution: 1
   points: 1
   points-per-contribution: 0
@@ -149,16 +150,16 @@ games:
   reaction:
     enabled: true
     goal: 10
-    duration-seconds: 90
+    duration-seconds: 120
     question-seconds: 10
   unscramble:
     enabled: true
     goal: 10
-    duration-seconds: 150
+    duration-seconds: 180
   math:
     enabled: true
     goal: 15
-    duration-seconds: 150
+    duration-seconds: 240
   sequence:
     enabled: true
     goal: 8
@@ -175,7 +176,7 @@ games:
   fillout:
     enabled: true
     goal: 10
-    duration-seconds: 150
+    duration-seconds: 180
   unreverse:
     enabled: false
   random:

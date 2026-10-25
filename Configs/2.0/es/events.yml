@@ -90,6 +90,9 @@ messages:
   #Antes de cada juego. %step% es su número, %game% el juego.
   step:
     - '&6&l» %event% &f- juego &e%step%/%steps%&f: &e%game%'
+  #En su lugar, cuando aún hay otro juego en marcha (p. ej. un juego global); el paso empieza en cuanto termine.
+  waiting:
+    - '&6&l» %event% &f- el juego &e%step%/%steps% &fempieza cuando termine el juego actual.'
   #A cada jugador que puntúa en un juego. %points% lo que ganó, %total% su total en el evento.
   step_points: '&8[%prefix%&8] &a+%points% puntos de evento &7(%total% en total)'
   #A todos al final. %count% jugadores puntuaron; %winner_<n>% y %points_<n>% los tres primeros.

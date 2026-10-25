@@ -42,9 +42,10 @@ progress-bar:
 #  points-per-contribution: extra punten voor elke bijdrage van een speler
 #  answers-per-question: alleen chatspellen, hoeveel spelers één vraag kunnen beantwoorden
 #  question-seconds: alleen chatspellen, het langst dat één vraag blijft staan
+#Houd bij chatspellen goal x question-seconds binnen duration-seconds, zodat zelfs één speler die alleen antwoordt het doel kan halen.
 defaults:
   goal: 10
-  duration-seconds: 120
+  duration-seconds: 180
   min-contribution: 1
   points: 1
   points-per-contribution: 0
@@ -149,16 +150,16 @@ games:
   reaction:
     enabled: true
     goal: 10
-    duration-seconds: 90
+    duration-seconds: 120
     question-seconds: 10
   unscramble:
     enabled: true
     goal: 10
-    duration-seconds: 150
+    duration-seconds: 180
   math:
     enabled: true
     goal: 15
-    duration-seconds: 150
+    duration-seconds: 240
   sequence:
     enabled: true
     goal: 8
@@ -175,7 +176,7 @@ games:
   fillout:
     enabled: true
     goal: 10
-    duration-seconds: 150
+    duration-seconds: 180
   unreverse:
     enabled: false
   random:

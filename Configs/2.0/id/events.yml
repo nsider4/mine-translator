@@ -90,6 +90,9 @@ messages:
   #Sebelum setiap game. %step% adalah nomornya, %game% gamenya.
   step:
     - '&6&l» %event% &f- game &e%step%/%steps%&f: &e%game%'
+  #Sebagai gantinya, saat game lain masih berjalan (mis. game global); langkah dimulai begitu game itu selesai.
+  waiting:
+    - '&6&l» %event% &f- game &e%step%/%steps% &fdimulai saat game yang sedang berjalan selesai.'
   #Untuk setiap pemain yang mendapat poin di sebuah game. %points% yang mereka dapat, %total% total acara mereka.
   step_points: '&8[%prefix%&8] &a+%points% poin acara &7(total %total%)'
   #Untuk semua orang di akhir. %count% pemain mendapat poin; %winner_<n>% dan %points_<n>% tiga teratas.

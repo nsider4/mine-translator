@@ -42,9 +42,10 @@ progress-bar:
 #  points-per-contribution：プレイヤーの貢献 1 回ごとの追加ポイント
 #  answers-per-question：チャットゲームのみ。1 問に何人答えられるか
 #  question-seconds：チャットゲームのみ。1 問が表示される最長時間
+#チャットゲームでは goal x question-seconds を duration-seconds 以内にしてください。1 人だけで答えても目標に届くようにするためです。
 defaults:
   goal: 10
-  duration-seconds: 120
+  duration-seconds: 180
   min-contribution: 1
   points: 1
   points-per-contribution: 0
@@ -149,16 +150,16 @@ games:
   reaction:
     enabled: true
     goal: 10
-    duration-seconds: 90
+    duration-seconds: 120
     question-seconds: 10
   unscramble:
     enabled: true
     goal: 10
-    duration-seconds: 150
+    duration-seconds: 180
   math:
     enabled: true
     goal: 15
-    duration-seconds: 150
+    duration-seconds: 240
   sequence:
     enabled: true
     goal: 8
@@ -175,7 +176,7 @@ games:
   fillout:
     enabled: true
     goal: 10
-    duration-seconds: 150
+    duration-seconds: 180
   unreverse:
     enabled: false
   random:

@@ -42,9 +42,10 @@ progress-bar:
 #  points-per-contribution: додаткові очки за кожен внесок гравця
 #  answers-per-question: лише чат-ігри, скільки гравців можуть відповісти на одне питання
 #  question-seconds: лише чат-ігри, найдовший час показу одного питання
+#Для чат-ігор тримайте goal x question-seconds у межах duration-seconds, щоб навіть один гравець, який відповідає сам, міг досягти мети.
 defaults:
   goal: 10
-  duration-seconds: 120
+  duration-seconds: 180
   min-contribution: 1
   points: 1
   points-per-contribution: 0
@@ -149,16 +150,16 @@ games:
   reaction:
     enabled: true
     goal: 10
-    duration-seconds: 90
+    duration-seconds: 120
     question-seconds: 10
   unscramble:
     enabled: true
     goal: 10
-    duration-seconds: 150
+    duration-seconds: 180
   math:
     enabled: true
     goal: 15
-    duration-seconds: 150
+    duration-seconds: 240
   sequence:
     enabled: true
     goal: 8
@@ -175,7 +176,7 @@ games:
   fillout:
     enabled: true
     goal: 10
-    duration-seconds: 150
+    duration-seconds: 180
   unreverse:
     enabled: false
   random:

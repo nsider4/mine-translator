@@ -90,6 +90,9 @@ messages:
   #Minden játék előtt. %step% a sorszáma, %game% a játék.
   step:
     - '&6&l» %event% &f- &e%step%/%steps%&f. játék: &e%game%'
+  #Helyette, ha még fut egy másik játék (pl. egy globális játék); a lépés akkor indul, amikor az véget ér.
+  waiting:
+    - '&6&l» %event% &f- a(z) &e%step%/%steps%&f. játék akkor indul, amikor a mostani véget ér.'
   #Minden játékosnak, aki pontot szerez egy játékban. %points% amit szerzett, %total% az eseménybeli összesítése.
   step_points: '&8[%prefix%&8] &a+%points% eseménypont &7(összesen %total%)'
   #Mindenkinek a végén. %count% játékos szerzett pontot; %winner_<n>% és %points_<n>% az első három.
