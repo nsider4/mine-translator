@@ -49,7 +49,7 @@ unscramble:
     - 'Mech'
     - 'Louč'
     - 'Truhla'
-    - 'Furnace'
+    - 'Pec'
     - 'Houba'
     - 'Sculk'
     - 'Prismarín'
@@ -152,7 +152,7 @@ unreverse:
     - 'Mech'
     - 'Louč'
     - 'Truhla'
-    - 'Furnace'
+    - 'Pec'
     - 'Houba'
     - 'Sculk'
     - 'Prismarín'
@@ -255,7 +255,7 @@ reaction:
     - 'Mech'
     - 'Louč'
     - 'Truhla'
-    - 'Furnace'
+    - 'Pec'
     - 'Houba'
     - 'Sculk'
     - 'Prismarín'
@@ -358,7 +358,7 @@ fillout:
     - 'Mech'
     - 'Louč'
     - 'Truhla'
-    - 'Furnace'
+    - 'Pec'
     - 'Houba'
     - 'Sculk'
     - 'Prismarín'
@@ -461,7 +461,7 @@ hoverable:
     - 'Mech'
     - 'Louč'
     - 'Truhla'
-    - 'Furnace'
+    - 'Pec'
     - 'Houba'
     - 'Sculk'
     - 'Prismarín'
@@ -721,7 +721,7 @@ trivia:
     27:
       question: 'Jakým materiálem se ochočují kočky?'
       answers:
-        - 'Fish'
+        - 'Ryba'
     28:
       question: 'Ve kterém biomu roste bambus?'
       answers:
@@ -876,7 +876,7 @@ word_association:
     furnace:
       difficulty: easy
       clues: ['Kamení', 'Tavení', 'Palivo']
-      answers: ['Furnace']
+      answers: ['Pec']
     bread:
       difficulty: easy
       clues: ['Pšenice', 'Tři', 'Jídlo']
@@ -899,7 +899,7 @@ word_association:
       answers: ['slepice']
     wolf:
       difficulty: easy
-      clues: ['Kosti', 'Tame', 'Obojek']
+      clues: ['Kosti', 'Ochočení', 'Obojek']
       answers: ['vlk', 'pes']
     ender_dragon:
       difficulty: medium

@@ -49,7 +49,7 @@ unscramble:
     - '이끼'
     - '횃불'
     - '상자'
-    - 'Furnace'
+    - '화로'
     - '버섯'
     - '스컬크'
     - '프리즈머린'
@@ -152,7 +152,7 @@ unreverse:
     - '이끼'
     - '횃불'
     - '상자'
-    - 'Furnace'
+    - '화로'
     - '버섯'
     - '스컬크'
     - '프리즈머린'
@@ -255,7 +255,7 @@ reaction:
     - '이끼'
     - '횃불'
     - '상자'
-    - 'Furnace'
+    - '화로'
     - '버섯'
     - '스컬크'
     - '프리즈머린'
@@ -358,7 +358,7 @@ fillout:
     - '이끼'
     - '횃불'
     - '상자'
-    - 'Furnace'
+    - '화로'
     - '버섯'
     - '스컬크'
     - '프리즈머린'
@@ -461,7 +461,7 @@ hoverable:
     - '이끼'
     - '횃불'
     - '상자'
-    - 'Furnace'
+    - '화로'
     - '버섯'
     - '스컬크'
     - '프리즈머린'
@@ -721,7 +721,7 @@ trivia:
     27:
       question: '고양이를 길들이는 데 쓰는 재료는?'
       answers:
-        - 'Fish'
+        - '물고기'
     28:
       question: '대나무가 자라는 생물 군계는?'
       answers:
@@ -876,7 +876,7 @@ word_association:
     furnace:
       difficulty: easy
       clues: ['조약돌', '제련', '연료']
-      answers: ['Furnace']
+      answers: ['화로']
     bread:
       difficulty: easy
       clues: ['밀', '세 개', '음식']
@@ -899,7 +899,7 @@ word_association:
       answers: ['닭']
     wolf:
       difficulty: easy
-      clues: ['뼈', 'Tame', '목줄']
+      clues: ['뼈', '길들이기', '목줄']
       answers: ['늑대', '개']
     ender_dragon:
       difficulty: medium

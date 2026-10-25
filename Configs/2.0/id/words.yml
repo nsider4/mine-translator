@@ -49,7 +49,7 @@ unscramble:
     - 'Lumut'
     - 'Obor'
     - 'Peti'
-    - 'Furnace'
+    - 'Tungku'
     - 'Jamur'
     - 'Sculk'
     - 'Prismarine'
@@ -152,7 +152,7 @@ unreverse:
     - 'Lumut'
     - 'Obor'
     - 'Peti'
-    - 'Furnace'
+    - 'Tungku'
     - 'Jamur'
     - 'Sculk'
     - 'Prismarine'
@@ -255,7 +255,7 @@ reaction:
     - 'Lumut'
     - 'Obor'
     - 'Peti'
-    - 'Furnace'
+    - 'Tungku'
     - 'Jamur'
     - 'Sculk'
     - 'Prismarine'
@@ -358,7 +358,7 @@ fillout:
     - 'Lumut'
     - 'Obor'
     - 'Peti'
-    - 'Furnace'
+    - 'Tungku'
     - 'Jamur'
     - 'Sculk'
     - 'Prismarine'
@@ -461,7 +461,7 @@ hoverable:
     - 'Lumut'
     - 'Obor'
     - 'Peti'
-    - 'Furnace'
+    - 'Tungku'
     - 'Jamur'
     - 'Sculk'
     - 'Prismarine'
@@ -721,7 +721,7 @@ trivia:
     27:
       question: 'Material apa yang dipakai untuk menjinakkan kucing?'
       answers:
-        - 'Fish'
+        - 'Ikan'
     28:
       question: 'Bioma apa yang menjadi rumah bambu?'
       answers:
@@ -876,7 +876,7 @@ word_association:
     furnace:
       difficulty: easy
       clues: ['Batu Kasar', 'Melebur', 'Bahan Bakar']
-      answers: ['Furnace']
+      answers: ['Tungku']
     bread:
       difficulty: easy
       clues: ['Gandum', 'Tiga', 'Makanan']
@@ -899,7 +899,7 @@ word_association:
       answers: ['Ayam']
     wolf:
       difficulty: easy
-      clues: ['Tulang', 'Tame', 'Kalung']
+      clues: ['Tulang', 'Jinakkan', 'Kalung']
       answers: ['Serigala', 'anjing']
     ender_dragon:
       difficulty: medium

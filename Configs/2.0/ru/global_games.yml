@@ -125,7 +125,7 @@ messages:
   completed:
     - ''
     - '&6&l» ЦЕЛЬ ДОСТИГНУТА! &fСервер набрал &e%goal_text% &fза &e%seconds%с&f.'
-    - '&f  Top: &e%top_1% &7(%top_1_amount%)  &e%top_2% &7(%top_2_amount%)  &e%top_3% &7(%top_3_amount%)'
+    - '&f  Лучшие: &e%top_1% &7(%top_1_amount%)  &e%top_2% &7(%top_2_amount%)  &e%top_3% &7(%top_3_amount%)'
     - '&f  &e%count% &fигрок(ов) получают награду.'
     - ''
   failed:

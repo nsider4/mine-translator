@@ -49,7 +49,7 @@ unscramble:
     - 'Rêu'
     - 'Đuốc'
     - 'Rương'
-    - 'Furnace'
+    - 'Lò nung'
     - 'Nấm'
     - 'Sculk'
     - 'Prismarin'
@@ -152,7 +152,7 @@ unreverse:
     - 'Rêu'
     - 'Đuốc'
     - 'Rương'
-    - 'Furnace'
+    - 'Lò nung'
     - 'Nấm'
     - 'Sculk'
     - 'Prismarin'
@@ -255,7 +255,7 @@ reaction:
     - 'Rêu'
     - 'Đuốc'
     - 'Rương'
-    - 'Furnace'
+    - 'Lò nung'
     - 'Nấm'
     - 'Sculk'
     - 'Prismarin'
@@ -358,7 +358,7 @@ fillout:
     - 'Rêu'
     - 'Đuốc'
     - 'Rương'
-    - 'Furnace'
+    - 'Lò nung'
     - 'Nấm'
     - 'Sculk'
     - 'Prismarin'
@@ -461,7 +461,7 @@ hoverable:
     - 'Rêu'
     - 'Đuốc'
     - 'Rương'
-    - 'Furnace'
+    - 'Lò nung'
     - 'Nấm'
     - 'Sculk'
     - 'Prismarin'
@@ -721,7 +721,7 @@ trivia:
     27:
       question: 'Dùng vật liệu gì để thuần hóa mèo?'
       answers:
-        - 'Fish'
+        - 'Cá'
     28:
       question: 'Tre mọc ở quần xã nào?'
       answers:
@@ -876,7 +876,7 @@ word_association:
     furnace:
       difficulty: easy
       clues: ['Đá cuội', 'Nung', 'Nhiên liệu']
-      answers: ['Furnace']
+      answers: ['Lò nung']
     bread:
       difficulty: easy
       clues: ['Lúa mì', 'Ba', 'Thức ăn']
@@ -899,7 +899,7 @@ word_association:
       answers: ['Con gà']
     wolf:
       difficulty: easy
-      clues: ['Xương', 'Tame', 'Vòng cổ']
+      clues: ['Xương', 'Thuần hóa', 'Vòng cổ']
       answers: ['Chó sói', 'chó']
     ender_dragon:
       difficulty: medium

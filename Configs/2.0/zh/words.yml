@@ -49,7 +49,7 @@ unscramble:
     - '苔藓'
     - '火把'
     - '箱子'
-    - 'Furnace'
+    - '熔炉'
     - '蘑菇'
     - '幽匿块'
     - '海晶石'
@@ -152,7 +152,7 @@ unreverse:
     - '苔藓'
     - '火把'
     - '箱子'
-    - 'Furnace'
+    - '熔炉'
     - '蘑菇'
     - '幽匿块'
     - '海晶石'
@@ -255,7 +255,7 @@ reaction:
     - '苔藓'
     - '火把'
     - '箱子'
-    - 'Furnace'
+    - '熔炉'
     - '蘑菇'
     - '幽匿块'
     - '海晶石'
@@ -358,7 +358,7 @@ fillout:
     - '苔藓'
     - '火把'
     - '箱子'
-    - 'Furnace'
+    - '熔炉'
     - '蘑菇'
     - '幽匿块'
     - '海晶石'
@@ -461,7 +461,7 @@ hoverable:
     - '苔藓'
     - '火把'
     - '箱子'
-    - 'Furnace'
+    - '熔炉'
     - '蘑菇'
     - '幽匿块'
     - '海晶石'
@@ -721,7 +721,7 @@ trivia:
     27:
       question: '用什么材料驯服猫？'
       answers:
-        - 'Fish'
+        - '鱼'
     28:
       question: '竹子生长在哪个生物群系？'
       answers:
@@ -876,7 +876,7 @@ word_association:
     furnace:
       difficulty: easy
       clues: ['圆石', '熔炼', '燃料']
-      answers: ['Furnace']
+      answers: ['熔炉']
     bread:
       difficulty: easy
       clues: ['小麦', '三个', '食物']
@@ -899,7 +899,7 @@ word_association:
       answers: ['鸡']
     wolf:
       difficulty: easy
-      clues: ['骨头', 'Tame', '项圈']
+      clues: ['骨头', '驯服', '项圈']
       answers: ['狼', '狗']
     ender_dragon:
       difficulty: medium

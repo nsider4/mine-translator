@@ -49,7 +49,7 @@ unscramble:
     - '苔'
     - '松明'
     - 'チェスト'
-    - 'Furnace'
+    - 'かまど'
     - 'キノコ'
     - 'スカルク'
     - 'プリズマリン'
@@ -152,7 +152,7 @@ unreverse:
     - '苔'
     - '松明'
     - 'チェスト'
-    - 'Furnace'
+    - 'かまど'
     - 'キノコ'
     - 'スカルク'
     - 'プリズマリン'
@@ -255,7 +255,7 @@ reaction:
     - '苔'
     - '松明'
     - 'チェスト'
-    - 'Furnace'
+    - 'かまど'
     - 'キノコ'
     - 'スカルク'
     - 'プリズマリン'
@@ -358,7 +358,7 @@ fillout:
     - '苔'
     - '松明'
     - 'チェスト'
-    - 'Furnace'
+    - 'かまど'
     - 'キノコ'
     - 'スカルク'
     - 'プリズマリン'
@@ -461,7 +461,7 @@ hoverable:
     - '苔'
     - '松明'
     - 'チェスト'
-    - 'Furnace'
+    - 'かまど'
     - 'キノコ'
     - 'スカルク'
     - 'プリズマリン'
@@ -721,7 +721,7 @@ trivia:
     27:
       question: 'ネコを飼いならすのに使う素材は？'
       answers:
-        - 'Fish'
+        - '魚'
     28:
       question: '竹が生えているバイオームは？'
       answers:
@@ -876,7 +876,7 @@ word_association:
     furnace:
       difficulty: easy
       clues: ['丸石', '精錬', '燃料']
-      answers: ['Furnace']
+      answers: ['かまど']
     bread:
       difficulty: easy
       clues: ['小麦', '3 つ', '食べ物']
@@ -899,7 +899,7 @@ word_association:
       answers: ['ニワトリ']
     wolf:
       difficulty: easy
-      clues: ['骨', 'Tame', '首輪']
+      clues: ['骨', '飼いならす', '首輪']
       answers: ['オオカミ', 'イヌ']
     ender_dragon:
       difficulty: medium

@@ -49,7 +49,7 @@ unscramble:
     - 'Moha'
     - 'Fáklya'
     - 'Láda'
-    - 'Furnace'
+    - 'Kemence'
     - 'Gomba'
     - 'Sculk'
     - 'Prizmarin'
@@ -152,7 +152,7 @@ unreverse:
     - 'Moha'
     - 'Fáklya'
     - 'Láda'
-    - 'Furnace'
+    - 'Kemence'
     - 'Gomba'
     - 'Sculk'
     - 'Prizmarin'
@@ -255,7 +255,7 @@ reaction:
     - 'Moha'
     - 'Fáklya'
     - 'Láda'
-    - 'Furnace'
+    - 'Kemence'
     - 'Gomba'
     - 'Sculk'
     - 'Prizmarin'
@@ -358,7 +358,7 @@ fillout:
     - 'Moha'
     - 'Fáklya'
     - 'Láda'
-    - 'Furnace'
+    - 'Kemence'
     - 'Gomba'
     - 'Sculk'
     - 'Prizmarin'
@@ -461,7 +461,7 @@ hoverable:
     - 'Moha'
     - 'Fáklya'
     - 'Láda'
-    - 'Furnace'
+    - 'Kemence'
     - 'Gomba'
     - 'Sculk'
     - 'Prizmarin'
@@ -721,7 +721,7 @@ trivia:
     27:
       question: 'Milyen anyaggal szelídíthetők meg a macskák?'
       answers:
-        - 'Fish'
+        - 'Hal'
     28:
       question: 'Melyik biomban nő a bambusz?'
       answers:
@@ -876,7 +876,7 @@ word_association:
     furnace:
       difficulty: easy
       clues: ['Zúzottkő', 'Olvasztás', 'Üzemanyag']
-      answers: ['Furnace']
+      answers: ['Kemence']
     bread:
       difficulty: easy
       clues: ['Búza', 'Három', 'Étel']
@@ -899,7 +899,7 @@ word_association:
       answers: ['Csirke']
     wolf:
       difficulty: easy
-      clues: ['Csontok', 'Tame', 'Nyakörv']
+      clues: ['Csontok', 'Szelídítés', 'Nyakörv']
       answers: ['Farkas', 'kutya']
     ender_dragon:
       difficulty: medium

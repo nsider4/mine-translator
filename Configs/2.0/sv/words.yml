@@ -49,7 +49,7 @@ unscramble:
     - 'Mossa'
     - 'Fackla'
     - 'Kista'
-    - 'Furnace'
+    - 'Ugn'
     - 'Svamp'
     - 'Sculk'
     - 'Prismarin'
@@ -152,7 +152,7 @@ unreverse:
     - 'Mossa'
     - 'Fackla'
     - 'Kista'
-    - 'Furnace'
+    - 'Ugn'
     - 'Svamp'
     - 'Sculk'
     - 'Prismarin'
@@ -255,7 +255,7 @@ reaction:
     - 'Mossa'
     - 'Fackla'
     - 'Kista'
-    - 'Furnace'
+    - 'Ugn'
     - 'Svamp'
     - 'Sculk'
     - 'Prismarin'
@@ -358,7 +358,7 @@ fillout:
     - 'Mossa'
     - 'Fackla'
     - 'Kista'
-    - 'Furnace'
+    - 'Ugn'
     - 'Svamp'
     - 'Sculk'
     - 'Prismarin'
@@ -461,7 +461,7 @@ hoverable:
     - 'Mossa'
     - 'Fackla'
     - 'Kista'
-    - 'Furnace'
+    - 'Ugn'
     - 'Svamp'
     - 'Sculk'
     - 'Prismarin'
@@ -721,7 +721,7 @@ trivia:
     27:
       question: 'Vilket material används för att tämja katter?'
       answers:
-        - 'Fish'
+        - 'Fisk'
     28:
       question: 'Vilken biom är hem för bambu?'
       answers:
@@ -876,7 +876,7 @@ word_association:
     furnace:
       difficulty: easy
       clues: ['Kullersten', 'Smälta', 'Bränsle']
-      answers: ['Furnace']
+      answers: ['Ugn']
     bread:
       difficulty: easy
       clues: ['Vete', 'Tre', 'Mat']
@@ -899,7 +899,7 @@ word_association:
       answers: ['Höna']
     wolf:
       difficulty: easy
-      clues: ['Ben', 'Tame', 'Halsband']
+      clues: ['Ben', 'Tämja', 'Halsband']
       answers: ['Varg', 'hund']
     ender_dragon:
       difficulty: medium

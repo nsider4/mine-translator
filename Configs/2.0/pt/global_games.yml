@@ -125,7 +125,7 @@ messages:
   completed:
     - ''
     - '&6&l» META ALCANÇADA! &fO servidor conseguiu &e%goal_text% &fem &e%seconds%s&f.'
-    - '&f  Top: &e%top_1% &7(%top_1_amount%)  &e%top_2% &7(%top_2_amount%)  &e%top_3% &7(%top_3_amount%)'
+    - '&f  Melhores: &e%top_1% &7(%top_1_amount%)  &e%top_2% &7(%top_2_amount%)  &e%top_3% &7(%top_3_amount%)'
     - '&f  &e%count% &fjogador(es) recebem a recompensa.'
     - ''
   failed:
