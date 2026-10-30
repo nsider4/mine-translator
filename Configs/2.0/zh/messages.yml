@@ -1,6 +1,8 @@
 unknown_command: '&8[%prefix%&8] &c未知命令。换一个试试吧！'
 config_reloaded: '&8[%prefix%&8] &f配置文件已重新加载！'
 config_reload_failed: '&8[%prefix%&8] &c部分文件加载失败，请查看控制台。这些文件保留之前的值。'
+config_reload_failed_file: '&8- &e%file%&7: 第 %line% 行，第 %column% 列'
+config_reload_failed_unreadable: '&8- &e%file%&7: 无法读取该文件'
 not_enough_permissions: '&8[%prefix%&8] &c你没有足够的权限执行此命令！'
 player_only_command: '&8[%prefix%&8] &c此命令只能由玩家执行！'
 player_deleted: '&8[%prefix%&8] &c玩家 &f%player% &c已从数据库中删除！'

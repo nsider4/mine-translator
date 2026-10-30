@@ -1,6 +1,8 @@
 unknown_command: '&8[%prefix%&8] &cNeznámý příkaz. Zkus něco jiného!'
 config_reloaded: '&8[%prefix%&8] &fKonfigurační soubory byly znovu načteny!'
 config_reload_failed: '&8[%prefix%&8] &cNěkteré soubory se nenačetly; podívej se do konzole. Tyto soubory si ponechají předchozí hodnoty.'
+config_reload_failed_file: '&8- &e%file%&7: řádek %line%, sloupec %column%'
+config_reload_failed_unreadable: '&8- &e%file%&7: soubor nelze přečíst'
 not_enough_permissions: '&8[%prefix%&8] &cNemáš dostatečná oprávnění pro tento příkaz!'
 player_only_command: '&8[%prefix%&8] &cTento příkaz mohou použít jen hráči!'
 player_deleted: '&8[%prefix%&8] &cHráč &f%player% &cbyl odstraněn z databáze!'

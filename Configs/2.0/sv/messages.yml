@@ -1,6 +1,8 @@
 unknown_command: '&8[%prefix%&8] &cOkänt kommando. Prova något annat!'
 config_reloaded: '&8[%prefix%&8] &fKonfigurationsfilerna har laddats om!'
 config_reload_failed: '&8[%prefix%&8] &cVissa filer laddades inte; kolla konsolen. De filerna behåller sina tidigare värden.'
+config_reload_failed_file: '&8- &e%file%&7: rad %line%, kolumn %column%'
+config_reload_failed_unreadable: '&8- &e%file%&7: filen kunde inte läsas'
 not_enough_permissions: '&8[%prefix%&8] &cDu har inte tillräckliga behörigheter för detta kommando!'
 player_only_command: '&8[%prefix%&8] &cBara spelare kan köra detta kommando!'
 player_deleted: '&8[%prefix%&8] &cSpelaren &f%player% &char tagits bort från databasen!'

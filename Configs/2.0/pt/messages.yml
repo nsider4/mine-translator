@@ -1,6 +1,8 @@
 unknown_command: '&8[%prefix%&8] &cComando desconhecido. Tente outra coisa!'
 config_reloaded: '&8[%prefix%&8] &fOs arquivos de configuração foram recarregados!'
 config_reload_failed: '&8[%prefix%&8] &cAlguns arquivos não carregaram; veja o console. Esses arquivos mantêm os valores anteriores.'
+config_reload_failed_file: '&8- &e%file%&7: linha %line%, coluna %column%'
+config_reload_failed_unreadable: '&8- &e%file%&7: não foi possível ler o arquivo'
 not_enough_permissions: '&8[%prefix%&8] &cVocê não tem permissão para executar este comando!'
 player_only_command: '&8[%prefix%&8] &cEste comando só pode ser executado por jogadores!'
 player_deleted: '&8[%prefix%&8] &cO jogador &f%player% &cfoi removido do banco de dados!'

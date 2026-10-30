@@ -1,6 +1,8 @@
 unknown_command: '&8[%prefix%&8] &cLệnh không xác định. Hãy thử lệnh khác!'
 config_reloaded: '&8[%prefix%&8] &fĐã tải lại các tệp cấu hình!'
 config_reload_failed: '&8[%prefix%&8] &cMột số tệp không tải được; hãy xem console. Các tệp đó giữ giá trị trước đó.'
+config_reload_failed_file: '&8- &e%file%&7: dòng %line%, cột %column%'
+config_reload_failed_unreadable: '&8- &e%file%&7: không thể đọc tệp'
 not_enough_permissions: '&8[%prefix%&8] &cBạn không có đủ quyền dùng lệnh này!'
 player_only_command: '&8[%prefix%&8] &cChỉ người chơi mới dùng được lệnh này!'
 player_deleted: '&8[%prefix%&8] &cNgười chơi &f%player% &cđã bị xóa khỏi cơ sở dữ liệu!'

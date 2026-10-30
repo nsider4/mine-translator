@@ -1,6 +1,8 @@
 unknown_command: '&8[%prefix%&8] &cOnbekend commando. Probeer iets anders!'
 config_reloaded: '&8[%prefix%&8] &fDe configuratiebestanden zijn herladen!'
 config_reload_failed: '&8[%prefix%&8] &cSommige bestanden konden niet laden; kijk in de console. Die bestanden houden hun vorige waarden.'
+config_reload_failed_file: '&8- &e%file%&7: regel %line%, kolom %column%'
+config_reload_failed_unreadable: '&8- &e%file%&7: het bestand kon niet worden gelezen'
 not_enough_permissions: '&8[%prefix%&8] &cJe hebt niet genoeg rechten om dit commando uit te voeren!'
 player_only_command: '&8[%prefix%&8] &cDit commando kan alleen door spelers worden uitgevoerd!'
 player_deleted: '&8[%prefix%&8] &cDe speler &f%player% &cis uit de database verwijderd!'

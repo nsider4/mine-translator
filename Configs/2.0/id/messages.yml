@@ -1,6 +1,8 @@
 unknown_command: '&8[%prefix%&8] &cPerintah tidak dikenal. Coba yang lain!'
 config_reloaded: '&8[%prefix%&8] &fFile konfigurasi telah dimuat ulang!'
 config_reload_failed: '&8[%prefix%&8] &cBeberapa file tidak termuat; periksa konsol. File tersebut tetap memakai nilai sebelumnya.'
+config_reload_failed_file: '&8- &e%file%&7: baris %line%, kolom %column%'
+config_reload_failed_unreadable: '&8- &e%file%&7: file tidak dapat dibaca'
 not_enough_permissions: '&8[%prefix%&8] &cKamu tidak punya cukup izin untuk perintah ini!'
 player_only_command: '&8[%prefix%&8] &cHanya pemain yang bisa menjalankan perintah ini!'
 player_deleted: '&8[%prefix%&8] &cPemain &f%player% &ctelah dihapus dari database!'

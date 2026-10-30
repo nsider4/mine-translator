@@ -1,6 +1,8 @@
 unknown_command: '&8[%prefix%&8] &cНевідома команда. Спробуй щось інше!'
 config_reloaded: '&8[%prefix%&8] &fФайли налаштувань перезавантажено!'
 config_reload_failed: '&8[%prefix%&8] &cДеякі файли не завантажилися; перевір консоль. Ці файли зберігають попередні значення.'
+config_reload_failed_file: '&8- &e%file%&7: рядок %line%, стовпець %column%'
+config_reload_failed_unreadable: '&8- &e%file%&7: не вдалося прочитати файл'
 not_enough_permissions: '&8[%prefix%&8] &cУ тебе недостатньо дозволів для цієї команди!'
 player_only_command: '&8[%prefix%&8] &cЦю команду можуть виконувати лише гравці!'
 player_deleted: '&8[%prefix%&8] &cГравця &f%player% &cвидалено з бази даних!'

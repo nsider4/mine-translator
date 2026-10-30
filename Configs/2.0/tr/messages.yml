@@ -1,6 +1,8 @@
 unknown_command: '&8[%prefix%&8] &cBilinmeyen komut. Başka bir şey dene!'
 config_reloaded: '&8[%prefix%&8] &fYapılandırma dosyaları yeniden yüklendi!'
 config_reload_failed: '&8[%prefix%&8] &cBazı dosyalar yüklenemedi; konsola bak. O dosyalar önceki değerlerini korur.'
+config_reload_failed_file: '&8- &e%file%&7: satır %line%, sütun %column%'
+config_reload_failed_unreadable: '&8- &e%file%&7: dosya okunamadı'
 not_enough_permissions: '&8[%prefix%&8] &cBu komutu kullanmak için yeterli iznin yok!'
 player_only_command: '&8[%prefix%&8] &cBu komutu yalnızca oyuncular kullanabilir!'
 player_deleted: '&8[%prefix%&8] &cOyuncu &f%player% &cveritabanından silindi!'
